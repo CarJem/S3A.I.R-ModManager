@@ -464,12 +464,26 @@ namespace Sonic3AIR_ModLoader
             foreach (DirectoryInfo folder in folders)
             {
                 DirectoryInfo f = new DirectoryInfo(folder.FullName);
-                Sonic3AIRMod mod = new Sonic3AIRMod(f.GetFiles("mod.json").FirstOrDefault());
-                if (mod != null)
+                var root = f.GetFiles("mod.json").FirstOrDefault();
+                if (root != null)
                 {
-                    if (folder.Name.Contains("#")) modsList.Items.Add(mod, false);
-                    else modsList.Items.Add(mod, true);
+                    Sonic3AIRMod mod = new Sonic3AIRMod(root);
+                    if (mod != null)
+                    {
+                        if (folder.Name.Contains("#")) modsList.Items.Add(mod, false);
+                        else modsList.Items.Add(mod, true);
+                    }
                 }
+                else
+                {
+                    Sonic3AIRMod mod = new Sonic3AIRMod(folder.Name, folder.FullName);
+                    if (mod != null)
+                    {
+                        if (folder.Name.Contains("#")) modsList.Items.Add(mod, false);
+                        else modsList.Items.Add(mod, true);
+                    }
+                }
+
             }
         }
 
@@ -656,6 +670,9 @@ namespace Sonic3AIR_ModLoader
             public string Description;
             public string FolderName;
             public string FolderPath;
+            public string URL;
+            public string ModVersion;
+            public string GameVersion;
             //public bool Enabled;
             public override string ToString() { return Name; }
 
@@ -671,9 +688,19 @@ namespace Sonic3AIR_ModLoader
                 Author = stuff.Metadata.Author;
                 Name = stuff.Metadata.Name;
                 Description = stuff.Metadata.Description;
+                URL = stuff.Metadata.URL;
+                ModVersion = stuff.Metadata.ModVersion;
+                GameVersion = stuff.Metadata.GameVersion;
                 if (Description == null) Description = "No Description Provided.";
                 FolderName = mod.Directory.Name;
                 FolderPath = mod.Directory.FullName;
+
+            }
+
+            public Sonic3AIRMod(string name, string path)
+            {
+                FolderName = name;
+                FolderPath = path;
 
             }
         }
