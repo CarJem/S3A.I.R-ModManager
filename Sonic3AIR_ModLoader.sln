@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28809.33
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModLoader", "Sonic3AIR_ModLoader\Sonic3AIR_ModLoader.csproj", "{74887941-CE31-48E7-A4EF-75C52EC6415E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {614F9ECA-E63D-44B5-961B-60BDAC46614B}
+	EndGlobalSection
+EndGlobal
