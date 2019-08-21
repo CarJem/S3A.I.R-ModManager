@@ -45,6 +45,15 @@ namespace Sonic3AIR_ModLoader
 
         #region Events
 
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            foreach (var mod in ModsList)
+            {
+                UpdateMods(mod);
+            }
+            UpdateModsList(true);
+        }
+
         private void ShowLogFileButton_Click(object sender, EventArgs e)
         {
             OpenLogFile();
@@ -96,7 +105,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveModToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (modFolderList.SelectedItem != null)
+            if (ModList.SelectedItem != null)
             {
                 RemoveMod();
             }
@@ -104,15 +113,15 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenModFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (modFolderList.SelectedItem != null)
+            if (ModList.SelectedItem != null)
             {
-                OpenSelectedModFolder(modFolderList.SelectedItem as Sonic3AIRMod);
+                OpenSelectedModFolder(ModList.SelectedItem as Sonic3AIRMod);
             }
         }
 
         private void ModsList_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && modFolderList.SelectedItem != null)
+            if (e.Button == MouseButtons.Right && ModList.SelectedItem != null)
             {
                 modContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
             }
@@ -125,7 +134,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            if (modFolderList.SelectedItem != null)
+            if (ModList.SelectedItem != null)
             {
                 RemoveMod();
             }
@@ -188,7 +197,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            UpdateModsList();
+            UpdateModsList(true);
         }
 
         private void UpdateSonic3AIRPathButton_Click(object sender, EventArgs e)
@@ -204,14 +213,7 @@ namespace Sonic3AIR_ModLoader
 
         private void ModsList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if (modFolderList.SelectedItem != null)
-            {
-                var item = modFolderList.SelectedItem as Sonic3AIRMod;
-                bool checkState;
-                if (e.NewValue == CheckState.Checked) checkState = true;
-                else checkState = false;
-                if (e.NewValue != e.CurrentValue) UpdateMods(item, checkState);
-            }
+            (ModList.SelectedItem as Sonic3AIRMod).IsEnabled = (e.NewValue == CheckState.Checked);
         }
 
         private void ModsList_SelectedValueChanged(object sender, EventArgs e)
@@ -335,7 +337,7 @@ namespace Sonic3AIR_ModLoader
 
         public void RefreshSelectedMobProperties()
         {
-            if (modFolderList.SelectedItem != null)
+            if (ModList.SelectedItem != null)
             {
                 removeButton.Enabled = true;
                 removeModToolStripMenuItem.Enabled = true;
@@ -349,18 +351,20 @@ namespace Sonic3AIR_ModLoader
             }
 
             
-            if (modFolderList.SelectedItem != null)
+            if (ModList.SelectedItem != null)
             {
-                Sonic3AIRMod item = modFolderList.SelectedItem as Sonic3AIRMod;
+                Sonic3AIRMod item = ModList.SelectedItem as Sonic3AIRMod;
                 if (item != null)
                 {
                     modNameLabel.Text = item.Name;
+                    modTechnicalNameLabel.Text = item.TechnicalName;
                     modAuthorLabel.Text = "By: " + item.Author;
                     modDesciptionLabel.Text = item.Description;
                 }
                 else
                 {
                     modNameLabel.Text = "";
+                    modTechnicalNameLabel.Text = "";
                     modAuthorLabel.Text = "";
                     modDesciptionLabel.Text = "";
                 }
@@ -368,75 +372,42 @@ namespace Sonic3AIR_ModLoader
             else
             {
                 modNameLabel.Text = "";
+                modTechnicalNameLabel.Text = "";
                 modAuthorLabel.Text = "";
                 modDesciptionLabel.Text = "";
             }
         }
 
-        private void UpdateModsList(bool firstTime = false)
+        private void UpdateModsList(bool FullReload = false)
         {
-            string selectedModName = "";
-
-            if (modFolderList.SelectedItem != null)
-            {
-               selectedModName = (modFolderList.SelectedItem as Sonic3AIRMod).TechnicalName;
-            }
-            FetchModListData(firstTime);
+            if (FullReload) FetchModListData();
             RefreshSelectedMobProperties();
-            Sonic3AIRMod modToFocus = null;
-            if (selectedModName != "")
-            {
-                foreach (Sonic3AIRMod mod in ModsList)
-                {
-                    if (mod.TechnicalName == selectedModName)
-                    {
-                        modToFocus = mod;
-                    }
-                }
-                if (modToFocus != null) modFolderList.SelectedItem = modToFocus;
-                RefreshSelectedMobProperties();
-            }
-
-
-
         }
 
-        private void FetchModListData(bool firstTime = false)
+        private void FetchModListData()
         {
-            modFolderList.ItemCheck -= ModsList_ItemCheck;
+            ModList.ItemCheck -= ModsList_ItemCheck;
             ModsList.Clear();
             ModsList = new List<Sonic3AIRMod>();
             GetEnabledDisabledMods();
-            //var list = (ListBox)modFolderList;
-            modFolderList.DataSource = ModsList;
-            modFolderList.DisplayMember = "TechnicalName";
-            modFolderList.ValueMember = "IsEnabled";
-
-            for (int i = 0; i < modFolderList.Items.Count; i++)
+            ModList.DataSource = ModsList;
+            ModList.DisplayMember = "Name";
+            ModList.ValueMember = "IsEnabled";
+            for (int i = 0; i < ModList.Items.Count; i++)
             {
-                Sonic3AIRMod obj = (Sonic3AIRMod)modFolderList.Items[i];
-                modFolderList.SetItemCheckState(i, obj.IsEnabled);
+                Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
+                ModList.SetItemChecked(i, obj.IsEnabled);
             }
-
-
-
-            modFolderList.ItemCheck += ModsList_ItemCheck;
+            ModList.ItemCheck += ModsList_ItemCheck;
 
         }
 
-        private void UpdateMods(Sonic3AIRMod item, bool checkState)
+        private void UpdateMods(Sonic3AIRMod item)
         {
-            if (item != null)
+            if (item.IsEnabled != item.EnabledLocal)
             {
-                if (checkState == false)
-                {
-                    MoveModToDisabledFolder(item);
-                }
-                else
-                {
-                    MoveModToModsFolder(item);
-                }
-                UpdateModsList();
+                if (item.IsEnabled == false) DisableMod(item);
+                else EnableMod(item);
             }
         }
 
@@ -499,12 +470,14 @@ namespace Sonic3AIR_ModLoader
                     {
                         if (folder.Name.Contains("#"))
                         {
-                            mod.IsEnabled = CheckState.Unchecked;
+                            mod.IsEnabled = false;
+                            mod.EnabledLocal = false;
                             ModsList.Add(mod);
                         }
                         else
                         {
-                            mod.IsEnabled = CheckState.Checked;
+                            mod.IsEnabled = true;
+                            mod.EnabledLocal = true;
                             ModsList.Add(mod);
                         }
                     }
@@ -542,7 +515,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveMod()
         {
-            var modToRemove = modFolderList.SelectedItem as Sonic3AIRMod;
+            var modToRemove = ModList.SelectedItem as Sonic3AIRMod;
             if (MessageBox.Show($"Are you sure you want to delete {modToRemove.Name}? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 WipeFolderContents(modToRemove.FolderPath);
@@ -574,11 +547,11 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void MoveModToDisabledFolder(Sonic3AIRMod mod)
+        private void DisableMod(Sonic3AIRMod mod)
         {
             try
             {
-                string result = Sonic3AIRModsFolder + "\\" + "#" + mod.FolderName;
+                string result = Sonic3AIRModsFolder + "\\" + "#" + mod.FolderName.Replace("#", "");
                 Directory.Move(mod.FolderPath, result);
             }
             catch (Exception ex)
@@ -587,7 +560,7 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void MoveModToModsFolder(Sonic3AIRMod mod)
+        private void EnableMod(Sonic3AIRMod mod)
         {
             try
             {
@@ -701,7 +674,8 @@ namespace Sonic3AIR_ModLoader
             public string URL;
             public string ModVersion;
             public string GameVersion;
-            public CheckState IsEnabled { get; set; }
+            public bool EnabledLocal { get; set; }
+            public bool IsEnabled { get; set; }
             public override string ToString() { return Name; }
 
             public Sonic3AIRMod(FileInfo mod)
@@ -722,7 +696,7 @@ namespace Sonic3AIR_ModLoader
                 if (Description == null) Description = "No Description Provided.";
                 FolderName = mod.Directory.Name;
                 FolderPath = mod.Directory.FullName;
-                TechnicalName = Name + $" [{FolderName.Replace("#","")}]";
+                TechnicalName = $"[{FolderName.Replace("#","")}]";
 
             }
         }
@@ -811,5 +785,7 @@ namespace Sonic3AIR_ModLoader
 
 
         }
+
+
     }
 }

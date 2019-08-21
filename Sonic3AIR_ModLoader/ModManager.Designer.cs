@@ -39,11 +39,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modPage = new System.Windows.Forms.TabPage();
             this.modPanel = new System.Windows.Forms.Panel();
-            this.modFolderList = new System.Windows.Forms.CheckedListBox();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.ModList = new System.Windows.Forms.CheckedListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.modDesciptionLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.modAuthorLabel = new System.Windows.Forms.Label();
+            this.modTechnicalNameLabel = new System.Windows.Forms.Label();
             this.modNameLabel = new System.Windows.Forms.Label();
             this.moveDownButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
@@ -172,7 +174,8 @@
             // 
             // modPanel
             // 
-            this.modPanel.Controls.Add(this.modFolderList);
+            this.modPanel.Controls.Add(this.saveButton);
+            this.modPanel.Controls.Add(this.ModList);
             this.modPanel.Controls.Add(this.groupBox3);
             this.modPanel.Controls.Add(this.moveDownButton);
             this.modPanel.Controls.Add(this.refreshButton);
@@ -185,29 +188,41 @@
             this.modPanel.Size = new System.Drawing.Size(297, 368);
             this.modPanel.TabIndex = 14;
             // 
-            // modFolderList
+            // saveButton
             // 
-            this.modFolderList.ContextMenuStrip = this.modContextMenuStrip;
-            this.modFolderList.FormattingEnabled = true;
-            this.modFolderList.Location = new System.Drawing.Point(34, 6);
-            this.modFolderList.Name = "modFolderList";
-            this.modFolderList.Size = new System.Drawing.Size(260, 214);
-            this.modFolderList.Sorted = true;
-            this.modFolderList.TabIndex = 15;
-            this.modFolderList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
-            this.modFolderList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
-            this.modFolderList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
-            this.modFolderList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
+            this.saveButton.Location = new System.Drawing.Point(144, 342);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 16;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // ModList
+            // 
+            this.ModList.ContextMenuStrip = this.modContextMenuStrip;
+            this.ModList.FormattingEnabled = true;
+            this.ModList.Location = new System.Drawing.Point(34, 6);
+            this.ModList.Name = "ModList";
+            this.ModList.ScrollAlwaysVisible = true;
+            this.ModList.Size = new System.Drawing.Size(260, 184);
+            this.ModList.Sorted = true;
+            this.ModList.TabIndex = 15;
+            this.ModList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
+            this.ModList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
+            this.ModList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
+            this.ModList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.modDesciptionLabel);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.modAuthorLabel);
+            this.groupBox3.Controls.Add(this.modTechnicalNameLabel);
             this.groupBox3.Controls.Add(this.modNameLabel);
-            this.groupBox3.Location = new System.Drawing.Point(3, 226);
+            this.groupBox3.Location = new System.Drawing.Point(3, 196);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(291, 110);
+            this.groupBox3.Size = new System.Drawing.Size(291, 140);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mod Properties";
@@ -216,7 +231,7 @@
             // 
             this.modDesciptionLabel.AutoSize = true;
             this.modDesciptionLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.modDesciptionLabel.Location = new System.Drawing.Point(3, 55);
+            this.modDesciptionLabel.Location = new System.Drawing.Point(3, 68);
             this.modDesciptionLabel.Name = "modDesciptionLabel";
             this.modDesciptionLabel.Size = new System.Drawing.Size(60, 13);
             this.modDesciptionLabel.TabIndex = 14;
@@ -228,7 +243,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label6.Location = new System.Drawing.Point(3, 42);
+            this.label6.Location = new System.Drawing.Point(3, 55);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 13);
             this.label6.TabIndex = 13;
@@ -239,13 +254,26 @@
             this.modAuthorLabel.AutoSize = true;
             this.modAuthorLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.modAuthorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modAuthorLabel.Location = new System.Drawing.Point(3, 29);
+            this.modAuthorLabel.Location = new System.Drawing.Point(3, 42);
             this.modAuthorLabel.Name = "modAuthorLabel";
             this.modAuthorLabel.Size = new System.Drawing.Size(38, 13);
             this.modAuthorLabel.TabIndex = 12;
             this.modAuthorLabel.Tag = "";
             this.modAuthorLabel.Text = "Author";
             this.modAuthorLabel.UseMnemonic = false;
+            // 
+            // modTechnicalNameLabel
+            // 
+            this.modTechnicalNameLabel.AutoSize = true;
+            this.modTechnicalNameLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modTechnicalNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modTechnicalNameLabel.Location = new System.Drawing.Point(3, 29);
+            this.modTechnicalNameLabel.Name = "modTechnicalNameLabel";
+            this.modTechnicalNameLabel.Size = new System.Drawing.Size(99, 13);
+            this.modTechnicalNameLabel.TabIndex = 15;
+            this.modTechnicalNameLabel.Tag = "";
+            this.modTechnicalNameLabel.Text = "Technical Name";
+            this.modTechnicalNameLabel.UseMnemonic = false;
             // 
             // modNameLabel
             // 
@@ -277,14 +305,14 @@
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(75, 23);
             this.refreshButton.TabIndex = 7;
-            this.refreshButton.Text = "Refresh";
+            this.refreshButton.Text = "Reload";
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // moveUpButton
             // 
             this.moveUpButton.Enabled = false;
-            this.moveUpButton.Location = new System.Drawing.Point(3, 68);
+            this.moveUpButton.Location = new System.Drawing.Point(3, 130);
             this.moveUpButton.Name = "moveUpButton";
             this.moveUpButton.Size = new System.Drawing.Size(25, 25);
             this.moveUpButton.TabIndex = 12;
@@ -638,7 +666,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(117, 26);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Version v.0.6 ALPHA\r\nBy CarJem Generations\r\n";
+            this.label4.Text = "Version v.0.7 ALPHA\r\nBy CarJem Generations\r\n";
             // 
             // exitButton
             // 
@@ -707,6 +735,7 @@
         private System.Windows.Forms.Button updateSonic3AIRPathButton;
         private System.Windows.Forms.Button openConfigFile;
         private System.Windows.Forms.Label modNameLabel;
+        private System.Windows.Forms.Label modTechnicalNameLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button openAppDataFolderButton;
         private System.Windows.Forms.Button openEXEFolderButton;
@@ -739,7 +768,8 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button showLogFileButton;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckedListBox modFolderList;
+        private System.Windows.Forms.CheckedListBox ModList;
+        private System.Windows.Forms.Button saveButton;
     }
 }
 
