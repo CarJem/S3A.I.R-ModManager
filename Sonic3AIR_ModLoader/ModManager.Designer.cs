@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModManager));
             this.addMods = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
-            this.modsList = new System.Windows.Forms.CheckedListBox();
             this.modContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openModFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +39,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modPage = new System.Windows.Forms.TabPage();
             this.modPanel = new System.Windows.Forms.Panel();
+            this.modFolderList = new System.Windows.Forms.CheckedListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.modDesciptionLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@
             this.moveUpButton = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.showLogFileButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.deleteRecordingButton = new System.Windows.Forms.Button();
@@ -80,7 +81,6 @@
             this.sonic3AIRPathBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -114,21 +114,6 @@
             this.removeButton.Text = "-";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.RemoveButton_Click);
-            // 
-            // modsList
-            // 
-            this.modsList.ContextMenuStrip = this.modContextMenuStrip;
-            this.modsList.FormattingEnabled = true;
-            this.modsList.Location = new System.Drawing.Point(31, 6);
-            this.modsList.Name = "modsList";
-            this.modsList.ScrollAlwaysVisible = true;
-            this.modsList.Size = new System.Drawing.Size(263, 214);
-            this.modsList.Sorted = true;
-            this.modsList.TabIndex = 4;
-            this.modsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
-            this.modsList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
-            this.modsList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
-            this.modsList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
             // 
             // modContextMenuStrip
             // 
@@ -187,11 +172,11 @@
             // 
             // modPanel
             // 
+            this.modPanel.Controls.Add(this.modFolderList);
             this.modPanel.Controls.Add(this.groupBox3);
             this.modPanel.Controls.Add(this.moveDownButton);
             this.modPanel.Controls.Add(this.refreshButton);
             this.modPanel.Controls.Add(this.addMods);
-            this.modPanel.Controls.Add(this.modsList);
             this.modPanel.Controls.Add(this.moveUpButton);
             this.modPanel.Controls.Add(this.removeButton);
             this.modPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -199,6 +184,20 @@
             this.modPanel.Name = "modPanel";
             this.modPanel.Size = new System.Drawing.Size(297, 368);
             this.modPanel.TabIndex = 14;
+            // 
+            // modFolderList
+            // 
+            this.modFolderList.ContextMenuStrip = this.modContextMenuStrip;
+            this.modFolderList.FormattingEnabled = true;
+            this.modFolderList.Location = new System.Drawing.Point(34, 6);
+            this.modFolderList.Name = "modFolderList";
+            this.modFolderList.Size = new System.Drawing.Size(260, 214);
+            this.modFolderList.Sorted = true;
+            this.modFolderList.TabIndex = 15;
+            this.modFolderList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
+            this.modFolderList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
+            this.modFolderList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
+            this.modFolderList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
             // 
             // groupBox3
             // 
@@ -315,6 +314,15 @@
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Other";
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(87, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(198, 67);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Useful In-Game Keys:\r\nESC - Toggle Fullscreen\r\nF2 - Take a Game Recording Capture" +
+    "\r\nIDK - Did I miss anything\r\n";
             // 
             // showLogFileButton
             // 
@@ -642,15 +650,6 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(87, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(198, 67);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Useful In-Game Keys:\r\nESC - Toggle Fullscreen\r\nF2 - Take a Game Recording Capture" +
-    "\r\nIDK - Did I miss anything\r\n";
-            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -692,7 +691,6 @@
         #endregion
         private System.Windows.Forms.Button addMods;
         private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.CheckedListBox modsList;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -741,6 +739,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button showLogFileButton;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckedListBox modFolderList;
     }
 }
 

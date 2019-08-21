@@ -25,7 +25,7 @@ namespace Sonic3AIR_ModLoader
         string Sonic3AIRTempModsFolder = "";
         Sonic3AIRSettings S3AIRSettings;
         public static ModManager Instance;
-        bool updateRequired = false;
+        List<Sonic3AIRMod> ModsList = new List<Sonic3AIRMod>();
 
         public ModManager(bool autoBoot = false)
         {
@@ -39,7 +39,7 @@ namespace Sonic3AIR_ModLoader
         {
             InitializeComponent();
             InitalCollection();
-            UpdateModsList();
+            UpdateModsList(true);
             UpdateUI();
         }
 
@@ -96,7 +96,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveModToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (modsList.SelectedItem != null)
+            if (modFolderList.SelectedItem != null)
             {
                 RemoveMod();
             }
@@ -104,15 +104,15 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenModFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (modsList.SelectedItem != null)
+            if (modFolderList.SelectedItem != null)
             {
-                OpenSelectedModFolder(modsList.SelectedItem as Sonic3AIRMod);
+                OpenSelectedModFolder(modFolderList.SelectedItem as Sonic3AIRMod);
             }
         }
 
         private void ModsList_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && modsList.SelectedItem != null)
+            if (e.Button == MouseButtons.Right && modFolderList.SelectedItem != null)
             {
                 modContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
             }
@@ -125,7 +125,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            if (modsList.SelectedItem != null)
+            if (modFolderList.SelectedItem != null)
             {
                 RemoveMod();
             }
@@ -204,9 +204,9 @@ namespace Sonic3AIR_ModLoader
 
         private void ModsList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if (modsList.SelectedItem != null)
+            if (modFolderList.SelectedItem != null)
             {
-                var item = modsList.SelectedItem as Sonic3AIRMod;
+                var item = modFolderList.SelectedItem as Sonic3AIRMod;
                 bool checkState;
                 if (e.NewValue == CheckState.Checked) checkState = true;
                 else checkState = false;
@@ -335,7 +335,7 @@ namespace Sonic3AIR_ModLoader
 
         public void RefreshSelectedMobProperties()
         {
-            if (modsList.SelectedItem != null)
+            if (modFolderList.SelectedItem != null)
             {
                 removeButton.Enabled = true;
                 removeModToolStripMenuItem.Enabled = true;
@@ -349,9 +349,9 @@ namespace Sonic3AIR_ModLoader
             }
 
             
-            if (modsList.SelectedItem != null)
+            if (modFolderList.SelectedItem != null)
             {
-                Sonic3AIRMod item = modsList.Items[modsList.SelectedIndex] as Sonic3AIRMod;
+                Sonic3AIRMod item = modFolderList.SelectedItem as Sonic3AIRMod;
                 if (item != null)
                 {
                     modNameLabel.Text = item.Name;
@@ -373,27 +373,27 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void UpdateModsList()
+        private void UpdateModsList(bool firstTime = false)
         {
             string selectedModName = "";
 
-            if (modsList.SelectedItem != null)
+            if (modFolderList.SelectedItem != null)
             {
-               selectedModName = (modsList.SelectedItem as Sonic3AIRMod).Name;
+               selectedModName = (modFolderList.SelectedItem as Sonic3AIRMod).TechnicalName;
             }
-            FetchModListData();
+            FetchModListData(firstTime);
             RefreshSelectedMobProperties();
             Sonic3AIRMod modToFocus = null;
             if (selectedModName != "")
             {
-                foreach (Sonic3AIRMod mod in modsList.Items)
+                foreach (Sonic3AIRMod mod in ModsList)
                 {
-                    if (mod.Name == selectedModName)
+                    if (mod.TechnicalName == selectedModName)
                     {
                         modToFocus = mod;
                     }
                 }
-                if (modToFocus != null) modsList.SelectedItem = modToFocus;
+                if (modToFocus != null) modFolderList.SelectedItem = modToFocus;
                 RefreshSelectedMobProperties();
             }
 
@@ -401,10 +401,27 @@ namespace Sonic3AIR_ModLoader
 
         }
 
-        private void FetchModListData()
+        private void FetchModListData(bool firstTime = false)
         {
-            modsList.Items.Clear();
+            modFolderList.ItemCheck -= ModsList_ItemCheck;
+            ModsList.Clear();
+            ModsList = new List<Sonic3AIRMod>();
             GetEnabledDisabledMods();
+            //var list = (ListBox)modFolderList;
+            modFolderList.DataSource = ModsList;
+            modFolderList.DisplayMember = "TechnicalName";
+            modFolderList.ValueMember = "IsEnabled";
+
+            for (int i = 0; i < modFolderList.Items.Count; i++)
+            {
+                Sonic3AIRMod obj = (Sonic3AIRMod)modFolderList.Items[i];
+                modFolderList.SetItemCheckState(i, obj.IsEnabled);
+            }
+
+
+
+            modFolderList.ItemCheck += ModsList_ItemCheck;
+
         }
 
         private void UpdateMods(Sonic3AIRMod item, bool checkState)
@@ -419,10 +436,6 @@ namespace Sonic3AIR_ModLoader
                 {
                     MoveModToModsFolder(item);
                 }
-            }
-            if (updateRequired == true)
-            {
-                updateRequired = false;
                 UpdateModsList();
             }
         }
@@ -457,8 +470,17 @@ namespace Sonic3AIR_ModLoader
             Sonic3AIRAppDataFolder = AppDataFolder + "\\Sonic3AIR";
             Sonic3AIRModsFolder = Sonic3AIRAppDataFolder + "\\mods";
             Sonic3AIRTempModsFolder = Sonic3AIRAppDataFolder + "\\temp_mod_install";
-            FileInfo file = new FileInfo(Sonic3AIRAppDataFolder + "\\settings.json");
-            S3AIRSettings = new Sonic3AIRSettings(file);
+            if (Directory.Exists(Sonic3AIRAppDataFolder) && File.Exists(Sonic3AIRAppDataFolder + "\\settings.json"))
+            {
+                FileInfo file = new FileInfo(Sonic3AIRAppDataFolder + "\\settings.json");
+                S3AIRSettings = new Sonic3AIRSettings(file);
+            }
+            else
+            {
+                MessageBox.Show("Please Run Sonic 3 A.I.R Once before Running the Modloader!");
+                Application.Exit();
+            }
+
         }
 
         private void GetEnabledDisabledMods()
@@ -469,24 +491,26 @@ namespace Sonic3AIR_ModLoader
             {
                 DirectoryInfo f = new DirectoryInfo(folder.FullName);
                 var root = f.GetFiles("mod.json").FirstOrDefault();
+                Sonic3AIRMod mod;
                 if (root != null)
                 {
-                    Sonic3AIRMod mod = new Sonic3AIRMod(root);
+                    mod = new Sonic3AIRMod(root);
                     if (mod != null)
                     {
-                        if (folder.Name.Contains("#")) modsList.Items.Add(mod, false);
-                        else modsList.Items.Add(mod, true);
+                        if (folder.Name.Contains("#"))
+                        {
+                            mod.IsEnabled = CheckState.Unchecked;
+                            ModsList.Add(mod);
+                        }
+                        else
+                        {
+                            mod.IsEnabled = CheckState.Checked;
+                            ModsList.Add(mod);
+                        }
                     }
                 }
-                else
-                {
-                    Sonic3AIRMod mod = new Sonic3AIRMod(folder.Name, folder.FullName);
-                    if (mod != null)
-                    {
-                        if (folder.Name.Contains("#")) modsList.Items.Add(mod, false);
-                        else modsList.Items.Add(mod, true);
-                    }
-                }
+
+
 
             }
         }
@@ -518,7 +542,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveMod()
         {
-            var modToRemove = modsList.SelectedItem as Sonic3AIRMod;
+            var modToRemove = modFolderList.SelectedItem as Sonic3AIRMod;
             if (MessageBox.Show($"Are you sure you want to delete {modToRemove.Name}? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 WipeFolderContents(modToRemove.FolderPath);
@@ -554,9 +578,8 @@ namespace Sonic3AIR_ModLoader
         {
             try
             {
-
-                Directory.Move(mod.FolderPath, Sonic3AIRModsFolder + "\\" + "#" + mod.FolderName);
-                updateRequired = true;
+                string result = Sonic3AIRModsFolder + "\\" + "#" + mod.FolderName;
+                Directory.Move(mod.FolderPath, result);
             }
             catch (Exception ex)
             {
@@ -568,8 +591,8 @@ namespace Sonic3AIR_ModLoader
         {
             try
             {
-                Directory.Move(mod.FolderPath, Sonic3AIRModsFolder + "\\" + mod.FolderName.Replace("#",""));
-                updateRequired = true;
+                string result = Sonic3AIRModsFolder + "\\" + mod.FolderName.Replace("#", "");
+                Directory.Move(mod.FolderPath, result);
             }
             catch (Exception ex)
             {
@@ -670,14 +693,15 @@ namespace Sonic3AIR_ModLoader
         public class Sonic3AIRMod
         {
             public string Author;
-            public string Name;
+            public string Name { get; set; }
+            public string TechnicalName { get; set; }
             public string Description;
             public string FolderName;
             public string FolderPath;
             public string URL;
             public string ModVersion;
             public string GameVersion;
-            //public bool Enabled;
+            public CheckState IsEnabled { get; set; }
             public override string ToString() { return Name; }
 
             public Sonic3AIRMod(FileInfo mod)
@@ -698,13 +722,7 @@ namespace Sonic3AIR_ModLoader
                 if (Description == null) Description = "No Description Provided.";
                 FolderName = mod.Directory.Name;
                 FolderPath = mod.Directory.FullName;
-
-            }
-
-            public Sonic3AIRMod(string name, string path)
-            {
-                FolderName = name;
-                FolderPath = path;
+                TechnicalName = Name + $" [{FolderName.Replace("#","")}]";
 
             }
         }
