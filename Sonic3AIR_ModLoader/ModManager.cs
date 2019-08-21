@@ -434,18 +434,22 @@ namespace Sonic3AIR_ModLoader
         private void CollectGameRecordings()
         {
             gameRecordingList.Items.Clear();
-            string baseDirectory = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath);
-            if (Directory.Exists(baseDirectory))
+            if (Properties.Settings.Default.Sonic3AIRPath != null)
             {
-                Regex reg = new Regex(@"(gamerecording_)\d{6}(_)\d{6}");
-                DirectoryInfo directoryInfo = new DirectoryInfo(baseDirectory);
-                FileInfo[] fileInfo = directoryInfo.GetFiles("*.bin").Where(path => reg.IsMatch(path.Name)).ToArray();
-                foreach (var file in fileInfo)
+                string baseDirectory = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath);
+                if (Directory.Exists(baseDirectory))
                 {
-                    Sonic3AIRRecording recording = new Sonic3AIRRecording(file);
-                    gameRecordingList.Items.Add(recording);
+                    Regex reg = new Regex(@"(gamerecording_)\d{6}(_)\d{6}");
+                    DirectoryInfo directoryInfo = new DirectoryInfo(baseDirectory);
+                    FileInfo[] fileInfo = directoryInfo.GetFiles("*.bin").Where(path => reg.IsMatch(path.Name)).ToArray();
+                    foreach (var file in fileInfo)
+                    {
+                        Sonic3AIRRecording recording = new Sonic3AIRRecording(file);
+                        gameRecordingList.Items.Add(recording);
+                    }
                 }
             }
+
         }
 
         private void InitalCollection()
