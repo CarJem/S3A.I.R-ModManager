@@ -26,6 +26,10 @@ namespace Sonic3AIR_ModLoader
         Sonic3AIRSettings S3AIRSettings;
         public static ModManager Instance;
         List<Sonic3AIRMod> ModsList = new List<Sonic3AIRMod>();
+        /// <summary>
+        /// In order to control itemcheck changes (blinds double clicking, among other things)
+        /// </summary>
+        bool AuthorizeCheck { get; set; }
 
         public ModManager(bool autoBoot = false)
         {
@@ -121,9 +125,32 @@ namespace Sonic3AIR_ModLoader
 
         private void ModsList_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && ModList.SelectedItem != null)
+            if (ModList.SelectedItem != null)
             {
-                modContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
+                if (e.Button == MouseButtons.Right)
+                {
+                    modContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
+                }
+            }
+        }
+
+        private void ModList_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point loc = this.ModList.PointToClient(Cursor.Position);
+            for (int i = 0; i < this.ModList.Items.Count; i++)
+            {
+                Rectangle rec = this.ModList.GetItemRectangle(i);
+                rec.Width = 16; //checkbox itself has a default width of about 16 pixels
+
+                if (rec.Contains(loc))
+                {
+                    AuthorizeCheck = true;
+                    bool newValue = !this.ModList.GetItemChecked(i);
+                    this.ModList.SetItemChecked(i, newValue);//check 
+                    AuthorizeCheck = false;
+
+                    return;
+                }
             }
         }
 
@@ -213,7 +240,14 @@ namespace Sonic3AIR_ModLoader
 
         private void ModsList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            (ModList.SelectedItem as Sonic3AIRMod).IsEnabled = (e.NewValue == CheckState.Checked);
+            if (!AuthorizeCheck)
+            {
+                e.NewValue = e.CurrentValue; //check state change was not through authorized actions
+            }
+            else
+            {
+                (ModList.SelectedItem as Sonic3AIRMod).IsEnabled = (e.NewValue == CheckState.Checked);
+            }
         }
 
         private void ModsList_SelectedValueChanged(object sender, EventArgs e)
@@ -418,7 +452,7 @@ namespace Sonic3AIR_ModLoader
         private void CollectGameRecordings()
         {
             gameRecordingList.Items.Clear();
-            if (Properties.Settings.Default.Sonic3AIRPath != null)
+            if (Directory.Exists(Properties.Settings.Default.Sonic3AIRPath))
             {
                 string baseDirectory = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath);
                 if (Directory.Exists(baseDirectory))
@@ -465,22 +499,35 @@ namespace Sonic3AIR_ModLoader
                 Sonic3AIRMod mod;
                 if (root != null)
                 {
-                    mod = new Sonic3AIRMod(root);
-                    if (mod != null)
+                    try
                     {
-                        if (folder.Name.Contains("#"))
+                        mod = new Sonic3AIRMod(root);
+                        if (mod != null)
                         {
-                            mod.IsEnabled = false;
-                            mod.EnabledLocal = false;
-                            ModsList.Add(mod);
-                        }
-                        else
-                        {
-                            mod.IsEnabled = true;
-                            mod.EnabledLocal = true;
-                            ModsList.Add(mod);
+                            if (folder.Name.Contains("#"))
+                            {
+                                mod.IsEnabled = false;
+                                mod.EnabledLocal = false;
+                                ModsList.Add(mod);
+                            }
+                            else
+                            {
+                                mod.IsEnabled = true;
+                                mod.EnabledLocal = true;
+                                ModsList.Add(mod);
+                            }
                         }
                     }
+                    catch (Newtonsoft.Json.JsonReaderException ex)
+                    {
+                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}(Likely a JSON Error; Make sure the mod.json file is formated correctly!){Environment.NewLine}{ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}{ex.Message}");
+                    }
+
+
                 }
 
 
@@ -660,6 +707,10 @@ namespace Sonic3AIR_ModLoader
                 }
             }
         }
+
+        #endregion
+
+        #region Helpers
 
         #endregion
 

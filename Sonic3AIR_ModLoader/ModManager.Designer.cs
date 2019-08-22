@@ -212,6 +212,7 @@
             this.ModList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
             this.ModList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
             this.ModList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
+            this.ModList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ModList_MouseDown);
             // 
             // groupBox3
             // 
@@ -666,7 +667,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(117, 26);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Version v.0.7 ALPHA\r\nBy CarJem Generations\r\n";
+            this.label4.Text = "Version v.0.8 ALPHA\r\nBy CarJem Generations\r\n";
             // 
             // exitButton
             // 

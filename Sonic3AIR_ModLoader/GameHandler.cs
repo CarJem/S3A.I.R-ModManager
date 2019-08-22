@@ -26,13 +26,20 @@ namespace Sonic3AIR_ModLoader
 
         public static void LaunchSonic3AIR()
         {
-            while (Properties.Settings.Default.Sonic3AIRPath == null || Properties.Settings.Default.Sonic3AIRPath == "")
+            bool IsGamePathSet = false;
+            if (Properties.Settings.Default.Sonic3AIRPath == null || Properties.Settings.Default.Sonic3AIRPath == "")
             {
-                UpdateSonic3AIRLocation();
+                IsGamePathSet = UpdateSonic3AIRLocation();
             }
-            System.Threading.Thread thread = new System.Threading.Thread(GameHandler.RunSonic3AIR);
-            thread.Start();
-
+            if (IsGamePathSet)
+            {
+                System.Threading.Thread thread = new System.Threading.Thread(GameHandler.RunSonic3AIR);
+                thread.Start();
+            }
+            else
+            {
+                MessageBox.Show("Path not set. Cannot start Sonic 3 A.I.R!");
+            }
         }
 
         public static void RunSonic3AIR()
@@ -84,7 +91,7 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        public static void UpdateSonic3AIRLocation()
+        public static bool UpdateSonic3AIRLocation()
         {
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
@@ -94,7 +101,9 @@ namespace Sonic3AIR_ModLoader
             {
                 Properties.Settings.Default.Sonic3AIRPath = fileDialog.FileName;
                 Properties.Settings.Default.Save();
+                return true;
             }
+            else return false;
         }
     }
 }
