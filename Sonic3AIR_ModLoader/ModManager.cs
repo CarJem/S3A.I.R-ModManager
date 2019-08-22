@@ -58,6 +58,22 @@ namespace Sonic3AIR_ModLoader
             UpdateModsList(true);
         }
 
+        private void OpenSampleModsFolderButton_Click(object sender, EventArgs e)
+        {
+            OpenSampleModsFolder();
+
+        }
+
+        private void OpenUserManualButton_Click(object sender, EventArgs e)
+        {
+            OpenUserManual();
+        }
+
+        private void OpenModDocumentationButton_Click(object sender, EventArgs e)
+        {
+            OpenModDocumentation();
+        }
+
         private void OpenModURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenModURL((ModList.SelectedItem as Sonic3AIRMod).URL);
@@ -648,10 +664,12 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
-                GameHandler.UpdateSonic3AIRLocation();
-                UpdateAIRSettings();
-                string filename = Properties.Settings.Default.Sonic3AIRPath;
-                Process.Start(Path.GetDirectoryName(filename));
+                if (GameHandler.UpdateSonic3AIRLocation())
+                {
+                    UpdateAIRSettings();
+                    string filename = Properties.Settings.Default.Sonic3AIRPath;
+                    Process.Start(Path.GetDirectoryName(filename));
+                }
             }
         }
 
@@ -673,6 +691,61 @@ namespace Sonic3AIR_ModLoader
         private void OpenLogFile()
         {
             Process.Start(Sonic3AIRAppDataFolder + "//logfile.txt");
+        }
+        
+
+        private void OpenSampleModsFolder()
+        {
+            if (Properties.Settings.Default.Sonic3AIRPath != null || Properties.Settings.Default.Sonic3AIRPath != "")
+            {
+                string filename = Properties.Settings.Default.Sonic3AIRPath;
+                Process.Start(Path.GetDirectoryName(filename) + "\\doc\\sample-mods");
+            }
+            else
+            {           
+                if (GameHandler.UpdateSonic3AIRLocation())
+                {
+                    UpdateAIRSettings();
+                    string filename = Properties.Settings.Default.Sonic3AIRPath;
+                    Process.Start(Path.GetDirectoryName(filename) + "\\doc\\sample-mods");
+                }
+            }
+        }
+
+        private void OpenUserManual()
+        {
+            if (Properties.Settings.Default.Sonic3AIRPath != null || Properties.Settings.Default.Sonic3AIRPath != "")
+            {
+                string filename = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath) + "\\Manual.pdf";
+                Process.Start(filename);
+            }
+            else
+            {
+                if (GameHandler.UpdateSonic3AIRLocation())
+                {
+                    UpdateAIRSettings();
+                    string filename = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath) + "\\Manual.pdf";
+                    Process.Start(filename);
+                }
+            }
+        }
+
+        private void OpenModDocumentation()
+        {
+            if (Properties.Settings.Default.Sonic3AIRPath != null || Properties.Settings.Default.Sonic3AIRPath != "")
+            {
+                string filename = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath) + "\\doc\\Modding.pdf";
+                Process.Start(filename);
+            }
+            else
+            {
+                if (GameHandler.UpdateSonic3AIRLocation())
+                {
+                    UpdateAIRSettings();
+                    string filename = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath) + "\\doc\\Modding.pdf";
+                    Process.Start(filename);
+                }
+            }
         }
 
         private void OpenModURL(string url)

@@ -120,6 +120,21 @@
   <metadata name="modContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Useful In-Game Shortcuts/Keys:
+
+Alt + Enter - Toggle Fullscreen
+F2 - Take a Game Recording Capture
+Right Click - Open A.I.R Context Menu
+F3 - Rescan for Game Controllers
+F4 - Switches Game Controllers for P1 and P2
+Numpad Plus/Minus - Adjust Global Audio Volume
+Alt + B - Change Background Blur
+Alt + F - Change Filter
+Alt + P - Show Performance Display
+
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

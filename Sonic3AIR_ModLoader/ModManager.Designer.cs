@@ -49,7 +49,6 @@
             this.refreshButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.showLogFileButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -84,18 +83,24 @@
             this.modInfoTextBox = new System.Windows.Forms.RichTextBox();
             this.openModURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.openUserManualButton = new System.Windows.Forms.Button();
+            this.openModDocumentationButton = new System.Windows.Forms.Button();
+            this.openSampleModsFolderButton = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
             this.modPanel.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // addMods
@@ -157,6 +162,7 @@
             // 
             this.tabControl1.Controls.Add(this.modPage);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
@@ -302,40 +308,27 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.groupBox4);
             this.tabPage3.Controls.Add(this.groupBox2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(303, 434);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Debug";
+            this.tabPage3.Text = "Recordings";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.showLogFileButton);
-            this.groupBox4.Location = new System.Drawing.Point(6, 282);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(291, 146);
-            this.groupBox4.TabIndex = 5;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Other";
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(6, 16);
+            this.label5.Location = new System.Drawing.Point(9, 122);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(279, 100);
+            this.label5.Size = new System.Drawing.Size(279, 268);
             this.label5.TabIndex = 7;
-            this.label5.Text = "Useful In-Game Shortcuts/Keys:\r\n\r\nESC - Toggle Fullscreen\r\nF2 - Take a Game Recor" +
-    "ding Capture\r\nRight Click - Open A.I.R Context Menu\r\n";
+            this.label5.Text = resources.GetString("label5.Text");
             this.label5.UseMnemonic = false;
             // 
             // showLogFileButton
             // 
-            this.showLogFileButton.Location = new System.Drawing.Point(6, 119);
+            this.showLogFileButton.Location = new System.Drawing.Point(9, 407);
             this.showLogFileButton.Name = "showLogFileButton";
             this.showLogFileButton.Size = new System.Drawing.Size(279, 21);
             this.showLogFileButton.TabIndex = 6;
@@ -648,7 +641,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(139, 52);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R Mod Manager\r\n\r\nVersion v.0.8 ALPHA\r\nBy CarJem Generations\r\n";
+            this.label4.Text = "Sonic 3 A.I.R Mod Manager\r\n\r\nVersion v.0.9 ALPHA\r\nBy CarJem Generations\r\n";
             // 
             // exitButton
             // 
@@ -690,6 +683,61 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "About";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.showLogFileButton);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.groupBox6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(303, 434);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Debug";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // openUserManualButton
+            // 
+            this.openUserManualButton.Location = new System.Drawing.Point(6, 48);
+            this.openUserManualButton.Name = "openUserManualButton";
+            this.openUserManualButton.Size = new System.Drawing.Size(279, 23);
+            this.openUserManualButton.TabIndex = 1;
+            this.openUserManualButton.Text = "Sonic 3 A.I.R User Manual";
+            this.openUserManualButton.UseVisualStyleBackColor = true;
+            this.openUserManualButton.Click += new System.EventHandler(this.OpenUserManualButton_Click);
+            // 
+            // openModDocumentationButton
+            // 
+            this.openModDocumentationButton.Location = new System.Drawing.Point(6, 77);
+            this.openModDocumentationButton.Name = "openModDocumentationButton";
+            this.openModDocumentationButton.Size = new System.Drawing.Size(279, 23);
+            this.openModDocumentationButton.TabIndex = 2;
+            this.openModDocumentationButton.Text = "Sonic 3 A.I.R Modding Instructions";
+            this.openModDocumentationButton.UseVisualStyleBackColor = true;
+            this.openModDocumentationButton.Click += new System.EventHandler(this.OpenModDocumentationButton_Click);
+            // 
+            // openSampleModsFolderButton
+            // 
+            this.openSampleModsFolderButton.Location = new System.Drawing.Point(6, 19);
+            this.openSampleModsFolderButton.Name = "openSampleModsFolderButton";
+            this.openSampleModsFolderButton.Size = new System.Drawing.Size(279, 23);
+            this.openSampleModsFolderButton.TabIndex = 3;
+            this.openSampleModsFolderButton.Text = "Open Sample Mods Folder";
+            this.openSampleModsFolderButton.UseVisualStyleBackColor = true;
+            this.openSampleModsFolderButton.Click += new System.EventHandler(this.OpenSampleModsFolderButton_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.openModDocumentationButton);
+            this.groupBox6.Controls.Add(this.openSampleModsFolderButton);
+            this.groupBox6.Controls.Add(this.openUserManualButton);
+            this.groupBox6.Location = new System.Drawing.Point(3, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(294, 113);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Guides";
+            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -716,7 +764,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -725,6 +772,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -776,7 +825,6 @@
         private System.Windows.Forms.NumericUpDown autoLaunchDelayUpDown;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button showLogFileButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckedListBox ModList;
@@ -784,6 +832,11 @@
         private System.Windows.Forms.RichTextBox modInfoTextBox;
         private System.Windows.Forms.ToolStripMenuItem openModURLToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button openModDocumentationButton;
+        private System.Windows.Forms.Button openSampleModsFolderButton;
+        private System.Windows.Forms.Button openUserManualButton;
     }
 }
 

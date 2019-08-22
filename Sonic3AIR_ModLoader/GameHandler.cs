@@ -26,7 +26,7 @@ namespace Sonic3AIR_ModLoader
 
         public static void LaunchSonic3AIR()
         {
-            bool IsGamePathSet = false;
+            bool IsGamePathSet = true;
             if (Properties.Settings.Default.Sonic3AIRPath == null || Properties.Settings.Default.Sonic3AIRPath == "")
             {
                 IsGamePathSet = UpdateSonic3AIRLocation();
