@@ -58,6 +58,11 @@ namespace Sonic3AIR_ModLoader
             UpdateModsList(true);
         }
 
+        private void OpenModURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenModURL((ModList.SelectedItem as Sonic3AIRMod).URL);
+        }
+
         private void ShowLogFileButton_Click(object sender, EventArgs e)
         {
             OpenLogFile();
@@ -257,6 +262,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RunButton_Click(object sender, EventArgs e)
         {
+            SaveButton_Click(null, null);
             GameHandler.LaunchSonic3AIR();
             UpdateInGameButtons();
         }
@@ -376,12 +382,14 @@ namespace Sonic3AIR_ModLoader
                 removeButton.Enabled = true;
                 removeModToolStripMenuItem.Enabled = true;
                 openModFolderToolStripMenuItem.Enabled = true;
+                openModURLToolStripMenuItem.Enabled = ((ModList.SelectedItem as Sonic3AIRMod).URL != null);
             }
             else
             {
                 removeButton.Enabled = false;
                 removeModToolStripMenuItem.Enabled = false;
                 openModFolderToolStripMenuItem.Enabled = false;
+                openModURLToolStripMenuItem.Enabled = false;
             }
 
             
@@ -390,25 +398,32 @@ namespace Sonic3AIR_ModLoader
                 Sonic3AIRMod item = ModList.SelectedItem as Sonic3AIRMod;
                 if (item != null)
                 {
+                    string nL = Environment.NewLine;
                     modNameLabel.Text = item.Name;
                     modTechnicalNameLabel.Text = item.TechnicalName;
-                    modAuthorLabel.Text = "By: " + item.Author;
-                    modDesciptionLabel.Text = item.Description;
+
+                    modInfoTextBox.Text = "";
+
+                    modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Bold);
+
+                    modInfoTextBox.AppendText($"By: {item.Author}{nL}Version: {item.GameVersion}{nL}A.I.R Version: {item.GameVersion}");
+
+                    modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Regular);
+
+                    modInfoTextBox.AppendText($"{nL}{nL}{item.Description}");
                 }
                 else
                 {
                     modNameLabel.Text = "";
                     modTechnicalNameLabel.Text = "";
-                    modAuthorLabel.Text = "";
-                    modDesciptionLabel.Text = "";
+                    modInfoTextBox.Text = "";
                 }
             }
             else
             {
                 modNameLabel.Text = "";
                 modTechnicalNameLabel.Text = "";
-                modAuthorLabel.Text = "";
-                modDesciptionLabel.Text = "";
+                modInfoTextBox.Text = "";
             }
         }
 
@@ -660,6 +675,11 @@ namespace Sonic3AIR_ModLoader
             Process.Start(Sonic3AIRAppDataFolder + "//logfile.txt");
         }
 
+        private void OpenModURL(string url)
+        {
+            Process.Start(url);
+        }
+
         private void OpenSettingsFile()
         {
             Process.Start(Sonic3AIRAppDataFolder + "//settings.json");
@@ -738,13 +758,24 @@ namespace Sonic3AIR_ModLoader
                 data = data.Replace("\t", " ");
                 data = data.Replace("\"", "\'");
                 dynamic stuff = JObject.Parse(data);
+                //Author
                 Author = stuff.Metadata.Author;
+                if (Author == null) Author = "N/A";
+                //Name
                 Name = stuff.Metadata.Name;
+                if (Name == null) Name = "N/A";
+                //Description
                 Description = stuff.Metadata.Description;
-                URL = stuff.Metadata.URL;
-                ModVersion = stuff.Metadata.ModVersion;
-                GameVersion = stuff.Metadata.GameVersion;
                 if (Description == null) Description = "No Description Provided.";
+                //Mod URL
+                URL = stuff.Metadata.URL;
+                //ModVersion
+                ModVersion = stuff.Metadata.ModVersion;
+                if (ModVersion == null) ModVersion = "N/A";
+                //GameVersion
+                GameVersion = stuff.Metadata.GameVersion;
+                if (GameVersion == null) GameVersion = "N/A";
+
                 FolderName = mod.Directory.Name;
                 FolderPath = mod.Directory.FullName;
                 TechnicalName = $"[{FolderName.Replace("#","")}]";
