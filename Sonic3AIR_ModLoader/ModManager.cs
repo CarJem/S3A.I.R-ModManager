@@ -406,7 +406,7 @@ namespace Sonic3AIR_ModLoader
 
                     modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Bold);
 
-                    modInfoTextBox.AppendText($"By: {item.Author}{nL}Version: {item.GameVersion}{nL}A.I.R Version: {item.GameVersion}");
+                    modInfoTextBox.AppendText($"By: {item.Author}{nL}Version: {item.ModVersion}{nL}A.I.R Version: {item.GameVersion}");
 
                     modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Regular);
 
