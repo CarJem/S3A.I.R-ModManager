@@ -824,13 +824,8 @@ namespace Sonic3AIR_ModLoader
 
             public Sonic3AIRMod(FileInfo mod)
             {
-                //Enabled = isEnabled;
                 string data = File.ReadAllText(mod.FullName);
-                data = data.Replace("\r", " ");
-                data = data.Replace("\n", " ");
-                data = data.Replace("\t", " ");
-                data = data.Replace("\"", "\'");
-                dynamic stuff = JObject.Parse(data);
+                dynamic stuff = JRaw.Parse(data);
                 //Author
                 Author = stuff.Metadata.Author;
                 if (Author == null) Author = "N/A";
