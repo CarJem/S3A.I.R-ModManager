@@ -35,22 +35,21 @@
             this.modContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openModFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openModURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modPage = new System.Windows.Forms.TabPage();
             this.modPanel = new System.Windows.Forms.Panel();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.ModList = new System.Windows.Forms.CheckedListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.modInfoTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.modTechnicalNameLabel = new System.Windows.Forms.Label();
             this.modNameLabel = new System.Windows.Forms.Label();
+            this.ModList = new System.Windows.Forms.CheckedListBox();
             this.moveDownButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.showLogFileButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.deleteRecordingButton = new System.Windows.Forms.Button();
             this.copyRecordingFilePath = new System.Windows.Forms.Button();
@@ -58,7 +57,16 @@
             this.refreshDebugButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.openRecordingButton = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.showLogFileButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.openModDocumentationButton = new System.Windows.Forms.Button();
+            this.openSampleModsFolderButton = new System.Windows.Forms.Button();
+            this.openUserManualButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.autoLaunchDelayLabel = new System.Windows.Forms.Label();
             this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -78,16 +86,9 @@
             this.fixGlitchesCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.sonic3AIRPathBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
-            this.modInfoTextBox = new System.Windows.Forms.RichTextBox();
-            this.openModURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.openUserManualButton = new System.Windows.Forms.Button();
-            this.openModDocumentationButton = new System.Windows.Forms.Button();
-            this.openSampleModsFolderButton = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.openModdingTemplatesFolder = new System.Windows.Forms.Button();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -95,12 +96,12 @@
             this.groupBox3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // addMods
@@ -146,6 +147,13 @@
             this.removeModToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.removeModToolStripMenuItem.Text = "Remove Mod";
             this.removeModToolStripMenuItem.Click += new System.EventHandler(this.RemoveModToolStripMenuItem_Click);
+            // 
+            // openModURLToolStripMenuItem
+            // 
+            this.openModURLToolStripMenuItem.Name = "openModURLToolStripMenuItem";
+            this.openModURLToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.openModURLToolStripMenuItem.Text = "Open Mod URL";
+            this.openModURLToolStripMenuItem.Click += new System.EventHandler(this.OpenModURLToolStripMenuItem_Click);
             // 
             // runButton
             // 
@@ -198,32 +206,6 @@
             this.modPanel.Size = new System.Drawing.Size(297, 428);
             this.modPanel.TabIndex = 14;
             // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(151, 478);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 16;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // ModList
-            // 
-            this.ModList.ContextMenuStrip = this.modContextMenuStrip;
-            this.ModList.FormattingEnabled = true;
-            this.ModList.Location = new System.Drawing.Point(34, 6);
-            this.ModList.Name = "ModList";
-            this.ModList.ScrollAlwaysVisible = true;
-            this.ModList.Size = new System.Drawing.Size(260, 199);
-            this.ModList.Sorted = true;
-            this.ModList.TabIndex = 15;
-            this.ModList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
-            this.ModList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
-            this.ModList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
-            this.ModList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
-            this.ModList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ModList_MouseDown);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.modInfoTextBox);
@@ -237,6 +219,19 @@
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mod Properties";
+            // 
+            // modInfoTextBox
+            // 
+            this.modInfoTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.modInfoTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.modInfoTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.modInfoTextBox.Location = new System.Drawing.Point(6, 45);
+            this.modInfoTextBox.Name = "modInfoTextBox";
+            this.modInfoTextBox.ReadOnly = true;
+            this.modInfoTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.modInfoTextBox.Size = new System.Drawing.Size(279, 124);
+            this.modInfoTextBox.TabIndex = 16;
+            this.modInfoTextBox.Text = "";
             // 
             // label6
             // 
@@ -273,6 +268,22 @@
             this.modNameLabel.Tag = "";
             this.modNameLabel.Text = "Name";
             this.modNameLabel.UseMnemonic = false;
+            // 
+            // ModList
+            // 
+            this.ModList.ContextMenuStrip = this.modContextMenuStrip;
+            this.ModList.FormattingEnabled = true;
+            this.ModList.Location = new System.Drawing.Point(34, 6);
+            this.ModList.Name = "ModList";
+            this.ModList.ScrollAlwaysVisible = true;
+            this.ModList.Size = new System.Drawing.Size(260, 199);
+            this.ModList.Sorted = true;
+            this.ModList.TabIndex = 15;
+            this.ModList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
+            this.ModList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
+            this.ModList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
+            this.ModList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
+            this.ModList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ModList_MouseDown);
             // 
             // moveDownButton
             // 
@@ -316,25 +327,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Recordings";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(9, 122);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(279, 268);
-            this.label5.TabIndex = 7;
-            this.label5.Text = resources.GetString("label5.Text");
-            this.label5.UseMnemonic = false;
-            // 
-            // showLogFileButton
-            // 
-            this.showLogFileButton.Location = new System.Drawing.Point(9, 407);
-            this.showLogFileButton.Name = "showLogFileButton";
-            this.showLogFileButton.Size = new System.Drawing.Size(279, 21);
-            this.showLogFileButton.TabIndex = 6;
-            this.showLogFileButton.Text = "Show Log File";
-            this.showLogFileButton.UseVisualStyleBackColor = true;
-            this.showLogFileButton.Click += new System.EventHandler(this.ShowLogFileButton_Click);
             // 
             // groupBox2
             // 
@@ -414,6 +406,81 @@
             this.openRecordingButton.UseVisualStyleBackColor = true;
             this.openRecordingButton.Click += new System.EventHandler(this.OpenRecordingButton_Click);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.showLogFileButton);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.groupBox6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(303, 434);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Debug";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // showLogFileButton
+            // 
+            this.showLogFileButton.Location = new System.Drawing.Point(9, 407);
+            this.showLogFileButton.Name = "showLogFileButton";
+            this.showLogFileButton.Size = new System.Drawing.Size(279, 21);
+            this.showLogFileButton.TabIndex = 6;
+            this.showLogFileButton.Text = "Show Log File";
+            this.showLogFileButton.UseVisualStyleBackColor = true;
+            this.showLogFileButton.Click += new System.EventHandler(this.ShowLogFileButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(9, 150);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(279, 240);
+            this.label5.TabIndex = 7;
+            this.label5.Text = resources.GetString("label5.Text");
+            this.label5.UseMnemonic = false;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.openModdingTemplatesFolder);
+            this.groupBox6.Controls.Add(this.openModDocumentationButton);
+            this.groupBox6.Controls.Add(this.openSampleModsFolderButton);
+            this.groupBox6.Controls.Add(this.openUserManualButton);
+            this.groupBox6.Location = new System.Drawing.Point(3, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(294, 141);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Guides";
+            // 
+            // openModDocumentationButton
+            // 
+            this.openModDocumentationButton.Location = new System.Drawing.Point(6, 77);
+            this.openModDocumentationButton.Name = "openModDocumentationButton";
+            this.openModDocumentationButton.Size = new System.Drawing.Size(279, 23);
+            this.openModDocumentationButton.TabIndex = 2;
+            this.openModDocumentationButton.Text = "Sonic 3 A.I.R Modding Instructions";
+            this.openModDocumentationButton.UseVisualStyleBackColor = true;
+            this.openModDocumentationButton.Click += new System.EventHandler(this.OpenModDocumentationButton_Click);
+            // 
+            // openSampleModsFolderButton
+            // 
+            this.openSampleModsFolderButton.Location = new System.Drawing.Point(6, 19);
+            this.openSampleModsFolderButton.Name = "openSampleModsFolderButton";
+            this.openSampleModsFolderButton.Size = new System.Drawing.Size(279, 23);
+            this.openSampleModsFolderButton.TabIndex = 3;
+            this.openSampleModsFolderButton.Text = "Open Sample Mods Folder";
+            this.openSampleModsFolderButton.UseVisualStyleBackColor = true;
+            this.openSampleModsFolderButton.Click += new System.EventHandler(this.OpenSampleModsFolderButton_Click);
+            // 
+            // openUserManualButton
+            // 
+            this.openUserManualButton.Location = new System.Drawing.Point(6, 48);
+            this.openUserManualButton.Name = "openUserManualButton";
+            this.openUserManualButton.Size = new System.Drawing.Size(279, 23);
+            this.openUserManualButton.TabIndex = 1;
+            this.openUserManualButton.Text = "Sonic 3 A.I.R User Manual";
+            this.openUserManualButton.UseVisualStyleBackColor = true;
+            this.openUserManualButton.Click += new System.EventHandler(this.OpenUserManualButton_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBox5);
@@ -434,6 +501,25 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Options";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Location = new System.Drawing.Point(6, 354);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(288, 74);
+            this.groupBox5.TabIndex = 15;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "About";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(139, 52);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Sonic 3 A.I.R Mod Manager\r\n\r\nVersion v.0.10 BETA\r\nBy CarJem Generations\r\n";
             // 
             // autoLaunchDelayLabel
             // 
@@ -634,14 +720,15 @@
             this.sonic3AIRPathBox.Size = new System.Drawing.Size(255, 20);
             this.sonic3AIRPathBox.TabIndex = 0;
             // 
-            // label4
+            // saveButton
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(139, 52);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R Mod Manager\r\n\r\nVersion v.0.9 ALPHA\r\nBy CarJem Generations\r\n";
+            this.saveButton.Location = new System.Drawing.Point(151, 478);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 16;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // exitButton
             // 
@@ -653,90 +740,15 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
-            // modInfoTextBox
+            // openModdingTemplatesFolder
             // 
-            this.modInfoTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.modInfoTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.modInfoTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.modInfoTextBox.Location = new System.Drawing.Point(6, 45);
-            this.modInfoTextBox.Name = "modInfoTextBox";
-            this.modInfoTextBox.ReadOnly = true;
-            this.modInfoTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.modInfoTextBox.Size = new System.Drawing.Size(279, 124);
-            this.modInfoTextBox.TabIndex = 16;
-            this.modInfoTextBox.Text = "";
-            // 
-            // openModURLToolStripMenuItem
-            // 
-            this.openModURLToolStripMenuItem.Name = "openModURLToolStripMenuItem";
-            this.openModURLToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.openModURLToolStripMenuItem.Text = "Open Mod URL";
-            this.openModURLToolStripMenuItem.Click += new System.EventHandler(this.OpenModURLToolStripMenuItem_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Location = new System.Drawing.Point(6, 354);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(288, 74);
-            this.groupBox5.TabIndex = 15;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "About";
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.showLogFileButton);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.groupBox6);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(303, 434);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "Debug";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // openUserManualButton
-            // 
-            this.openUserManualButton.Location = new System.Drawing.Point(6, 48);
-            this.openUserManualButton.Name = "openUserManualButton";
-            this.openUserManualButton.Size = new System.Drawing.Size(279, 23);
-            this.openUserManualButton.TabIndex = 1;
-            this.openUserManualButton.Text = "Sonic 3 A.I.R User Manual";
-            this.openUserManualButton.UseVisualStyleBackColor = true;
-            this.openUserManualButton.Click += new System.EventHandler(this.OpenUserManualButton_Click);
-            // 
-            // openModDocumentationButton
-            // 
-            this.openModDocumentationButton.Location = new System.Drawing.Point(6, 77);
-            this.openModDocumentationButton.Name = "openModDocumentationButton";
-            this.openModDocumentationButton.Size = new System.Drawing.Size(279, 23);
-            this.openModDocumentationButton.TabIndex = 2;
-            this.openModDocumentationButton.Text = "Sonic 3 A.I.R Modding Instructions";
-            this.openModDocumentationButton.UseVisualStyleBackColor = true;
-            this.openModDocumentationButton.Click += new System.EventHandler(this.OpenModDocumentationButton_Click);
-            // 
-            // openSampleModsFolderButton
-            // 
-            this.openSampleModsFolderButton.Location = new System.Drawing.Point(6, 19);
-            this.openSampleModsFolderButton.Name = "openSampleModsFolderButton";
-            this.openSampleModsFolderButton.Size = new System.Drawing.Size(279, 23);
-            this.openSampleModsFolderButton.TabIndex = 3;
-            this.openSampleModsFolderButton.Text = "Open Sample Mods Folder";
-            this.openSampleModsFolderButton.UseVisualStyleBackColor = true;
-            this.openSampleModsFolderButton.Click += new System.EventHandler(this.OpenSampleModsFolderButton_Click);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.openModDocumentationButton);
-            this.groupBox6.Controls.Add(this.openSampleModsFolderButton);
-            this.groupBox6.Controls.Add(this.openUserManualButton);
-            this.groupBox6.Location = new System.Drawing.Point(3, 6);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(294, 113);
-            this.groupBox6.TabIndex = 0;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Guides";
+            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(6, 106);
+            this.openModdingTemplatesFolder.Name = "openModdingTemplatesFolder";
+            this.openModdingTemplatesFolder.Size = new System.Drawing.Size(279, 23);
+            this.openModdingTemplatesFolder.TabIndex = 4;
+            this.openModdingTemplatesFolder.Text = "Open Modding Templates Folder";
+            this.openModdingTemplatesFolder.UseVisualStyleBackColor = true;
+            this.openModdingTemplatesFolder.Click += new System.EventHandler(this.OpenModdingTemplatesFolder_Click);
             // 
             // ModManager
             // 
@@ -765,15 +777,15 @@
             this.groupBox3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -837,6 +849,7 @@
         private System.Windows.Forms.Button openModDocumentationButton;
         private System.Windows.Forms.Button openSampleModsFolderButton;
         private System.Windows.Forms.Button openUserManualButton;
+        private System.Windows.Forms.Button openModdingTemplatesFolder;
     }
 }
 
