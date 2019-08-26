@@ -68,11 +68,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.autoLaunchDelayLabel = new System.Windows.Forms.Label();
-            this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.keepOpenOnQuitCheckBox = new System.Windows.Forms.CheckBox();
-            this.keepLoaderOpenCheckBox = new System.Windows.Forms.CheckBox();
-            this.autoRunCheckbox = new System.Windows.Forms.CheckBox();
             this.updateSonic3AIRPathButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.openModsFolder = new System.Windows.Forms.Button();
@@ -89,6 +85,14 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.openModdingTemplatesFolder = new System.Windows.Forms.Button();
+            this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
+            this.keepOpenOnQuitCheckBox = new System.Windows.Forms.CheckBox();
+            this.keepLoaderOpenCheckBox = new System.Windows.Forms.CheckBox();
+            this.autoRunCheckbox = new System.Windows.Forms.CheckBox();
+            this.s3AIRWebsiteButton = new System.Windows.Forms.Button();
+            this.gamebannaButton = new System.Windows.Forms.Button();
+            this.eukaTwitterButton = new System.Windows.Forms.Button();
+            this.carJemTwitterButton = new System.Windows.Forms.Button();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -100,8 +104,8 @@
             this.groupBox6.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // addMods
@@ -483,7 +487,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Controls.Add(this.autoLaunchDelayLabel);
             this.tabPage2.Controls.Add(this.autoLaunchDelayUpDown);
             this.tabPage2.Controls.Add(this.label3);
@@ -505,9 +508,9 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Location = new System.Drawing.Point(6, 354);
+            this.groupBox5.Location = new System.Drawing.Point(6, 142);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(288, 74);
+            this.groupBox5.Size = new System.Drawing.Size(139, 88);
             this.groupBox5.TabIndex = 15;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "About";
@@ -517,9 +520,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 16);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(139, 52);
+            this.label4.Size = new System.Drawing.Size(117, 65);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R Mod Manager\r\n\r\nVersion v.0.10 BETA\r\nBy CarJem Generations\r\n";
+            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.0.10 BETA\r\nBy CarJem Generations\r\n";
             // 
             // autoLaunchDelayLabel
             // 
@@ -530,15 +533,6 @@
             this.autoLaunchDelayLabel.TabIndex = 14;
             this.autoLaunchDelayLabel.Text = "Boot Delay (Seconds):";
             // 
-            // autoLaunchDelayUpDown
-            // 
-            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(125, 64);
-            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
-            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(91, 20);
-            this.autoLaunchDelayUpDown.TabIndex = 13;
-            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunchDelay;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -547,44 +541,6 @@
             this.label3.Size = new System.Drawing.Size(115, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Mod Manager Options:";
-            // 
-            // keepOpenOnQuitCheckBox
-            // 
-            this.keepOpenOnQuitCheckBox.AutoSize = true;
-            this.keepOpenOnQuitCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnQuit;
-            this.keepOpenOnQuitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnQuit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keepOpenOnQuitCheckBox.Location = new System.Drawing.Point(9, 136);
-            this.keepOpenOnQuitCheckBox.Name = "keepOpenOnQuitCheckBox";
-            this.keepOpenOnQuitCheckBox.Size = new System.Drawing.Size(142, 17);
-            this.keepOpenOnQuitCheckBox.TabIndex = 10;
-            this.keepOpenOnQuitCheckBox.Text = "Stay Open on Game Exit";
-            this.keepOpenOnQuitCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // keepLoaderOpenCheckBox
-            // 
-            this.keepLoaderOpenCheckBox.AutoSize = true;
-            this.keepLoaderOpenCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnLaunch;
-            this.keepLoaderOpenCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keepLoaderOpenCheckBox.Location = new System.Drawing.Point(9, 113);
-            this.keepLoaderOpenCheckBox.Name = "keepLoaderOpenCheckBox";
-            this.keepLoaderOpenCheckBox.Size = new System.Drawing.Size(161, 17);
-            this.keepLoaderOpenCheckBox.TabIndex = 9;
-            this.keepLoaderOpenCheckBox.Text = "Stay Open on Game Launch";
-            this.keepLoaderOpenCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // autoRunCheckbox
-            // 
-            this.autoRunCheckbox.AutoSize = true;
-            this.autoRunCheckbox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunch;
-            this.autoRunCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoRunCheckbox.Location = new System.Drawing.Point(9, 46);
-            this.autoRunCheckbox.Name = "autoRunCheckbox";
-            this.autoRunCheckbox.Size = new System.Drawing.Size(139, 17);
-            this.autoRunCheckbox.TabIndex = 8;
-            this.autoRunCheckbox.Text = "Enable Auto Boot Mode";
-            this.autoRunCheckbox.UseVisualStyleBackColor = true;
-            this.autoRunCheckbox.CheckedChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
-            this.autoRunCheckbox.CheckStateChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
             // 
             // updateSonic3AIRPathButton
             // 
@@ -598,6 +554,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.carJemTwitterButton);
+            this.groupBox1.Controls.Add(this.eukaTwitterButton);
+            this.groupBox1.Controls.Add(this.gamebannaButton);
+            this.groupBox1.Controls.Add(this.s3AIRWebsiteButton);
+            this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.openModsFolder);
             this.groupBox1.Controls.Add(this.changeRomPathButton);
             this.groupBox1.Controls.Add(this.openConfigFile);
@@ -609,14 +570,14 @@
             this.groupBox1.Controls.Add(this.fixGlitchesCheckbox);
             this.groupBox1.Location = new System.Drawing.Point(6, 159);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(288, 195);
+            this.groupBox1.Size = new System.Drawing.Size(288, 269);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Advanced Settings";
             // 
             // openModsFolder
             // 
-            this.openModsFolder.Location = new System.Drawing.Point(6, 137);
+            this.openModsFolder.Location = new System.Drawing.Point(3, 112);
             this.openModsFolder.Name = "openModsFolder";
             this.openModsFolder.Size = new System.Drawing.Size(133, 24);
             this.openModsFolder.TabIndex = 10;
@@ -636,9 +597,9 @@
             // 
             // openConfigFile
             // 
-            this.openConfigFile.Location = new System.Drawing.Point(6, 105);
+            this.openConfigFile.Location = new System.Drawing.Point(3, 82);
             this.openConfigFile.Name = "openConfigFile";
-            this.openConfigFile.Size = new System.Drawing.Size(276, 26);
+            this.openConfigFile.Size = new System.Drawing.Size(133, 24);
             this.openConfigFile.TabIndex = 9;
             this.openConfigFile.Text = "Open Settings File";
             this.openConfigFile.UseVisualStyleBackColor = true;
@@ -646,7 +607,7 @@
             // 
             // openAppDataFolderButton
             // 
-            this.openAppDataFolderButton.Location = new System.Drawing.Point(149, 137);
+            this.openAppDataFolderButton.Location = new System.Drawing.Point(149, 82);
             this.openAppDataFolderButton.Name = "openAppDataFolderButton";
             this.openAppDataFolderButton.Size = new System.Drawing.Size(133, 24);
             this.openAppDataFolderButton.TabIndex = 9;
@@ -673,9 +634,9 @@
             // 
             // openEXEFolderButton
             // 
-            this.openEXEFolderButton.Location = new System.Drawing.Point(149, 166);
+            this.openEXEFolderButton.Location = new System.Drawing.Point(149, 112);
             this.openEXEFolderButton.Name = "openEXEFolderButton";
-            this.openEXEFolderButton.Size = new System.Drawing.Size(133, 23);
+            this.openEXEFolderButton.Size = new System.Drawing.Size(133, 24);
             this.openEXEFolderButton.TabIndex = 8;
             this.openEXEFolderButton.Text = "Open EXE Folder";
             this.openEXEFolderButton.UseVisualStyleBackColor = true;
@@ -684,7 +645,7 @@
             // failSafeModeCheckbox
             // 
             this.failSafeModeCheckbox.AutoSize = true;
-            this.failSafeModeCheckbox.Location = new System.Drawing.Point(9, 82);
+            this.failSafeModeCheckbox.Location = new System.Drawing.Point(95, 59);
             this.failSafeModeCheckbox.Name = "failSafeModeCheckbox";
             this.failSafeModeCheckbox.Size = new System.Drawing.Size(97, 17);
             this.failSafeModeCheckbox.TabIndex = 4;
@@ -750,6 +711,93 @@
             this.openModdingTemplatesFolder.UseVisualStyleBackColor = true;
             this.openModdingTemplatesFolder.Click += new System.EventHandler(this.OpenModdingTemplatesFolder_Click);
             // 
+            // autoLaunchDelayUpDown
+            // 
+            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(125, 64);
+            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
+            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(91, 20);
+            this.autoLaunchDelayUpDown.TabIndex = 13;
+            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunchDelay;
+            // 
+            // keepOpenOnQuitCheckBox
+            // 
+            this.keepOpenOnQuitCheckBox.AutoSize = true;
+            this.keepOpenOnQuitCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnQuit;
+            this.keepOpenOnQuitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnQuit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keepOpenOnQuitCheckBox.Location = new System.Drawing.Point(9, 136);
+            this.keepOpenOnQuitCheckBox.Name = "keepOpenOnQuitCheckBox";
+            this.keepOpenOnQuitCheckBox.Size = new System.Drawing.Size(142, 17);
+            this.keepOpenOnQuitCheckBox.TabIndex = 10;
+            this.keepOpenOnQuitCheckBox.Text = "Stay Open on Game Exit";
+            this.keepOpenOnQuitCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // keepLoaderOpenCheckBox
+            // 
+            this.keepLoaderOpenCheckBox.AutoSize = true;
+            this.keepLoaderOpenCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnLaunch;
+            this.keepLoaderOpenCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keepLoaderOpenCheckBox.Location = new System.Drawing.Point(9, 113);
+            this.keepLoaderOpenCheckBox.Name = "keepLoaderOpenCheckBox";
+            this.keepLoaderOpenCheckBox.Size = new System.Drawing.Size(161, 17);
+            this.keepLoaderOpenCheckBox.TabIndex = 9;
+            this.keepLoaderOpenCheckBox.Text = "Stay Open on Game Launch";
+            this.keepLoaderOpenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // autoRunCheckbox
+            // 
+            this.autoRunCheckbox.AutoSize = true;
+            this.autoRunCheckbox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunch;
+            this.autoRunCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoRunCheckbox.Location = new System.Drawing.Point(9, 46);
+            this.autoRunCheckbox.Name = "autoRunCheckbox";
+            this.autoRunCheckbox.Size = new System.Drawing.Size(139, 17);
+            this.autoRunCheckbox.TabIndex = 8;
+            this.autoRunCheckbox.Text = "Enable Auto Boot Mode";
+            this.autoRunCheckbox.UseVisualStyleBackColor = true;
+            this.autoRunCheckbox.CheckedChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
+            this.autoRunCheckbox.CheckStateChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
+            // 
+            // s3AIRWebsiteButton
+            // 
+            this.s3AIRWebsiteButton.Location = new System.Drawing.Point(149, 142);
+            this.s3AIRWebsiteButton.Name = "s3AIRWebsiteButton";
+            this.s3AIRWebsiteButton.Size = new System.Drawing.Size(133, 24);
+            this.s3AIRWebsiteButton.TabIndex = 16;
+            this.s3AIRWebsiteButton.Text = "Sonic 3 AIR Homepage";
+            this.s3AIRWebsiteButton.UseVisualStyleBackColor = true;
+            this.s3AIRWebsiteButton.Click += new System.EventHandler(this.S3AIRWebsiteButton_Click);
+            // 
+            // gamebannaButton
+            // 
+            this.gamebannaButton.Location = new System.Drawing.Point(149, 172);
+            this.gamebannaButton.Name = "gamebannaButton";
+            this.gamebannaButton.Size = new System.Drawing.Size(133, 24);
+            this.gamebannaButton.TabIndex = 17;
+            this.gamebannaButton.Text = "S3AIR @ Gamebanna";
+            this.gamebannaButton.UseVisualStyleBackColor = true;
+            this.gamebannaButton.Click += new System.EventHandler(this.GamebannaButton_Click);
+            // 
+            // eukaTwitterButton
+            // 
+            this.eukaTwitterButton.Location = new System.Drawing.Point(149, 202);
+            this.eukaTwitterButton.Name = "eukaTwitterButton";
+            this.eukaTwitterButton.Size = new System.Drawing.Size(133, 24);
+            this.eukaTwitterButton.TabIndex = 18;
+            this.eukaTwitterButton.Text = "Eukaryot3K @ Twitter";
+            this.eukaTwitterButton.UseVisualStyleBackColor = true;
+            this.eukaTwitterButton.Click += new System.EventHandler(this.EukaTwitterButton_Click);
+            // 
+            // carJemTwitterButton
+            // 
+            this.carJemTwitterButton.Location = new System.Drawing.Point(149, 232);
+            this.carJemTwitterButton.Name = "carJemTwitterButton";
+            this.carJemTwitterButton.Size = new System.Drawing.Size(133, 24);
+            this.carJemTwitterButton.TabIndex = 19;
+            this.carJemTwitterButton.Text = "CarJem @ Twitter";
+            this.carJemTwitterButton.UseVisualStyleBackColor = true;
+            this.carJemTwitterButton.Click += new System.EventHandler(this.CarJemTwitterButton_Click);
+            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -783,9 +831,9 @@
             this.tabPage2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -850,6 +898,10 @@
         private System.Windows.Forms.Button openSampleModsFolderButton;
         private System.Windows.Forms.Button openUserManualButton;
         private System.Windows.Forms.Button openModdingTemplatesFolder;
+        private System.Windows.Forms.Button carJemTwitterButton;
+        private System.Windows.Forms.Button eukaTwitterButton;
+        private System.Windows.Forms.Button gamebannaButton;
+        private System.Windows.Forms.Button s3AIRWebsiteButton;
     }
 }
 

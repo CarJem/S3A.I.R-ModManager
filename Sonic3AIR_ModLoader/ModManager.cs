@@ -220,6 +220,26 @@ namespace Sonic3AIR_ModLoader
 
         #region Events
 
+        private void S3AIRWebsiteButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://sonic3air.org/");
+        }
+
+        private void GamebannaButton_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://gamebanana.com/games/6878");
+        }
+
+        private void EukaTwitterButton_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://twitter.com/eukaryot3k");
+        }
+
+        private void CarJemTwitterButton_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://twitter.com/carter5467_99");
+        }
+
         private void OpenModdingTemplatesFolder_Click(object sender, EventArgs e)
         {
             OpenModdingTemplatesFolder();
@@ -659,7 +679,7 @@ namespace Sonic3AIR_ModLoader
         private void CollectGameRecordings()
         {
             gameRecordingList.Items.Clear();
-            if (Directory.Exists(Properties.Settings.Default.Sonic3AIRPath))
+            if (File.Exists(Properties.Settings.Default.Sonic3AIRPath))
             {
                 string baseDirectory = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath);
                 if (Directory.Exists(baseDirectory))
@@ -781,7 +801,7 @@ namespace Sonic3AIR_ModLoader
                 }
                 Directory.Move(System.IO.Path.GetDirectoryName(foundFile), Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(ofd.FileName));
                 CleanUpTempModsFolder();
-                UpdateModsList();
+                UpdateModsList(true);
             }
         }
 
@@ -1148,8 +1168,8 @@ namespace Sonic3AIR_ModLoader
 
         }
 
-        #endregion
 
+        #endregion
 
     }
 }
