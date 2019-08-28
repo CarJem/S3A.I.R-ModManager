@@ -95,7 +95,8 @@ namespace Sonic3AIR_ModLoader
         {
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
-                Filter = "Executable File (*.exe)|*.exe"
+                Filter = "Executable File (*.exe)|*.exe",
+                Title = "Select Sonic 3 AIR Executable..."
             };
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {

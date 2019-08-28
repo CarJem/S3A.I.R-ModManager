@@ -22,7 +22,7 @@ namespace Sonic3AIR_ModLoader.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Sonic3AIR_ModLoader.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModLoader.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Sonic3AIR_ModLoader.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Sonic3AIR_ModLoader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Sonic3AIRBackground {
+        public static System.Drawing.Bitmap Sonic3AIRBackground {
             get {
                 object obj = ResourceManager.GetObject("Sonic3AIRBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,9 +73,19 @@ namespace Sonic3AIR_ModLoader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Sonic3AIRLogo {
+        public static System.Drawing.Bitmap Sonic3AIRLogo {
             get {
                 object obj = ResourceManager.GetObject("Sonic3AIRLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Sonic3KAIRLogo {
+            get {
+                object obj = ResourceManager.GetObject("Sonic3KAIRLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

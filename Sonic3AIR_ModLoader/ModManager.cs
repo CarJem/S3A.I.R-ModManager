@@ -549,8 +549,9 @@ namespace Sonic3AIR_ModLoader
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
                 Filter = "Sonic 3K ROM File (*.bin)|*.bin",
-                InitialDirectory = Path.GetDirectoryName(S3AIRSettings.Sonic3KRomPath)
-                
+                InitialDirectory = Path.GetDirectoryName(S3AIRSettings.Sonic3KRomPath),
+                Title = "Select Sonic 3K ROM File..."
+
             };
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -788,7 +789,8 @@ namespace Sonic3AIR_ModLoader
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Filter = "Sonic 3 AIR Mod (*.zip)|*.zip"
+                Filter = "Sonic 3 AIR Mod (*.zip)|*.zip",
+                Title = "Select Mod ZIP File..."
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {

@@ -20,6 +20,13 @@ namespace Sonic3AIR_ModLoader
         public AutoBootDialog()
         {
             InitializeComponent();
+            Random rnd = new Random();
+            int knuckMode = (rnd.Next(1, 50));
+            if (knuckMode == 3)
+            {
+                pictureBox1.Image = Sonic3AIR_ModLoader.Properties.Resources.Sonic3KAIRLogo;
+            }
+
             button1.Parent = pictureBox1;
             label1.Parent = pictureBox1;
             button1.BackColor = Color.FromArgb(64, 0, 0, 0);
