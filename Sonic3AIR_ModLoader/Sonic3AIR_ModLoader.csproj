@@ -37,13 +37,17 @@
     <ApplicationIcon>Resources\Sonic3AIR.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +57,8 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoBootDialog.cs">
@@ -61,6 +67,7 @@
     <Compile Include="AutoBootDialog.Designer.cs">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="DownloadWindow.xaml.cs" />
     <Compile Include="ModManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +118,12 @@
     <None Include="Resources\Sonic3AIRBackground.png" />
     <Content Include="Resources\Sonic3AIR.ico" />
     <Content Include="Resources\Sonic3AIRLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="DownloadWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

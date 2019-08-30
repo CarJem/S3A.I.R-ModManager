@@ -36,10 +36,11 @@
             this.openModFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openModURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runButton = new System.Windows.Forms.Button();
+            this.saveAndLoadButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modPage = new System.Windows.Forms.TabPage();
             this.modPanel = new System.Windows.Forms.Panel();
+            this.downloadButtonTest = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.modInfoTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -61,16 +62,25 @@
             this.showLogFileButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.openModdingTemplatesFolder = new System.Windows.Forms.Button();
             this.openModDocumentationButton = new System.Windows.Forms.Button();
             this.openSampleModsFolderButton = new System.Windows.Forms.Button();
             this.openUserManualButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.autoLaunchDelayLabel = new System.Windows.Forms.Label();
+            this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.keepOpenOnQuitCheckBox = new System.Windows.Forms.CheckBox();
+            this.keepLoaderOpenCheckBox = new System.Windows.Forms.CheckBox();
+            this.autoRunCheckbox = new System.Windows.Forms.CheckBox();
             this.updateSonic3AIRPathButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.carJemTwitterButton = new System.Windows.Forms.Button();
+            this.eukaTwitterButton = new System.Windows.Forms.Button();
+            this.gamebannaButton = new System.Windows.Forms.Button();
+            this.s3AIRWebsiteButton = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.openModsFolder = new System.Windows.Forms.Button();
             this.changeRomPathButton = new System.Windows.Forms.Button();
             this.openConfigFile = new System.Windows.Forms.Button();
@@ -84,15 +94,6 @@
             this.sonic3AIRPathBox = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
-            this.openModdingTemplatesFolder = new System.Windows.Forms.Button();
-            this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
-            this.keepOpenOnQuitCheckBox = new System.Windows.Forms.CheckBox();
-            this.keepLoaderOpenCheckBox = new System.Windows.Forms.CheckBox();
-            this.autoRunCheckbox = new System.Windows.Forms.CheckBox();
-            this.s3AIRWebsiteButton = new System.Windows.Forms.Button();
-            this.gamebannaButton = new System.Windows.Forms.Button();
-            this.eukaTwitterButton = new System.Windows.Forms.Button();
-            this.carJemTwitterButton = new System.Windows.Forms.Button();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -103,13 +104,15 @@
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // addMods
             // 
+            this.addMods.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.addMods.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addMods.Location = new System.Drawing.Point(3, 6);
             this.addMods.Name = "addMods";
             this.addMods.Size = new System.Drawing.Size(25, 25);
@@ -121,6 +124,8 @@
             // removeButton
             // 
             this.removeButton.Enabled = false;
+            this.removeButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.removeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeButton.Location = new System.Drawing.Point(3, 37);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(25, 25);
@@ -159,16 +164,16 @@
             this.openModURLToolStripMenuItem.Text = "Open Mod URL";
             this.openModURLToolStripMenuItem.Click += new System.EventHandler(this.OpenModURLToolStripMenuItem_Click);
             // 
-            // runButton
+            // saveAndLoadButton
             // 
-            this.runButton.Location = new System.Drawing.Point(232, 478);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(81, 23);
-            this.runButton.TabIndex = 5;
-            this.runButton.Text = "Save & Load";
-            this.runButton.UseMnemonic = false;
-            this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
+            this.saveAndLoadButton.Location = new System.Drawing.Point(232, 478);
+            this.saveAndLoadButton.Name = "saveAndLoadButton";
+            this.saveAndLoadButton.Size = new System.Drawing.Size(81, 23);
+            this.saveAndLoadButton.TabIndex = 5;
+            this.saveAndLoadButton.Text = "Save & Load";
+            this.saveAndLoadButton.UseMnemonic = false;
+            this.saveAndLoadButton.UseVisualStyleBackColor = true;
+            this.saveAndLoadButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // tabControl1
             // 
@@ -197,6 +202,7 @@
             // modPanel
             // 
             this.modPanel.BackColor = System.Drawing.Color.Transparent;
+            this.modPanel.Controls.Add(this.downloadButtonTest);
             this.modPanel.Controls.Add(this.groupBox3);
             this.modPanel.Controls.Add(this.ModList);
             this.modPanel.Controls.Add(this.moveDownButton);
@@ -209,6 +215,18 @@
             this.modPanel.Name = "modPanel";
             this.modPanel.Size = new System.Drawing.Size(297, 428);
             this.modPanel.TabIndex = 14;
+            // 
+            // downloadButtonTest
+            // 
+            this.downloadButtonTest.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.downloadButtonTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.downloadButtonTest.Location = new System.Drawing.Point(3, 180);
+            this.downloadButtonTest.Name = "downloadButtonTest";
+            this.downloadButtonTest.Size = new System.Drawing.Size(25, 25);
+            this.downloadButtonTest.TabIndex = 16;
+            this.downloadButtonTest.Text = "⭳";
+            this.downloadButtonTest.UseVisualStyleBackColor = true;
+            this.downloadButtonTest.Click += new System.EventHandler(this.DownloadButtonTest_Click);
             // 
             // groupBox3
             // 
@@ -292,13 +310,14 @@
             // moveDownButton
             // 
             this.moveDownButton.Enabled = false;
+            this.moveDownButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.moveDownButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveDownButton.Location = new System.Drawing.Point(3, 68);
             this.moveDownButton.Name = "moveDownButton";
             this.moveDownButton.Size = new System.Drawing.Size(25, 25);
             this.moveDownButton.TabIndex = 13;
             this.moveDownButton.Text = "↓";
             this.moveDownButton.UseVisualStyleBackColor = true;
-            this.moveDownButton.Visible = false;
             // 
             // refreshButton
             // 
@@ -313,13 +332,14 @@
             // moveUpButton
             // 
             this.moveUpButton.Enabled = false;
+            this.moveUpButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.moveUpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveUpButton.Location = new System.Drawing.Point(3, 99);
             this.moveUpButton.Name = "moveUpButton";
             this.moveUpButton.Size = new System.Drawing.Size(25, 25);
             this.moveUpButton.TabIndex = 12;
             this.moveUpButton.Text = "↑";
             this.moveUpButton.UseVisualStyleBackColor = true;
-            this.moveUpButton.Visible = false;
             // 
             // tabPage3
             // 
@@ -455,6 +475,16 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Guides";
             // 
+            // openModdingTemplatesFolder
+            // 
+            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(6, 106);
+            this.openModdingTemplatesFolder.Name = "openModdingTemplatesFolder";
+            this.openModdingTemplatesFolder.Size = new System.Drawing.Size(279, 23);
+            this.openModdingTemplatesFolder.TabIndex = 4;
+            this.openModdingTemplatesFolder.Text = "Open Modding Templates Folder";
+            this.openModdingTemplatesFolder.UseVisualStyleBackColor = true;
+            this.openModdingTemplatesFolder.Click += new System.EventHandler(this.OpenModdingTemplatesFolder_Click);
+            // 
             // openModDocumentationButton
             // 
             this.openModDocumentationButton.Location = new System.Drawing.Point(6, 77);
@@ -505,25 +535,6 @@
             this.tabPage2.Text = "Options";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Location = new System.Drawing.Point(6, 142);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(139, 88);
-            this.groupBox5.TabIndex = 15;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "About";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 65);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.0.10 BETA\r\nBy CarJem Generations\r\n";
-            // 
             // autoLaunchDelayLabel
             // 
             this.autoLaunchDelayLabel.AutoSize = true;
@@ -533,6 +544,15 @@
             this.autoLaunchDelayLabel.TabIndex = 14;
             this.autoLaunchDelayLabel.Text = "Boot Delay (Seconds):";
             // 
+            // autoLaunchDelayUpDown
+            // 
+            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(125, 64);
+            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
+            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(91, 20);
+            this.autoLaunchDelayUpDown.TabIndex = 13;
+            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunchDelay;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -541,6 +561,44 @@
             this.label3.Size = new System.Drawing.Size(115, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Mod Manager Options:";
+            // 
+            // keepOpenOnQuitCheckBox
+            // 
+            this.keepOpenOnQuitCheckBox.AutoSize = true;
+            this.keepOpenOnQuitCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnQuit;
+            this.keepOpenOnQuitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnQuit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keepOpenOnQuitCheckBox.Location = new System.Drawing.Point(9, 136);
+            this.keepOpenOnQuitCheckBox.Name = "keepOpenOnQuitCheckBox";
+            this.keepOpenOnQuitCheckBox.Size = new System.Drawing.Size(142, 17);
+            this.keepOpenOnQuitCheckBox.TabIndex = 10;
+            this.keepOpenOnQuitCheckBox.Text = "Stay Open on Game Exit";
+            this.keepOpenOnQuitCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // keepLoaderOpenCheckBox
+            // 
+            this.keepLoaderOpenCheckBox.AutoSize = true;
+            this.keepLoaderOpenCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnLaunch;
+            this.keepLoaderOpenCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keepLoaderOpenCheckBox.Location = new System.Drawing.Point(9, 113);
+            this.keepLoaderOpenCheckBox.Name = "keepLoaderOpenCheckBox";
+            this.keepLoaderOpenCheckBox.Size = new System.Drawing.Size(161, 17);
+            this.keepLoaderOpenCheckBox.TabIndex = 9;
+            this.keepLoaderOpenCheckBox.Text = "Stay Open on Game Launch";
+            this.keepLoaderOpenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // autoRunCheckbox
+            // 
+            this.autoRunCheckbox.AutoSize = true;
+            this.autoRunCheckbox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunch;
+            this.autoRunCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoRunCheckbox.Location = new System.Drawing.Point(9, 46);
+            this.autoRunCheckbox.Name = "autoRunCheckbox";
+            this.autoRunCheckbox.Size = new System.Drawing.Size(139, 17);
+            this.autoRunCheckbox.TabIndex = 8;
+            this.autoRunCheckbox.Text = "Enable Auto Boot Mode";
+            this.autoRunCheckbox.UseVisualStyleBackColor = true;
+            this.autoRunCheckbox.CheckedChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
+            this.autoRunCheckbox.CheckStateChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
             // 
             // updateSonic3AIRPathButton
             // 
@@ -574,6 +632,65 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Advanced Settings";
+            // 
+            // carJemTwitterButton
+            // 
+            this.carJemTwitterButton.Location = new System.Drawing.Point(149, 232);
+            this.carJemTwitterButton.Name = "carJemTwitterButton";
+            this.carJemTwitterButton.Size = new System.Drawing.Size(133, 24);
+            this.carJemTwitterButton.TabIndex = 19;
+            this.carJemTwitterButton.Text = "CarJem @ Twitter";
+            this.carJemTwitterButton.UseVisualStyleBackColor = true;
+            this.carJemTwitterButton.Click += new System.EventHandler(this.CarJemTwitterButton_Click);
+            // 
+            // eukaTwitterButton
+            // 
+            this.eukaTwitterButton.Location = new System.Drawing.Point(149, 202);
+            this.eukaTwitterButton.Name = "eukaTwitterButton";
+            this.eukaTwitterButton.Size = new System.Drawing.Size(133, 24);
+            this.eukaTwitterButton.TabIndex = 18;
+            this.eukaTwitterButton.Text = "Eukaryot3K @ Twitter";
+            this.eukaTwitterButton.UseVisualStyleBackColor = true;
+            this.eukaTwitterButton.Click += new System.EventHandler(this.EukaTwitterButton_Click);
+            // 
+            // gamebannaButton
+            // 
+            this.gamebannaButton.Location = new System.Drawing.Point(149, 172);
+            this.gamebannaButton.Name = "gamebannaButton";
+            this.gamebannaButton.Size = new System.Drawing.Size(133, 24);
+            this.gamebannaButton.TabIndex = 17;
+            this.gamebannaButton.Text = "S3AIR @ Gamebanna";
+            this.gamebannaButton.UseVisualStyleBackColor = true;
+            this.gamebannaButton.Click += new System.EventHandler(this.GamebannaButton_Click);
+            // 
+            // s3AIRWebsiteButton
+            // 
+            this.s3AIRWebsiteButton.Location = new System.Drawing.Point(149, 142);
+            this.s3AIRWebsiteButton.Name = "s3AIRWebsiteButton";
+            this.s3AIRWebsiteButton.Size = new System.Drawing.Size(133, 24);
+            this.s3AIRWebsiteButton.TabIndex = 16;
+            this.s3AIRWebsiteButton.Text = "Sonic 3 AIR Homepage";
+            this.s3AIRWebsiteButton.UseVisualStyleBackColor = true;
+            this.s3AIRWebsiteButton.Click += new System.EventHandler(this.S3AIRWebsiteButton_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Location = new System.Drawing.Point(6, 142);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(139, 88);
+            this.groupBox5.TabIndex = 15;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "About";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 65);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.0.10 BETA\r\nBy CarJem Generations\r\n";
             // 
             // openModsFolder
             // 
@@ -701,103 +818,6 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
-            // openModdingTemplatesFolder
-            // 
-            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(6, 106);
-            this.openModdingTemplatesFolder.Name = "openModdingTemplatesFolder";
-            this.openModdingTemplatesFolder.Size = new System.Drawing.Size(279, 23);
-            this.openModdingTemplatesFolder.TabIndex = 4;
-            this.openModdingTemplatesFolder.Text = "Open Modding Templates Folder";
-            this.openModdingTemplatesFolder.UseVisualStyleBackColor = true;
-            this.openModdingTemplatesFolder.Click += new System.EventHandler(this.OpenModdingTemplatesFolder_Click);
-            // 
-            // autoLaunchDelayUpDown
-            // 
-            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(125, 64);
-            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
-            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(91, 20);
-            this.autoLaunchDelayUpDown.TabIndex = 13;
-            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunchDelay;
-            // 
-            // keepOpenOnQuitCheckBox
-            // 
-            this.keepOpenOnQuitCheckBox.AutoSize = true;
-            this.keepOpenOnQuitCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnQuit;
-            this.keepOpenOnQuitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnQuit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keepOpenOnQuitCheckBox.Location = new System.Drawing.Point(9, 136);
-            this.keepOpenOnQuitCheckBox.Name = "keepOpenOnQuitCheckBox";
-            this.keepOpenOnQuitCheckBox.Size = new System.Drawing.Size(142, 17);
-            this.keepOpenOnQuitCheckBox.TabIndex = 10;
-            this.keepOpenOnQuitCheckBox.Text = "Stay Open on Game Exit";
-            this.keepOpenOnQuitCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // keepLoaderOpenCheckBox
-            // 
-            this.keepLoaderOpenCheckBox.AutoSize = true;
-            this.keepLoaderOpenCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnLaunch;
-            this.keepLoaderOpenCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keepLoaderOpenCheckBox.Location = new System.Drawing.Point(9, 113);
-            this.keepLoaderOpenCheckBox.Name = "keepLoaderOpenCheckBox";
-            this.keepLoaderOpenCheckBox.Size = new System.Drawing.Size(161, 17);
-            this.keepLoaderOpenCheckBox.TabIndex = 9;
-            this.keepLoaderOpenCheckBox.Text = "Stay Open on Game Launch";
-            this.keepLoaderOpenCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // autoRunCheckbox
-            // 
-            this.autoRunCheckbox.AutoSize = true;
-            this.autoRunCheckbox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunch;
-            this.autoRunCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoRunCheckbox.Location = new System.Drawing.Point(9, 46);
-            this.autoRunCheckbox.Name = "autoRunCheckbox";
-            this.autoRunCheckbox.Size = new System.Drawing.Size(139, 17);
-            this.autoRunCheckbox.TabIndex = 8;
-            this.autoRunCheckbox.Text = "Enable Auto Boot Mode";
-            this.autoRunCheckbox.UseVisualStyleBackColor = true;
-            this.autoRunCheckbox.CheckedChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
-            this.autoRunCheckbox.CheckStateChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
-            // 
-            // s3AIRWebsiteButton
-            // 
-            this.s3AIRWebsiteButton.Location = new System.Drawing.Point(149, 142);
-            this.s3AIRWebsiteButton.Name = "s3AIRWebsiteButton";
-            this.s3AIRWebsiteButton.Size = new System.Drawing.Size(133, 24);
-            this.s3AIRWebsiteButton.TabIndex = 16;
-            this.s3AIRWebsiteButton.Text = "Sonic 3 AIR Homepage";
-            this.s3AIRWebsiteButton.UseVisualStyleBackColor = true;
-            this.s3AIRWebsiteButton.Click += new System.EventHandler(this.S3AIRWebsiteButton_Click);
-            // 
-            // gamebannaButton
-            // 
-            this.gamebannaButton.Location = new System.Drawing.Point(149, 172);
-            this.gamebannaButton.Name = "gamebannaButton";
-            this.gamebannaButton.Size = new System.Drawing.Size(133, 24);
-            this.gamebannaButton.TabIndex = 17;
-            this.gamebannaButton.Text = "S3AIR @ Gamebanna";
-            this.gamebannaButton.UseVisualStyleBackColor = true;
-            this.gamebannaButton.Click += new System.EventHandler(this.GamebannaButton_Click);
-            // 
-            // eukaTwitterButton
-            // 
-            this.eukaTwitterButton.Location = new System.Drawing.Point(149, 202);
-            this.eukaTwitterButton.Name = "eukaTwitterButton";
-            this.eukaTwitterButton.Size = new System.Drawing.Size(133, 24);
-            this.eukaTwitterButton.TabIndex = 18;
-            this.eukaTwitterButton.Text = "Eukaryot3K @ Twitter";
-            this.eukaTwitterButton.UseVisualStyleBackColor = true;
-            this.eukaTwitterButton.Click += new System.EventHandler(this.EukaTwitterButton_Click);
-            // 
-            // carJemTwitterButton
-            // 
-            this.carJemTwitterButton.Location = new System.Drawing.Point(149, 232);
-            this.carJemTwitterButton.Name = "carJemTwitterButton";
-            this.carJemTwitterButton.Size = new System.Drawing.Size(133, 24);
-            this.carJemTwitterButton.TabIndex = 19;
-            this.carJemTwitterButton.Text = "CarJem @ Twitter";
-            this.carJemTwitterButton.UseVisualStyleBackColor = true;
-            this.carJemTwitterButton.Click += new System.EventHandler(this.CarJemTwitterButton_Click);
-            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -806,7 +826,7 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.runButton);
+            this.Controls.Add(this.saveAndLoadButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -829,11 +849,11 @@
             this.groupBox6.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -841,7 +861,7 @@
         #endregion
         private System.Windows.Forms.Button addMods;
         private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.Button runButton;
+        private System.Windows.Forms.Button saveAndLoadButton;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage modPage;
@@ -902,6 +922,7 @@
         private System.Windows.Forms.Button eukaTwitterButton;
         private System.Windows.Forms.Button gamebannaButton;
         private System.Windows.Forms.Button s3AIRWebsiteButton;
+        private System.Windows.Forms.Button downloadButtonTest;
     }
 }
 

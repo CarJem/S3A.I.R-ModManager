@@ -21,7 +21,7 @@ namespace Sonic3AIR_ModLoader
         {
             InitializeComponent();
             Random rnd = new Random();
-            int knuckMode = (rnd.Next(1, 50));
+            int knuckMode = (rnd.Next(1, 25));
             if (knuckMode == 3)
             {
                 pictureBox1.Image = Sonic3AIR_ModLoader.Properties.Resources.Sonic3KAIRLogo;

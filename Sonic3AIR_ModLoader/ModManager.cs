@@ -13,6 +13,8 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
 using System.Net.Http;
+using System.Net;
+using Microsoft.VisualBasic;
 
 namespace Sonic3AIR_ModLoader
 {
@@ -207,6 +209,7 @@ namespace Sonic3AIR_ModLoader
             InitializeComponent();
             if (InitalCollection() == true)
             {
+                SetTooltips();
                 UpdateModsList(true);
                 UpdateUI();
                 if (autoBoot) GameHandler.LaunchSonic3AIR();
@@ -522,10 +525,20 @@ namespace Sonic3AIR_ModLoader
         #endregion
 
         #region Refreshing and Updating
+        private void SetTooltips()
+        {
+            new ToolTip().SetToolTip(addMods, "Add a Mod...");
+            new ToolTip().SetToolTip(removeButton, "Remove Selected Mod...");
+            new ToolTip().SetToolTip(downloadButtonTest, "Download Test...");
+            new ToolTip().SetToolTip(moveUpButton, "Increase Selected Mod Priority...");
+            new ToolTip().SetToolTip(moveDownButton, "Decrease Selected Mod Priority...");
+        }
+
         public void UpdateInGameButtons()
         {
             bool enabled = !GameHandler.isGameRunning;
-            runButton.Enabled = enabled;
+            saveAndLoadButton.Enabled = enabled;
+            saveButton.Enabled = enabled;
             exitButton.Enabled = enabled;
             keepLoaderOpenCheckBox.Enabled = enabled;
             keepOpenOnQuitCheckBox.Enabled = enabled;
@@ -536,6 +549,7 @@ namespace Sonic3AIR_ModLoader
             modPanel.Enabled = enabled;
             autoRunCheckbox.Enabled = enabled;
         }
+
 
         private void UpdateUI()
         {
@@ -794,17 +808,22 @@ namespace Sonic3AIR_ModLoader
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                //Find the Root of the Mod in the Zip, Because some people have a folder inside of the zip, others may not
-                string foundFile = "";
-                ZipFile.ExtractToDirectory(ofd.FileName, Sonic3AIRTempModsFolder);
-                foreach (string d in Directory.GetDirectories(Sonic3AIRTempModsFolder))
-                {
-                    foundFile = Directory.GetFiles(d, "mod.json").FirstOrDefault();
-                }
-                Directory.Move(System.IO.Path.GetDirectoryName(foundFile), Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(ofd.FileName));
-                CleanUpTempModsFolder();
-                UpdateModsList(true);
+                AddMod(ofd.FileName);
             }
+        }
+
+        private void AddMod(string file)
+        {
+            //Find the Root of the Mod in the Zip, Because some people have a folder inside of the zip, others may not
+            string foundFile = "";
+            ZipFile.ExtractToDirectory(file, Sonic3AIRTempModsFolder);
+            foreach (string d in Directory.GetDirectories(Sonic3AIRTempModsFolder))
+            {
+                foundFile = Directory.GetFiles(d, "mod.json").FirstOrDefault();
+            }
+            Directory.Move(System.IO.Path.GetDirectoryName(foundFile), Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
+            CleanUpTempModsFolder();
+            UpdateModsList(true);
         }
 
         private void RemoveMod()
@@ -814,7 +833,7 @@ namespace Sonic3AIR_ModLoader
             {
                 WipeFolderContents(modToRemove.FolderPath);
                 Directory.Delete(modToRemove.FolderPath);
-                UpdateModsList();
+                UpdateModsList(true);
                 
             }
 
@@ -1006,6 +1025,114 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
+        #region Downloading
+
+        public void DownloadMod(string url)
+        {
+            string baseURL = GetBaseURL(url);
+            if (baseURL != "") url = baseURL;
+
+            string remote_filename = "";
+            if (baseURL != "") remote_filename = GetRemoteFileName(baseURL);
+            string filename = "temp.zip";
+            if (remote_filename != "") filename = remote_filename;
+
+            DownloadWindow downloadWindow = new DownloadWindow($"Downloading \"{filename}\"", url, $"{Sonic3AIRTempModsFolder}\\{filename}");
+            Action finishAction = DownloadModCompleted;
+            downloadWindow.DownloadCompleted = finishAction;
+            downloadWindow.Start();
+        }
+
+        private string GetRemoteFileName(string baseURL)
+        {
+            Uri uri = new Uri(baseURL);
+            return System.IO.Path.GetFileName(uri.LocalPath);
+        }
+
+        private string GetBaseURL(string url)
+        {
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+            webRequest.AllowAutoRedirect = false;  // IMPORTANT
+
+            webRequest.Timeout = 10000;           // timeout 10s
+            webRequest.Method = "HEAD";
+            // Get the response ...
+            HttpWebResponse webResponse;
+            using (webResponse = (HttpWebResponse)webRequest.GetResponse())
+            {
+                // Now look to see if it's a redirect
+                if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
+                {
+                    string uriString = webResponse.Headers["Location"];
+                    return uriString;
+                }
+            }
+            return "";
+        }
+
+        private void DownloadModCompleted()
+        {
+            string file = Directory.GetFiles($"{Sonic3AIRTempModsFolder}").FirstOrDefault(x => x.EndsWith(".zip"));
+            AddMod(file);
+        }
+
+        private void DownloadButtonTest_Click(object sender, EventArgs e)
+        {
+            //DownloadMod("https://gamebanana.com/dl/430253");
+
+
+            string url = "";
+            if (ShowInputDialog(ref url) == DialogResult.OK)
+            {
+                if (url != "") MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else DownloadMod(url);
+            }
+            
+        }
+
+        private static DialogResult ShowInputDialog(ref string input)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(300, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = "Enter Mod URL...";
+            inputBox.StartPosition = FormStartPosition.CenterScreen;
+
+            System.Windows.Forms.TextBox textBox = new TextBox();
+            textBox.Size = new System.Drawing.Size(size.Width - 10, 23);
+            textBox.Location = new System.Drawing.Point(5, 5);
+            textBox.Text = input;
+            inputBox.Controls.Add(textBox);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = textBox.Text;
+            return result;
+        }
+
+        #endregion
+
         #region Information Sending
 
         private async void UploadRecordingToFileDotIO(Sonic3AIRRecording recording)
@@ -1172,6 +1299,7 @@ namespace Sonic3AIR_ModLoader
 
 
         #endregion
+
 
     }
 }
