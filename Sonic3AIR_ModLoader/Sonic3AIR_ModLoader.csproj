@@ -68,6 +68,7 @@
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DownloadWindow.xaml.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="ModManager.cs">
       <SubType>Form</SubType>
     </Compile>

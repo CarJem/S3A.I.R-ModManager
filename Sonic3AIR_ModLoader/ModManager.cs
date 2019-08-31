@@ -26,6 +26,7 @@ namespace Sonic3AIR_ModLoader
         public string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public string Sonic3AIRAppDataFolder = "";
         public string Sonic3AIRModsFolder = "";
+        public string Sonic3AIRActiveModsList = "";
         public string Sonic3AIRTempModsFolder = "";
         public string Sonic3AIRSettingsFile = "";
 
@@ -193,9 +194,11 @@ namespace Sonic3AIR_ModLoader
         public string nL = Environment.NewLine;
         Sonic3AIRSettings S3AIRSettings;
         public static ModManager Instance;
-        List<Sonic3AIRMod> ModsList = new List<Sonic3AIRMod>();
+        Sonic3AIRActiveMods S3AIRActiveMods;
+        IList<Sonic3AIRMod> ModsList = new List<Sonic3AIRMod>();
 
         bool AuthorizeCheck { get; set; }
+        bool AllowUpdate { get; set; } = true;
 
         public ModManager(bool autoBoot = false)
         {
@@ -222,6 +225,26 @@ namespace Sonic3AIR_ModLoader
         }
 
         #region Events
+
+        private void ModStackRadioButtons_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AllowUpdate)
+            {
+                AllowUpdate = false;
+                if (modStackOnRadioButton.Checked)
+                {
+                    Properties.Settings.Default.EnableNewLoaderMethod = true;
+
+                }
+                else
+                {
+                    Properties.Settings.Default.EnableNewLoaderMethod = false;
+                }
+                Properties.Settings.Default.Save();
+                AllowUpdate = true;
+                UpdateModsList(true);
+            }
+        }
 
         private void S3AIRWebsiteButton_Click(object sender, EventArgs e)
         {
@@ -250,11 +273,7 @@ namespace Sonic3AIR_ModLoader
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            foreach (var mod in ModsList)
-            {
-                UpdateMods(mod);
-            }
-            UpdateModsList(true);
+            Save();
         }
 
         private void OpenSampleModsFolderButton_Click(object sender, EventArgs e)
@@ -466,7 +485,9 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
-                (ModList.SelectedItem as Sonic3AIRMod).IsEnabled = (e.NewValue == CheckState.Checked);
+                var item = (ModList.SelectedItem as Sonic3AIRMod);
+                item.IsEnabled = (e.NewValue == CheckState.Checked);
+                UpdateModsList();
             }
         }
 
@@ -477,7 +498,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RunButton_Click(object sender, EventArgs e)
         {
-            SaveButton_Click(null, null);
+            Save();
             GameHandler.LaunchSonic3AIR();
             UpdateInGameButtons();
         }
@@ -554,8 +575,17 @@ namespace Sonic3AIR_ModLoader
         private void UpdateUI()
         {
             UpdateAIRSettings();
+            UpdateModStackingToggle();
             autoLaunchDelayLabel.Enabled = Properties.Settings.Default.AutoLaunch;
             autoLaunchDelayUpDown.Enabled = Properties.Settings.Default.AutoLaunch;
+        }
+
+        private void UpdateModStackingToggle()
+        {
+            AllowUpdate = false;
+            modStackOnRadioButton.Checked = Properties.Settings.Default.EnableNewLoaderMethod == true;
+            modStackOffRadioButton.Checked = Properties.Settings.Default.EnableNewLoaderMethod == false;
+            AllowUpdate = true;
         }
 
         private void ChangeS3RomPath()
@@ -606,6 +636,16 @@ namespace Sonic3AIR_ModLoader
         {
             if (ModList.SelectedItem != null)
             {
+                if (Properties.Settings.Default.EnableNewLoaderMethod)
+                {
+                    moveUpButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) > 0);
+                    moveDownButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) < ModsList.Count - 1);
+                }
+                else
+                {
+                    moveUpButton.Enabled = false;
+                    moveDownButton.Enabled = false;
+                }
                 removeButton.Enabled = true;
                 removeModToolStripMenuItem.Enabled = true;
                 openModFolderToolStripMenuItem.Enabled = true;
@@ -613,13 +653,15 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
+                moveUpButton.Enabled = false;
+                moveDownButton.Enabled = false;
                 removeButton.Enabled = false;
                 removeModToolStripMenuItem.Enabled = false;
                 openModFolderToolStripMenuItem.Enabled = false;
                 openModURLToolStripMenuItem.Enabled = false;
             }
 
-            
+
             if (ModList.SelectedItem != null)
             {
                 Sonic3AIRMod item = ModList.SelectedItem as Sonic3AIRMod;
@@ -653,40 +695,6 @@ namespace Sonic3AIR_ModLoader
                 modInfoTextBox.Text = "";
             }
         }
-
-        private void UpdateModsList(bool FullReload = false)
-        {
-            if (FullReload) FetchModListData();
-            RefreshSelectedMobProperties();
-        }
-
-        private void FetchModListData()
-        {
-            ModList.ItemCheck -= ModsList_ItemCheck;
-            ModsList.Clear();
-            ModsList = new List<Sonic3AIRMod>();
-            GetEnabledDisabledMods();
-            ModList.DataSource = ModsList;
-            ModList.DisplayMember = "Name";
-            ModList.ValueMember = "IsEnabled";
-            for (int i = 0; i < ModList.Items.Count; i++)
-            {
-                Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
-                ModList.SetItemChecked(i, obj.IsEnabled);
-            }
-            ModList.ItemCheck += ModsList_ItemCheck;
-
-        }
-
-        private void UpdateMods(Sonic3AIRMod item)
-        {
-            if (item.IsEnabled != item.EnabledLocal)
-            {
-                if (item.IsEnabled == false) DisableMod(item);
-                else EnableMod(item);
-            }
-        }
-
         #endregion
 
         #region Information Retriving
@@ -715,6 +723,7 @@ namespace Sonic3AIR_ModLoader
         private bool InitalCollection()
         {
             Sonic3AIRAppDataFolder = AppDataFolder + "\\Sonic3AIR";
+            Sonic3AIRActiveModsList = Sonic3AIRAppDataFolder + "\\mods\\active-mods.json";
             Sonic3AIRModsFolder = Sonic3AIRAppDataFolder + "\\mods";
             Sonic3AIRTempModsFolder = Sonic3AIRAppDataFolder + "\\temp_mod_install";
             Sonic3AIRSettingsFile = Sonic3AIRAppDataFolder + "\\settings.json";
@@ -741,58 +750,23 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
+
+                if (!File.Exists(Sonic3AIRActiveModsList))
+                {
+                    S3AIRActiveMods = new Sonic3AIRActiveMods(Sonic3AIRActiveModsList);
+                }
+                else
+                {
+                    FileInfo list = new FileInfo(Sonic3AIRActiveModsList);
+                    S3AIRActiveMods = new Sonic3AIRActiveMods(list);
+                }
+
+
                 FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
                 S3AIRSettings = new Sonic3AIRSettings(file);
                 return true;
             }
 
-        }
-
-        private void GetEnabledDisabledMods()
-        {
-            DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
-            DirectoryInfo[] folders = d.GetDirectories();
-            foreach (DirectoryInfo folder in folders)
-            {
-                DirectoryInfo f = new DirectoryInfo(folder.FullName);
-                var root = f.GetFiles("mod.json").FirstOrDefault();
-                Sonic3AIRMod mod;
-                if (root != null)
-                {
-                    try
-                    {
-                        mod = new Sonic3AIRMod(root);
-                        if (mod != null)
-                        {
-                            if (folder.Name.Contains("#"))
-                            {
-                                mod.IsEnabled = false;
-                                mod.EnabledLocal = false;
-                                ModsList.Add(mod);
-                            }
-                            else
-                            {
-                                mod.IsEnabled = true;
-                                mod.EnabledLocal = true;
-                                ModsList.Add(mod);
-                            }
-                        }
-                    }
-                    catch (Newtonsoft.Json.JsonReaderException ex)
-                    {
-                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}(Likely a JSON Error; Make sure the mod.json file is formated correctly!){Environment.NewLine}{ex.Message}");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}{ex.Message}");
-                    }
-
-
-                }
-
-
-
-            }
         }
 
         #endregion
@@ -840,7 +814,6 @@ namespace Sonic3AIR_ModLoader
 
         }
 
-
         private void CleanUpTempModsFolder()
         {
             WipeFolderContents(Sonic3AIRTempModsFolder);
@@ -860,7 +833,100 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void DisableMod(Sonic3AIRMod mod)
+        #endregion
+
+        #region Legacy Mod Management
+
+        private void UpdateModsListLegacy(bool FullReload = false)
+        {
+            if (FullReload) FetchModsLegacy();
+            RefreshSelectedMobProperties();
+        }
+
+        private void SaveLegacy()
+        {
+            foreach (var mod in ModsList)
+            {
+                UpdateMods(mod);
+            }
+            UpdateModsList(true);
+
+            void UpdateMods(Sonic3AIRMod item)
+            {
+                if (item.IsEnabled != item.EnabledLocal)
+                {
+                    if (item.IsEnabled == true) EnableModLegacy(item);
+                    else DisableModLegacy(item);
+                }
+            }
+        }
+
+        private void FetchModsLegacy()
+        {
+            ModList.ItemCheck -= ModsList_ItemCheck;
+            ModsList.Clear();
+            ModsList = new List<Sonic3AIRMod>();
+            GetModsCheckStateLegacy();
+            ModList.DataSource = ModsList;
+            ModList.DisplayMember = "Name";
+            ModList.ValueMember = "IsEnabled";
+            for (int i = 0; i < ModList.Items.Count; i++)
+            {
+                Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
+                ModList.SetItemChecked(i, obj.IsEnabled);
+            }
+            ModList.ItemCheck += ModsList_ItemCheck;
+
+        }
+
+        private void GetModsCheckStateLegacy()
+        {
+            DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
+            DirectoryInfo[] folders = d.GetDirectories();
+            foreach (DirectoryInfo folder in folders)
+            {
+                DirectoryInfo f = new DirectoryInfo(folder.FullName);
+                var root = f.GetFiles("mod.json").FirstOrDefault();
+                Sonic3AIRMod mod;
+                if (root != null)
+                {
+                    try
+                    {
+                        mod = new Sonic3AIRMod(root);
+                        if (mod != null)
+                        {
+                            if (folder.Name.Contains("#"))
+                            {
+                                mod.IsEnabled = false;
+                                mod.EnabledLocal = false;
+                                ModsList.Add(mod);
+                            }
+                            else
+                            {
+                                mod.IsEnabled = true;
+                                mod.EnabledLocal = true;
+                                ModsList.Add(mod);
+                            }
+                        }
+                    }
+                    catch (Newtonsoft.Json.JsonReaderException ex)
+                    {
+                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}(Likely a JSON Error; Make sure the mod.json file is formated correctly!){Environment.NewLine}{ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}{ex.Message}");
+                    }
+
+
+                }
+
+
+
+            }
+        }
+
+        private void DisableModLegacy(Sonic3AIRMod mod)
         {
             try
             {
@@ -873,7 +939,7 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void EnableMod(Sonic3AIRMod mod)
+        private void EnableModLegacy(Sonic3AIRMod mod)
         {
             try
             {
@@ -885,6 +951,179 @@ namespace Sonic3AIR_ModLoader
                 MessageBox.Show(ex.Message + Environment.NewLine + "Please Refresh the Mod List!");
             }
         }
+
+        #endregion
+
+        #region Modern Mod Management
+
+        private void UpdateModsList(bool FullReload = false)
+        {
+            if (!Properties.Settings.Default.EnableNewLoaderMethod) UpdateModsListLegacy(FullReload);
+            else
+            {
+
+                if (FullReload) FetchMods();
+                else
+                {
+                    ModList.ItemCheck -= ModsList_ItemCheck;
+                    ModList.DataSource = null;
+                    ModList.DataSource = ModsList;
+                    ModList.DisplayMember = "Name";
+                    ModList.ValueMember = "IsEnabled";
+                    for (int i = 0; i < ModList.Items.Count; i++)
+                    {
+                        Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
+                        ModList.SetItemChecked(i, obj.IsEnabled);
+                    }
+                    ModList.ItemCheck += ModsList_ItemCheck;
+                }
+                RefreshSelectedMobProperties();
+            }
+        }
+
+        private void FetchMods()
+        {
+            ModList.ItemCheck -= ModsList_ItemCheck;
+            ModsList.Clear();
+            ModsList = new List<Sonic3AIRMod>();
+            EnableAllLegacyDisabledMods();
+            GetModsCheckState();
+            ModList.DataSource = ModsList;
+            ModList.DisplayMember = "Name";
+            ModList.ValueMember = "IsEnabled";
+            for (int i = 0; i < ModList.Items.Count; i++)
+            {
+                Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
+                ModList.SetItemChecked(i, obj.IsEnabled);
+            }
+            ModList.ItemCheck += ModsList_ItemCheck;
+
+        }
+
+        private void GetModsCheckState()
+        {
+            DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
+            DirectoryInfo[] folders = d.GetDirectories();
+            IList<Tuple<Sonic3AIRMod, int>> ActiveMods = new List<Tuple<Sonic3AIRMod, int>>();
+            foreach (DirectoryInfo folder in folders)
+            {
+                DirectoryInfo f = new DirectoryInfo(folder.FullName);
+                var root = f.GetFiles("mod.json").FirstOrDefault();
+                Sonic3AIRMod mod;
+                if (root != null)
+                {
+                    try
+                    {
+                        mod = new Sonic3AIRMod(root);
+                        if (S3AIRActiveMods.ActiveMods.Contains(mod.FolderName))
+                        {
+                            mod.IsEnabled = true;
+                            mod.EnabledLocal = true;
+                            ActiveMods.Add(new Tuple<Sonic3AIRMod, int>(mod, S3AIRActiveMods.ActiveMods.IndexOf(mod.FolderName)));
+                        }
+                        else
+                        {
+                            mod.IsEnabled = false;
+                            mod.EnabledLocal = false;
+                            ModsList.Add(mod);
+                        }
+                    }
+                    catch (Newtonsoft.Json.JsonReaderException ex)
+                    {
+                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}(Likely a JSON Error; Make sure the mod.json file is formated correctly!){Environment.NewLine}{ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error with loading {folder.Name}!{Environment.NewLine}{ex.Message}");
+                    }
+
+
+                }
+            }
+            foreach (var enabledMod in ActiveMods.OrderBy(x => x.Item2).ToList())
+            {
+                ModsList.Insert(0, enabledMod.Item1);
+            }
+
+        }
+
+        private void MoveModUp()
+        {
+            int index = ModList.SelectedIndex;
+            if (index != 0)
+            {
+                ModsList.Move(index, index - 1);
+                UpdateModsList();
+                ModList.SelectedIndex = index - 1;
+            }
+        }
+        private void MoveModDown()
+        {
+            int index = ModList.SelectedIndex;
+            if (index != ModsList.Count - 1)
+            {
+                ModsList.Move(index, index + 1);
+                UpdateModsList();
+                ModList.SelectedIndex = index + 1;
+            }
+        }
+
+        private void Save()
+        {
+            if (!Properties.Settings.Default.EnableNewLoaderMethod) SaveLegacy();
+            else
+            {
+                foreach (var mod in ModsList)
+                {
+                    UpdateMods(mod);
+                }
+                S3AIRActiveMods.Save(ModsList.Where(x => x.IsEnabled).Select(x => x.FolderName).Reverse().ToList());
+                UpdateModsList(true);
+
+                void UpdateMods(Sonic3AIRMod item)
+                {
+                    if (item.IsEnabled != item.EnabledLocal)
+                    {
+                        if (item.IsEnabled == true) EnableMod(item);
+                        else DisableMod(item);
+                    }
+                }
+            }
+        }
+
+        private void DisableMod(Sonic3AIRMod mod)
+        {
+            S3AIRActiveMods.ActiveMods.Remove(mod.FolderName);
+        }
+
+        private void EnableMod(Sonic3AIRMod mod)
+        {
+            S3AIRActiveMods.ActiveMods.Add(mod.FolderName);
+        }
+
+        private void EnableAllLegacyDisabledMods()
+        {
+            DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
+            DirectoryInfo[] folders = d.GetDirectories();
+            List<string> DisabledFolders = new List<string>();
+            foreach (DirectoryInfo folder in folders)
+            {
+                DirectoryInfo f = new DirectoryInfo(folder.FullName);
+                var root = f.GetFiles("mod.json").FirstOrDefault();
+                if (root != null)
+                {
+                    if (folder.Name.Contains("#")) DisabledFolders.Add(folder.Name);
+                }
+            }
+
+            foreach (string folder in DisabledFolders)
+            {
+                string destination = Sonic3AIRModsFolder + "\\" + folder.Replace("#", "");
+                string source = Sonic3AIRModsFolder + "\\" + folder;
+                Directory.Move(source, destination);
+            }
+        }
+
 
         #endregion
 
@@ -1296,10 +1535,99 @@ namespace Sonic3AIR_ModLoader
 
 
         }
+        public class Sonic3AIRActiveMods
+        {
+            public List<string> ActiveMods = new List<string>();
+            public string ConfigPath = "";
+            public Sonic3AIRActiveMods(FileInfo config)
+            {
+                ConfigPath = config.FullName;
+                Load();
+            }
+
+            public void Load()
+            {
+                try
+                {
+                    string data = File.ReadAllText(ConfigPath);
+                    JToken stuff = JRaw.Parse(data);
+                    foreach (JProperty content in stuff.Children())
+                    {
+                        if (content.HasValues)
+                        {
+                            ActiveMods.AddRange(content.Value.ToObject<List<string>>());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CreateFile(ConfigPath);
+                    Load();
+                }
+
+            }
+
+            public void CreateFile(string filePath)
+            {
+                var myFile = File.Create(filePath);
+                myFile.Close();
+                string nL = Environment.NewLine;
+                string bracketOpen = "{";
+                string bracketClose = "}";
+                string standardFile = $"{bracketOpen}{nL}\t\"ActiveMods\": [{nL}{nL}\t]{nL}{bracketClose}";
+                using (StreamWriter writetext = new StreamWriter(filePath)) writetext.WriteLine(standardFile);
+            }
+
+            public Sonic3AIRActiveMods(string filePath)
+            {
+                CreateFile(filePath);
+                ConfigPath = filePath;
+                Load();
+            }
+
+            public void Save(List<string> CurrentActiveMods)
+            {
+                var myFile = File.Create(ConfigPath);
+                myFile.Close();
+                string nL = Environment.NewLine;
+                string bracketOpen = "{";
+                string bracketClose = "}";
+                string fileHeader = $"{bracketOpen}{nL}\t\"ActiveMods\": [{nL}";
+                string fileFooter = $"{nL}\t]{nL}{bracketClose}";
+                string fileContents = fileHeader + GetFiles() + fileFooter;
+                using (StreamWriter writetext = new StreamWriter(ConfigPath)) writetext.WriteLine(fileContents);
+
+                string GetFiles()
+                {
+                    string fileList = "";
+                    string formatHead = "\t\t\"";
+                    string formatFoot = "\",";
+                    string formatFootEndofList = $"\"";
+                    for (int i = 0; i < CurrentActiveMods.Count; i++)
+                    {
+                        if (i >= CurrentActiveMods.Count - 1) fileList += $"{nL}{formatHead}{CurrentActiveMods[i]}{formatFootEndofList}";
+                        else fileList += $"{nL}{formatHead}{CurrentActiveMods[i]}{formatFoot}";
+                    }
+                    return fileList;
+                }
+
+                ActiveMods = CurrentActiveMods;
+            }
+
+
+        }
 
 
         #endregion
 
+        private void MoveDownButton_Click(object sender, EventArgs e)
+        {
+            MoveModDown();
+        }
 
+        private void MoveUpButton_Click(object sender, EventArgs e)
+        {
+            MoveModUp();
+        }
     }
 }

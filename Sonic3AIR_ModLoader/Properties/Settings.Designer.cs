@@ -82,5 +82,17 @@ namespace Sonic3AIR_ModLoader.Properties {
                 this["AutoLaunchDelay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableNewLoaderMethod {
+            get {
+                return ((bool)(this["EnableNewLoaderMethod"]));
+            }
+            set {
+                this["EnableNewLoaderMethod"] = value;
+            }
+        }
     }
 }

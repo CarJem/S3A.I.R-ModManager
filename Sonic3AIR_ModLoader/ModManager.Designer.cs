@@ -92,6 +92,9 @@
             this.fixGlitchesCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.sonic3AIRPathBox = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.modStackOffRadioButton = new System.Windows.Forms.RadioButton();
+            this.modStackOnRadioButton = new System.Windows.Forms.RadioButton();
             this.saveButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.modContextMenuStrip.SuspendLayout();
@@ -107,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // addMods
@@ -299,7 +303,6 @@
             this.ModList.Name = "ModList";
             this.ModList.ScrollAlwaysVisible = true;
             this.ModList.Size = new System.Drawing.Size(260, 199);
-            this.ModList.Sorted = true;
             this.ModList.TabIndex = 15;
             this.ModList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
             this.ModList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
@@ -309,7 +312,6 @@
             // 
             // moveDownButton
             // 
-            this.moveDownButton.Enabled = false;
             this.moveDownButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.moveDownButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveDownButton.Location = new System.Drawing.Point(3, 68);
@@ -318,10 +320,11 @@
             this.moveDownButton.TabIndex = 13;
             this.moveDownButton.Text = "↓";
             this.moveDownButton.UseVisualStyleBackColor = true;
+            this.moveDownButton.Click += new System.EventHandler(this.MoveDownButton_Click);
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(213, 402);
+            this.refreshButton.Location = new System.Drawing.Point(213, 392);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(81, 23);
             this.refreshButton.TabIndex = 7;
@@ -331,7 +334,6 @@
             // 
             // moveUpButton
             // 
-            this.moveUpButton.Enabled = false;
             this.moveUpButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.moveUpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveUpButton.Location = new System.Drawing.Point(3, 99);
@@ -340,6 +342,7 @@
             this.moveUpButton.TabIndex = 12;
             this.moveUpButton.Text = "↑";
             this.moveUpButton.UseVisualStyleBackColor = true;
+            this.moveUpButton.Click += new System.EventHandler(this.MoveUpButton_Click);
             // 
             // tabPage3
             // 
@@ -527,6 +530,7 @@
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.sonic3AIRPathBox);
+            this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -798,6 +802,41 @@
             this.sonic3AIRPathBox.Size = new System.Drawing.Size(255, 20);
             this.sonic3AIRPathBox.TabIndex = 0;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.modStackOffRadioButton);
+            this.groupBox4.Controls.Add(this.modStackOnRadioButton);
+            this.groupBox4.Location = new System.Drawing.Point(176, 97);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(118, 56);
+            this.groupBox4.TabIndex = 16;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Enable Mod Stacking";
+            // 
+            // modStackOffRadioButton
+            // 
+            this.modStackOffRadioButton.AutoSize = true;
+            this.modStackOffRadioButton.Location = new System.Drawing.Point(53, 33);
+            this.modStackOffRadioButton.Name = "modStackOffRadioButton";
+            this.modStackOffRadioButton.Size = new System.Drawing.Size(45, 17);
+            this.modStackOffRadioButton.TabIndex = 16;
+            this.modStackOffRadioButton.TabStop = true;
+            this.modStackOffRadioButton.Text = "OFF";
+            this.modStackOffRadioButton.UseVisualStyleBackColor = true;
+            this.modStackOffRadioButton.CheckedChanged += new System.EventHandler(this.ModStackRadioButtons_CheckedChanged);
+            // 
+            // modStackOnRadioButton
+            // 
+            this.modStackOnRadioButton.AutoSize = true;
+            this.modStackOnRadioButton.Location = new System.Drawing.Point(6, 33);
+            this.modStackOnRadioButton.Name = "modStackOnRadioButton";
+            this.modStackOnRadioButton.Size = new System.Drawing.Size(41, 17);
+            this.modStackOnRadioButton.TabIndex = 15;
+            this.modStackOnRadioButton.TabStop = true;
+            this.modStackOnRadioButton.Text = "ON";
+            this.modStackOnRadioButton.UseVisualStyleBackColor = true;
+            this.modStackOnRadioButton.CheckedChanged += new System.EventHandler(this.ModStackRadioButtons_CheckedChanged);
+            // 
             // saveButton
             // 
             this.saveButton.Location = new System.Drawing.Point(151, 478);
@@ -854,6 +893,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -923,6 +964,9 @@
         private System.Windows.Forms.Button gamebannaButton;
         private System.Windows.Forms.Button s3AIRWebsiteButton;
         private System.Windows.Forms.Button downloadButtonTest;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton modStackOffRadioButton;
+        private System.Windows.Forms.RadioButton modStackOnRadioButton;
     }
 }
 
