@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModLoader", "Sonic3AIR_ModLoader\Sonic3AIR_ModLoader.csproj", "{74887941-CE31-48E7-A4EF-75C52EC6415E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR_Protocol_Handler", "AIR_Protocol_Handler\AIR_Protocol_Handler.csproj", "{11A257A9-07AC-43C5-8705-808B7AFD644B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "res", "res", "{FAAC80A9-AF51-478E-985F-855B1BC084FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,10 @@ Global
 		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

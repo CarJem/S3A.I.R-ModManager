@@ -97,6 +97,9 @@
             this.modStackOnRadioButton = new System.Windows.Forms.RadioButton();
             this.saveButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.moreModOptionsButton = new System.Windows.Forms.Button();
+            this.moreModOptionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.gamebannaURLHandlerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -111,6 +114,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.moreModOptionsMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // addMods
@@ -206,6 +210,7 @@
             // modPanel
             // 
             this.modPanel.BackColor = System.Drawing.Color.Transparent;
+            this.modPanel.Controls.Add(this.moreModOptionsButton);
             this.modPanel.Controls.Add(this.downloadButtonTest);
             this.modPanel.Controls.Add(this.groupBox3);
             this.modPanel.Controls.Add(this.ModList);
@@ -324,9 +329,9 @@
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(213, 392);
+            this.refreshButton.Location = new System.Drawing.Point(132, 392);
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(81, 23);
+            this.refreshButton.Size = new System.Drawing.Size(75, 23);
             this.refreshButton.TabIndex = 7;
             this.refreshButton.Text = "Reload";
             this.refreshButton.UseVisualStyleBackColor = true;
@@ -857,6 +862,31 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
+            // moreModOptionsButton
+            // 
+            this.moreModOptionsButton.ContextMenuStrip = this.moreModOptionsMenuStrip;
+            this.moreModOptionsButton.Location = new System.Drawing.Point(213, 392);
+            this.moreModOptionsButton.Name = "moreModOptionsButton";
+            this.moreModOptionsButton.Size = new System.Drawing.Size(81, 23);
+            this.moreModOptionsButton.TabIndex = 18;
+            this.moreModOptionsButton.Text = "More...";
+            this.moreModOptionsButton.UseVisualStyleBackColor = true;
+            this.moreModOptionsButton.Click += new System.EventHandler(this.MoreModOptionsButton_Click);
+            // 
+            // moreModOptionsMenuStrip
+            // 
+            this.moreModOptionsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gamebannaURLHandlerOptionsToolStripMenuItem});
+            this.moreModOptionsMenuStrip.Name = "moreModOptionsMenuStrip";
+            this.moreModOptionsMenuStrip.Size = new System.Drawing.Size(262, 48);
+            // 
+            // gamebannaURLHandlerOptionsToolStripMenuItem
+            // 
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Name = "gamebannaURLHandlerOptionsToolStripMenuItem";
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Text = "Gamebanna URL Handler Options...";
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Click += new System.EventHandler(this.AddRemoveURLHandlerButton_Click);
+            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -895,6 +925,7 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.moreModOptionsMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -967,6 +998,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton modStackOffRadioButton;
         private System.Windows.Forms.RadioButton modStackOnRadioButton;
+        private System.Windows.Forms.Button moreModOptionsButton;
+        private System.Windows.Forms.ContextMenuStrip moreModOptionsMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem gamebannaURLHandlerOptionsToolStripMenuItem;
     }
 }
 

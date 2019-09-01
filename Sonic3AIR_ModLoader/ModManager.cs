@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
@@ -14,13 +15,19 @@ using System.Text.RegularExpressions;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Net;
+using System.Security.Permissions;
 using Microsoft.VisualBasic;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+
+
 
 namespace Sonic3AIR_ModLoader
 {
 
     public partial class ModManager : Form
     {
+        #region Variables
+
         #region File Path Strings
 
         public string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -29,6 +36,7 @@ namespace Sonic3AIR_ModLoader
         public string Sonic3AIRActiveModsList = "";
         public string Sonic3AIRTempModsFolder = "";
         public string Sonic3AIRSettingsFile = "";
+        public string Sonic3AIRGBLinkPath = "";
 
 
         #region AppData Path Strings
@@ -196,17 +204,17 @@ namespace Sonic3AIR_ModLoader
         public static ModManager Instance;
         Sonic3AIRActiveMods S3AIRActiveMods;
         IList<Sonic3AIRMod> ModsList = new List<Sonic3AIRMod>();
-
         bool AuthorizeCheck { get; set; }
-        bool AllowUpdate { get; set; } = true;
+        bool AllowUpdate { get; set; } = true; 
+        #endregion
 
+        #region Initialize Methods
         public ModManager(bool autoBoot = false)
         {
             Instance = this;
             StartModloader(autoBoot);
 
-        }
-        
+        }       
         private void StartModloader(bool autoBoot = false)
         {
             InitializeComponent();
@@ -223,8 +231,23 @@ namespace Sonic3AIR_ModLoader
             }
 
         }
+        #endregion
 
         #region Events
+        private void MoreModOptionsButton_Click(object sender, EventArgs e)
+        {
+            moreModOptionsMenuStrip.Show(moreModOptionsButton, new Point(0, moreModOptionsButton.Height));
+        }
+
+        private void MoveDownButton_Click(object sender, EventArgs e)
+        {
+            MoveModDown();
+        }
+
+        private void MoveUpButton_Click(object sender, EventArgs e)
+        {
+            MoveModUp();
+        }
 
         private void ModStackRadioButtons_CheckedChanged(object sender, EventArgs e)
         {
@@ -750,7 +773,7 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
-
+                //CreateGameBananaShortcut();
                 if (!File.Exists(Sonic3AIRActiveModsList))
                 {
                     S3AIRActiveMods = new Sonic3AIRActiveMods(Sonic3AIRActiveModsList);
@@ -766,7 +789,6 @@ namespace Sonic3AIR_ModLoader
                 S3AIRSettings = new Sonic3AIRSettings(file);
                 return true;
             }
-
         }
 
         #endregion
@@ -1129,6 +1151,13 @@ namespace Sonic3AIR_ModLoader
 
         #region Launching Events
 
+        private void AddRemoveURLHandlerButton_Click(object sender, EventArgs e)
+        {
+            string ModLoaderPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string InstallerPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "//GameBanana API Installer.exe";
+            Process.Start($"\"{InstallerPath}\"", $"\"{ModLoaderPath}\"");
+        }
+
         private void OpenEXEFolder()
         {
             if (Properties.Settings.Default.Sonic3AIRPath != null || Properties.Settings.Default.Sonic3AIRPath != "")
@@ -1319,7 +1348,7 @@ namespace Sonic3AIR_ModLoader
         {
             //DownloadMod("https://gamebanana.com/dl/430253");
 
-
+            
             string url = "";
             if (ShowInputDialog(ref url) == DialogResult.OK)
             {
@@ -1327,7 +1356,7 @@ namespace Sonic3AIR_ModLoader
                 else if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else DownloadMod(url);
             }
-            
+
         }
 
         private static DialogResult ShowInputDialog(ref string input)
@@ -1399,10 +1428,6 @@ namespace Sonic3AIR_ModLoader
                 }
             }
         }
-
-        #endregion
-
-        #region Helpers
 
         #endregion
 
@@ -1620,14 +1645,19 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
-        private void MoveDownButton_Click(object sender, EventArgs e)
+        #region Protocol Handler
+
+        public void CreateGameBananaShortcut()
         {
-            MoveModDown();
+            Sonic3AIRGBLinkPath = Sonic3AIRAppDataFolder + "//AIRModLoader.lnk";
+            IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+            IWshRuntimeLibrary.IWshShortcut shortcut = shell.CreateShortcut(Sonic3AIRGBLinkPath) as IWshRuntimeLibrary.IWshShortcut;
+            shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            shortcut.WorkingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            shortcut.Save();
         }
 
-        private void MoveUpButton_Click(object sender, EventArgs e)
-        {
-            MoveModUp();
-        }
+
+        #endregion
     }
 }

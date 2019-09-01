@@ -15,6 +15,14 @@ namespace Sonic3AIR_ModLoader
         [STAThread]
         static void Main()
         {
+            String[] arguments = Environment.GetCommandLineArgs();
+
+            if (arguments.Contains("-gb") && arguments.Length >= 3)
+            {
+                int index = Array.IndexOf(arguments, "-gb") + 1;
+                MessageBox.Show(arguments[index]);
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (Properties.Settings.Default.AutoLaunch)
