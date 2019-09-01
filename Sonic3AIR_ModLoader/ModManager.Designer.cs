@@ -694,7 +694,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(117, 65);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.0.10 BETA\r\nBy CarJem Generations\r\n";
+            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.0.11 BETA\r\nBy CarJem Generations\r\n";
             // 
             // openModsFolder
             // 
