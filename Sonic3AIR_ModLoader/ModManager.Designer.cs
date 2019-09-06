@@ -40,7 +40,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modPage = new System.Windows.Forms.TabPage();
             this.modPanel = new System.Windows.Forms.Panel();
-            this.downloadButtonTest = new System.Windows.Forms.Button();
+            this.moveToBottomButton = new System.Windows.Forms.Button();
+            this.moveToTopButton = new System.Windows.Forms.Button();
+            this.moreModOptionsButton = new System.Windows.Forms.Button();
+            this.moreModOptionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.gamebannaURLHandlerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.enableModStackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.onForAIRVersionUnreleasedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.modInfoTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -75,35 +82,34 @@
             this.autoRunCheckbox = new System.Windows.Forms.CheckBox();
             this.updateSonic3AIRPathButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.carJemTwitterButton = new System.Windows.Forms.Button();
-            this.eukaTwitterButton = new System.Windows.Forms.Button();
-            this.gamebannaButton = new System.Windows.Forms.Button();
-            this.s3AIRWebsiteButton = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.airMediaButton = new System.Windows.Forms.Button();
+            this.airPlacesButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.openModsFolder = new System.Windows.Forms.Button();
             this.changeRomPathButton = new System.Windows.Forms.Button();
-            this.openConfigFile = new System.Windows.Forms.Button();
-            this.openAppDataFolderButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.romPathBox = new System.Windows.Forms.TextBox();
-            this.openEXEFolderButton = new System.Windows.Forms.Button();
             this.failSafeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.fixGlitchesCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.sonic3AIRPathBox = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.modStackOffRadioButton = new System.Windows.Forms.RadioButton();
-            this.modStackOnRadioButton = new System.Windows.Forms.RadioButton();
             this.saveButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
-            this.moreModOptionsButton = new System.Windows.Forms.Button();
-            this.moreModOptionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.gamebannaURLHandlerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediaLinksMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sonic3AIRHomepageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.s3AIRGamebannaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eukaryot3KTwitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.carJemTwitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.directoriesMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openAppDataFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openEXEFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openSettingsFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openModsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
             this.modPanel.SuspendLayout();
+            this.moreModOptionsMenuStrip.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -113,8 +119,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.moreModOptionsMenuStrip.SuspendLayout();
+            this.mediaLinksMenuStrip.SuspendLayout();
+            this.directoriesMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // addMods
@@ -210,8 +216,9 @@
             // modPanel
             // 
             this.modPanel.BackColor = System.Drawing.Color.Transparent;
+            this.modPanel.Controls.Add(this.moveToBottomButton);
+            this.modPanel.Controls.Add(this.moveToTopButton);
             this.modPanel.Controls.Add(this.moreModOptionsButton);
-            this.modPanel.Controls.Add(this.downloadButtonTest);
             this.modPanel.Controls.Add(this.groupBox3);
             this.modPanel.Controls.Add(this.ModList);
             this.modPanel.Controls.Add(this.moveDownButton);
@@ -225,17 +232,77 @@
             this.modPanel.Size = new System.Drawing.Size(297, 428);
             this.modPanel.TabIndex = 14;
             // 
-            // downloadButtonTest
+            // moveToBottomButton
             // 
-            this.downloadButtonTest.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.downloadButtonTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.downloadButtonTest.Location = new System.Drawing.Point(3, 180);
-            this.downloadButtonTest.Name = "downloadButtonTest";
-            this.downloadButtonTest.Size = new System.Drawing.Size(25, 25);
-            this.downloadButtonTest.TabIndex = 16;
-            this.downloadButtonTest.Text = "⭳";
-            this.downloadButtonTest.UseVisualStyleBackColor = true;
-            this.downloadButtonTest.Click += new System.EventHandler(this.DownloadButtonTest_Click);
+            this.moveToBottomButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.moveToBottomButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveToBottomButton.Location = new System.Drawing.Point(3, 173);
+            this.moveToBottomButton.Name = "moveToBottomButton";
+            this.moveToBottomButton.Size = new System.Drawing.Size(25, 25);
+            this.moveToBottomButton.TabIndex = 20;
+            this.moveToBottomButton.Text = "⭳";
+            this.moveToBottomButton.UseVisualStyleBackColor = true;
+            this.moveToBottomButton.Click += new System.EventHandler(this.MoveToBottomButton_Click);
+            // 
+            // moveToTopButton
+            // 
+            this.moveToTopButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.moveToTopButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveToTopButton.Location = new System.Drawing.Point(3, 80);
+            this.moveToTopButton.Name = "moveToTopButton";
+            this.moveToTopButton.Size = new System.Drawing.Size(25, 25);
+            this.moveToTopButton.TabIndex = 19;
+            this.moveToTopButton.Text = "⭱";
+            this.moveToTopButton.UseVisualStyleBackColor = true;
+            this.moveToTopButton.Click += new System.EventHandler(this.MoveToTopButton_Click);
+            // 
+            // moreModOptionsButton
+            // 
+            this.moreModOptionsButton.ContextMenuStrip = this.moreModOptionsMenuStrip;
+            this.moreModOptionsButton.Location = new System.Drawing.Point(213, 402);
+            this.moreModOptionsButton.Name = "moreModOptionsButton";
+            this.moreModOptionsButton.Size = new System.Drawing.Size(81, 23);
+            this.moreModOptionsButton.TabIndex = 18;
+            this.moreModOptionsButton.Text = "More...";
+            this.moreModOptionsButton.UseVisualStyleBackColor = true;
+            this.moreModOptionsButton.Click += new System.EventHandler(this.MoreModOptionsButton_Click);
+            // 
+            // moreModOptionsMenuStrip
+            // 
+            this.moreModOptionsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gamebannaURLHandlerOptionsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.enableModStackingToolStripMenuItem,
+            this.onForAIRVersionUnreleasedToolStripMenuItem});
+            this.moreModOptionsMenuStrip.Name = "moreModOptionsMenuStrip";
+            this.moreModOptionsMenuStrip.Size = new System.Drawing.Size(295, 76);
+            // 
+            // gamebannaURLHandlerOptionsToolStripMenuItem
+            // 
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Name = "gamebannaURLHandlerOptionsToolStripMenuItem";
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Text = "Gamebanna URL Handler Options...";
+            this.gamebannaURLHandlerOptionsToolStripMenuItem.Click += new System.EventHandler(this.AddRemoveURLHandlerButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(291, 6);
+            // 
+            // enableModStackingToolStripMenuItem
+            // 
+            this.enableModStackingToolStripMenuItem.CheckOnClick = true;
+            this.enableModStackingToolStripMenuItem.Name = "enableModStackingToolStripMenuItem";
+            this.enableModStackingToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.enableModStackingToolStripMenuItem.Text = "Enable Mod Stacking";
+            this.enableModStackingToolStripMenuItem.Click += new System.EventHandler(this.ModStackRadioButtons_CheckedChanged);
+            // 
+            // onForAIRVersionUnreleasedToolStripMenuItem
+            // 
+            this.onForAIRVersionUnreleasedToolStripMenuItem.Enabled = false;
+            this.onForAIRVersionUnreleasedToolStripMenuItem.Name = "onForAIRVersionUnreleasedToolStripMenuItem";
+            this.onForAIRVersionUnreleasedToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.onForAIRVersionUnreleasedToolStripMenuItem.Text = "NOTE: Only for AIR Version \"Unreleased\"+";
             // 
             // groupBox3
             // 
@@ -246,7 +313,7 @@
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.Location = new System.Drawing.Point(3, 211);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(291, 175);
+            this.groupBox3.Size = new System.Drawing.Size(291, 185);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mod Properties";
@@ -260,7 +327,7 @@
             this.modInfoTextBox.Name = "modInfoTextBox";
             this.modInfoTextBox.ReadOnly = true;
             this.modInfoTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.modInfoTextBox.Size = new System.Drawing.Size(279, 124);
+            this.modInfoTextBox.Size = new System.Drawing.Size(279, 134);
             this.modInfoTextBox.TabIndex = 16;
             this.modInfoTextBox.Text = "";
             // 
@@ -319,7 +386,7 @@
             // 
             this.moveDownButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.moveDownButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moveDownButton.Location = new System.Drawing.Point(3, 68);
+            this.moveDownButton.Location = new System.Drawing.Point(3, 142);
             this.moveDownButton.Name = "moveDownButton";
             this.moveDownButton.Size = new System.Drawing.Size(25, 25);
             this.moveDownButton.TabIndex = 13;
@@ -329,7 +396,7 @@
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(132, 392);
+            this.refreshButton.Location = new System.Drawing.Point(132, 402);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(75, 23);
             this.refreshButton.TabIndex = 7;
@@ -341,7 +408,7 @@
             // 
             this.moveUpButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.moveUpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moveUpButton.Location = new System.Drawing.Point(3, 99);
+            this.moveUpButton.Location = new System.Drawing.Point(3, 111);
             this.moveUpButton.Name = "moveUpButton";
             this.moveUpButton.Size = new System.Drawing.Size(25, 25);
             this.moveUpButton.TabIndex = 12;
@@ -453,9 +520,9 @@
             // 
             // showLogFileButton
             // 
-            this.showLogFileButton.Location = new System.Drawing.Point(9, 407);
+            this.showLogFileButton.Location = new System.Drawing.Point(6, 407);
             this.showLogFileButton.Name = "showLogFileButton";
-            this.showLogFileButton.Size = new System.Drawing.Size(279, 21);
+            this.showLogFileButton.Size = new System.Drawing.Size(291, 21);
             this.showLogFileButton.TabIndex = 6;
             this.showLogFileButton.Text = "Show Log File";
             this.showLogFileButton.UseVisualStyleBackColor = true;
@@ -478,16 +545,16 @@
             this.groupBox6.Controls.Add(this.openUserManualButton);
             this.groupBox6.Location = new System.Drawing.Point(3, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(294, 141);
+            this.groupBox6.Size = new System.Drawing.Size(297, 141);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Guides";
             // 
             // openModdingTemplatesFolder
             // 
-            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(6, 106);
+            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(3, 106);
             this.openModdingTemplatesFolder.Name = "openModdingTemplatesFolder";
-            this.openModdingTemplatesFolder.Size = new System.Drawing.Size(279, 23);
+            this.openModdingTemplatesFolder.Size = new System.Drawing.Size(291, 23);
             this.openModdingTemplatesFolder.TabIndex = 4;
             this.openModdingTemplatesFolder.Text = "Open Modding Templates Folder";
             this.openModdingTemplatesFolder.UseVisualStyleBackColor = true;
@@ -495,9 +562,9 @@
             // 
             // openModDocumentationButton
             // 
-            this.openModDocumentationButton.Location = new System.Drawing.Point(6, 77);
+            this.openModDocumentationButton.Location = new System.Drawing.Point(3, 77);
             this.openModDocumentationButton.Name = "openModDocumentationButton";
-            this.openModDocumentationButton.Size = new System.Drawing.Size(279, 23);
+            this.openModDocumentationButton.Size = new System.Drawing.Size(291, 23);
             this.openModDocumentationButton.TabIndex = 2;
             this.openModDocumentationButton.Text = "Sonic 3 A.I.R Modding Instructions";
             this.openModDocumentationButton.UseVisualStyleBackColor = true;
@@ -505,9 +572,9 @@
             // 
             // openSampleModsFolderButton
             // 
-            this.openSampleModsFolderButton.Location = new System.Drawing.Point(6, 19);
+            this.openSampleModsFolderButton.Location = new System.Drawing.Point(3, 19);
             this.openSampleModsFolderButton.Name = "openSampleModsFolderButton";
-            this.openSampleModsFolderButton.Size = new System.Drawing.Size(279, 23);
+            this.openSampleModsFolderButton.Size = new System.Drawing.Size(291, 23);
             this.openSampleModsFolderButton.TabIndex = 3;
             this.openSampleModsFolderButton.Text = "Open Sample Mods Folder";
             this.openSampleModsFolderButton.UseVisualStyleBackColor = true;
@@ -515,9 +582,9 @@
             // 
             // openUserManualButton
             // 
-            this.openUserManualButton.Location = new System.Drawing.Point(6, 48);
+            this.openUserManualButton.Location = new System.Drawing.Point(3, 48);
             this.openUserManualButton.Name = "openUserManualButton";
-            this.openUserManualButton.Size = new System.Drawing.Size(279, 23);
+            this.openUserManualButton.Size = new System.Drawing.Size(291, 23);
             this.openUserManualButton.TabIndex = 1;
             this.openUserManualButton.Text = "Sonic 3 A.I.R User Manual";
             this.openUserManualButton.UseVisualStyleBackColor = true;
@@ -535,7 +602,6 @@
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.sonic3AIRPathBox);
-            this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -621,18 +687,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.carJemTwitterButton);
-            this.groupBox1.Controls.Add(this.eukaTwitterButton);
-            this.groupBox1.Controls.Add(this.gamebannaButton);
-            this.groupBox1.Controls.Add(this.s3AIRWebsiteButton);
             this.groupBox1.Controls.Add(this.groupBox5);
-            this.groupBox1.Controls.Add(this.openModsFolder);
             this.groupBox1.Controls.Add(this.changeRomPathButton);
-            this.groupBox1.Controls.Add(this.openConfigFile);
-            this.groupBox1.Controls.Add(this.openAppDataFolderButton);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.romPathBox);
-            this.groupBox1.Controls.Add(this.openEXEFolderButton);
             this.groupBox1.Controls.Add(this.failSafeModeCheckbox);
             this.groupBox1.Controls.Add(this.fixGlitchesCheckbox);
             this.groupBox1.Location = new System.Drawing.Point(6, 159);
@@ -642,74 +700,48 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Advanced Settings";
             // 
-            // carJemTwitterButton
-            // 
-            this.carJemTwitterButton.Location = new System.Drawing.Point(149, 232);
-            this.carJemTwitterButton.Name = "carJemTwitterButton";
-            this.carJemTwitterButton.Size = new System.Drawing.Size(133, 24);
-            this.carJemTwitterButton.TabIndex = 19;
-            this.carJemTwitterButton.Text = "CarJem @ Twitter";
-            this.carJemTwitterButton.UseVisualStyleBackColor = true;
-            this.carJemTwitterButton.Click += new System.EventHandler(this.CarJemTwitterButton_Click);
-            // 
-            // eukaTwitterButton
-            // 
-            this.eukaTwitterButton.Location = new System.Drawing.Point(149, 202);
-            this.eukaTwitterButton.Name = "eukaTwitterButton";
-            this.eukaTwitterButton.Size = new System.Drawing.Size(133, 24);
-            this.eukaTwitterButton.TabIndex = 18;
-            this.eukaTwitterButton.Text = "Eukaryot3K @ Twitter";
-            this.eukaTwitterButton.UseVisualStyleBackColor = true;
-            this.eukaTwitterButton.Click += new System.EventHandler(this.EukaTwitterButton_Click);
-            // 
-            // gamebannaButton
-            // 
-            this.gamebannaButton.Location = new System.Drawing.Point(149, 172);
-            this.gamebannaButton.Name = "gamebannaButton";
-            this.gamebannaButton.Size = new System.Drawing.Size(133, 24);
-            this.gamebannaButton.TabIndex = 17;
-            this.gamebannaButton.Text = "S3AIR @ Gamebanna";
-            this.gamebannaButton.UseVisualStyleBackColor = true;
-            this.gamebannaButton.Click += new System.EventHandler(this.GamebannaButton_Click);
-            // 
-            // s3AIRWebsiteButton
-            // 
-            this.s3AIRWebsiteButton.Location = new System.Drawing.Point(149, 142);
-            this.s3AIRWebsiteButton.Name = "s3AIRWebsiteButton";
-            this.s3AIRWebsiteButton.Size = new System.Drawing.Size(133, 24);
-            this.s3AIRWebsiteButton.TabIndex = 16;
-            this.s3AIRWebsiteButton.Text = "Sonic 3 AIR Homepage";
-            this.s3AIRWebsiteButton.UseVisualStyleBackColor = true;
-            this.s3AIRWebsiteButton.Click += new System.EventHandler(this.S3AIRWebsiteButton_Click);
-            // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.airMediaButton);
+            this.groupBox5.Controls.Add(this.airPlacesButton);
             this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Location = new System.Drawing.Point(6, 142);
+            this.groupBox5.Location = new System.Drawing.Point(6, 82);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(139, 88);
+            this.groupBox5.Size = new System.Drawing.Size(276, 181);
             this.groupBox5.TabIndex = 15;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "About";
+            // 
+            // airMediaButton
+            // 
+            this.airMediaButton.Location = new System.Drawing.Point(98, 152);
+            this.airMediaButton.Name = "airMediaButton";
+            this.airMediaButton.Size = new System.Drawing.Size(88, 23);
+            this.airMediaButton.TabIndex = 14;
+            this.airMediaButton.Text = "A.I.R Media...";
+            this.airMediaButton.UseVisualStyleBackColor = true;
+            this.airMediaButton.Click += new System.EventHandler(this.AirMediaButton_Click);
+            // 
+            // airPlacesButton
+            // 
+            this.airPlacesButton.Location = new System.Drawing.Point(3, 152);
+            this.airPlacesButton.Name = "airPlacesButton";
+            this.airPlacesButton.Size = new System.Drawing.Size(89, 23);
+            this.airPlacesButton.TabIndex = 13;
+            this.airPlacesButton.Text = "A.I.R Places...";
+            this.airPlacesButton.UseVisualStyleBackColor = true;
+            this.airPlacesButton.Click += new System.EventHandler(this.AirPlacesButton_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 16);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 65);
+            this.label4.Size = new System.Drawing.Size(147, 117);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.0.11 BETA\r\nBy CarJem Generations\r\n";
-            // 
-            // openModsFolder
-            // 
-            this.openModsFolder.Location = new System.Drawing.Point(3, 112);
-            this.openModsFolder.Name = "openModsFolder";
-            this.openModsFolder.Size = new System.Drawing.Size(133, 24);
-            this.openModsFolder.TabIndex = 10;
-            this.openModsFolder.Text = "Open Mods Folder";
-            this.openModsFolder.UseVisualStyleBackColor = true;
-            this.openModsFolder.Click += new System.EventHandler(this.OpenModsFolder_Click);
+            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.1.0\r\nBy CarJem Generations\r\n\r\nSpecial th" +
+    "anks to Eukayrot3K\r\n--------------------------------\r\nCreator of Sonic 3 A.I.R\r\n" +
+    "";
             // 
             // changeRomPathButton
             // 
@@ -720,26 +752,6 @@
             this.changeRomPathButton.Text = "...";
             this.changeRomPathButton.UseVisualStyleBackColor = true;
             this.changeRomPathButton.Click += new System.EventHandler(this.ChangeRomPathButton_Click);
-            // 
-            // openConfigFile
-            // 
-            this.openConfigFile.Location = new System.Drawing.Point(3, 82);
-            this.openConfigFile.Name = "openConfigFile";
-            this.openConfigFile.Size = new System.Drawing.Size(133, 24);
-            this.openConfigFile.TabIndex = 9;
-            this.openConfigFile.Text = "Open Settings File";
-            this.openConfigFile.UseVisualStyleBackColor = true;
-            this.openConfigFile.Click += new System.EventHandler(this.OpenConfigFile_Click);
-            // 
-            // openAppDataFolderButton
-            // 
-            this.openAppDataFolderButton.Location = new System.Drawing.Point(149, 82);
-            this.openAppDataFolderButton.Name = "openAppDataFolderButton";
-            this.openAppDataFolderButton.Size = new System.Drawing.Size(133, 24);
-            this.openAppDataFolderButton.TabIndex = 9;
-            this.openAppDataFolderButton.Text = "Open AppData Folder";
-            this.openAppDataFolderButton.UseVisualStyleBackColor = true;
-            this.openAppDataFolderButton.Click += new System.EventHandler(this.OpenAppDataFolderButton_Click);
             // 
             // label2
             // 
@@ -757,16 +769,6 @@
             this.romPathBox.ReadOnly = true;
             this.romPathBox.Size = new System.Drawing.Size(243, 20);
             this.romPathBox.TabIndex = 5;
-            // 
-            // openEXEFolderButton
-            // 
-            this.openEXEFolderButton.Location = new System.Drawing.Point(149, 112);
-            this.openEXEFolderButton.Name = "openEXEFolderButton";
-            this.openEXEFolderButton.Size = new System.Drawing.Size(133, 24);
-            this.openEXEFolderButton.TabIndex = 8;
-            this.openEXEFolderButton.Text = "Open EXE Folder";
-            this.openEXEFolderButton.UseVisualStyleBackColor = true;
-            this.openEXEFolderButton.Click += new System.EventHandler(this.OpenEXEFolderButton_Click);
             // 
             // failSafeModeCheckbox
             // 
@@ -807,41 +809,6 @@
             this.sonic3AIRPathBox.Size = new System.Drawing.Size(255, 20);
             this.sonic3AIRPathBox.TabIndex = 0;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.modStackOffRadioButton);
-            this.groupBox4.Controls.Add(this.modStackOnRadioButton);
-            this.groupBox4.Location = new System.Drawing.Point(176, 97);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(118, 56);
-            this.groupBox4.TabIndex = 16;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Enable Mod Stacking";
-            // 
-            // modStackOffRadioButton
-            // 
-            this.modStackOffRadioButton.AutoSize = true;
-            this.modStackOffRadioButton.Location = new System.Drawing.Point(53, 33);
-            this.modStackOffRadioButton.Name = "modStackOffRadioButton";
-            this.modStackOffRadioButton.Size = new System.Drawing.Size(45, 17);
-            this.modStackOffRadioButton.TabIndex = 16;
-            this.modStackOffRadioButton.TabStop = true;
-            this.modStackOffRadioButton.Text = "OFF";
-            this.modStackOffRadioButton.UseVisualStyleBackColor = true;
-            this.modStackOffRadioButton.CheckedChanged += new System.EventHandler(this.ModStackRadioButtons_CheckedChanged);
-            // 
-            // modStackOnRadioButton
-            // 
-            this.modStackOnRadioButton.AutoSize = true;
-            this.modStackOnRadioButton.Location = new System.Drawing.Point(6, 33);
-            this.modStackOnRadioButton.Name = "modStackOnRadioButton";
-            this.modStackOnRadioButton.Size = new System.Drawing.Size(41, 17);
-            this.modStackOnRadioButton.TabIndex = 15;
-            this.modStackOnRadioButton.TabStop = true;
-            this.modStackOnRadioButton.Text = "ON";
-            this.modStackOnRadioButton.UseVisualStyleBackColor = true;
-            this.modStackOnRadioButton.CheckedChanged += new System.EventHandler(this.ModStackRadioButtons_CheckedChanged);
-            // 
             // saveButton
             // 
             this.saveButton.Location = new System.Drawing.Point(151, 478);
@@ -862,30 +829,81 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
-            // moreModOptionsButton
+            // mediaLinksMenuStrip
             // 
-            this.moreModOptionsButton.ContextMenuStrip = this.moreModOptionsMenuStrip;
-            this.moreModOptionsButton.Location = new System.Drawing.Point(213, 392);
-            this.moreModOptionsButton.Name = "moreModOptionsButton";
-            this.moreModOptionsButton.Size = new System.Drawing.Size(81, 23);
-            this.moreModOptionsButton.TabIndex = 18;
-            this.moreModOptionsButton.Text = "More...";
-            this.moreModOptionsButton.UseVisualStyleBackColor = true;
-            this.moreModOptionsButton.Click += new System.EventHandler(this.MoreModOptionsButton_Click);
+            this.mediaLinksMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sonic3AIRHomepageToolStripMenuItem,
+            this.s3AIRGamebannaToolStripMenuItem,
+            this.eukaryot3KTwitterToolStripMenuItem,
+            this.carJemTwitterToolStripMenuItem});
+            this.mediaLinksMenuStrip.Name = "mediaLinksMenuStrip";
+            this.mediaLinksMenuStrip.Size = new System.Drawing.Size(196, 92);
             // 
-            // moreModOptionsMenuStrip
+            // sonic3AIRHomepageToolStripMenuItem
             // 
-            this.moreModOptionsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gamebannaURLHandlerOptionsToolStripMenuItem});
-            this.moreModOptionsMenuStrip.Name = "moreModOptionsMenuStrip";
-            this.moreModOptionsMenuStrip.Size = new System.Drawing.Size(262, 48);
+            this.sonic3AIRHomepageToolStripMenuItem.Name = "sonic3AIRHomepageToolStripMenuItem";
+            this.sonic3AIRHomepageToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.sonic3AIRHomepageToolStripMenuItem.Text = "Sonic 3 AIR Homepage";
+            this.sonic3AIRHomepageToolStripMenuItem.Click += new System.EventHandler(this.S3AIRWebsiteButton_Click);
             // 
-            // gamebannaURLHandlerOptionsToolStripMenuItem
+            // s3AIRGamebannaToolStripMenuItem
             // 
-            this.gamebannaURLHandlerOptionsToolStripMenuItem.Name = "gamebannaURLHandlerOptionsToolStripMenuItem";
-            this.gamebannaURLHandlerOptionsToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.gamebannaURLHandlerOptionsToolStripMenuItem.Text = "Gamebanna URL Handler Options...";
-            this.gamebannaURLHandlerOptionsToolStripMenuItem.Click += new System.EventHandler(this.AddRemoveURLHandlerButton_Click);
+            this.s3AIRGamebannaToolStripMenuItem.Name = "s3AIRGamebannaToolStripMenuItem";
+            this.s3AIRGamebannaToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.s3AIRGamebannaToolStripMenuItem.Text = "S3AIR @ Gamebanna";
+            this.s3AIRGamebannaToolStripMenuItem.Click += new System.EventHandler(this.GamebannaButton_Click);
+            // 
+            // eukaryot3KTwitterToolStripMenuItem
+            // 
+            this.eukaryot3KTwitterToolStripMenuItem.Name = "eukaryot3KTwitterToolStripMenuItem";
+            this.eukaryot3KTwitterToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.eukaryot3KTwitterToolStripMenuItem.Text = "Eukaryot3K @ Twitter";
+            this.eukaryot3KTwitterToolStripMenuItem.Click += new System.EventHandler(this.EukaTwitterButton_Click);
+            // 
+            // carJemTwitterToolStripMenuItem
+            // 
+            this.carJemTwitterToolStripMenuItem.Name = "carJemTwitterToolStripMenuItem";
+            this.carJemTwitterToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.carJemTwitterToolStripMenuItem.Text = "CarJem @ Twitter";
+            this.carJemTwitterToolStripMenuItem.Click += new System.EventHandler(this.CarJemTwitterButton_Click);
+            // 
+            // directoriesMenuStrip
+            // 
+            this.directoriesMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openAppDataFolderToolStripMenuItem,
+            this.openEXEFolderToolStripMenuItem,
+            this.openSettingsFileToolStripMenuItem,
+            this.openModsFolderToolStripMenuItem});
+            this.directoriesMenuStrip.Name = "mediaLinksMenuStrip";
+            this.directoriesMenuStrip.Size = new System.Drawing.Size(189, 92);
+            // 
+            // openAppDataFolderToolStripMenuItem
+            // 
+            this.openAppDataFolderToolStripMenuItem.Name = "openAppDataFolderToolStripMenuItem";
+            this.openAppDataFolderToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.openAppDataFolderToolStripMenuItem.Text = "Open AppData Folder";
+            this.openAppDataFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenAppDataFolderButton_Click);
+            // 
+            // openEXEFolderToolStripMenuItem
+            // 
+            this.openEXEFolderToolStripMenuItem.Name = "openEXEFolderToolStripMenuItem";
+            this.openEXEFolderToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.openEXEFolderToolStripMenuItem.Text = "Open EXE Folder";
+            this.openEXEFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenEXEFolderButton_Click);
+            // 
+            // openSettingsFileToolStripMenuItem
+            // 
+            this.openSettingsFileToolStripMenuItem.Name = "openSettingsFileToolStripMenuItem";
+            this.openSettingsFileToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.openSettingsFileToolStripMenuItem.Text = "Open Settings File";
+            this.openSettingsFileToolStripMenuItem.Click += new System.EventHandler(this.OpenConfigFile_Click);
+            // 
+            // openModsFolderToolStripMenuItem
+            // 
+            this.openModsFolderToolStripMenuItem.Name = "openModsFolderToolStripMenuItem";
+            this.openModsFolderToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.openModsFolderToolStripMenuItem.Text = "Open Mods Folder";
+            this.openModsFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenModsFolder_Click);
             // 
             // ModManager
             // 
@@ -910,6 +928,7 @@
             this.tabControl1.ResumeLayout(false);
             this.modPage.ResumeLayout(false);
             this.modPanel.ResumeLayout(false);
+            this.moreModOptionsMenuStrip.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -923,9 +942,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.moreModOptionsMenuStrip.ResumeLayout(false);
+            this.mediaLinksMenuStrip.ResumeLayout(false);
+            this.directoriesMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -947,12 +965,9 @@
         private System.Windows.Forms.TextBox sonic3AIRPathBox;
         private System.Windows.Forms.Button changeRomPathButton;
         private System.Windows.Forms.Button updateSonic3AIRPathButton;
-        private System.Windows.Forms.Button openConfigFile;
         private System.Windows.Forms.Label modNameLabel;
         private System.Windows.Forms.Label modTechnicalNameLabel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button openAppDataFolderButton;
-        private System.Windows.Forms.Button openEXEFolderButton;
         private System.Windows.Forms.Button moveDownButton;
         private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.CheckBox autoRunCheckbox;
@@ -962,7 +977,6 @@
         private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.Button openRecordingButton;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button openModsFolder;
         private System.Windows.Forms.Button copyRecordingFilePath;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.ContextMenuStrip modContextMenuStrip;
@@ -990,17 +1004,26 @@
         private System.Windows.Forms.Button openSampleModsFolderButton;
         private System.Windows.Forms.Button openUserManualButton;
         private System.Windows.Forms.Button openModdingTemplatesFolder;
-        private System.Windows.Forms.Button carJemTwitterButton;
-        private System.Windows.Forms.Button eukaTwitterButton;
-        private System.Windows.Forms.Button gamebannaButton;
-        private System.Windows.Forms.Button s3AIRWebsiteButton;
-        private System.Windows.Forms.Button downloadButtonTest;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton modStackOffRadioButton;
-        private System.Windows.Forms.RadioButton modStackOnRadioButton;
         private System.Windows.Forms.Button moreModOptionsButton;
         private System.Windows.Forms.ContextMenuStrip moreModOptionsMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem gamebannaURLHandlerOptionsToolStripMenuItem;
+        private System.Windows.Forms.Button moveToBottomButton;
+        private System.Windows.Forms.Button moveToTopButton;
+        private System.Windows.Forms.ToolStripMenuItem enableModStackingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem onForAIRVersionUnreleasedToolStripMenuItem;
+        private System.Windows.Forms.Button airMediaButton;
+        private System.Windows.Forms.Button airPlacesButton;
+        private System.Windows.Forms.ContextMenuStrip mediaLinksMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem sonic3AIRHomepageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem s3AIRGamebannaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eukaryot3KTwitterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem carJemTwitterToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip directoriesMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem openAppDataFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openEXEFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openSettingsFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openModsFolderToolStripMenuItem;
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CommandLine;
 
 namespace Sonic3AIR_ModLoader
 {
@@ -13,18 +14,34 @@ namespace Sonic3AIR_ModLoader
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            String[] arguments = Environment.GetCommandLineArgs();
-
-            if (arguments.Contains("-gb") && arguments.Length >= 3)
-            {
-                int index = Array.IndexOf(arguments, "-gb") + 1;
-                MessageBox.Show(arguments[index]);
-            }
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => {
+
+                if (o.gamebanana_api != null)
+                {
+                    Application.Run(new ModManager(o.gamebanana_api));
+                }
+                else MainProgram();
+
+            });
+        }
+
+        public static void ShowWarning()
+        {
+            MessageBox.Show("NOTICE: This is Program is in RELEASE CANIDATE Stage, meaning while it's just about ready, it's unfinished and still may need some further tweaks. Any Bugs you may find are a sideffect of this early release and will hopefully be fixed on release. Please let me know via GameBanna if you encounter any problems!" + Environment.NewLine + Environment.NewLine + "-CarJem Generations", "A Message from CarJem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public class Options
+        {
+            [Option('g', "gamebanana_api", Required = false, HelpText = "Used with Gamebanna's 1 Click Install API")]
+            public string gamebanana_api { get; set; }
+        }
+
+        public static void MainProgram()
+        {
             if (Properties.Settings.Default.AutoLaunch)
             {
                 Application.Run(new AutoBootDialog());
@@ -35,8 +52,7 @@ namespace Sonic3AIR_ModLoader
             {
                 Application.Run(new ModManager());
             }
-
-
         }
+
     }
 }

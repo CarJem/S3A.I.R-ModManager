@@ -18,6 +18,15 @@ using System.Net;
 using System.Security.Permissions;
 using Microsoft.VisualBasic;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using SharpCompress.Readers;
+using SharpCompress.Writers;
+using SharpCompress.Archives;
+using SharpCompress.Common;
+using SharpCompress.Compressors;
+using SharpCompress.IO;
+using SharpCompress.Archives.Rar;
+using SharpCompress.Archives.SevenZip;
+using SharpCompress.Archives.Zip;
 
 
 
@@ -214,8 +223,16 @@ namespace Sonic3AIR_ModLoader
             Instance = this;
             StartModloader(autoBoot);
 
-        }       
-        private void StartModloader(bool autoBoot = false)
+        }
+
+        public ModManager(string gamebanana_api)
+        {
+            Instance = this;
+            StartModloader(false, gamebanana_api);
+
+        }
+
+        private void StartModloader(bool autoBoot = false, string gamebanana_api = "")
         {
             InitializeComponent();
             if (InitalCollection() == true)
@@ -224,6 +241,7 @@ namespace Sonic3AIR_ModLoader
                 UpdateModsList(true);
                 UpdateUI();
                 if (autoBoot) GameHandler.LaunchSonic3AIR();
+                if (gamebanana_api != "") GamebananaAPI_Install(gamebanana_api);
             }
             else
             {
@@ -234,6 +252,27 @@ namespace Sonic3AIR_ModLoader
         #endregion
 
         #region Events
+        private void AirPlacesButton_Click(object sender, EventArgs e)
+        {
+            directoriesMenuStrip.Show(airPlacesButton, new Point(0, airPlacesButton.Height));
+
+        }
+
+        private void AirMediaButton_Click(object sender, EventArgs e)
+        {
+            mediaLinksMenuStrip.Show(airMediaButton, new Point(0, airMediaButton.Height));
+
+        }
+        private void MoveToTopButton_Click(object sender, EventArgs e)
+        {
+            MoveModToTop();
+        }
+
+        private void MoveToBottomButton_Click(object sender, EventArgs e)
+        {
+            MoveModToBottom();
+        }
+
         private void MoreModOptionsButton_Click(object sender, EventArgs e)
         {
             moreModOptionsMenuStrip.Show(moreModOptionsButton, new Point(0, moreModOptionsButton.Height));
@@ -254,10 +293,9 @@ namespace Sonic3AIR_ModLoader
             if (AllowUpdate)
             {
                 AllowUpdate = false;
-                if (modStackOnRadioButton.Checked)
+                if (enableModStackingToolStripMenuItem.Checked)
                 {
                     Properties.Settings.Default.EnableNewLoaderMethod = true;
-
                 }
                 else
                 {
@@ -573,9 +611,10 @@ namespace Sonic3AIR_ModLoader
         {
             new ToolTip().SetToolTip(addMods, "Add a Mod...");
             new ToolTip().SetToolTip(removeButton, "Remove Selected Mod...");
-            new ToolTip().SetToolTip(downloadButtonTest, "Download Test...");
             new ToolTip().SetToolTip(moveUpButton, "Increase Selected Mod Priority...");
             new ToolTip().SetToolTip(moveDownButton, "Decrease Selected Mod Priority...");
+            new ToolTip().SetToolTip(moveToTopButton, "Increase Selected Mod Priority to Max...");
+            new ToolTip().SetToolTip(moveToBottomButton, "Decrease Selected Mod Priority to Min...");
         }
 
         public void UpdateInGameButtons()
@@ -606,8 +645,7 @@ namespace Sonic3AIR_ModLoader
         private void UpdateModStackingToggle()
         {
             AllowUpdate = false;
-            modStackOnRadioButton.Checked = Properties.Settings.Default.EnableNewLoaderMethod == true;
-            modStackOffRadioButton.Checked = Properties.Settings.Default.EnableNewLoaderMethod == false;
+            enableModStackingToolStripMenuItem.Checked = Properties.Settings.Default.EnableNewLoaderMethod;
             AllowUpdate = true;
         }
 
@@ -663,11 +701,15 @@ namespace Sonic3AIR_ModLoader
                 {
                     moveUpButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) > 0);
                     moveDownButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) < ModsList.Count - 1);
+                    moveToTopButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) > 0);
+                    moveToBottomButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) < ModsList.Count - 1);
                 }
                 else
                 {
                     moveUpButton.Enabled = false;
                     moveDownButton.Enabled = false;
+                    moveToTopButton.Enabled = false;
+                    moveToBottomButton.Enabled = false;
                 }
                 removeButton.Enabled = true;
                 removeModToolStripMenuItem.Enabled = true;
@@ -751,6 +793,12 @@ namespace Sonic3AIR_ModLoader
             Sonic3AIRTempModsFolder = Sonic3AIRAppDataFolder + "\\temp_mod_install";
             Sonic3AIRSettingsFile = Sonic3AIRAppDataFolder + "\\settings.json";
 
+
+            if (!Directory.Exists(Sonic3AIRTempModsFolder))
+            {
+                Directory.CreateDirectory(Sonic3AIRTempModsFolder);
+            }
+
             List<Tuple<string, bool>> MissingFilesState = new List<Tuple<string, bool>>();
 
             MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRAppDataFolder", Directory.Exists(Sonic3AIRAppDataFolder)));
@@ -799,8 +847,8 @@ namespace Sonic3AIR_ModLoader
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Filter = "Sonic 3 AIR Mod (*.zip)|*.zip",
-                Title = "Select Mod ZIP File..."
+                Filter = "Sonic 3 AIR Mod (*.zip;*.7z;*.rar)|*.zip;*.7z;*.rar",
+                Title = "Select Compressed Mod File..."
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -812,7 +860,11 @@ namespace Sonic3AIR_ModLoader
         {
             //Find the Root of the Mod in the Zip, Because some people have a folder inside of the zip, others may not
             string foundFile = "";
-            ZipFile.ExtractToDirectory(file, Sonic3AIRTempModsFolder);
+
+            if (Path.GetExtension(file) == ".rar") ExtractRar(file);
+            else if (Path.GetExtension(file) == ".zip") ExtractZip(file);
+            else if (Path.GetExtension(file) == ".7z") Extract7Zip(file);
+
             foreach (string d in Directory.GetDirectories(Sonic3AIRTempModsFolder))
             {
                 foundFile = Directory.GetFiles(d, "mod.json").FirstOrDefault();
@@ -820,6 +872,52 @@ namespace Sonic3AIR_ModLoader
             Directory.Move(System.IO.Path.GetDirectoryName(foundFile), Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
             CleanUpTempModsFolder();
             UpdateModsList(true);
+        }
+
+
+        public void ExtractRar(string file)
+        {
+            using (var archive = SharpCompress.Archives.Rar.RarArchive.Open(file))
+            {
+                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                {
+                    entry.WriteToDirectory(Sonic3AIRTempModsFolder, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true
+                    });
+                }
+            }
+        }
+
+        public void ExtractZip(string file)
+        {
+            using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(file))
+            {
+                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                {
+                    entry.WriteToDirectory(Sonic3AIRTempModsFolder, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true
+                    });
+                }
+            }
+        }
+
+        public void Extract7Zip(string file)
+        {
+            using (var archive = SharpCompress.Archives.SevenZip.SevenZipArchive.Open(file))
+            {
+                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                {
+                    entry.WriteToDirectory(Sonic3AIRTempModsFolder, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true
+                    });
+                }
+            }
         }
 
         private void RemoveMod()
@@ -1069,6 +1167,17 @@ namespace Sonic3AIR_ModLoader
 
         }
 
+        private void MoveModToTop()
+        {
+            int index = ModList.SelectedIndex;
+            if (index != 0)
+            {
+                ModsList.Move(index, 0);
+                UpdateModsList();
+                ModList.SelectedIndex = 0;
+            }
+        }
+
         private void MoveModUp()
         {
             int index = ModList.SelectedIndex;
@@ -1087,6 +1196,17 @@ namespace Sonic3AIR_ModLoader
                 ModsList.Move(index, index + 1);
                 UpdateModsList();
                 ModList.SelectedIndex = index + 1;
+            }
+        }
+
+        private void MoveModToBottom()
+        {
+            int index = ModList.SelectedIndex;
+            if (index != ModsList.Count - 1)
+            {
+                ModsList.Move(index, ModsList.Count - 1);
+                UpdateModsList();
+                ModList.SelectedIndex = ModsList.Count - 1;
             }
         }
 
@@ -1294,6 +1414,14 @@ namespace Sonic3AIR_ModLoader
         #endregion
 
         #region Downloading
+
+        public void GamebananaAPI_Install(string data)
+        {
+            string url = data.Replace("s3airmm://","");
+            if (url == "") MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else DownloadMod(url);
+        }
 
         public void DownloadMod(string url)
         {
@@ -1658,6 +1786,9 @@ namespace Sonic3AIR_ModLoader
         }
 
 
+
         #endregion
+
+
     }
 }

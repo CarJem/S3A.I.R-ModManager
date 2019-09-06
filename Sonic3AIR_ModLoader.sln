@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModLoader", "Soni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR_Protocol_Handler", "AIR_Protocol_Handler\AIR_Protocol_Handler.csproj", "{11A257A9-07AC-43C5-8705-808B7AFD644B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "res", "res", "{FAAC80A9-AF51-478E-985F-855B1BC084FB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

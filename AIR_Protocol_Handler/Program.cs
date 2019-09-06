@@ -153,7 +153,7 @@ namespace AIR_Protocol_Handler
             if (Key == null) Key = PrevKey.CreateSubKey("command");
 
             /*Command for GB API*/
-            Key.SetValue("", $"\"{ModLoaderPath}\" \"-gb\" \"%1\"");
+            Key.SetValue("", $"\"{ModLoaderPath}\" \"-g\" \"%1\"");
             Key.Close();
         }
 
