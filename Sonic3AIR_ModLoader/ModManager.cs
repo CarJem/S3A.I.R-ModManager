@@ -833,9 +833,20 @@ namespace Sonic3AIR_ModLoader
                 }
 
 
+
                 FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
-                S3AIRSettings = new Sonic3AIRSettings(file);
-                return true;
+                try
+                {
+                    S3AIRSettings = new Sonic3AIRSettings(file);
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+
+
+
             }
         }
 
@@ -1614,10 +1625,41 @@ namespace Sonic3AIR_ModLoader
             {
                 FilePath = settings.FullName;
                 string data = File.ReadAllText(FilePath);
-                jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
-                FailSafeMode = jsonObj.FailSafeMode;
-                FixGlitches = jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES;
-                Sonic3KRomPath = jsonObj.RomPath;
+                Version targetVersion = new Version("19.08.17.0");
+                bool isExceptionVersionRelatedForSure = false;
+
+                try
+                {
+                    jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
+
+                    string version = jsonObj.GameVersion;
+                    Version currentVersion = new Version(version);
+
+
+                    var result = currentVersion.CompareTo(targetVersion);
+                    if (result < 0)
+                    {
+                        MessageBox.Show($"Sonic 3 A.I.R is out of date, please use version {targetVersion.ToString()} or above! (and start it at least once fully)");
+                        isExceptionVersionRelatedForSure = true;
+                        throw new Exception();
+                    }
+                    else
+                    {
+                        FailSafeMode = jsonObj.FailSafeMode;
+                        FixGlitches = jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES;
+                        Sonic3KRomPath = jsonObj.RomPath;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (!isExceptionVersionRelatedForSure) MessageBox.Show("JSON Error, File Not Found, or A.I.R is Outdated! Unable to Load Mod Manager!" + Environment.NewLine + $"If AIR is out of date, please use version {targetVersion.ToString()} or above! (and start it at least once fully)");
+                    throw ex;
+                }
+
+
+
+
+
             }
 
             private void PraseSettings()
