@@ -19,8 +19,8 @@ namespace Sonic3AIR_ModLoader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Action action = Updater;
-            Task.Run(action);
+            //Action action = Updater;
+            //Task.Run(action);
             ModManager(args);
 
         }

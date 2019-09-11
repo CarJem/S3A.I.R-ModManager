@@ -315,7 +315,7 @@
             this.onForAIRVersionUnreleasedToolStripMenuItem,
             this.downloadFromURLToolStripMenuItem});
             this.moreModOptionsMenuStrip.Name = "moreModOptionsMenuStrip";
-            this.moreModOptionsMenuStrip.Size = new System.Drawing.Size(295, 120);
+            this.moreModOptionsMenuStrip.Size = new System.Drawing.Size(295, 98);
             // 
             // gamebannaURLHandlerOptionsToolStripMenuItem
             // 
@@ -1106,6 +1106,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(98, 11);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(172, 23);
@@ -1141,9 +1142,9 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(147, 117);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R. \r\nMod Manager\r\n\r\nVersion v.1.0\r\nBy CarJem Generations\r\n\r\nSpecial th" +
-    "anks to Eukayrot3K\r\n--------------------------------\r\nCreator of Sonic 3 A.I.R.\r\n" +
-    "";
+            this.label4.Text = "Sonic 3 A.I.R. \r\nMod Manager\r\n\r\nVersion v.1.1\r\nBy CarJem Generations\r\n\r\nSpecial t" +
+    "hanks to Eukayrot3K\r\n--------------------------------\r\nCreator of Sonic 3 A.I.R." +
+    "\r\n";
             // 
             // changeRomPathButton
             // 
@@ -1199,7 +1200,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Sonic 3 A.I.R. Path:";
             // 
