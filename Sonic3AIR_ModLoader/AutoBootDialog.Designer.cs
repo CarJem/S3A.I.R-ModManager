@@ -73,7 +73,7 @@
             this.pictureBox1.BackgroundImage = global::Sonic3AIR_ModLoader.Properties.Resources.Sonic3AIRBackground;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::Sonic3AIR_ModLoader.Properties.Resources.Sonic3AIRLogo;
+            this.pictureBox1.Image = global::Sonic3AIR_ModLoader.Properties.Resources.Sonic3AIRLogov4;
             this.pictureBox1.ImageLocation = "";
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
@@ -95,6 +95,7 @@
             this.MinimizeBox = false;
             this.Name = "AutoBootDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

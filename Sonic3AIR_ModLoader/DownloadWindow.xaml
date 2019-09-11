@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sonic3AIR_ModLoader"
         mc:Ignorable="d"
-        Title="Sonic 3 A.I.R Mod Loader" Height="150" MinWidth="400" 
+        Title="Sonic 3 A.I.R. Mod Loader" Height="150" MinWidth="400" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="Width">
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo ProgressState="Normal"/>

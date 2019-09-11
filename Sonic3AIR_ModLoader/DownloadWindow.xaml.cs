@@ -36,6 +36,15 @@ namespace Sonic3AIR_ModLoader
             DestinationPath = destinationFile;
         }
 
+        public void StartBackground()
+        {
+            DownloadClient = new WebClient();
+            DownloadClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; " + "Windows NT 5.2; .NET CLR 1.0.3705;)");
+            DownloadClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
+            DownloadClient.DownloadFileCompleted += WebClient_DownloadCompleted;
+            DownloadClient.DownloadFileAsync(new Uri(URL), DestinationPath);
+        }
+
         public void Start()
         {
             Show();

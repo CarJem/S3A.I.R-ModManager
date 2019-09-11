@@ -73,9 +73,9 @@ namespace Sonic3AIR_ModLoader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Sonic3AIRLogo {
+        public static System.Drawing.Bitmap Sonic3AIRLogov4 {
             get {
-                object obj = ResourceManager.GetObject("Sonic3AIRLogo", resourceCulture);
+                object obj = ResourceManager.GetObject("Sonic3AIRLogov4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Sonic3AIR_ModLoader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Sonic3KAIRLogo {
+        public static System.Drawing.Bitmap Sonic3KAIRLogoV4 {
             get {
-                object obj = ResourceManager.GetObject("Sonic3KAIRLogo", resourceCulture);
+                object obj = ResourceManager.GetObject("Sonic3KAIRLogoV4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

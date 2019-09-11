@@ -48,6 +48,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.enableModStackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onForAIRVersionUnreleasedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadFromURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.modInfoTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -57,7 +58,39 @@
             this.moveDownButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.inputPage = new System.Windows.Forms.TabPage();
+            this.inputPanel = new System.Windows.Forms.Panel();
+            this.saveInputsButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.startInputButton = new System.Windows.Forms.Button();
+            this.backInputButton = new System.Windows.Forms.Button();
+            this.leftInputButton = new System.Windows.Forms.Button();
+            this.downInputButton = new System.Windows.Forms.Button();
+            this.rightInputButton = new System.Windows.Forms.Button();
+            this.upInputButton = new System.Windows.Forms.Button();
+            this.yInputButton = new System.Windows.Forms.Button();
+            this.xInputButton = new System.Windows.Forms.Button();
+            this.bInputButton = new System.Windows.Forms.Button();
+            this.aInputButton = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.openGamepadSettingsButton = new System.Windows.Forms.Button();
+            this.removeDeviceNameButton = new System.Windows.Forms.Button();
+            this.inputDeviceNamesList = new System.Windows.Forms.ListBox();
+            this.addDeviceNameButton = new System.Windows.Forms.Button();
+            this.resetInputsButton = new System.Windows.Forms.Button();
+            this.inputMethodsList = new System.Windows.Forms.ListBox();
+            this.inputErrorMessage = new System.Windows.Forms.Label();
+            this.recordingsPage = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.deleteRecordingButton = new System.Windows.Forms.Button();
             this.copyRecordingFilePath = new System.Windows.Forms.Button();
@@ -65,7 +98,7 @@
             this.refreshDebugButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.openRecordingButton = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.debugPage = new System.Windows.Forms.TabPage();
             this.showLogFileButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -73,7 +106,7 @@
             this.openModDocumentationButton = new System.Windows.Forms.Button();
             this.openSampleModsFolderButton = new System.Windows.Forms.Button();
             this.openUserManualButton = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.optionsPage = new System.Windows.Forms.TabPage();
             this.autoLaunchDelayLabel = new System.Windows.Forms.Label();
             this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -83,6 +116,7 @@
             this.updateSonic3AIRPathButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.airMediaButton = new System.Windows.Forms.Button();
             this.airPlacesButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -111,11 +145,15 @@
             this.modPanel.SuspendLayout();
             this.moreModOptionsMenuStrip.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.inputPage.SuspendLayout();
+            this.inputPanel.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.recordingsPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.debugPage.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.optionsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -192,9 +230,10 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.modPage);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.inputPage);
+            this.tabControl1.Controls.Add(this.recordingsPage);
+            this.tabControl1.Controls.Add(this.debugPage);
+            this.tabControl1.Controls.Add(this.optionsPage);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -273,9 +312,10 @@
             this.gamebannaURLHandlerOptionsToolStripMenuItem,
             this.toolStripSeparator1,
             this.enableModStackingToolStripMenuItem,
-            this.onForAIRVersionUnreleasedToolStripMenuItem});
+            this.onForAIRVersionUnreleasedToolStripMenuItem,
+            this.downloadFromURLToolStripMenuItem});
             this.moreModOptionsMenuStrip.Name = "moreModOptionsMenuStrip";
-            this.moreModOptionsMenuStrip.Size = new System.Drawing.Size(295, 76);
+            this.moreModOptionsMenuStrip.Size = new System.Drawing.Size(295, 120);
             // 
             // gamebannaURLHandlerOptionsToolStripMenuItem
             // 
@@ -303,6 +343,16 @@
             this.onForAIRVersionUnreleasedToolStripMenuItem.Name = "onForAIRVersionUnreleasedToolStripMenuItem";
             this.onForAIRVersionUnreleasedToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
             this.onForAIRVersionUnreleasedToolStripMenuItem.Text = "NOTE: Only for AIR Version \"Unreleased\"+";
+            // 
+            // downloadFromURLToolStripMenuItem
+            // 
+            this.downloadFromURLToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.downloadFromURLToolStripMenuItem.Enabled = false;
+            this.downloadFromURLToolStripMenuItem.Name = "downloadFromURLToolStripMenuItem";
+            this.downloadFromURLToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.downloadFromURLToolStripMenuItem.Text = "Download From URL...";
+            this.downloadFromURLToolStripMenuItem.Visible = false;
+            this.downloadFromURLToolStripMenuItem.Click += new System.EventHandler(this.DownloadButtonTest_Click);
             // 
             // groupBox3
             // 
@@ -416,16 +466,357 @@
             this.moveUpButton.UseVisualStyleBackColor = true;
             this.moveUpButton.Click += new System.EventHandler(this.MoveUpButton_Click);
             // 
-            // tabPage3
+            // inputPage
             // 
-            this.tabPage3.Controls.Add(this.groupBox2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(303, 434);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Recordings";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.inputPage.Controls.Add(this.inputPanel);
+            this.inputPage.Location = new System.Drawing.Point(4, 22);
+            this.inputPage.Name = "inputPage";
+            this.inputPage.Size = new System.Drawing.Size(303, 434);
+            this.inputPage.TabIndex = 4;
+            this.inputPage.Text = "Input";
+            this.inputPage.UseVisualStyleBackColor = true;
+            // 
+            // inputPanel
+            // 
+            this.inputPanel.Controls.Add(this.saveInputsButton);
+            this.inputPanel.Controls.Add(this.groupBox4);
+            this.inputPanel.Controls.Add(this.resetInputsButton);
+            this.inputPanel.Controls.Add(this.inputMethodsList);
+            this.inputPanel.Controls.Add(this.inputErrorMessage);
+            this.inputPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputPanel.Location = new System.Drawing.Point(0, 0);
+            this.inputPanel.Name = "inputPanel";
+            this.inputPanel.Size = new System.Drawing.Size(303, 434);
+            this.inputPanel.TabIndex = 25;
+            // 
+            // saveInputsButton
+            // 
+            this.saveInputsButton.Location = new System.Drawing.Point(9, 407);
+            this.saveInputsButton.Name = "saveInputsButton";
+            this.saveInputsButton.Size = new System.Drawing.Size(136, 23);
+            this.saveInputsButton.TabIndex = 23;
+            this.saveInputsButton.Text = "Save Input Mappings";
+            this.saveInputsButton.UseVisualStyleBackColor = true;
+            this.saveInputsButton.Click += new System.EventHandler(this.SaveInputsButton_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.label14);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.startInputButton);
+            this.groupBox4.Controls.Add(this.backInputButton);
+            this.groupBox4.Controls.Add(this.leftInputButton);
+            this.groupBox4.Controls.Add(this.downInputButton);
+            this.groupBox4.Controls.Add(this.rightInputButton);
+            this.groupBox4.Controls.Add(this.upInputButton);
+            this.groupBox4.Controls.Add(this.yInputButton);
+            this.groupBox4.Controls.Add(this.xInputButton);
+            this.groupBox4.Controls.Add(this.bInputButton);
+            this.groupBox4.Controls.Add(this.aInputButton);
+            this.groupBox4.Controls.Add(this.groupBox7);
+            this.groupBox4.Location = new System.Drawing.Point(9, 131);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(288, 270);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Button Mappings";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(250, 140);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.TabIndex = 18;
+            this.label17.Text = "Back";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(112, 140);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(29, 13);
+            this.label16.TabIndex = 17;
+            this.label16.Text = "Start";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(112, 53);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(14, 13);
+            this.label14.TabIndex = 16;
+            this.label14.Text = "B";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(112, 82);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(14, 13);
+            this.label13.TabIndex = 15;
+            this.label13.Text = "X";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(112, 111);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(14, 13);
+            this.label12.TabIndex = 14;
+            this.label12.Text = "Y";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(250, 111);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 13);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Right";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(250, 82);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(25, 13);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Left";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(250, 53);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Down";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(250, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(21, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Up";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(112, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(14, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "A";
+            // 
+            // startInputButton
+            // 
+            this.startInputButton.Location = new System.Drawing.Point(144, 135);
+            this.startInputButton.Name = "startInputButton";
+            this.startInputButton.Size = new System.Drawing.Size(100, 23);
+            this.startInputButton.TabIndex = 8;
+            this.startInputButton.Text = "[Input]";
+            this.startInputButton.UseVisualStyleBackColor = true;
+            this.startInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // backInputButton
+            // 
+            this.backInputButton.Location = new System.Drawing.Point(6, 135);
+            this.backInputButton.Name = "backInputButton";
+            this.backInputButton.Size = new System.Drawing.Size(100, 23);
+            this.backInputButton.TabIndex = 7;
+            this.backInputButton.Text = "[Input]";
+            this.backInputButton.UseVisualStyleBackColor = true;
+            this.backInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // leftInputButton
+            // 
+            this.leftInputButton.Location = new System.Drawing.Point(144, 77);
+            this.leftInputButton.Name = "leftInputButton";
+            this.leftInputButton.Size = new System.Drawing.Size(100, 23);
+            this.leftInputButton.TabIndex = 6;
+            this.leftInputButton.Text = "[Input]";
+            this.leftInputButton.UseVisualStyleBackColor = true;
+            this.leftInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // downInputButton
+            // 
+            this.downInputButton.Location = new System.Drawing.Point(144, 48);
+            this.downInputButton.Name = "downInputButton";
+            this.downInputButton.Size = new System.Drawing.Size(100, 23);
+            this.downInputButton.TabIndex = 5;
+            this.downInputButton.Text = "[Input]";
+            this.downInputButton.UseVisualStyleBackColor = true;
+            this.downInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // rightInputButton
+            // 
+            this.rightInputButton.Location = new System.Drawing.Point(144, 106);
+            this.rightInputButton.Name = "rightInputButton";
+            this.rightInputButton.Size = new System.Drawing.Size(100, 23);
+            this.rightInputButton.TabIndex = 5;
+            this.rightInputButton.Text = "[Input]";
+            this.rightInputButton.UseVisualStyleBackColor = true;
+            this.rightInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // upInputButton
+            // 
+            this.upInputButton.Location = new System.Drawing.Point(144, 19);
+            this.upInputButton.Name = "upInputButton";
+            this.upInputButton.Size = new System.Drawing.Size(100, 23);
+            this.upInputButton.TabIndex = 4;
+            this.upInputButton.Text = "[Input]";
+            this.upInputButton.UseVisualStyleBackColor = true;
+            this.upInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // yInputButton
+            // 
+            this.yInputButton.Location = new System.Drawing.Point(6, 106);
+            this.yInputButton.Name = "yInputButton";
+            this.yInputButton.Size = new System.Drawing.Size(100, 23);
+            this.yInputButton.TabIndex = 3;
+            this.yInputButton.Text = "[Input]";
+            this.yInputButton.UseVisualStyleBackColor = true;
+            this.yInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // xInputButton
+            // 
+            this.xInputButton.Location = new System.Drawing.Point(6, 77);
+            this.xInputButton.Name = "xInputButton";
+            this.xInputButton.Size = new System.Drawing.Size(100, 23);
+            this.xInputButton.TabIndex = 2;
+            this.xInputButton.Text = "[Input]";
+            this.xInputButton.UseVisualStyleBackColor = true;
+            this.xInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // bInputButton
+            // 
+            this.bInputButton.Location = new System.Drawing.Point(6, 48);
+            this.bInputButton.Name = "bInputButton";
+            this.bInputButton.Size = new System.Drawing.Size(100, 23);
+            this.bInputButton.TabIndex = 1;
+            this.bInputButton.Text = "[Input]";
+            this.bInputButton.UseVisualStyleBackColor = true;
+            this.bInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // aInputButton
+            // 
+            this.aInputButton.Location = new System.Drawing.Point(6, 19);
+            this.aInputButton.Name = "aInputButton";
+            this.aInputButton.Size = new System.Drawing.Size(100, 23);
+            this.aInputButton.TabIndex = 0;
+            this.aInputButton.Text = "[Input]";
+            this.aInputButton.UseVisualStyleBackColor = true;
+            this.aInputButton.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.openGamepadSettingsButton);
+            this.groupBox7.Controls.Add(this.removeDeviceNameButton);
+            this.groupBox7.Controls.Add(this.inputDeviceNamesList);
+            this.groupBox7.Controls.Add(this.addDeviceNameButton);
+            this.groupBox7.Location = new System.Drawing.Point(6, 164);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(276, 100);
+            this.groupBox7.TabIndex = 22;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Device Identifier Names";
+            // 
+            // openGamepadSettingsButton
+            // 
+            this.openGamepadSettingsButton.Location = new System.Drawing.Point(138, 68);
+            this.openGamepadSettingsButton.Name = "openGamepadSettingsButton";
+            this.openGamepadSettingsButton.Size = new System.Drawing.Size(131, 23);
+            this.openGamepadSettingsButton.TabIndex = 23;
+            this.openGamepadSettingsButton.Text = "Open System Settings...";
+            this.openGamepadSettingsButton.UseVisualStyleBackColor = true;
+            this.openGamepadSettingsButton.Click += new System.EventHandler(this.OpenGamepadSettingsButton_Click);
+            // 
+            // removeDeviceNameButton
+            // 
+            this.removeDeviceNameButton.Enabled = false;
+            this.removeDeviceNameButton.Location = new System.Drawing.Point(67, 68);
+            this.removeDeviceNameButton.Name = "removeDeviceNameButton";
+            this.removeDeviceNameButton.Size = new System.Drawing.Size(55, 23);
+            this.removeDeviceNameButton.TabIndex = 21;
+            this.removeDeviceNameButton.Text = "-";
+            this.removeDeviceNameButton.UseVisualStyleBackColor = true;
+            this.removeDeviceNameButton.Click += new System.EventHandler(this.RemoveDeviceNameButton_Click);
+            // 
+            // inputDeviceNamesList
+            // 
+            this.inputDeviceNamesList.Enabled = false;
+            this.inputDeviceNamesList.FormattingEnabled = true;
+            this.inputDeviceNamesList.Location = new System.Drawing.Point(6, 19);
+            this.inputDeviceNamesList.Name = "inputDeviceNamesList";
+            this.inputDeviceNamesList.Size = new System.Drawing.Size(264, 43);
+            this.inputDeviceNamesList.TabIndex = 19;
+            this.inputDeviceNamesList.SelectedIndexChanged += new System.EventHandler(this.InputDeviceNamesList_SelectedIndexChanged);
+            // 
+            // addDeviceNameButton
+            // 
+            this.addDeviceNameButton.Enabled = false;
+            this.addDeviceNameButton.Location = new System.Drawing.Point(6, 68);
+            this.addDeviceNameButton.Name = "addDeviceNameButton";
+            this.addDeviceNameButton.Size = new System.Drawing.Size(55, 23);
+            this.addDeviceNameButton.TabIndex = 20;
+            this.addDeviceNameButton.Text = "+";
+            this.addDeviceNameButton.UseVisualStyleBackColor = true;
+            this.addDeviceNameButton.Click += new System.EventHandler(this.AddDeviceNameButton_Click);
+            // 
+            // resetInputsButton
+            // 
+            this.resetInputsButton.Enabled = false;
+            this.resetInputsButton.Location = new System.Drawing.Point(161, 407);
+            this.resetInputsButton.Name = "resetInputsButton";
+            this.resetInputsButton.Size = new System.Drawing.Size(136, 23);
+            this.resetInputsButton.TabIndex = 24;
+            this.resetInputsButton.Text = "Reset to Defaults";
+            this.resetInputsButton.UseVisualStyleBackColor = true;
+            this.resetInputsButton.Click += new System.EventHandler(this.ResetInputsButton_Click);
+            // 
+            // inputMethodsList
+            // 
+            this.inputMethodsList.FormattingEnabled = true;
+            this.inputMethodsList.Location = new System.Drawing.Point(9, 4);
+            this.inputMethodsList.Name = "inputMethodsList";
+            this.inputMethodsList.Size = new System.Drawing.Size(288, 121);
+            this.inputMethodsList.TabIndex = 0;
+            this.inputMethodsList.SelectedIndexChanged += new System.EventHandler(this.InputMethodsList_SelectedIndexChanged);
+            // 
+            // inputErrorMessage
+            // 
+            this.inputErrorMessage.BackColor = System.Drawing.Color.Transparent;
+            this.inputErrorMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputErrorMessage.Location = new System.Drawing.Point(0, 0);
+            this.inputErrorMessage.Name = "inputErrorMessage";
+            this.inputErrorMessage.Size = new System.Drawing.Size(303, 434);
+            this.inputErrorMessage.TabIndex = 17;
+            this.inputErrorMessage.Text = "Error Loading Input Configuration File!\r\nMake sure your game is up to date and yo" +
+    "u have A.I.R.\'s Game Path set in Options.\r\n";
+            this.inputErrorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.inputErrorMessage.Visible = false;
+            // 
+            // recordingsPage
+            // 
+            this.recordingsPage.Controls.Add(this.groupBox2);
+            this.recordingsPage.Location = new System.Drawing.Point(4, 22);
+            this.recordingsPage.Name = "recordingsPage";
+            this.recordingsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.recordingsPage.Size = new System.Drawing.Size(303, 434);
+            this.recordingsPage.TabIndex = 2;
+            this.recordingsPage.Text = "Recordings";
+            this.recordingsPage.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -505,18 +896,18 @@
             this.openRecordingButton.UseVisualStyleBackColor = true;
             this.openRecordingButton.Click += new System.EventHandler(this.OpenRecordingButton_Click);
             // 
-            // tabPage1
+            // debugPage
             // 
-            this.tabPage1.Controls.Add(this.showLogFileButton);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.groupBox6);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(303, 434);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "Debug";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.debugPage.Controls.Add(this.showLogFileButton);
+            this.debugPage.Controls.Add(this.label5);
+            this.debugPage.Controls.Add(this.groupBox6);
+            this.debugPage.Location = new System.Drawing.Point(4, 22);
+            this.debugPage.Name = "debugPage";
+            this.debugPage.Padding = new System.Windows.Forms.Padding(3);
+            this.debugPage.Size = new System.Drawing.Size(303, 434);
+            this.debugPage.TabIndex = 3;
+            this.debugPage.Text = "Debug";
+            this.debugPage.UseVisualStyleBackColor = true;
             // 
             // showLogFileButton
             // 
@@ -566,7 +957,7 @@
             this.openModDocumentationButton.Name = "openModDocumentationButton";
             this.openModDocumentationButton.Size = new System.Drawing.Size(291, 23);
             this.openModDocumentationButton.TabIndex = 2;
-            this.openModDocumentationButton.Text = "Sonic 3 A.I.R Modding Instructions";
+            this.openModDocumentationButton.Text = "Sonic 3 A.I.R. Modding Instructions";
             this.openModDocumentationButton.UseVisualStyleBackColor = true;
             this.openModDocumentationButton.Click += new System.EventHandler(this.OpenModDocumentationButton_Click);
             // 
@@ -586,29 +977,29 @@
             this.openUserManualButton.Name = "openUserManualButton";
             this.openUserManualButton.Size = new System.Drawing.Size(291, 23);
             this.openUserManualButton.TabIndex = 1;
-            this.openUserManualButton.Text = "Sonic 3 A.I.R User Manual";
+            this.openUserManualButton.Text = "Sonic 3 A.I.R. User Manual";
             this.openUserManualButton.UseVisualStyleBackColor = true;
             this.openUserManualButton.Click += new System.EventHandler(this.OpenUserManualButton_Click);
             // 
-            // tabPage2
+            // optionsPage
             // 
-            this.tabPage2.Controls.Add(this.autoLaunchDelayLabel);
-            this.tabPage2.Controls.Add(this.autoLaunchDelayUpDown);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.keepOpenOnQuitCheckBox);
-            this.tabPage2.Controls.Add(this.keepLoaderOpenCheckBox);
-            this.tabPage2.Controls.Add(this.autoRunCheckbox);
-            this.tabPage2.Controls.Add(this.updateSonic3AIRPathButton);
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.sonic3AIRPathBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(303, 434);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Options";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.optionsPage.Controls.Add(this.autoLaunchDelayLabel);
+            this.optionsPage.Controls.Add(this.autoLaunchDelayUpDown);
+            this.optionsPage.Controls.Add(this.label3);
+            this.optionsPage.Controls.Add(this.keepOpenOnQuitCheckBox);
+            this.optionsPage.Controls.Add(this.keepLoaderOpenCheckBox);
+            this.optionsPage.Controls.Add(this.autoRunCheckbox);
+            this.optionsPage.Controls.Add(this.updateSonic3AIRPathButton);
+            this.optionsPage.Controls.Add(this.groupBox1);
+            this.optionsPage.Controls.Add(this.label1);
+            this.optionsPage.Controls.Add(this.sonic3AIRPathBox);
+            this.optionsPage.Location = new System.Drawing.Point(4, 22);
+            this.optionsPage.Name = "optionsPage";
+            this.optionsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.optionsPage.Size = new System.Drawing.Size(303, 434);
+            this.optionsPage.TabIndex = 1;
+            this.optionsPage.Text = "Options";
+            this.optionsPage.UseVisualStyleBackColor = true;
             // 
             // autoLaunchDelayLabel
             // 
@@ -702,6 +1093,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button1);
             this.groupBox5.Controls.Add(this.airMediaButton);
             this.groupBox5.Controls.Add(this.airPlacesButton);
             this.groupBox5.Controls.Add(this.label4);
@@ -712,13 +1104,23 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "About";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(98, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(172, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Check for Game Updates...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // airMediaButton
             // 
             this.airMediaButton.Location = new System.Drawing.Point(98, 152);
             this.airMediaButton.Name = "airMediaButton";
             this.airMediaButton.Size = new System.Drawing.Size(88, 23);
             this.airMediaButton.TabIndex = 14;
-            this.airMediaButton.Text = "A.I.R Media...";
+            this.airMediaButton.Text = "A.I.R. Media...";
             this.airMediaButton.UseVisualStyleBackColor = true;
             this.airMediaButton.Click += new System.EventHandler(this.AirMediaButton_Click);
             // 
@@ -728,7 +1130,7 @@
             this.airPlacesButton.Name = "airPlacesButton";
             this.airPlacesButton.Size = new System.Drawing.Size(89, 23);
             this.airPlacesButton.TabIndex = 13;
-            this.airPlacesButton.Text = "A.I.R Places...";
+            this.airPlacesButton.Text = "A.I.R. Places...";
             this.airPlacesButton.UseVisualStyleBackColor = true;
             this.airPlacesButton.Click += new System.EventHandler(this.AirPlacesButton_Click);
             // 
@@ -739,8 +1141,8 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(147, 117);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R \r\nMod Manager\r\n\r\nVersion v.1.0\r\nBy CarJem Generations\r\n\r\nSpecial th" +
-    "anks to Eukayrot3K\r\n--------------------------------\r\nCreator of Sonic 3 A.I.R\r\n" +
+            this.label4.Text = "Sonic 3 A.I.R. \r\nMod Manager\r\n\r\nVersion v.1.0\r\nBy CarJem Generations\r\n\r\nSpecial th" +
+    "anks to Eukayrot3K\r\n--------------------------------\r\nCreator of Sonic 3 A.I.R.\r\n" +
     "";
             // 
             // changeRomPathButton
@@ -799,7 +1201,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Sonic 3 A.I.R Path:";
+            this.label1.Text = "Sonic 3 A.I.R. Path:";
             // 
             // sonic3AIRPathBox
             // 
@@ -920,7 +1322,7 @@
             this.MinimizeBox = false;
             this.Name = "ModManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sonic 3 A.I.R Mod Manager";
+            this.Text = "Sonic 3 A.I.R. Mod Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModManager_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.VisibleChanged += new System.EventHandler(this.ModManager_VisibleChanged);
@@ -931,12 +1333,17 @@
             this.moreModOptionsMenuStrip.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
+            this.inputPage.ResumeLayout(false);
+            this.inputPanel.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.recordingsPage.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.debugPage.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.optionsPage.ResumeLayout(false);
+            this.optionsPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -953,7 +1360,7 @@
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button saveAndLoadButton;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage optionsPage;
         private System.Windows.Forms.TabPage modPage;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.Label label2;
@@ -971,7 +1378,7 @@
         private System.Windows.Forms.Button moveDownButton;
         private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.CheckBox autoRunCheckbox;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage recordingsPage;
         private System.Windows.Forms.Button refreshDebugButton;
         private System.Windows.Forms.ListBox gameRecordingList;
         private System.Windows.Forms.Button uploadButton;
@@ -998,7 +1405,7 @@
         private System.Windows.Forms.RichTextBox modInfoTextBox;
         private System.Windows.Forms.ToolStripMenuItem openModURLToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage debugPage;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button openModDocumentationButton;
         private System.Windows.Forms.Button openSampleModsFolderButton;
@@ -1024,6 +1431,40 @@
         private System.Windows.Forms.ToolStripMenuItem openEXEFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openSettingsFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openModsFolderToolStripMenuItem;
+        private System.Windows.Forms.TabPage inputPage;
+        private System.Windows.Forms.ListBox inputMethodsList;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button startInputButton;
+        private System.Windows.Forms.Button backInputButton;
+        private System.Windows.Forms.Button leftInputButton;
+        private System.Windows.Forms.Button downInputButton;
+        private System.Windows.Forms.Button rightInputButton;
+        private System.Windows.Forms.Button upInputButton;
+        private System.Windows.Forms.Button yInputButton;
+        private System.Windows.Forms.Button xInputButton;
+        private System.Windows.Forms.Button bInputButton;
+        private System.Windows.Forms.Button aInputButton;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button removeDeviceNameButton;
+        private System.Windows.Forms.ListBox inputDeviceNamesList;
+        private System.Windows.Forms.Button addDeviceNameButton;
+        private System.Windows.Forms.Button resetInputsButton;
+        private System.Windows.Forms.Button saveInputsButton;
+        private System.Windows.Forms.Button openGamepadSettingsButton;
+        private System.Windows.Forms.Panel inputPanel;
+        private System.Windows.Forms.Label inputErrorMessage;
+        private System.Windows.Forms.ToolStripMenuItem downloadFromURLToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }
 

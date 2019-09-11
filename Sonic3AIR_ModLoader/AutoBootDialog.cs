@@ -24,7 +24,7 @@ namespace Sonic3AIR_ModLoader
             int knuckMode = (rnd.Next(1, 25));
             if (knuckMode == 3)
             {
-                pictureBox1.Image = Sonic3AIR_ModLoader.Properties.Resources.Sonic3KAIRLogo;
+                pictureBox1.Image = Sonic3AIR_ModLoader.Properties.Resources.Sonic3KAIRLogoV4;
             }
 
             button1.Parent = pictureBox1;

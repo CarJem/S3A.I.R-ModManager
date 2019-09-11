@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModLoader", "Soni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR_Protocol_Handler", "AIR_Protocol_Handler\AIR_Protocol_Handler.csproj", "{11A257A9-07AC-43C5-8705-808B7AFD644B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR-SDK", "AIR-SDK\AIR-SDK.csproj", "{0F33D309-0FF8-42C5-AB4A-585D31072EC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

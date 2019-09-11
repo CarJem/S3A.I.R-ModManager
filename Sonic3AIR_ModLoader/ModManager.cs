@@ -27,6 +27,11 @@ using SharpCompress.IO;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.SevenZip;
 using SharpCompress.Archives.Zip;
+using System.Dynamic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Reflection;
+
 
 
 
@@ -194,7 +199,7 @@ namespace Sonic3AIR_ModLoader
 
         private void AIRPathNotSetMessageBox(string text)
         {
-            string message = $"Unable to Validate Path: {nL}{text}{nL}Reason: {nL}Sonic 3 A.I.R's Path is not set!";
+            string message = $"Unable to Validate Path: {nL}{text}{nL}Reason: {nL}Sonic 3 A.I.R.'s Path is not set!";
             MessageBox.Show(message);
         }
 
@@ -208,11 +213,13 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
+
         public string nL = Environment.NewLine;
-        Sonic3AIRSettings S3AIRSettings;
+        AIR_SDK.Settings S3AIRSettings;
         public static ModManager Instance;
-        Sonic3AIRActiveMods S3AIRActiveMods;
-        IList<Sonic3AIRMod> ModsList = new List<Sonic3AIRMod>();
+        AIR_SDK.ActiveModsList S3AIRActiveMods;
+        AIR_SDK.GameConfig GameConfig;
+        IList<AIR_SDK.Mod> ModsList = new List<AIR_SDK.Mod>();
         bool AuthorizeCheck { get; set; }
         bool AllowUpdate { get; set; } = true; 
         #endregion
@@ -252,6 +259,26 @@ namespace Sonic3AIR_ModLoader
         #endregion
 
         #region Events
+        private void SaveInputsButton_Click(object sender, EventArgs e)
+        {
+            GameConfig.Save();
+        }
+
+        private void ResetInputsButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InputMethodsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateInputMappings();
+        }
+
+        private void InputButton_Click(object sender, EventArgs e)
+        {
+            if (inputMethodsList.SelectedItem != null) ChangeInputMappings(sender);
+        }
+
         private void AirPlacesButton_Click(object sender, EventArgs e)
         {
             directoriesMenuStrip.Show(airPlacesButton, new Point(0, airPlacesButton.Height));
@@ -355,7 +382,7 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenModURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenModURL((ModList.SelectedItem as Sonic3AIRMod).URL);
+            OpenModURL((ModList.SelectedItem as AIR_SDK.Mod).URL);
         }
 
         private void ShowLogFileButton_Click(object sender, EventArgs e)
@@ -385,7 +412,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (gameRecordingList.SelectedItem != null)
             {
-                Sonic3AIRRecording recording = gameRecordingList.SelectedItem as Sonic3AIRRecording;
+                AIR_SDK.Recording recording = gameRecordingList.SelectedItem as AIR_SDK.Recording;
                 if (MessageBox.Show($"Are you sure you want to delete \"{recording.Name}\"?", "", MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     try
@@ -419,7 +446,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (ModList.SelectedItem != null)
             {
-                OpenSelectedModFolder(ModList.SelectedItem as Sonic3AIRMod);
+                OpenSelectedModFolder(ModList.SelectedItem as AIR_SDK.Mod);
             }
         }
 
@@ -468,9 +495,14 @@ namespace Sonic3AIR_ModLoader
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabPage3)
+            if (tabControl1.SelectedTab == recordingsPage)
             {
                 CollectGameRecordings();
+            }
+            else if (tabControl1.SelectedTab == inputPage)
+            {
+                DisableMappings();
+                CollectInputMappings();
             }
         }
 
@@ -478,7 +510,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (gameRecordingList.SelectedItem != null)
             {
-                var item = gameRecordingList.SelectedItem as Sonic3AIRRecording;
+                var item = gameRecordingList.SelectedItem as AIR_SDK.Recording;
                 Clipboard.SetText(item.FilePath);
                 MessageBox.Show("Recording File Path Copied to Clipboard!");
             }
@@ -488,7 +520,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (gameRecordingList.SelectedItem != null)
             {
-                UploadRecordingToFileDotIO(gameRecordingList.SelectedItem as Sonic3AIRRecording);
+                UploadRecordingToFileDotIO(gameRecordingList.SelectedItem as AIR_SDK.Recording);
             }
 
         }
@@ -546,7 +578,7 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
-                var item = (ModList.SelectedItem as Sonic3AIRMod);
+                var item = (ModList.SelectedItem as AIR_SDK.Mod);
                 item.IsEnabled = (e.NewValue == CheckState.Checked);
                 UpdateModsList();
             }
@@ -602,6 +634,26 @@ namespace Sonic3AIR_ModLoader
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.Save();
+        }
+
+        private void OpenGamepadSettingsButton_Click(object sender, EventArgs e)
+        {
+            LaunchSystemGamepadSettings();
+        }
+
+        private void InputDeviceNamesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateInputDeviceNamesList();
+        }
+
+        private void AddDeviceNameButton_Click(object sender, EventArgs e)
+        {
+            AddInputDeviceName();
+        }
+
+        private void RemoveDeviceNameButton_Click(object sender, EventArgs e)
+        {
+            RemoveInputDeviceName();
         }
 
         #endregion
@@ -699,10 +751,10 @@ namespace Sonic3AIR_ModLoader
             {
                 if (Properties.Settings.Default.EnableNewLoaderMethod)
                 {
-                    moveUpButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) > 0);
-                    moveDownButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) < ModsList.Count - 1);
-                    moveToTopButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) > 0);
-                    moveToBottomButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as Sonic3AIRMod)) < ModsList.Count - 1);
+                    moveUpButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as AIR_SDK.Mod)) > 0);
+                    moveDownButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as AIR_SDK.Mod)) < ModsList.Count - 1);
+                    moveToTopButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as AIR_SDK.Mod)) > 0);
+                    moveToBottomButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as AIR_SDK.Mod)) < ModsList.Count - 1);
                 }
                 else
                 {
@@ -714,7 +766,7 @@ namespace Sonic3AIR_ModLoader
                 removeButton.Enabled = true;
                 removeModToolStripMenuItem.Enabled = true;
                 openModFolderToolStripMenuItem.Enabled = true;
-                openModURLToolStripMenuItem.Enabled = ((ModList.SelectedItem as Sonic3AIRMod).URL != null);
+                openModURLToolStripMenuItem.Enabled = ((ModList.SelectedItem as AIR_SDK.Mod).URL != null);
             }
             else
             {
@@ -729,7 +781,7 @@ namespace Sonic3AIR_ModLoader
 
             if (ModList.SelectedItem != null)
             {
-                Sonic3AIRMod item = ModList.SelectedItem as Sonic3AIRMod;
+                AIR_SDK.Mod item = ModList.SelectedItem as AIR_SDK.Mod;
                 if (item != null)
                 {
 
@@ -740,7 +792,7 @@ namespace Sonic3AIR_ModLoader
 
                     modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Bold);
 
-                    modInfoTextBox.AppendText($"By: {item.Author}{nL}Version: {item.ModVersion}{nL}A.I.R Version: {item.GameVersion}");
+                    modInfoTextBox.AppendText($"By: {item.Author}{nL}Version: {item.ModVersion}{nL}A.I.R. Version: {item.GameVersion}");
 
                     modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Regular);
 
@@ -777,12 +829,42 @@ namespace Sonic3AIR_ModLoader
                     FileInfo[] fileInfo = directoryInfo.GetFiles("*.bin").Where(path => reg.IsMatch(path.Name)).ToArray();
                     foreach (var file in fileInfo)
                     {
-                        Sonic3AIRRecording recording = new Sonic3AIRRecording(file);
+                        AIR_SDK.Recording recording = new AIR_SDK.Recording(file);
                         gameRecordingList.Items.Add(recording);
                     }
                 }
             }
 
+        }
+
+        private void CollectInputMappings()
+        {
+            inputMethodsList.Items.Clear();
+            if (Properties.Settings.Default.Sonic3AIRPath != null)
+            {
+                string Sonic3AIREXEFolder = Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath);
+                FileInfo config = new FileInfo($"{Sonic3AIREXEFolder}//config.json");
+                if (config.Exists)
+                {
+                    inputPanel.Enabled = true;
+                    inputErrorMessage.Visible = false;
+                    GameConfig = new AIR_SDK.GameConfig(config);
+
+
+                    foreach (var inputMethod in GameConfig.Input.Devices)
+                    {
+                        inputMethodsList.Items.Add(inputMethod);
+                    }
+                }
+                else
+                {
+                    inputPanel.Enabled = false;
+                    inputErrorMessage.BringToFront();
+                    inputErrorMessage.Visible = true;
+                }
+
+
+            }
         }
 
         private bool InitalCollection()
@@ -814,7 +896,7 @@ namespace Sonic3AIR_ModLoader
                 if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRModsFolder"))) missingItems += $"{nL}- {Sonic3AIRModsFolder}";
                 if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRTempModsFolder"))) missingItems += $"{nL}- {Sonic3AIRTempModsFolder}";
                 if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRSettingsFile"))) missingItems += $"{nL}- {Sonic3AIRSettingsFile}";
-                missingItems += $"{nL}{nL}If you have not run Sonic 3 A.I.R yet, please run Sonic 3 A.I.R once before running the modloader!";
+                missingItems += $"{nL}{nL}If you have not run Sonic 3 A.I.R. yet, please run Sonic 3 A.I.R. once before running the modloader!";
                 missingItems += $"{nL}{nL}If you have, make sure these locations exist. The modloader can't run without them";
                 MessageBox.Show(missingItems);
                 return false;
@@ -824,12 +906,12 @@ namespace Sonic3AIR_ModLoader
                 //CreateGameBananaShortcut();
                 if (!File.Exists(Sonic3AIRActiveModsList))
                 {
-                    S3AIRActiveMods = new Sonic3AIRActiveMods(Sonic3AIRActiveModsList);
+                    S3AIRActiveMods = new AIR_SDK.ActiveModsList(Sonic3AIRActiveModsList);
                 }
                 else
                 {
                     FileInfo list = new FileInfo(Sonic3AIRActiveModsList);
-                    S3AIRActiveMods = new Sonic3AIRActiveMods(list);
+                    S3AIRActiveMods = new AIR_SDK.ActiveModsList(list);
                 }
 
 
@@ -837,7 +919,7 @@ namespace Sonic3AIR_ModLoader
                 FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
                 try
                 {
-                    S3AIRSettings = new Sonic3AIRSettings(file);
+                    S3AIRSettings = new AIR_SDK.Settings(file);
                     return true;
                 }
                 catch
@@ -848,6 +930,203 @@ namespace Sonic3AIR_ModLoader
 
 
             }
+        }
+
+        #endregion
+
+        #region Input Mapping
+
+        private void UpdateInputMappings()
+        {
+            inputDeviceNamesList.Items.Clear();
+            if (GameConfig != null)
+            {
+                if (inputMethodsList.SelectedItem != null)
+                {
+                    if (inputMethodsList.SelectedItem is AIR_SDK.GameConfig.InputDevices.Device)
+                    {
+                        AIR_SDK.GameConfig.InputDevices.Device device = inputMethodsList.SelectedItem as AIR_SDK.GameConfig.InputDevices.Device;
+                        aInputButton.Text = (device.A.Count() > 1 ? "[MULTI]" : device.A.FirstOrDefault());
+                        bInputButton.Text = (device.B.Count() > 1 ? "[MULTI]" : device.B.FirstOrDefault());
+                        xInputButton.Text = (device.X.Count() > 1 ? "[MULTI]" : device.X.FirstOrDefault());
+                        yInputButton.Text = (device.Y.Count() > 1 ? "[MULTI]" : device.Y.FirstOrDefault());
+                        upInputButton.Text = (device.Up.Count() > 1 ? "[MULTI]" : device.Up.FirstOrDefault());
+                        downInputButton.Text = (device.Down.Count() > 1 ? "[MULTI]" : device.Down.FirstOrDefault());
+                        leftInputButton.Text = (device.Left.Count() > 1 ? "[MULTI]" : device.Left.FirstOrDefault());
+                        rightInputButton.Text = (device.Right.Count() > 1 ? "[MULTI]" : device.Right.FirstOrDefault());
+                        startInputButton.Text = (device.Start.Count() > 1 ? "[MULTI]" : device.Start.FirstOrDefault());
+                        backInputButton.Text = (device.Back.Count() > 1 ? "[MULTI]" : device.Back.FirstOrDefault());
+
+                        if (aInputButton.Text == "") aInputButton.Text = "[NONE]";
+                        if (bInputButton.Text == "") bInputButton.Text = "[NONE]";
+                        if (xInputButton.Text == "") xInputButton.Text = "[NONE]";
+                        if (yInputButton.Text == "") yInputButton.Text = "[NONE]";
+                        if (upInputButton.Text == "") upInputButton.Text = "[NONE]";
+                        if (downInputButton.Text == "") downInputButton.Text = "[NONE]";
+                        if (leftInputButton.Text == "") leftInputButton.Text = "[NONE]";
+                        if (rightInputButton.Text == "") rightInputButton.Text = "[NONE]";
+                        if (startInputButton.Text == "") startInputButton.Text = "[NONE]";
+                        if (backInputButton.Text == "") backInputButton.Text = "[NONE]";
+
+                        UpdateInputDeviceNamesList(true);
+
+
+
+                    }
+                }
+                else
+                {
+                    DisableMappings();
+                }
+            }
+        }
+
+        private void ToggleDeviceNamesUI(bool enabled)
+        {
+            inputDeviceNamesList.Enabled = enabled;
+            addDeviceNameButton.Enabled = enabled;
+            removeDeviceNameButton.Enabled = (enabled == true ? inputDeviceNamesList.SelectedItem != null : enabled);
+        }
+
+        private void DisableMappings()
+        {
+            inputDeviceNamesList.Items.Clear();
+            aInputButton.Text = "[NULL]";
+            bInputButton.Text = "[NULL]";
+            xInputButton.Text = "[NULL]";
+            yInputButton.Text = "[NULL]";
+            upInputButton.Text = "[NULL]";
+            downInputButton.Text = "[NULL]";
+            leftInputButton.Text = "[NULL]";
+            rightInputButton.Text = "[NULL]";
+            startInputButton.Text = "[NULL]";
+            backInputButton.Text = "[NULL]";
+            inputDeviceNamesList.Items.Add("[NULL]");
+        }
+
+        private void ChangeInputMappings(object sender)
+        {
+            AIR_SDK.GameConfig.InputDevices.Device device = inputMethodsList.SelectedItem as AIR_SDK.GameConfig.InputDevices.Device;
+
+            if (sender.Equals(aInputButton)) ChangeMappings(ref device, "A");
+            else if (sender.Equals(bInputButton)) ChangeMappings(ref device, "B");
+            else if (sender.Equals(xInputButton)) ChangeMappings(ref device, "X");
+            else if (sender.Equals(yInputButton)) ChangeMappings(ref device, "Y");
+            else if (sender.Equals(upInputButton)) ChangeMappings(ref device, "Up");
+            else if (sender.Equals(downInputButton)) ChangeMappings(ref device, "Down");
+            else if (sender.Equals(leftInputButton)) ChangeMappings(ref device, "Left");
+            else if (sender.Equals(rightInputButton)) ChangeMappings(ref device, "Right");
+            else if (sender.Equals(startInputButton)) ChangeMappings(ref device, "Start");
+            else if (sender.Equals(backInputButton)) ChangeMappings(ref device, "Back");
+
+            void ChangeMappings(ref AIR_SDK.GameConfig.InputDevices.Device button, string input)
+            {
+                switch (input)
+                {
+                    case "A":
+                        MappingDialog(ref button.A);
+                        break;
+                    case "B":
+                        MappingDialog(ref button.B);
+                        break;
+                    case "X":
+                        MappingDialog(ref button.X);
+                        break;
+                    case "Y":
+                        MappingDialog(ref button.Y);
+                        break;
+                    case "Up":
+                        MappingDialog(ref button.Up);
+                        break;
+                    case "Down":
+                        MappingDialog(ref button.Down);
+                        break;
+                    case "Left":
+                        MappingDialog(ref button.Left);
+                        break;
+                    case "Right":
+                        MappingDialog(ref button.Right);
+                        break;
+                    case "Start":
+                        MappingDialog(ref button.Start);
+                        break;
+                    case "Back":
+                        MappingDialog(ref button.Back);
+                        break;
+                }
+                UpdateInputMappings();
+
+                void MappingDialog(ref List<string> mappings)
+                {
+                    var mD = new KeybindingsListDialog(mappings);
+                    mD.ShowDialog();
+                }
+
+            }
+        }
+
+        private void AddInputDeviceName()
+        {
+            if (inputMethodsList.SelectedItem != null)
+            {
+                int index = inputMethodsList.SelectedIndex;
+                string newDevice = "New Device";
+                DialogResult result = ShowInputDialog(ref newDevice, "Add New Device...", "Enter the name of the controller as it appears in the system settings or type * to target all devices.");
+                GameConfig.Input.Devices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
+                UpdateInputMappings();
+
+            }
+
+        }
+
+        private void RemoveInputDeviceName()
+        {
+            if (inputMethodsList.SelectedItem != null && inputDeviceNamesList.SelectedItem != null)
+            {
+                DialogResult result = MessageBox.Show($"Verification: Do you want to remove [ {inputDeviceNamesList.SelectedItem.ToString()} ] from the list of acceptable devices for this input?", "Delete Device", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    int index = inputDeviceNamesList.SelectedIndex;
+                    GameConfig.Input.Devices[inputMethodsList.SelectedIndex].DeviceNames.RemoveAt(index);
+                    UpdateInputMappings();
+                }
+            }
+        }
+
+        private void UpdateInputDeviceNamesList(bool refreshItems = false)
+        {
+            if (GameConfig != null)
+            {
+                if (inputMethodsList.SelectedItem != null)
+                {
+                    if (inputMethodsList.SelectedItem is AIR_SDK.GameConfig.InputDevices.Device)
+                    {
+                        AIR_SDK.GameConfig.InputDevices.Device device = inputMethodsList.SelectedItem as AIR_SDK.GameConfig.InputDevices.Device;
+                        if (device.HasDeviceNames)
+                        {
+                            if (refreshItems)
+                            {
+                                foreach (var name in device.DeviceNames)
+                                {
+                                    inputDeviceNamesList.Items.Add(name);
+                                }
+                            }
+                            ToggleDeviceNamesUI(true);
+                        }
+                        else
+                        {
+                            inputDeviceNamesList.Items.Add("[UNSUPPORTED]");
+                            ToggleDeviceNamesUI(false);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void LaunchSystemGamepadSettings()
+        {
+            Process.Start("joy.cpl");
+
         }
 
         #endregion
@@ -933,7 +1212,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveMod()
         {
-            var modToRemove = ModList.SelectedItem as Sonic3AIRMod;
+            var modToRemove = ModList.SelectedItem as AIR_SDK.Mod;
             if (MessageBox.Show($"Are you sure you want to delete {modToRemove.Name}? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 WipeFolderContents(modToRemove.FolderPath);
@@ -982,7 +1261,7 @@ namespace Sonic3AIR_ModLoader
             }
             UpdateModsList(true);
 
-            void UpdateMods(Sonic3AIRMod item)
+            void UpdateMods(AIR_SDK.Mod item)
             {
                 if (item.IsEnabled != item.EnabledLocal)
                 {
@@ -996,14 +1275,14 @@ namespace Sonic3AIR_ModLoader
         {
             ModList.ItemCheck -= ModsList_ItemCheck;
             ModsList.Clear();
-            ModsList = new List<Sonic3AIRMod>();
+            ModsList = new List<AIR_SDK.Mod>();
             GetModsCheckStateLegacy();
             ModList.DataSource = ModsList;
             ModList.DisplayMember = "Name";
             ModList.ValueMember = "IsEnabled";
             for (int i = 0; i < ModList.Items.Count; i++)
             {
-                Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
+                AIR_SDK.Mod obj = (AIR_SDK.Mod)ModList.Items[i];
                 ModList.SetItemChecked(i, obj.IsEnabled);
             }
             ModList.ItemCheck += ModsList_ItemCheck;
@@ -1018,12 +1297,12 @@ namespace Sonic3AIR_ModLoader
             {
                 DirectoryInfo f = new DirectoryInfo(folder.FullName);
                 var root = f.GetFiles("mod.json").FirstOrDefault();
-                Sonic3AIRMod mod;
+                AIR_SDK.Mod mod;
                 if (root != null)
                 {
                     try
                     {
-                        mod = new Sonic3AIRMod(root);
+                        mod = new AIR_SDK.Mod(root);
                         if (mod != null)
                         {
                             if (folder.Name.Contains("#"))
@@ -1057,7 +1336,7 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void DisableModLegacy(Sonic3AIRMod mod)
+        private void DisableModLegacy(AIR_SDK.Mod mod)
         {
             try
             {
@@ -1070,7 +1349,7 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void EnableModLegacy(Sonic3AIRMod mod)
+        private void EnableModLegacy(AIR_SDK.Mod mod)
         {
             try
             {
@@ -1103,7 +1382,7 @@ namespace Sonic3AIR_ModLoader
                     ModList.ValueMember = "IsEnabled";
                     for (int i = 0; i < ModList.Items.Count; i++)
                     {
-                        Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
+                        AIR_SDK.Mod obj = (AIR_SDK.Mod)ModList.Items[i];
                         ModList.SetItemChecked(i, obj.IsEnabled);
                     }
                     ModList.ItemCheck += ModsList_ItemCheck;
@@ -1116,7 +1395,7 @@ namespace Sonic3AIR_ModLoader
         {
             ModList.ItemCheck -= ModsList_ItemCheck;
             ModsList.Clear();
-            ModsList = new List<Sonic3AIRMod>();
+            ModsList = new List<AIR_SDK.Mod>();
             EnableAllLegacyDisabledMods();
             GetModsCheckState();
             ModList.DataSource = ModsList;
@@ -1124,7 +1403,7 @@ namespace Sonic3AIR_ModLoader
             ModList.ValueMember = "IsEnabled";
             for (int i = 0; i < ModList.Items.Count; i++)
             {
-                Sonic3AIRMod obj = (Sonic3AIRMod)ModList.Items[i];
+                AIR_SDK.Mod obj = (AIR_SDK.Mod)ModList.Items[i];
                 ModList.SetItemChecked(i, obj.IsEnabled);
             }
             ModList.ItemCheck += ModsList_ItemCheck;
@@ -1135,22 +1414,22 @@ namespace Sonic3AIR_ModLoader
         {
             DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
             DirectoryInfo[] folders = d.GetDirectories();
-            IList<Tuple<Sonic3AIRMod, int>> ActiveMods = new List<Tuple<Sonic3AIRMod, int>>();
+            IList<Tuple<AIR_SDK.Mod, int>> ActiveMods = new List<Tuple<AIR_SDK.Mod, int>>();
             foreach (DirectoryInfo folder in folders)
             {
                 DirectoryInfo f = new DirectoryInfo(folder.FullName);
                 var root = f.GetFiles("mod.json").FirstOrDefault();
-                Sonic3AIRMod mod;
+                AIR_SDK.Mod mod;
                 if (root != null)
                 {
                     try
                     {
-                        mod = new Sonic3AIRMod(root);
+                        mod = new AIR_SDK.Mod(root);
                         if (S3AIRActiveMods.ActiveMods.Contains(mod.FolderName))
                         {
                             mod.IsEnabled = true;
                             mod.EnabledLocal = true;
-                            ActiveMods.Add(new Tuple<Sonic3AIRMod, int>(mod, S3AIRActiveMods.ActiveMods.IndexOf(mod.FolderName)));
+                            ActiveMods.Add(new Tuple<AIR_SDK.Mod, int>(mod, S3AIRActiveMods.ActiveMods.IndexOf(mod.FolderName)));
                         }
                         else
                         {
@@ -1233,7 +1512,7 @@ namespace Sonic3AIR_ModLoader
                 S3AIRActiveMods.Save(ModsList.Where(x => x.IsEnabled).Select(x => x.FolderName).Reverse().ToList());
                 UpdateModsList(true);
 
-                void UpdateMods(Sonic3AIRMod item)
+                void UpdateMods(AIR_SDK.Mod item)
                 {
                     if (item.IsEnabled != item.EnabledLocal)
                     {
@@ -1244,12 +1523,12 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void DisableMod(Sonic3AIRMod mod)
+        private void DisableMod(AIR_SDK.Mod mod)
         {
             S3AIRActiveMods.ActiveMods.Remove(mod.FolderName);
         }
 
-        private void EnableMod(Sonic3AIRMod mod)
+        private void EnableMod(AIR_SDK.Mod mod)
         {
             S3AIRActiveMods.ActiveMods.Add(mod.FolderName);
         }
@@ -1317,7 +1596,7 @@ namespace Sonic3AIR_ModLoader
             Process.Start(Sonic3AIRModsFolder);
         }
 
-        private void OpenSelectedModFolder(Sonic3AIRMod mod)
+        private void OpenSelectedModFolder(AIR_SDK.Mod mod)
         {
             Process.Start(mod.FolderPath);
         }
@@ -1413,7 +1692,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (gameRecordingList.SelectedItem != null)
             {
-                Sonic3AIRRecording item = gameRecordingList.SelectedItem as Sonic3AIRRecording;
+                AIR_SDK.Recording item = gameRecordingList.SelectedItem as AIR_SDK.Recording;
                 if (File.Exists(item.FilePath))
                 {
                     Process.Start("explorer.exe", "/select, " + item.FilePath);
@@ -1434,20 +1713,22 @@ namespace Sonic3AIR_ModLoader
             else DownloadMod(url);
         }
 
-        public void DownloadMod(string url)
+        public void DownloadMod(string url, bool isMod = true, bool backgroundDownload = false)
         {
             string baseURL = GetBaseURL(url);
+            MessageBox.Show(baseURL);
             if (baseURL != "") url = baseURL;
 
             string remote_filename = "";
-            if (baseURL != "") remote_filename = GetRemoteFileName(baseURL);
+            if (url != "") remote_filename = GetRemoteFileName(url);
             string filename = "temp.zip";
             if (remote_filename != "") filename = remote_filename;
 
             DownloadWindow downloadWindow = new DownloadWindow($"Downloading \"{filename}\"", url, $"{Sonic3AIRTempModsFolder}\\{filename}");
             Action finishAction = DownloadModCompleted;
-            downloadWindow.DownloadCompleted = finishAction;
-            downloadWindow.Start();
+            if (isMod) downloadWindow.DownloadCompleted = finishAction;
+            if (backgroundDownload) downloadWindow.StartBackground();
+            else downloadWindow.Start();
         }
 
         private string GetRemoteFileName(string baseURL)
@@ -1484,33 +1765,36 @@ namespace Sonic3AIR_ModLoader
         }
 
         private void DownloadButtonTest_Click(object sender, EventArgs e)
-        {
-            //DownloadMod("https://gamebanana.com/dl/430253");
-
-            
+        {    
             string url = "";
-            if (ShowInputDialog(ref url) == DialogResult.OK)
+            if (ShowInputDialog(ref url, "Enter Mod URL...") == DialogResult.OK)
             {
                 if (url != "") MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else DownloadMod(url);
+                else DownloadMod(url, false);
             }
 
         }
 
-        private static DialogResult ShowInputDialog(ref string input)
+        private DialogResult ShowInputDialog(ref string input, string caption, string message = "")
         {
-            System.Drawing.Size size = new System.Drawing.Size(300, 70);
+            System.Drawing.Size size = new System.Drawing.Size(500, 75);
             Form inputBox = new Form();
 
             inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             inputBox.ClientSize = size;
-            inputBox.Text = "Enter Mod URL...";
+            inputBox.Text = caption;
             inputBox.StartPosition = FormStartPosition.CenterScreen;
+
+            System.Windows.Forms.Label label = new Label();
+            label.Size = new System.Drawing.Size(size.Width - 10, 13);
+            label.Location = new System.Drawing.Point(5, 5);
+            label.Text = message;
+            inputBox.Controls.Add(label);
 
             System.Windows.Forms.TextBox textBox = new TextBox();
             textBox.Size = new System.Drawing.Size(size.Width - 10, 23);
-            textBox.Location = new System.Drawing.Point(5, 5);
+            textBox.Location = new System.Drawing.Point(5, 25);
             textBox.Text = input;
             inputBox.Controls.Add(textBox);
 
@@ -1519,7 +1803,7 @@ namespace Sonic3AIR_ModLoader
             okButton.Name = "okButton";
             okButton.Size = new System.Drawing.Size(75, 23);
             okButton.Text = "&OK";
-            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 49);
             inputBox.Controls.Add(okButton);
 
             Button cancelButton = new Button();
@@ -1527,22 +1811,23 @@ namespace Sonic3AIR_ModLoader
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new System.Drawing.Size(75, 23);
             cancelButton.Text = "&Cancel";
-            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 49);
             inputBox.Controls.Add(cancelButton);
 
             inputBox.AcceptButton = okButton;
             inputBox.CancelButton = cancelButton;
+            
 
-            DialogResult result = inputBox.ShowDialog();
+            inputBox.ShowDialog();
             input = textBox.Text;
-            return result;
+            return inputBox.DialogResult;
         }
 
         #endregion
 
         #region Information Sending
 
-        private async void UploadRecordingToFileDotIO(Sonic3AIRRecording recording)
+        private async void UploadRecordingToFileDotIO(AIR_SDK.Recording recording)
         {
             string expires = "/?expires=1w";
             using (var httpClient = new HttpClient())
@@ -1570,251 +1855,6 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
-        #region Custom Classes
-        public class Sonic3AIRMod
-        {
-            public string Author;
-            public string Name { get; set; }
-            public string TechnicalName { get; set; }
-            public string Description;
-            public string FolderName;
-            public string FolderPath;
-            public string URL;
-            public string ModVersion;
-            public string GameVersion;
-            public bool EnabledLocal { get; set; }
-            public bool IsEnabled { get; set; }
-            public override string ToString() { return Name; }
-
-            public Sonic3AIRMod(FileInfo mod)
-            {
-                string data = File.ReadAllText(mod.FullName);
-                dynamic stuff = JRaw.Parse(data);
-                //Author
-                Author = stuff.Metadata.Author;
-                if (Author == null) Author = "N/A";
-                //Name
-                Name = stuff.Metadata.Name;
-                if (Name == null) Name = "N/A";
-                //Description
-                Description = stuff.Metadata.Description;
-                if (Description == null) Description = "No Description Provided.";
-                //Mod URL
-                URL = stuff.Metadata.URL;
-                //ModVersion
-                ModVersion = stuff.Metadata.ModVersion;
-                if (ModVersion == null) ModVersion = "N/A";
-                //GameVersion
-                GameVersion = stuff.Metadata.GameVersion;
-                if (GameVersion == null) GameVersion = "N/A";
-
-                FolderName = mod.Directory.Name;
-                FolderPath = mod.Directory.FullName;
-                TechnicalName = $"[{FolderName.Replace("#","")}]";
-
-            }
-        }
-        public class Sonic3AIRSettings
-        {
-            public bool FailSafeMode = false;
-            public string Sonic3KRomPath = "";
-            public bool FixGlitches = false;
-            public string FilePath = "";
-            private dynamic jsonObj;
-            public Sonic3AIRSettings(FileInfo settings)
-            {
-                FilePath = settings.FullName;
-                string data = File.ReadAllText(FilePath);
-                Version targetVersion = new Version("19.08.17.0");
-                bool isExceptionVersionRelatedForSure = false;
-
-                try
-                {
-                    jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
-
-                    string version = jsonObj.GameVersion;
-                    Version currentVersion = new Version(version);
-
-
-                    var result = currentVersion.CompareTo(targetVersion);
-                    if (result < 0)
-                    {
-                        MessageBox.Show($"Sonic 3 A.I.R is out of date, please use version {targetVersion.ToString()} or above! (and start it at least once fully)");
-                        isExceptionVersionRelatedForSure = true;
-                        throw new Exception();
-                    }
-                    else
-                    {
-                        FailSafeMode = jsonObj.FailSafeMode;
-                        FixGlitches = jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES;
-                        Sonic3KRomPath = jsonObj.RomPath;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (!isExceptionVersionRelatedForSure) MessageBox.Show("JSON Error, File Not Found, or A.I.R is Outdated! Unable to Load Mod Manager!" + Environment.NewLine + $"If AIR is out of date, please use version {targetVersion.ToString()} or above! (and start it at least once fully)");
-                    throw ex;
-                }
-
-
-
-
-
-            }
-
-            private void PraseSettings()
-            {
-                if (FailSafeMode == true)
-                {
-                    jsonObj.FailSafeMode = true;
-                }
-                else
-                {
-                    jsonObj.FailSafeMode = false;
-                }
-                if (FixGlitches == true)
-                {
-                    jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES = 1;
-                }
-                else
-                {
-                    jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES = 0;
-                }
-                jsonObj.RomPath = Sonic3KRomPath;
-            }
-
-            public void SaveSettings()
-            {
-                PraseSettings();
-                string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
-                File.WriteAllText(FilePath, output);
-            }
-        }
-        public class Sonic3AIRRecording
-        {
-            public string Name;
-            public string FilePath;
-            public string FormalName;
-
-            public override string ToString() { return Name; }
-            public string GetRAW()
-            {
-                var binData = File.ReadAllBytes(FilePath);
-                var sb = new StringBuilder();
-                foreach (var b in binData)
-                    sb.Append(" " + b.ToString("X2"));
-                return sb.ToString();
-            }
-
-            public Sonic3AIRRecording(FileInfo file)
-            {
-                FilePath = file.FullName;
-
-                string baseString = file.Name.Replace("gamerecording_", "");
-
-                string month = baseString.Substring(2, 2);
-                string day = baseString.Substring(4, 2);
-                string year = baseString.Substring(0, 2);
-
-                string hour = baseString.Substring(7, 2);
-                string minute = baseString.Substring(9, 2);
-                string second = baseString.Substring(11, 2);
-
-                string recordingFormat = $"Recording: {month}/{day}/{year} - {hour}.{minute}.{second}";
-
-                Name = recordingFormat;
-
-                FormalName = $"Sonic 3 AIR Recording [{recordingFormat}] ";
-            }
-
-
-
-        }
-        public class Sonic3AIRActiveMods
-        {
-            public List<string> ActiveMods = new List<string>();
-            public string ConfigPath = "";
-            public Sonic3AIRActiveMods(FileInfo config)
-            {
-                ConfigPath = config.FullName;
-                Load();
-            }
-
-            public void Load()
-            {
-                try
-                {
-                    string data = File.ReadAllText(ConfigPath);
-                    JToken stuff = JRaw.Parse(data);
-                    foreach (JProperty content in stuff.Children())
-                    {
-                        if (content.HasValues)
-                        {
-                            ActiveMods.AddRange(content.Value.ToObject<List<string>>());
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    CreateFile(ConfigPath);
-                    Load();
-                }
-
-            }
-
-            public void CreateFile(string filePath)
-            {
-                var myFile = File.Create(filePath);
-                myFile.Close();
-                string nL = Environment.NewLine;
-                string bracketOpen = "{";
-                string bracketClose = "}";
-                string standardFile = $"{bracketOpen}{nL}\t\"ActiveMods\": [{nL}{nL}\t]{nL}{bracketClose}";
-                using (StreamWriter writetext = new StreamWriter(filePath)) writetext.WriteLine(standardFile);
-            }
-
-            public Sonic3AIRActiveMods(string filePath)
-            {
-                CreateFile(filePath);
-                ConfigPath = filePath;
-                Load();
-            }
-
-            public void Save(List<string> CurrentActiveMods)
-            {
-                var myFile = File.Create(ConfigPath);
-                myFile.Close();
-                string nL = Environment.NewLine;
-                string bracketOpen = "{";
-                string bracketClose = "}";
-                string fileHeader = $"{bracketOpen}{nL}\t\"ActiveMods\": [{nL}";
-                string fileFooter = $"{nL}\t]{nL}{bracketClose}";
-                string fileContents = fileHeader + GetFiles() + fileFooter;
-                using (StreamWriter writetext = new StreamWriter(ConfigPath)) writetext.WriteLine(fileContents);
-
-                string GetFiles()
-                {
-                    string fileList = "";
-                    string formatHead = "\t\t\"";
-                    string formatFoot = "\",";
-                    string formatFootEndofList = $"\"";
-                    for (int i = 0; i < CurrentActiveMods.Count; i++)
-                    {
-                        if (i >= CurrentActiveMods.Count - 1) fileList += $"{nL}{formatHead}{CurrentActiveMods[i]}{formatFootEndofList}";
-                        else fileList += $"{nL}{formatHead}{CurrentActiveMods[i]}{formatFoot}";
-                    }
-                    return fileList;
-                }
-
-                ActiveMods = CurrentActiveMods;
-            }
-
-
-        }
-
-
-        #endregion
-
         #region Protocol Handler
 
         public void CreateGameBananaShortcut()
@@ -1831,6 +1871,10 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
-
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming Soon!");
+            //if (Program.CanUpdaterRun) new Updater();
+        }
     }
 }

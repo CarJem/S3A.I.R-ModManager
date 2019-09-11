@@ -10,6 +10,7 @@ namespace Sonic3AIR_ModLoader
     static class Program
     {
         public static bool AutoBootCanceled = false;
+        public static bool CanUpdaterRun = true;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -18,6 +19,20 @@ namespace Sonic3AIR_ModLoader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Action action = Updater;
+            Task.Run(action);
+            ModManager(args);
+
+        }
+
+        static void Updater()
+        {
+            CanUpdaterRun = false;
+            new Updater();
+        }
+
+        static void ModManager(string[] args)
+        {
             Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => {
 
                 if (o.gamebanana_api != null)
