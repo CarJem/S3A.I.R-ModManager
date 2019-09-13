@@ -18,6 +18,7 @@ namespace AIR_SDK
         public string VersionString;
         public Version Version;
         public string DownloadURL;
+        public string Details = "";
         public VersionCheck(FileInfo config)
         {
             FilePath = config.FullName;
@@ -26,6 +27,7 @@ namespace AIR_SDK
             VersionString = RawJSON.Stable.Version;
             Version = new Version(VersionString);
             DownloadURL = RawJSON.Stable.URL;
+            Details = RawJSON.Stable.Details;
         }
     }
 }

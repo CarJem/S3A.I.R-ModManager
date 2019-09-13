@@ -94,5 +94,41 @@ namespace Sonic3AIR_ModLoader.Properties {
                 this["EnableNewLoaderMethod"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PathModeManual {
+            get {
+                return ((bool)(this["PathModeManual"]));
+            }
+            set {
+                this["PathModeManual"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PathModeAuto {
+            get {
+                return ((bool)(this["PathModeAuto"]));
+            }
+            set {
+                this["PathModeAuto"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoUpdates {
+            get {
+                return ((bool)(this["AutoUpdates"]));
+            }
+            set {
+                this["AutoUpdates"] = value;
+            }
+        }
     }
 }

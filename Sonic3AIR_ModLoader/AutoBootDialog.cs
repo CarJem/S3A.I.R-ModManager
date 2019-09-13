@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ namespace Sonic3AIR_ModLoader
     {
         private Timer CountDown = new Timer();
         private int TimeLeft = (int)(Properties.Settings.Default.AutoLaunchDelay - 1);
+
 
         public AutoBootDialog()
         {
@@ -33,10 +35,25 @@ namespace Sonic3AIR_ModLoader
             label1.BackColor = Color.FromArgb(64, 0, 0, 0);
             button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, 0, 0);
             button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
-            UpdateTimeLeftLabel(true);
+            label1.Text = "  Initializing...";
             CountDown.Interval = 1000;
             CountDown.Tick += CountDown_Tick;
             CountDown.Enabled = true;
+
+            }
+
+
+
+        private void StartUpdater()
+        {
+            this.BeginInvoke((Action)(() =>
+            {
+                Program.UpdaterState = Updater.UpdateState.Running;
+                label1.Text = "  Checking for Updates...";
+                Updater updaterTask = new Updater();
+
+            }));
+
         }
 
         private void UpdateTimeLeftLabel(bool startUp = false)
@@ -50,16 +67,31 @@ namespace Sonic3AIR_ModLoader
 
         private void CountDown_Tick(object sender, EventArgs evt)
         {
-            if (TimeLeft >= 1)
+            bool allowedToProcced = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.UpdaterState == Updater.UpdateState.Finished : true);
+            if (allowedToProcced)
             {
-                UpdateTimeLeftLabel();
-                TimeLeft -= 1;
+                if (TimeLeft >= 1)
+                {
+                    UpdateTimeLeftLabel();
+                    TimeLeft -= 1;
+                }
+                else
+                {
+                    CountDown.Enabled = false;
+                    Close();
+                }
             }
             else
             {
-                CountDown.Enabled = false;
-                Close();
+                if (Program.UpdaterState == Updater.UpdateState.NeverStarted) StartUpdater();
+                else if (Program.UpdateResult != Updater.UpdateResult.Null && Program.CheckedForUpdateOnStartup && Program.UpdaterState == Updater.UpdateState.Finished)
+                {
+                    Program.LastUpdateResult = Program.UpdateResult;
+                    Program.UpdateResult = Updater.UpdateResult.Null;
+                }
             }
+            
+
         }
 
         private void Button1_Click(object sender, EventArgs e)

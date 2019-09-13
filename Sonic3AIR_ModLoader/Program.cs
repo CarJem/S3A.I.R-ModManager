@@ -10,7 +10,15 @@ namespace Sonic3AIR_ModLoader
     static class Program
     {
         public static bool AutoBootCanceled = false;
-        public static bool CanUpdaterRun = true;
+
+
+
+        public static bool CheckedForUpdateOnStartup = false;
+        public static Updater.UpdateState UpdaterState { get; set; } = Updater.UpdateState.NeverStarted;
+        public static Updater.UpdateResult UpdateResult { get; set; } = Updater.UpdateResult.Null;
+        public static Updater.UpdateResult LastUpdateResult { get; set; } = Updater.UpdateResult.Null;
+
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,12 +31,6 @@ namespace Sonic3AIR_ModLoader
             //Task.Run(action);
             ModManager(args);
 
-        }
-
-        static void Updater()
-        {
-            CanUpdaterRun = false;
-            new Updater();
         }
 
         static void ModManager(string[] args)

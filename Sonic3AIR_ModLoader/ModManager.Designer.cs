@@ -98,6 +98,7 @@
             this.refreshDebugButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.openRecordingButton = new System.Windows.Forms.Button();
+            this.recordingsErrorMessage = new System.Windows.Forms.Label();
             this.debugPage = new System.Windows.Forms.TabPage();
             this.showLogFileButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -107,12 +108,6 @@
             this.openSampleModsFolderButton = new System.Windows.Forms.Button();
             this.openUserManualButton = new System.Windows.Forms.Button();
             this.optionsPage = new System.Windows.Forms.TabPage();
-            this.autoLaunchDelayLabel = new System.Windows.Forms.Label();
-            this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.keepOpenOnQuitCheckBox = new System.Windows.Forms.CheckBox();
-            this.keepLoaderOpenCheckBox = new System.Windows.Forms.CheckBox();
-            this.autoRunCheckbox = new System.Windows.Forms.CheckBox();
             this.updateSonic3AIRPathButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -127,6 +122,12 @@
             this.fixGlitchesCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.sonic3AIRPathBox = new System.Windows.Forms.TextBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.autoLaunchDelayLabel = new System.Windows.Forms.Label();
+            this.autoRunCheckbox = new System.Windows.Forms.CheckBox();
+            this.autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
+            this.keepLoaderOpenCheckBox = new System.Windows.Forms.CheckBox();
+            this.keepOpenOnQuitCheckBox = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.mediaLinksMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -139,6 +140,11 @@
             this.openEXEFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSettingsFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openModsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AIRPathMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.browseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.installedVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noInstalledEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -154,11 +160,13 @@
             this.debugPage.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.optionsPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).BeginInit();
             this.mediaLinksMenuStrip.SuspendLayout();
             this.directoriesMenuStrip.SuspendLayout();
+            this.AIRPathMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // addMods
@@ -810,6 +818,7 @@
             // recordingsPage
             // 
             this.recordingsPage.Controls.Add(this.groupBox2);
+            this.recordingsPage.Controls.Add(this.recordingsErrorMessage);
             this.recordingsPage.Location = new System.Drawing.Point(4, 22);
             this.recordingsPage.Name = "recordingsPage";
             this.recordingsPage.Padding = new System.Windows.Forms.Padding(3);
@@ -895,6 +904,19 @@
             this.openRecordingButton.Text = "Open";
             this.openRecordingButton.UseVisualStyleBackColor = true;
             this.openRecordingButton.Click += new System.EventHandler(this.OpenRecordingButton_Click);
+            // 
+            // recordingsErrorMessage
+            // 
+            this.recordingsErrorMessage.BackColor = System.Drawing.Color.Transparent;
+            this.recordingsErrorMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recordingsErrorMessage.Location = new System.Drawing.Point(3, 3);
+            this.recordingsErrorMessage.Name = "recordingsErrorMessage";
+            this.recordingsErrorMessage.Size = new System.Drawing.Size(297, 428);
+            this.recordingsErrorMessage.TabIndex = 18;
+            this.recordingsErrorMessage.Text = "Error Loading Recordings!\r\nMake sure your game is up to date and you have A.I.R.\'" +
+    "s Game Path set in Options.\r\n";
+            this.recordingsErrorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.recordingsErrorMessage.Visible = false;
             // 
             // debugPage
             // 
@@ -983,16 +1005,11 @@
             // 
             // optionsPage
             // 
-            this.optionsPage.Controls.Add(this.autoLaunchDelayLabel);
-            this.optionsPage.Controls.Add(this.autoLaunchDelayUpDown);
-            this.optionsPage.Controls.Add(this.label3);
-            this.optionsPage.Controls.Add(this.keepOpenOnQuitCheckBox);
-            this.optionsPage.Controls.Add(this.keepLoaderOpenCheckBox);
-            this.optionsPage.Controls.Add(this.autoRunCheckbox);
             this.optionsPage.Controls.Add(this.updateSonic3AIRPathButton);
             this.optionsPage.Controls.Add(this.groupBox1);
             this.optionsPage.Controls.Add(this.label1);
             this.optionsPage.Controls.Add(this.sonic3AIRPathBox);
+            this.optionsPage.Controls.Add(this.groupBox8);
             this.optionsPage.Location = new System.Drawing.Point(4, 22);
             this.optionsPage.Name = "optionsPage";
             this.optionsPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1000,71 +1017,6 @@
             this.optionsPage.TabIndex = 1;
             this.optionsPage.Text = "Options";
             this.optionsPage.UseVisualStyleBackColor = true;
-            // 
-            // autoLaunchDelayLabel
-            // 
-            this.autoLaunchDelayLabel.AutoSize = true;
-            this.autoLaunchDelayLabel.Location = new System.Drawing.Point(6, 66);
-            this.autoLaunchDelayLabel.Name = "autoLaunchDelayLabel";
-            this.autoLaunchDelayLabel.Size = new System.Drawing.Size(113, 13);
-            this.autoLaunchDelayLabel.TabIndex = 14;
-            this.autoLaunchDelayLabel.Text = "Boot Delay (Seconds):";
-            // 
-            // autoLaunchDelayUpDown
-            // 
-            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(125, 64);
-            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
-            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(91, 20);
-            this.autoLaunchDelayUpDown.TabIndex = 13;
-            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunchDelay;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 97);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(115, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Mod Manager Options:";
-            // 
-            // keepOpenOnQuitCheckBox
-            // 
-            this.keepOpenOnQuitCheckBox.AutoSize = true;
-            this.keepOpenOnQuitCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnQuit;
-            this.keepOpenOnQuitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnQuit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keepOpenOnQuitCheckBox.Location = new System.Drawing.Point(9, 136);
-            this.keepOpenOnQuitCheckBox.Name = "keepOpenOnQuitCheckBox";
-            this.keepOpenOnQuitCheckBox.Size = new System.Drawing.Size(142, 17);
-            this.keepOpenOnQuitCheckBox.TabIndex = 10;
-            this.keepOpenOnQuitCheckBox.Text = "Stay Open on Game Exit";
-            this.keepOpenOnQuitCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // keepLoaderOpenCheckBox
-            // 
-            this.keepLoaderOpenCheckBox.AutoSize = true;
-            this.keepLoaderOpenCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnLaunch;
-            this.keepLoaderOpenCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keepLoaderOpenCheckBox.Location = new System.Drawing.Point(9, 113);
-            this.keepLoaderOpenCheckBox.Name = "keepLoaderOpenCheckBox";
-            this.keepLoaderOpenCheckBox.Size = new System.Drawing.Size(161, 17);
-            this.keepLoaderOpenCheckBox.TabIndex = 9;
-            this.keepLoaderOpenCheckBox.Text = "Stay Open on Game Launch";
-            this.keepLoaderOpenCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // autoRunCheckbox
-            // 
-            this.autoRunCheckbox.AutoSize = true;
-            this.autoRunCheckbox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunch;
-            this.autoRunCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoRunCheckbox.Location = new System.Drawing.Point(9, 46);
-            this.autoRunCheckbox.Name = "autoRunCheckbox";
-            this.autoRunCheckbox.Size = new System.Drawing.Size(139, 17);
-            this.autoRunCheckbox.TabIndex = 8;
-            this.autoRunCheckbox.Text = "Enable Auto Boot Mode";
-            this.autoRunCheckbox.UseVisualStyleBackColor = true;
-            this.autoRunCheckbox.CheckedChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
-            this.autoRunCheckbox.CheckStateChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
             // 
             // updateSonic3AIRPathButton
             // 
@@ -1074,7 +1026,7 @@
             this.updateSonic3AIRPathButton.TabIndex = 7;
             this.updateSonic3AIRPathButton.Text = "...";
             this.updateSonic3AIRPathButton.UseVisualStyleBackColor = true;
-            this.updateSonic3AIRPathButton.Click += new System.EventHandler(this.UpdateSonic3AIRPathButton_Click);
+            this.updateSonic3AIRPathButton.Click += new System.EventHandler(this.ChangeSonic3AIRPathButton_Click);
             // 
             // groupBox1
             // 
@@ -1106,7 +1058,6 @@
             // 
             // button1
             // 
-            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(98, 11);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(172, 23);
@@ -1142,7 +1093,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(147, 117);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Sonic 3 A.I.R. \r\nMod Manager\r\n\r\nVersion v.1.1\r\nBy CarJem Generations\r\n\r\nSpecial t" +
+            this.label4.Text = "Sonic 3 A.I.R. \r\nMod Manager\r\n\r\nVersion v.1.2\r\nBy CarJem Generations\r\n\r\nSpecial t" +
     "hanks to Eukayrot3K\r\n--------------------------------\r\nCreator of Sonic 3 A.I.R." +
     "\r\n";
             // 
@@ -1211,6 +1162,77 @@
             this.sonic3AIRPathBox.ReadOnly = true;
             this.sonic3AIRPathBox.Size = new System.Drawing.Size(255, 20);
             this.sonic3AIRPathBox.TabIndex = 0;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.checkBox1);
+            this.groupBox8.Controls.Add(this.autoLaunchDelayLabel);
+            this.groupBox8.Controls.Add(this.autoRunCheckbox);
+            this.groupBox8.Controls.Add(this.autoLaunchDelayUpDown);
+            this.groupBox8.Controls.Add(this.keepLoaderOpenCheckBox);
+            this.groupBox8.Controls.Add(this.keepOpenOnQuitCheckBox);
+            this.groupBox8.Location = new System.Drawing.Point(9, 47);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(288, 106);
+            this.groupBox8.TabIndex = 15;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Mod Manager Options";
+            // 
+            // autoLaunchDelayLabel
+            // 
+            this.autoLaunchDelayLabel.AutoSize = true;
+            this.autoLaunchDelayLabel.Location = new System.Drawing.Point(6, 39);
+            this.autoLaunchDelayLabel.Name = "autoLaunchDelayLabel";
+            this.autoLaunchDelayLabel.Size = new System.Drawing.Size(88, 13);
+            this.autoLaunchDelayLabel.TabIndex = 14;
+            this.autoLaunchDelayLabel.Text = "Delay (Seconds):";
+            // 
+            // autoRunCheckbox
+            // 
+            this.autoRunCheckbox.AutoSize = true;
+            this.autoRunCheckbox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunch;
+            this.autoRunCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoRunCheckbox.Location = new System.Drawing.Point(6, 19);
+            this.autoRunCheckbox.Name = "autoRunCheckbox";
+            this.autoRunCheckbox.Size = new System.Drawing.Size(139, 17);
+            this.autoRunCheckbox.TabIndex = 8;
+            this.autoRunCheckbox.Text = "Enable Auto Boot Mode";
+            this.autoRunCheckbox.UseVisualStyleBackColor = true;
+            this.autoRunCheckbox.CheckedChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
+            this.autoRunCheckbox.CheckStateChanged += new System.EventHandler(this.AutoRunCheckbox_CheckedChanged);
+            // 
+            // autoLaunchDelayUpDown
+            // 
+            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(100, 37);
+            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
+            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(56, 20);
+            this.autoLaunchDelayUpDown.TabIndex = 13;
+            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunchDelay;
+            // 
+            // keepLoaderOpenCheckBox
+            // 
+            this.keepLoaderOpenCheckBox.AutoSize = true;
+            this.keepLoaderOpenCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnLaunch;
+            this.keepLoaderOpenCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnLaunch", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keepLoaderOpenCheckBox.Location = new System.Drawing.Point(6, 60);
+            this.keepLoaderOpenCheckBox.Name = "keepLoaderOpenCheckBox";
+            this.keepLoaderOpenCheckBox.Size = new System.Drawing.Size(134, 17);
+            this.keepLoaderOpenCheckBox.TabIndex = 9;
+            this.keepLoaderOpenCheckBox.Text = "Keep Open on Launch";
+            this.keepLoaderOpenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // keepOpenOnQuitCheckBox
+            // 
+            this.keepOpenOnQuitCheckBox.AutoSize = true;
+            this.keepOpenOnQuitCheckBox.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.KeepOpenOnQuit;
+            this.keepOpenOnQuitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "KeepOpenOnQuit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keepOpenOnQuitCheckBox.Location = new System.Drawing.Point(6, 83);
+            this.keepOpenOnQuitCheckBox.Name = "keepOpenOnQuitCheckBox";
+            this.keepOpenOnQuitCheckBox.Size = new System.Drawing.Size(146, 17);
+            this.keepOpenOnQuitCheckBox.TabIndex = 10;
+            this.keepOpenOnQuitCheckBox.Text = "Don\'t Close on Game Exit";
+            this.keepOpenOnQuitCheckBox.UseVisualStyleBackColor = true;
             // 
             // saveButton
             // 
@@ -1308,6 +1330,48 @@
             this.openModsFolderToolStripMenuItem.Text = "Open Mods Folder";
             this.openModsFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenModsFolder_Click);
             // 
+            // AIRPathMenuStrip
+            // 
+            this.AIRPathMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.browseToolStripMenuItem,
+            this.installedVersionsToolStripMenuItem});
+            this.AIRPathMenuStrip.Name = "contextMenuStrip1";
+            this.AIRPathMenuStrip.Size = new System.Drawing.Size(174, 48);
+            // 
+            // browseToolStripMenuItem
+            // 
+            this.browseToolStripMenuItem.Name = "browseToolStripMenuItem";
+            this.browseToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.browseToolStripMenuItem.Text = "Browse...";
+            this.browseToolStripMenuItem.Click += new System.EventHandler(this.UpdateSonic3AIRPath_Click);
+            // 
+            // installedVersionsToolStripMenuItem
+            // 
+            this.installedVersionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noInstalledEntriesToolStripMenuItem});
+            this.installedVersionsToolStripMenuItem.Name = "installedVersionsToolStripMenuItem";
+            this.installedVersionsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.installedVersionsToolStripMenuItem.Text = "Installed Versions...";
+            // 
+            // noInstalledEntriesToolStripMenuItem
+            // 
+            this.noInstalledEntriesToolStripMenuItem.Enabled = false;
+            this.noInstalledEntriesToolStripMenuItem.Name = "noInstalledEntriesToolStripMenuItem";
+            this.noInstalledEntriesToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.noInstalledEntriesToolStripMenuItem.Text = "No Installed Entries";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Checked = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoUpdates;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoUpdates", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox1.Location = new System.Drawing.Point(162, 60);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(123, 40);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "Enable A.I.R. Update Notifications";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1345,13 +1409,16 @@
             this.groupBox6.ResumeLayout(false);
             this.optionsPage.ResumeLayout(false);
             this.optionsPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoLaunchDelayUpDown)).EndInit();
             this.mediaLinksMenuStrip.ResumeLayout(false);
             this.directoriesMenuStrip.ResumeLayout(false);
+            this.AIRPathMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1393,7 +1460,6 @@
         private System.Windows.Forms.CheckBox keepLoaderOpenCheckBox;
         private System.Windows.Forms.CheckBox keepOpenOnQuitCheckBox;
         private System.Windows.Forms.Panel modPanel;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button deleteRecordingButton;
         private System.Windows.Forms.Label autoLaunchDelayLabel;
         private System.Windows.Forms.NumericUpDown autoLaunchDelayUpDown;
@@ -1466,6 +1532,13 @@
         private System.Windows.Forms.Label inputErrorMessage;
         private System.Windows.Forms.ToolStripMenuItem downloadFromURLToolStripMenuItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label recordingsErrorMessage;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.ContextMenuStrip AIRPathMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem browseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem installedVersionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noInstalledEntriesToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

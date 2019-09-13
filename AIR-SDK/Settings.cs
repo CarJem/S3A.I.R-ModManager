@@ -13,49 +13,107 @@ namespace AIR_SDK
         public bool FailSafeMode = false;
         public string Sonic3KRomPath = "";
         public bool FixGlitches = false;
+        public string AIREXEPath = "";
+        public bool HasEXEPath = true;
         public string FilePath = "";
         private dynamic jsonObj;
-        public Version Version;
-        public Settings(FileInfo settings, bool JustGetVersion = false)
+        public Version Version = new Version();
+
+        public LoadOptions DefaultLoadOptions;
+
+
+        public class LoadOptions
+        {
+            public bool ThrowNoExceptionsForMissingAttributesBesidesVersion = false;
+            public bool ThrowNoExceptionsForVersionMismatch = false;
+            public Version TargetVersion = new Version("19.08.17.0");
+
+            public LoadOptions(bool _ThrowNoExceptionsForMissingAttributes = false, Version _targetVersion = null, bool _ThrowNoExceptionsForVersionMismatch = false)
+            {
+                ThrowNoExceptionsForMissingAttributesBesidesVersion = _ThrowNoExceptionsForMissingAttributes;
+                if (_targetVersion != null) TargetVersion = _targetVersion;
+                ThrowNoExceptionsForVersionMismatch = _ThrowNoExceptionsForVersionMismatch;
+            }
+        }
+
+
+        public Settings(FileInfo settings, LoadOptions loadOptions = null)
         {
             FilePath = settings.FullName;
             string data = File.ReadAllText(FilePath);
-            Version targetVersion = new Version("19.08.17.0");
             bool isExceptionVersionRelatedForSure = false;
+            if (loadOptions == null) loadOptions = new LoadOptions();
 
             try
             {
                 jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
 
-                string version = jsonObj.GameVersion;
-                Version currentVersion = new Version(version);
-
-                if (JustGetVersion)
+                try
                 {
-                    Version = currentVersion;
+                    string version = jsonObj.GameVersion;
+                    Version = new Version(version);
                 }
-                else
+                catch (Exception ex)
                 {
-                    var result = currentVersion.CompareTo(targetVersion);
-                    if (result < 0)
+                    throw ex;
+                }
+
+                try
+                {
+                    var result = Version.CompareTo(loadOptions.TargetVersion);
+                    if (result < 0 && loadOptions.ThrowNoExceptionsForVersionMismatch)
                     {
-                        MessageBox.Show($"Sonic 3 A.I.R is out of date, please use version {targetVersion.ToString()} or above! (and start it at least once fully)");
+                        MessageBox.Show($"Sonic 3 A.I.R is out of date, please use version {loadOptions.TargetVersion.ToString()} or above! (and start it at least once fully)");
                         isExceptionVersionRelatedForSure = true;
                         throw new Exception();
                     }
-                    else
-                    {
-                        Version = currentVersion;
-                        FailSafeMode = jsonObj.FailSafeMode;
-                        FixGlitches = jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES;
-                        Sonic3KRomPath = jsonObj.RomPath;
-                    }
+                }
+                catch (Exception ex)
+                {
+                    if (!loadOptions.ThrowNoExceptionsForMissingAttributesBesidesVersion) throw ex;
+                }
+
+                try
+                {
+                    FailSafeMode = jsonObj.FailSafeMode;
+                }
+                catch (Exception ex)
+                {
+                    if (!loadOptions.ThrowNoExceptionsForMissingAttributesBesidesVersion) throw ex;
+                }
+
+                try
+                {
+                    FixGlitches = jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES;
+                }
+                catch (Exception ex)
+                {
+                    if (!loadOptions.ThrowNoExceptionsForMissingAttributesBesidesVersion) throw ex;
+                }
+
+                try
+                {
+                    Sonic3KRomPath = jsonObj.RomPath;
+                }
+                catch (Exception ex)
+                {
+                    if (!loadOptions.ThrowNoExceptionsForMissingAttributesBesidesVersion) throw ex;
+                }
+
+                try
+                {
+                    AIREXEPath = jsonObj.GameExePath;
+                }
+                catch
+                {
+                    AIREXEPath = "";
+                    HasEXEPath = false;
                 }
 
             }
             catch (Exception ex)
             {
-                if (!isExceptionVersionRelatedForSure) MessageBox.Show("JSON Error, File Not Found, or A.I.R is Outdated! Unable to Load Mod Manager!" + Environment.NewLine + $"If AIR is out of date, please use version {targetVersion.ToString()} or above! (and start it at least once fully)");
+                if (!isExceptionVersionRelatedForSure) MessageBox.Show("JSON Error, File Not Found, or A.I.R is Outdated! Unable to Load Mod Manager!" + Environment.NewLine + $"If AIR is out of date, please use version {loadOptions.TargetVersion.ToString()} or above! (and start it at least once fully)");
                 throw ex;
             }
 
