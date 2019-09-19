@@ -237,6 +237,7 @@ namespace Sonic3AIR_ModLoader
         public static ModManager Instance;
         public static AIR_SDK.ActiveModsList S3AIRActiveMods;
         public static AIR_SDK.GameConfig GameConfig;
+        public static AIR_SDK.VersionMetadata CurrentAIRVersion;
         IList<AIR_SDK.Mod> ModsList = new List<AIR_SDK.Mod>();
         bool AuthorizeCheck { get; set; }
         bool AllowUpdate { get; set; } = true; 
@@ -282,6 +283,30 @@ namespace Sonic3AIR_ModLoader
         #endregion
 
         #region Events
+        private void OpenDownloadsFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OpenVersionsFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void airModManagerPlacesButton_Click(object sender, EventArgs e)
+        {
+            modManagerPathMenuStrip.Show(airModManagerPlacesButton, new Point(0, airModManagerPlacesButton.Height));
+        }
+
+        private void OpenConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenConfigFile();
+        }
+
+        private void FromSettingsFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeAIRPathFromSettings();
+        }
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -590,7 +615,7 @@ namespace Sonic3AIR_ModLoader
 
         private void UpdateSonic3AIRPath_Click(object sender, EventArgs e)
         {
-            GameHandler.UpdateSonic3AIRLocation();
+            GameHandler.UpdateSonic3AIRLocation(true);
             UpdateAIRSettings();
         }
 
@@ -703,6 +728,9 @@ namespace Sonic3AIR_ModLoader
             new ToolTip().SetToolTip(moveDownButton, "Decrease Selected Mod Priority...");
             new ToolTip().SetToolTip(moveToTopButton, "Increase Selected Mod Priority to Max...");
             new ToolTip().SetToolTip(moveToBottomButton, "Decrease Selected Mod Priority to Min...");
+
+            aboutLabel.Text = aboutLabel.Text.Replace("{version}", Program.Version);
+            this.Text = this.Text.Replace("{version}", Program.Version);
         }
 
         public void UpdateInGameButtons()
@@ -719,8 +747,9 @@ namespace Sonic3AIR_ModLoader
             failSafeModeCheckbox.Enabled = enabled;
             modPanel.Enabled = enabled;
             autoRunCheckbox.Enabled = enabled;
+            inputPanel.Enabled = enabled;
+            checkForUpdatesButton.Enabled = enabled;
         }
-
 
         private void UpdateUI()
         {
@@ -779,6 +808,50 @@ namespace Sonic3AIR_ModLoader
             romPathBox.Text = S3AIRSettings.Sonic3KRomPath;
             fixGlitchesCheckbox.Checked = S3AIRSettings.FixGlitches;
             failSafeModeCheckbox.Checked = S3AIRSettings.FailSafeMode;
+
+            bool loaderMethodPast = Properties.Settings.Default.EnableNewLoaderMethod;
+
+            string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+            if (metaDataFile != null)
+            {
+                try
+                {
+                    CurrentAIRVersion = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                    if (CurrentAIRVersion.Version.CompareTo(new Version("19.09.0.0")) >= 0)
+                    {
+                        Properties.Settings.Default.EnableNewLoaderMethod = true;
+                        enableModStackingToolStripMenuItem.Enabled = true;
+                        airVersionLabel.Text = $"A.I.R Version: {CurrentAIRVersion.VersionString}";
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.EnableNewLoaderMethod = false;
+                        enableModStackingToolStripMenuItem.Enabled = false;
+                        airVersionLabel.Text = $"A.I.R Version: {CurrentAIRVersion.VersionString}";
+                    }
+                }
+                catch
+                {
+                    NullSituation();
+
+                }
+
+            }
+            else
+            {
+                NullSituation();
+            }
+            UpdateModStackingToggle();
+            Properties.Settings.Default.Save();
+            if (Properties.Settings.Default.EnableNewLoaderMethod != loaderMethodPast) UpdateModsList(true);
+
+            void NullSituation()
+            {
+                Properties.Settings.Default.EnableNewLoaderMethod = false;
+                enableModStackingToolStripMenuItem.Enabled = false;
+                airVersionLabel.Text = $"A.I.R Version: NULL";
+            }
+
         }
 
         public void RefreshSelectedMobProperties()
@@ -1670,6 +1743,30 @@ namespace Sonic3AIR_ModLoader
             Process.Start(mod.FolderPath);
         }
 
+        private void OpenConfigFile()
+        {
+            if (Sonic3AIRPath != null || Sonic3AIRPath != "")
+            {
+                string filename = Sonic3AIRPath;
+                if (File.Exists(Path.GetDirectoryName(filename) + "//config.json"))
+                {
+                    Process.Start(Path.GetDirectoryName(filename) + "//config.json");
+                }
+            }
+            else
+            {
+                if (GameHandler.UpdateSonic3AIRLocation())
+                {
+                    UpdateAIRSettings();
+                    string filename = Sonic3AIRPath;
+                    if (File.Exists(Path.GetDirectoryName(filename) + "//config.json"))
+                    {
+                        Process.Start(Path.GetDirectoryName(filename) + "//config.json");
+                    }
+                }
+            }
+        }
+
         private void OpenLogFile()
         {
             if (File.Exists(Sonic3AIRAppDataFolder + "//logfile.txt"))
@@ -1941,19 +2038,26 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
-        #region AIR EXE Version Handler Toolstrip
+        #region AIR EXE Version Handler Toolstrip / Path Management
+
+        private void AIRVersionZIPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InstallVersionFromZIP();
+        }
 
         private void UpdateAIRVersionsToolstrips()
         {
             CleanUpInstalledVersionsToolStrip();
             DirectoryInfo directoryInfo = new DirectoryInfo(Sonic3AIR_MM_VersionsFolder);
-            foreach (var folder in directoryInfo.GetDirectories())
+            foreach (var folder in directoryInfo.GetDirectories().ToList().VersionSort().Reverse())
             {
                 string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
                 if (File.Exists(filePath))
                 {
                     installedVersionsToolStripMenuItem.DropDownItems.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
                 }
+
+                
             }
         }
 
@@ -1983,6 +2087,165 @@ namespace Sonic3AIR_ModLoader
             UpdateAIRSettings();
         }
 
+        private void ChangeAIRPathFromSettings()
+        {
+            if (S3AIRSettings != null)
+            {
+                if (S3AIRSettings.HasEXEPath)
+                {
+                    if (File.Exists(S3AIRSettings.AIREXEPath))
+                    {
+                        Sonic3AIRPath = S3AIRSettings.AIREXEPath;
+                        Properties.Settings.Default.Save();
+                        UpdateAIRSettings();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The file defined settings does not exist anymore. Launch AIR again outside of the mod loader and try again");
+                    }
+                }
+            }
+        }
+
+        private void InstallVersionFromZIP()
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Filter = "Sonic 3 A.I.R. Version ZIP (*.zip)|*.zip",
+                Title = "Select Sonic 3 A.I.R. Version ZIP..."
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
+                string output = destination;
+
+                using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(ofd.FileName))
+                {
+                    foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                    {
+                        entry.WriteToDirectory(output, new ExtractionOptions()
+                        {
+                            ExtractFullPath = true,
+                            Overwrite = true
+                        });
+                    }
+                }
+
+
+                string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                AIR_SDK.VersionMetadata ver = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+
+
+                string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
+
+                Directory.Move(destination, output2);
+
+                Directory.CreateDirectory(destination);
+
+                MessageBox.Show($"The game has been installed at \"{output2}\"");
+            }
+
+
+        }
+
+
+
         #endregion
+
+        #region A.I.R. Version Manager List
+
+        private void RefreshVersionsList(bool fullRefresh = false)
+        {
+            if (fullRefresh)
+            {
+                versionsListBox.Items.Clear();
+                DirectoryInfo directoryInfo = new DirectoryInfo(Sonic3AIR_MM_VersionsFolder);
+                foreach (var folder in directoryInfo.GetDirectories().ToList().VersionSort().Reverse())
+                {
+                    string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
+                    if (File.Exists(filePath))
+                    {
+                        versionsListBox.Items.Add(new AIRVersionListItem(folder.Name, folder.FullName));
+                    }
+
+
+                }
+            }
+
+            bool enabled = versionsListBox.SelectedItem != null;
+            removeVersionButton.Enabled = enabled;
+            openVersionLocationButton.Enabled = enabled;
+        }
+
+        private class AIRVersionListItem
+        {
+            public string Name { get { return _name; } }
+            private string _name;
+
+            public string FilePath { get { return _filePath; } }
+            private string _filePath;
+
+            public override string ToString()
+            {
+                return "Version " + Name;
+            }
+
+            public AIRVersionListItem(string name, string filePath)
+            {
+                _name = name;
+                _filePath = filePath;
+            }
+        }
+
+        private void VersionsListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            RefreshVersionsList();
+        }
+
+        private void TabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl2.SelectedTab == versionsPage)
+            {
+                RefreshVersionsList(true);
+            }
+        }
+
+        private void OpenVersionLocationButton_Click(object sender, EventArgs e)
+        {
+            if (versionsListBox.SelectedItem != null && versionsListBox.SelectedItem is AIRVersionListItem)
+            {
+                AIRVersionListItem item = versionsListBox.SelectedItem as AIRVersionListItem;
+                Process.Start(item.FilePath);
+            }
+        }
+
+        private void RemoveVersionButton_Click(object sender, EventArgs e)
+        {
+            if (versionsListBox.SelectedItem != null && versionsListBox.SelectedItem is AIRVersionListItem)
+            {
+                AIRVersionListItem item = versionsListBox.SelectedItem as AIRVersionListItem;
+                if (MessageBox.Show($"Are you sure you want to remove Version \"{item.Name}\"?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        WipeFolderContents(item.FilePath);
+                        Directory.Delete(item.FilePath);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Unable to Remove Version!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    RefreshVersionsList(true);
+                }
+
+            }
+        }
+
+
+
+
+        #endregion
+
+
     }
 }

@@ -91,19 +91,39 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        public static bool UpdateSonic3AIRLocation()
+        public static bool UpdateSonic3AIRLocation(bool intended = false)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog()
+            if (intended)
             {
-                Filter = "Executable File (*.exe)|*.exe",
-                Title = "Select Sonic 3 AIR Executable..."
-            };
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                ModManager.Sonic3AIRPath = fileDialog.FileName;
-                return true;
+                return LocationDialog();
             }
-            else return false;
+            else
+            {
+                DialogResult result = MessageBox.Show("Sonic 3 A.I.R.'s File Path is Not Set, Would you like to set it now?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (result == DialogResult.Yes)
+                {
+                    return LocationDialog();
+                }
+                else return false;
+            }
+
+
+
+            bool LocationDialog()
+            {
+                OpenFileDialog fileDialog = new OpenFileDialog()
+                {
+                    Filter = "Executable File (*.exe)|*.exe",
+                    Title = "Select Sonic 3 A.I.R. Executable..."
+                };
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    ModManager.Sonic3AIRPath = fileDialog.FileName;
+                    return true;
+                }
+                else return false;
+            }
+
         }
     }
 }

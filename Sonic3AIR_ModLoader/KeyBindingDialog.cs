@@ -17,35 +17,20 @@ namespace Sonic3AIR_ModLoader
 
         private List<string> GetKeys()
         {
-            char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
             List<string> functionKeys = new List<string>();
 
             functionKeys.AddRange(new string[] {
-                "Space",
-                "Enter",
-                "Up",
-                "Down",
-                "Left",
-                "Right"
+            "Enter","Space","Backspace","Up","Down","Left","Right","A","B","C","D","E","F","G","H","I","J","K","L",
+            "M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Comma","Period","Colon","Semicolon",
+            "Quote","Slash","Backslash","Minus","Equals","BracketLeft","BracketRight","0","1","2","3","4","5","6","7","8","9",
+            "Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","NumpadPlus",
+            "NumpadMinus","NumpadMultiply","NumpadDivide","NumpadPeriod","Insert","Delete","Home","End","PageUp","PageDown"
             });
 
             List<string> Keys = new List<string>();
             Keys.Add("");
             Keys.AddRange(functionKeys);
-            Keys.AddRange(alphabet.Select(c => c.ToString()).ToList());
-            //AddUnsupportedKeys(ref Keys);
             return Keys;
-        }
-
-        private void AddUnsupportedKeys(ref List<string> Keys)
-        {
-            for (int i = 1; i <= 12; i++)
-            {
-                Keys.Add($"F{i}");
-            }
-
-            char[] numbers = "12345678910".ToCharArray();
-            Keys.AddRange(numbers.Select(c => c.ToString()).ToList());
         }
 
         public KeyBindingDialog()

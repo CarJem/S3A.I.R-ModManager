@@ -70,11 +70,15 @@ namespace Sonic3AIR_ModLoader
         {
             try
             {
+                bool isDeveloper = false;
                 bool isNetAccessable = IsNetworkAvailable();
 
                 if (isNetAccessable)
                 {
-                    VersionCheckFileName = DownloadFromURL(@"http://sonic3air.org/sonic3air_updateinfo.json", Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), DownloadCheckComplete);
+                    string url = "";
+                    if (isDeveloper) url = @"http://sonic3air.org/sonic3air_updateinfo_dev.json";
+                    else url = @"http://sonic3air.org/sonic3air_updateinfo.json";
+                    VersionCheckFileName = DownloadFromURL(url, Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), DownloadCheckComplete);
                 }
                 else
                 {
@@ -181,9 +185,7 @@ namespace Sonic3AIR_ModLoader
         {
             string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
             string file = $"{destination}//{UpdateFileName}";
-            string output = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{VersionCheckInfo.Version.ToString()}";
-
-            Directory.CreateDirectory(output);
+            string output = destination;
 
             using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(file))
             {
@@ -197,9 +199,18 @@ namespace Sonic3AIR_ModLoader
                 }
             }
 
-            WipeFolderContents(destination);
 
-            MessageBox.Show($"The game has been installed at \"{output}\"");
+            string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+            AIR_SDK.VersionMetadata ver = new AIR_SDK.VersionMetadata(new FileInfo(file));
+
+
+            string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
+
+            Directory.Move(destination, output2);
+
+            Directory.CreateDirectory(destination);
+
+            MessageBox.Show($"The game has been installed at \"{output2}\"");
 
 
             Program.UpdaterState = UpdateState.Finished;

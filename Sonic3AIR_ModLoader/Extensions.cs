@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Sonic3AIR_ModLoader
 {
@@ -35,6 +37,19 @@ namespace Sonic3AIR_ModLoader
             }
             // put element from position 1 to destination
             list[newIndex] = tmp;
+        }
+
+        public static IEnumerable<DirectoryInfo> VersionSort(this IEnumerable<DirectoryInfo> list)
+        {
+            int maxLen = list.Select(s => s.Name.Length).Max();
+
+            return list.Select(s => new
+            {
+                OrgStr = s,
+                SortStr = Regex.Replace(s.Name, @"(\d+)|(\D+)", m => m.Value.PadLeft(maxLen, char.IsDigit(m.Value[0]) ? ' ' : '\xffff'))
+            })
+            .OrderBy(x => x.SortStr)
+            .Select(x => x.OrgStr);
         }
 
         public static void Move<T>(this IList<T> list, int oldIndex, int newIndex)
