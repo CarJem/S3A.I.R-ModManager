@@ -60,6 +60,7 @@
             this.refreshButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
             this.toolsPage = new System.Windows.Forms.TabPage();
+            this.toolsPanel = new System.Windows.Forms.Panel();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.recordingsPage = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -178,6 +179,7 @@
             this.moreModOptionsMenuStrip.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.toolsPage.SuspendLayout();
+            this.toolsPanel.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.recordingsPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -308,7 +310,7 @@
             this.modPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modPanel.Location = new System.Drawing.Point(3, 3);
             this.modPanel.Name = "modPanel";
-            this.modPanel.Size = new System.Drawing.Size(313, 428);
+            this.modPanel.Size = new System.Drawing.Size(311, 426);
             this.modPanel.TabIndex = 14;
             // 
             // moveToBottomButton
@@ -516,14 +518,24 @@
             // 
             // toolsPage
             // 
-            this.toolsPage.Controls.Add(this.tabControl3);
+            this.toolsPage.BackColor = System.Drawing.SystemColors.Control;
+            this.toolsPage.Controls.Add(this.toolsPanel);
             this.toolsPage.Location = new System.Drawing.Point(4, 22);
+            this.toolsPage.Margin = new System.Windows.Forms.Padding(0);
             this.toolsPage.Name = "toolsPage";
-            this.toolsPage.Padding = new System.Windows.Forms.Padding(3);
             this.toolsPage.Size = new System.Drawing.Size(319, 434);
             this.toolsPage.TabIndex = 7;
             this.toolsPage.Text = "Tools";
-            this.toolsPage.UseVisualStyleBackColor = true;
+            // 
+            // toolsPanel
+            // 
+            this.toolsPanel.Controls.Add(this.tabControl3);
+            this.toolsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolsPanel.Location = new System.Drawing.Point(0, 0);
+            this.toolsPanel.Name = "toolsPanel";
+            this.toolsPanel.Padding = new System.Windows.Forms.Padding(4);
+            this.toolsPanel.Size = new System.Drawing.Size(317, 432);
+            this.toolsPanel.TabIndex = 20;
             // 
             // tabControl3
             // 
@@ -531,11 +543,15 @@
             this.tabControl3.Controls.Add(this.recordingsPage);
             this.tabControl3.Controls.Add(this.debugPage);
             this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl3.Location = new System.Drawing.Point(3, 3);
+            this.tabControl3.Location = new System.Drawing.Point(4, 4);
+            this.tabControl3.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl3.Multiline = true;
             this.tabControl3.Name = "tabControl3";
+            this.tabControl3.Padding = new System.Drawing.Point(0, 0);
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(313, 428);
+            this.tabControl3.Size = new System.Drawing.Size(309, 424);
             this.tabControl3.TabIndex = 0;
+            this.tabControl3.SelectedIndexChanged += new System.EventHandler(this.TabControl3_SelectedIndexChanged);
             // 
             // recordingsPage
             // 
@@ -545,7 +561,7 @@
             this.recordingsPage.Location = new System.Drawing.Point(4, 25);
             this.recordingsPage.Name = "recordingsPage";
             this.recordingsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.recordingsPage.Size = new System.Drawing.Size(305, 399);
+            this.recordingsPage.Size = new System.Drawing.Size(301, 395);
             this.recordingsPage.TabIndex = 2;
             this.recordingsPage.Text = "Game Recordings";
             // 
@@ -560,7 +576,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(299, 393);
+            this.panel1.Size = new System.Drawing.Size(295, 389);
             this.panel1.TabIndex = 19;
             // 
             // refreshDebugButton
@@ -601,7 +617,7 @@
             this.gameRecordingList.FormattingEnabled = true;
             this.gameRecordingList.Location = new System.Drawing.Point(0, 0);
             this.gameRecordingList.Name = "gameRecordingList";
-            this.gameRecordingList.Size = new System.Drawing.Size(299, 173);
+            this.gameRecordingList.Size = new System.Drawing.Size(295, 173);
             this.gameRecordingList.TabIndex = 0;
             this.gameRecordingList.SelectedIndexChanged += new System.EventHandler(this.GameRecordingList_SelectedIndexChanged);
             // 
@@ -633,7 +649,7 @@
             this.recordingsErrorMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recordingsErrorMessage.Location = new System.Drawing.Point(3, 3);
             this.recordingsErrorMessage.Name = "recordingsErrorMessage";
-            this.recordingsErrorMessage.Size = new System.Drawing.Size(299, 393);
+            this.recordingsErrorMessage.Size = new System.Drawing.Size(295, 389);
             this.recordingsErrorMessage.TabIndex = 18;
             this.recordingsErrorMessage.Text = "Error Loading Recordings!\r\nMake sure your game is up to date and you have A.I.R.\'" +
     "s Game Path set in Options.\r\n";
@@ -652,7 +668,7 @@
             this.debugPage.Location = new System.Drawing.Point(4, 25);
             this.debugPage.Name = "debugPage";
             this.debugPage.Padding = new System.Windows.Forms.Padding(3);
-            this.debugPage.Size = new System.Drawing.Size(305, 399);
+            this.debugPage.Size = new System.Drawing.Size(309, 403);
             this.debugPage.TabIndex = 3;
             this.debugPage.Text = "Guides/Shortcuts";
             // 
@@ -689,7 +705,7 @@
             // showLogFileButton
             // 
             this.showLogFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.showLogFileButton.Location = new System.Drawing.Point(-8, 407);
+            this.showLogFileButton.Location = new System.Drawing.Point(-22, 407);
             this.showLogFileButton.Name = "showLogFileButton";
             this.showLogFileButton.Size = new System.Drawing.Size(307, 21);
             this.showLogFileButton.TabIndex = 6;
@@ -700,9 +716,9 @@
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.Location = new System.Drawing.Point(3, 147);
+            this.label5.Location = new System.Drawing.Point(3, 151);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(299, 249);
+            this.label5.Size = new System.Drawing.Size(303, 249);
             this.label5.TabIndex = 7;
             this.label5.Text = resources.GetString("label5.Text");
             this.label5.UseMnemonic = false;
@@ -716,7 +732,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(3, 3);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(299, 141);
+            this.groupBox6.Size = new System.Drawing.Size(303, 141);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Guides";
@@ -724,7 +740,7 @@
             // openModdingTemplatesFolder
             // 
             this.openModdingTemplatesFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(6, 106);
+            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(10, 106);
             this.openModdingTemplatesFolder.Name = "openModdingTemplatesFolder";
             this.openModdingTemplatesFolder.Size = new System.Drawing.Size(287, 23);
             this.openModdingTemplatesFolder.TabIndex = 4;
@@ -735,7 +751,7 @@
             // openModDocumentationButton
             // 
             this.openModDocumentationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openModDocumentationButton.Location = new System.Drawing.Point(6, 77);
+            this.openModDocumentationButton.Location = new System.Drawing.Point(10, 77);
             this.openModDocumentationButton.Name = "openModDocumentationButton";
             this.openModDocumentationButton.Size = new System.Drawing.Size(287, 23);
             this.openModDocumentationButton.TabIndex = 2;
@@ -746,7 +762,7 @@
             // openSampleModsFolderButton
             // 
             this.openSampleModsFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openSampleModsFolderButton.Location = new System.Drawing.Point(6, 19);
+            this.openSampleModsFolderButton.Location = new System.Drawing.Point(10, 19);
             this.openSampleModsFolderButton.Name = "openSampleModsFolderButton";
             this.openSampleModsFolderButton.Size = new System.Drawing.Size(287, 23);
             this.openSampleModsFolderButton.TabIndex = 3;
@@ -757,7 +773,7 @@
             // openUserManualButton
             // 
             this.openUserManualButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openUserManualButton.Location = new System.Drawing.Point(6, 48);
+            this.openUserManualButton.Location = new System.Drawing.Point(10, 48);
             this.openUserManualButton.Name = "openUserManualButton";
             this.openUserManualButton.Size = new System.Drawing.Size(287, 23);
             this.openUserManualButton.TabIndex = 1;
@@ -767,6 +783,7 @@
             // 
             // settingsPage
             // 
+            this.settingsPage.BackColor = System.Drawing.SystemColors.Control;
             this.settingsPage.Controls.Add(this.tabControl2);
             this.settingsPage.Location = new System.Drawing.Point(4, 22);
             this.settingsPage.Name = "settingsPage";
@@ -774,7 +791,6 @@
             this.settingsPage.Size = new System.Drawing.Size(319, 434);
             this.settingsPage.TabIndex = 6;
             this.settingsPage.Text = "Settings";
-            this.settingsPage.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
@@ -785,9 +801,11 @@
             this.tabControl2.Controls.Add(this.aboutPage);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl2.Name = "tabControl2";
+            this.tabControl2.Padding = new System.Drawing.Point(0, 0);
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(313, 428);
+            this.tabControl2.Size = new System.Drawing.Size(311, 426);
             this.tabControl2.TabIndex = 0;
             this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.TabControl2_SelectedIndexChanged);
             // 
@@ -798,7 +816,7 @@
             this.optionsPage.Location = new System.Drawing.Point(4, 25);
             this.optionsPage.Name = "optionsPage";
             this.optionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.optionsPage.Size = new System.Drawing.Size(305, 399);
+            this.optionsPage.Size = new System.Drawing.Size(303, 397);
             this.optionsPage.TabIndex = 1;
             this.optionsPage.Text = "General";
             this.optionsPage.UseVisualStyleBackColor = true;
@@ -985,7 +1003,7 @@
             this.inputPage.Controls.Add(this.inputPanel);
             this.inputPage.Location = new System.Drawing.Point(4, 25);
             this.inputPage.Name = "inputPage";
-            this.inputPage.Size = new System.Drawing.Size(305, 399);
+            this.inputPage.Size = new System.Drawing.Size(303, 397);
             this.inputPage.TabIndex = 4;
             this.inputPage.Text = "Input";
             this.inputPage.UseVisualStyleBackColor = true;
@@ -1000,7 +1018,7 @@
             this.inputPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inputPanel.Location = new System.Drawing.Point(0, 0);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(305, 399);
+            this.inputPanel.Size = new System.Drawing.Size(303, 397);
             this.inputPanel.TabIndex = 25;
             // 
             // saveInputsButton
@@ -1037,9 +1055,9 @@
             this.groupBox4.Controls.Add(this.aInputButton);
             this.groupBox4.Controls.Add(this.groupBox7);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox4.Location = new System.Drawing.Point(0, 129);
+            this.groupBox4.Location = new System.Drawing.Point(0, 127);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(305, 270);
+            this.groupBox4.Size = new System.Drawing.Size(303, 270);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Button Mappings";
@@ -1306,14 +1324,13 @@
             this.inputMethodsList.FormattingEnabled = true;
             this.inputMethodsList.Location = new System.Drawing.Point(0, 0);
             this.inputMethodsList.Name = "inputMethodsList";
-            this.inputMethodsList.Size = new System.Drawing.Size(305, 121);
+            this.inputMethodsList.Size = new System.Drawing.Size(303, 121);
             this.inputMethodsList.TabIndex = 0;
             this.inputMethodsList.SelectedIndexChanged += new System.EventHandler(this.InputMethodsList_SelectedIndexChanged);
             // 
             // inputErrorMessage
             // 
             this.inputErrorMessage.BackColor = System.Drawing.Color.Transparent;
-            this.inputErrorMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inputErrorMessage.Location = new System.Drawing.Point(0, 0);
             this.inputErrorMessage.Name = "inputErrorMessage";
             this.inputErrorMessage.Size = new System.Drawing.Size(305, 399);
@@ -1328,7 +1345,7 @@
             this.versionsPage.Controls.Add(this.groupBox2);
             this.versionsPage.Location = new System.Drawing.Point(4, 25);
             this.versionsPage.Name = "versionsPage";
-            this.versionsPage.Size = new System.Drawing.Size(305, 399);
+            this.versionsPage.Size = new System.Drawing.Size(303, 397);
             this.versionsPage.TabIndex = 5;
             this.versionsPage.Text = "Versions";
             this.versionsPage.UseVisualStyleBackColor = true;
@@ -1386,7 +1403,7 @@
             this.aboutPage.Location = new System.Drawing.Point(4, 25);
             this.aboutPage.Name = "aboutPage";
             this.aboutPage.Padding = new System.Windows.Forms.Padding(3);
-            this.aboutPage.Size = new System.Drawing.Size(305, 399);
+            this.aboutPage.Size = new System.Drawing.Size(303, 397);
             this.aboutPage.TabIndex = 5;
             this.aboutPage.Text = "About";
             this.aboutPage.UseVisualStyleBackColor = true;
@@ -1678,6 +1695,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.toolsPage.ResumeLayout(false);
+            this.toolsPanel.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.recordingsPage.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -1851,6 +1869,7 @@
         private System.Windows.Forms.ContextMenuStrip modManagerPathMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem openDownloadsFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openVersionsFolderToolStripMenuItem;
+        private System.Windows.Forms.Panel toolsPanel;
     }
 }
 
