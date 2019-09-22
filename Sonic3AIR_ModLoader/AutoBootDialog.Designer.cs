@@ -68,6 +68,7 @@
             this.cancelButton.Size = new System.Drawing.Size(77, 43);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseMnemonic = false;
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.Button1_Click);
             // 
@@ -114,6 +115,7 @@
             this.forceStartButton.Size = new System.Drawing.Size(96, 43);
             this.forceStartButton.TabIndex = 7;
             this.forceStartButton.Text = "Force Start";
+            this.forceStartButton.UseMnemonic = false;
             this.forceStartButton.UseVisualStyleBackColor = false;
             this.forceStartButton.Click += new System.EventHandler(this.ForceStartButton_Click);
             // 
@@ -158,10 +160,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button cancelButton;
+        public System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label buildDetails;
-        private System.Windows.Forms.Button forceStartButton;
+        public System.Windows.Forms.Button forceStartButton;
         private System.Windows.Forms.Label label2;
     }
 }

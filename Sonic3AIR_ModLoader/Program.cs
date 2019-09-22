@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommandLine;
+using System.Resources;
+using System.Reflection;
 
 namespace Sonic3AIR_ModLoader
 {
@@ -18,6 +20,8 @@ namespace Sonic3AIR_ModLoader
         public static Updater.UpdateResult UpdateResult { get; set; } = Updater.UpdateResult.Null;
         public static Updater.UpdateResult LastUpdateResult { get; set; } = Updater.UpdateResult.Null;
 
+        public static ResourceManager CurrentLanguage;
+
         private static bool DebugMode = false;
 
 
@@ -29,6 +33,10 @@ namespace Sonic3AIR_ModLoader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            
+
+            CurrentLanguage = new ResourceManager("Sonic3AIR_ModLoader.Languages.lang_en", Assembly.GetExecutingAssembly());
 
             if (DebugMode) Debug();
             else ModManager(args);
