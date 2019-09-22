@@ -138,6 +138,7 @@
       <DependentUpon>Updater.cs</DependentUpon>
     </Compile>
     <Compile Include="UserLanguage.cs" />
+    <Compile Include="Validator.cs" />
     <EmbeddedResource Include="AutoBootDialog.resx">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </EmbeddedResource>

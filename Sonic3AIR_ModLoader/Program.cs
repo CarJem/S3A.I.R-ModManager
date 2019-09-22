@@ -18,6 +18,8 @@ namespace Sonic3AIR_ModLoader
         public static Updater.UpdateResult UpdateResult { get; set; } = Updater.UpdateResult.Null;
         public static Updater.UpdateResult LastUpdateResult { get; set; } = Updater.UpdateResult.Null;
 
+        private static bool DebugMode = false;
+
 
         /// <summary>
         /// The main entry point for the application.
@@ -27,10 +29,22 @@ namespace Sonic3AIR_ModLoader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Action action = Updater;
-            //Task.Run(action);
-            ModManager(args);
 
+            if (DebugMode) Debug();
+            else ModManager(args);
+
+            void Debug()
+            {
+                try
+                {
+                    ModManager(args);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    throw ex;
+                }
+            }
         }
 
         static void ModManager(string[] args)

@@ -36,7 +36,7 @@ namespace AIR_SDK
             }
         }
 
-
+        
         public Settings(FileInfo settings, LoadOptions loadOptions = null)
         {
             FilePath = settings.FullName;
@@ -122,6 +122,23 @@ namespace AIR_SDK
 
 
         }
+        
+
+            /*
+        public Settings (FileInfo settings, LoadOptions loadOptions = null)
+        {
+            FilePath = settings.FullName;
+            string data = File.ReadAllText(FilePath);
+            if (loadOptions == null) loadOptions = new LoadOptions();
+            jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
+            string version = (jsonObj.GameVersion == null ? "0.0.0.0" : jsonObj.GameVersion);
+            Version = new Version(version);
+            FailSafeMode = (jsonObj.FailSafeMode == null ? false : jsonObj.FailSafeMode);
+            Sonic3KRomPath = (jsonObj.RomPath == null ? "NULL" : jsonObj.RomPath);
+            FixGlitches = (jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES == null ? false : jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES);
+            AIREXEPath = (jsonObj.GameExePath == null ? "" : jsonObj.GameExePath);
+            HasEXEPath = (jsonObj.GameExePath == null ? false : true);
+        }*/
 
         private void PraseSettings()
         {

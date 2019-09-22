@@ -42,194 +42,7 @@ namespace Sonic3AIR_ModLoader
     {
         #region Variables
 
-        #region File Path Strings
 
-        public string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        public string Sonic3AIRAppDataFolder = "";
-        public string Sonic3AIRModsFolder = "";
-        public string Sonic3AIRActiveModsList = "";
-        public string Sonic3AIR_MM_TempModsFolder = "";
-        public string Sonic3AIRSettingsFile = "";
-        public string Sonic3AIRGBLinkPath = "";
-        public string Sonic3AIR_MM_BaseFolder = "";
-        public string Sonic3AIR_MM_DownloadsFolder = "";
-        public string Sonic3AIR_MM_VersionsFolder = "";
-
-        #region Sonic 3 A.I.R. Path
-        public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
-        public static string GetSonic3AIRPath()
-        {
-            return Properties.Settings.Default.Sonic3AIRPath;
-
-        }
-        public static void SetSonic3AIRPath(string value)
-        {
-            Properties.Settings.Default.Sonic3AIRPath = value;
-            Properties.Settings.Default.Save();
-        }
-
-        #endregion
-
-
-        #region AppData Path Strings
-        public string Sonic3AIRSampleModsFolder { get => GetSonic3AIRSampleModsFolderPath(); }
-        public string Sonic3AIRModDocumentationFile { get => GetSonic3AIRModDocumentationFilePath(); }
-        
-        public string Sonic3AIRUserManualFile { get => GetSonic3AIRUserManualFilePath(); }
-
-        public string Sonic3AIRModdingTemplatesFolder { get => GetSonic3AIRModdingTemplatesFolderPath(); }
-
-        #endregion
-
-        #region File Path Checkers
-        private string GetSonic3AIRModdingTemplatesFolderPath()
-        {
-            try
-            {
-                string filename = Sonic3AIRPath;
-                return Path.GetDirectoryName(filename) + "\\doc\\modding";
-            }
-            catch
-            {
-                return "%S3AIRPath%" + "\\doc\\modding";
-            }
-
-        }
-        private string GetSonic3AIRSampleModsFolderPath()
-        {
-            try
-            {
-                string filename = Sonic3AIRPath;
-                return Path.GetDirectoryName(filename) + "\\doc\\sample-mods";
-            }
-            catch
-            {
-                return "%S3AIRPath%" + "\\doc\\sample-mods";
-            }
-
-        }
-        private string GetSonic3AIRModDocumentationFilePath()
-        {
-            try
-            {
-                string filename = Sonic3AIRPath;
-                return Path.GetDirectoryName(filename) + "\\doc\\Modding.pdf";
-            }
-            catch
-            {
-                return "%S3AIRPath%" + "\\doc\\Modding.pdf";
-            }
-        }
-        private string GetSonic3AIRUserManualFilePath()
-        {
-            try
-            {
-                string filename = Sonic3AIRPath;
-                return Path.GetDirectoryName(filename) + "\\Manual.pdf";
-            }
-            catch
-            {
-                return "%S3AIRPath%" + "\\Manual.pdf";
-            }
-
-        }
-        #endregion
-
-        #region File Path Validators
-
-        private bool ValidateSonic3AIRModdingTemplatesFolderPath()
-        {
-            if (!Sonic3AIRModdingTemplatesFolder.Contains("%S3AIRPath%"))
-            {
-                if (Directory.Exists(Sonic3AIRModdingTemplatesFolder)) return true;
-                else
-                {
-                    FileDoesNotExistMessageBox(Sonic3AIRModdingTemplatesFolder);
-                    return false;
-                }
-            }
-            else
-            {
-                AIRPathNotSetMessageBox(Sonic3AIRModdingTemplatesFolder);
-                return false;
-            }
-
-        }
-
-        private bool ValidateSonic3AIRSampleModsFolderPath()
-        {
-            if (!Sonic3AIRSampleModsFolder.Contains("%S3AIRPath%"))
-            {
-                if (Directory.Exists(Sonic3AIRSampleModsFolder)) return true;
-                else
-                {
-                    FileDoesNotExistMessageBox(Sonic3AIRSampleModsFolder);
-                    return false;
-                }
-            }
-            else
-            {
-                AIRPathNotSetMessageBox(Sonic3AIRSampleModsFolder);
-                return false;
-            }
-
-        }
-
-        private bool ValidateSonic3AIRModDocumentationFilePath()
-        {
-            if (!Sonic3AIRModDocumentationFile.Contains("%S3AIRPath%"))
-            {
-                if (File.Exists(Sonic3AIRModDocumentationFile)) return true;
-                else
-                {
-                    FileDoesNotExistMessageBox(Sonic3AIRModDocumentationFile);
-                    return false;
-                }
-            }
-            else
-            {
-                AIRPathNotSetMessageBox(Sonic3AIRModDocumentationFile);
-                return false;
-            }
-        }
-
-        private bool ValidateSonic3AIRUserManualFilePath()
-        {
-            if (!Sonic3AIRUserManualFile.Contains("%S3AIRPath%"))
-            {
-                if (File.Exists(Sonic3AIRUserManualFile)) return true;
-                else
-                {
-                    FileDoesNotExistMessageBox(Sonic3AIRUserManualFile);
-                    return false;
-                }
-            }
-            else
-            {
-                AIRPathNotSetMessageBox(Sonic3AIRUserManualFile);
-                return false;
-            }
-        }
-
-        #endregion
-
-        #region File Path Invalid Messages
-
-        private void AIRPathNotSetMessageBox(string text)
-        {
-            string message = UserLanguage.AIRPathNotSet(text);
-            MessageBox.Show(message);
-        }
-
-        private void FileDoesNotExistMessageBox(string text)
-        {
-            string message = UserLanguage.FileDoesNotExist(text);
-            MessageBox.Show(message);
-        }
-
-        #endregion
-
-        #endregion
 
 
         public string nL = Environment.NewLine;
@@ -266,7 +79,7 @@ namespace Sonic3AIR_ModLoader
         private void StartModloader(bool autoBoot = false, string gamebanana_api = "")
         {
             InitializeComponent();
-            if (InitalCollection() == true)
+            if (ValidateInstall() == true)
             {
                 UserLanguage.ApplyLanguage(this);
                 SetTooltips();
@@ -804,43 +617,49 @@ namespace Sonic3AIR_ModLoader
 
         private void UpdateAIRSettings()
         {
-            sonic3AIRPathBox.Text = Sonic3AIRPath;
+            sonic3AIRPathBox.Text = ProgramPaths.Sonic3AIRPath;
             romPathBox.Text = S3AIRSettings.Sonic3KRomPath;
             fixGlitchesCheckbox.Checked = S3AIRSettings.FixGlitches;
             failSafeModeCheckbox.Checked = S3AIRSettings.FailSafeMode;
 
             bool loaderMethodPast = Properties.Settings.Default.EnableNewLoaderMethod;
 
-            string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-            if (metaDataFile != null)
+            if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                try
+                string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                if (metaDataFile != null)
                 {
-                    CurrentAIRVersion = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
-                    if (CurrentAIRVersion.Version.CompareTo(new Version("19.09.0.0")) >= 0)
+                    try
                     {
-                        Properties.Settings.Default.EnableNewLoaderMethod = true;
-                        enableModStackingToolStripMenuItem.Enabled = true;
-                        airVersionLabel.Text = $"{UserLanguage.AIRVersion}: {CurrentAIRVersion.VersionString}";
+                        CurrentAIRVersion = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                        if (CurrentAIRVersion.Version.CompareTo(new Version("19.09.0.0")) >= 0)
+                        {
+                            Properties.Settings.Default.EnableNewLoaderMethod = true;
+                            enableModStackingToolStripMenuItem.Enabled = true;
+                            airVersionLabel.Text = $"{UserLanguage.AIRVersion}: {CurrentAIRVersion.VersionString}";
+                        }
+                        else
+                        {
+                            Properties.Settings.Default.EnableNewLoaderMethod = false;
+                            enableModStackingToolStripMenuItem.Enabled = false;
+                            airVersionLabel.Text = $"{UserLanguage.AIRVersion}: {CurrentAIRVersion.VersionString}";
+                        }
                     }
-                    else
+                    catch
                     {
-                        Properties.Settings.Default.EnableNewLoaderMethod = false;
-                        enableModStackingToolStripMenuItem.Enabled = false;
-                        airVersionLabel.Text = $"{UserLanguage.AIRVersion}: {CurrentAIRVersion.VersionString}";
+                        NullSituation();
+
                     }
+
                 }
-                catch
+                else
                 {
                     NullSituation();
-
                 }
+            }
+            else NullSituation();
 
-            }
-            else
-            {
-                NullSituation();
-            }
+
             UpdateModStackingToggle();
             Properties.Settings.Default.Save();
             if (Properties.Settings.Default.EnableNewLoaderMethod != loaderMethodPast) UpdateModsList(true);
@@ -928,12 +747,12 @@ namespace Sonic3AIR_ModLoader
         private void CollectGameRecordings()
         {
             gameRecordingList.Items.Clear();
-            if (File.Exists(Sonic3AIRPath))
+            if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
                 recordingsErrorMessage.SendToBack();
                 recordingsErrorMessage.Visible = false;
 
-                string baseDirectory = Path.GetDirectoryName(Sonic3AIRPath);
+                string baseDirectory = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
                 if (Directory.Exists(baseDirectory))
                 {
                     Regex reg = new Regex(@"(gamerecording_)\d{6}(_)\d{6}");
@@ -958,9 +777,9 @@ namespace Sonic3AIR_ModLoader
         private void CollectInputMappings()
         {
             inputMethodsList.Items.Clear();
-            if (Sonic3AIRPath != null && Sonic3AIRPath != "" && File.Exists(Sonic3AIRPath))
+            if (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" && File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                string Sonic3AIREXEFolder = Path.GetDirectoryName(Sonic3AIRPath);
+                string Sonic3AIREXEFolder = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
                 FileInfo config = new FileInfo($"{Sonic3AIREXEFolder}//config.json");
                 if (config.Exists)
                 {
@@ -1005,76 +824,9 @@ namespace Sonic3AIR_ModLoader
 
 
 
-        private bool InitalCollection()
+        private bool ValidateInstall()
         {
-            Sonic3AIRAppDataFolder = AppDataFolder + "\\Sonic3AIR";
-            Sonic3AIRActiveModsList = Sonic3AIRAppDataFolder + "\\mods\\active-mods.json";
-            Sonic3AIRModsFolder = Sonic3AIRAppDataFolder + "\\mods";
-            Sonic3AIRSettingsFile = Sonic3AIRAppDataFolder + "\\settings.json";
-
-            Sonic3AIR_MM_BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM";
-            Sonic3AIR_MM_TempModsFolder = Sonic3AIR_MM_BaseFolder + "\\temp_mod_install";
-            Sonic3AIR_MM_DownloadsFolder = Sonic3AIR_MM_BaseFolder + "\\downloads";
-            Sonic3AIR_MM_VersionsFolder = Sonic3AIR_MM_BaseFolder + "\\air_versions";
-
-
-            if (!Directory.Exists(Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_TempModsFolder);
-
-
-
-
-            if (!Directory.Exists(Sonic3AIR_MM_BaseFolder)) Directory.CreateDirectory(Sonic3AIR_MM_BaseFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_DownloadsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_DownloadsFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_VersionsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_VersionsFolder);
-
-            List<Tuple<string, bool>> MissingFilesState = new List<Tuple<string, bool>>();
-
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRAppDataFolder", Directory.Exists(Sonic3AIRAppDataFolder)));
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRModsFolder", Directory.Exists(Sonic3AIRModsFolder)));
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRTempModsFolder", Directory.Exists(Sonic3AIR_MM_TempModsFolder)));
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRSettingsFile", File.Exists(Sonic3AIRSettingsFile)));
-
-            if (MissingFilesState.Exists(x => x.Item2.Equals(false)))
-            {
-                List<Tuple<string, bool>> MissingList = MissingFilesState.Where(x => x.Item2.Equals(false)).ToList();
-                string missingItems = UserLanguage.CollectionFilesCouldNotBeFound1;
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRAppDataFolder"))) missingItems += $"{nL}- {Sonic3AIRAppDataFolder}";
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRModsFolder"))) missingItems += $"{nL}- {Sonic3AIRModsFolder}";
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRTempModsFolder"))) missingItems += $"{nL}- {Sonic3AIR_MM_TempModsFolder}";
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRSettingsFile"))) missingItems += $"{nL}- {Sonic3AIRSettingsFile}";
-                missingItems += UserLanguage.CollectionFilesCouldNotBeFound2;
-                missingItems += UserLanguage.CollectionFilesCouldNotBeFound3;
-                MessageBox.Show(missingItems);
-                return false;
-            }
-            else
-            {
-                if (!File.Exists(Sonic3AIRActiveModsList))
-                {
-                    S3AIRActiveMods = new AIR_SDK.ActiveModsList(Sonic3AIRActiveModsList);
-                }
-                else
-                {
-                    FileInfo list = new FileInfo(Sonic3AIRActiveModsList);
-                    S3AIRActiveMods = new AIR_SDK.ActiveModsList(list);
-                }
-
-
-
-                FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
-                try
-                {
-                    S3AIRSettings = new AIR_SDK.Settings(file);
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-
-
-
-            }
+            return ProgramPaths.ValidateInstall(ref S3AIRActiveMods,ref S3AIRSettings);
         }
 
         #endregion
@@ -1300,14 +1052,14 @@ namespace Sonic3AIR_ModLoader
             else if (Path.GetExtension(file) == ".zip") ExtractZip(file);
             else if (Path.GetExtension(file) == ".7z") Extract7Zip(file);
 
-            foreach (string d in Directory.GetDirectories(Sonic3AIR_MM_TempModsFolder))
+            foreach (string d in Directory.GetDirectories(ProgramPaths.Sonic3AIR_MM_TempModsFolder))
             {
                 var item = Directory.GetFiles(d, "mod.json").FirstOrDefault();
                 foundFile = (item != null ? item.ToString() : "");
             }
             if (foundFile != "")
             {
-                Directory.Move(System.IO.Path.GetDirectoryName(foundFile), Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
+                Directory.Move(System.IO.Path.GetDirectoryName(foundFile), ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
             }
             else
             {
@@ -1324,7 +1076,7 @@ namespace Sonic3AIR_ModLoader
             {
                 foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
                 {
-                    entry.WriteToDirectory(Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
+                    entry.WriteToDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
                     {
                         ExtractFullPath = true,
                         Overwrite = true
@@ -1339,7 +1091,7 @@ namespace Sonic3AIR_ModLoader
             {
                 foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
                 {
-                    entry.WriteToDirectory(Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
+                    entry.WriteToDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
                     {
                         ExtractFullPath = true,
                         Overwrite = true
@@ -1354,7 +1106,7 @@ namespace Sonic3AIR_ModLoader
             {
                 foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
                 {
-                    entry.WriteToDirectory(Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
+                    entry.WriteToDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
                     {
                         ExtractFullPath = true,
                         Overwrite = true
@@ -1379,7 +1131,7 @@ namespace Sonic3AIR_ModLoader
 
         private void CleanUpTempModsFolder()
         {
-            WipeFolderContents(Sonic3AIR_MM_TempModsFolder);
+            WipeFolderContents(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
         }
 
         private void WipeFolderContents(string folder)
@@ -1444,7 +1196,7 @@ namespace Sonic3AIR_ModLoader
 
         private void GetModsCheckStateLegacy()
         {
-            DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
+            DirectoryInfo d = new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder);
             DirectoryInfo[] folders = d.GetDirectories();
             foreach (DirectoryInfo folder in folders)
             {
@@ -1493,7 +1245,7 @@ namespace Sonic3AIR_ModLoader
         {
             try
             {
-                string result = Sonic3AIRModsFolder + "\\" + "#" + mod.FolderName.Replace("#", "");
+                string result = ProgramPaths.Sonic3AIRModsFolder + "\\" + "#" + mod.FolderName.Replace("#", "");
                 Directory.Move(mod.FolderPath, result);
             }
             catch (Exception ex)
@@ -1506,7 +1258,7 @@ namespace Sonic3AIR_ModLoader
         {
             try
             {
-                string result = Sonic3AIRModsFolder + "\\" + mod.FolderName.Replace("#", "");
+                string result = ProgramPaths.Sonic3AIRModsFolder + "\\" + mod.FolderName.Replace("#", "");
                 Directory.Move(mod.FolderPath, result);
             }
             catch (Exception ex)
@@ -1565,7 +1317,7 @@ namespace Sonic3AIR_ModLoader
 
         private void GetModsCheckState()
         {
-            DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
+            DirectoryInfo d = new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder);
             DirectoryInfo[] folders = d.GetDirectories();
             IList<Tuple<AIR_SDK.Mod, int>> ActiveMods = new List<Tuple<AIR_SDK.Mod, int>>();
             foreach (DirectoryInfo folder in folders)
@@ -1688,7 +1440,7 @@ namespace Sonic3AIR_ModLoader
 
         private void EnableAllLegacyDisabledMods()
         {
-            DirectoryInfo d = new DirectoryInfo(Sonic3AIRModsFolder);
+            DirectoryInfo d = new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder);
             DirectoryInfo[] folders = d.GetDirectories();
             List<string> DisabledFolders = new List<string>();
             foreach (DirectoryInfo folder in folders)
@@ -1703,8 +1455,8 @@ namespace Sonic3AIR_ModLoader
 
             foreach (string folder in DisabledFolders)
             {
-                string destination = Sonic3AIRModsFolder + "\\" + folder.Replace("#", "");
-                string source = Sonic3AIRModsFolder + "\\" + folder;
+                string destination = ProgramPaths.Sonic3AIRModsFolder + "\\" + folder.Replace("#", "");
+                string source = ProgramPaths.Sonic3AIRModsFolder + "\\" + folder;
                 Directory.Move(source, destination);
             }
         }
@@ -1723,9 +1475,9 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenEXEFolder()
         {
-            if (Sonic3AIRPath != null || Sonic3AIRPath != "")
+            if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                string filename = Sonic3AIRPath;
+                string filename = ProgramPaths.Sonic3AIRPath;
                 Process.Start(Path.GetDirectoryName(filename));
             }
             else
@@ -1733,7 +1485,7 @@ namespace Sonic3AIR_ModLoader
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    string filename = Sonic3AIRPath;
+                    string filename = ProgramPaths.Sonic3AIRPath;
                     Process.Start(Path.GetDirectoryName(filename));
                 }
             }
@@ -1741,12 +1493,12 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenAppDataFolder()
         {
-            Process.Start(Sonic3AIRAppDataFolder);
+            Process.Start(ProgramPaths.Sonic3AIRAppDataFolder);
         }
 
         private void OpenModsFolder()
         {
-            Process.Start(Sonic3AIRModsFolder);
+            Process.Start(ProgramPaths.Sonic3AIRModsFolder);
         }
 
         private void OpenSelectedModFolder(AIR_SDK.Mod mod)
@@ -1756,9 +1508,9 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenConfigFile()
         {
-            if (Sonic3AIRPath != null || Sonic3AIRPath != "")
+            if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                string filename = Sonic3AIRPath;
+                string filename = ProgramPaths.Sonic3AIRPath;
                 if (File.Exists(Path.GetDirectoryName(filename) + "//config.json"))
                 {
                     Process.Start(Path.GetDirectoryName(filename) + "//config.json");
@@ -1769,7 +1521,7 @@ namespace Sonic3AIR_ModLoader
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    string filename = Sonic3AIRPath;
+                    string filename = ProgramPaths.Sonic3AIRPath;
                     if (File.Exists(Path.GetDirectoryName(filename) + "//config.json"))
                     {
                         Process.Start(Path.GetDirectoryName(filename) + "//config.json");
@@ -1780,77 +1532,77 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenLogFile()
         {
-            if (File.Exists(Sonic3AIRAppDataFolder + "//logfile.txt"))
+            if (File.Exists(ProgramPaths.Sonic3AIRAppDataFolder + "//logfile.txt"))
             {
-                Process.Start(Sonic3AIRAppDataFolder + "//logfile.txt");
+                Process.Start(ProgramPaths.Sonic3AIRAppDataFolder + "//logfile.txt");
             }
             else
             {
-                MessageBox.Show($"{UserLanguage.LogFileNotFound}: {nL}{Sonic3AIRAppDataFolder}\\logfile.txt");
+                MessageBox.Show($"{UserLanguage.LogFileNotFound}: {nL}{ProgramPaths.Sonic3AIRAppDataFolder}\\logfile.txt");
             }
 
         }
 
         private void OpenModdingTemplatesFolder()
         {
-            if (Sonic3AIRPath != null || Sonic3AIRPath != "")
+            if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                if (ValidateSonic3AIRModdingTemplatesFolderPath()) Process.Start(Sonic3AIRModdingTemplatesFolder);
+                if (ProgramPaths.ValidateSonic3AIRModdingTemplatesFolderPath()) Process.Start(ProgramPaths.Sonic3AIRModdingTemplatesFolder);
             }
             else
             {
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    if (ValidateSonic3AIRModdingTemplatesFolderPath()) Process.Start(Sonic3AIRModdingTemplatesFolder);
+                    if (ProgramPaths.ValidateSonic3AIRModdingTemplatesFolderPath()) Process.Start(ProgramPaths.Sonic3AIRModdingTemplatesFolder);
                 }
             }
         }
 
         private void OpenSampleModsFolder()
         {
-            if (Sonic3AIRPath != null || Sonic3AIRPath != "")
+            if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                if (ValidateSonic3AIRSampleModsFolderPath()) Process.Start(Sonic3AIRSampleModsFolder);
+                if (ProgramPaths.ValidateSonic3AIRSampleModsFolderPath()) Process.Start(ProgramPaths.Sonic3AIRSampleModsFolder);
             }
             else
             {
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    if (ValidateSonic3AIRSampleModsFolderPath()) Process.Start(Sonic3AIRSampleModsFolder);
+                    if (ProgramPaths.ValidateSonic3AIRSampleModsFolderPath()) Process.Start(ProgramPaths.Sonic3AIRSampleModsFolder);
                 }
             }
         }
 
         private void OpenUserManual()
         {
-            if (Sonic3AIRPath != null || Sonic3AIRPath != "")
+            if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                if (ValidateSonic3AIRUserManualFilePath()) Process.Start(Sonic3AIRUserManualFile);
+                if (ProgramPaths.ValidateSonic3AIRUserManualFilePath()) Process.Start(ProgramPaths.Sonic3AIRUserManualFile);
             }
             else
             {
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    if (ValidateSonic3AIRUserManualFilePath()) Process.Start(Sonic3AIRUserManualFile);
+                    if (ProgramPaths.ValidateSonic3AIRUserManualFilePath()) Process.Start(ProgramPaths.Sonic3AIRUserManualFile);
                 }
             }
         }
 
         private void OpenModDocumentation()
         {
-            if (Sonic3AIRPath != null || Sonic3AIRPath != "")
+            if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                if (ValidateSonic3AIRModDocumentationFilePath()) Process.Start(Sonic3AIRModDocumentationFile);
+                if (ProgramPaths.ValidateSonic3AIRModDocumentationFilePath()) Process.Start(ProgramPaths.Sonic3AIRModDocumentationFile);
             }
             else
             {
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    if (ValidateSonic3AIRModDocumentationFilePath()) Process.Start(Sonic3AIRModDocumentationFile);
+                    if (ProgramPaths.ValidateSonic3AIRModDocumentationFilePath()) Process.Start(ProgramPaths.Sonic3AIRModDocumentationFile);
                 }
             }
         }
@@ -1862,7 +1614,7 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenSettingsFile()
         {
-            Process.Start(Sonic3AIRAppDataFolder + "//settings.json");
+            Process.Start(ProgramPaths.Sonic3AIRAppDataFolder + "//settings.json");
         }
 
         private void OpenRecordingLocation()
@@ -1901,7 +1653,7 @@ namespace Sonic3AIR_ModLoader
             string filename = "temp.zip";
             if (remote_filename != "") filename = remote_filename;
 
-            DownloadWindow downloadWindow = new DownloadWindow($"{UserLanguage.Downloading} \"{filename}\"", url, $"{Sonic3AIR_MM_TempModsFolder}\\{filename}");
+            DownloadWindow downloadWindow = new DownloadWindow($"{UserLanguage.Downloading} \"{filename}\"", url, $"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}\\{filename}");
             Action finishAction = DownloadModCompleted;
             if (isMod) downloadWindow.DownloadCompleted = finishAction;
             if (backgroundDownload) downloadWindow.StartBackground();
@@ -1937,7 +1689,7 @@ namespace Sonic3AIR_ModLoader
 
         private void DownloadModCompleted()
         {
-            string file = Directory.GetFiles($"{Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".zip"));
+            string file = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".zip"));
             AddMod(file);
         }
 
@@ -2034,9 +1786,9 @@ namespace Sonic3AIR_ModLoader
 
         public void CreateGameBananaShortcut()
         {
-            Sonic3AIRGBLinkPath = Sonic3AIRAppDataFolder + "//AIRModLoader.lnk";
+            ProgramPaths.Sonic3AIRGBLinkPath = ProgramPaths.Sonic3AIRAppDataFolder + "//AIRModLoader.lnk";
             IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
-            IWshRuntimeLibrary.IWshShortcut shortcut = shell.CreateShortcut(Sonic3AIRGBLinkPath) as IWshRuntimeLibrary.IWshShortcut;
+            IWshRuntimeLibrary.IWshShortcut shortcut = shell.CreateShortcut(ProgramPaths.Sonic3AIRGBLinkPath) as IWshRuntimeLibrary.IWshShortcut;
             shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             shortcut.WorkingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             shortcut.Save();
@@ -2057,7 +1809,7 @@ namespace Sonic3AIR_ModLoader
         private void UpdateAIRVersionsToolstrips()
         {
             CleanUpInstalledVersionsToolStrip();
-            DirectoryInfo directoryInfo = new DirectoryInfo(Sonic3AIR_MM_VersionsFolder);
+            DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
             foreach (var folder in directoryInfo.GetDirectories().ToList().VersionSort().Reverse())
             {
                 string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
@@ -2091,7 +1843,7 @@ namespace Sonic3AIR_ModLoader
         private void ChangeAIRPathByInstalls(object sender, EventArgs e)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
-            Sonic3AIRPath = item.Tag.ToString();
+            ProgramPaths.Sonic3AIRPath = item.Tag.ToString();
             Properties.Settings.Default.Save();
             UpdateAIRSettings();
         }
@@ -2104,7 +1856,7 @@ namespace Sonic3AIR_ModLoader
                 {
                     if (File.Exists(S3AIRSettings.AIREXEPath))
                     {
-                        Sonic3AIRPath = S3AIRSettings.AIREXEPath;
+                        ProgramPaths.Sonic3AIRPath = S3AIRSettings.AIREXEPath;
                         Properties.Settings.Default.Save();
                         UpdateAIRSettings();
                     }
@@ -2168,7 +1920,7 @@ namespace Sonic3AIR_ModLoader
             if (fullRefresh)
             {
                 versionsListBox.Items.Clear();
-                DirectoryInfo directoryInfo = new DirectoryInfo(Sonic3AIR_MM_VersionsFolder);
+                DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
                 foreach (var folder in directoryInfo.GetDirectories().ToList().VersionSort().Reverse())
                 {
                     string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");

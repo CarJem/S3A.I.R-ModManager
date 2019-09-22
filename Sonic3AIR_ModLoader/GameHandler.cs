@@ -27,7 +27,7 @@ namespace Sonic3AIR_ModLoader
         public static void LaunchSonic3AIR()
         {
             bool IsGamePathSet = true;
-            if (ModManager.Sonic3AIRPath == null || ModManager.Sonic3AIRPath == "")
+            if (ProgramPaths.Sonic3AIRPath == null || ProgramPaths.Sonic3AIRPath == "")
             {
                 IsGamePathSet = UpdateSonic3AIRLocation();
             }
@@ -44,7 +44,7 @@ namespace Sonic3AIR_ModLoader
 
         public static void RunSonic3AIR()
         {
-            string filename = ModManager.Sonic3AIRPath;
+            string filename = ProgramPaths.Sonic3AIRPath;
             var start = new ProcessStartInfo() { FileName = filename, WorkingDirectory = Path.GetDirectoryName(filename) };
             var process = Process.Start(start);
             GameStartHandler();
@@ -118,7 +118,7 @@ namespace Sonic3AIR_ModLoader
                 };
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    ModManager.Sonic3AIRPath = fileDialog.FileName;
+                    ProgramPaths.Sonic3AIRPath = fileDialog.FileName;
                     return true;
                 }
                 else return false;

@@ -56,20 +56,27 @@ namespace Sonic3AIR_ModLoader
 
         private string GetAIRVersion()
         {
-            string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-            if (metaDataFile != null)
+            if (File.Exists(Properties.Settings.Default.Sonic3AIRPath))
             {
-                try
+                string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                if (metaDataFile != null)
                 {
-                    var CurrentAIRVersion = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
-                    return CurrentAIRVersion.VersionString;
+                    try
+                    {
+                        var CurrentAIRVersion = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                        return CurrentAIRVersion.VersionString;
+                    }
+                    catch
+                    {
+                        return "N/A";
+
+                    }
+
                 }
-                catch
+                else
                 {
                     return "N/A";
-
                 }
-
             }
             else
             {
