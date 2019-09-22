@@ -156,13 +156,11 @@
             this.openModsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AIRPathMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aIRVersionZIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eXEPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.installedVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noInstalledVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fromSettingsFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aIRVersionZIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eXEPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.airVersionLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,6 +170,12 @@
             this.modManagerPathMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openDownloadsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openVersionsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -310,7 +314,7 @@
             this.modPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modPanel.Location = new System.Drawing.Point(3, 3);
             this.modPanel.Name = "modPanel";
-            this.modPanel.Size = new System.Drawing.Size(311, 426);
+            this.modPanel.Size = new System.Drawing.Size(313, 428);
             this.modPanel.TabIndex = 14;
             // 
             // moveToBottomButton
@@ -534,7 +538,7 @@
             this.toolsPanel.Location = new System.Drawing.Point(0, 0);
             this.toolsPanel.Name = "toolsPanel";
             this.toolsPanel.Padding = new System.Windows.Forms.Padding(4);
-            this.toolsPanel.Size = new System.Drawing.Size(317, 432);
+            this.toolsPanel.Size = new System.Drawing.Size(319, 434);
             this.toolsPanel.TabIndex = 20;
             // 
             // tabControl3
@@ -549,7 +553,7 @@
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.Padding = new System.Drawing.Point(0, 0);
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(309, 424);
+            this.tabControl3.Size = new System.Drawing.Size(311, 426);
             this.tabControl3.TabIndex = 0;
             this.tabControl3.SelectedIndexChanged += new System.EventHandler(this.TabControl3_SelectedIndexChanged);
             // 
@@ -561,7 +565,7 @@
             this.recordingsPage.Location = new System.Drawing.Point(4, 25);
             this.recordingsPage.Name = "recordingsPage";
             this.recordingsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.recordingsPage.Size = new System.Drawing.Size(301, 395);
+            this.recordingsPage.Size = new System.Drawing.Size(303, 397);
             this.recordingsPage.TabIndex = 2;
             this.recordingsPage.Text = "Game Recordings";
             // 
@@ -576,7 +580,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(295, 389);
+            this.panel1.Size = new System.Drawing.Size(297, 391);
             this.panel1.TabIndex = 19;
             // 
             // refreshDebugButton
@@ -617,7 +621,7 @@
             this.gameRecordingList.FormattingEnabled = true;
             this.gameRecordingList.Location = new System.Drawing.Point(0, 0);
             this.gameRecordingList.Name = "gameRecordingList";
-            this.gameRecordingList.Size = new System.Drawing.Size(295, 173);
+            this.gameRecordingList.Size = new System.Drawing.Size(297, 173);
             this.gameRecordingList.TabIndex = 0;
             this.gameRecordingList.SelectedIndexChanged += new System.EventHandler(this.GameRecordingList_SelectedIndexChanged);
             // 
@@ -649,7 +653,7 @@
             this.recordingsErrorMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recordingsErrorMessage.Location = new System.Drawing.Point(3, 3);
             this.recordingsErrorMessage.Name = "recordingsErrorMessage";
-            this.recordingsErrorMessage.Size = new System.Drawing.Size(295, 389);
+            this.recordingsErrorMessage.Size = new System.Drawing.Size(297, 391);
             this.recordingsErrorMessage.TabIndex = 18;
             this.recordingsErrorMessage.Text = "Error Loading Recordings!\r\nMake sure your game is up to date and you have A.I.R.\'" +
     "s Game Path set in Options.\r\n";
@@ -668,7 +672,7 @@
             this.debugPage.Location = new System.Drawing.Point(4, 25);
             this.debugPage.Name = "debugPage";
             this.debugPage.Padding = new System.Windows.Forms.Padding(3);
-            this.debugPage.Size = new System.Drawing.Size(309, 403);
+            this.debugPage.Size = new System.Drawing.Size(303, 397);
             this.debugPage.TabIndex = 3;
             this.debugPage.Text = "Guides/Shortcuts";
             // 
@@ -705,7 +709,7 @@
             // showLogFileButton
             // 
             this.showLogFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.showLogFileButton.Location = new System.Drawing.Point(-22, 407);
+            this.showLogFileButton.Location = new System.Drawing.Point(-30, 407);
             this.showLogFileButton.Name = "showLogFileButton";
             this.showLogFileButton.Size = new System.Drawing.Size(307, 21);
             this.showLogFileButton.TabIndex = 6;
@@ -716,9 +720,9 @@
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.Location = new System.Drawing.Point(3, 151);
+            this.label5.Location = new System.Drawing.Point(3, 145);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(303, 249);
+            this.label5.Size = new System.Drawing.Size(297, 249);
             this.label5.TabIndex = 7;
             this.label5.Text = resources.GetString("label5.Text");
             this.label5.UseMnemonic = false;
@@ -732,7 +736,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(3, 3);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(303, 141);
+            this.groupBox6.Size = new System.Drawing.Size(297, 141);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Guides";
@@ -740,7 +744,7 @@
             // openModdingTemplatesFolder
             // 
             this.openModdingTemplatesFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(10, 106);
+            this.openModdingTemplatesFolder.Location = new System.Drawing.Point(4, 106);
             this.openModdingTemplatesFolder.Name = "openModdingTemplatesFolder";
             this.openModdingTemplatesFolder.Size = new System.Drawing.Size(287, 23);
             this.openModdingTemplatesFolder.TabIndex = 4;
@@ -751,7 +755,7 @@
             // openModDocumentationButton
             // 
             this.openModDocumentationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openModDocumentationButton.Location = new System.Drawing.Point(10, 77);
+            this.openModDocumentationButton.Location = new System.Drawing.Point(4, 77);
             this.openModDocumentationButton.Name = "openModDocumentationButton";
             this.openModDocumentationButton.Size = new System.Drawing.Size(287, 23);
             this.openModDocumentationButton.TabIndex = 2;
@@ -762,7 +766,7 @@
             // openSampleModsFolderButton
             // 
             this.openSampleModsFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openSampleModsFolderButton.Location = new System.Drawing.Point(10, 19);
+            this.openSampleModsFolderButton.Location = new System.Drawing.Point(4, 19);
             this.openSampleModsFolderButton.Name = "openSampleModsFolderButton";
             this.openSampleModsFolderButton.Size = new System.Drawing.Size(287, 23);
             this.openSampleModsFolderButton.TabIndex = 3;
@@ -773,7 +777,7 @@
             // openUserManualButton
             // 
             this.openUserManualButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openUserManualButton.Location = new System.Drawing.Point(10, 48);
+            this.openUserManualButton.Location = new System.Drawing.Point(4, 48);
             this.openUserManualButton.Name = "openUserManualButton";
             this.openUserManualButton.Size = new System.Drawing.Size(287, 23);
             this.openUserManualButton.TabIndex = 1;
@@ -805,7 +809,7 @@
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.Padding = new System.Drawing.Point(0, 0);
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(311, 426);
+            this.tabControl2.Size = new System.Drawing.Size(313, 428);
             this.tabControl2.TabIndex = 0;
             this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.TabControl2_SelectedIndexChanged);
             // 
@@ -816,7 +820,7 @@
             this.optionsPage.Location = new System.Drawing.Point(4, 25);
             this.optionsPage.Name = "optionsPage";
             this.optionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.optionsPage.Size = new System.Drawing.Size(303, 397);
+            this.optionsPage.Size = new System.Drawing.Size(305, 399);
             this.optionsPage.TabIndex = 1;
             this.optionsPage.Text = "General";
             this.optionsPage.UseVisualStyleBackColor = true;
@@ -1003,7 +1007,7 @@
             this.inputPage.Controls.Add(this.inputPanel);
             this.inputPage.Location = new System.Drawing.Point(4, 25);
             this.inputPage.Name = "inputPage";
-            this.inputPage.Size = new System.Drawing.Size(303, 397);
+            this.inputPage.Size = new System.Drawing.Size(305, 399);
             this.inputPage.TabIndex = 4;
             this.inputPage.Text = "Input";
             this.inputPage.UseVisualStyleBackColor = true;
@@ -1018,7 +1022,7 @@
             this.inputPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inputPanel.Location = new System.Drawing.Point(0, 0);
             this.inputPanel.Name = "inputPanel";
-            this.inputPanel.Size = new System.Drawing.Size(303, 397);
+            this.inputPanel.Size = new System.Drawing.Size(305, 399);
             this.inputPanel.TabIndex = 25;
             // 
             // saveInputsButton
@@ -1055,9 +1059,9 @@
             this.groupBox4.Controls.Add(this.aInputButton);
             this.groupBox4.Controls.Add(this.groupBox7);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox4.Location = new System.Drawing.Point(0, 127);
+            this.groupBox4.Location = new System.Drawing.Point(0, 129);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(303, 270);
+            this.groupBox4.Size = new System.Drawing.Size(305, 270);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Button Mappings";
@@ -1324,7 +1328,7 @@
             this.inputMethodsList.FormattingEnabled = true;
             this.inputMethodsList.Location = new System.Drawing.Point(0, 0);
             this.inputMethodsList.Name = "inputMethodsList";
-            this.inputMethodsList.Size = new System.Drawing.Size(303, 121);
+            this.inputMethodsList.Size = new System.Drawing.Size(305, 121);
             this.inputMethodsList.TabIndex = 0;
             this.inputMethodsList.SelectedIndexChanged += new System.EventHandler(this.InputMethodsList_SelectedIndexChanged);
             // 
@@ -1345,7 +1349,7 @@
             this.versionsPage.Controls.Add(this.groupBox2);
             this.versionsPage.Location = new System.Drawing.Point(4, 25);
             this.versionsPage.Name = "versionsPage";
-            this.versionsPage.Size = new System.Drawing.Size(303, 397);
+            this.versionsPage.Size = new System.Drawing.Size(305, 399);
             this.versionsPage.TabIndex = 5;
             this.versionsPage.Text = "Versions";
             this.versionsPage.UseVisualStyleBackColor = true;
@@ -1403,7 +1407,7 @@
             this.aboutPage.Location = new System.Drawing.Point(4, 25);
             this.aboutPage.Name = "aboutPage";
             this.aboutPage.Padding = new System.Windows.Forms.Padding(3);
-            this.aboutPage.Size = new System.Drawing.Size(303, 397);
+            this.aboutPage.Size = new System.Drawing.Size(305, 399);
             this.aboutPage.TabIndex = 5;
             this.aboutPage.Text = "About";
             this.aboutPage.UseVisualStyleBackColor = true;
@@ -1543,50 +1547,26 @@
             // AIRPathMenuStrip
             // 
             this.AIRPathMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.selectToolStripMenuItem});
-            this.AIRPathMenuStrip.Name = "contextMenuStrip1";
-            this.AIRPathMenuStrip.Size = new System.Drawing.Size(115, 48);
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator5,
+            this.toolStripMenuItem6,
+            this.toolStripSeparator2,
+            this.eXEPathToolStripMenuItem,
+            this.fromSettingsFileToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.toolStripMenuItem5,
+            this.toolStripSeparator4,
             this.aIRVersionZIPToolStripMenuItem,
-            this.eXEPathToolStripMenuItem});
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.addToolStripMenuItem.Text = "Add...";
-            // 
-            // aIRVersionZIPToolStripMenuItem
-            // 
-            this.aIRVersionZIPToolStripMenuItem.Name = "aIRVersionZIPToolStripMenuItem";
-            this.aIRVersionZIPToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.aIRVersionZIPToolStripMenuItem.Text = "AIR Version from ZIP...";
-            this.aIRVersionZIPToolStripMenuItem.Click += new System.EventHandler(this.AIRVersionZIPToolStripMenuItem_Click);
-            // 
-            // eXEPathToolStripMenuItem
-            // 
-            this.eXEPathToolStripMenuItem.Name = "eXEPathToolStripMenuItem";
-            this.eXEPathToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.eXEPathToolStripMenuItem.Text = "Temporary EXE Path...";
-            this.eXEPathToolStripMenuItem.Click += new System.EventHandler(this.UpdateSonic3AIRPath_Click);
-            // 
-            // selectToolStripMenuItem
-            // 
-            this.selectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.installedVersionsToolStripMenuItem,
-            this.fromSettingsFileToolStripMenuItem});
-            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            this.selectToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.selectToolStripMenuItem.Text = "Select...";
+            this.installedVersionsToolStripMenuItem});
+            this.AIRPathMenuStrip.Name = "contextMenuStrip1";
+            this.AIRPathMenuStrip.Size = new System.Drawing.Size(271, 182);
             // 
             // installedVersionsToolStripMenuItem
             // 
             this.installedVersionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.noInstalledVersionsToolStripMenuItem});
             this.installedVersionsToolStripMenuItem.Name = "installedVersionsToolStripMenuItem";
-            this.installedVersionsToolStripMenuItem.Size = new System.Drawing.Size(179, 34);
-            this.installedVersionsToolStripMenuItem.Text = "From Installed A.I.R.\r\nVersions...";
+            this.installedVersionsToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.installedVersionsToolStripMenuItem.Text = "Select from Installed A.I.R. Versions...";
             // 
             // noInstalledVersionsToolStripMenuItem
             // 
@@ -1598,9 +1578,23 @@
             // fromSettingsFileToolStripMenuItem
             // 
             this.fromSettingsFileToolStripMenuItem.Name = "fromSettingsFileToolStripMenuItem";
-            this.fromSettingsFileToolStripMenuItem.Size = new System.Drawing.Size(179, 34);
-            this.fromSettingsFileToolStripMenuItem.Text = "Temporary EXE Path\r\nfrom Settings File...";
+            this.fromSettingsFileToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.fromSettingsFileToolStripMenuItem.Text = "Set A.I.R. Path from Settings File...";
             this.fromSettingsFileToolStripMenuItem.Click += new System.EventHandler(this.FromSettingsFileToolStripMenuItem_Click);
+            // 
+            // aIRVersionZIPToolStripMenuItem
+            // 
+            this.aIRVersionZIPToolStripMenuItem.Name = "aIRVersionZIPToolStripMenuItem";
+            this.aIRVersionZIPToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.aIRVersionZIPToolStripMenuItem.Text = "Select/Install from A.I.R. Version ZIP...";
+            this.aIRVersionZIPToolStripMenuItem.Click += new System.EventHandler(this.AIRVersionZIPToolStripMenuItem_Click);
+            // 
+            // eXEPathToolStripMenuItem
+            // 
+            this.eXEPathToolStripMenuItem.Name = "eXEPathToolStripMenuItem";
+            this.eXEPathToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.eXEPathToolStripMenuItem.Text = "Set A.I.R. Path Manually (Classic)...";
+            this.eXEPathToolStripMenuItem.Click += new System.EventHandler(this.UpdateSonic3AIRPath_Click);
             // 
             // airVersionLabel
             // 
@@ -1666,6 +1660,40 @@
             this.openVersionsFolderToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.openVersionsFolderToolStripMenuItem.Text = "Open Versions Folder";
             this.openVersionsFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenVersionsFolderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(263, 6);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(263, 6);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Enabled = false;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(270, 22);
+            this.toolStripMenuItem5.Text = "Get/Set from Installed Versions:";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Enabled = false;
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(270, 22);
+            this.toolStripMenuItem6.Text = "Set Manually:";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(263, 6);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(267, 6);
             // 
             // ModManager
             // 
@@ -1838,10 +1866,8 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.ContextMenuStrip AIRPathMenuStrip;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aIRVersionZIPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eXEPathToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem installedVersionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem noInstalledVersionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fromSettingsFileToolStripMenuItem;
@@ -1870,6 +1896,12 @@
         private System.Windows.Forms.ToolStripMenuItem openDownloadsFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openVersionsFolderToolStripMenuItem;
         private System.Windows.Forms.Panel toolsPanel;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

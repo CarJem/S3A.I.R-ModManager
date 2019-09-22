@@ -1809,17 +1809,26 @@ namespace Sonic3AIR_ModLoader
         private void UpdateAIRVersionsToolstrips()
         {
             CleanUpInstalledVersionsToolStrip();
-            DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
-            foreach (var folder in directoryInfo.GetDirectories().ToList().VersionSort().Reverse())
+            if (Directory.Exists(ProgramPaths.Sonic3AIR_MM_VersionsFolder))
             {
-                string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
-                if (File.Exists(filePath))
+                DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
+                var folders = directoryInfo.GetDirectories().ToList();
+                if (folders.Count != 0)
                 {
-                    installedVersionsToolStripMenuItem.DropDownItems.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
+                    foreach (var folder in folders.VersionSort().Reverse())
+                    {
+                        string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
+                        if (File.Exists(filePath))
+                        {
+                            installedVersionsToolStripMenuItem.DropDownItems.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
+                        }
+
+
+                    }
                 }
 
-                
             }
+
         }
 
         private void CleanUpInstalledVersionsToolStrip()
@@ -1921,15 +1930,19 @@ namespace Sonic3AIR_ModLoader
             {
                 versionsListBox.Items.Clear();
                 DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
-                foreach (var folder in directoryInfo.GetDirectories().ToList().VersionSort().Reverse())
+                var folders = directoryInfo.GetDirectories().ToList();
+                if (folders.Count != 0)
                 {
-                    string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
-                    if (File.Exists(filePath))
+                    foreach (var folder in folders.VersionSort().Reverse())
                     {
-                        versionsListBox.Items.Add(new AIRVersionListItem(folder.Name, folder.FullName));
+                        string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
+                        if (File.Exists(filePath))
+                        {
+                            versionsListBox.Items.Add(new AIRVersionListItem(folder.Name, folder.FullName));
+                        }
+
+
                     }
-
-
                 }
             }
 
