@@ -32,21 +32,19 @@ namespace Sonic3AIR_ModLoader
                 pictureBox1.Image = Sonic3AIR_ModLoader.Properties.Resources.Sonic3KAIRLogoV4;
             }
             label1.Parent = pictureBox1;
-            button1.Parent = pictureBox1;
-            button2.Parent = pictureBox1;
-            button3.Parent = pictureBox1;
+            label2.Parent = pictureBox1;
+            cancelButton.Parent = pictureBox1;
+            forceStartButton.Parent = pictureBox1;
             buildDetails.BackColor = Color.FromArgb(64, 0, 0, 0);
-            button1.BackColor = Color.FromArgb(64, 0, 0, 0);
-            button2.BackColor = Color.FromArgb(64, 0, 0, 0);
-            button3.BackColor = Color.FromArgb(64, 0, 0, 0);
+            cancelButton.BackColor = Color.FromArgb(64, 0, 0, 0);
+            forceStartButton.BackColor = Color.FromArgb(64, 0, 0, 0);
 
             label1.BackColor = Color.FromArgb(64, 0, 0, 0);
-            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, 0, 0);
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
-            button2.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, 0, 0);
-            button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
-            button3.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, 0, 0);
-            button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
+            label2.BackColor = Color.FromArgb(64, 0, 0, 0);
+            cancelButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, 0, 0);
+            cancelButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
+            forceStartButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, 0, 0);
+            forceStartButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
             label1.Text = $"  {UserLanguage.AutoBoot_Initalizing}";
             CountDown.Interval = 1000;
             CountDown.Tick += CountDown_Tick;
@@ -56,9 +54,9 @@ namespace Sonic3AIR_ModLoader
 
         private string GetAIRVersion()
         {
-            if (File.Exists(Properties.Settings.Default.Sonic3AIRPath))
+            if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(Properties.Settings.Default.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
                 if (metaDataFile != null)
                 {
                     try
@@ -141,6 +139,11 @@ namespace Sonic3AIR_ModLoader
             CountDown.Enabled = false;
             Program.AutoBootCanceled = true;
             Close();
+        }
+
+        private void ForceStartButton_Click(object sender, EventArgs e)
+        {
+            TimeLeft = 0;
         }
     }
 }

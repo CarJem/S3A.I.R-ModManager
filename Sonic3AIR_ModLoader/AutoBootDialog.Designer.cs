@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoBootDialog));
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buildDetails = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.forceStartButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,29 +47,29 @@
             this.label1.Location = new System.Drawing.Point(0, 375);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(635, 43);
+            this.label1.Size = new System.Drawing.Size(737, 43);
             this.label1.TabIndex = 0;
             this.label1.Tag = "";
             this.label1.Text = "   Launching in: 0:05";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // cancelButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Yellow;
-            this.button1.Location = new System.Drawing.Point(843, 375);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 43);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.cancelButton.BackColor = System.Drawing.Color.Transparent;
+            this.cancelButton.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.cancelButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.cancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.ForeColor = System.Drawing.Color.Yellow;
+            this.cancelButton.Location = new System.Drawing.Point(843, 375);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(0);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(77, 43);
+            this.cancelButton.TabIndex = 1;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // pictureBox1
             // 
@@ -92,46 +92,44 @@
             this.buildDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buildDetails.ForeColor = System.Drawing.Color.Yellow;
             this.buildDetails.Location = new System.Drawing.Point(0, 418);
-            this.buildDetails.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.buildDetails.Margin = new System.Windows.Forms.Padding(0);
             this.buildDetails.Name = "buildDetails";
             this.buildDetails.Size = new System.Drawing.Size(920, 42);
             this.buildDetails.TabIndex = 5;
             this.buildDetails.Text = "Mod Manager Version: {n}\r\nA.I.R. Version: {n}\r\n";
             this.buildDetails.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button2
+            // forceStartButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Yellow;
-            this.button2.Location = new System.Drawing.Point(730, 375);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(114, 43);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Failsafe Mode";
-            this.button2.UseVisualStyleBackColor = false;
+            this.forceStartButton.BackColor = System.Drawing.Color.Transparent;
+            this.forceStartButton.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.forceStartButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.forceStartButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.forceStartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.forceStartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.forceStartButton.ForeColor = System.Drawing.Color.Yellow;
+            this.forceStartButton.Location = new System.Drawing.Point(737, 375);
+            this.forceStartButton.Margin = new System.Windows.Forms.Padding(0);
+            this.forceStartButton.Name = "forceStartButton";
+            this.forceStartButton.Size = new System.Drawing.Size(96, 43);
+            this.forceStartButton.TabIndex = 7;
+            this.forceStartButton.Text = "Force Start";
+            this.forceStartButton.UseVisualStyleBackColor = false;
+            this.forceStartButton.Click += new System.EventHandler(this.ForceStartButton_Click);
             // 
-            // button3
+            // label2
             // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Yellow;
-            this.button3.Location = new System.Drawing.Point(635, 375);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 43);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Force Start";
-            this.button3.UseVisualStyleBackColor = false;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Yellow;
+            this.label2.Location = new System.Drawing.Point(833, 375);
+            this.label2.Margin = new System.Windows.Forms.Padding(0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(10, 43);
+            this.label2.TabIndex = 8;
+            this.label2.Tag = "";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // AutoBootDialog
             // 
@@ -139,10 +137,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(224)))));
             this.ClientSize = new System.Drawing.Size(920, 460);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.forceStartButton);
             this.Controls.Add(this.buildDetails);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -160,10 +158,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label buildDetails;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button forceStartButton;
+        private System.Windows.Forms.Label label2;
     }
 }
