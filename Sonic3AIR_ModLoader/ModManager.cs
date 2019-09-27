@@ -1767,6 +1767,11 @@ namespace Sonic3AIR_ModLoader
             if (File.Exists(fileZIP)) AddMod(fileZIP);
             else if (File.Exists(fileRAR)) AddMod(fileRAR);
             else if (File.Exists(file7Z)) AddMod(file7Z);
+            else
+            {
+                MessageBox.Show("Something went Wrong!");
+                CleanUpTempModsFolder();
+            }
 
         }
 
