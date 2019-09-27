@@ -1716,7 +1716,7 @@ namespace Sonic3AIR_ModLoader
         public void DownloadMod(string url, bool isMod = true, bool backgroundDownload = false)
         {
             string baseURL = GetBaseURL(url);
-            MessageBox.Show(baseURL);
+            //MessageBox.Show(baseURL);
             if (baseURL != "") url = baseURL;
 
             string remote_filename = "";
