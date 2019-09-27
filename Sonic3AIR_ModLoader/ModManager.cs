@@ -1120,10 +1120,21 @@ namespace Sonic3AIR_ModLoader
             if (foundFile != "")
             {
                 Directory.Move(System.IO.Path.GetDirectoryName(foundFile), ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
-            }
+            }           
             else
             {
-                MessageBox.Show("This is not a valid Sonic 3 A.I.R. Mod. A valid mod requires a mod.json, and either this isn't a mod or it's a legacy mod. If you know for sure that this is a mod, then it's probably a legacy mod. You can't use legacy mods that work without them going forward.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var item = Directory.GetFiles(ProgramPaths.Sonic3AIR_MM_TempModsFolder, "mod.json").FirstOrDefault();
+                foundFile = (item != null ? item.ToString() : "");
+                if (foundFile != "")
+                {
+                    Directory.Move(System.IO.Path.GetDirectoryName(foundFile), ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
+                }
+                else
+                {
+                    MessageBox.Show(foundFile);
+                    MessageBox.Show("This is not a valid Sonic 3 A.I.R. Mod. A valid mod requires a mod.json, and either this isn't a mod or it's a legacy mod. If you know for sure that this is a mod, then it's probably a legacy mod. You can't use legacy mods that work without them going forward.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
             CleanUpTempModsFolder();
             UpdateModsList(true);
@@ -1749,8 +1760,14 @@ namespace Sonic3AIR_ModLoader
 
         private void DownloadModCompleted()
         {
-            string file = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".zip"));
-            AddMod(file);
+            string fileZIP = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".zip"));
+            string file7Z = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".7z"));
+            string fileRAR = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".rar"));
+
+            if (File.Exists(fileZIP)) AddMod(fileZIP);
+            else if (File.Exists(fileRAR)) AddMod(fileRAR);
+            else if (File.Exists(file7Z)) AddMod(file7Z);
+
         }
 
         private void DownloadButtonTest_Click(object sender, EventArgs e)

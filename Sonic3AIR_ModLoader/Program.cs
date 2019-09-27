@@ -56,6 +56,7 @@ namespace Sonic3AIR_ModLoader
         {
             Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => {
 
+                o.gamebanana_api = $"s3airmm://https://gamebanana.com/mmdl/433351";
                 if (o.gamebanana_api != null)
                 {
                     Application.Run(new ModManager(o.gamebanana_api));
