@@ -28,7 +28,7 @@ namespace Sonic3AIR_ModLoader
 
             buildDetails.Parent = pictureBox1;
 
-            buildDetails.Text = $"{Program.CurrentLanguage.GetString("ModManagerVersion")}: {Program.Version}" + Environment.NewLine + $"{Program.CurrentLanguage.GetString("AIRVersion")}: {GetAIRVersion()}";
+            buildDetails.Text = $"{Program.LanguageResource.GetString("ModManagerVersion")}: {Program.Version}" + Environment.NewLine + $"{Program.LanguageResource.GetString("AIRVersion")}: {GetAIRVersion()}";
             Random rnd = new Random();
             int knuckMode = (rnd.Next(1, 25));
             if (knuckMode == 3)
@@ -49,7 +49,7 @@ namespace Sonic3AIR_ModLoader
             cancelButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
             forceStartButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, 0, 0);
             forceStartButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(85, 0, 0, 0);
-            label1.Text = $"  {Program.CurrentLanguage.GetString("AutoBoot_Initalizing")}";
+            label1.Text = $"  {Program.LanguageResource.GetString("AutoBoot_Initalizing")}";
             CountDown.Interval = 1000;
             CountDown.Tick += CountDown_Tick;
             CountDown.Enabled = true;
@@ -93,7 +93,7 @@ namespace Sonic3AIR_ModLoader
             this.BeginInvoke((Action)(() =>
             {
                 Program.UpdaterState = Updater.UpdateState.Running;
-                label1.Text = $"  {Program.CurrentLanguage.GetString("AutoBoot_CheckingForUpdates")}";
+                label1.Text = $"  {Program.LanguageResource.GetString("AutoBoot_CheckingForUpdates")}";
                 Updater updaterTask = new Updater();
 
             }));
@@ -106,7 +106,7 @@ namespace Sonic3AIR_ModLoader
             if (startUp) time = time + 1;
             TimeSpan result = TimeSpan.FromSeconds(time);
             string fromTimeString = result.ToString("mm':'ss");
-            label1.Text = $" {Program.CurrentLanguage.GetString("AutoBoot_LaunchingIn")}: {fromTimeString}";
+            label1.Text = $" {Program.LanguageResource.GetString("AutoBoot_LaunchingIn")}: {fromTimeString}";
         }
 
         private void CountDown_Tick(object sender, EventArgs evt)

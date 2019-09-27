@@ -33,9 +33,13 @@ namespace Sonic3AIR_ModLoader
             return Keys;
         }
 
+        private KeyBindingDialog Instance;
+
         public KeyBindingDialog()
         {
             InitializeComponent();
+            Instance = this;
+            UserLanguage.ApplyLanguage(ref Instance);
             keyBox.DataSource = KeyBindings;
             RadioButton1_CheckedChanged(null, null);
         }
@@ -43,7 +47,7 @@ namespace Sonic3AIR_ModLoader
         public string ShowInputDialog(string keybind)
         {
             OriginalKeybinding = keybind;
-            resultText.Text = $"{keybind} (Existing)"; ;
+            resultText.Text = $"{keybind} {Program.LanguageResource.GetString("KeybindingsExistingNote")}"; ;
             resultText.Tag = keybind;
             if (this.ShowDialog() == DialogResult.OK)
             {
@@ -88,7 +92,7 @@ namespace Sonic3AIR_ModLoader
             void ToggleKeyboardBindingsArea(bool enabled)
             {
                 keyBox.Enabled = enabled;
-                label1.Enabled = enabled;
+                keyLabel.Enabled = enabled;
                 UpdateResultText(enabled);
             }
 
@@ -129,7 +133,7 @@ namespace Sonic3AIR_ModLoader
                     if (axisTypeRadio1.Checked) axisType = "Axis";
                     else if (axisTypeRadio2.Checked) axisType = "Pov";
                     else if (axisTypeRadio4.Checked) axisType = "Thumb";
-                    else if (axisTypeRadio5.Checked) axisType = axisCustomStringBox.Text;
+                    else if (axisTypeRadio3.Checked) axisType = axisCustomStringBox.Text;
 
                     bool left = AxisLeftRadioButton.Checked;
                     bool right = AxisRightRadioButton.Checked;
@@ -192,13 +196,13 @@ namespace Sonic3AIR_ModLoader
 
                 if (ShowExistingString && resultText.Tag.ToString() == OriginalKeybinding)
                 {
-                    resultText.Text = $"{OriginalKeybinding} (Existing)";
+                    resultText.Text = $"{OriginalKeybinding} {Program.LanguageResource.GetString("KeybindingsExistingNote")}";
                 }
 
             }
             else
             {
-                if (ShowExistingString) resultText.Text = $"{OriginalKeybinding} (Existing)";
+                if (ShowExistingString) resultText.Text = $"{OriginalKeybinding} {Program.LanguageResource.GetString("KeybindingsExistingNote")}";
                 else resultText.Text = OriginalKeybinding;
                 resultText.Tag = OriginalKeybinding;
             }

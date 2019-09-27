@@ -120,11 +120,11 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox keybindsList;
-        private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.Button editButton;
-        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.ListBox keybindsList;
+        public System.Windows.Forms.Button addButton;
+        public System.Windows.Forms.Button removeButton;
+        public System.Windows.Forms.Button editButton;
+        public System.Windows.Forms.Button button1;
     }
 }

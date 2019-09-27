@@ -130,5 +130,17 @@ namespace Sonic3AIR_ModLoader.Properties {
                 this["AutoUpdates"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EN")]
+        public string UserLanguage {
+            get {
+                return ((string)(this["UserLanguage"]));
+            }
+            set {
+                this["UserLanguage"] = value;
+            }
+        }
     }
 }

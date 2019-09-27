@@ -20,7 +20,7 @@ namespace Sonic3AIR_ModLoader
         public static Updater.UpdateResult UpdateResult { get; set; } = Updater.UpdateResult.Null;
         public static Updater.UpdateResult LastUpdateResult { get; set; } = Updater.UpdateResult.Null;
 
-        public static ResourceManager CurrentLanguage;
+        public static ResourceManager LanguageResource { get { return UserLanguage.CurrentResource; } set { UserLanguage.CurrentResource = value; } }
 
         private static bool DebugMode = false;
 
@@ -33,10 +33,7 @@ namespace Sonic3AIR_ModLoader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            
-
-            CurrentLanguage = new ResourceManager("Sonic3AIR_ModLoader.Languages.lang_en", Assembly.GetExecutingAssembly());
+            UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
 
             if (DebugMode) Debug();
             else ModManager(args);

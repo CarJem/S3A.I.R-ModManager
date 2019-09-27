@@ -43,10 +43,13 @@ namespace Sonic3AIR_ModLoader
         private bool ManuallyTriggered = false;
 
         private bool DisableUpdater = false;
+        private Updater Instance;
 
         public Updater(bool _manuallyTriggered = false)
         {
             InitializeComponent();
+            Instance = this;
+            UserLanguage.ApplyLanguage(ref Instance);
 
             ManuallyTriggered = _manuallyTriggered;
             richTextBox1.SelectionProtected = true;
@@ -144,7 +147,7 @@ namespace Sonic3AIR_ModLoader
 
             if (Program.UpdateResult == UpdateResult.OutOfDate)
             {
-                label1.Text = "An Update is Avaliable! Would You Like to Update Now?";
+                updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
                 if (ShowDialog() == DialogResult.Yes)
                 {
                     DownloadUpdate();
@@ -158,7 +161,7 @@ namespace Sonic3AIR_ModLoader
             else if (ManuallyTriggered && Program.UpdateResult == UpdateResult.UpToDate)
             {
                 ManuallyTriggered = false;
-                label1.Text = "You have the latest version. Would you like to redownload it?";
+                updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_UpToDate");
                 if (ShowDialog() == DialogResult.Yes)
                 {
                     DownloadUpdate();
@@ -210,7 +213,7 @@ namespace Sonic3AIR_ModLoader
 
             Directory.CreateDirectory(destination);
 
-            MessageBox.Show($"The game has been installed at \"{output2}\"");
+            MessageBox.Show($"{Program.LanguageResource.GetString("GameInstalledAt")} \"{output2}\"");
 
 
             Program.UpdaterState = UpdateState.Finished;
@@ -281,7 +284,7 @@ namespace Sonic3AIR_ModLoader
             if (remote_filename != "") filename = remote_filename;
 
 
-            DownloadWindow downloadWindow = new DownloadWindow($"Downloading \"{filename}\"", url, $"{destination}\\{filename}");
+            DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{destination}\\{filename}");
             downloadWindow.DownloadCompleted = finishAction;
             if (backgroundDownload) downloadWindow.StartBackground();
             else downloadWindow.Start();

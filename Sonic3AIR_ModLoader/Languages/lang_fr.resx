@@ -118,331 +118,326 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutTab" xml:space="preserve">
-    <value>About</value>
+    <value>En savoir plus...</value>
   </data>
   <data name="AIRInternalSettings" xml:space="preserve">
-    <value>A.I.R. Internal Settings</value>
+    <value>Paramètre interne de A.I.R</value>
   </data>
   <data name="AIRMedia" xml:space="preserve">
-    <value>A.I.R. Media...</value>
+    <value>Média A.I.R...</value>
   </data>
   <data name="AIRMMPlaces" xml:space="preserve">
-    <value>A.I.R. Mod Manager Places...</value>
+    <value>Emplacement de A.I.R Mod Manager ...</value>
   </data>
   <data name="AIRPlaces" xml:space="preserve">
-    <value>A.I.R. Places...</value>
+    <value>Emplacement de A.I.R...</value>
   </data>
   <data name="AutoBootDelay" xml:space="preserve">
-    <value>Delay (Seconds):</value>
+    <value>Délai (secondes):</value>
   </data>
   <data name="ButtonMappings" xml:space="preserve">
-    <value>Button Mappings</value>
+    <value>Réglages des boutons</value>
   </data>
   <data name="CarJemTwitter" xml:space="preserve">
     <value>CarJem @ Twitter</value>
   </data>
   <data name="CheckforAIRUpdatesOnStart" xml:space="preserve">
-    <value>Check for A.I.R. Updates on Startup</value>
+    <value>Vérifier les mises à jour de A.I.R au démarrage </value>
   </data>
   <data name="CheckForGameUpdatesExpandable" xml:space="preserve">
-    <value>Check for Game Updates...</value>
+    <value>Vérifier les mises à jour de A.I.R...</value>
   </data>
   <data name="CopyFilePath" xml:space="preserve">
-    <value>Copy File Path</value>
+    <value>Copier l'emplacement du fichier</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Supprimer</value>
   </data>
   <data name="DeviceIdentifierNames" xml:space="preserve">
-    <value>Device Identifier Names</value>
+    <value>Noms d'identifiant de périphérique</value>
   </data>
   <data name="EnableAutoBootMode" xml:space="preserve">
-    <value>Enable Auto Boot Mode</value>
+    <value>Activer le mode de démarrage automatique</value>
   </data>
   <data name="EnableModStacking" xml:space="preserve">
-    <value>Enable Mod Stacking</value>
+    <value>Activer l'empilement de Mod</value>
   </data>
   <data name="EnableModStacking_Note1" xml:space="preserve">
-    <value>NOTE: For A.I.R. Versions</value>
+    <value>NOTE : Pour les versions de A.I.R</value>
   </data>
   <data name="EnableModStacking_Note2" xml:space="preserve">
-    <value>v19.09.19.0 and Above Only</value>
+    <value>v19.09.19.0 et plus récent</value>
   </data>
   <data name="Eukaryot3KTwitter" xml:space="preserve">
     <value>Eukaryot3K @ Twitter</value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>Quitter</value>
   </data>
   <data name="FailSafeMode" xml:space="preserve">
-    <value>Fail Safe Mode</value>
+    <value>Mode sans échec</value>
   </data>
   <data name="FixGlitches" xml:space="preserve">
-    <value>Fix Glitches</value>
+    <value>Correction des problèmes</value>
   </data>
   <data name="GameBannaURLHandler" xml:space="preserve">
-    <value>Gamebanana URL Handler Options...</value>
+    <value>Les options de Gamebanana URL Handler...</value>
   </data>
   <data name="GeneralTab" xml:space="preserve">
-    <value>General</value>
+    <value>Général</value>
   </data>
   <data name="GuidesTab" xml:space="preserve">
-    <value>Guides/Shortcuts</value>
+    <value>Guides/Raccourcis</value>
   </data>
   <data name="InputTab" xml:space="preserve">
     <value>Input</value>
   </data>
   <data name="InstalledVersions" xml:space="preserve">
-    <value>Installed Versions</value>
+    <value>Versions installées</value>
   </data>
   <data name="ModManagerOptions" xml:space="preserve">
-    <value>Mod Manager Options</value>
+    <value>Options du Mod Manager</value>
   </data>
   <data name="ModsTab" xml:space="preserve">
     <value>Mods</value>
   </data>
   <data name="ModsTab_ModProperties" xml:space="preserve">
-    <value>Mod Properties</value>
+    <value>Propriétés du Mod </value>
   </data>
   <data name="MoreExpandable" xml:space="preserve">
-    <value>More...</value>
+    <value>Plus...</value>
   </data>
   <data name="NoInstalledVersions" xml:space="preserve">
-    <value>No Installed Versions</value>
+    <value>Aucune version installée</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Ouvrir</value>
   </data>
   <data name="OpenAppDataFolder" xml:space="preserve">
-    <value>Open AppData Folder</value>
+    <value>Ouvrir le dossier AppData</value>
   </data>
   <data name="OpenConfigFile" xml:space="preserve">
-    <value>Open Config File</value>
+    <value>Ouvrir le fichier de configuration</value>
   </data>
   <data name="OpenDownloadsFolder" xml:space="preserve">
-    <value>Open Downloads Folder</value>
+    <value>Ouvrir le dossier de téléchargement</value>
   </data>
   <data name="OpenEXEFolder" xml:space="preserve">
-    <value>Open EXE Folder</value>
+    <value>Ouvrir le dossier du fichier EXE</value>
   </data>
   <data name="OpenLocationExpandable" xml:space="preserve">
-    <value>Open Location...</value>
+    <value>Ouvrir l'emplacement du fichier...</value>
   </data>
   <data name="OpenModFolder" xml:space="preserve">
-    <value>Open Mod Folder</value>
+    <value>Ouvrir le dossier du Mod</value>
   </data>
   <data name="OpenModInstructions" xml:space="preserve">
-    <value>Sonic 3 A.I.R. Modding Instructions</value>
+    <value>Les instructions de Modding sur Sonic 3 A.I.R</value>
   </data>
   <data name="OpenModsFolder" xml:space="preserve">
-    <value>Open Mods Folder</value>
+    <value>Ouvrir le dossier des Mods</value>
   </data>
   <data name="OpenModTemplatesFolder" xml:space="preserve">
-    <value>Open Modding Templates Folder</value>
+    <value>Ouvrir le dossier du modèle de modding</value>
   </data>
   <data name="OpenModURL" xml:space="preserve">
-    <value>Open Mod URL</value>
+    <value>Ouvrir l'URL du Mod</value>
   </data>
   <data name="OpenSampleModsFolder" xml:space="preserve">
-    <value>Open Sample Mods Folder</value>
+    <value>Ouvrir l'exemple du dossier Mods</value>
   </data>
   <data name="OpenSettingsFile" xml:space="preserve">
-    <value>Open Settings File</value>
+    <value>Ouvrir le fichier de configuration</value>
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
-    <value>Open System Settings...</value>
+    <value>Ouvrir les paramètres système...</value>
   </data>
   <data name="OpenUserManual" xml:space="preserve">
-    <value>Sonic 3 A.I.R. User Manual</value>
+    <value>Le manuel d'utilisation de Sonic 3 A.I.R</value>
   </data>
   <data name="OpenVersionsFolder" xml:space="preserve">
-    <value>Open Versions Folder</value>
+    <value>Ouvrir le dossier des versions</value>
   </data>
   <data name="RecordingsTab" xml:space="preserve">
-    <value>Game Recordings</value>
+    <value>Enregistrements(captures) du jeu</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Rafraîchir</value>
   </data>
   <data name="Reload" xml:space="preserve">
-    <value>Reload</value>
+    <value>Relancer</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Retirer</value>
   </data>
   <data name="RemoveMod" xml:space="preserve">
-    <value>Remove Mod</value>
+    <value>Retirer le Mod</value>
   </data>
   <data name="S3AIRGB" xml:space="preserve">
     <value>S3AIR @ Gamebanana</value>
   </data>
   <data name="S3AIRHomepage" xml:space="preserve">
-    <value>Sonic 3 A.I.R. Homepage</value>
+    <value>Page d'accueil de Sonic 3 A.I.R</value>
   </data>
   <data name="S3KROMPathLabel" xml:space="preserve">
-    <value>Sonic 3K ROM Path:</value>
+    <value>Emplacement de la ROM Sonic 3K :</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Sauvegarder</value>
   </data>
   <data name="Save&amp;Load" xml:space="preserve">
-    <value>Save &amp; Load</value>
+    <value>Sauvegarder et Charger</value>
   </data>
   <data name="SelectFromInstalledVersions" xml:space="preserve">
-    <value>Select from Installed A.I.R. Versions...</value>
+    <value>Sélectionnez dans "Installer" la version de A.I.R...</value>
   </data>
   <data name="SelectInstallFromAIRZIP" xml:space="preserve">
-    <value>Select/Install from A.I.R. Version ZIP...</value>
+    <value>Sélectionnez/Installez à partir d'une version archivée(ZIP) de A.I.R...</value>
   </data>
   <data name="SetAIRPathFromSettings" xml:space="preserve">
-    <value>Set A.I.R. Path from Settings File...</value>
+    <value>Régler l'emplacement du fichier de paramètre de A.I.R...</value>
   </data>
   <data name="SetAIRPathManuallyClassic" xml:space="preserve">
-    <value>Set A.I.R. Path Manually (Classic)...</value>
+    <value>Régler manuellement (Classique) l'emplacement du fichier de paramètre de A.I.R...</value>
   </data>
   <data name="SetFromInstalledHeader" xml:space="preserve">
-    <value>Get/Set from Installed Versions:</value>
+    <value>Obtenir/Définir à partir de versions installées :</value>
   </data>
   <data name="SetManuallyHeader" xml:space="preserve">
-    <value>Set Manually:</value>
+    <value>Régler Manuellement :</value>
   </data>
   <data name="SettingsTab" xml:space="preserve">
-    <value>Settings</value>
+    <value>Paramètres</value>
   </data>
   <data name="Sonic3AIRPathLabel" xml:space="preserve">
-    <value>Sonic 3 A.I.R. Path:</value>
+    <value>Emplacement de Sonic 3 A.I.R :</value>
   </data>
   <data name="StayOpenOnExit" xml:space="preserve">
-    <value>Stay Open on Game Exit</value>
+    <value>Laisser ouvert quand je quitte le jeu</value>
   </data>
   <data name="StayOpenOnLoad" xml:space="preserve">
-    <value>Stay Open on Game Load</value>
+    <value>Laisser ouvert quand je lance le jeu</value>
   </data>
   <data name="ToolsTab" xml:space="preserve">
-    <value>Tools</value>
+    <value>Outils</value>
   </data>
   <data name="Upload" xml:space="preserve">
-    <value>Upload</value>
+    <value>Importer</value>
   </data>
   <data name="UsefulShortKeys" xml:space="preserve">
-    <value>Useful In-Game Shortcuts/Keys:
+    <value>Raccourcis/Touches utiles dans le jeu :
 
-Alt + Enter - Toggle Fullscreen
-F2 - Take a Game Recording Capture
-Right Click - Open A.I.R Context Menu
-F3 - Rescan for Game Controllers
-F4 - Switches Game Controllers for P1 and P2
-Numpad Plus/Minus - Adjust Global Audio Volume
-Alt + B - Change Background Blur
-Alt + F - Change Filter
-Alt + P - Show Performance Display</value>
+Alt + Entrée - Basculer en plein écran
+F2 - Faire une capture(enregistrement) du jeu
+Clic droit - Ouvrir le menu contextuel de A.I.R
+F3 - Rescanner pour les manettes de jeu
+F4 - Échanger les contrôles des manettes J1 et J2
+Pavé numérique Plus/Moins - Ajuster le volume audio global
+Alt + B - Changer le flou d'arrière-plan
+Alt + F - Changer le filtre
+Alt + P - Afficher les performances</value>
   </data>
   <data name="VersionsTab" xml:space="preserve">
     <value>Versions</value>
   </data>
   <data name="AIRVersion" xml:space="preserve">
-    <value>A.I.R. Version</value>
+    <value>Version A.I.R</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version</value>
   </data>
   <data name="By" xml:space="preserve">
-    <value>By</value>
+    <value>Par</value>
   </data>
   <data name="ModManagerVersion" xml:space="preserve">
-    <value>Mod Manager Version</value>
+    <value>Version du Mod Manager</value>
   </data>
   <data name="Sonic3KRomFile" xml:space="preserve">
-    <value>Sonic 3K ROM File</value>
+    <value>Dossier de la ROM Sonic 3K</value>
   </data>
   <data name="SelectSonic3KRomFile" xml:space="preserve">
-    <value>Select Sonic 3K ROM File...</value>
+    <value>Choisir le dossier de la ROM Sonic 3K...</value>
   </data>
   <data name="SonicAIRVersionZIP" xml:space="preserve">
-    <value>Sonic 3 A.I.R. Version ZIP</value>
+    <value>Archive(Zip) de Sonic 3 A.I.R</value>
   </data>
   <data name="SelectSonicAIRVersionZIP" xml:space="preserve">
-    <value>Select Sonic 3 A.I.R. Version ZIP...</value>
+    <value>Choisir l'archive(Zip) de Sonic 3 A.I.R...</value>
   </data>
   <data name="AddAMod" xml:space="preserve">
-    <value>Add a Mod...</value>
+    <value>Ajouter un Mod...</value>
   </data>
   <data name="RemoveSelectedMod" xml:space="preserve">
-    <value>Remove Selected Mod...</value>
+    <value>Retirer le Mod sélectionné...</value>
   </data>
   <data name="IncreaseModPriority" xml:space="preserve">
-    <value>Increase Selected Mod Priority...</value>
+    <value>Augmenter la priorité du Mod sélectionné...</value>
   </data>
   <data name="IncreaseModPriorityToMax" xml:space="preserve">
-    <value>Increase Selected Mod Priority to Max...</value>
+    <value>Augmenter la priorité du mod sélectionné sur Max...</value>
   </data>
   <data name="DecreaseModPriority" xml:space="preserve">
-    <value>Decrease Selected Mod Priority...</value>
+    <value>Diminuer la priorité du mod sélectionné...</value>
   </data>
   <data name="DecreaseModPriorityToMin" xml:space="preserve">
-    <value>Decrease Selected Mod Priority to Min...</value>
+    <value>Diminuer la priorité du mod sélectionné sur Min...</value>
   </data>
   <data name="RecordingPathCopiedToClipboard" xml:space="preserve">
-    <value>Recording File Path Copied to Clipboard!</value>
+    <value>Chemin du fichier d’enregistrement copié dans le Presse-papiers !</value>
   </data>
   <data name="AddNewDeviceTitle" xml:space="preserve">
-    <value>Add New Device...</value>
+    <value>Ajouter un nouveau périphérique...</value>
   </data>
   <data name="AddNewDeviceDescription" xml:space="preserve">
-    <value>Enter the name of the controller as it appears in the system settings or type * to target all devices.</value>
+    <value>Entrez le nom de la manette telle qu'il apparaît dans les paramètres système ou tapez * pour cibler tous les périphériques.</value>
   </data>
   <data name="DeleteDeviceTitle" xml:space="preserve">
-    <value>Delete Device</value>
+    <value>Supprimer un périphérique</value>
   </data>
   <data name="EnterModURL" xml:space="preserve">
-    <value>Enter Mod URL...</value>
+    <value>Entrer l'URL du Mod ...</value>
   </data>
   <data name="InputMappingError1" xml:space="preserve">
-    <value>Error Loading Input Configuration File!
-Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.
-</value>
+    <value>Erreur lors du chargement du fichier de configuration des inputs !
+Assurez-vous que votre jeu est à jour et que le chemin du jeu A.I.R est défini dans Options.</value>
   </data>
   <data name="InputMappingError2" xml:space="preserve">
-    <value>There was an error reading the config file in this Version's Folder!
- Please make sure nothing is wrong with it or do a clean install of this version of A.I.R.</value>
+    <value>Une erreur s'est produite lors de la lecture du fichier de configuration dans le dossier de cette version !
+Assurez-vous que le fichier de configuration n'est pas endommagé ou effectuez une réinstallation  de cette version de A.I.R</value>
   </data>
   <data name="InputMappingError3" xml:space="preserve">
-    <value>The config file does not exist in the A.I.R. EXE Folder.
- Please make sure the file exists or do a clean install of this version of A.I.R.</value>
+    <value>Le fichier de configuration n'existe pas dans le dossier A.I.R du fichier EXE.
+  Assurez-vous que le fichier existe ou réinstaller cette version de A.I.R</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound1" xml:space="preserve">
-    <value>The following files could not be found: </value>
+    <value>Les fichiers suivants sont introuvables :</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound2" xml:space="preserve">
-    <value>
-
-If you have not run Sonic 3 A.I.R. yet, please run Sonic 3 A.I.R. once before running the modloader!</value>
+    <value>Si vous n'avez pas encore exécuté Sonic 3 A.I.R, veuillez lancer Sonic 3 A.I.R avant d'exécuter le Mod Loader !</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound3" xml:space="preserve">
-    <value>
-
-If you have, make sure these locations exist. The modloader can't run without them</value>
+    <value>Si vous les avez, assurez-vous que ces emplacements existent. Le Mod Loader ne peut pas fonctionner sans eux</value>
   </data>
   <data name="AIRChangePathNoLongerExists" xml:space="preserve">
-    <value>The file defined settings does not exist anymore. Launch AIR again outside of the mod loader and try again</value>
+    <value>Les paramètres définis par le fichier n’existent plus. Relancez AIR en dehors du mod loader puis réessayez.</value>
   </data>
   <data name="UnableToRemoveVersion" xml:space="preserve">
-    <value>Unable to Remove Version!</value>
+    <value>Impossible de supprimer cette version !</value>
   </data>
   <data name="UnableToDeleteFile" xml:space="preserve">
-    <value>Unable to Delete File!</value>
+    <value>Impossible de supprimer le fichier !</value>
   </data>
   <data name="PleaseRefreshTheModList" xml:space="preserve">
-    <value>Please Refresh the Mod List!</value>
+    <value>Veuillez actualiser la liste de Mod !</value>
   </data>
   <data name="LogFileNotFound" xml:space="preserve">
-    <value>Log file not found</value>
+    <value>Fichier journal non trouvé</value>
   </data>
   <data name="InvalidURL" xml:space="preserve">
-    <value>Invalid URL</value>
+    <value>URL incorrect</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Downloading</value>
+    <value>Téléchargement</value>
   </data>
   <data name="Input_MULTI" xml:space="preserve">
     <value>[MULTI]</value>
@@ -451,28 +446,28 @@ If you have, make sure these locations exist. The modloader can't run without th
     <value>[NULL]</value>
   </data>
   <data name="Input_NONE" xml:space="preserve">
-    <value>[NONE]</value>
+    <value>[AUCUN]</value>
   </data>
   <data name="Input_INPUT" xml:space="preserve">
     <value>[INPUT]</value>
   </data>
   <data name="Input_UNSUPPORTED" xml:space="preserve">
-    <value>[UNSUPPORTED]</value>
+    <value>[NON-SUPPORTÉ]</value>
   </data>
   <data name="Ok_Button" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
   <data name="Cancel_Button" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>&amp;Annuler</value>
   </data>
   <data name="AutoBoot_Initalizing" xml:space="preserve">
-    <value>Initializing...</value>
+    <value>Initialisation...</value>
   </data>
   <data name="AutoBoot_CheckingForUpdates" xml:space="preserve">
-    <value>Checking for Updates...</value>
+    <value>Recherche de mises à jour...</value>
   </data>
   <data name="AutoBoot_LaunchingIn" xml:space="preserve">
-    <value>Launching in</value>
+    <value>Lancer en</value>
   </data>
   <data name="Buttons_A" xml:space="preserve">
     <value>A</value>
@@ -484,19 +479,19 @@ If you have, make sure these locations exist. The modloader can't run without th
     <value>Back</value>
   </data>
   <data name="Buttons_Down" xml:space="preserve">
-    <value>Down</value>
+    <value>Bas</value>
   </data>
   <data name="Buttons_Left" xml:space="preserve">
-    <value>Left</value>
+    <value>Gauche</value>
   </data>
   <data name="Buttons_Right" xml:space="preserve">
-    <value>Right</value>
+    <value>Droite</value>
   </data>
   <data name="Buttons_Start" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="Buttons_Up" xml:space="preserve">
-    <value>Up</value>
+    <value>Haut</value>
   </data>
   <data name="Buttons_X" xml:space="preserve">
     <value>X</value>
@@ -505,94 +500,94 @@ If you have, make sure these locations exist. The modloader can't run without th
     <value>Y</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annuler</value>
   </data>
   <data name="ForceStart" xml:space="preserve">
-    <value>Force Start</value>
-  </data>
-  <data name="DeleteItemConfirmation" xml:space="preserve">
-    <value>Are you sure you want to delete</value>
-  </data>
-  <data name="ErrorWithLoading" xml:space="preserve">
-    <value>Error with loading</value>
+    <value>Démarrage forcé</value>
   </data>
   <data name="GameInstalledAt" xml:space="preserve">
-    <value>The game has been installed at</value>
-  </data>
-  <data name="JSONErrorPossible" xml:space="preserve">
-    <value>(Likely a JSON Error; Make sure the mod.json file is formated correctly!)</value>
-  </data>
-  <data name="Reason" xml:space="preserve">
-    <value>Reason</value>
+    <value>Le jeu a été installé dans</value>
   </data>
   <data name="RecordingUploaded1" xml:space="preserve">
-    <value>File Uploaded to File.io, it will expire in 1 week and has a one time use:</value>
+    <value>Le fichier téléchargé sur File.io expirera dans 1 semaine, il sera utilisé qu'une seule fois :</value>
   </data>
   <data name="RecordingUploaded2" xml:space="preserve">
-    <value>(URL Has Been Copied to Clipboard):</value>
+    <value>(L'URL a été copiée dans le presse-papiers) :</value>
   </data>
-  <data name="RemoveInputDeviceConfirmation1" xml:space="preserve">
-    <value>Verification: Do you want to remove</value>
-  </data>
-  <data name="RemoveInputDeviceConfirmation2" xml:space="preserve">
-    <value>from the list of acceptable devices for this input?</value>
+  <data name="DeleteItemConfirmation" xml:space="preserve">
+    <value>Etes-vous sûr de vouloir supprimer</value>
   </data>
   <data name="RemoveVersionConfirmation" xml:space="preserve">
-    <value>Are you sure you want to remove Version</value>
+    <value>Êtes-vous sûr de vouloir retirer cette version</value>
   </data>
-  <data name="S3AIRPathNotSet" xml:space="preserve">
-    <value>Sonic 3 A.I.R.'s Path is not set!</value>
+  <data name="RemoveInputDeviceConfirmation1" xml:space="preserve">
+    <value>Vérification: voulez-vous retirer</value>
   </data>
-  <data name="SpecifiedFileDirNotExist" xml:space="preserve">
-    <value>Specified file or directory does not exist!</value>
+  <data name="RemoveInputDeviceConfirmation2" xml:space="preserve">
+    <value>de la liste des périphériques acceptables pour cet Input ?</value>
   </data>
   <data name="UnableToValididatePath" xml:space="preserve">
-    <value>Unable to Validate Path</value>
+    <value>Impossible de valider l'emplacement</value>
   </data>
-  <data name="AIRCanNotStartNoPath" xml:space="preserve">
-    <value>Path not set. Cannot start Sonic 3 A.I.R!</value>
+  <data name="ErrorWithLoading" xml:space="preserve">
+    <value>Erreur de chargement</value>
   </data>
-  <data name="EXEFileDialogFilter" xml:space="preserve">
-    <value>Executable File</value>
+  <data name="Reason" xml:space="preserve">
+    <value>Raison</value>
   </data>
-  <data name="EXEFileDialogTitle" xml:space="preserve">
-    <value>Select Sonic 3 A.I.R. Executable...</value>
+  <data name="JSONErrorPossible" xml:space="preserve">
+    <value>(Probablement une erreur du JSON; Assurez-vous que le fichier mod.json est correctement formaté !)</value>
+  </data>
+  <data name="S3AIRPathNotSet" xml:space="preserve">
+    <value>L'emplacement de Sonic 3 A.I.R. n'est pas défini !</value>
+  </data>
+  <data name="SpecifiedFileDirNotExist" xml:space="preserve">
+    <value>Le fichier ou le répertoire spécifié n'existe pas !</value>
   </data>
   <data name="LanguageLabel" xml:space="preserve">
-    <value>Language:</value>
-  </data>
-  <data name="MissingAIRSetNowAlert" xml:space="preserve">
-    <value>Sonic 3 A.I.R.'s File Path is Not Set, Would you like to set it now?</value>
-  </data>
-  <data name="ModFileDialogFilter" xml:space="preserve">
-    <value>Sonic 3 AIR Mod</value>
-  </data>
-  <data name="ModFileDialogTitle" xml:space="preserve">
-    <value>Select Compressed Mod File...</value>
+    <value>La langue :</value>
   </data>
   <data name="NoModDescript" xml:space="preserve">
-    <value>No Description Provided.</value>
+    <value>Aucune description fournie.</value>
+  </data>
+  <data name="MissingAIRSetNowAlert" xml:space="preserve">
+    <value>L'emplacement du fichier de Sonic 3 A.I.R n'est pas défini, souhaitez-vous le configurer maintenant ?</value>
+  </data>
+  <data name="EXEFileDialogFilter" xml:space="preserve">
+    <value>Fichier executable</value>
+  </data>
+  <data name="EXEFileDialogTitle" xml:space="preserve">
+    <value>Sélectionner le fichier EXE (de Lancement) de Sonic 3 A.I.R...</value>
+  </data>
+  <data name="ModFileDialogTitle" xml:space="preserve">
+    <value>Sélectionner le fichier compressé...</value>
+  </data>
+  <data name="ModFileDialogFilter" xml:space="preserve">
+    <value>Mod de Sonic 3 AIR</value>
+  </data>
+  <data name="AIRCanNotStartNoPath" xml:space="preserve">
+    <value>Emplacement non défini. Impossible de démarrer Sonic 3 A.I.R !</value>
   </data>
   <data name="KeybindingsLabel" xml:space="preserve">
-    <value>Keybindings:</value>
+    <value>Raccourcis clavier :</value>
   </data>
   <data name="EditExpandable" xml:space="preserve">
-    <value>Edit...</value>
+    <value>Modifier...</value>
   </data>
   <data name="KeyboardRadioButton" xml:space="preserve">
-    <value>Keyboard</value>
+    <value>Clavier</value>
   </data>
   <data name="KeyLabel" xml:space="preserve">
-    <value>Key:</value>
+    <value>Touche :</value>
   </data>
   <data name="ControllerRadioButton" xml:space="preserve">
-    <value>Controller</value>
+    <value>Manette</value>
   </data>
   <data name="ButtonLabel" xml:space="preserve">
-    <value>Button:</value>
+    <value>Bouton :</value>
   </data>
   <data name="AxisPOVLabel" xml:space="preserve">
-    <value>Axis/POV:</value>
+    <value>Axe/POV</value>
   </data>
   <data name="IDLabel" xml:space="preserve">
     <value>ID:</value>
@@ -604,60 +599,60 @@ If you have, make sure these locations exist. The modloader can't run without th
     <value>Type</value>
   </data>
   <data name="AxisRadioButton" xml:space="preserve">
-    <value>Axis</value>
+    <value>Axe</value>
   </data>
   <data name="POVRadioButton" xml:space="preserve">
     <value>POV</value>
   </data>
   <data name="CustomStringLabel" xml:space="preserve">
-    <value>Custom String:</value>
+    <value>Chaîne personnalisée :</value>
   </data>
   <data name="ThumbstickRadioButton" xml:space="preserve">
-    <value>Thumb</value>
+    <value>Pouce</value>
   </data>
   <data name="CustomAdvancedLabel" xml:space="preserve">
-    <value>Custom/Advanced:</value>
+    <value>Personnalisé/Avancé :</value>
   </data>
   <data name="ResultLabel" xml:space="preserve">
-    <value>Result:</value>
+    <value>Résultat :</value>
   </data>
   <data name="SelectInputTitleExpandable" xml:space="preserve">
-    <value>Select Input...</value>
+    <value>Selectionner l'Input</value>
   </data>
   <data name="EditKeybindingsTitleExpandable" xml:space="preserve">
-    <value>Edit Keybindings...</value>
+    <value>Modifier les raccourcis clavier...</value>
   </data>
   <data name="UpdateAvaliable" xml:space="preserve">
-    <value>An Update is Avaliable! Would You Like to Update Now?</value>
+    <value>Une mise à jour est disponible! Souhaitez-vous mettre à jour maintenant ?</value>
   </data>
   <data name="UpdaterTitle" xml:space="preserve">
-    <value>Updater</value>
+    <value>Mise à jour</value>
   </data>
   <data name="Yes_Button" xml:space="preserve">
-    <value>Yes</value>
+    <value>Oui</value>
   </data>
   <data name="No_Button" xml:space="preserve">
-    <value>No</value>
+    <value>Non</value>
   </data>
   <data name="StartupFailureError" xml:space="preserve">
-    <value>Sonic 3 A.I.R is out of date, please use version 19.08.17.0 or above! (and start it at least once fully)</value>
+    <value>La version de Sonic 3 A.I.R est obsolète, veuillez utiliser la version 19.08.17.0 ou une version ultérieure ! (Sans oublier de le démarrer au moins une fois !)</value>
   </data>
   <data name="DeleteKeybindTitle" xml:space="preserve">
-    <value>Delete Keybind</value>
+    <value>Supprimer le raccourci clavier</value>
   </data>
   <data name="DeleteKeybindVerification1" xml:space="preserve">
-    <value>Verification: Do you want to remove the</value>
+    <value>Vérification : voulez-vous supprimer le</value>
   </data>
   <data name="DeleteKeybindVerification2" xml:space="preserve">
-    <value>keybind?</value>
+    <value>raccourci clavier ?</value>
   </data>
   <data name="KeybindingsExistingNote" xml:space="preserve">
-    <value>(Existing)</value>
+    <value>(Existant)</value>
   </data>
   <data name="Updater_Avaliable" xml:space="preserve">
-    <value>An Update is Avaliable! Would You Like to Update Now?</value>
+    <value>Une mise à jour est disponible ! Souhaitez-vous mettre à jour maintenant ?</value>
   </data>
   <data name="Updater_UpToDate" xml:space="preserve">
-    <value>You have the latest version. Would you like to redownload it?</value>
+    <value>Vous avez la dernière version. Voulez-vous la retélécharger ?</value>
   </data>
 </root>

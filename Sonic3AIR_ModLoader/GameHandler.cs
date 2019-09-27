@@ -38,7 +38,7 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
-                MessageBox.Show("Path not set. Cannot start Sonic 3 A.I.R!");
+                MessageBox.Show(Program.LanguageResource.GetString("AIRCanNotStartNoPath"));
             }
         }
 
@@ -99,7 +99,7 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
-                DialogResult result = MessageBox.Show("Sonic 3 A.I.R.'s File Path is Not Set, Would you like to set it now?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                DialogResult result = MessageBox.Show(Program.LanguageResource.GetString("MissingAIRSetNowAlert"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (result == DialogResult.Yes)
                 {
                     return LocationDialog();
@@ -113,8 +113,8 @@ namespace Sonic3AIR_ModLoader
             {
                 OpenFileDialog fileDialog = new OpenFileDialog()
                 {
-                    Filter = "Executable File (*.exe)|*.exe",
-                    Title = "Select Sonic 3 A.I.R. Executable..."
+                    Filter = $"{Program.LanguageResource.GetString("EXEFileDialogFilter")} (*.exe)|*.exe",
+                    Title = Program.LanguageResource.GetString("EXEFileDialogTitle")
                 };
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {

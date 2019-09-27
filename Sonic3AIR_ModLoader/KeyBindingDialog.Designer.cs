@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.resultLabel = new System.Windows.Forms.Label();
             this.resultText = new System.Windows.Forms.TextBox();
             this.inputDeviceRadioButton3 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.keyLabel = new System.Windows.Forms.Label();
             this.keyBox = new System.Windows.Forms.ComboBox();
             this.inputDeviceRadioButton2 = new System.Windows.Forms.RadioButton();
             this.inputDeviceRadioButton1 = new System.Windows.Forms.RadioButton();
@@ -44,7 +44,7 @@
             this.axisTypeBox = new System.Windows.Forms.GroupBox();
             this.axisTypeRadio4 = new System.Windows.Forms.RadioButton();
             this.axisCustomStringBox = new System.Windows.Forms.TextBox();
-            this.axisTypeRadio5 = new System.Windows.Forms.RadioButton();
+            this.axisTypeRadio3 = new System.Windows.Forms.RadioButton();
             this.axisTypeRadio2 = new System.Windows.Forms.RadioButton();
             this.axisTypeRadio1 = new System.Windows.Forms.RadioButton();
             this.AxisIDLabel = new System.Windows.Forms.Label();
@@ -53,21 +53,21 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.AxisUpRadioButton = new System.Windows.Forms.RadioButton();
             this.UpAxisButton = new System.Windows.Forms.Label();
+            this.AxisUpRadioButton = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.AxisLeftRadioButton = new System.Windows.Forms.RadioButton();
             this.LeftAxisButton = new System.Windows.Forms.Label();
+            this.AxisLeftRadioButton = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.AxisRightRadioButton = new System.Windows.Forms.RadioButton();
             this.RightAxisButton = new System.Windows.Forms.Label();
+            this.AxisRightRadioButton = new System.Windows.Forms.RadioButton();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.AxisDownRadioButton = new System.Windows.Forms.RadioButton();
             this.DownAxisButton = new System.Windows.Forms.Label();
+            this.AxisDownRadioButton = new System.Windows.Forms.RadioButton();
             this.panel9 = new System.Windows.Forms.Panel();
             this.controllerInputTypeRadio1 = new System.Windows.Forms.RadioButton();
             this.buttonIDNUD = new System.Windows.Forms.NumericUpDown();
@@ -88,12 +88,12 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.cancelButton);
+            this.groupBox1.Controls.Add(this.okButton);
             this.groupBox1.Controls.Add(this.resultLabel);
             this.groupBox1.Controls.Add(this.resultText);
             this.groupBox1.Controls.Add(this.inputDeviceRadioButton3);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.keyLabel);
             this.groupBox1.Controls.Add(this.keyBox);
             this.groupBox1.Controls.Add(this.inputDeviceRadioButton2);
             this.groupBox1.Controls.Add(this.inputDeviceRadioButton1);
@@ -107,25 +107,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // button2
+            // cancelButton
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Abort;
-            this.button2.Location = new System.Drawing.Point(83, 331);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Abort;
+            this.cancelButton.Location = new System.Drawing.Point(83, 331);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 20;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // okButton
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(164, 331);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Location = new System.Drawing.Point(164, 331);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 19;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
             // 
             // resultLabel
             // 
@@ -154,14 +154,14 @@
             this.inputDeviceRadioButton3.UseVisualStyleBackColor = true;
             this.inputDeviceRadioButton3.CheckedChanged += new System.EventHandler(this.RadioButton1_CheckedChanged);
             // 
-            // label1
+            // keyLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Key:";
+            this.keyLabel.AutoSize = true;
+            this.keyLabel.Location = new System.Drawing.Point(12, 38);
+            this.keyLabel.Name = "keyLabel";
+            this.keyLabel.Size = new System.Drawing.Size(28, 13);
+            this.keyLabel.TabIndex = 3;
+            this.keyLabel.Text = "Key:";
             // 
             // keyBox
             // 
@@ -238,7 +238,7 @@
             // 
             this.axisTypeBox.Controls.Add(this.axisTypeRadio4);
             this.axisTypeBox.Controls.Add(this.axisCustomStringBox);
-            this.axisTypeBox.Controls.Add(this.axisTypeRadio5);
+            this.axisTypeBox.Controls.Add(this.axisTypeRadio3);
             this.axisTypeBox.Controls.Add(this.axisTypeRadio2);
             this.axisTypeBox.Controls.Add(this.axisTypeRadio1);
             this.axisTypeBox.Location = new System.Drawing.Point(106, 45);
@@ -268,17 +268,17 @@
             this.axisCustomStringBox.TabIndex = 24;
             this.axisCustomStringBox.TextChanged += new System.EventHandler(this.AxisCustomStringBox_TextChanged);
             // 
-            // axisTypeRadio5
+            // axisTypeRadio3
             // 
-            this.axisTypeRadio5.AutoSize = true;
-            this.axisTypeRadio5.Location = new System.Drawing.Point(6, 62);
-            this.axisTypeRadio5.Name = "axisTypeRadio5";
-            this.axisTypeRadio5.Size = new System.Drawing.Size(93, 17);
-            this.axisTypeRadio5.TabIndex = 27;
-            this.axisTypeRadio5.TabStop = true;
-            this.axisTypeRadio5.Text = "Custom String:";
-            this.axisTypeRadio5.UseVisualStyleBackColor = true;
-            this.axisTypeRadio5.CheckedChanged += new System.EventHandler(this.AxisTypeRadio5_CheckedChanged);
+            this.axisTypeRadio3.AutoSize = true;
+            this.axisTypeRadio3.Location = new System.Drawing.Point(6, 62);
+            this.axisTypeRadio3.Name = "axisTypeRadio3";
+            this.axisTypeRadio3.Size = new System.Drawing.Size(93, 17);
+            this.axisTypeRadio3.TabIndex = 27;
+            this.axisTypeRadio3.TabStop = true;
+            this.axisTypeRadio3.Text = "Custom String:";
+            this.axisTypeRadio3.UseVisualStyleBackColor = true;
+            this.axisTypeRadio3.CheckedChanged += new System.EventHandler(this.AxisTypeRadio5_CheckedChanged);
             // 
             // axisTypeRadio2
             // 
@@ -376,6 +376,18 @@
             this.panel1.Size = new System.Drawing.Size(30, 30);
             this.panel1.TabIndex = 19;
             // 
+            // UpAxisButton
+            // 
+            this.UpAxisButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UpAxisButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpAxisButton.Location = new System.Drawing.Point(0, 0);
+            this.UpAxisButton.Name = "UpAxisButton";
+            this.UpAxisButton.Size = new System.Drawing.Size(30, 30);
+            this.UpAxisButton.TabIndex = 1;
+            this.UpAxisButton.Text = "▲";
+            this.UpAxisButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UpAxisButton.Click += new System.EventHandler(this.Label5_Click);
+            // 
             // AxisUpRadioButton
             // 
             this.AxisUpRadioButton.AutoSize = true;
@@ -388,18 +400,6 @@
             this.AxisUpRadioButton.UseVisualStyleBackColor = true;
             this.AxisUpRadioButton.Visible = false;
             this.AxisUpRadioButton.CheckedChanged += new System.EventHandler(this.AxisRightRadioButton_CheckedChanged);
-            // 
-            // UpAxisButton
-            // 
-            this.UpAxisButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UpAxisButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpAxisButton.Location = new System.Drawing.Point(0, 0);
-            this.UpAxisButton.Name = "UpAxisButton";
-            this.UpAxisButton.Size = new System.Drawing.Size(30, 30);
-            this.UpAxisButton.TabIndex = 1;
-            this.UpAxisButton.Text = "▲";
-            this.UpAxisButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.UpAxisButton.Click += new System.EventHandler(this.Label5_Click);
             // 
             // panel2
             // 
@@ -421,18 +421,6 @@
             this.panel3.Size = new System.Drawing.Size(30, 30);
             this.panel3.TabIndex = 21;
             // 
-            // AxisLeftRadioButton
-            // 
-            this.AxisLeftRadioButton.AutoSize = true;
-            this.AxisLeftRadioButton.Location = new System.Drawing.Point(8, 9);
-            this.AxisLeftRadioButton.Name = "AxisLeftRadioButton";
-            this.AxisLeftRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.AxisLeftRadioButton.TabIndex = 26;
-            this.AxisLeftRadioButton.TabStop = true;
-            this.AxisLeftRadioButton.UseVisualStyleBackColor = true;
-            this.AxisLeftRadioButton.Visible = false;
-            this.AxisLeftRadioButton.CheckedChanged += new System.EventHandler(this.AxisRightRadioButton_CheckedChanged);
-            // 
             // LeftAxisButton
             // 
             this.LeftAxisButton.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -444,6 +432,18 @@
             this.LeftAxisButton.Text = "◀";
             this.LeftAxisButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LeftAxisButton.Click += new System.EventHandler(this.Label5_Click);
+            // 
+            // AxisLeftRadioButton
+            // 
+            this.AxisLeftRadioButton.AutoSize = true;
+            this.AxisLeftRadioButton.Location = new System.Drawing.Point(8, 9);
+            this.AxisLeftRadioButton.Name = "AxisLeftRadioButton";
+            this.AxisLeftRadioButton.Size = new System.Drawing.Size(14, 13);
+            this.AxisLeftRadioButton.TabIndex = 26;
+            this.AxisLeftRadioButton.TabStop = true;
+            this.AxisLeftRadioButton.UseVisualStyleBackColor = true;
+            this.AxisLeftRadioButton.Visible = false;
+            this.AxisLeftRadioButton.CheckedChanged += new System.EventHandler(this.AxisRightRadioButton_CheckedChanged);
             // 
             // panel5
             // 
@@ -478,18 +478,6 @@
             this.panel6.Size = new System.Drawing.Size(30, 30);
             this.panel6.TabIndex = 23;
             // 
-            // AxisRightRadioButton
-            // 
-            this.AxisRightRadioButton.AutoSize = true;
-            this.AxisRightRadioButton.Location = new System.Drawing.Point(6, 9);
-            this.AxisRightRadioButton.Name = "AxisRightRadioButton";
-            this.AxisRightRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.AxisRightRadioButton.TabIndex = 24;
-            this.AxisRightRadioButton.TabStop = true;
-            this.AxisRightRadioButton.UseVisualStyleBackColor = true;
-            this.AxisRightRadioButton.Visible = false;
-            this.AxisRightRadioButton.CheckedChanged += new System.EventHandler(this.AxisRightRadioButton_CheckedChanged);
-            // 
             // RightAxisButton
             // 
             this.RightAxisButton.BackColor = System.Drawing.SystemColors.ScrollBar;
@@ -502,6 +490,18 @@
             this.RightAxisButton.Text = "▶";
             this.RightAxisButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RightAxisButton.Click += new System.EventHandler(this.Label5_Click);
+            // 
+            // AxisRightRadioButton
+            // 
+            this.AxisRightRadioButton.AutoSize = true;
+            this.AxisRightRadioButton.Location = new System.Drawing.Point(6, 9);
+            this.AxisRightRadioButton.Name = "AxisRightRadioButton";
+            this.AxisRightRadioButton.Size = new System.Drawing.Size(14, 13);
+            this.AxisRightRadioButton.TabIndex = 24;
+            this.AxisRightRadioButton.TabStop = true;
+            this.AxisRightRadioButton.UseVisualStyleBackColor = true;
+            this.AxisRightRadioButton.Visible = false;
+            this.AxisRightRadioButton.CheckedChanged += new System.EventHandler(this.AxisRightRadioButton_CheckedChanged);
             // 
             // panel7
             // 
@@ -523,18 +523,6 @@
             this.panel8.Size = new System.Drawing.Size(30, 30);
             this.panel8.TabIndex = 25;
             // 
-            // AxisDownRadioButton
-            // 
-            this.AxisDownRadioButton.AutoSize = true;
-            this.AxisDownRadioButton.Location = new System.Drawing.Point(7, 12);
-            this.AxisDownRadioButton.Name = "AxisDownRadioButton";
-            this.AxisDownRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.AxisDownRadioButton.TabIndex = 25;
-            this.AxisDownRadioButton.TabStop = true;
-            this.AxisDownRadioButton.UseVisualStyleBackColor = true;
-            this.AxisDownRadioButton.Visible = false;
-            this.AxisDownRadioButton.CheckedChanged += new System.EventHandler(this.AxisRightRadioButton_CheckedChanged);
-            // 
             // DownAxisButton
             // 
             this.DownAxisButton.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -546,6 +534,18 @@
             this.DownAxisButton.Text = "▼";
             this.DownAxisButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DownAxisButton.Click += new System.EventHandler(this.Label5_Click);
+            // 
+            // AxisDownRadioButton
+            // 
+            this.AxisDownRadioButton.AutoSize = true;
+            this.AxisDownRadioButton.Location = new System.Drawing.Point(7, 12);
+            this.AxisDownRadioButton.Name = "AxisDownRadioButton";
+            this.AxisDownRadioButton.Size = new System.Drawing.Size(14, 13);
+            this.AxisDownRadioButton.TabIndex = 25;
+            this.AxisDownRadioButton.TabStop = true;
+            this.AxisDownRadioButton.UseVisualStyleBackColor = true;
+            this.AxisDownRadioButton.Visible = false;
+            this.AxisDownRadioButton.CheckedChanged += new System.EventHandler(this.AxisRightRadioButton_CheckedChanged);
             // 
             // panel9
             // 
@@ -620,48 +620,48 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown AxisIDNUD;
-        private System.Windows.Forms.NumericUpDown buttonIDNUD;
-        private System.Windows.Forms.RadioButton controllerInputTypeRadio2;
-        private System.Windows.Forms.RadioButton controllerInputTypeRadio1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox keyBox;
-        private System.Windows.Forms.RadioButton inputDeviceRadioButton2;
-        private System.Windows.Forms.RadioButton inputDeviceRadioButton1;
-        private System.Windows.Forms.GroupBox axisDirectionBox;
-        private System.Windows.Forms.Label AxisIDLabel;
-        private System.Windows.Forms.GroupBox axisPOVBox;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Label UpAxisButton;
-        private System.Windows.Forms.Label LeftAxisButton;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label RightAxisButton;
-        private System.Windows.Forms.Label DownAxisButton;
-        private System.Windows.Forms.Label resultLabel;
-        private System.Windows.Forms.TextBox resultText;
-        private System.Windows.Forms.RadioButton inputDeviceRadioButton3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox axisTypeBox;
-        private System.Windows.Forms.RadioButton axisTypeRadio2;
-        private System.Windows.Forms.RadioButton axisTypeRadio1;
-        private System.Windows.Forms.TextBox axisCustomStringBox;
-        private System.Windows.Forms.RadioButton axisTypeRadio5;
-        private System.Windows.Forms.RadioButton axisTypeRadio4;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton AxisUpRadioButton;
-        private System.Windows.Forms.RadioButton AxisLeftRadioButton;
-        private System.Windows.Forms.RadioButton AxisRightRadioButton;
-        private System.Windows.Forms.RadioButton AxisDownRadioButton;
+        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.NumericUpDown AxisIDNUD;
+        public System.Windows.Forms.NumericUpDown buttonIDNUD;
+        public System.Windows.Forms.RadioButton controllerInputTypeRadio2;
+        public System.Windows.Forms.RadioButton controllerInputTypeRadio1;
+        public System.Windows.Forms.Label keyLabel;
+        public System.Windows.Forms.ComboBox keyBox;
+        public System.Windows.Forms.RadioButton inputDeviceRadioButton2;
+        public System.Windows.Forms.RadioButton inputDeviceRadioButton1;
+        public System.Windows.Forms.GroupBox axisDirectionBox;
+        public System.Windows.Forms.Label AxisIDLabel;
+        public System.Windows.Forms.GroupBox axisPOVBox;
+        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        public System.Windows.Forms.Panel panel4;
+        public System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.Panel panel5;
+        public System.Windows.Forms.Panel panel6;
+        public System.Windows.Forms.Panel panel7;
+        public System.Windows.Forms.Panel panel8;
+        public System.Windows.Forms.Panel panel9;
+        public System.Windows.Forms.Label UpAxisButton;
+        public System.Windows.Forms.Label LeftAxisButton;
+        public System.Windows.Forms.Label label7;
+        public System.Windows.Forms.Label RightAxisButton;
+        public System.Windows.Forms.Label DownAxisButton;
+        public System.Windows.Forms.Label resultLabel;
+        public System.Windows.Forms.TextBox resultText;
+        public System.Windows.Forms.RadioButton inputDeviceRadioButton3;
+        public System.Windows.Forms.Button cancelButton;
+        public System.Windows.Forms.Button okButton;
+        public System.Windows.Forms.GroupBox axisTypeBox;
+        public System.Windows.Forms.RadioButton axisTypeRadio2;
+        public System.Windows.Forms.RadioButton axisTypeRadio1;
+        public System.Windows.Forms.TextBox axisCustomStringBox;
+        public System.Windows.Forms.RadioButton axisTypeRadio3;
+        public System.Windows.Forms.RadioButton axisTypeRadio4;
+        public System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.RadioButton AxisUpRadioButton;
+        public System.Windows.Forms.RadioButton AxisLeftRadioButton;
+        public System.Windows.Forms.RadioButton AxisRightRadioButton;
+        public System.Windows.Forms.RadioButton AxisDownRadioButton;
     }
 }

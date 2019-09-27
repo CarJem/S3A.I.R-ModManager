@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.yesButton = new System.Windows.Forms.Button();
+            this.noButton = new System.Windows.Forms.Button();
+            this.updateMessageLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -44,46 +44,46 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
-            // button1
+            // yesButton
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.button1.Location = new System.Drawing.Point(12, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(184, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Yes";
-            this.button1.UseVisualStyleBackColor = true;
+            this.yesButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.yesButton.Location = new System.Drawing.Point(12, 415);
+            this.yesButton.Name = "yesButton";
+            this.yesButton.Size = new System.Drawing.Size(184, 23);
+            this.yesButton.TabIndex = 1;
+            this.yesButton.Text = "Yes";
+            this.yesButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // noButton
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.button2.Location = new System.Drawing.Point(202, 415);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "No";
-            this.button2.UseVisualStyleBackColor = true;
+            this.noButton.DialogResult = System.Windows.Forms.DialogResult.No;
+            this.noButton.Location = new System.Drawing.Point(202, 415);
+            this.noButton.Name = "noButton";
+            this.noButton.Size = new System.Drawing.Size(95, 23);
+            this.noButton.TabIndex = 2;
+            this.noButton.Text = "No";
+            this.noButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // updateMessageLabel
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(309, 44);
-            this.label1.TabIndex = 3;
-            this.label1.Tag = "";
-            this.label1.Text = "An Update is Avaliable! Would You Like to Update Now?";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.updateMessageLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.updateMessageLabel.Location = new System.Drawing.Point(0, 0);
+            this.updateMessageLabel.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
+            this.updateMessageLabel.Name = "updateMessageLabel";
+            this.updateMessageLabel.Size = new System.Drawing.Size(309, 44);
+            this.updateMessageLabel.TabIndex = 3;
+            this.updateMessageLabel.Tag = "";
+            this.updateMessageLabel.Text = "An Update is Avaliable! Would You Like to Update Now?";
+            this.updateMessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Updater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 450);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.updateMessageLabel);
+            this.Controls.Add(this.noButton);
+            this.Controls.Add(this.yesButton);
             this.Controls.Add(this.richTextBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Updater";
@@ -97,8 +97,8 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Button yesButton;
+        public System.Windows.Forms.Button noButton;
+        public System.Windows.Forms.Label updateMessageLabel;
     }
 }

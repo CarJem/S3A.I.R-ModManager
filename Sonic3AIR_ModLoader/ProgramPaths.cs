@@ -228,13 +228,13 @@ namespace Sonic3AIR_ModLoader
             if (MissingFilesState.Exists(x => x.Item2.Equals(false)))
             {
                 List<Tuple<string, bool>> MissingList = MissingFilesState.Where(x => x.Item2.Equals(false)).ToList();
-                string missingItems = Program.CurrentLanguage.GetString("CollectionFilesCouldNotBeFound1");
+                string missingItems = Program.LanguageResource.GetString("CollectionFilesCouldNotBeFound1");
                 if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRAppDataFolder"))) missingItems += $"{nL}- {Sonic3AIRAppDataFolder}";
                 if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRModsFolder"))) missingItems += $"{nL}- {Sonic3AIRModsFolder}";
                 if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRTempModsFolder"))) missingItems += $"{nL}- {Sonic3AIR_MM_TempModsFolder}";
                 if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRSettingsFile"))) missingItems += $"{nL}- {Sonic3AIRSettingsFile}";
-                missingItems += Program.CurrentLanguage.GetString("CollectionFilesCouldNotBeFound2");
-                missingItems += Program.CurrentLanguage.GetString("CollectionFilesCouldNotBeFound3");
+                missingItems += Program.LanguageResource.GetString("CollectionFilesCouldNotBeFound2");
+                missingItems += Program.LanguageResource.GetString("CollectionFilesCouldNotBeFound3");
                 MessageBox.Show(missingItems);
                 return false;
             }
@@ -267,7 +267,7 @@ namespace Sonic3AIR_ModLoader
                 int result = S3AIRSettings.Version.CompareTo(target);
                 if (result < 0)
                 {
-                    MessageBox.Show($"Sonic 3 A.I.R is out of date, please use version 19.08.17.0 or above! (and start it at least once fully)");
+                    MessageBox.Show(Program.LanguageResource.GetString("StartupFailureError"));
                     return false;
                 }
                 else

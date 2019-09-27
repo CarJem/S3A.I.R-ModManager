@@ -16,13 +16,19 @@ namespace Sonic3AIR_ModLoader
         public KeybindingsListDialog(List<string> _keybindList)
         {
             InitializeComponent();
+            Instance = this;
+            UserLanguage.ApplyLanguage(ref Instance);
             KeybindList = _keybindList;
             keybindsList.DataSource = KeybindList;
         }
 
+        private KeybindingsListDialog Instance;
+
         public KeybindingsListDialog()
         {
             InitializeComponent();
+            Instance = this;
+            UserLanguage.ApplyLanguage(ref Instance);
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -41,7 +47,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (keybindsList.SelectedItem != null)
             {
-                DialogResult result = MessageBox.Show($"Verification: Do you want to remove the [ {keybindsList.SelectedItem.ToString()} ] keybind?", "Delete Keybind", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show($"{Program.LanguageResource.GetString("DeleteKeybindVerification1")} [ {keybindsList.SelectedItem.ToString()} ] {Program.LanguageResource.GetString("DeleteKeybindVerification2")}", Program.LanguageResource.GetString("DeleteKeybindTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     int index = keybindsList.SelectedIndex;

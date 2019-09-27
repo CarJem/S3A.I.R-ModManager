@@ -121,6 +121,11 @@
     <Compile Include="KeybindingsListDialog.Designer.cs">
       <DependentUpon>KeybindingsListDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Languages\lang_fr.Designer.cs">
+      <DependentUpon>lang_fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Languages\lang_gr.Designer.cs">
       <DependentUpon>lang_gr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -161,6 +166,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KeybindingsListDialog.resx">
       <DependentUpon>KeybindingsListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\lang_fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>lang_fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\lang_gr.resx">
       <Generator>ResXFileCodeGenerator</Generator>

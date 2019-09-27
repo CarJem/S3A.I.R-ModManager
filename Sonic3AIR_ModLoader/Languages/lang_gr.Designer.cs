@@ -97,6 +97,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pfad nicht gesetzt. Kann Sonic 3 A.I.R. nicht starten!.
+        /// </summary>
+        internal static string AIRCanNotStartNoPath {
+            get {
+                return ResourceManager.GetString("AIRCanNotStartNoPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Die Datei mit deinen Spieleinstellungen existiert nicht mehr. Starte Sonic 3 A.I.R. einmal ohne den Mod Loader und evrsuche es dann noch einmal..
         /// </summary>
         internal static string AIRChangePathNoLongerExists {
@@ -183,6 +192,33 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string AutoBootDelay {
             get {
                 return ResourceManager.GetString("AutoBootDelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Achse/POV:.
+        /// </summary>
+        internal static string AxisPOVLabel {
+            get {
+                return ResourceManager.GetString("AxisPOVLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Achse.
+        /// </summary>
+        internal static string AxisRadioButton {
+            get {
+                return ResourceManager.GetString("AxisRadioButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knopf:.
+        /// </summary>
+        internal static string ButtonLabel {
+            get {
+                return ResourceManager.GetString("ButtonLabel", resourceCulture);
             }
         }
         
@@ -367,11 +403,38 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Controller.
+        /// </summary>
+        internal static string ControllerRadioButton {
+            get {
+                return ResourceManager.GetString("ControllerRadioButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dateipfad kopieren.
         /// </summary>
         internal static string CopyFilePath {
             get {
                 return ResourceManager.GetString("CopyFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Benutzerdefiniert/Erweitert:.
+        /// </summary>
+        internal static string CustomAdvancedLabel {
+            get {
+                return ResourceManager.GetString("CustomAdvancedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eigener String:.
+        /// </summary>
+        internal static string CustomStringLabel {
+            get {
+                return ResourceManager.GetString("CustomStringLabel", resourceCulture);
             }
         }
         
@@ -421,6 +484,33 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zuordnung löschen.
+        /// </summary>
+        internal static string DeleteKeybindTitle {
+            get {
+                return ResourceManager.GetString("DeleteKeybindTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sicherheitsabfrage: Willst du die Tastenzuordnung.
+        /// </summary>
+        internal static string DeleteKeybindVerification1 {
+            get {
+                return ResourceManager.GetString("DeleteKeybindVerification1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to löschen?.
+        /// </summary>
+        internal static string DeleteKeybindVerification2 {
+            get {
+                return ResourceManager.GetString("DeleteKeybindVerification2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gerätebezeichner.
         /// </summary>
         internal static string DeviceIdentifierNames {
@@ -430,11 +520,38 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Richtung.
+        /// </summary>
+        internal static string DirectionGB {
+            get {
+                return ResourceManager.GetString("DirectionGB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wird heruntergeladen.
         /// </summary>
         internal static string Downloading {
             get {
                 return ResourceManager.GetString("Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bearbeiten....
+        /// </summary>
+        internal static string EditExpandable {
+            get {
+                return ResourceManager.GetString("EditExpandable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tastenzuordnungen bearbeiten....
+        /// </summary>
+        internal static string EditKeybindingsTitleExpandable {
+            get {
+                return ResourceManager.GetString("EditKeybindingsTitleExpandable", resourceCulture);
             }
         }
         
@@ -502,6 +619,24 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anwendungsdatei.
+        /// </summary>
+        internal static string EXEFileDialogFilter {
+            get {
+                return ResourceManager.GetString("EXEFileDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic 3 A.I.R. Anwendungsdatei wählen....
+        /// </summary>
+        internal static string EXEFileDialogTitle {
+            get {
+                return ResourceManager.GetString("EXEFileDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Beenden.
         /// </summary>
         internal static string Exit {
@@ -565,11 +700,20 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anleitungen/Direktlinks.
+        ///   Looks up a localized string similar to Anleitungen/Links.
         /// </summary>
         internal static string GuidesTab {
             get {
                 return ResourceManager.GetString("GuidesTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID:.
+        /// </summary>
+        internal static string IDLabel {
+            get {
+                return ResourceManager.GetString("IDLabel", resourceCulture);
             }
         }
         
@@ -703,11 +847,83 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Existiert).
+        /// </summary>
+        internal static string KeybindingsExistingNote {
+            get {
+                return ResourceManager.GetString("KeybindingsExistingNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tastenzuordnungen:.
+        /// </summary>
+        internal static string KeybindingsLabel {
+            get {
+                return ResourceManager.GetString("KeybindingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tastatur.
+        /// </summary>
+        internal static string KeyboardRadioButton {
+            get {
+                return ResourceManager.GetString("KeyboardRadioButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taste:.
+        /// </summary>
+        internal static string KeyLabel {
+            get {
+                return ResourceManager.GetString("KeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sprache:.
+        /// </summary>
+        internal static string LanguageLabel {
+            get {
+                return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log-Datei nicht gefunden.
         /// </summary>
         internal static string LogFileNotFound {
             get {
                 return ResourceManager.GetString("LogFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic 3 A.I.R.&apos;s Dateipfad ist nicht gesetzt, willst du ihn jetzt festlegen?.
+        /// </summary>
+        internal static string MissingAIRSetNowAlert {
+            get {
+                return ResourceManager.GetString("MissingAIRSetNowAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic 3 AIR Mod.
+        /// </summary>
+        internal static string ModFileDialogFilter {
+            get {
+                return ResourceManager.GetString("ModFileDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Komprimierte Mod-Datei wählen....
+        /// </summary>
+        internal static string ModFileDialogTitle {
+            get {
+                return ResourceManager.GetString("ModFileDialogTitle", resourceCulture);
             }
         }
         
@@ -739,7 +955,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mod-Eigenschften.
+        ///   Looks up a localized string similar to Mod-Eigenschaften.
         /// </summary>
         internal static string ModsTab_ModProperties {
             get {
@@ -757,11 +973,29 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nein.
+        /// </summary>
+        internal static string No_Button {
+            get {
+                return ResourceManager.GetString("No_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keine Versionen installiert.
         /// </summary>
         internal static string NoInstalledVersions {
             get {
                 return ResourceManager.GetString("NoInstalledVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keine Beschreibung angegeben..
+        /// </summary>
+        internal static string NoModDescript {
+            get {
+                return ResourceManager.GetString("NoModDescript", resourceCulture);
             }
         }
         
@@ -928,6 +1162,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to POV.
+        /// </summary>
+        internal static string POVRadioButton {
+            get {
+                return ResourceManager.GetString("POVRadioButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grund.
         /// </summary>
         internal static string Reason {
@@ -946,7 +1189,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Game Recordings (Aufzeichnungen).
+        ///   Looks up a localized string similar to Aufzeichnungen.
         /// </summary>
         internal static string RecordingsTab {
             get {
@@ -1045,6 +1288,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ergebnis:.
+        /// </summary>
+        internal static string ResultLabel {
+            get {
+                return ResourceManager.GetString("ResultLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S3AIR @ Gamebanana.
         /// </summary>
         internal static string S3AIRGB {
@@ -1090,7 +1342,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Speichern &amp; Laden.
+        ///   Looks up a localized string similar to Speichern &amp; Starten.
         /// </summary>
         internal static string Save_Load {
             get {
@@ -1104,6 +1356,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string SelectFromInstalledVersions {
             get {
                 return ResourceManager.GetString("SelectFromInstalledVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eingabe wählen....
+        /// </summary>
+        internal static string SelectInputTitleExpandable {
+            get {
+                return ResourceManager.GetString("SelectInputTitleExpandable", resourceCulture);
             }
         }
         
@@ -1216,6 +1477,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deine Sonic 3 A.I.R. Version ist veraltet, bitte update auf Version 19.08.17.0 oder höher! (und starte es zumindest einmal).
+        /// </summary>
+        internal static string StartupFailureError {
+            get {
+                return ResourceManager.GetString("StartupFailureError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nach Spielende offen bleiben.
         /// </summary>
         internal static string StayOpenOnExit {
@@ -1234,11 +1504,29 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analogstick.
+        /// </summary>
+        internal static string ThumbstickRadioButton {
+            get {
+                return ResourceManager.GetString("ThumbstickRadioButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Werkzeuge.
         /// </summary>
         internal static string ToolsTab {
             get {
                 return ResourceManager.GetString("ToolsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ.
+        /// </summary>
+        internal static string TypeGB {
+            get {
+                return ResourceManager.GetString("TypeGB", resourceCulture);
             }
         }
         
@@ -1266,6 +1554,42 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string UnableToValididatePath {
             get {
                 return ResourceManager.GetString("UnableToValididatePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ein Update ist verfügbar! Willst du es jetzt installieren?.
+        /// </summary>
+        internal static string UpdateAvaliable {
+            get {
+                return ResourceManager.GetString("UpdateAvaliable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ein Update ist verfügbar! Willst du es jetzt installieren?.
+        /// </summary>
+        internal static string Updater_Avaliable {
+            get {
+                return ResourceManager.GetString("Updater_Avaliable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Du hast die aktuellste Version. Willst du sie erneut runterladen?.
+        /// </summary>
+        internal static string Updater_UpToDate {
+            get {
+                return ResourceManager.GetString("Updater_UpToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updater.
+        /// </summary>
+        internal static string UpdaterTitle {
+            get {
+                return ResourceManager.GetString("UpdaterTitle", resourceCulture);
             }
         }
         
@@ -1312,6 +1636,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string VersionsTab {
             get {
                 return ResourceManager.GetString("VersionsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ja.
+        /// </summary>
+        internal static string Yes_Button {
+            get {
+                return ResourceManager.GetString("Yes_Button", resourceCulture);
             }
         }
     }

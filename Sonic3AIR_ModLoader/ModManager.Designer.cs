@@ -92,6 +92,8 @@
             this.failSafeModeCheckbox = new System.Windows.Forms.CheckBox();
             this.fixGlitchesCheckbox = new System.Windows.Forms.CheckBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.languageLabel = new System.Windows.Forms.Label();
+            this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.updateSonic3AIRPathButton = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.autoLaunchDelayLabel = new System.Windows.Forms.Label();
@@ -678,9 +680,9 @@
             // 
             // airModManagerPlacesButton
             // 
-            this.airModManagerPlacesButton.Location = new System.Drawing.Point(116, 370);
+            this.airModManagerPlacesButton.Location = new System.Drawing.Point(6, 370);
             this.airModManagerPlacesButton.Name = "airModManagerPlacesButton";
-            this.airModManagerPlacesButton.Size = new System.Drawing.Size(183, 23);
+            this.airModManagerPlacesButton.Size = new System.Drawing.Size(293, 23);
             this.airModManagerPlacesButton.TabIndex = 15;
             this.airModManagerPlacesButton.Text = "A.I.R. Mod Manager Places...";
             this.airModManagerPlacesButton.UseVisualStyleBackColor = true;
@@ -688,9 +690,9 @@
             // 
             // airMediaButton
             // 
-            this.airMediaButton.Location = new System.Drawing.Point(211, 341);
+            this.airMediaButton.Location = new System.Drawing.Point(169, 341);
             this.airMediaButton.Name = "airMediaButton";
-            this.airMediaButton.Size = new System.Drawing.Size(88, 23);
+            this.airMediaButton.Size = new System.Drawing.Size(130, 23);
             this.airMediaButton.TabIndex = 14;
             this.airMediaButton.Text = "A.I.R. Media...";
             this.airMediaButton.UseVisualStyleBackColor = true;
@@ -698,9 +700,9 @@
             // 
             // airPlacesButton
             // 
-            this.airPlacesButton.Location = new System.Drawing.Point(116, 341);
+            this.airPlacesButton.Location = new System.Drawing.Point(6, 341);
             this.airPlacesButton.Name = "airPlacesButton";
-            this.airPlacesButton.Size = new System.Drawing.Size(89, 23);
+            this.airPlacesButton.Size = new System.Drawing.Size(130, 23);
             this.airPlacesButton.TabIndex = 13;
             this.airPlacesButton.Text = "A.I.R. Places...";
             this.airPlacesButton.UseVisualStyleBackColor = true;
@@ -890,6 +892,8 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.languageLabel);
+            this.groupBox8.Controls.Add(this.languageComboBox);
             this.groupBox8.Controls.Add(this.updateSonic3AIRPathButton);
             this.groupBox8.Controls.Add(this.checkBox1);
             this.groupBox8.Controls.Add(this.autoLaunchDelayLabel);
@@ -905,6 +909,24 @@
             this.groupBox8.TabIndex = 15;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Mod Manager Options";
+            // 
+            // languageLabel
+            // 
+            this.languageLabel.AutoSize = true;
+            this.languageLabel.Location = new System.Drawing.Point(6, 207);
+            this.languageLabel.Name = "languageLabel";
+            this.languageLabel.Size = new System.Drawing.Size(58, 13);
+            this.languageLabel.TabIndex = 16;
+            this.languageLabel.Text = "Language:";
+            // 
+            // languageComboBox
+            // 
+            this.languageComboBox.FormattingEnabled = true;
+            this.languageComboBox.Location = new System.Drawing.Point(9, 223);
+            this.languageComboBox.Name = "languageComboBox";
+            this.languageComboBox.Size = new System.Drawing.Size(278, 21);
+            this.languageComboBox.TabIndex = 1;
+            this.languageComboBox.SelectionChangeCommitted += new System.EventHandler(this.LanguageComboBox_SelectionChangeCommitted);
             // 
             // updateSonic3AIRPathButton
             // 
@@ -1419,7 +1441,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(196, 52);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Special Thanks:\r\n● Eukayrot3K - Creator of Sonic 3 A.I.R.\r\n\r\n\r\n";
+            this.label3.Text = "Special Thanks:\r\n● Eukaryot3K - Creator of Sonic 3 A.I.R.\r\n\r\n\r\n";
             // 
             // checkForUpdatesButton
             // 
@@ -1902,6 +1924,8 @@
         public System.Windows.Forms.ToolStripMenuItem fromInstalledHeader;
         public System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         public System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        public System.Windows.Forms.Label languageLabel;
+        private System.Windows.Forms.ComboBox languageComboBox;
     }
 }
 

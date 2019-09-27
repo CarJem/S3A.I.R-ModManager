@@ -22,14 +22,14 @@ namespace Sonic3AIR_ModLoader.Languages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class lang_en {
+    internal class lang_fr {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal lang_en() {
+        internal lang_fr() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModLoader.Languages.lang_en", typeof(lang_en).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModLoader.Languages.lang_fr", typeof(lang_fr).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About.
+        ///   Looks up a localized string similar to En savoir plus....
         /// </summary>
         internal static string AboutTab {
             get {
@@ -70,7 +70,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a Mod....
+        ///   Looks up a localized string similar to Ajouter un Mod....
         /// </summary>
         internal static string AddAMod {
             get {
@@ -79,7 +79,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the name of the controller as it appears in the system settings or type * to target all devices..
+        ///   Looks up a localized string similar to Entrez le nom de la manette telle qu&apos;il apparaît dans les paramètres système ou tapez * pour cibler tous les périphériques..
         /// </summary>
         internal static string AddNewDeviceDescription {
             get {
@@ -88,7 +88,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add New Device....
+        ///   Looks up a localized string similar to Ajouter un nouveau périphérique....
         /// </summary>
         internal static string AddNewDeviceTitle {
             get {
@@ -97,7 +97,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path not set. Cannot start Sonic 3 A.I.R!.
+        ///   Looks up a localized string similar to Emplacement non défini. Impossible de démarrer Sonic 3 A.I.R !.
         /// </summary>
         internal static string AIRCanNotStartNoPath {
             get {
@@ -106,7 +106,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The file defined settings does not exist anymore. Launch AIR again outside of the mod loader and try again.
+        ///   Looks up a localized string similar to Les paramètres définis par le fichier n’existent plus. Relancez AIR en dehors du mod loader puis réessayez..
         /// </summary>
         internal static string AIRChangePathNoLongerExists {
             get {
@@ -115,7 +115,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A.I.R. Internal Settings.
+        ///   Looks up a localized string similar to Paramètre interne de A.I.R.
         /// </summary>
         internal static string AIRInternalSettings {
             get {
@@ -124,7 +124,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A.I.R. Media....
+        ///   Looks up a localized string similar to Média A.I.R....
         /// </summary>
         internal static string AIRMedia {
             get {
@@ -133,7 +133,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A.I.R. Mod Manager Places....
+        ///   Looks up a localized string similar to Emplacement de A.I.R Mod Manager ....
         /// </summary>
         internal static string AIRMMPlaces {
             get {
@@ -142,7 +142,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A.I.R. Places....
+        ///   Looks up a localized string similar to Emplacement de A.I.R....
         /// </summary>
         internal static string AIRPlaces {
             get {
@@ -151,7 +151,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A.I.R. Version.
+        ///   Looks up a localized string similar to Version A.I.R.
         /// </summary>
         internal static string AIRVersion {
             get {
@@ -160,7 +160,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking for Updates....
+        ///   Looks up a localized string similar to Recherche de mises à jour....
         /// </summary>
         internal static string AutoBoot_CheckingForUpdates {
             get {
@@ -169,7 +169,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Initializing....
+        ///   Looks up a localized string similar to Initialisation....
         /// </summary>
         internal static string AutoBoot_Initalizing {
             get {
@@ -178,7 +178,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Launching in.
+        ///   Looks up a localized string similar to Lancer en.
         /// </summary>
         internal static string AutoBoot_LaunchingIn {
             get {
@@ -187,7 +187,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delay (Seconds):.
+        ///   Looks up a localized string similar to Délai (secondes):.
         /// </summary>
         internal static string AutoBootDelay {
             get {
@@ -196,7 +196,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Axis/POV:.
+        ///   Looks up a localized string similar to Axe/POV.
         /// </summary>
         internal static string AxisPOVLabel {
             get {
@@ -205,7 +205,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Axis.
+        ///   Looks up a localized string similar to Axe.
         /// </summary>
         internal static string AxisRadioButton {
             get {
@@ -214,7 +214,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Button:.
+        ///   Looks up a localized string similar to Bouton :.
         /// </summary>
         internal static string ButtonLabel {
             get {
@@ -223,7 +223,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Button Mappings.
+        ///   Looks up a localized string similar to Réglages des boutons.
         /// </summary>
         internal static string ButtonMappings {
             get {
@@ -259,7 +259,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Down.
+        ///   Looks up a localized string similar to Bas.
         /// </summary>
         internal static string Buttons_Down {
             get {
@@ -268,7 +268,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Left.
+        ///   Looks up a localized string similar to Gauche.
         /// </summary>
         internal static string Buttons_Left {
             get {
@@ -277,7 +277,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Right.
+        ///   Looks up a localized string similar to Droite.
         /// </summary>
         internal static string Buttons_Right {
             get {
@@ -295,7 +295,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Up.
+        ///   Looks up a localized string similar to Haut.
         /// </summary>
         internal static string Buttons_Up {
             get {
@@ -322,7 +322,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to By.
+        ///   Looks up a localized string similar to Par.
         /// </summary>
         internal static string By {
             get {
@@ -331,7 +331,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Annuler.
         /// </summary>
         internal static string Cancel {
             get {
@@ -340,7 +340,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Cancel.
+        ///   Looks up a localized string similar to &amp;Annuler.
         /// </summary>
         internal static string Cancel_Button {
             get {
@@ -358,7 +358,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check for A.I.R. Updates on Startup.
+        ///   Looks up a localized string similar to Vérifier les mises à jour de A.I.R au démarrage .
         /// </summary>
         internal static string CheckforAIRUpdatesOnStart {
             get {
@@ -367,7 +367,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check for Game Updates....
+        ///   Looks up a localized string similar to Vérifier les mises à jour de A.I.R....
         /// </summary>
         internal static string CheckForGameUpdatesExpandable {
             get {
@@ -376,7 +376,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following files could not be found: .
+        ///   Looks up a localized string similar to Les fichiers suivants sont introuvables :.
         /// </summary>
         internal static string CollectionFilesCouldNotBeFound1 {
             get {
@@ -385,9 +385,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///If you have not run Sonic 3 A.I.R. yet, please run Sonic 3 A.I.R. once before running the modloader!.
+        ///   Looks up a localized string similar to Si vous n&apos;avez pas encore exécuté Sonic 3 A.I.R, veuillez lancer Sonic 3 A.I.R avant d&apos;exécuter le Mod Loader !.
         /// </summary>
         internal static string CollectionFilesCouldNotBeFound2 {
             get {
@@ -396,9 +394,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///If you have, make sure these locations exist. The modloader can&apos;t run without them.
+        ///   Looks up a localized string similar to Si vous les avez, assurez-vous que ces emplacements existent. Le Mod Loader ne peut pas fonctionner sans eux.
         /// </summary>
         internal static string CollectionFilesCouldNotBeFound3 {
             get {
@@ -407,7 +403,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Controller.
+        ///   Looks up a localized string similar to Manette.
         /// </summary>
         internal static string ControllerRadioButton {
             get {
@@ -416,7 +412,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy File Path.
+        ///   Looks up a localized string similar to Copier l&apos;emplacement du fichier.
         /// </summary>
         internal static string CopyFilePath {
             get {
@@ -425,7 +421,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Custom/Advanced:.
+        ///   Looks up a localized string similar to Personnalisé/Avancé :.
         /// </summary>
         internal static string CustomAdvancedLabel {
             get {
@@ -434,7 +430,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Custom String:.
+        ///   Looks up a localized string similar to Chaîne personnalisée :.
         /// </summary>
         internal static string CustomStringLabel {
             get {
@@ -443,7 +439,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrease Selected Mod Priority....
+        ///   Looks up a localized string similar to Diminuer la priorité du mod sélectionné....
         /// </summary>
         internal static string DecreaseModPriority {
             get {
@@ -452,7 +448,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrease Selected Mod Priority to Min....
+        ///   Looks up a localized string similar to Diminuer la priorité du mod sélectionné sur Min....
         /// </summary>
         internal static string DecreaseModPriorityToMin {
             get {
@@ -461,7 +457,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to Supprimer.
         /// </summary>
         internal static string Delete {
             get {
@@ -470,7 +466,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete Device.
+        ///   Looks up a localized string similar to Supprimer un périphérique.
         /// </summary>
         internal static string DeleteDeviceTitle {
             get {
@@ -479,7 +475,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete.
+        ///   Looks up a localized string similar to Etes-vous sûr de vouloir supprimer.
         /// </summary>
         internal static string DeleteItemConfirmation {
             get {
@@ -488,7 +484,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete Keybind.
+        ///   Looks up a localized string similar to Supprimer le raccourci clavier.
         /// </summary>
         internal static string DeleteKeybindTitle {
             get {
@@ -497,7 +493,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verification: Do you want to remove the.
+        ///   Looks up a localized string similar to Vérification : voulez-vous supprimer le.
         /// </summary>
         internal static string DeleteKeybindVerification1 {
             get {
@@ -506,7 +502,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to keybind?.
+        ///   Looks up a localized string similar to raccourci clavier ?.
         /// </summary>
         internal static string DeleteKeybindVerification2 {
             get {
@@ -515,7 +511,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Device Identifier Names.
+        ///   Looks up a localized string similar to Noms d&apos;identifiant de périphérique.
         /// </summary>
         internal static string DeviceIdentifierNames {
             get {
@@ -533,7 +529,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading.
+        ///   Looks up a localized string similar to Téléchargement.
         /// </summary>
         internal static string Downloading {
             get {
@@ -542,7 +538,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit....
+        ///   Looks up a localized string similar to Modifier....
         /// </summary>
         internal static string EditExpandable {
             get {
@@ -551,7 +547,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Keybindings....
+        ///   Looks up a localized string similar to Modifier les raccourcis clavier....
         /// </summary>
         internal static string EditKeybindingsTitleExpandable {
             get {
@@ -560,7 +556,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable Auto Boot Mode.
+        ///   Looks up a localized string similar to Activer le mode de démarrage automatique.
         /// </summary>
         internal static string EnableAutoBootMode {
             get {
@@ -569,7 +565,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable Mod Stacking.
+        ///   Looks up a localized string similar to Activer l&apos;empilement de Mod.
         /// </summary>
         internal static string EnableModStacking {
             get {
@@ -578,7 +574,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NOTE: For A.I.R. Versions.
+        ///   Looks up a localized string similar to NOTE : Pour les versions de A.I.R.
         /// </summary>
         internal static string EnableModStacking_Note1 {
             get {
@@ -587,7 +583,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to v19.09.19.0 and Above Only.
+        ///   Looks up a localized string similar to v19.09.19.0 et plus récent.
         /// </summary>
         internal static string EnableModStacking_Note2 {
             get {
@@ -596,7 +592,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Mod URL....
+        ///   Looks up a localized string similar to Entrer l&apos;URL du Mod ....
         /// </summary>
         internal static string EnterModURL {
             get {
@@ -605,7 +601,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error with loading.
+        ///   Looks up a localized string similar to Erreur de chargement.
         /// </summary>
         internal static string ErrorWithLoading {
             get {
@@ -623,7 +619,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Executable File.
+        ///   Looks up a localized string similar to Fichier executable.
         /// </summary>
         internal static string EXEFileDialogFilter {
             get {
@@ -632,7 +628,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Sonic 3 A.I.R. Executable....
+        ///   Looks up a localized string similar to Sélectionner le fichier EXE (de Lancement) de Sonic 3 A.I.R....
         /// </summary>
         internal static string EXEFileDialogTitle {
             get {
@@ -641,7 +637,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exit.
+        ///   Looks up a localized string similar to Quitter.
         /// </summary>
         internal static string Exit {
             get {
@@ -650,7 +646,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fail Safe Mode.
+        ///   Looks up a localized string similar to Mode sans échec.
         /// </summary>
         internal static string FailSafeMode {
             get {
@@ -659,7 +655,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fix Glitches.
+        ///   Looks up a localized string similar to Correction des problèmes.
         /// </summary>
         internal static string FixGlitches {
             get {
@@ -668,7 +664,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force Start.
+        ///   Looks up a localized string similar to Démarrage forcé.
         /// </summary>
         internal static string ForceStart {
             get {
@@ -677,7 +673,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gamebanana URL Handler Options....
+        ///   Looks up a localized string similar to Les options de Gamebanana URL Handler....
         /// </summary>
         internal static string GameBannaURLHandler {
             get {
@@ -686,7 +682,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The game has been installed at.
+        ///   Looks up a localized string similar to Le jeu a été installé dans.
         /// </summary>
         internal static string GameInstalledAt {
             get {
@@ -695,7 +691,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to General.
+        ///   Looks up a localized string similar to Général.
         /// </summary>
         internal static string GeneralTab {
             get {
@@ -704,7 +700,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guides/Shortcuts.
+        ///   Looks up a localized string similar to Guides/Raccourcis.
         /// </summary>
         internal static string GuidesTab {
             get {
@@ -722,7 +718,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Increase Selected Mod Priority....
+        ///   Looks up a localized string similar to Augmenter la priorité du Mod sélectionné....
         /// </summary>
         internal static string IncreaseModPriority {
             get {
@@ -731,7 +727,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Increase Selected Mod Priority to Max....
+        ///   Looks up a localized string similar to Augmenter la priorité du mod sélectionné sur Max....
         /// </summary>
         internal static string IncreaseModPriorityToMax {
             get {
@@ -758,7 +754,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [NONE].
+        ///   Looks up a localized string similar to [AUCUN].
         /// </summary>
         internal static string Input_NONE {
             get {
@@ -776,7 +772,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [UNSUPPORTED].
+        ///   Looks up a localized string similar to [NON-SUPPORTÉ].
         /// </summary>
         internal static string Input_UNSUPPORTED {
             get {
@@ -785,9 +781,8 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error Loading Input Configuration File!
-        ///Make sure your game is up to date and you have A.I.R.&apos;s Game Path set in Options.
-        ///.
+        ///   Looks up a localized string similar to Erreur lors du chargement du fichier de configuration des inputs !
+        ///Assurez-vous que votre jeu est à jour et que le chemin du jeu A.I.R est défini dans Options..
         /// </summary>
         internal static string InputMappingError1 {
             get {
@@ -796,8 +791,8 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was an error reading the config file in this Version&apos;s Folder!
-        /// Please make sure nothing is wrong with it or do a clean install of this version of A.I.R..
+        ///   Looks up a localized string similar to Une erreur s&apos;est produite lors de la lecture du fichier de configuration dans le dossier de cette version !
+        ///Assurez-vous que le fichier de configuration n&apos;est pas endommagé ou effectuez une réinstallation  de cette version de A.I.R.
         /// </summary>
         internal static string InputMappingError2 {
             get {
@@ -806,8 +801,8 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The config file does not exist in the A.I.R. EXE Folder.
-        /// Please make sure the file exists or do a clean install of this version of A.I.R..
+        ///   Looks up a localized string similar to Le fichier de configuration n&apos;existe pas dans le dossier A.I.R du fichier EXE.
+        ///  Assurez-vous que le fichier existe ou réinstaller cette version de A.I.R.
         /// </summary>
         internal static string InputMappingError3 {
             get {
@@ -825,7 +820,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installed Versions.
+        ///   Looks up a localized string similar to Versions installées.
         /// </summary>
         internal static string InstalledVersions {
             get {
@@ -834,7 +829,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid URL.
+        ///   Looks up a localized string similar to URL incorrect.
         /// </summary>
         internal static string InvalidURL {
             get {
@@ -843,7 +838,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (Likely a JSON Error; Make sure the mod.json file is formated correctly!).
+        ///   Looks up a localized string similar to (Probablement une erreur du JSON; Assurez-vous que le fichier mod.json est correctement formaté !).
         /// </summary>
         internal static string JSONErrorPossible {
             get {
@@ -852,7 +847,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (Existing).
+        ///   Looks up a localized string similar to (Existant).
         /// </summary>
         internal static string KeybindingsExistingNote {
             get {
@@ -861,7 +856,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keybindings:.
+        ///   Looks up a localized string similar to Raccourcis clavier :.
         /// </summary>
         internal static string KeybindingsLabel {
             get {
@@ -870,7 +865,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keyboard.
+        ///   Looks up a localized string similar to Clavier.
         /// </summary>
         internal static string KeyboardRadioButton {
             get {
@@ -879,7 +874,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Key:.
+        ///   Looks up a localized string similar to Touche :.
         /// </summary>
         internal static string KeyLabel {
             get {
@@ -888,7 +883,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language:.
+        ///   Looks up a localized string similar to La langue :.
         /// </summary>
         internal static string LanguageLabel {
             get {
@@ -897,7 +892,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log file not found.
+        ///   Looks up a localized string similar to Fichier journal non trouvé.
         /// </summary>
         internal static string LogFileNotFound {
             get {
@@ -906,7 +901,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R.&apos;s File Path is Not Set, Would you like to set it now?.
+        ///   Looks up a localized string similar to L&apos;emplacement du fichier de Sonic 3 A.I.R n&apos;est pas défini, souhaitez-vous le configurer maintenant ?.
         /// </summary>
         internal static string MissingAIRSetNowAlert {
             get {
@@ -915,7 +910,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 AIR Mod.
+        ///   Looks up a localized string similar to Mod de Sonic 3 AIR.
         /// </summary>
         internal static string ModFileDialogFilter {
             get {
@@ -924,7 +919,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Compressed Mod File....
+        ///   Looks up a localized string similar to Sélectionner le fichier compressé....
         /// </summary>
         internal static string ModFileDialogTitle {
             get {
@@ -933,7 +928,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mod Manager Options.
+        ///   Looks up a localized string similar to Options du Mod Manager.
         /// </summary>
         internal static string ModManagerOptions {
             get {
@@ -942,7 +937,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mod Manager Version.
+        ///   Looks up a localized string similar to Version du Mod Manager.
         /// </summary>
         internal static string ModManagerVersion {
             get {
@@ -960,7 +955,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mod Properties.
+        ///   Looks up a localized string similar to Propriétés du Mod .
         /// </summary>
         internal static string ModsTab_ModProperties {
             get {
@@ -969,7 +964,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to More....
+        ///   Looks up a localized string similar to Plus....
         /// </summary>
         internal static string MoreExpandable {
             get {
@@ -978,7 +973,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to Non.
         /// </summary>
         internal static string No_Button {
             get {
@@ -987,7 +982,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Installed Versions.
+        ///   Looks up a localized string similar to Aucune version installée.
         /// </summary>
         internal static string NoInstalledVersions {
             get {
@@ -996,7 +991,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Description Provided..
+        ///   Looks up a localized string similar to Aucune description fournie..
         /// </summary>
         internal static string NoModDescript {
             get {
@@ -1014,7 +1009,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open.
+        ///   Looks up a localized string similar to Ouvrir.
         /// </summary>
         internal static string Open {
             get {
@@ -1023,7 +1018,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open AppData Folder.
+        ///   Looks up a localized string similar to Ouvrir le dossier AppData.
         /// </summary>
         internal static string OpenAppDataFolder {
             get {
@@ -1032,7 +1027,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Config File.
+        ///   Looks up a localized string similar to Ouvrir le fichier de configuration.
         /// </summary>
         internal static string OpenConfigFile {
             get {
@@ -1041,7 +1036,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Downloads Folder.
+        ///   Looks up a localized string similar to Ouvrir le dossier de téléchargement.
         /// </summary>
         internal static string OpenDownloadsFolder {
             get {
@@ -1050,7 +1045,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open EXE Folder.
+        ///   Looks up a localized string similar to Ouvrir le dossier du fichier EXE.
         /// </summary>
         internal static string OpenEXEFolder {
             get {
@@ -1059,7 +1054,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Location....
+        ///   Looks up a localized string similar to Ouvrir l&apos;emplacement du fichier....
         /// </summary>
         internal static string OpenLocationExpandable {
             get {
@@ -1068,7 +1063,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Mod Folder.
+        ///   Looks up a localized string similar to Ouvrir le dossier du Mod.
         /// </summary>
         internal static string OpenModFolder {
             get {
@@ -1077,7 +1072,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R. Modding Instructions.
+        ///   Looks up a localized string similar to Les instructions de Modding sur Sonic 3 A.I.R.
         /// </summary>
         internal static string OpenModInstructions {
             get {
@@ -1086,7 +1081,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Mods Folder.
+        ///   Looks up a localized string similar to Ouvrir le dossier des Mods.
         /// </summary>
         internal static string OpenModsFolder {
             get {
@@ -1095,7 +1090,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Modding Templates Folder.
+        ///   Looks up a localized string similar to Ouvrir le dossier du modèle de modding.
         /// </summary>
         internal static string OpenModTemplatesFolder {
             get {
@@ -1104,7 +1099,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Mod URL.
+        ///   Looks up a localized string similar to Ouvrir l&apos;URL du Mod.
         /// </summary>
         internal static string OpenModURL {
             get {
@@ -1113,7 +1108,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Sample Mods Folder.
+        ///   Looks up a localized string similar to Ouvrir l&apos;exemple du dossier Mods.
         /// </summary>
         internal static string OpenSampleModsFolder {
             get {
@@ -1122,7 +1117,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Settings File.
+        ///   Looks up a localized string similar to Ouvrir le fichier de configuration.
         /// </summary>
         internal static string OpenSettingsFile {
             get {
@@ -1131,7 +1126,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open System Settings....
+        ///   Looks up a localized string similar to Ouvrir les paramètres système....
         /// </summary>
         internal static string OpenSystemSettingsExpandable {
             get {
@@ -1140,7 +1135,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R. User Manual.
+        ///   Looks up a localized string similar to Le manuel d&apos;utilisation de Sonic 3 A.I.R.
         /// </summary>
         internal static string OpenUserManual {
             get {
@@ -1149,7 +1144,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Versions Folder.
+        ///   Looks up a localized string similar to Ouvrir le dossier des versions.
         /// </summary>
         internal static string OpenVersionsFolder {
             get {
@@ -1158,7 +1153,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Refresh the Mod List!.
+        ///   Looks up a localized string similar to Veuillez actualiser la liste de Mod !.
         /// </summary>
         internal static string PleaseRefreshTheModList {
             get {
@@ -1176,7 +1171,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reason.
+        ///   Looks up a localized string similar to Raison.
         /// </summary>
         internal static string Reason {
             get {
@@ -1185,7 +1180,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recording File Path Copied to Clipboard!.
+        ///   Looks up a localized string similar to Chemin du fichier d’enregistrement copié dans le Presse-papiers !.
         /// </summary>
         internal static string RecordingPathCopiedToClipboard {
             get {
@@ -1194,7 +1189,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Game Recordings.
+        ///   Looks up a localized string similar to Enregistrements(captures) du jeu.
         /// </summary>
         internal static string RecordingsTab {
             get {
@@ -1203,7 +1198,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File Uploaded to File.io, it will expire in 1 week and has a one time use:.
+        ///   Looks up a localized string similar to Le fichier téléchargé sur File.io expirera dans 1 semaine, il sera utilisé qu&apos;une seule fois :.
         /// </summary>
         internal static string RecordingUploaded1 {
             get {
@@ -1212,7 +1207,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (URL Has Been Copied to Clipboard):.
+        ///   Looks up a localized string similar to (L&apos;URL a été copiée dans le presse-papiers) :.
         /// </summary>
         internal static string RecordingUploaded2 {
             get {
@@ -1221,7 +1216,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refresh.
+        ///   Looks up a localized string similar to Rafraîchir.
         /// </summary>
         internal static string Refresh {
             get {
@@ -1230,7 +1225,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reload.
+        ///   Looks up a localized string similar to Relancer.
         /// </summary>
         internal static string Reload {
             get {
@@ -1239,7 +1234,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to Retirer.
         /// </summary>
         internal static string Remove {
             get {
@@ -1248,7 +1243,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verification: Do you want to remove.
+        ///   Looks up a localized string similar to Vérification: voulez-vous retirer.
         /// </summary>
         internal static string RemoveInputDeviceConfirmation1 {
             get {
@@ -1257,7 +1252,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to from the list of acceptable devices for this input?.
+        ///   Looks up a localized string similar to de la liste des périphériques acceptables pour cet Input ?.
         /// </summary>
         internal static string RemoveInputDeviceConfirmation2 {
             get {
@@ -1266,7 +1261,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Mod.
+        ///   Looks up a localized string similar to Retirer le Mod.
         /// </summary>
         internal static string RemoveMod {
             get {
@@ -1275,7 +1270,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove Selected Mod....
+        ///   Looks up a localized string similar to Retirer le Mod sélectionné....
         /// </summary>
         internal static string RemoveSelectedMod {
             get {
@@ -1284,7 +1279,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to remove Version.
+        ///   Looks up a localized string similar to Êtes-vous sûr de vouloir retirer cette version.
         /// </summary>
         internal static string RemoveVersionConfirmation {
             get {
@@ -1293,7 +1288,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Result:.
+        ///   Looks up a localized string similar to Résultat :.
         /// </summary>
         internal static string ResultLabel {
             get {
@@ -1311,7 +1306,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R. Homepage.
+        ///   Looks up a localized string similar to Page d&apos;accueil de Sonic 3 A.I.R.
         /// </summary>
         internal static string S3AIRHomepage {
             get {
@@ -1320,7 +1315,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R.&apos;s Path is not set!.
+        ///   Looks up a localized string similar to L&apos;emplacement de Sonic 3 A.I.R. n&apos;est pas défini !.
         /// </summary>
         internal static string S3AIRPathNotSet {
             get {
@@ -1329,7 +1324,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3K ROM Path:.
+        ///   Looks up a localized string similar to Emplacement de la ROM Sonic 3K :.
         /// </summary>
         internal static string S3KROMPathLabel {
             get {
@@ -1338,7 +1333,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to Sauvegarder.
         /// </summary>
         internal static string Save {
             get {
@@ -1347,7 +1342,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save &amp; Load.
+        ///   Looks up a localized string similar to Sauvegarder et Charger.
         /// </summary>
         internal static string Save_Load {
             get {
@@ -1356,7 +1351,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select from Installed A.I.R. Versions....
+        ///   Looks up a localized string similar to Sélectionnez dans &quot;Installer&quot; la version de A.I.R....
         /// </summary>
         internal static string SelectFromInstalledVersions {
             get {
@@ -1365,7 +1360,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Input....
+        ///   Looks up a localized string similar to Selectionner l&apos;Input.
         /// </summary>
         internal static string SelectInputTitleExpandable {
             get {
@@ -1374,7 +1369,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select/Install from A.I.R. Version ZIP....
+        ///   Looks up a localized string similar to Sélectionnez/Installez à partir d&apos;une version archivée(ZIP) de A.I.R....
         /// </summary>
         internal static string SelectInstallFromAIRZIP {
             get {
@@ -1383,7 +1378,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Sonic 3K ROM File....
+        ///   Looks up a localized string similar to Choisir le dossier de la ROM Sonic 3K....
         /// </summary>
         internal static string SelectSonic3KRomFile {
             get {
@@ -1392,7 +1387,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Sonic 3 A.I.R. Version ZIP....
+        ///   Looks up a localized string similar to Choisir l&apos;archive(Zip) de Sonic 3 A.I.R....
         /// </summary>
         internal static string SelectSonicAIRVersionZIP {
             get {
@@ -1401,7 +1396,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set A.I.R. Path from Settings File....
+        ///   Looks up a localized string similar to Régler l&apos;emplacement du fichier de paramètre de A.I.R....
         /// </summary>
         internal static string SetAIRPathFromSettings {
             get {
@@ -1410,7 +1405,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set A.I.R. Path Manually (Classic)....
+        ///   Looks up a localized string similar to Régler manuellement (Classique) l&apos;emplacement du fichier de paramètre de A.I.R....
         /// </summary>
         internal static string SetAIRPathManuallyClassic {
             get {
@@ -1419,7 +1414,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get/Set from Installed Versions:.
+        ///   Looks up a localized string similar to Obtenir/Définir à partir de versions installées :.
         /// </summary>
         internal static string SetFromInstalledHeader {
             get {
@@ -1428,7 +1423,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set Manually:.
+        ///   Looks up a localized string similar to Régler Manuellement :.
         /// </summary>
         internal static string SetManuallyHeader {
             get {
@@ -1437,7 +1432,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
+        ///   Looks up a localized string similar to Paramètres.
         /// </summary>
         internal static string SettingsTab {
             get {
@@ -1446,7 +1441,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R. Path:.
+        ///   Looks up a localized string similar to Emplacement de Sonic 3 A.I.R :.
         /// </summary>
         internal static string Sonic3AIRPathLabel {
             get {
@@ -1455,7 +1450,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3K ROM File.
+        ///   Looks up a localized string similar to Dossier de la ROM Sonic 3K.
         /// </summary>
         internal static string Sonic3KRomFile {
             get {
@@ -1464,7 +1459,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R. Version ZIP.
+        ///   Looks up a localized string similar to Archive(Zip) de Sonic 3 A.I.R.
         /// </summary>
         internal static string SonicAIRVersionZIP {
             get {
@@ -1473,7 +1468,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specified file or directory does not exist!.
+        ///   Looks up a localized string similar to Le fichier ou le répertoire spécifié n&apos;existe pas !.
         /// </summary>
         internal static string SpecifiedFileDirNotExist {
             get {
@@ -1482,7 +1477,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic 3 A.I.R is out of date, please use version 19.08.17.0 or above! (and start it at least once fully).
+        ///   Looks up a localized string similar to La version de Sonic 3 A.I.R est obsolète, veuillez utiliser la version 19.08.17.0 ou une version ultérieure ! (Sans oublier de le démarrer au moins une fois !).
         /// </summary>
         internal static string StartupFailureError {
             get {
@@ -1491,7 +1486,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stay Open on Game Exit.
+        ///   Looks up a localized string similar to Laisser ouvert quand je quitte le jeu.
         /// </summary>
         internal static string StayOpenOnExit {
             get {
@@ -1500,7 +1495,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stay Open on Game Load.
+        ///   Looks up a localized string similar to Laisser ouvert quand je lance le jeu.
         /// </summary>
         internal static string StayOpenOnLoad {
             get {
@@ -1509,7 +1504,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thumb.
+        ///   Looks up a localized string similar to Pouce.
         /// </summary>
         internal static string ThumbstickRadioButton {
             get {
@@ -1518,7 +1513,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tools.
+        ///   Looks up a localized string similar to Outils.
         /// </summary>
         internal static string ToolsTab {
             get {
@@ -1536,7 +1531,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to Delete File!.
+        ///   Looks up a localized string similar to Impossible de supprimer le fichier !.
         /// </summary>
         internal static string UnableToDeleteFile {
             get {
@@ -1545,7 +1540,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to Remove Version!.
+        ///   Looks up a localized string similar to Impossible de supprimer cette version !.
         /// </summary>
         internal static string UnableToRemoveVersion {
             get {
@@ -1554,7 +1549,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to Validate Path.
+        ///   Looks up a localized string similar to Impossible de valider l&apos;emplacement.
         /// </summary>
         internal static string UnableToValididatePath {
             get {
@@ -1563,7 +1558,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An Update is Avaliable! Would You Like to Update Now?.
+        ///   Looks up a localized string similar to Une mise à jour est disponible! Souhaitez-vous mettre à jour maintenant ?.
         /// </summary>
         internal static string UpdateAvaliable {
             get {
@@ -1572,7 +1567,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An Update is Avaliable! Would You Like to Update Now?.
+        ///   Looks up a localized string similar to Une mise à jour est disponible ! Souhaitez-vous mettre à jour maintenant ?.
         /// </summary>
         internal static string Updater_Avaliable {
             get {
@@ -1581,7 +1576,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have the latest version. Would you like to redownload it?.
+        ///   Looks up a localized string similar to Vous avez la dernière version. Voulez-vous la retélécharger ?.
         /// </summary>
         internal static string Updater_UpToDate {
             get {
@@ -1590,7 +1585,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updater.
+        ///   Looks up a localized string similar to Mise à jour.
         /// </summary>
         internal static string UpdaterTitle {
             get {
@@ -1599,7 +1594,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload.
+        ///   Looks up a localized string similar to Importer.
         /// </summary>
         internal static string Upload {
             get {
@@ -1608,17 +1603,17 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Useful In-Game Shortcuts/Keys:
+        ///   Looks up a localized string similar to Raccourcis/Touches utiles dans le jeu :
         ///
-        ///Alt + Enter - Toggle Fullscreen
-        ///F2 - Take a Game Recording Capture
-        ///Right Click - Open A.I.R Context Menu
-        ///F3 - Rescan for Game Controllers
-        ///F4 - Switches Game Controllers for P1 and P2
-        ///Numpad Plus/Minus - Adjust Global Audio Volume
-        ///Alt + B - Change Background Blur
-        ///Alt + F - Change Filter
-        ///Alt + P - Show Performance Display.
+        ///Alt + Entrée - Basculer en plein écran
+        ///F2 - Faire une capture(enregistrement) du jeu
+        ///Clic droit - Ouvrir le menu contextuel de A.I.R
+        ///F3 - Rescanner pour les manettes de jeu
+        ///F4 - Échanger les contrôles des manettes J1 et J2
+        ///Pavé numérique Plus/Moins - Ajuster le volume audio global
+        ///Alt + B - Changer le flou d&apos;arrière-plan
+        ///Alt + F - Changer le filtre
+        ///Alt + P - Afficher les performances.
         /// </summary>
         internal static string UsefulShortKeys {
             get {
@@ -1645,7 +1640,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to Oui.
         /// </summary>
         internal static string Yes_Button {
             get {
