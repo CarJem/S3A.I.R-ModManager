@@ -273,7 +273,7 @@ namespace Sonic3AIR_ModLoader
         public static void ApplyLanguage(ref Updater form)
         {
             form.yesButton.Text = Program.LanguageResource.GetString("Yes_Button");
-            form.noButton.Text = Program.LanguageResource.GetString("No");
+            form.noButton.Text = Program.LanguageResource.GetString("No_Button");
             form.updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
         }
 

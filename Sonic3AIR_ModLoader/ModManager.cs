@@ -32,7 +32,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using System.Resources;
-using System.Reflection;
 
 
 
@@ -1772,6 +1771,7 @@ namespace Sonic3AIR_ModLoader
                 MessageBox.Show("Something went Wrong!");
                 CleanUpTempModsFolder();
             }
+            Environment.Exit(0);
 
         }
 

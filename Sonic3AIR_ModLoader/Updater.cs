@@ -81,7 +81,7 @@ namespace Sonic3AIR_ModLoader
                     string url = "";
                     if (isDeveloper) url = @"http://sonic3air.org/sonic3air_updateinfo_dev.json";
                     else url = @"http://sonic3air.org/sonic3air_updateinfo.json";
-                    VersionCheckFileName = DownloadFromURL(url, Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), DownloadCheckComplete);
+                    VersionCheckFileName = DownloadFromURL(url, ProgramPaths.Sonic3AIR_MM_BaseFolder, DownloadCheckComplete);
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace Sonic3AIR_ModLoader
 
         private void DownloadCheckComplete()
         {
-            string destination = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            string destination = ProgramPaths.Sonic3AIR_MM_BaseFolder;
             string path = $"{destination}//{VersionCheckFileName}";
             FileInfo file = new FileInfo(path);
             VersionCheckInfo = new AIR_SDK.VersionCheck(file);
@@ -187,7 +187,7 @@ namespace Sonic3AIR_ModLoader
         private void UpdateDownloadComplete()
         {
             string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
-            string file = $"{destination}//{UpdateFileName}";
+            string file = $"{destination}\\{UpdateFileName}";
             string output = destination;
 
             using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(file))
@@ -202,22 +202,35 @@ namespace Sonic3AIR_ModLoader
                 }
             }
 
-
-            string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-            AIR_SDK.VersionMetadata ver = new AIR_SDK.VersionMetadata(new FileInfo(file));
-
-
-            string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
-
-            Directory.Move(destination, output2);
-
-            Directory.CreateDirectory(destination);
-
-            MessageBox.Show($"{Program.LanguageResource.GetString("GameInstalledAt")} \"{output2}\"");
+            try
+            {
+                string metaDataFile = Directory.GetFiles(output, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                FileInfo fileInfo = new FileInfo(metaDataFile);
+                AIR_SDK.VersionMetadata ver = new AIR_SDK.VersionMetadata(fileInfo);
 
 
-            Program.UpdaterState = UpdateState.Finished;
-            Close();
+                string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
+
+                Directory.CreateDirectory(output2);
+
+                Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
+
+                MessageBox.Show($"{Program.LanguageResource.GetString("GameInstalledAt")} \"{output2}\"");
+
+                Program.UpdaterState = UpdateState.Finished;
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show($"Update Failed!");
+
+                Program.UpdaterState = UpdateState.Finished;
+                Close();
+            }
+
+
+
+
         }
 
         private void WipeFolderContents(string folder)

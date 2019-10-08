@@ -18,12 +18,12 @@ namespace Sonic3AIR_ModLoader
         public static string Sonic3AIRAppDataFolder = "";
         public static string Sonic3AIRModsFolder = "";
         public static string Sonic3AIRActiveModsList = "";
-        public static string Sonic3AIR_MM_TempModsFolder = "";
         public static string Sonic3AIRSettingsFile = "";
         public static string Sonic3AIRGBLinkPath = "";
-        public static string Sonic3AIR_MM_BaseFolder = "";
-        public static string Sonic3AIR_MM_DownloadsFolder = "";
-        public static string Sonic3AIR_MM_VersionsFolder = "";
+        public static string Sonic3AIR_MM_BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM";
+        public static string Sonic3AIR_MM_TempModsFolder = Sonic3AIR_MM_BaseFolder + "\\temp_mod_install";
+        public static string Sonic3AIR_MM_DownloadsFolder = Sonic3AIR_MM_BaseFolder + "\\downloads";
+        public static string Sonic3AIR_MM_VersionsFolder = Sonic3AIR_MM_BaseFolder + "\\air_versions";
 
         #region Sonic 3 A.I.R. Path
         public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
@@ -206,12 +206,6 @@ namespace Sonic3AIR_ModLoader
             Sonic3AIRActiveModsList = Sonic3AIRAppDataFolder + "\\mods\\active-mods.json";
             Sonic3AIRModsFolder = Sonic3AIRAppDataFolder + "\\mods";
             Sonic3AIRSettingsFile = Sonic3AIRAppDataFolder + "\\settings.json";
-
-            Sonic3AIR_MM_BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM";
-            Sonic3AIR_MM_TempModsFolder = Sonic3AIR_MM_BaseFolder + "\\temp_mod_install";
-            Sonic3AIR_MM_DownloadsFolder = Sonic3AIR_MM_BaseFolder + "\\downloads";
-            Sonic3AIR_MM_VersionsFolder = Sonic3AIR_MM_BaseFolder + "\\air_versions";
-
 
             if (!Directory.Exists(Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_TempModsFolder);
             if (!Directory.Exists(Sonic3AIR_MM_BaseFolder)) Directory.CreateDirectory(Sonic3AIR_MM_BaseFolder);
