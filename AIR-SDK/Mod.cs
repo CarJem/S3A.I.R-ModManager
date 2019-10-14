@@ -12,10 +12,10 @@ namespace AIR_SDK
 {
     public class Mod
     {
-        public string Author;
+        public string Author { get; set; }
         public string Name { get; set; }
         public string TechnicalName { get; set; }
-        public string Description;
+        public string Description { get; set; }
         public string FolderName;
         public string FolderPath;
         public string URL;

@@ -211,7 +211,8 @@ namespace Sonic3AIR_ModLoader
 
                 string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
 
-                Directory.CreateDirectory(output2);
+                //Directory.CreateDirectory(output2);
+                if (Directory.Exists(output2)) Directory.Delete(output2,true);
 
                 Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
 

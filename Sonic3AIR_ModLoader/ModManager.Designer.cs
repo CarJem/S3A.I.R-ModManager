@@ -40,6 +40,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modPage = new System.Windows.Forms.TabPage();
             this.modPanel = new System.Windows.Forms.Panel();
+            this.ModViewHost = new System.Windows.Forms.Integration.ElementHost();
             this.moveToBottomButton = new System.Windows.Forms.Button();
             this.moveToTopButton = new System.Windows.Forms.Button();
             this.moreModOptionsButton = new System.Windows.Forms.Button();
@@ -55,7 +56,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.modTechnicalNameLabel = new System.Windows.Forms.Label();
             this.modNameLabel = new System.Windows.Forms.Label();
-            this.ModList = new System.Windows.Forms.CheckedListBox();
             this.moveDownButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
@@ -304,11 +304,11 @@
             // modPanel
             // 
             this.modPanel.BackColor = System.Drawing.Color.Transparent;
+            this.modPanel.Controls.Add(this.ModViewHost);
             this.modPanel.Controls.Add(this.moveToBottomButton);
             this.modPanel.Controls.Add(this.moveToTopButton);
             this.modPanel.Controls.Add(this.moreModOptionsButton);
             this.modPanel.Controls.Add(this.groupBox3);
-            this.modPanel.Controls.Add(this.ModList);
             this.modPanel.Controls.Add(this.moveDownButton);
             this.modPanel.Controls.Add(this.refreshButton);
             this.modPanel.Controls.Add(this.addMods);
@@ -319,6 +319,15 @@
             this.modPanel.Name = "modPanel";
             this.modPanel.Size = new System.Drawing.Size(313, 428);
             this.modPanel.TabIndex = 14;
+            // 
+            // ModViewHost
+            // 
+            this.ModViewHost.Location = new System.Drawing.Point(34, 6);
+            this.ModViewHost.Name = "ModViewHost";
+            this.ModViewHost.Size = new System.Drawing.Size(276, 192);
+            this.ModViewHost.TabIndex = 21;
+            this.ModViewHost.Text = "elementHost1";
+            this.ModViewHost.Child = null;
             // 
             // moveToBottomButton
             // 
@@ -418,9 +427,9 @@
             this.groupBox3.Controls.Add(this.modTechnicalNameLabel);
             this.groupBox3.Controls.Add(this.modNameLabel);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox3.Location = new System.Drawing.Point(3, 211);
+            this.groupBox3.Location = new System.Drawing.Point(3, 204);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(307, 185);
+            this.groupBox3.Size = new System.Drawing.Size(307, 192);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mod Properties";
@@ -434,7 +443,7 @@
             this.modInfoTextBox.Name = "modInfoTextBox";
             this.modInfoTextBox.ReadOnly = true;
             this.modInfoTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.modInfoTextBox.Size = new System.Drawing.Size(295, 134);
+            this.modInfoTextBox.Size = new System.Drawing.Size(295, 80);
             this.modInfoTextBox.TabIndex = 16;
             this.modInfoTextBox.Text = "";
             // 
@@ -473,21 +482,6 @@
             this.modNameLabel.Tag = "";
             this.modNameLabel.Text = "Name";
             this.modNameLabel.UseMnemonic = false;
-            // 
-            // ModList
-            // 
-            this.ModList.ContextMenuStrip = this.modContextMenuStrip;
-            this.ModList.FormattingEnabled = true;
-            this.ModList.Location = new System.Drawing.Point(34, 6);
-            this.ModList.Name = "ModList";
-            this.ModList.ScrollAlwaysVisible = true;
-            this.ModList.Size = new System.Drawing.Size(276, 199);
-            this.ModList.TabIndex = 15;
-            this.ModList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ModsList_ItemCheck);
-            this.ModList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsList_MouseClick);
-            this.ModList.SelectedIndexChanged += new System.EventHandler(this.ModsList_SelectedIndexChanged);
-            this.ModList.SelectedValueChanged += new System.EventHandler(this.ModsList_SelectedValueChanged);
-            this.ModList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ModList_MouseDown);
             // 
             // moveDownButton
             // 
@@ -1820,7 +1814,6 @@
         public System.Windows.Forms.Label label6;
         public System.Windows.Forms.Button showLogFileButton;
         public System.Windows.Forms.Label label5;
-        public System.Windows.Forms.CheckedListBox ModList;
         public System.Windows.Forms.Button saveButton;
         public System.Windows.Forms.RichTextBox modInfoTextBox;
         public System.Windows.Forms.ToolStripMenuItem openModURLToolStripMenuItem;
@@ -1926,6 +1919,7 @@
         public System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         public System.Windows.Forms.Label languageLabel;
         private System.Windows.Forms.ComboBox languageComboBox;
+        private System.Windows.Forms.Integration.ElementHost ModViewHost;
     }
 }
 
