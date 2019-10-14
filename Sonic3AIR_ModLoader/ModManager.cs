@@ -290,7 +290,7 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenModURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenModURL((ModList.SelectedItem as AIR_SDK.Mod).URL);
+            OpenModURL((ModList.SelectedItem as ModViewerItem).Source.URL);
         }
 
         private void ShowLogFileButton_Click(object sender, EventArgs e)
@@ -354,7 +354,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (ModList.SelectedItem != null)
             {
-                OpenSelectedModFolder(ModList.SelectedItem as AIR_SDK.Mod);
+                OpenSelectedModFolder(ModList.SelectedItem as ModViewerItem);
             }
         }
 
@@ -1144,6 +1144,10 @@ namespace Sonic3AIR_ModLoader
             }
             if (foundFile != "")
             {
+                if (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file)))
+                {
+                    Directory.Delete(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file),true);
+                }
                 Directory.Move(System.IO.Path.GetDirectoryName(foundFile), ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
             }           
             else
@@ -1152,6 +1156,10 @@ namespace Sonic3AIR_ModLoader
                 foundFile = (item != null ? item.ToString() : "");
                 if (foundFile != "")
                 {
+                    if (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file)))
+                    {
+                        Directory.Delete(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file), true);
+                    }
                     Directory.Move(System.IO.Path.GetDirectoryName(foundFile), ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
                 }
                 else
@@ -1213,7 +1221,7 @@ namespace Sonic3AIR_ModLoader
 
         private void RemoveMod()
         {
-            var modToRemove = ModList.SelectedItem as AIR_SDK.Mod;
+            var modToRemove = (ModList.SelectedItem as ModViewerItem).Source;
             if (MessageBox.Show($"Are you sure you want to delete {modToRemove.Name}? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 WipeFolderContents(modToRemove.FolderPath);
@@ -1234,14 +1242,22 @@ namespace Sonic3AIR_ModLoader
         {
             System.IO.DirectoryInfo di = new DirectoryInfo(folder);
 
-            foreach (FileInfo file in di.EnumerateFiles())
+            try
             {
-                file.Delete();
+                foreach (FileInfo file in di.EnumerateFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.EnumerateDirectories())
+                {
+                    dir.Delete(true);
+                }
             }
-            foreach (DirectoryInfo dir in di.EnumerateDirectories())
+            catch
             {
-                dir.Delete(true);
+
             }
+
         }
 
         #endregion
@@ -1581,9 +1597,9 @@ namespace Sonic3AIR_ModLoader
             Process.Start(ProgramPaths.Sonic3AIRModsFolder);
         }
 
-        private void OpenSelectedModFolder(AIR_SDK.Mod mod)
+        private void OpenSelectedModFolder(ModViewerItem mod)
         {
-            Process.Start(mod.FolderPath);
+            Process.Start(mod.Source.FolderPath);
         }
 
         private void OpenConfigFile()
@@ -1716,6 +1732,7 @@ namespace Sonic3AIR_ModLoader
 
         public void GamebananaAPI_Install(string data)
         {
+            if (!Directory.Exists(ProgramPaths.Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
             string url = data.Replace("s3airmm://","");
             if (url == "") MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1732,6 +1749,9 @@ namespace Sonic3AIR_ModLoader
             if (url != "") remote_filename = GetRemoteFileName(url);
             string filename = "temp.zip";
             if (remote_filename != "") filename = remote_filename;
+
+            if (File.Exists($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}\\{filename}")) File.Delete($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}\\{filename}");
+            if (!Directory.Exists(ProgramPaths.Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
 
             DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}\\{filename}");
             Action finishAction = DownloadModCompleted;
