@@ -1637,7 +1637,7 @@
             this.airVersionLabel.Location = new System.Drawing.Point(0, 504);
             this.airVersionLabel.Margin = new System.Windows.Forms.Padding(9, 0, 0, 0);
             this.airVersionLabel.Name = "airVersionLabel";
-            this.airVersionLabel.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.airVersionLabel.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.airVersionLabel.Size = new System.Drawing.Size(337, 33);
             this.airVersionLabel.TabIndex = 17;
             this.airVersionLabel.Text = "A.I.R Version: NULL\r\nSettings Version: NULL";
