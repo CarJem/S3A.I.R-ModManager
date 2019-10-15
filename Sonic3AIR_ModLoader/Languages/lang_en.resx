@@ -660,4 +660,10 @@ If you have, make sure these locations exist. The modloader can't run without th
   <data name="Updater_UpToDate" xml:space="preserve">
     <value>You have the latest version. Would you like to redownload it?</value>
   </data>
+  <data name="SettingsVersionLabel" xml:space="preserve">
+    <value>A.I.R. Settings Version</value>
+  </data>
+  <data name="AIRDevMode" xml:space="preserve">
+    <value>Enable Dev Mode (Not Debug Mode)</value>
+  </data>
 </root>

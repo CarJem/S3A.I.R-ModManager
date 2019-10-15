@@ -13,8 +13,12 @@ namespace AIR_SDK
         public string Name;
         public string FilePath;
         public string FormalName;
+        public string AIRVersion = "N/A";
 
-        public override string ToString() { return Name; }
+        public override string ToString()
+        {
+            return string.Format("{0} -- [A.I.R. {1}]", this.Name, this.AIRVersion);
+        }
         public string GetRAW()
         {
             var binData = File.ReadAllBytes(FilePath);
@@ -28,6 +32,10 @@ namespace AIR_SDK
         {
             FilePath = file.FullName;
 
+            byte[] byteArray = File.ReadAllBytes(FilePath).Skip(4).Take(10).ToArray();
+            AIRVersion = System.Text.Encoding.UTF8.GetString(byteArray);
+            
+
             string baseString = file.Name.Replace("gamerecording_", "");
 
             string month = baseString.Substring(2, 2);
@@ -38,7 +46,7 @@ namespace AIR_SDK
             string minute = baseString.Substring(9, 2);
             string second = baseString.Substring(11, 2);
 
-            string recordingFormat = $"Recording: {month}/{day}/{year} - {hour}.{minute}.{second}";
+            string recordingFormat = $"{month}/{day}/{year} - {hour}.{minute}.{second}";
 
             Name = recordingFormat;
 

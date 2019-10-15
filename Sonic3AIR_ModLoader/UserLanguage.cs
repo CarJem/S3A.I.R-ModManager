@@ -213,6 +213,7 @@ namespace Sonic3AIR_ModLoader
             form.label2.Text = Program.LanguageResource.GetString("S3KROMPathLabel");
             form.fixGlitchesCheckbox.Text = Program.LanguageResource.GetString("FixGlitches");
             form.failSafeModeCheckbox.Text = Program.LanguageResource.GetString("FailSafeMode");
+            form.devModeCheckbox.Text = Program.LanguageResource.GetString("AIRDevMode");
 
             form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
 
@@ -251,7 +252,7 @@ namespace Sonic3AIR_ModLoader
             //About Page
             form.checkForUpdatesButton.Text = Program.LanguageResource.GetString("CheckForGameUpdatesExpandable");
 
-
+            form.SetTooltips();
 
         }
 

@@ -115,6 +115,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Dev Mode (Not Debug Mode).
+        /// </summary>
+        internal static string AIRDevMode {
+            get {
+                return ResourceManager.GetString("AIRDevMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A.I.R. Internal Settings.
         /// </summary>
         internal static string AIRInternalSettings {
@@ -1442,6 +1451,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string SettingsTab {
             get {
                 return ResourceManager.GetString("SettingsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A.I.R. Settings Version.
+        /// </summary>
+        internal static string SettingsVersionLabel {
+            get {
+                return ResourceManager.GetString("SettingsVersionLabel", resourceCulture);
             }
         }
         

@@ -54,8 +54,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.modInfoTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.modTechnicalNameLabel = new System.Windows.Forms.Label();
-            this.modNameLabel = new System.Windows.Forms.Label();
             this.moveDownButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
@@ -178,6 +176,7 @@
             this.modManagerPathMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openDownloadsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openVersionsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.devModeCheckbox = new System.Windows.Forms.CheckBox();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -324,7 +323,7 @@
             // 
             this.ModViewHost.Location = new System.Drawing.Point(34, 6);
             this.ModViewHost.Name = "ModViewHost";
-            this.ModViewHost.Size = new System.Drawing.Size(276, 192);
+            this.ModViewHost.Size = new System.Drawing.Size(276, 243);
             this.ModViewHost.TabIndex = 21;
             this.ModViewHost.Text = "elementHost1";
             this.ModViewHost.Child = null;
@@ -424,26 +423,27 @@
             // 
             this.groupBox3.Controls.Add(this.modInfoTextBox);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.modTechnicalNameLabel);
-            this.groupBox3.Controls.Add(this.modNameLabel);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox3.Location = new System.Drawing.Point(3, 204);
+            this.groupBox3.Location = new System.Drawing.Point(3, 255);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(307, 192);
+            this.groupBox3.Size = new System.Drawing.Size(307, 141);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mod Properties";
             // 
             // modInfoTextBox
             // 
+            this.modInfoTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modInfoTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.modInfoTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.modInfoTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.modInfoTextBox.Location = new System.Drawing.Point(6, 45);
+            this.modInfoTextBox.Location = new System.Drawing.Point(9, 19);
             this.modInfoTextBox.Name = "modInfoTextBox";
             this.modInfoTextBox.ReadOnly = true;
             this.modInfoTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.modInfoTextBox.Size = new System.Drawing.Size(295, 80);
+            this.modInfoTextBox.Size = new System.Drawing.Size(292, 116);
             this.modInfoTextBox.TabIndex = 16;
             this.modInfoTextBox.Text = "";
             // 
@@ -451,37 +451,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label6.Location = new System.Drawing.Point(3, 42);
+            this.label6.Location = new System.Drawing.Point(3, 16);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 13);
             this.label6.TabIndex = 13;
             this.label6.Tag = "";
-            // 
-            // modTechnicalNameLabel
-            // 
-            this.modTechnicalNameLabel.AutoSize = true;
-            this.modTechnicalNameLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.modTechnicalNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modTechnicalNameLabel.Location = new System.Drawing.Point(3, 29);
-            this.modTechnicalNameLabel.Name = "modTechnicalNameLabel";
-            this.modTechnicalNameLabel.Size = new System.Drawing.Size(99, 13);
-            this.modTechnicalNameLabel.TabIndex = 15;
-            this.modTechnicalNameLabel.Tag = "";
-            this.modTechnicalNameLabel.Text = "Technical Name";
-            this.modTechnicalNameLabel.UseMnemonic = false;
-            // 
-            // modNameLabel
-            // 
-            this.modNameLabel.AutoSize = true;
-            this.modNameLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.modNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modNameLabel.Location = new System.Drawing.Point(3, 16);
-            this.modNameLabel.Name = "modNameLabel";
-            this.modNameLabel.Size = new System.Drawing.Size(39, 13);
-            this.modNameLabel.TabIndex = 11;
-            this.modNameLabel.Tag = "";
-            this.modNameLabel.Text = "Name";
-            this.modNameLabel.UseMnemonic = false;
             // 
             // moveDownButton
             // 
@@ -614,7 +588,6 @@
             // gameRecordingList
             // 
             this.gameRecordingList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gameRecordingList.FormattingEnabled = true;
             this.gameRecordingList.Location = new System.Drawing.Point(0, 0);
             this.gameRecordingList.Name = "gameRecordingList";
             this.gameRecordingList.Size = new System.Drawing.Size(297, 173);
@@ -823,6 +796,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.devModeCheckbox);
             this.groupBox1.Controls.Add(this.changeRomPathButton);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.romPathBox);
@@ -1648,12 +1622,15 @@
             // 
             // airVersionLabel
             // 
-            this.airVersionLabel.Location = new System.Drawing.Point(9, 509);
+            this.airVersionLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.airVersionLabel.Location = new System.Drawing.Point(0, 504);
+            this.airVersionLabel.Margin = new System.Windows.Forms.Padding(9, 0, 0, 0);
             this.airVersionLabel.Name = "airVersionLabel";
-            this.airVersionLabel.Size = new System.Drawing.Size(185, 19);
+            this.airVersionLabel.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.airVersionLabel.Size = new System.Drawing.Size(344, 33);
             this.airVersionLabel.TabIndex = 17;
-            this.airVersionLabel.Text = "A.I.R Version: NULL";
-            this.airVersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.airVersionLabel.Text = "A.I.R Version: NULL\r\nSettings Version: NULL";
+            this.airVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // contextMenuStrip1
             // 
@@ -1710,6 +1687,17 @@
             this.openVersionsFolderToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.openVersionsFolderToolStripMenuItem.Text = "Open Versions Folder";
             this.openVersionsFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenVersionsFolderToolStripMenuItem_Click);
+            // 
+            // devModeCheckbox
+            // 
+            this.devModeCheckbox.AutoSize = true;
+            this.devModeCheckbox.Location = new System.Drawing.Point(9, 104);
+            this.devModeCheckbox.Name = "devModeCheckbox";
+            this.devModeCheckbox.Size = new System.Drawing.Size(203, 17);
+            this.devModeCheckbox.TabIndex = 9;
+            this.devModeCheckbox.Text = "Enable Dev Mode (Not Debug Mode)";
+            this.devModeCheckbox.UseVisualStyleBackColor = true;
+            this.devModeCheckbox.Click += new System.EventHandler(this.devModeCheckbox_Click);
             // 
             // ModManager
             // 
@@ -1788,8 +1776,6 @@
         public System.Windows.Forms.TextBox sonic3AIRPathBox;
         public System.Windows.Forms.Button changeRomPathButton;
         public System.Windows.Forms.Button updateSonic3AIRPathButton;
-        public System.Windows.Forms.Label modNameLabel;
-        public System.Windows.Forms.Label modTechnicalNameLabel;
         public System.Windows.Forms.Label aboutLabel;
         public System.Windows.Forms.Button moveDownButton;
         public System.Windows.Forms.Button moveUpButton;
@@ -1920,6 +1906,7 @@
         public System.Windows.Forms.Label languageLabel;
         private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.Integration.ElementHost ModViewHost;
+        public System.Windows.Forms.CheckBox devModeCheckbox;
     }
 }
 

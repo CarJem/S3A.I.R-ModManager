@@ -153,6 +153,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>lang_en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Updater.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,11 +199,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Updater.resx">
       <DependentUpon>Updater.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,6 +224,7 @@
     <Content Include="banner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\ModIconDefault.png" />
     <Content Include="Resources\Sonic3KAIRLogoV4Kuck.png" />
     <Content Include="Resources\Sonic3AIRLogov4.png" />
     <Content Include="Resources\Sonic3KAIRLogo.png" />

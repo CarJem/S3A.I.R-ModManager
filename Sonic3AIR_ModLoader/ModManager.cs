@@ -43,10 +43,19 @@ namespace Sonic3AIR_ModLoader
     {
         #region Variables
 
+        #region Tooltips
+
+        ToolTip AddModTooltip = new ToolTip();
+        ToolTip RemoveSelectedModTooltip = new ToolTip();
+        ToolTip MoveModUpTooltip = new ToolTip();
+        ToolTip MoveModDownTooltip = new ToolTip();
+        ToolTip MoveModToTopTooltip = new ToolTip();
+        ToolTip MoveModToBottomTooltip = new ToolTip();
+
+        #endregion
 
 
 
-        
         public string nL = Environment.NewLine;
         public static AIR_SDK.Settings S3AIRSettings;
         public static ModManager Instance;
@@ -404,7 +413,10 @@ namespace Sonic3AIR_ModLoader
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (tabControl1.SelectedTab == toolsPage)
+            {
+                CollectGameRecordings();
+            }
         }
         private void TabControl3_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -537,6 +549,11 @@ namespace Sonic3AIR_ModLoader
             UpdateBoolSettings(S3AIRSetting.FailSafeMode, failSafeModeCheckbox.Checked);
         }
 
+        private void devModeCheckbox_Click(object sender, EventArgs e)
+        {
+            UpdateBoolSettings(S3AIRSetting.EnableDevMode, devModeCheckbox.Checked);
+        }
+
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.Save();
@@ -565,14 +582,15 @@ namespace Sonic3AIR_ModLoader
         #endregion
 
         #region Refreshing and Updating
-        private void SetTooltips()
+
+        public void SetTooltips()
         {
-            new ToolTip().SetToolTip(addMods, Program.LanguageResource.GetString("AddAMod"));
-            new ToolTip().SetToolTip(removeButton, Program.LanguageResource.GetString("RemoveSelectedMod"));
-            new ToolTip().SetToolTip(moveUpButton, Program.LanguageResource.GetString("IncreaseModPriority"));
-            new ToolTip().SetToolTip(moveDownButton, Program.LanguageResource.GetString("DecreaseModPriority"));
-            new ToolTip().SetToolTip(moveToTopButton, Program.LanguageResource.GetString("IncreaseModPriorityToMax"));
-            new ToolTip().SetToolTip(moveToBottomButton, Program.LanguageResource.GetString("DecreaseModPriorityToMin"));
+            AddModTooltip.SetToolTip(addMods, Program.LanguageResource.GetString("AddAMod"));
+            RemoveSelectedModTooltip.SetToolTip(removeButton, Program.LanguageResource.GetString("RemoveSelectedMod"));
+            MoveModUpTooltip.SetToolTip(moveUpButton, Program.LanguageResource.GetString("IncreaseModPriority"));
+            MoveModDownTooltip.SetToolTip(moveDownButton, Program.LanguageResource.GetString("DecreaseModPriority"));
+            MoveModToTopTooltip.SetToolTip(moveToTopButton, Program.LanguageResource.GetString("IncreaseModPriorityToMax"));
+            MoveModToBottomTooltip.SetToolTip(moveToBottomButton, Program.LanguageResource.GetString("DecreaseModPriorityToMin"));
 
             aboutLabel.Text = aboutLabel.Text.Replace("{version}", Program.Version);
             this.Text = this.Text.Replace("{version}", Program.Version);
@@ -631,7 +649,8 @@ namespace Sonic3AIR_ModLoader
         private enum S3AIRSetting : int
         {
             FailSafeMode = 0,
-            FixGlitches = 1 
+            FixGlitches = 1,
+            EnableDevMode = 2
         }
 
         private void UpdateBoolSettings(S3AIRSetting setting, bool isChecked)
@@ -640,9 +659,13 @@ namespace Sonic3AIR_ModLoader
             {
                 S3AIRSettings.FailSafeMode = isChecked;
             }
-            else
+            else if (setting == S3AIRSetting.FixGlitches)
             {
                 S3AIRSettings.FixGlitches = isChecked;
+            }
+            else
+            {
+                S3AIRSettings.EnableDevMode = isChecked;
             }
             S3AIRSettings.SaveSettings();
         }
@@ -698,6 +721,7 @@ namespace Sonic3AIR_ModLoader
             romPathBox.Text = S3AIRSettings.Sonic3KRomPath;
             fixGlitchesCheckbox.Checked = S3AIRSettings.FixGlitches;
             failSafeModeCheckbox.Checked = S3AIRSettings.FailSafeMode;
+            devModeCheckbox.Checked = S3AIRSettings.EnableDevMode;
             GetLanguageSelection();
 
             bool loaderMethodPast = Properties.Settings.Default.EnableNewLoaderMethod;
@@ -715,12 +739,14 @@ namespace Sonic3AIR_ModLoader
                             Properties.Settings.Default.EnableNewLoaderMethod = true;
                             enableModStackingToolStripMenuItem.Enabled = true;
                             airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {CurrentAIRVersion.VersionString}";
+                            airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
                         }
                         else
                         {
                             Properties.Settings.Default.EnableNewLoaderMethod = false;
                             enableModStackingToolStripMenuItem.Enabled = false;
                             airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {CurrentAIRVersion.VersionString}";
+                            airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
                         }
                     }
                     catch
@@ -747,6 +773,7 @@ namespace Sonic3AIR_ModLoader
                 Properties.Settings.Default.EnableNewLoaderMethod = false;
                 enableModStackingToolStripMenuItem.Enabled = false;
                 airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: NULL";
+                airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
             }
 
         }
@@ -791,9 +818,6 @@ namespace Sonic3AIR_ModLoader
                 if (item != null)
                 {
 
-                    modNameLabel.Text = item.Name;
-                    modTechnicalNameLabel.Text = item.TechnicalName;
-
                     modInfoTextBox.Text = "";
 
                     modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Bold);
@@ -813,15 +837,11 @@ namespace Sonic3AIR_ModLoader
                 }
                 else
                 {
-                    modNameLabel.Text = "";
-                    modTechnicalNameLabel.Text = "";
                     modInfoTextBox.Text = "";
                 }
             }
             else
             {
-                modNameLabel.Text = "";
-                modTechnicalNameLabel.Text = "";
                 modInfoTextBox.Text = "";
             }
         }
@@ -1255,7 +1275,7 @@ namespace Sonic3AIR_ModLoader
             }
             catch
             {
-
+                MessageBox.Show($"Unable to Wipe Contents of \"{folder}\" clean, this may or may not be an issue.");
             }
 
         }
@@ -2131,10 +2151,6 @@ namespace Sonic3AIR_ModLoader
 
             }
         }
-
-
-
-
 
 
         #endregion

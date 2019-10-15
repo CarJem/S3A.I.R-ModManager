@@ -13,6 +13,8 @@ namespace AIR_SDK
         public bool FailSafeMode = false;
         public string Sonic3KRomPath = "";
         public bool FixGlitches = false;
+        public bool EnableDevMode = false;
+
         public string AIREXEPath = "";
         public bool HasEXEPath = true;
         public string FilePath = "";
@@ -93,6 +95,15 @@ namespace AIR_SDK
 
                 try
                 {
+                    EnableDevMode = jsonObj.DebugMode;
+                }
+                catch (Exception ex)
+                {
+                    if (!loadOptions.ThrowNoExceptionsForMissingAttributesBesidesVersion) throw ex;
+                }
+           
+                try
+                {
                     Sonic3KRomPath = jsonObj.RomPath;
                 }
                 catch (Exception ex)
@@ -157,6 +168,14 @@ namespace AIR_SDK
             else
             {
                 jsonObj.GameplayTweaks.GAMEPLAY_TWEAK_FIX_GLITCHES = 0;
+            }
+            if (EnableDevMode == true)
+            {
+                jsonObj.DebugMode = true;
+            }
+            else
+            {
+                jsonObj.DebugMode = false;
             }
             jsonObj.RomPath = Sonic3KRomPath;
         }

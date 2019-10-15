@@ -13,7 +13,7 @@ namespace Sonic3AIR_ModLoader
     {
         public static bool AutoBootCanceled = false;
 
-        public static string Version = "v.1.3.1";
+        public static string Version = "v.1.4.0 DEV";
 
         public static bool CheckedForUpdateOnStartup = false;
         public static Updater.UpdateState UpdaterState { get; set; } = Updater.UpdateState.NeverStarted;

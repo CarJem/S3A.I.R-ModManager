@@ -63,6 +63,16 @@ namespace Sonic3AIR_ModLoader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ModIconDefault {
+            get {
+                object obj = ResourceManager.GetObject("ModIconDefault", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Sonic3AIRBackground {
             get {
                 object obj = ResourceManager.GetObject("Sonic3AIRBackground", resourceCulture);

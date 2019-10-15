@@ -127,10 +127,19 @@ namespace Sonic3AIR_ModLoader
             {
                 SettingsFile = new AIR_SDK.Settings(settingsFile, new AIR_SDK.Settings.LoadOptions(true,null,true));
                 var result = SettingsFile.Version.CompareTo(VersionCheckInfo.Version);
+                var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
                 if (result < 0)
                 {
-                    Program.UpdateResult = UpdateResult.OutOfDate;
-                    Program.CheckedForUpdateOnStartup = true;
+                    if (result2 < 0)
+                    {
+                        Program.UpdateResult = UpdateResult.OutOfDate;
+                        Program.CheckedForUpdateOnStartup = true;
+                    }
+                    else
+                    {
+                        Program.UpdateResult = UpdateResult.UpToDate;
+                        Program.CheckedForUpdateOnStartup = true;
+                    }
 
                 }
                 else
@@ -148,6 +157,7 @@ namespace Sonic3AIR_ModLoader
             if (Program.UpdateResult == UpdateResult.OutOfDate)
             {
                 updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
+                if (ShowDialog() == DialogResult.Yes)
                 if (ShowDialog() == DialogResult.Yes)
                 {
                     DownloadUpdate();
@@ -184,6 +194,24 @@ namespace Sonic3AIR_ModLoader
 
         }
 
+        private int CheckFromSelectedVersion(Version comparision)
+        {
+            string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+            if (metaDataFile != null)
+            {
+                try
+                {
+                    var metadata = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                    return metadata.Version.CompareTo(comparision);
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+            else return 0;
+        }
+
         private void UpdateDownloadComplete()
         {
             string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
@@ -209,7 +237,7 @@ namespace Sonic3AIR_ModLoader
                 AIR_SDK.VersionMetadata ver = new AIR_SDK.VersionMetadata(fileInfo);
 
 
-                string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
+                string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}\\sonic3air_game";
 
                 //Directory.CreateDirectory(output2);
                 if (Directory.Exists(output2)) Directory.Delete(output2,true);

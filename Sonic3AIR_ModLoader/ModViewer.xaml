@@ -10,19 +10,30 @@
         <ListView x:Name="View" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="Auto" Height="32">
-                        <StackPanel Orientation="Horizontal"  Width="Auto" Height="32">
-                            <Grid Width="32" Height="32">
-                                <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top"></CheckBox>
-                                <Border Width="32" Height="32" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                    <Image Width="30" Height="30" Source="{Binding Image}"></Image>
-                                </Border>
-                            </Grid>
-                            <StackPanel VerticalAlignment="Center" Width="195" Margin="5" Height="Auto">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="Bold" />
-                                <TextBlock Text="{Binding Author}" TextWrapping="Wrap" FontWeight="Medium" />
+                    <Grid Width="Auto" Height="Auto">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Width="Auto" Height="35">
+                                <Grid Width="32" Height="32">
+                                    <Border Width="32" Height="32" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                        <Image Width="30" Height="30" Source="{Binding Image}"></Image>
+                                    </Border>
+                                </Grid>
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="5" Height="Auto">
+                                    <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="UniformToFill">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Author}" TextWrapping="Wrap" FontWeight="Medium" />
+                                        </StackPanel>
+                                    </Viewbox>
+                                </StackPanel>
+                                <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
                             </StackPanel>
+                            <DockPanel>
+                                <TextBlock Text="{Binding TechName}" HorizontalAlignment="Right" DockPanel.Dock="Left" TextWrapping="Wrap" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Version}" HorizontalAlignment="Right" DockPanel.Dock="Right" TextWrapping="Wrap" FontWeight="DemiBold" />
+                            </DockPanel>
                         </StackPanel>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
