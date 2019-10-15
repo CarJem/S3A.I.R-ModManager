@@ -84,6 +84,7 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.optionsPage = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.devModeCheckbox = new System.Windows.Forms.CheckBox();
             this.changeRomPathButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.romPathBox = new System.Windows.Forms.TextBox();
@@ -176,7 +177,6 @@
             this.modManagerPathMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openDownloadsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openVersionsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.devModeCheckbox = new System.Windows.Forms.CheckBox();
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -268,7 +268,7 @@
             // saveAndLoadButton
             // 
             this.saveAndLoadButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.saveAndLoadButton.Location = new System.Drawing.Point(181, 478);
+            this.saveAndLoadButton.Location = new System.Drawing.Point(174, 478);
             this.saveAndLoadButton.Name = "saveAndLoadButton";
             this.saveAndLoadButton.Size = new System.Drawing.Size(158, 23);
             this.saveAndLoadButton.TabIndex = 5;
@@ -282,7 +282,7 @@
             this.tabControl1.Controls.Add(this.modPage);
             this.tabControl1.Controls.Add(this.toolsPage);
             this.tabControl1.Controls.Add(this.settingsPage);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(5, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(327, 460);
@@ -808,6 +808,17 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "A.I.R. Internal Settings";
+            // 
+            // devModeCheckbox
+            // 
+            this.devModeCheckbox.AutoSize = true;
+            this.devModeCheckbox.Location = new System.Drawing.Point(9, 104);
+            this.devModeCheckbox.Name = "devModeCheckbox";
+            this.devModeCheckbox.Size = new System.Drawing.Size(203, 17);
+            this.devModeCheckbox.TabIndex = 9;
+            this.devModeCheckbox.Text = "Enable Dev Mode (Not Debug Mode)";
+            this.devModeCheckbox.UseVisualStyleBackColor = true;
+            this.devModeCheckbox.Click += new System.EventHandler(this.devModeCheckbox_Click);
             // 
             // changeRomPathButton
             // 
@@ -1369,7 +1380,7 @@
             // 
             // removeVersionButton
             // 
-            this.removeVersionButton.Location = new System.Drawing.Point(103, 364);
+            this.removeVersionButton.Location = new System.Drawing.Point(106, 364);
             this.removeVersionButton.Name = "removeVersionButton";
             this.removeVersionButton.Size = new System.Drawing.Size(81, 23);
             this.removeVersionButton.TabIndex = 18;
@@ -1380,7 +1391,7 @@
             // 
             // openVersionLocationButton
             // 
-            this.openVersionLocationButton.Location = new System.Drawing.Point(190, 364);
+            this.openVersionLocationButton.Location = new System.Drawing.Point(193, 364);
             this.openVersionLocationButton.Name = "openVersionLocationButton";
             this.openVersionLocationButton.Size = new System.Drawing.Size(103, 23);
             this.openVersionLocationButton.TabIndex = 19;
@@ -1432,7 +1443,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(93, 478);
+            this.saveButton.Location = new System.Drawing.Point(86, 478);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(82, 23);
             this.saveButton.TabIndex = 16;
@@ -1442,7 +1453,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(12, 478);
+            this.exitButton.Location = new System.Drawing.Point(5, 478);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 23);
             this.exitButton.TabIndex = 13;
@@ -1627,7 +1638,7 @@
             this.airVersionLabel.Margin = new System.Windows.Forms.Padding(9, 0, 0, 0);
             this.airVersionLabel.Name = "airVersionLabel";
             this.airVersionLabel.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.airVersionLabel.Size = new System.Drawing.Size(344, 33);
+            this.airVersionLabel.Size = new System.Drawing.Size(337, 33);
             this.airVersionLabel.TabIndex = 17;
             this.airVersionLabel.Text = "A.I.R Version: NULL\r\nSettings Version: NULL";
             this.airVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1688,22 +1699,11 @@
             this.openVersionsFolderToolStripMenuItem.Text = "Open Versions Folder";
             this.openVersionsFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenVersionsFolderToolStripMenuItem_Click);
             // 
-            // devModeCheckbox
-            // 
-            this.devModeCheckbox.AutoSize = true;
-            this.devModeCheckbox.Location = new System.Drawing.Point(9, 104);
-            this.devModeCheckbox.Name = "devModeCheckbox";
-            this.devModeCheckbox.Size = new System.Drawing.Size(203, 17);
-            this.devModeCheckbox.TabIndex = 9;
-            this.devModeCheckbox.Text = "Enable Dev Mode (Not Debug Mode)";
-            this.devModeCheckbox.UseVisualStyleBackColor = true;
-            this.devModeCheckbox.Click += new System.EventHandler(this.devModeCheckbox_Click);
-            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 537);
+            this.ClientSize = new System.Drawing.Size(337, 537);
             this.Controls.Add(this.airVersionLabel);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.exitButton);
