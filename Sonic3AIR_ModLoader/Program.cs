@@ -6,12 +6,17 @@ using System.Windows.Forms;
 using CommandLine;
 using System.Resources;
 using System.Reflection;
+using System.Threading;
+using System.IO;
+using System.Diagnostics;
 
 namespace Sonic3AIR_ModLoader
 {
     static class Program
     {
         public static bool AutoBootCanceled = false;
+
+        public static Options Arguments;
 
         public static string Version = "v.1.4.0 DEV";
 
@@ -22,8 +27,6 @@ namespace Sonic3AIR_ModLoader
 
         public static ResourceManager LanguageResource { get { return UserLanguage.CurrentResource; } set { UserLanguage.CurrentResource = value; } }
 
-        private static bool DebugMode = false;
-
 
         /// <summary>
         /// The main entry point for the application.
@@ -31,64 +34,82 @@ namespace Sonic3AIR_ModLoader
         [STAThread]
         static void Main(string[] args)
         {
+            Parser.Default.ParseArguments<Options>(args).WithParsed<Options>( o => { Arguments = o; });
+            ProgramPaths.CreateMissingModManagerFolders();
+            var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
+            if (exists) GamebannaAPIHandler(args);
+            else StartApplication(args);
+        }
+
+        static void GamebannaAPIHandler(string[] args)
+        {
+            if (Arguments.gamebanana_api != null)
+            {
+
+                int currentFileIndex = 0;
+                bool fileCreated = false;
+                while (!fileCreated)
+                {
+                    string path = Path.Combine(ProgramPaths.Sonic3AIR_MM_GBRequestsFolder, $"gb_api{currentFileIndex}.txt");
+                    if (!File.Exists(path))
+                    {
+                        CreateFile(path, Arguments.gamebanana_api);
+                        fileCreated = true;
+                    }
+                    else currentFileIndex++;
+                }
+
+            }
+            Environment.Exit(Environment.ExitCode);
+
+
+            void CreateFile(string path, string contents)
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(contents);
+                }
+            }
+
+        }
+
+        static void GamebanannaAPIHandler_Startup()
+        {
+            Application.Run(new ModManager(Arguments.gamebanana_api));
+        }
+
+        static void StartApplication(string[] args)
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
+            ModFileManagement.CleanUpAPIRequests();
 
-            if (DebugMode) Debug();
-            else ModManager(args);
 
-            void Debug()
+            if (Arguments.gamebanana_api != null)
             {
-                try
-                {
-                    ModManager(args);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    throw ex;
-                }
+                GamebanannaAPIHandler_Startup();
             }
+            else
+            {
+                if (Properties.Settings.Default.AutoLaunch) AutoBootLoader();
+                else Application.Run(new ModManager());
+            }
+
         }
 
-        static void ModManager(string[] args)
+        static void AutoBootLoader()
         {
-            
-            Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => {
-                //o.gamebanana_api = @"s3airmm://https://gamebanana.com/mmdl/433866";
-                if (o.gamebanana_api != null)
-                {
-                    Application.Run(new ModManager(o.gamebanana_api));
-                }
-                else MainProgram();
-
-            });
-        }
-
-        public static void ShowWarning()
-        {
-            MessageBox.Show("NOTICE: This is Program is in RELEASE CANIDATE Stage, meaning while it's just about ready, it's unfinished and still may need some further tweaks. Any Bugs you may find are a sideffect of this early release and will hopefully be fixed on release. Please let me know via GameBanna if you encounter any problems!" + Environment.NewLine + Environment.NewLine + "-CarJem Generations", "A Message from CarJem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            Application.Run(new AutoBootDialog());
+            if (AutoBootCanceled == false) Application.Run(new ModManager(true));
+            else Application.Run(new ModManager(false));
         }
 
         public class Options
         {
             [Option('g', "gamebanana_api", Required = false, HelpText = "Used with Gamebanna's 1 Click Install API")]
             public string gamebanana_api { get; set; }
-        }
-
-        public static void MainProgram()
-        {
-            if (Properties.Settings.Default.AutoLaunch)
-            {
-                Application.Run(new AutoBootDialog());
-                if (AutoBootCanceled == false) Application.Run(new ModManager(true));
-                else Application.Run(new ModManager(false));
-            }
-            else
-            {
-                Application.Run(new ModManager());
-            }
         }
 
     }

@@ -20,13 +20,15 @@ namespace Sonic3AIR_ModLoader
     /// <summary>
     /// Interaction logic for DownloadWindow.xaml
     /// </summary>
+
     public partial class DownloadWindow : Window
     {
         public string URL;
         public string DestinationPath;
         public WebClient DownloadClient;
         public Action DownloadCompleted;
-        
+
+
         public DownloadWindow(string header, string url, string destinationFile)
         {
             InitializeComponent();

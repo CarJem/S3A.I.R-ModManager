@@ -31,6 +31,7 @@ using System.Dynamic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
+using System.Threading;
 using System.Resources;
 
 
@@ -54,8 +55,6 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
-
-
         public string nL = Environment.NewLine;
         public static AIR_SDK.Settings S3AIRSettings;
         public static ModManager Instance;
@@ -63,22 +62,21 @@ namespace Sonic3AIR_ModLoader
         public static AIR_SDK.GameConfig GameConfig;
         public static AIR_SDK.VersionMetadata CurrentAIRVersion;
         IList<ModViewerItem> ModsList = new List<ModViewerItem>();
-        bool AuthorizeCheck { get; set; }
         bool AllowUpdate { get; set; } = true;
-        #endregion
+
 
         #region Hosted Elements
 
         public ModViewer Viewer;
+        public System.Windows.Controls.ListView ModList { get => Viewer.View; set => Viewer.View = value; }
 
-        public System.Windows.Controls.ListView ModList { get => Viewer.View; }
+        #endregion
 
         #endregion
 
         #region Initialize Methods
         public ModManager(bool autoBoot = false)
         {
-            Instance = this;
             if (Properties.Settings.Default.AutoUpdates)
             {
                 if (autoBoot == false && Program.UpdaterState == Updater.UpdateState.NeverStarted) new Updater();
@@ -90,9 +88,7 @@ namespace Sonic3AIR_ModLoader
 
         public ModManager(string gamebanana_api)
         {
-            Instance = this;
             StartModloader(false, gamebanana_api);
-
         }
 
         #region WPF Definitions
@@ -104,19 +100,6 @@ namespace Sonic3AIR_ModLoader
             ModViewHost.Child = Viewer;
         }
 
-        private void View_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == System.Windows.Input.MouseButton.Right)
-            {
-                modContextMenuStrip.Show(ModViewHost, ModViewHost.PointToClient(Cursor.Position));
-            }
-        }
-
-        private void View_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            RefreshSelectedMobProperties();
-        }
-
         #endregion
 
         private void StartModloader(bool autoBoot = false, string gamebanana_api = "")
@@ -125,12 +108,21 @@ namespace Sonic3AIR_ModLoader
             StartupWPFHost();
             if (ValidateInstall() == true)
             {
-                UserLanguage.ApplyLanguage(ref Instance);
                 SetTooltips();
                 UpdateModsList(true);
                 UpdateUI();
+                Instance = this;
+
+                ApiInstallChecker.Enabled = true;
+                ApiInstallChecker.Start();
+
+                ModFileManagement.GBAPIWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
+                ModFileManagement.GBAPIWatcher.EnableRaisingEvents = true;
+                ModFileManagement.GBAPIWatcher.Changed += ModFileManagement.GBAPIWatcher_Changed;
+
+                UserLanguage.ApplyLanguage(ref Instance);
                 if (autoBoot) GameHandler.LaunchSonic3AIR();
-                if (gamebanana_api != "") GamebananaAPI_Install(gamebanana_api);
+                if (gamebanana_api != "") ModFileManagement.GamebananaAPI_Install(gamebanana_api);
             }
             else
             {
@@ -138,9 +130,25 @@ namespace Sonic3AIR_ModLoader
             }
 
         }
+
         #endregion
 
         #region Events
+
+        private void apiInstallChecker_Tick(object sender, EventArgs e)
+        {
+            ModFileManagement.GBAPIInstallTrigger();
+        }
+
+        public static void UpdateUIFromInvoke()
+        {
+            Instance.UpdateModsList(true);          
+        }
+
+        public void DownloadButtonTest_Click(object sender, EventArgs e)
+        {
+            ModFileManagement.AddModFromURLLink();
+        }
 
         private void LanguageComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -355,7 +363,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (ModList.SelectedItem != null)
             {
-                RemoveMod();
+                ModFileManagement.RemoveMod((ModList.SelectedItem as ModViewerItem).Source);
             }
         }
 
@@ -367,48 +375,29 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void ModsList_MouseClick(object sender, MouseEventArgs e)
+        private void View_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (ModList.SelectedItem != null)
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Right)
             {
-                if (e.Button == MouseButtons.Right)
-                {
-                    modContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
-                }
+                modContextMenuStrip.Show(ModViewHost, ModViewHost.PointToClient(Cursor.Position));
             }
         }
 
-        private void ModList_MouseDown(object sender, MouseEventArgs e)
+        private void View_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            /*
-            Point loc = this.ModViewHost.PointToClient(Cursor.Position);
-            for (int i = 0; i < this.ModList.Items.Count; i++)
-            {
-                Rectangle rec = this.ModList.GetItemRectangle(i);
-                rec.Width = 16; //checkbox itself has a default width of about 16 pixels
-
-                if (rec.Contains(loc))
-                {
-                    AuthorizeCheck = true;
-                    bool newValue = !this.ModList.GetItemChecked(i);
-                    this.ModList.SetItemChecked(i, newValue);//check 
-                    AuthorizeCheck = false;
-
-                    return;
-                }
-            }*/
+            RefreshSelectedMobProperties();
         }
 
         private void AddMods_Click(object sender, EventArgs e)
         {
-            AddMod();
+            ModFileManagement.AddMod();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             if (ModList.SelectedItem != null)
             {
-                RemoveMod();
+                ModFileManagement.RemoveMod((ModList.SelectedItem as ModViewerItem).Source);
             }
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -812,6 +801,7 @@ namespace Sonic3AIR_ModLoader
             }
 
 
+
             if (ModList.SelectedItem != null)
             {
                 AIR_SDK.Mod item = (ModList.SelectedItem as ModViewerItem).Source;
@@ -1073,7 +1063,7 @@ namespace Sonic3AIR_ModLoader
             {
                 int index = inputMethodsList.SelectedIndex;
                 string newDevice = "New Device";
-                DialogResult result = ShowInputDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
+                DialogResult result = ExtraDialog.ShowInputDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
                 GameConfig.Input.Devices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
                 UpdateInputMappings();
 
@@ -1128,155 +1118,6 @@ namespace Sonic3AIR_ModLoader
         private void LaunchSystemGamepadSettings()
         {
             Process.Start("joy.cpl");
-
-        }
-
-        #endregion
-
-        #region File Management
-
-        private void AddMod()
-        {
-            OpenFileDialog ofd = new OpenFileDialog()
-            {
-                Filter = $"{Program.LanguageResource.GetString("ModFileDialogFilter")} (*.zip;*.7z;*.rar)|*.zip;*.7z;*.rar",
-                Title = Program.LanguageResource.GetString("ModFileDialogTitle")
-            };
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                AddMod(ofd.FileName);
-            }
-        }
-
-        private void AddMod(string file)
-        {
-            //Find the Root of the Mod in the Zip, Because some people have a folder inside of the zip, others may not
-            string foundFile = "";
-
-            if (Path.GetExtension(file) == ".rar") ExtractRar(file);
-            else if (Path.GetExtension(file) == ".zip") ExtractZip(file);
-            else if (Path.GetExtension(file) == ".7z") Extract7Zip(file);
-
-            foreach (string d in Directory.GetDirectories(ProgramPaths.Sonic3AIR_MM_TempModsFolder))
-            {
-                var item = Directory.GetFiles(d, "mod.json").FirstOrDefault();
-                foundFile = (item != null ? item.ToString() : "");
-            }
-            if (foundFile != "")
-            {
-                if (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file)))
-                {
-                    Directory.Delete(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file),true);
-                }
-                Directory.Move(System.IO.Path.GetDirectoryName(foundFile), ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
-            }           
-            else
-            {
-                var item = Directory.GetFiles(ProgramPaths.Sonic3AIR_MM_TempModsFolder, "mod.json").FirstOrDefault();
-                foundFile = (item != null ? item.ToString() : "");
-                if (foundFile != "")
-                {
-                    if (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file)))
-                    {
-                        Directory.Delete(ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file), true);
-                    }
-                    Directory.Move(System.IO.Path.GetDirectoryName(foundFile), ProgramPaths.Sonic3AIRModsFolder + "\\" + Path.GetFileNameWithoutExtension(file));
-                }
-                else
-                {
-                    MessageBox.Show(foundFile);
-                    MessageBox.Show("This is not a valid Sonic 3 A.I.R. Mod. A valid mod requires a mod.json, and either this isn't a mod or it's a legacy mod. If you know for sure that this is a mod, then it's probably a legacy mod. You can't use legacy mods that work without them going forward.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
-            CleanUpTempModsFolder();
-            UpdateModsList(true);
-        }
-
-
-        public void ExtractRar(string file)
-        {
-            using (var archive = SharpCompress.Archives.Rar.RarArchive.Open(file))
-            {
-                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
-                {
-                    entry.WriteToDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
-                    {
-                        ExtractFullPath = true,
-                        Overwrite = true
-                    });
-                }
-            }
-        }
-
-        public void ExtractZip(string file)
-        {
-            using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(file))
-            {
-                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
-                {
-                    entry.WriteToDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
-                    {
-                        ExtractFullPath = true,
-                        Overwrite = true
-                    });
-                }
-            }
-        }
-
-        public void Extract7Zip(string file)
-        {
-            using (var archive = SharpCompress.Archives.SevenZip.SevenZipArchive.Open(file))
-            {
-                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
-                {
-                    entry.WriteToDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder, new ExtractionOptions()
-                    {
-                        ExtractFullPath = true,
-                        Overwrite = true
-                    });
-                }
-            }
-        }
-
-        private void RemoveMod()
-        {
-            var modToRemove = (ModList.SelectedItem as ModViewerItem).Source;
-            if (MessageBox.Show($"Are you sure you want to delete {modToRemove.Name}? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                WipeFolderContents(modToRemove.FolderPath);
-                Directory.Delete(modToRemove.FolderPath);
-                UpdateModsList(true);
-                
-            }
-
-
-        }
-
-        private void CleanUpTempModsFolder()
-        {
-            WipeFolderContents(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
-        }
-
-        private void WipeFolderContents(string folder)
-        {
-            System.IO.DirectoryInfo di = new DirectoryInfo(folder);
-
-            try
-            {
-                foreach (FileInfo file in di.EnumerateFiles())
-                {
-                    file.Delete();
-                }
-                foreach (DirectoryInfo dir in di.EnumerateDirectories())
-                {
-                    dir.Delete(true);
-                }
-            }
-            catch
-            {
-                MessageBox.Show($"Unable to Wipe Contents of \"{folder}\" clean, this may or may not be an issue.");
-            }
 
         }
 
@@ -1413,13 +1254,14 @@ namespace Sonic3AIR_ModLoader
 
         private void UpdateNewModsListItems()
         {
-
+            ProgramPaths.ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings);
             Viewer.View.Items.Clear();
             foreach (ModViewerItem mod in ModsList)
             {
                 Viewer.View.Items.Add(mod);
             }
             Viewer.View.Items.Refresh();
+
         }
 
         private void FetchMods()
@@ -1748,144 +1590,6 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
-        #region Downloading
-
-        public void GamebananaAPI_Install(string data)
-        {
-            if (!Directory.Exists(ProgramPaths.Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
-            string url = data.Replace("s3airmm://","");
-            if (url == "") MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else DownloadMod(url);
-        }
-
-        public void DownloadMod(string url, bool isMod = true, bool backgroundDownload = false)
-        {
-            string baseURL = GetBaseURL(url);
-            //MessageBox.Show(baseURL);
-            if (baseURL != "") url = baseURL;
-
-            string remote_filename = "";
-            if (url != "") remote_filename = GetRemoteFileName(url);
-            string filename = "temp.zip";
-            if (remote_filename != "") filename = remote_filename;
-
-            if (File.Exists($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}\\{filename}")) File.Delete($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}\\{filename}");
-            if (!Directory.Exists(ProgramPaths.Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
-
-            DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}\\{filename}");
-            Action finishAction = DownloadModCompleted;
-            if (isMod) downloadWindow.DownloadCompleted = finishAction;
-            if (backgroundDownload) downloadWindow.StartBackground();
-            else downloadWindow.Start();
-        }
-
-        private string GetRemoteFileName(string baseURL)
-        {
-            Uri uri = new Uri(baseURL);
-            return System.IO.Path.GetFileName(uri.LocalPath);
-        }
-
-        private string GetBaseURL(string url)
-        {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
-            webRequest.AllowAutoRedirect = false;  // IMPORTANT
-
-            webRequest.Timeout = 10000;           // timeout 10s
-            webRequest.Method = "HEAD";
-            // Get the response ...
-            HttpWebResponse webResponse;
-            using (webResponse = (HttpWebResponse)webRequest.GetResponse())
-            {
-                // Now look to see if it's a redirect
-                if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
-                {
-                    string uriString = webResponse.Headers["Location"];
-                    return uriString;
-                }
-            }
-            return "";
-        }
-
-        private void DownloadModCompleted()
-        {
-            string fileZIP = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".zip"));
-            string file7Z = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".7z"));
-            string fileRAR = Directory.GetFiles($"{ProgramPaths.Sonic3AIR_MM_TempModsFolder}").FirstOrDefault(x => x.EndsWith(".rar"));
-
-            if (File.Exists(fileZIP)) AddMod(fileZIP);
-            else if (File.Exists(fileRAR)) AddMod(fileRAR);
-            else if (File.Exists(file7Z)) AddMod(file7Z);
-            else
-            {
-                MessageBox.Show("Something went Wrong!");
-                CleanUpTempModsFolder();
-            }
-            Environment.Exit(0);
-
-        }
-
-        private void DownloadButtonTest_Click(object sender, EventArgs e)
-        {    
-            string url = "";
-            if (ShowInputDialog(ref url, Program.LanguageResource.GetString("EnterModURL")) == DialogResult.OK)
-            {
-                if (url != "") MessageBox.Show(Program.LanguageResource.GetString("InvalidURL"), Program.LanguageResource.GetString("InvalidURL"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) MessageBox.Show(Program.LanguageResource.GetString("InvalidURL"), Program.LanguageResource.GetString("InvalidURL"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else DownloadMod(url, false);
-            }
-
-        }
-
-        private DialogResult ShowInputDialog(ref string input, string caption, string message = "")
-        {
-            System.Drawing.Size size = new System.Drawing.Size(500, 75);
-            Form inputBox = new Form();
-
-            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            inputBox.ClientSize = size;
-            inputBox.Text = caption;
-            inputBox.StartPosition = FormStartPosition.CenterScreen;
-
-            System.Windows.Forms.Label label = new Label();
-            label.Size = new System.Drawing.Size(size.Width - 10, 13);
-            label.Location = new System.Drawing.Point(5, 5);
-            label.Text = message;
-            inputBox.Controls.Add(label);
-
-            System.Windows.Forms.TextBox textBox = new TextBox();
-            textBox.Size = new System.Drawing.Size(size.Width - 10, 23);
-            textBox.Location = new System.Drawing.Point(5, 25);
-            textBox.Text = input;
-            inputBox.Controls.Add(textBox);
-
-            Button okButton = new Button();
-            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            okButton.Name = "okButton";
-            okButton.Size = new System.Drawing.Size(75, 23);
-            okButton.Text = Program.LanguageResource.GetString("Ok_Button");
-            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 49);
-            inputBox.Controls.Add(okButton);
-
-            Button cancelButton = new Button();
-            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            cancelButton.Name = "cancelButton";
-            cancelButton.Size = new System.Drawing.Size(75, 23);
-            cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
-            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 49);
-            inputBox.Controls.Add(cancelButton);
-
-            inputBox.AcceptButton = okButton;
-            inputBox.CancelButton = cancelButton;
-            
-
-            inputBox.ShowDialog();
-            input = textBox.Text;
-            return inputBox.DialogResult;
-        }
-
-        #endregion
-
         #region Information Sending
 
         private async void UploadRecordingToFileDotIO(AIR_SDK.Recording recording)
@@ -2139,7 +1843,7 @@ namespace Sonic3AIR_ModLoader
                 {
                     try
                     {
-                        WipeFolderContents(item.FilePath);
+                        ModFileManagement.WipeFolderContents(item.FilePath);
                         Directory.Delete(item.FilePath);
                     }
                     catch
@@ -2151,6 +1855,7 @@ namespace Sonic3AIR_ModLoader
 
             }
         }
+
 
 
         #endregion

@@ -177,6 +177,7 @@
             this.modManagerPathMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openDownloadsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openVersionsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ApiInstallChecker = new System.Windows.Forms.Timer(this.components);
             this.modContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.modPage.SuspendLayout();
@@ -1699,6 +1700,10 @@
             this.openVersionsFolderToolStripMenuItem.Text = "Open Versions Folder";
             this.openVersionsFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenVersionsFolderToolStripMenuItem_Click);
             // 
+            // apiInstallChecker
+            // 
+            this.ApiInstallChecker.Tick += new System.EventHandler(this.apiInstallChecker_Tick);
+            // 
             // ModManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1907,6 +1912,7 @@
         private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.Integration.ElementHost ModViewHost;
         public System.Windows.Forms.CheckBox devModeCheckbox;
+        private System.Windows.Forms.Timer ApiInstallChecker;
     }
 }
 

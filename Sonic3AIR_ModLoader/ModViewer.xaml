@@ -11,6 +11,18 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="Auto" Height="Auto">
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                        <Setter Property="Background" Value="#7F26FF04" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                        <Setter Property="Background" Value="#7FFF0000" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Width="Auto" Height="35">
                                 <Grid Width="32" Height="32">
@@ -33,7 +45,6 @@
                                 <TextBlock Text="{Binding Version}" HorizontalAlignment="Right" DockPanel.Dock="Right" TextWrapping="Wrap" FontWeight="DemiBold" />
                             </DockPanel>
                         </StackPanel>
-
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

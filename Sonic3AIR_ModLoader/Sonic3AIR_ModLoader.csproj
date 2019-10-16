@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="DownloadWindow.xaml.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ExtraDialog.cs" />
     <Compile Include="KeyBindingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +137,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>lang_null.resx</DependentUpon>
     </Compile>
+    <Compile Include="ItemConflictDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemConflictDialog.Designer.cs">
+      <DependentUpon>ItemConflictDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModFileManagement.cs" />
     <Compile Include="ModManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +194,9 @@
     <EmbeddedResource Include="Languages\lang_null.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>lang_null.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemConflictDialog.resx">
+      <DependentUpon>ItemConflictDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModManager.resx">
       <DependentUpon>ModManager.cs</DependentUpon>

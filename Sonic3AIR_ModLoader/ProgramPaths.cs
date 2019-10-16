@@ -21,6 +21,7 @@ namespace Sonic3AIR_ModLoader
         public static string Sonic3AIRSettingsFile = "";
         public static string Sonic3AIRGBLinkPath = "";
         public static string Sonic3AIR_MM_BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM";
+        public static string Sonic3AIR_MM_GBRequestsFolder = Sonic3AIR_MM_BaseFolder + "\\gb_api_urls";
         public static string Sonic3AIR_MM_TempModsFolder = Sonic3AIR_MM_BaseFolder + "\\temp_mod_install";
         public static string Sonic3AIR_MM_DownloadsFolder = Sonic3AIR_MM_BaseFolder + "\\downloads";
         public static string Sonic3AIR_MM_VersionsFolder = Sonic3AIR_MM_BaseFolder + "\\air_versions";
@@ -207,10 +208,7 @@ namespace Sonic3AIR_ModLoader
             Sonic3AIRModsFolder = Sonic3AIRAppDataFolder + "\\mods";
             Sonic3AIRSettingsFile = Sonic3AIRAppDataFolder + "\\settings.json";
 
-            if (!Directory.Exists(Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_TempModsFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_BaseFolder)) Directory.CreateDirectory(Sonic3AIR_MM_BaseFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_DownloadsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_DownloadsFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_VersionsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_VersionsFolder);
+            CreateMissingModManagerFolders();
 
             List<Tuple<string, bool>> MissingFilesState = new List<Tuple<string, bool>>();
 
@@ -236,6 +234,16 @@ namespace Sonic3AIR_ModLoader
             {
                 return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings);
             }
+        }
+
+
+        public static void CreateMissingModManagerFolders()
+        {
+            if (!Directory.Exists(Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_TempModsFolder);
+            if (!Directory.Exists(Sonic3AIR_MM_BaseFolder)) Directory.CreateDirectory(Sonic3AIR_MM_BaseFolder);
+            if (!Directory.Exists(Sonic3AIR_MM_DownloadsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_DownloadsFolder);
+            if (!Directory.Exists(Sonic3AIR_MM_VersionsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_VersionsFolder);
+            if (!Directory.Exists(Sonic3AIR_MM_GBRequestsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_GBRequestsFolder);
         }
 
 
