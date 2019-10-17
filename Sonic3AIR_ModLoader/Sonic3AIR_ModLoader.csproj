@@ -153,6 +153,7 @@
     <Compile Include="ModViewer.xaml.cs">
       <DependentUpon>ModViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModWrapPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameHandler.cs" />

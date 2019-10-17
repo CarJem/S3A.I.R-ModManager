@@ -10,44 +10,52 @@
         <ListView x:Name="View" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="Auto" Height="Auto">
-                        <Grid.Style>
-                            <Style TargetType="{x:Type Grid}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                                        <Setter Property="Background" Value="#7F26FF04" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                                        <Setter Property="Background" Value="#7FFF0000" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Style>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal" Width="Auto" Height="35">
-                                <Grid Width="32" Height="32">
-                                    <Border Width="32" Height="32" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                        <Image Width="30" Height="30" Source="{Binding Image}"></Image>
-                                    </Border>
-                                </Grid>
-                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="5" Height="Auto">
-                                    <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="UniformToFill">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="Bold" />
-                                            <TextBlock Text="{Binding Author}" TextWrapping="Wrap" FontWeight="Medium" />
-                                        </StackPanel>
-                                    </Viewbox>
-                                </StackPanel>
-                                <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Grid Width="Auto" HorizontalAlignment="Stretch" Height="52" Margin="1">
+                            <Grid.Style>
+                                <Style TargetType="{x:Type Grid}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                            <Setter Property="Background" Value="#7F26FF04" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                            <Setter Property="Background" Value="#7FFF0000" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <StackPanel Width="Auto" Height="Auto">
+                                <DockPanel>
+                                    <Grid>
+                                        <Border BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                            <Image RenderOptions.BitmapScalingMode="HighQuality" Width="50" Height="50" Source="{Binding Image}"></Image>
+                                        </Border>
+                                    </Grid>
+                                    <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="5" Height="Auto">
+                                        <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="UniformToFill">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="Bold" />
+                                                <TextBlock Text="{Binding Author}" TextWrapping="Wrap" FontWeight="Medium" />
+                                                <Grid>
+                                                    <TextBlock Text="{Binding Version}" HorizontalAlignment="Left" TextWrapping="Wrap" FontWeight="DemiBold" />
+                                                </Grid>
+                                            </StackPanel>
+                                        </Viewbox>
+                                    </StackPanel>
+                                    <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
+                                </DockPanel>
                             </StackPanel>
-                            <DockPanel>
-                                <TextBlock Text="{Binding TechName}" HorizontalAlignment="Right" DockPanel.Dock="Left" TextWrapping="Wrap" FontWeight="Bold" />
-                                <TextBlock Text="{Binding Version}" HorizontalAlignment="Right" DockPanel.Dock="Right" TextWrapping="Wrap" FontWeight="DemiBold" />
-                            </DockPanel>
-                        </StackPanel>
-                    </Grid>
+                        </Grid>
+                    </Border>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <local:ModWrapPanel2 HorizontalAlignment="Center">
+                    </local:ModWrapPanel2>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
         </ListView>
     </Grid>
 </UserControl>

@@ -808,11 +808,11 @@ namespace Sonic3AIR_ModLoader
                 if (item != null)
                 {
 
-                    modInfoTextBox.Text = "";
+                    modInfoTextBox.Clear();
 
                     modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Bold);
 
-                    modInfoTextBox.AppendText($"{Program.LanguageResource.GetString("By")}: {item.Author}{nL}{Program.LanguageResource.GetString("Version")}: {item.ModVersion}{nL}{Program.LanguageResource.GetString("AIRVersion")}: {item.GameVersion}");
+                    modInfoTextBox.AppendText($"{Program.LanguageResource.GetString("By")}: {item.Author}{nL}{Program.LanguageResource.GetString("Version")}: {item.ModVersion}{nL}{Program.LanguageResource.GetString("AIRVersion")}: {item.GameVersion}{nL}{item.TechnicalName}");
 
                     modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Regular);
 
@@ -1858,8 +1858,15 @@ namespace Sonic3AIR_ModLoader
 
 
 
+
         #endregion
 
+        private void ModManager_Resize(object sender, EventArgs e)
+        {
+            if (this.Width == 600)
+            {
 
+            }
+        }
     }
 }
