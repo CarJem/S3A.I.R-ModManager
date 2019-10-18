@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR_Protocol_Handler", "AIR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR-SDK", "AIR-SDK\AIR-SDK.csproj", "{0F33D309-0FF8-42C5-AB4A-585D31072EC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIRModManagerWPF", "..\Sonic3AIRModManagerWPF\Sonic3AIRModManagerWPF\Sonic3AIRModManagerWPF.csproj", "{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,12 +43,20 @@ Global
 		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|x86.ActiveCfg = Release|Any CPU
 		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|x86.Build.0 = Release|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F1A0BE5-CA20-4B93-BBAA-14A6B093A0FD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {614F9ECA-E63D-44B5-961B-60BDAC46614B}
 		RESX_PrefixTranslations = False
+		SolutionGuid = {614F9ECA-E63D-44B5-961B-60BDAC46614B}
 	EndGlobalSection
 EndGlobal

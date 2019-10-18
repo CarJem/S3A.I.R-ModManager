@@ -67,8 +67,11 @@ namespace Sonic3AIR_ModLoader
 
         #region Hosted Elements
 
-        public ModViewer Viewer;
-        public System.Windows.Controls.ListView ModList { get => Viewer.View; set => Viewer.View = value; }
+        public ModViewer ModViewer;
+        public ListViewControl VersionsViewer;
+
+        public System.Windows.Controls.ListView ModList { get => ModViewer.View; set => ModViewer.View = value; }
+        public System.Windows.Controls.ListView VersionsListView { get => VersionsViewer.View; set => VersionsViewer.View = value; }
 
         #endregion
 
@@ -81,6 +84,7 @@ namespace Sonic3AIR_ModLoader
             {
                 if (autoBoot == false && Program.UpdaterState == Updater.UpdateState.NeverStarted) new Updater();
             }
+            
 
             StartModloader(autoBoot);
 
@@ -94,10 +98,34 @@ namespace Sonic3AIR_ModLoader
         #region WPF Definitions
         private void StartupWPFHost()
         {
-            Viewer = new ModViewer();
-            Viewer.View.SelectionChanged += View_SelectionChanged;
-            Viewer.View.MouseUp += View_MouseUp;
-            ModViewHost.Child = Viewer;
+            ModViewer = new ModViewer();
+            ModViewer.View.SelectionChanged += View_SelectionChanged;
+            ModViewer.View.MouseUp += View_MouseUp;
+            ModViewHost.Child = ModViewer;
+
+            VersionsViewer = new ListViewControl();
+            VersionsViewer.View.SelectionChanged += this.VersionsListBox_SelectedValueChanged;
+            versionsListHost.Child = VersionsViewer;
+
+            var VersionsGrid = new AutoSizedGridView();
+
+            VersionsGrid.AllowsColumnReorder = false;
+
+            var VersionColumn = new System.Windows.Controls.GridViewColumn();
+            VersionColumn.Header = "Version";
+            VersionColumn.Width = 100;
+            VersionColumn.DisplayMemberBinding = new System.Windows.Data.Binding("Name");
+            VersionsGrid.Columns.Add(VersionColumn);
+
+            var PathColumn = new System.Windows.Controls.GridViewColumn();
+            PathColumn.Header = "Path";
+            PathColumn.Width = Double.NaN;
+            PathColumn.DisplayMemberBinding = new System.Windows.Data.Binding("FilePath");
+            VersionsGrid.Columns.Add(PathColumn);
+
+
+            VersionsViewer.View.View = VersionsGrid;
+
         }
 
         #endregion
@@ -601,6 +629,8 @@ namespace Sonic3AIR_ModLoader
             autoRunCheckbox.Enabled = enabled;
             inputPanel.Enabled = enabled;
             checkForUpdatesButton.Enabled = enabled;
+            devModeCheckbox.Enabled = enabled;
+            settingsTabControl.Enabled = enabled;
         }
 
         private void UpdateUI()
@@ -1255,12 +1285,12 @@ namespace Sonic3AIR_ModLoader
         private void UpdateNewModsListItems()
         {
             ProgramPaths.ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings);
-            Viewer.View.Items.Clear();
+            ModViewer.View.Items.Clear();
             foreach (ModViewerItem mod in ModsList)
             {
-                Viewer.View.Items.Add(mod);
+                ModViewer.View.Items.Add(mod);
             }
-            Viewer.View.Items.Refresh();
+            ModViewer.View.Items.Refresh();
 
         }
 
@@ -1764,7 +1794,7 @@ namespace Sonic3AIR_ModLoader
         {
             if (fullRefresh)
             {
-                versionsListBox.Items.Clear();
+                VersionsListView.Items.Clear();
                 DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
                 var folders = directoryInfo.GetDirectories().ToList();
                 if (folders.Count != 0)
@@ -1774,7 +1804,7 @@ namespace Sonic3AIR_ModLoader
                         string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
                         if (File.Exists(filePath))
                         {
-                            versionsListBox.Items.Add(new AIRVersionListItem(folder.Name, folder.FullName));
+                            VersionsListView.Items.Add(new AIRVersionListItem(folder.Name, folder.FullName));
                         }
 
 
@@ -1782,7 +1812,7 @@ namespace Sonic3AIR_ModLoader
                 }
             }
 
-            bool enabled = versionsListBox.SelectedItem != null;
+            bool enabled = VersionsListView.SelectedItem != null;
             removeVersionButton.Enabled = enabled;
             openVersionLocationButton.Enabled = enabled;
         }
@@ -1814,11 +1844,11 @@ namespace Sonic3AIR_ModLoader
 
         private void TabControl2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl2.SelectedTab == versionsPage)
+            if (settingsTabControl.SelectedTab == versionsPage)
             {
                 RefreshVersionsList(true);
             }
-            else if (tabControl2.SelectedTab == inputPage)
+            else if (settingsTabControl.SelectedTab == inputPage)
             {
                 DisableMappings();
                 CollectInputMappings();
@@ -1827,18 +1857,18 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenVersionLocationButton_Click(object sender, EventArgs e)
         {
-            if (versionsListBox.SelectedItem != null && versionsListBox.SelectedItem is AIRVersionListItem)
+            if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is AIRVersionListItem)
             {
-                AIRVersionListItem item = versionsListBox.SelectedItem as AIRVersionListItem;
+                AIRVersionListItem item = VersionsListView.SelectedItem as AIRVersionListItem;
                 Process.Start(item.FilePath);
             }
         }
 
         private void RemoveVersionButton_Click(object sender, EventArgs e)
         {
-            if (versionsListBox.SelectedItem != null && versionsListBox.SelectedItem is AIRVersionListItem)
+            if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is AIRVersionListItem)
             {
-                AIRVersionListItem item = versionsListBox.SelectedItem as AIRVersionListItem;
+                AIRVersionListItem item = VersionsListView.SelectedItem as AIRVersionListItem;
                 if (MessageBox.Show(UserLanguage.RemoveVersion(item.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     try
@@ -1863,10 +1893,7 @@ namespace Sonic3AIR_ModLoader
 
         private void ModManager_Resize(object sender, EventArgs e)
         {
-            if (this.Width == 600)
-            {
 
-            }
         }
     }
 }

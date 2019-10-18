@@ -57,6 +57,7 @@ namespace Sonic3AIR_ModLoader
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
                 image.UriSource = new Uri(ImageLocation);
                 image.EndInit();
 

@@ -99,7 +99,7 @@ namespace AIR_SDK
                 }
                 catch (Exception ex)
                 {
-                    if (!loadOptions.ThrowNoExceptionsForMissingAttributesBesidesVersion) throw ex;
+                    EnableDevMode = false;
                 }
            
                 try

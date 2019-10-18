@@ -178,9 +178,9 @@ namespace Sonic3AIR_ModLoader
                     else BadModMessage();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Something Went Wrong!");
+                MessageBox.Show("Something Went Wrong:" + Environment.NewLine + ex.Message);
             }
 
             CleanUpTempModsFolder();

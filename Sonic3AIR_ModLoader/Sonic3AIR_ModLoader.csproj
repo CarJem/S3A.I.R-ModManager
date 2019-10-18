@@ -143,6 +143,9 @@
     <Compile Include="ItemConflictDialog.Designer.cs">
       <DependentUpon>ItemConflictDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListViewControl.xaml.cs">
+      <DependentUpon>ListViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModFileManagement.cs" />
     <Compile Include="ModManager.cs">
       <SubType>Form</SubType>
@@ -248,6 +251,10 @@
     <Page Include="DownloadWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModViewer.xaml">
       <SubType>Designer</SubType>
