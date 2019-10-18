@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Sonic3AIR_ModLoader"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ListView x:Name="View" HorizontalAlignment="Stretch" SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded">
+    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="View" HorizontalAlignment="Stretch" SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded">
         <ListView.View>
             <GridView></GridView>
         </ListView.View>

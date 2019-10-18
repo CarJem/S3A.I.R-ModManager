@@ -69,9 +69,12 @@ namespace Sonic3AIR_ModLoader
 
         public ModViewer ModViewer;
         public ListViewControl VersionsViewer;
+        public ListViewControl RecordingsViewer;
 
         public System.Windows.Controls.ListView ModList { get => ModViewer.View; set => ModViewer.View = value; }
         public System.Windows.Controls.ListView VersionsListView { get => VersionsViewer.View; set => VersionsViewer.View = value; }
+        public System.Windows.Controls.ListView GameRecordingList { get => RecordingsViewer.View; set => RecordingsViewer.View = value; }
+        
 
         #endregion
 
@@ -123,9 +126,36 @@ namespace Sonic3AIR_ModLoader
             PathColumn.DisplayMemberBinding = new System.Windows.Data.Binding("FilePath");
             VersionsGrid.Columns.Add(PathColumn);
 
-
             VersionsViewer.View.View = VersionsGrid;
 
+            RecordingsViewer = new ListViewControl();
+            RecordingsViewer.View.SelectionChanged += GameRecordingList_SelectedIndexChanged;
+            GameRecordingListHost.Child = RecordingsViewer;
+
+            var RecordingsGrid = new AutoSizedGridView();
+
+            RecordingsGrid.AllowsColumnReorder = false;
+
+            var TimestampColumn = new System.Windows.Controls.GridViewColumn();
+            TimestampColumn.Header = "Item";
+            TimestampColumn.Width = 100;
+            TimestampColumn.DisplayMemberBinding = new System.Windows.Data.Binding("Name");
+            RecordingsGrid.Columns.Add(TimestampColumn);
+
+            var RecVersionColumn = new System.Windows.Controls.GridViewColumn();
+            RecVersionColumn.Header = "A.I.R. Version";
+            RecVersionColumn.Width = Double.NaN;
+            RecVersionColumn.DisplayMemberBinding = new System.Windows.Data.Binding("AIRVersion");
+            RecordingsGrid.Columns.Add(RecVersionColumn);
+
+            RecordingsViewer.View.View = RecordingsGrid;
+        }
+
+        private void UpdateWPFListViews(System.Windows.Controls.ListView listView)
+        {
+            //listView.InvalidateVisual();
+            //listView.RenderSize = new System.Windows.Size(listView.RenderSize.Width + 1, listView.RenderSize.Height + 1);
+            //listView.RenderSize = new System.Windows.Size(listView.RenderSize.Width - 1, listView.RenderSize.Height - 1);
         }
 
         #endregion
@@ -363,9 +393,9 @@ namespace Sonic3AIR_ModLoader
 
         private void DeleteRecordingButton_Click(object sender, EventArgs e)
         {
-            if (gameRecordingList.SelectedItem != null)
+            if (GameRecordingList.SelectedItem != null)
             {
-                AIR_SDK.Recording recording = gameRecordingList.SelectedItem as AIR_SDK.Recording;
+                AIR_SDK.Recording recording = GameRecordingList.SelectedItem as AIR_SDK.Recording;
                 if (MessageBox.Show(UserLanguage.DeleteItem(recording.Name), "", MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     try
@@ -445,9 +475,9 @@ namespace Sonic3AIR_ModLoader
 
         private void CopyRecordingFilePath_Click(object sender, EventArgs e)
         {
-            if (gameRecordingList.SelectedItem != null)
+            if (GameRecordingList.SelectedItem != null)
             {
-                var item = gameRecordingList.SelectedItem as AIR_SDK.Recording;
+                var item = GameRecordingList.SelectedItem as AIR_SDK.Recording;
                 Clipboard.SetText(item.FilePath);
                 MessageBox.Show(Program.LanguageResource.GetString("RecordingPathCopiedToClipboard"));
             }
@@ -455,16 +485,16 @@ namespace Sonic3AIR_ModLoader
 
         private void UploadButton_Click(object sender, EventArgs e)
         {
-            if (gameRecordingList.SelectedItem != null)
+            if (GameRecordingList.SelectedItem != null)
             {
-                UploadRecordingToFileDotIO(gameRecordingList.SelectedItem as AIR_SDK.Recording);
+                UploadRecordingToFileDotIO(GameRecordingList.SelectedItem as AIR_SDK.Recording);
             }
 
         }
 
         private void GameRecordingList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (gameRecordingList.SelectedItem != null)
+            if (GameRecordingList.SelectedItem != null)
             {
                 openRecordingButton.Enabled = true;
                 copyRecordingFilePath.Enabled = true;
@@ -871,7 +901,7 @@ namespace Sonic3AIR_ModLoader
 
         private void CollectGameRecordings()
         {
-            gameRecordingList.Items.Clear();
+            GameRecordingList.Items.Clear();
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
                 recordingsErrorMessage.SendToBack();
@@ -886,7 +916,7 @@ namespace Sonic3AIR_ModLoader
                     foreach (var file in fileInfo)
                     {
                         AIR_SDK.Recording recording = new AIR_SDK.Recording(file);
-                        gameRecordingList.Items.Add(recording);
+                        GameRecordingList.Items.Add(recording);
                     }
                 }
             }
@@ -896,6 +926,7 @@ namespace Sonic3AIR_ModLoader
                 recordingsErrorMessage.Visible = true;
                 recordingsErrorMessage.Enabled = false;
             }
+            UpdateWPFListViews(GameRecordingList);
 
         }
 
@@ -1607,9 +1638,9 @@ namespace Sonic3AIR_ModLoader
 
         private void OpenRecordingLocation()
         {
-            if (gameRecordingList.SelectedItem != null)
+            if (GameRecordingList.SelectedItem != null)
             {
-                AIR_SDK.Recording item = gameRecordingList.SelectedItem as AIR_SDK.Recording;
+                AIR_SDK.Recording item = GameRecordingList.SelectedItem as AIR_SDK.Recording;
                 if (File.Exists(item.FilePath))
                 {
                     Process.Start("explorer.exe", "/select, " + item.FilePath);
@@ -1810,6 +1841,7 @@ namespace Sonic3AIR_ModLoader
 
                     }
                 }
+                UpdateWPFListViews(VersionsListView);
             }
 
             bool enabled = VersionsListView.SelectedItem != null;

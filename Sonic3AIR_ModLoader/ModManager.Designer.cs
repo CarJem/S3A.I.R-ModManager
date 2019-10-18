@@ -65,7 +65,7 @@
             this.refreshDebugButton = new System.Windows.Forms.Button();
             this.copyRecordingFilePath = new System.Windows.Forms.Button();
             this.openRecordingButton = new System.Windows.Forms.Button();
-            this.gameRecordingList = new System.Windows.Forms.ListBox();
+            this.GameRecordingListHost = new System.Windows.Forms.Integration.ElementHost();
             this.deleteRecordingButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.recordingsErrorMessage = new System.Windows.Forms.Label();
@@ -572,7 +572,7 @@
             this.recordingsPanel.Controls.Add(this.refreshDebugButton);
             this.recordingsPanel.Controls.Add(this.copyRecordingFilePath);
             this.recordingsPanel.Controls.Add(this.openRecordingButton);
-            this.recordingsPanel.Controls.Add(this.gameRecordingList);
+            this.recordingsPanel.Controls.Add(this.GameRecordingListHost);
             this.recordingsPanel.Controls.Add(this.deleteRecordingButton);
             this.recordingsPanel.Controls.Add(this.uploadButton);
             this.recordingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -616,16 +616,15 @@
             this.openRecordingButton.UseVisualStyleBackColor = true;
             this.openRecordingButton.Click += new System.EventHandler(this.OpenRecordingButton_Click);
             // 
-            // gameRecordingList
+            // GameRecordingListHost
             // 
-            this.gameRecordingList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.GameRecordingListHost.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gameRecordingList.Location = new System.Drawing.Point(3, 3);
-            this.gameRecordingList.Name = "gameRecordingList";
-            this.gameRecordingList.Size = new System.Drawing.Size(314, 342);
-            this.gameRecordingList.TabIndex = 0;
-            this.gameRecordingList.SelectedIndexChanged += new System.EventHandler(this.GameRecordingList_SelectedIndexChanged);
+            this.GameRecordingListHost.Location = new System.Drawing.Point(3, 3);
+            this.GameRecordingListHost.Name = "gameRecordingList";
+            this.GameRecordingListHost.Size = new System.Drawing.Size(314, 342);
+            this.GameRecordingListHost.TabIndex = 0;
             // 
             // deleteRecordingButton
             // 
@@ -1957,7 +1956,7 @@
         public System.Windows.Forms.CheckBox autoRunCheckbox;
         public System.Windows.Forms.TabPage recordingsPage;
         public System.Windows.Forms.Button refreshDebugButton;
-        public System.Windows.Forms.ListBox gameRecordingList;
+        public System.Windows.Forms.Integration.ElementHost GameRecordingListHost;
         public System.Windows.Forms.Button uploadButton;
         public System.Windows.Forms.Button openRecordingButton;
         public System.Windows.Forms.Button copyRecordingFilePath;

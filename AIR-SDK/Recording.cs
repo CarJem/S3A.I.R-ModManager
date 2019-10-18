@@ -10,10 +10,10 @@ namespace AIR_SDK
 {
     public class Recording
     {
-        public string Name;
-        public string FilePath;
-        public string FormalName;
-        public string AIRVersion = "N/A";
+        public string Name { get; set; }
+        public string FilePath { get; set; }
+        public string FormalName { get; set; }
+        public string AIRVersion { get; set; } = "N/A";
 
         public override string ToString()
         {
