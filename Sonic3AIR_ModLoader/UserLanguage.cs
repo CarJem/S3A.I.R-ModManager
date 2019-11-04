@@ -256,6 +256,11 @@ namespace Sonic3AIR_ModLoader
 
         }
 
+        public static void ApplyLanguage(ref ModManagerV2 window)
+        {
+
+        }
+
         public static void ApplyLanguage(ref AutoBootDialog form)
         {
             form.forceStartButton.Text = Program.LanguageResource.GetString("ForceStart");
@@ -278,7 +283,7 @@ namespace Sonic3AIR_ModLoader
             form.updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
         }
 
-        public static void ApplyLanguage(ref KeyBindingDialog form)
+        public static void ApplyLanguage(ref KeyBindingDialogOriginal form)
         {
             form.inputDeviceRadioButton1.Text = Program.LanguageResource.GetString("KeyboardRadioButton");
             form.inputDeviceRadioButton2.Text = Program.LanguageResource.GetString("ControllerRadioButton");
@@ -298,6 +303,20 @@ namespace Sonic3AIR_ModLoader
             form.resultLabel.Text = Program.LanguageResource.GetString("ResultLabel");
             form.keyLabel.Text = Program.LanguageResource.GetString("KeyLabel");
             form.AxisIDLabel.Text = Program.LanguageResource.GetString("IDLabel");
+
+            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
+            form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
+
+            form.Text = Program.LanguageResource.GetString("SelectInputTitleExpandable");
+        }
+
+        public static void ApplyLanguage(ref KeyBindingDialog form)
+        {
+            form.inputDeviceRadioButton1.Text = Program.LanguageResource.GetString("KeyboardRadioButton");
+            form.inputDeviceRadioButton3.Text = Program.LanguageResource.GetString("CustomAdvancedLabel");
+
+            form.resultLabel.Text = Program.LanguageResource.GetString("ResultLabel");
+            form.keyLabel.Text = Program.LanguageResource.GetString("KeyLabel");
 
             form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
             form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");

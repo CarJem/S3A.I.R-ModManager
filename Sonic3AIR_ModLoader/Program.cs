@@ -33,12 +33,13 @@ namespace Sonic3AIR_ModLoader
         /// </summary>
         [STAThread]
         static void Main(string[] args)
-        {
+        {       
             Parser.Default.ParseArguments<Options>(args).WithParsed<Options>( o => { Arguments = o; });
             ProgramPaths.CreateMissingModManagerFolders();
             var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
             if (exists) GamebannaAPIHandler(args);
             else StartApplication(args);
+            
         }
 
         static void GamebannaAPIHandler(string[] args)

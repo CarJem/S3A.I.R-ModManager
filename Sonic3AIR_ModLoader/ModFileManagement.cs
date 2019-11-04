@@ -197,7 +197,7 @@ namespace Sonic3AIR_ModLoader
         {
             string ModPath = Path.GetFileNameWithoutExtension(file);
 
-            if (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath)) ModImportConflictResolve(meta,file);
+            if (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath)) ModImportConflictResolve(meta, file);
             else MoveMod();
 
 
@@ -223,7 +223,7 @@ namespace Sonic3AIR_ModLoader
 
 
 
-            var result = new ItemConflictDialog().ShowDialog(ExistingMod,NewMod);
+            var result = new ItemConflictDialog().ShowDialog(ExistingMod, NewMod);
             if (result == DialogResult.Yes)
             {
                 DeleteOldMod();
@@ -448,6 +448,36 @@ namespace Sonic3AIR_ModLoader
                 else DownloadMod(url, false);
             }
 
+        }
+
+
+        #endregion
+
+        #region Input Mapping Import/Exporting
+
+        public static void ExportInputMappings(AIR_SDK.InputMappings.Device mappings)
+        {
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog()
+            {
+                FileName = string.Format("{0}", mappings.EntryName),
+                Filter = "Input File | *.json",
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                mappings.ExportDevice(sfd.FileName);
+            }
+        }
+
+        public static void ImportInputMappings(AIR_SDK.GameConfig config)
+        {
+            System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog()
+            {
+                Filter = "Input File | *.json",
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                config.ImportDevice(ofd.FileName);
+            }
         }
 
 

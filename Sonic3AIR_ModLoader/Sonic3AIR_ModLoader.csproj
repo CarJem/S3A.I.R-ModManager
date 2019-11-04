@@ -62,6 +62,9 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLine, Version=2.6.0.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.2.6.0\lib\net461\CommandLine.dll</HintPath>
@@ -79,6 +82,15 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="SharpCompress, Version=0.24.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpCompress.0.24.0\lib\net45\SharpCompress.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net40\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.XInput.4.2.0\lib\net45\SharpDX.XInput.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -107,9 +119,22 @@
     <Compile Include="AutoBootDialog.Designer.cs">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="DirectInputReaderDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectInputReaderDialog.Designer.cs">
+      <DependentUpon>DirectInputReaderDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="DownloadWindow.xaml.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraDialog.cs" />
+    <Compile Include="DirectInputReader.cs" />
+    <Compile Include="KeyBindingDialogOriginal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeyBindingDialogOriginal.Designer.cs">
+      <DependentUpon>KeyBindingDialogOriginal.cs</DependentUpon>
+    </Compile>
     <Compile Include="KeyBindingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +171,9 @@
     <Compile Include="ListViewControl.xaml.cs">
       <DependentUpon>ListViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModManagerV2.xaml.cs">
+      <DependentUpon>ModManagerV2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModFileManagement.cs" />
     <Compile Include="ModManager.cs">
       <SubType>Form</SubType>
@@ -180,6 +208,12 @@
     <Compile Include="ProgramPaths.cs" />
     <EmbeddedResource Include="AutoBootDialog.resx">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectInputReaderDialog.resx">
+      <DependentUpon>DirectInputReaderDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyBindingDialogOriginal.resx">
+      <DependentUpon>KeyBindingDialogOriginal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyBindingDialog.resx">
       <DependentUpon>KeyBindingDialog.cs</DependentUpon>
@@ -255,6 +289,10 @@
     <Page Include="ListViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModManagerV2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ModViewer.xaml">
       <SubType>Designer</SubType>

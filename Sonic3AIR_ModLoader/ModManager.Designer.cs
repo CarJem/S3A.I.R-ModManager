@@ -622,9 +622,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GameRecordingListHost.Location = new System.Drawing.Point(3, 3);
-            this.GameRecordingListHost.Name = "gameRecordingList";
+            this.GameRecordingListHost.Name = "GameRecordingListHost";
             this.GameRecordingListHost.Size = new System.Drawing.Size(314, 342);
             this.GameRecordingListHost.TabIndex = 0;
+            this.GameRecordingListHost.Child = null;
             // 
             // deleteRecordingButton
             // 
@@ -1097,46 +1098,46 @@
             // importConfigButton
             // 
             this.importConfigButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.importConfigButton.Enabled = false;
             this.importConfigButton.Location = new System.Drawing.Point(171, 78);
             this.importConfigButton.Name = "importConfigButton";
             this.importConfigButton.Size = new System.Drawing.Size(69, 23);
             this.importConfigButton.TabIndex = 26;
             this.importConfigButton.Text = "Import...";
             this.importConfigButton.UseVisualStyleBackColor = true;
+            this.importConfigButton.Click += new System.EventHandler(this.importConfigButton_Click);
             // 
             // exportConfigButton
             // 
             this.exportConfigButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.exportConfigButton.Enabled = false;
             this.exportConfigButton.Location = new System.Drawing.Point(246, 78);
             this.exportConfigButton.Name = "exportConfigButton";
             this.exportConfigButton.Size = new System.Drawing.Size(71, 23);
             this.exportConfigButton.TabIndex = 25;
             this.exportConfigButton.Text = "Export...";
             this.exportConfigButton.UseVisualStyleBackColor = true;
+            this.exportConfigButton.Click += new System.EventHandler(this.exportConfigButton_Click);
             // 
             // removeInputMethodButton
             // 
             this.removeInputMethodButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.removeInputMethodButton.Enabled = false;
             this.removeInputMethodButton.Location = new System.Drawing.Point(64, 78);
             this.removeInputMethodButton.Name = "removeInputMethodButton";
             this.removeInputMethodButton.Size = new System.Drawing.Size(55, 23);
             this.removeInputMethodButton.TabIndex = 24;
             this.removeInputMethodButton.Text = "-";
             this.removeInputMethodButton.UseVisualStyleBackColor = true;
+            this.removeInputMethodButton.Click += new System.EventHandler(this.removeInputMethodButton_Click);
             // 
             // addInputMethodButton
             // 
             this.addInputMethodButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addInputMethodButton.Enabled = false;
             this.addInputMethodButton.Location = new System.Drawing.Point(3, 78);
             this.addInputMethodButton.Name = "addInputMethodButton";
             this.addInputMethodButton.Size = new System.Drawing.Size(55, 23);
             this.addInputMethodButton.TabIndex = 24;
             this.addInputMethodButton.Text = "+";
             this.addInputMethodButton.UseVisualStyleBackColor = true;
+            this.addInputMethodButton.Click += new System.EventHandler(this.addInputMethodButton_Click);
             // 
             // groupBox4
             // 
@@ -1374,7 +1375,6 @@
             // resetInputsButton
             // 
             this.resetInputsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.resetInputsButton.Enabled = false;
             this.resetInputsButton.Location = new System.Drawing.Point(172, 276);
             this.resetInputsButton.Name = "resetInputsButton";
             this.resetInputsButton.Size = new System.Drawing.Size(136, 23);

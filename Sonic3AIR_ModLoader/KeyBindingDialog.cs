@@ -49,6 +49,7 @@ namespace Sonic3AIR_ModLoader
             OriginalKeybinding = keybind;
             resultText.Text = $"{keybind} {Program.LanguageResource.GetString("KeybindingsExistingNote")}"; ;
             resultText.Tag = keybind;
+            if (KeyBindings.Contains(keybind)) keyBox.SelectedIndex = keyBox.Items.IndexOf(OriginalKeybinding);
             if (this.ShowDialog() == DialogResult.OK)
             {
                 keybind = resultText.Tag.ToString();
@@ -73,12 +74,6 @@ namespace Sonic3AIR_ModLoader
             {
                 ToggleKeyboardBindingsArea(true);
                 ToggleControllerBindingsArea(false);
-                ToggleCustomBindingsArea(false);
-            }
-            else if (inputDeviceRadioButton2.Checked)
-            {
-                ToggleKeyboardBindingsArea(false);
-                ToggleControllerBindingsArea(true);
                 ToggleCustomBindingsArea(false);
             }
             else if (inputDeviceRadioButton3.Checked)
@@ -117,94 +112,17 @@ namespace Sonic3AIR_ModLoader
                 resultText.Text = keyBox.SelectedItem.ToString();
                 resultText.Tag = keyBox.SelectedItem.ToString();
             }
-            else if (inputDeviceRadioButton2.Checked)
+            else
             {
-                if (controllerInputTypeRadio1.Checked)
-                {
-                    resultText.Text = $"Button{(int)buttonIDNUD.Value}";
-                    resultText.Tag = $"Button{(int)buttonIDNUD.Value}";
-                }
-                else if (controllerInputTypeRadio2.Checked)
-                {
-                    int axisBase = (int)AxisIDNUD.Value * 4;
-                    string axisType = "";
-
-
-                    if (axisTypeRadio1.Checked) axisType = "Axis";
-                    else if (axisTypeRadio2.Checked) axisType = "Pov";
-                    else if (axisTypeRadio4.Checked) axisType = "Thumb";
-                    else if (axisTypeRadio3.Checked) axisType = axisCustomStringBox.Text;
-
-                    bool left = AxisLeftRadioButton.Checked;
-                    bool right = AxisRightRadioButton.Checked;
-                    bool up = AxisUpRadioButton.Checked;
-                    bool down = AxisDownRadioButton.Checked;
-
-                    if (axisType == "Pov")
-                    {
-                        if (up)
-                        {
-                            resultText.Text = $"{axisType}{axisBase}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-                        else if (right)
-                        {
-                            resultText.Text = $"{axisType}{axisBase + 1}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-                        else if (down)
-                        {
-                            resultText.Text = $"{axisType}{axisBase + 2}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-                        else if (left)
-                        {
-                            resultText.Text = $"{axisType}{axisBase + 3}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-
-                    }
-                    else
-                    {
-                        if (left)
-                        {
-                            resultText.Text = $"{axisType}{axisBase}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-                        else if (right)
-                        {
-                            resultText.Text = $"{axisType}{axisBase + 1}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-                        else if (up)
-                        {
-                            resultText.Text = $"{axisType}{axisBase + 2}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-                        else if (down)
-                        {
-                            resultText.Text = $"{axisType}{axisBase + 3}";
-                            resultText.Tag = keyBox.SelectedItem.ToString();
-                        }
-                    }
-
-
-
-
-
-                }
-
-                if (ShowExistingString && resultText.Tag.ToString() == OriginalKeybinding)
+                if (ShowExistingString)
                 {
                     resultText.Text = $"{OriginalKeybinding} {Program.LanguageResource.GetString("KeybindingsExistingNote")}";
                 }
-
-            }
-            else
-            {
-                if (ShowExistingString) resultText.Text = $"{OriginalKeybinding} {Program.LanguageResource.GetString("KeybindingsExistingNote")}";
-                else resultText.Text = OriginalKeybinding;
-                resultText.Tag = OriginalKeybinding;
+                else
+                {
+                    resultText.Text = OriginalKeybinding;
+                    resultText.Tag = OriginalKeybinding;
+                }
             }
         }
 
@@ -217,38 +135,23 @@ namespace Sonic3AIR_ModLoader
         {
             if (isSectionEnabled)
             {
-                controllerInputTypeRadio1.Enabled = true;
-                controllerInputTypeRadio2.Enabled = true;
 
-                if (controllerInputTypeRadio1.Checked)
-                {
-                    ToggleButtonIDInput(true);
-                    ToggleAxisInput(false);
-                }
-                else if (controllerInputTypeRadio2.Checked)
-                {
-                    ToggleButtonIDInput(false);
-                    ToggleAxisInput(true);
-                }
             }
             else
             {
                 ToggleButtonIDInput(false);
                 ToggleAxisInput(false);
 
-                controllerInputTypeRadio1.Enabled = false;
-                controllerInputTypeRadio2.Enabled = false;
+
             }
 
             void ToggleButtonIDInput(bool enabled)
             {
-                buttonIDNUD.Enabled = enabled;
+
             }
 
             void ToggleAxisInput(bool enabled)
             {
-                axisPOVBox.Enabled = enabled;
-                axisTypeBox.Enabled = enabled;
                 UpdateJoyAxisUI(null);
             }
 
@@ -273,11 +176,7 @@ namespace Sonic3AIR_ModLoader
 
         private void UpdateJoyAxisUI(object sender)
         {
-            if (sender == UpAxisButton) UpdateAxisDiagram(0);
-            else if (sender == RightAxisButton) UpdateAxisDiagram(1);
-            else if (sender == DownAxisButton) UpdateAxisDiagram(2);
-            else if (sender == LeftAxisButton) UpdateAxisDiagram(3);
-            else UpdateAxisDiagram(AxisCurrentDirection);
+            UpdateAxisDiagram(AxisCurrentDirection);
 
             void UpdateAxisDiagram(int direction = 0)
             {
@@ -314,29 +213,25 @@ namespace Sonic3AIR_ModLoader
 
                 void Left(bool enabled)
                 {
-                    LeftAxisButton.ForeColor = (enabled ? SystemColors.Highlight : SystemColors.WindowText);
-                    AxisLeftRadioButton.Checked = enabled;
+
                 }
 
 
                 void Right(bool enabled)
                 {
-                    RightAxisButton.ForeColor = (enabled ? SystemColors.Highlight : SystemColors.WindowText);
-                    AxisRightRadioButton.Checked = enabled;
+
                 }
 
 
                 void Up(bool enabled)
                 {
-                    UpAxisButton.ForeColor = (enabled ? SystemColors.Highlight : SystemColors.WindowText);
-                    AxisUpRadioButton.Checked = enabled;
+
                 }
 
 
                 void Down(bool enabled)
                 {
-                    DownAxisButton.ForeColor = (enabled ? SystemColors.Highlight : SystemColors.WindowText);
-                    AxisDownRadioButton.Checked = enabled;
+
                 }
             }
         }
@@ -359,6 +254,14 @@ namespace Sonic3AIR_ModLoader
         private void AxisCustomStringBox_TextChanged(object sender, EventArgs e)
         {
             UpdateResultText();
+        }
+
+        private void resultText_TextChanged(object sender, EventArgs e)
+        {
+            if (inputDeviceRadioButton3.Checked == true)
+            {
+                resultText.Tag = resultText.Text;
+            }
         }
     }
 }

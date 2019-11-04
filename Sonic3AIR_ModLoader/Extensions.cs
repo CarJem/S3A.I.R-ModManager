@@ -10,10 +10,50 @@ namespace Sonic3AIR_ModLoader
 {
     public static class Extensions
     {
-
         public static string EvenColumns(int desiredWidth, IEnumerable<IEnumerable<string>> lists)
         {
             return string.Join(Environment.NewLine, EvenColumns(desiredWidth, true, lists));
+        }
+
+        public static bool ContainsAny(this string haystack, params string[] needles)
+        {
+            foreach (string needle in needles)
+            {
+                if (haystack.Contains(needle))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
+
+        public static bool ContainsOnly(this string haystack, params char[] needles)
+        {
+            foreach (char hay in haystack)
+            {
+                bool isAnythingBut = false;
+                foreach (char needle in needles)
+                {
+                    if (hay.Equals(needle))
+                    {
+                        isAnythingBut = true;
+                        break;
+                    }
+                }
+                if (!isAnythingBut) return false;
+            }
+
+            return true;
         }
 
         public static IEnumerable<string> EvenColumns(int desiredWidth, bool rightOrLeft, IEnumerable<IEnumerable<string>> lists)

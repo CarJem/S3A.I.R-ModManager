@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ActiveModsList.cs" />
     <Compile Include="Animation.cs" />
+    <Compile Include="InputMappings.cs" />
     <Compile Include="GameConfig.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Recording.cs" />
