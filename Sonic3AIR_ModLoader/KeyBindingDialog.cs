@@ -263,5 +263,15 @@ namespace Sonic3AIR_ModLoader
                 resultText.Tag = resultText.Text;
             }
         }
+
+        private void getInputButton_Click(object sender, EventArgs e)
+        {
+            JoystickReaderDialog dlg = new JoystickReaderDialog();
+            if (dlg.ShowInputDialog() == DialogResult.OK)
+            {
+                inputDeviceRadioButton3.Checked = true;
+                resultText.Text = dlg.Result;
+            }
+        }
     }
 }

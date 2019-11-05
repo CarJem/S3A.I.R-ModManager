@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.keybindsList = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +52,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Keybindings:";
             // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Location = new System.Drawing.Point(189, 250);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "OK";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // removeButton
             // 
             this.removeButton.Location = new System.Drawing.Point(41, 250);
@@ -66,7 +76,7 @@
             // 
             this.editButton.Location = new System.Drawing.Point(70, 250);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(89, 23);
+            this.editButton.Size = new System.Drawing.Size(91, 23);
             this.editButton.TabIndex = 2;
             this.editButton.Text = "Edit...";
             this.editButton.UseVisualStyleBackColor = true;
@@ -90,16 +100,6 @@
             this.keybindsList.Size = new System.Drawing.Size(227, 225);
             this.keybindsList.TabIndex = 0;
             this.keybindsList.SelectedValueChanged += new System.EventHandler(this.KeybindsList_SelectedValueChanged);
-            // 
-            // button1
-            // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(189, 250);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // KeybindingsListDialog
             // 

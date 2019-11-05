@@ -80,10 +80,14 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SDL2-CS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDL2-CS.dll.2.0.0.0\lib\net20\SDL2-CS.dll</HintPath>
+    </Reference>
     <Reference Include="SharpCompress, Version=0.24.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpCompress.0.24.0\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX">
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SharpDX.4.2.0\lib\net40\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
@@ -119,16 +123,16 @@
     <Compile Include="AutoBootDialog.Designer.cs">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DirectInputReaderDialog.cs">
+    <Compile Include="JoystickReaderDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DirectInputReaderDialog.Designer.cs">
-      <DependentUpon>DirectInputReaderDialog.cs</DependentUpon>
+    <Compile Include="JoystickReaderDialog.Designer.cs">
+      <DependentUpon>JoystickReaderDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DownloadWindow.xaml.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraDialog.cs" />
-    <Compile Include="DirectInputReader.cs" />
+    <Compile Include="JoystickReader.cs" />
     <Compile Include="KeyBindingDialogOriginal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,8 +213,8 @@
     <EmbeddedResource Include="AutoBootDialog.resx">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DirectInputReaderDialog.resx">
-      <DependentUpon>DirectInputReaderDialog.cs</DependentUpon>
+    <EmbeddedResource Include="JoystickReaderDialog.resx">
+      <DependentUpon>JoystickReaderDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyBindingDialogOriginal.resx">
       <DependentUpon>KeyBindingDialogOriginal.cs</DependentUpon>
@@ -271,6 +275,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="banner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SDL2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\ModIconDefault.png" />
