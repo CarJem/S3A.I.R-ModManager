@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.cancelButton = new System.Windows.Forms.Button();
-            this.manualButton = new System.Windows.Forms.Button();
+            this.reselectInputButton = new System.Windows.Forms.Button();
             this.testingForInputLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -46,13 +46,13 @@
             // 
             // manualButton
             // 
-            this.manualButton.Location = new System.Drawing.Point(208, 97);
-            this.manualButton.Name = "manualButton";
-            this.manualButton.Size = new System.Drawing.Size(99, 23);
-            this.manualButton.TabIndex = 1;
-            this.manualButton.Text = "Reselect Input";
-            this.manualButton.UseVisualStyleBackColor = true;
-            this.manualButton.Click += new System.EventHandler(this.manualButton_Click);
+            this.reselectInputButton.Location = new System.Drawing.Point(208, 97);
+            this.reselectInputButton.Name = "manualButton";
+            this.reselectInputButton.Size = new System.Drawing.Size(99, 23);
+            this.reselectInputButton.TabIndex = 1;
+            this.reselectInputButton.Text = "Reselect Input";
+            this.reselectInputButton.UseVisualStyleBackColor = true;
+            this.reselectInputButton.Click += new System.EventHandler(this.manualButton_Click);
             // 
             // testingForInputLabel
             // 
@@ -62,7 +62,7 @@
             this.testingForInputLabel.Size = new System.Drawing.Size(319, 94);
             this.testingForInputLabel.TabIndex = 2;
             this.testingForInputLabel.Tag = "Selected Input:";
-            this.testingForInputLabel.Text = "Trigger the Desired Input to Map to this Control.....";
+            this.testingForInputLabel.Text = "Waiting for Input...";
             this.testingForInputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // okButton
@@ -76,17 +76,17 @@
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             // 
-            // DirectInputReaderDialog
+            // JoystickReaderDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 132);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.testingForInputLabel);
-            this.Controls.Add(this.manualButton);
+            this.Controls.Add(this.reselectInputButton);
             this.Controls.Add(this.cancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "DirectInputReaderDialog";
+            this.Name = "JoystickReaderDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.DirectInputReaderDialog_Load);
             this.ResumeLayout(false);
@@ -95,9 +95,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button manualButton;
-        private System.Windows.Forms.Label testingForInputLabel;
-        private System.Windows.Forms.Button okButton;
+        public System.Windows.Forms.Button cancelButton;
+        public System.Windows.Forms.Button reselectInputButton;
+        public System.Windows.Forms.Label testingForInputLabel;
+        public System.Windows.Forms.Button okButton;
     }
 }

@@ -39,15 +39,43 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        public static IntPtr GetJoystick()
+        public static IntPtr GetJoystick(int index = 0)
         {
             SDL.SDL_Init(SDL.SDL_INIT_GAMECONTROLLER);
 
-
-            int joysticks = SDL.SDL_NumJoysticks();
-            var joystick = SDL.SDL_JoystickOpen(0); //Better do that only once, cache the pointer
+            var joystick = SDL.SDL_JoystickOpen(index); //Better do that only once, cache the pointer
 
             return joystick;
+        }
+
+        public static List<string> GetJoysticks()
+        {
+            SDL.SDL_Init(SDL.SDL_INIT_JOYSTICK);
+
+            SDL.SDL_JoystickUpdate();
+
+            int joystickCount = SDL.SDL_NumJoysticks();
+
+            List<string> inputNames = new List<string>();
+
+            for (int i = 0; i < joystickCount; i++)
+            {
+                //if (SDL.SDL_JoystickGetAttached(GetJoystick(i)) == SDL.SDL_bool.SDL_TRUE)
+                inputNames.Add(SDL.SDL_JoystickNameForIndex(i));
+            }
+
+            return inputNames;
+        }
+
+        public static int GetJoystickCount()
+        {
+            SDL.SDL_Init(SDL.SDL_INIT_JOYSTICK);
+
+            SDL.SDL_JoystickUpdate();
+
+            int joystickCount = SDL.SDL_NumJoysticks();
+
+            return joystickCount;
         }
 
         private static void WipeEvents()
@@ -57,7 +85,6 @@ namespace Sonic3AIR_ModLoader
                 //CleanUp
             }
         }
-
 
         public static string GetJoystickInput(IntPtr joystick)
         {

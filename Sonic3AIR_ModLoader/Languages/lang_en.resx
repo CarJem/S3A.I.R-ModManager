@@ -666,4 +666,61 @@ If you have, make sure these locations exist. The modloader can't run without th
   <data name="AIRDevMode" xml:space="preserve">
     <value>Enable Dev Mode (Not Debug Mode)</value>
   </data>
+  <data name="ImportExpandable" xml:space="preserve">
+    <value>Import...</value>
+  </data>
+  <data name="ExportExpanable" xml:space="preserve">
+    <value>Export...</value>
+  </data>
+  <data name="ShowLogFileButton" xml:space="preserve">
+    <value>Show Log File</value>
+  </data>
+  <data name="PathColumnHeader" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="AIRVersionColumnHeader" xml:space="preserve">
+    <value>A.I.R. Version</value>
+  </data>
+  <data name="TimestampColumnHeader" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="VersionColumnHeader" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="SaveInputMappingsButton" xml:space="preserve">
+    <value>Save Input Mappings</value>
+  </data>
+  <data name="ResetMappingsToDefaultButton" xml:space="preserve">
+    <value>Reset to Defaults</value>
+  </data>
+  <data name="ResetInputMappingsDefaultFormTitle" xml:space="preserve">
+    <value>Reset Input Mappings to Default</value>
+  </data>
+  <data name="ResetInputMappingsDefaultFormMessage" xml:space="preserve">
+    <value>Are you sure, your current edits will be lost!</value>
+  </data>
+  <data name="DetectControllerExpandable" xml:space="preserve">
+    <value>Detect Controller...</value>
+  </data>
+  <data name="DetectGamepadInputExpandable" xml:space="preserve">
+    <value>Detect Gamepad Input...</value>
+  </data>
+  <data name="JoystickInputSelectorFormTitle" xml:space="preserve">
+    <value>Select a Controller...</value>
+  </data>
+  <data name="NoControllerFound" xml:space="preserve">
+    <value>No Controllers Found!</value>
+  </data>
+  <data name="Select_Button" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="WaitingForInputDialogLabel" xml:space="preserve">
+    <value>Waiting for Input...</value>
+  </data>
+  <data name="Reselect_Input_Button" xml:space="preserve">
+    <value>Reselect Input</value>
+  </data>
+  <data name="WaitingForInputDialogLabelTag" xml:space="preserve">
+    <value>Selected Input:</value>
+  </data>
 </root>

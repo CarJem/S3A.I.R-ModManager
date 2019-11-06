@@ -169,6 +169,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A.I.R. Version.
+        /// </summary>
+        internal static string AIRVersionColumnHeader {
+            get {
+                return ResourceManager.GetString("AIRVersionColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for Updates....
         /// </summary>
         internal static string AutoBoot_CheckingForUpdates {
@@ -524,6 +533,24 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Detect Controller....
+        /// </summary>
+        internal static string DetectControllerExpandable {
+            get {
+                return ResourceManager.GetString("DetectControllerExpandable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detect Gamepad Input....
+        /// </summary>
+        internal static string DetectGamepadInputExpandable {
+            get {
+                return ResourceManager.GetString("DetectGamepadInputExpandable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Device Identifier Names.
         /// </summary>
         internal static string DeviceIdentifierNames {
@@ -659,6 +686,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export....
+        /// </summary>
+        internal static string ExportExpanable {
+            get {
+                return ResourceManager.GetString("ExportExpanable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fail Safe Mode.
         /// </summary>
         internal static string FailSafeMode {
@@ -727,6 +763,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string IDLabel {
             get {
                 return ResourceManager.GetString("IDLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import....
+        /// </summary>
+        internal static string ImportExpandable {
+            get {
+                return ResourceManager.GetString("ImportExpandable", resourceCulture);
             }
         }
         
@@ -848,6 +893,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string InvalidURL {
             get {
                 return ResourceManager.GetString("InvalidURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a Controller....
+        /// </summary>
+        internal static string JoystickInputSelectorFormTitle {
+            get {
+                return ResourceManager.GetString("JoystickInputSelectorFormTitle", resourceCulture);
             }
         }
         
@@ -992,6 +1046,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string No_Button {
             get {
                 return ResourceManager.GetString("No_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Controllers Found!.
+        /// </summary>
+        internal static string NoControllerFound {
+            get {
+                return ResourceManager.GetString("NoControllerFound", resourceCulture);
             }
         }
         
@@ -1167,6 +1230,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Path.
+        /// </summary>
+        internal static string PathColumnHeader {
+            get {
+                return ResourceManager.GetString("PathColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Refresh the Mod List!.
         /// </summary>
         internal static string PleaseRefreshTheModList {
@@ -1302,6 +1374,42 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reselect Input.
+        /// </summary>
+        internal static string Reselect_Input_Button {
+            get {
+                return ResourceManager.GetString("Reselect_Input_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure, your current edits will be lost!.
+        /// </summary>
+        internal static string ResetInputMappingsDefaultFormMessage {
+            get {
+                return ResourceManager.GetString("ResetInputMappingsDefaultFormMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Input Mappings to Default.
+        /// </summary>
+        internal static string ResetInputMappingsDefaultFormTitle {
+            get {
+                return ResourceManager.GetString("ResetInputMappingsDefaultFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset to Defaults.
+        /// </summary>
+        internal static string ResetMappingsToDefaultButton {
+            get {
+                return ResourceManager.GetString("ResetMappingsToDefaultButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Result:.
         /// </summary>
         internal static string ResultLabel {
@@ -1361,6 +1469,24 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string Save_Load {
             get {
                 return ResourceManager.GetString("Save&Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Input Mappings.
+        /// </summary>
+        internal static string SaveInputMappingsButton {
+            get {
+                return ResourceManager.GetString("SaveInputMappingsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        internal static string Select_Button {
+            get {
+                return ResourceManager.GetString("Select_Button", resourceCulture);
             }
         }
         
@@ -1464,6 +1590,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Log File.
+        /// </summary>
+        internal static string ShowLogFileButton {
+            get {
+                return ResourceManager.GetString("ShowLogFileButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sonic 3 A.I.R. Path:.
         /// </summary>
         internal static string Sonic3AIRPathLabel {
@@ -1532,6 +1667,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static string ThumbstickRadioButton {
             get {
                 return ResourceManager.GetString("ThumbstickRadioButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item.
+        /// </summary>
+        internal static string TimestampColumnHeader {
+            get {
+                return ResourceManager.GetString("TimestampColumnHeader", resourceCulture);
             }
         }
         
@@ -1654,11 +1798,38 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        internal static string VersionColumnHeader {
+            get {
+                return ResourceManager.GetString("VersionColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Versions.
         /// </summary>
         internal static string VersionsTab {
             get {
                 return ResourceManager.GetString("VersionsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for Input....
+        /// </summary>
+        internal static string WaitingForInputDialogLabel {
+            get {
+                return ResourceManager.GetString("WaitingForInputDialogLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected Input:.
+        /// </summary>
+        internal static string WaitingForInputDialogLabelTag {
+            get {
+                return ResourceManager.GetString("WaitingForInputDialogLabelTag", resourceCulture);
             }
         }
         

@@ -65,6 +65,16 @@ namespace Sonic3AIR_ModLoader
         bool AllowUpdate { get; set; } = true;
 
 
+        #region WPF Columns
+
+        public System.Windows.Controls.GridViewColumn VersionColumn = new System.Windows.Controls.GridViewColumn();
+        public System.Windows.Controls.GridViewColumn PathColumn = new System.Windows.Controls.GridViewColumn();
+        public System.Windows.Controls.GridViewColumn TimestampColumn = new System.Windows.Controls.GridViewColumn();
+        public System.Windows.Controls.GridViewColumn RecVersionColumn = new System.Windows.Controls.GridViewColumn();
+
+        #endregion
+
+
         #region Hosted Elements
 
         public ModViewer ModViewer;
@@ -114,14 +124,14 @@ namespace Sonic3AIR_ModLoader
 
             VersionsGrid.AllowsColumnReorder = false;
 
-            var VersionColumn = new System.Windows.Controls.GridViewColumn();
-            VersionColumn.Header = "Version";
+            VersionColumn = new System.Windows.Controls.GridViewColumn();
+            VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
             VersionColumn.Width = 100;
             VersionColumn.DisplayMemberBinding = new System.Windows.Data.Binding("Name");
             VersionsGrid.Columns.Add(VersionColumn);
 
-            var PathColumn = new System.Windows.Controls.GridViewColumn();
-            PathColumn.Header = "Path";
+            PathColumn = new System.Windows.Controls.GridViewColumn();
+            PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
             PathColumn.Width = Double.NaN;
             PathColumn.DisplayMemberBinding = new System.Windows.Data.Binding("FilePath");
             VersionsGrid.Columns.Add(PathColumn);
@@ -136,14 +146,14 @@ namespace Sonic3AIR_ModLoader
 
             RecordingsGrid.AllowsColumnReorder = false;
 
-            var TimestampColumn = new System.Windows.Controls.GridViewColumn();
-            TimestampColumn.Header = "Item";
+            TimestampColumn = new System.Windows.Controls.GridViewColumn();
+            TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
             TimestampColumn.Width = 100;
             TimestampColumn.DisplayMemberBinding = new System.Windows.Data.Binding("Name");
             RecordingsGrid.Columns.Add(TimestampColumn);
 
-            var RecVersionColumn = new System.Windows.Controls.GridViewColumn();
-            RecVersionColumn.Header = "A.I.R. Version";
+            RecVersionColumn = new System.Windows.Controls.GridViewColumn();
+            RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
             RecVersionColumn.Width = Double.NaN;
             RecVersionColumn.DisplayMemberBinding = new System.Windows.Data.Binding("AIRVersion");
             RecordingsGrid.Columns.Add(RecVersionColumn);
@@ -248,8 +258,8 @@ namespace Sonic3AIR_ModLoader
         }
 
         private void ResetInputsButton_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("Are you sure, your current edits will be lost!", "Reset Input Mappings to Default", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        {          
+            var result = MessageBox.Show(Program.LanguageResource.GetString("ResetInputMappingsDefaultFormMessage"), Program.LanguageResource.GetString("ResetInputMappingsDefaultFormTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 if (GameConfig != null)
@@ -1170,9 +1180,14 @@ namespace Sonic3AIR_ModLoader
             {
                 int index = inputMethodsList.SelectedIndex;
                 string newDevice = "New Device";
-                DialogResult result = ExtraDialog.ShowInputDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
-                GameConfig.InputDevices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
-                UpdateInputMappings();
+                DeviceNameDialog deviceNameDialog = new DeviceNameDialog();
+                DialogResult result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
+                if (result == DialogResult.OK)
+                {
+                    GameConfig.InputDevices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
+                    UpdateInputMappings();
+                }
+
 
             }
 

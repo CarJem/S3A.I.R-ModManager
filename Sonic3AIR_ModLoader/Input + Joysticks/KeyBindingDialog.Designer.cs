@@ -128,7 +128,7 @@
             this.getInputButton.Name = "getInputButton";
             this.getInputButton.Size = new System.Drawing.Size(151, 23);
             this.getInputButton.TabIndex = 21;
-            this.getInputButton.Text = "Get Gamepad Input....";
+            this.getInputButton.Text = "Detect Gamepad Input...\r\n";
             this.getInputButton.UseVisualStyleBackColor = true;
             this.getInputButton.Click += new System.EventHandler(this.getInputButton_Click);
             // 
@@ -180,7 +180,7 @@
         public System.Windows.Forms.Label resultLabel;
         public System.Windows.Forms.Button okButton;
         public System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button getInputButton;
         public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.Button getInputButton;
     }
 }

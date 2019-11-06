@@ -123,32 +123,44 @@
     <Compile Include="AutoBootDialog.Designer.cs">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="JoystickReaderDialog.cs">
+    <Compile Include="Input + Joysticks\DeviceNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JoystickReaderDialog.Designer.cs">
+    <Compile Include="Input + Joysticks\DeviceNameDialog.Designer.cs">
+      <DependentUpon>DeviceNameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Input + Joysticks\JoystickInputSelectorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Input + Joysticks\JoystickInputSelectorDialog.Designer.cs">
+      <DependentUpon>JoystickInputSelectorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Input + Joysticks\JoystickReaderDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Input + Joysticks\JoystickReaderDialog.Designer.cs">
       <DependentUpon>JoystickReaderDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DownloadWindow.xaml.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraDialog.cs" />
-    <Compile Include="JoystickReader.cs" />
-    <Compile Include="KeyBindingDialogOriginal.cs">
+    <Compile Include="Input + Joysticks\JoystickReader.cs" />
+    <Compile Include="Input + Joysticks\KeyBindingDialogOriginal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KeyBindingDialogOriginal.Designer.cs">
+    <Compile Include="Input + Joysticks\KeyBindingDialogOriginal.Designer.cs">
       <DependentUpon>KeyBindingDialogOriginal.cs</DependentUpon>
     </Compile>
-    <Compile Include="KeyBindingDialog.cs">
+    <Compile Include="Input + Joysticks\KeyBindingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KeyBindingDialog.Designer.cs">
+    <Compile Include="Input + Joysticks\KeyBindingDialog.Designer.cs">
       <DependentUpon>KeyBindingDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="KeybindingsListDialog.cs">
+    <Compile Include="Input + Joysticks\KeybindingsListDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KeybindingsListDialog.Designer.cs">
+    <Compile Include="Input + Joysticks\KeybindingsListDialog.Designer.cs">
       <DependentUpon>KeybindingsListDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Languages\lang_fr.Designer.cs">
@@ -213,16 +225,22 @@
     <EmbeddedResource Include="AutoBootDialog.resx">
       <DependentUpon>AutoBootDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JoystickReaderDialog.resx">
+    <EmbeddedResource Include="Input + Joysticks\DeviceNameDialog.resx">
+      <DependentUpon>DeviceNameDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Input + Joysticks\JoystickInputSelectorDialog.resx">
+      <DependentUpon>JoystickInputSelectorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Input + Joysticks\JoystickReaderDialog.resx">
       <DependentUpon>JoystickReaderDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeyBindingDialogOriginal.resx">
+    <EmbeddedResource Include="Input + Joysticks\KeyBindingDialogOriginal.resx">
       <DependentUpon>KeyBindingDialogOriginal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeyBindingDialog.resx">
+    <EmbeddedResource Include="Input + Joysticks\KeyBindingDialog.resx">
       <DependentUpon>KeyBindingDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeybindingsListDialog.resx">
+    <EmbeddedResource Include="Input + Joysticks\KeybindingsListDialog.resx">
       <DependentUpon>KeybindingsListDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\lang_fr.resx">

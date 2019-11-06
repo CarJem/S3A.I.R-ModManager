@@ -175,6 +175,11 @@ namespace Sonic3AIR_ModLoader
             form.deleteRecordingButton.Text = Program.LanguageResource.GetString("Delete");
             form.refreshDebugButton.Text = Program.LanguageResource.GetString("Refresh");
 
+
+
+            form.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
+            form.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
+
             //Guides/Shortcuts Page
             form.groupBox6.Text = Program.LanguageResource.GetString("Delete");
             form.openSampleModsFolderButton.Text = Program.LanguageResource.GetString("OpenSampleModsFolder");
@@ -199,6 +204,8 @@ namespace Sonic3AIR_ModLoader
 
             form.openDownloadsFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenDownloadsFolder");
             form.openVersionsFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenVersionsFolder");
+
+            form.showLogFileButton.Text = Program.LanguageResource.GetString("ShowLogFileButton");
 
             //General Options Page
             form.groupBox8.Text = Program.LanguageResource.GetString("ModManagerOptions");
@@ -243,11 +250,21 @@ namespace Sonic3AIR_ModLoader
             form.buttonStartLabel.Text = Program.LanguageResource.GetString("Buttons_Start");
             form.buttonBackLabel.Text = Program.LanguageResource.GetString("Buttons_Back");
 
+
+            form.importConfigButton.Text = Program.LanguageResource.GetString("ImportExpandable");
+            form.exportConfigButton.Text = Program.LanguageResource.GetString("ExportExpanable");
+
+            form.saveInputsButton.Text = Program.LanguageResource.GetString("SaveInputMappingsButton");
+            form.resetInputsButton.Text = Program.LanguageResource.GetString("ResetMappingsToDefaultButton");
+
             //Versions Page
             form.groupBox2.Text = Program.LanguageResource.GetString("InstalledVersions");
 
             form.removeVersionButton.Text = Program.LanguageResource.GetString("Remove");
             form.openVersionLocationButton.Text = Program.LanguageResource.GetString("OpenLocationExpandable");
+
+            form.VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
+            form.PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
 
             //About Page
             form.checkForUpdatesButton.Text = Program.LanguageResource.GetString("CheckForGameUpdatesExpandable");
@@ -322,6 +339,7 @@ namespace Sonic3AIR_ModLoader
             form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
 
             form.Text = Program.LanguageResource.GetString("SelectInputTitleExpandable");
+            form.getInputButton.Text = Program.LanguageResource.GetString("DetectGamepadInputExpandable");
         }
 
         public static void ApplyLanguage(ref KeybindingsListDialog form)
@@ -331,6 +349,29 @@ namespace Sonic3AIR_ModLoader
             form.groupBox1.Text = Program.LanguageResource.GetString("KeybindingsLabel");
 
             form.Text = Program.LanguageResource.GetString("EditKeybindingsTitleExpandable");
+        }
+
+        public static void ApplyLanguage(ref DeviceNameDialog form)
+        {
+            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
+            form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
+            form.detectControllerButton.Text = Program.LanguageResource.GetString("DetectControllerExpandable");
+        }
+
+        public static void ApplyLanguage(ref JoystickInputSelectorDialog form)
+        {
+            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
+            form.selectButton.Text = Program.LanguageResource.GetString("Select_Button");
+            form.refreshButton.Text = Program.LanguageResource.GetString("Refresh");
+        }
+
+        public static void ApplyLanguage(ref JoystickReaderDialog form)
+        {
+            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
+            form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
+            form.reselectInputButton.Text = Program.LanguageResource.GetString("Reselect_Input_Button");
+            form.testingForInputLabel.Text = Program.LanguageResource.GetString("WaitingForInputDialogLabel");
+            form.testingForInputLabel.Tag = Program.LanguageResource.GetString("WaitingForInputDialogLabelTag");
         }
 
     }

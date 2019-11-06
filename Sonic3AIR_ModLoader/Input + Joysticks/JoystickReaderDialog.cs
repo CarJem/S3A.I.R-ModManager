@@ -22,21 +22,37 @@ namespace Sonic3AIR_ModLoader
         public JoystickReaderDialog()
         {
             InitializeComponent();
+            var instance = this;
+            UserLanguage.ApplyLanguage(ref instance);
             timer1 = new System.Timers.Timer();
             timer1.Elapsed += timer1_Tick;
-            this.manualButton.Enabled = false;
+            this.reselectInputButton.Enabled = false;
+
+
+
+
         }
 
 
         public DialogResult ShowInputDialog()
         {
-            timer1.Start();
-            return this.ShowDialog();
+            JoystickInputSelectorDialog dlg = new JoystickInputSelectorDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                Joystick = JoystickReader.GetJoystick();
+                timer1.Start();
+                return this.ShowDialog();
+            }
+            else
+            {
+                return DialogResult.Cancel;
+            }
+
         }
 
         private void DirectInputReaderDialog_Load(object sender, EventArgs e)
         {
-            Joystick = JoystickReader.GetJoystick();
+
         }
 
 
@@ -50,9 +66,9 @@ namespace Sonic3AIR_ModLoader
             {
                 okButton.Enabled = true;
             });
-            this.manualButton.BeginInvoke((MethodInvoker)delegate ()
+            this.reselectInputButton.BeginInvoke((MethodInvoker)delegate ()
             {
-                manualButton.Enabled = true;
+                reselectInputButton.Enabled = true;
             });
             Allowed = false;
         }
@@ -72,8 +88,9 @@ namespace Sonic3AIR_ModLoader
         private void manualButton_Click(object sender, EventArgs e)
         {
             Allowed = true;
-            this.manualButton.Enabled = false;
-            testingForInputLabel.Text = "Waiting...";
+            this.reselectInputButton.Enabled = false;
+            this.okButton.Enabled = false;
+            testingForInputLabel.Text = Program.LanguageResource.GetString("WaitingForInputDialogLabel");
         }
     }
 }
