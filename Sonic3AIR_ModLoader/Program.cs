@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using CommandLine;
 using System.Resources;
 using System.Reflection;
 using System.Threading;
 using System.IO;
 using System.Diagnostics;
+using System.Drawing;
+using System.Windows;
 
 namespace Sonic3AIR_ModLoader
 {
@@ -77,15 +78,18 @@ namespace Sonic3AIR_ModLoader
 
         static void GamebanannaAPIHandler_Startup()
         {
-            Application.Run(new ModManager(Arguments.gamebanana_api));
+            var app = new App();
+            app.InitializeComponent();
+            app.Run(new ModManagerV2(Arguments.gamebanana_api));
         }
 
         static void StartApplication(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
             ModFileManagement.CleanUpAPIRequests();
+            WinformsTheming.UseDarkTheme(false);
 
 
             if (Arguments.gamebanana_api != null)
@@ -95,16 +99,23 @@ namespace Sonic3AIR_ModLoader
             else
             {
                 if (Properties.Settings.Default.AutoLaunch) AutoBootLoader();
-                else Application.Run(new ModManager());
+                else
+                {
+                    var app = new App();
+                    app.InitializeComponent();
+                    app.Run(new ModManagerV2());
+                }
             }
 
         }
 
         static void AutoBootLoader()
         {
-            Application.Run(new AutoBootDialog());
-            if (AutoBootCanceled == false) Application.Run(new ModManager(true));
-            else Application.Run(new ModManager(false));
+            var app = new App();
+            app.InitializeComponent();
+            System.Windows.Forms.Application.Run(new AutoBootDialog());
+            if (AutoBootCanceled == false) app.Run(new ModManagerV2(true));
+            else app.Run(new ModManagerV2(false));
         }
 
         public class Options
@@ -112,6 +123,7 @@ namespace Sonic3AIR_ModLoader
             [Option('g', "gamebanana_api", Required = false, HelpText = "Used with Gamebanna's 1 Click Install API")]
             public string gamebanana_api { get; set; }
         }
+
 
     }
 }

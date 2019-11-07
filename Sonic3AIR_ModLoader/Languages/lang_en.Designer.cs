@@ -394,6 +394,15 @@ namespace Sonic3AIR_ModLoader.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check for Mod Manager Updates....
+        /// </summary>
+        internal static string CheckForModManagerUpdatesButton {
+            get {
+                return ResourceManager.GetString("CheckForModManagerUpdatesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The following files could not be found: .
         /// </summary>
         internal static string CollectionFilesCouldNotBeFound1 {

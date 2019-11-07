@@ -76,7 +76,6 @@ namespace Sonic3AIR_ModLoader
 
 
         #region Hosted Elements
-
         public ModViewer ModViewer;
         public ListViewControl VersionsViewer;
         public ListViewControl RecordingsViewer;
@@ -174,6 +173,7 @@ namespace Sonic3AIR_ModLoader
         {
             InitializeComponent();
             StartupWPFHost();
+
             if (ValidateInstall() == true)
             {
                 SetTooltips();
@@ -2093,5 +2093,7 @@ namespace Sonic3AIR_ModLoader
         {
             ExportInputDevice();
         }
+
+
     }
 }

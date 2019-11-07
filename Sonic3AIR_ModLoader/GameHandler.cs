@@ -59,14 +59,14 @@ namespace Sonic3AIR_ModLoader
             if (!Properties.Settings.Default.KeepOpenOnQuit) Application.Exit();
             else if (!Properties.Settings.Default.KeepOpenOnLaunch)
             {
-                ModManager.Instance.BeginInvoke((Action)(() =>
+                ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManager.Instance.Show();
+                    ModManagerV2.Instance.Show();
                 }));
             }
-            ModManager.Instance.BeginInvoke((Action)(() =>
+            ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
-                ModManager.Instance.UpdateInGameButtons();
+                ModManagerV2.Instance.UpdateInGameButtons();
             }));
 
         }
@@ -76,17 +76,17 @@ namespace Sonic3AIR_ModLoader
             isGameRunning = true;
             if (!Properties.Settings.Default.KeepOpenOnLaunch)
             {
-                ModManager.Instance.BeginInvoke((Action)(() =>
+                ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManager.Instance.Hide();
+                    ModManagerV2.Instance.Hide();
                 }));
 
             }
             else
             {
-                ModManager.Instance.BeginInvoke((Action)(() =>
+                ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManager.Instance.UpdateInGameButtons();
+                    ModManagerV2.Instance.UpdateInGameButtons();
                 }));
             }
         }

@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView x:Name="View" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView x:Name="View" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource TextBoxBackground}">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="Black">
+                <DataTemplate x:Name="ViewTemplate">
+                    <Border BorderThickness="1" BorderBrush="{DynamicResource ComboBoxBorder}">
                         <Grid Width="Auto" HorizontalAlignment="Stretch" Height="52" Margin="1">
                             <Grid.Style>
                                 <Style TargetType="{x:Type Grid}">
@@ -47,7 +47,6 @@
                             </StackPanel>
                         </Grid>
                     </Border>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemsPanel>
@@ -58,4 +57,56 @@
             </ListView.ItemsPanel>
         </ListView>
     </Grid>
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ListViewItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="5,2,5,2"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="2" SnapsToDevicePixels="true">
+                            <Border x:Name="InnerBorder" BorderThickness="1" CornerRadius="1" Padding="2">
+                                <ContentPresenter></ContentPresenter>
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="{StaticResource ListItemHoverFill}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource ListItemHoverBorder}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" Value="{StaticResource ListItemSelectedFill}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedBorder}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource ListItemSelectedInactiveFill}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedInactiveBorder}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource ListItemSelectedHoverFill}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedHoverBorder}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
 </UserControl>

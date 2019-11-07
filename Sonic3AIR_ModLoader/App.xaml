@@ -1,0 +1,30 @@
+﻿<Application x:Class="Sonic3AIR_ModLoader.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Sonic3AIR_ModLoader">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ColorLibrary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/IconLibrary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/CheckboxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ButtonStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ItemContainerStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/MenuItemContextStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/FlatButtonStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ExpanderStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/TextBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/TabItemStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ComboBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ScrollBarStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ScrollViewerStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ListViewStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/RepeatButtonStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ToolbarStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/SliderStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/AppSpecificStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/GroupBoxStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

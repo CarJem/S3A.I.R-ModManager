@@ -5,12 +5,57 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Sonic3AIR_ModLoader
 {
     public static class Extensions
     {
-        public static string EvenColumns(int desiredWidth, IEnumerable<IEnumerable<string>> lists)
+
+        [DllImport("gdi32.dll",
+           EntryPoint = "BitBlt",
+           CallingConvention = CallingConvention.StdCall)]
+    extern public static int BitBlt(
+    IntPtr hdcDesc, int nXDest, int nYDest, int nWidth, int nHeight,
+    IntPtr hdcSrc, int nXSrc, int nYSrcs, uint dwRop);
+
+    public static System.Drawing.Bitmap GetWhiteBitmap(System.Drawing.Graphics g, System.Drawing.Rectangle r)
+    {
+        int w = r.Width;
+        int h = r.Height;
+
+        System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(w, h);
+        using (System.Drawing.Graphics gTmp = System.Drawing.Graphics.FromImage(bmp))
+        {
+            gTmp.Clear(System.Drawing.Color.White);
+        }
+        return bmp;
+    }
+
+
+    public static void InvertGraphicsArea(System.Drawing.Graphics g, System.Drawing.Rectangle r)
+    {
+        if (r.Height <= 0) { return; }
+        if (r.Width <= 0) { return; }
+
+        using (System.Drawing.Bitmap bmpInvert = GetWhiteBitmap(g, r))
+        {
+            IntPtr hdcDest = g.GetHdc();
+            using (System.Drawing.Graphics src = System.Drawing.Graphics.FromImage(bmpInvert))
+            {
+                int xDest = r.Left;
+                int yDest = r.Top;
+                int nWidth = r.Width;
+                int nHeight = r.Height;
+                IntPtr hdcSrc = src.GetHdc();
+                BitBlt(hdcDest, xDest, yDest, nWidth, nHeight,
+                       hdcSrc, 0, 0, (uint)System.Drawing.CopyPixelOperation.DestinationInvert);
+                src.ReleaseHdc(hdcSrc);
+            }
+            g.ReleaseHdc(hdcDest);
+        }
+    }
+    public static string EvenColumns(int desiredWidth, IEnumerable<IEnumerable<string>> lists)
         {
             return string.Join(Environment.NewLine, EvenColumns(desiredWidth, true, lists));
         }

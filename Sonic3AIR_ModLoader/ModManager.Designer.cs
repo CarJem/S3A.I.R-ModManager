@@ -149,6 +149,7 @@
             this.openVersionLocationButton = new System.Windows.Forms.Button();
             this.aboutPage = new System.Windows.Forms.TabPage();
             this.aboutPanel = new System.Windows.Forms.Panel();
+            this.checkForModManagerUpdatesButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.aboutLabel = new System.Windows.Forms.Label();
             this.checkForUpdatesButton = new System.Windows.Forms.Button();
@@ -1564,6 +1565,7 @@
             // aboutPanel
             // 
             this.aboutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.aboutPanel.Controls.Add(this.checkForModManagerUpdatesButton);
             this.aboutPanel.Controls.Add(this.label3);
             this.aboutPanel.Controls.Add(this.aboutLabel);
             this.aboutPanel.Controls.Add(this.checkForUpdatesButton);
@@ -1572,6 +1574,18 @@
             this.aboutPanel.Name = "aboutPanel";
             this.aboutPanel.Size = new System.Drawing.Size(322, 426);
             this.aboutPanel.TabIndex = 17;
+            // 
+            // checkForModManagerUpdatesButton
+            // 
+            this.checkForModManagerUpdatesButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkForModManagerUpdatesButton.Enabled = false;
+            this.checkForModManagerUpdatesButton.Location = new System.Drawing.Point(3, 369);
+            this.checkForModManagerUpdatesButton.Name = "checkForModManagerUpdatesButton";
+            this.checkForModManagerUpdatesButton.Size = new System.Drawing.Size(314, 23);
+            this.checkForModManagerUpdatesButton.TabIndex = 17;
+            this.checkForModManagerUpdatesButton.Text = "Check for Mod Manager Updates...";
+            this.checkForModManagerUpdatesButton.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -2091,6 +2105,7 @@
         public System.Windows.Forms.Button exportConfigButton;
         public System.Windows.Forms.Button removeInputMethodButton;
         public System.Windows.Forms.Button addInputMethodButton;
+        public System.Windows.Forms.Button checkForModManagerUpdatesButton;
     }
 }
 

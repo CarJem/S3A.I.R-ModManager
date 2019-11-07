@@ -1,11 +1,12 @@
-﻿<Window x:Class="Sonic3AIR_ModLoader.ModManagerV2"
+﻿<Window x:Name="MainView" x:Class="Sonic3AIR_ModLoader.ModManagerV2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sonic3AIR_ModLoader"
+        xmlns:p="clr-namespace:Sonic3AIR_ModLoader.Properties"
         mc:Ignorable="d"
-        Title="Sonic 3 A.I.R. Mod Manager {version}" Height="550" Width="400" MinHeight="550" MinWidth="400">
+        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="600" Width="400" MinHeight="600" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -13,235 +14,336 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="85"></RowDefinition>
         </Grid.RowDefinitions>
-        <TabControl Grid.ColumnSpan="2">
-            <TabItem Header="Mods">
-                <Grid>
+        <TabControl x:Name="tabControl1" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">
+            <TabItem Header="Mods" Name="modPage">
+                <Grid x:Name="modPanel" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="200"></RowDefinition>
                     </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="5" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <Button Click="AddMods_Click" x:Name="addMods" Height="25" Width="25" Margin="0,0,0,5" Content="+"></Button>
+                            <Button Click="RemoveButton_Click" x:Name="removeButton" Height="25" Width="25" Margin="0,0,0,5"  Content="-"></Button>
+                            <Button Click="MoveToTopButton_Click" x:Name="moveToTopButton" Height="25" Width="25" Margin="0,0,0,5" Content="⤒"></Button>
+                            <Button Click="MoveUpButton_Click" x:Name="moveUpButton" Height="25" Width="25" Margin="0,0,0,5" Content="↑"></Button>
+                            <Button Click="MoveDownButton_Click" x:Name="moveDownButton" Height="25" Width="25" Margin="0,0,0,5"  Content="↓"></Button>
+                            <Button Click="MoveToBottomButton_Click" x:Name="moveToBottomButton" Height="25" Width="25" Margin="0,0,0,5" Content="⤓"></Button>
+                        </StackPanel>
+                        <local:ModViewer Grid.Column="1" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
+                        <Grid.ContextMenu>
+                            <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
+                                <MenuItem Name="removeModToolStripMenuItem"></MenuItem>
+                                <MenuItem Name="openModFolderToolStripMenuItem"></MenuItem>
+                                <MenuItem Name="openModURLToolStripMenuItem"></MenuItem>
+                            </ContextMenu>
+                        </Grid.ContextMenu>
+                    </Grid>
 
-                    <local:ModViewer x:Name="ModViewer" Grid.Row="0" Margin="5" Grid.Column="1" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
                     <Grid Grid.Row="1" Grid.ColumnSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="30"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <GroupBox Grid.Row="0" Header="Mod Properties">
-                            <RichTextBox BorderBrush="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="False"></RichTextBox>
+                        <GroupBox x:Name="groupBox3" Grid.Row="0" Header="Mod Properties" Margin="10">
+                            <Grid Background="Transparent">
+                                <RichTextBox x:Name="modInfoTextBox" Foreground="{DynamicResource NormalText}"  BorderBrush="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="False">
+                                    <RichTextBox.Resources>
+                                        <Style TargetType="{x:Type Paragraph}">
+                                            <Setter Property="Margin" Value="0"/>
+                                        </Style>
+                                    </RichTextBox.Resources>
+                                </RichTextBox>
+                                <Grid Background="Transparent"></Grid>
+                            </Grid>
                         </GroupBox>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Width="75" Height="25" Margin="4,0" Content="Reload"></Button>
-                            <Button Width="75" Height="25" Margin="4,0" Content="More..."></Button>
+                        <StackPanel Grid.Row="1" Margin="11,0,0,5" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button x:Name="refreshButton" Click="RefreshButton_Click" Width="75" Height="25" Margin="0,0,0.5,0" Content="Reload"></Button>
+                            <Button Click="MoreModOptionsButton_Click" x:Name="moreModOptionsButton" Width="75" Height="25" Margin="4,0" Content="More..." ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                                <Button.ContextMenu>
+                                    <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="moreModOptionsMenuStrip">
+                                        <MenuItem Name="gamebannaURLHandlerOptionsToolStripMenuItem" Click="AddRemoveURLHandlerButton_Click"></MenuItem>
+                                        <Separator></Separator>
+                                        <MenuItem Name="enableModStackingToolStripMenuItem" IsCheckable="True" Click="ModStackRadioButtons_CheckedChanged"></MenuItem>
+                                        <MenuItem Name="onForAIRVersionUnreleasedToolStripMenuItem" IsEnabled="False"></MenuItem>
+                                        <MenuItem Name="v1909190AndAboveOnlyToolStripMenuItem" IsEnabled="False"></MenuItem>
+                                        <MenuItem Name="downloadFromURLToolStripMenuItem" Visibility="Collapsed"></MenuItem>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
                         </StackPanel>
                     </Grid>
-                    <StackPanel>
-                        <Button Height="25" Width="25" Margin="5" Content="+"></Button>
-                        <Button Height="25" Width="25" Margin="5" Content="-"></Button>
-                        <Button Height="25" Width="25" Margin="5" Content="↑"></Button>
-                        <Button Height="25" Width="25" Margin="5" Content="↓"></Button>
-                        <Button Height="25" Width="25" Margin="5" Content="⤒"></Button>
-                        <Button Height="25" Width="25" Margin="5" Content="⤓"></Button>
-                    </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Tools">
-                <TabControl>
-                    <TabItem Header="Game Recordings">
-                        <Grid>
+            <TabItem Name="toolsPage" Header="Tools">
+                <TabControl x:Name="tabControl3" SelectionChanged="TabControl3_SelectedIndexChanged" Padding="0">
+                    <TabItem Name="recordingsPage" Header="Game Recordings">
+                        <Grid x:Name="recordingsPanel" Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition Height="65"></RowDefinition>
+                                <RowDefinition Height="80"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <local:ListViewControl x:Name="RecordingsViewer" Grid.ColumnSpan="2" Margin="4"></local:ListViewControl>
-                            <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                            <local:ListViewControl x:Name="RecordingsViewer" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ListViewControl>
+                            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="6,0">
                                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,4">
-                                    <Button Width="75" Margin="4,0" Content="Upload"></Button>
-                                    <Button Width="100" Margin="4,0" Content="Copy File Path"></Button>
-                                    <Button Width="75" Margin="4,0" Content="Refresh"></Button>
+                                    <Button x:Name="uploadButton" Width="75" Margin="4,0" Content="Upload" Click="UploadButton_Click" IsEnabled="False"></Button>
+                                    <Button x:Name="copyRecordingFilePath" Width="100" Margin="4,0" Content="Copy File Path" Click="CopyRecordingFilePath_Click" IsEnabled="False"></Button>
+                                    <Button x:Name="refreshDebugButton" Width="75" Margin="4,0" Content="Refresh" Click="RefreshDebugButton_Click" IsEnabled="True"></Button>
                                 </StackPanel>
                                 <StackPanel Height="25" Orientation="Horizontal">
-                                    <Button Width="75" Margin="4,0" Content="Open"></Button>
-                                    <Button Width="75" Margin="4,0" Content="Delete"></Button>
+                                    <Button x:Name="openRecordingButton" Width="75" Margin="4,0" Content="Open" Click="OpenRecordingButton_Click" IsEnabled="False"></Button>
+                                    <Button x:Name="deleteRecordingButton" Width="75" Margin="4,0" Content="Delete" Click="DeleteRecordingButton_Click" IsEnabled="False"></Button>
                                 </StackPanel>
                             </StackPanel>
+                            <Label Name="recordingsErrorMessage" Visibility="Collapsed"></Label>
 
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Guides/Shortcuts">
-                        <Grid>
+                    <TabItem Name="guidesPage" Header="Guides/Shortcuts">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition Width="157*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="140"></RowDefinition>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="Guides">
-                                <StackPanel VerticalAlignment="Center">
-                                    <Button Height="23" Margin="0,2"></Button>
-                                    <Button Height="23" Margin="0,2"></Button>
-                                    <Button Height="23" Margin="0,2"></Button>
-                                    <Button Height="23" Margin="0,2"></Button>
+                            <GroupBox Header="Guides" Name="groupBox6" Grid.ColumnSpan="2" Margin="0">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <Button Content="Open Sample Mods Folder" x:Name="openSampleModsFolderButton" Height="23" Margin="0,2" Click="OpenSampleModsFolderButton_Click"></Button>
+                                    <Button Content="Sonic 3 A.I.R. User Manual" Height="23" x:Name="openUserManualButton" Margin="0,2" Click="OpenUserManualButton_Click"></Button>
+                                    <Button Content="Sonic 3 A.I.R. Modding Instructions" x:Name="openModDocumentationButton" Height="23" Margin="0,2" Click="OpenModDocumentationButton_Click"></Button>
+                                    <Button Content="Open Modding Templates Folder" x:Name="openModdingTemplatesFolder" Height="23" Margin="0,2" Click="OpenModdingTemplatesFolder_Click"></Button>
                                 </StackPanel>
                             </GroupBox>
-                            <TextBlock Grid.Row="1"></TextBlock>
-                            <StackPanel VerticalAlignment="Center" Grid.Row="2" Margin="6,0">
+                            <TextBlock FontSize="11" VerticalAlignment="Center" Padding="0" x:Name="label5" Grid.Row="1" TextAlignment="Center" Text="Useful In-Game Shortcuts/Keys: &#10;Alt + Enter - Toggle Fullscreen&#10;F2 - Take a Game Recording Capture&#10;Right Click - Open A.I.R Context Menu&#10;F3 - Rescan for Game Controllers&#10;F4 - Switches Game Controllers for P1 and P2&#10;Numpad Plus/Minus - Adjust Global Audio Volume&#10;Alt + B - Change Background Blur&#10;Alt + F - Change Filter&#10;Alt + P - Show Performance Display&#10;" Grid.ColumnSpan="2" Margin="0,11"></TextBlock>
+                            <StackPanel VerticalAlignment="Center" Grid.Row="2" Margin="6,8" Grid.ColumnSpan="2">
                                 <Grid Margin="0,1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Button Height="23" Grid.Column="0" Margin="0,2" HorizontalAlignment="Stretch"></Button>
-                                    <Button Height="23" Grid.Column="2" Margin="0,2" HorizontalAlignment="Stretch"></Button>
+                                    <Button x:Name="airPlacesButton" Height="23" Grid.Column="0" Margin="0,2" HorizontalAlignment="Stretch" Content="A.I.R. Places..." Click="AirPlacesButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                                        <Button.ContextMenu>
+                                            <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="directoriesMenuStrip">
+                                                <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
+                                                <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
+                                                <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
+                                                <MenuItem Name="openModsFolderToolStripMenuItem" Click="OpenModsFolder_Click"></MenuItem>
+                                                <MenuItem Name="openConfigFileToolStripMenuItem" Click="OpenConfigFileToolStripMenuItem_Click"></MenuItem>
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
+                                    <Button x:Name="airMediaButton" Height="23" Grid.Column="2" Margin="0,2" HorizontalAlignment="Stretch" Content="A.I.R. Media..." Click="AirMediaButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                                        <Button.ContextMenu>
+                                            <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="mediaLinksMenuStrip">
+                                                <MenuItem Name="sonic3AIRHomepageToolStripMenuItem" Click="S3AIRWebsiteButton_Click"></MenuItem>
+                                                <MenuItem Name="s3AIRGamebannaToolStripMenuItem" Click="GamebannaButton_Click"></MenuItem>
+                                                <MenuItem Name="eukaryot3KTwitterToolStripMenuItem" Click="EukaTwitterButton_Click"></MenuItem>
+                                                <MenuItem Name="carJemTwitterToolStripMenuItem" Click="CarJemTwitterButton_Click"></MenuItem>
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
                                 </Grid>
-                                <Button Height="23" Margin="0,2"></Button>
-                                <Button Height="23" Margin="0,2"></Button>
+                                <Button x:Name="airModManagerPlacesButton" Height="23" Margin="0,2" Content="A.I.R. Mod Manager Places..." Click="airModManagerPlacesButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                                    <Button.ContextMenu>
+                                        <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="modManagerPathMenuStrip">
+                                            <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
+                                            <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
+                                </Button>
+                                <Button x:Name="showLogFileButton" Height="23" Margin="0,2" Content="Show Log File" Click="ShowLogFileButton_Click"></Button>
                             </StackPanel>
                         </Grid>
                     </TabItem>
                 </TabControl>
             </TabItem>
-            <TabItem Header="Options">
-                <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <TabItem Header="General">
-                        <Grid>
+            <TabItem Name="settingsPage" Header="Options">
+                <TabControl x:Name="settingsTabControl" SelectionChanged="TabControl2_SelectedIndexChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
+                    <TabItem Name="optionsPage" Header="General">
+                        <Grid x:Name="inputPanel" Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="Mod Manager Options">
-                                <StackPanel>
-                                    <TextBlock Text="Sonic 3 A.I.R. Path:" Margin="0,2"></TextBlock>
-                                    <Grid>
+                            <GroupBox x:Name="groupBox8" Header="Mod Manager Options">
+                                <StackPanel Margin="5">
+                                    <TextBlock x:Name="label1" Text="Sonic 3 A.I.R. Path:" Margin="0,2"></TextBlock>
+                                    <Grid Height="25">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition></ColumnDefinition>
                                             <ColumnDefinition Width="25"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <TextBox></TextBox>
-                                        <Button Grid.Column="1" Content="..."></Button>
+                                        <TextBox x:Name="sonic3AIRPathBox"></TextBox>
+                                        <Button Grid.Column="1" Content="..." Name="updateSonic3AIRPathButton" Click="ChangeSonic3AIRPathButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                                            <Button.ContextMenu>
+                                                <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="AIRPathMenuStrip">
+                                                    <Separator></Separator>
+                                                    <MenuItem Name="setManuallyHeader"></MenuItem>
+                                                    <Separator></Separator>
+                                                    <MenuItem Name="eXEPathToolStripMenuItem" Click="UpdateSonic3AIRPath_Click"></MenuItem>
+                                                    <MenuItem Name="fromSettingsFileToolStripMenuItem" Click="FromSettingsFileToolStripMenuItem_Click"></MenuItem>
+                                                    <Separator></Separator>
+                                                    <MenuItem Name="fromInstalledHeader"></MenuItem>
+                                                    <Separator></Separator>
+                                                    <MenuItem Name="aIRVersionZIPToolStripMenuItem" Click="AIRVersionZIPToolStripMenuItem_Click"></MenuItem>
+                                                    <MenuItem Name="installedVersionsToolStripMenuItem">
+                                                        <MenuItem Name="noInstalledVersionsToolStripMenuItem"></MenuItem>
+                                                    </MenuItem>
+                                                </ContextMenu>
+                                            </Button.ContextMenu>
+                                        </Button>
                                     </Grid>
-                                    <CheckBox Content="Enable Auto Boot Mode" Margin="0,2"></CheckBox>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="autoRunCheckbox" Content="Enable Auto Boot Mode" Margin="0,2" Checked="AutoRunCheckbox_CheckedChanged" Unchecked="AutoRunCheckbox_CheckedChanged" IsChecked="{Binding AutoLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                                     <Separator Visibility="Hidden"></Separator>
-                                    <TextBlock Text="Delay (Seconds):" Margin="0,2"></TextBlock>
-                                    <TextBox Width="90" HorizontalAlignment="Left"></TextBox>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <CheckBox Content="Stay Open on Game Load" Margin="0,2"></CheckBox>
-                                    <CheckBox Content="Stay Open on Game Exit" Margin="0,2"></CheckBox>
+                                    <TextBlock x:Name="autoLaunchDelayLabel" Text="Delay (Seconds):" Margin="0,2"></TextBlock>
+                                    <WindowsFormsHost Width="90" HorizontalAlignment="Left" Name="IntergerUpDownHost"></WindowsFormsHost>
                                     <Separator Visibility="Hidden"></Separator>
                                     <Separator Visibility="Hidden"></Separator>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="keepLoaderOpenCheckBox" Content="Stay Open on Game Load" Margin="0,2" IsChecked="{Binding KeepOpenOnLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="keepOpenOnQuitCheckBox" Content="Stay Open on Game Exit" Margin="0,2" IsChecked="{Binding KeepOpenOnQuit, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                                     <Separator Visibility="Hidden"></Separator>
                                     <Separator Visibility="Hidden"></Separator>
                                     <Separator Visibility="Hidden"></Separator>
-                                    <CheckBox Content="Check for A.I.R. Updates on Startup"></CheckBox>
-                                    <TextBlock Text="Language:" Margin="0,2"></TextBlock>
+                                    <Separator Visibility="Hidden"></Separator>
+                                    <Separator Visibility="Hidden"></Separator>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="checkBox1" Content="Check for A.I.R. Updates on Startup" IsChecked="{Binding AutoUpdates, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                    <TextBlock x:Name="languageLabel" Text="Language:" Margin="0,2"></TextBlock>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <ComboBox></ComboBox>
+                                        <ComboBox Name="languageComboBox" SelectionChanged="LanguageComboBox_SelectionChangeCommitted"></ComboBox>
                                     </Grid>
                                 </StackPanel>
                             </GroupBox>
-                            <GroupBox Grid.Row="1" Header="A.I.R. Advanced Settings">
-                                <StackPanel>
-                                    <TextBlock Text="Sonic 3K ROM Path:" Margin="0,2"></TextBlock>
-                                    <Grid>
+                            <GroupBox x:Name="groupBox1" Grid.Row="1" Header="A.I.R. Advanced Settings">
+                                <StackPanel Margin="5">
+                                    <TextBlock x:Name="label2" Text="Sonic 3K ROM Path:" Margin="0,2"></TextBlock>
+                                    <Grid Height="25">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition></ColumnDefinition>
                                             <ColumnDefinition Width="25"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <TextBox></TextBox>
-                                        <Button Grid.Column="1" Content="..."></Button>
+                                        <TextBox x:Name="romPathBox"></TextBox>
+                                        <Button x:Name="changeRomPathButton" Grid.Column="1" Content="..." Click="ChangeRomPathButton_Click"></Button>
                                     </Grid>
-                                    <CheckBox Content="Fix Glitches" Margin="0,2"></CheckBox>
-                                    <CheckBox Content="Fail Safe Mode" Margin="0,2"></CheckBox>
-                                    <CheckBox Content="Enable Dev Mode (Not Debug Mode)" Margin="0,2"></CheckBox>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="fixGlitchesCheckbox" Content="Fix Glitches" Margin="0,2" Click="FixGlitchesCheckbox_Click"></CheckBox>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="failSafeModeCheckbox" Content="Fail Safe Mode" Margin="0,2" Click="FailSafeModeCheckbox_Click"></CheckBox>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" Content="Enable Dev Mode (Not Debug Mode)" Margin="0,2" Name="devModeCheckbox" Click="devModeCheckbox_Click"></CheckBox>
                                 </StackPanel>
                             </GroupBox>
                         </Grid>
 
                     </TabItem>
-                    <TabItem Header="Input">
-                        <Grid>
+                    <TabItem Name="inputPage" Header="Input">
+                        <Grid Margin="5">
                             <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="2*"></RowDefinition>
-                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="30"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <ListBox Margin="4"></ListBox>
-                            <GroupBox Grid.Row="1" Header="Button Mappings">
+                            <Label Grid.RowSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="inputErrorMessage"></Label>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <ListBox Style="{StaticResource BaseListBoxStyle}" ItemContainerStyle="{StaticResource BaseListBoxItemStyle}" x:Name="inputMethodsList" Margin="4,4" SelectionChanged="InputMethodsList_SelectedIndexChanged"></ListBox>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
+                                    <Button Click="addInputMethodButton_Click" x:Name="addInputMethodButton" Height="25" Width="75" Margin="4,0" Content="+"></Button>
+                                    <Button Click="removeInputMethodButton_Click" x:Name="removeInputMethodButton" Height="25" Width="75" Margin="4,0" Content="-"></Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+                                    <Button Click="importConfigButton_Click" x:Name="importConfigButton" Height="25" Width="75" Margin="4,0" Content="Import..."></Button>
+                                    <Button Click="exportConfigButton_Click" x:Name="exportConfigButton" Height="25" Width="75" Margin="4,0" Content="Export..."></Button>
+                                </StackPanel>
+                            </Grid>
+                            <GroupBox Grid.Row="1" Header="Button Mappings" x:Name="groupBox4">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="A"></Label>
+                                            <Button Click="InputButton_Click" x:Name="aInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonALabel" Content="A"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="B"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="bInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonBLabel" Content="B"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="X"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="xInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonXLabel" Content="X"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="Y"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="yInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonYLabel" Content="Y"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="Start"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="startInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonStartLabel" Content="Start"></Label>
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="Up"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="upInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonUpLabel" Content="Up"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="Down"></Label>
+                                            <Button x:Name="downInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonDownLabel" Content="Down"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="Left"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="leftInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonLeftLabel" Content="Left"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="Right"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="rightInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonRightLabel" Content="Right"></Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Width="100" Height="25" Margin="4,0"></Button>
-                                            <Label Content="Back"></Label>
+                                            <Button Click="InputButton_Click"  x:Name="backInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                            <Label Name="buttonBackLabel" Content="Back"></Label>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </GroupBox>
-                            <GroupBox Grid.Row="2" Header="Device Identifier Names">
+                            <GroupBox Grid.Row="2" Header="Device Identifier Names" Name="groupBox7">
                                 <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="45"></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <ListBox Margin="4"></ListBox>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
-                                        <Button Height="25" Width="75" Margin="4,0" Content="+"></Button>
-                                        <Button Height="25" Width="75" Margin="4,0" Content="-"></Button>
+                                    <ListBox Style="{StaticResource BaseListBoxStyle}" ItemContainerStyle="{StaticResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,0" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
+                                    </ListBox>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Grid.ColumnSpan="2">
+                                        <Button x:Name="addDeviceNameButton" Click="AddDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="+" IsEnabled="False"></Button>
+                                        <Button x:Name="removeDeviceNameButton" Click="RemoveDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="-" IsEnabled="False"></Button>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
-                                        <Button Height="25" Width="125" Margin="4,0"></Button>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1">
+                                        <Button x:Name="openGamepadSettingsButton" Click="OpenGamepadSettingsButton_Click" Height="25" Width="150" Margin="4,0" Content="Open System Settings..."></Button>
                                     </StackPanel>
                                 </Grid>
                             </GroupBox>
@@ -250,51 +352,67 @@
                                     <ColumnDefinition Width="5*"></ColumnDefinition>
                                     <ColumnDefinition Width="4*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Button Height="25" Margin="4,0"></Button>
-                                <Button Height="25" Grid.Column="1" Margin="4,0"></Button>
+                                <Button x:Name="saveInputsButton" Height="25" Margin="4,0" Content="Save Input Mappings..."></Button>
+                                <Button x:Name="resetInputsButton" Height="25" Grid.Column="1" Margin="4,0" Content="Reset to Defaults"></Button>
                             </Grid>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Versions">
-                        <GroupBox Header="Installed Versions">
-                            <Grid>
+                    <TabItem Name="versionsPage" Header="Versions">
+                        <GroupBox x:Name="groupBox2" Header="Installed Versions" Margin="5">
+                            <Grid Margin="5">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="6*"></RowDefinition>
                                     <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="35"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <local:ListViewControl x:Name="VersionsViewer" Margin="4"></local:ListViewControl>
-                                <StackPanel Height="25" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1">
-                                    <Button Width="75" Margin="4,0" Content="Remove"></Button>
-                                    <Button Width="125" Margin="4,0" Content="Open Location..."></Button>
+                                <StackPanel Height="25" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1">
+                                    <Button x:Name="removeVersionButton" Width="75" Margin="4,0" Content="Remove" Click="RemoveVersionButton_Click"></Button>
+                                    <Button x:Name="openVersionLocationButton" Width="125" Margin="4,0" Content="Open Location..." Click="OpenVersionLocationButton_Click"></Button>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
                     </TabItem>
-                    <TabItem Header="About">
-                        <Grid>
+                    <TabItem Name="aboutPage" Header="About">
+                        <Grid Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="60"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock></TextBlock>
-                            <Button Height="25" Grid.Row="1" Margin="4,0"></Button>
+                            <TextBlock x:Name="aboutLabel" Padding="10" Text="Sonic 3 A.I.R. Mod Manager&#10;Version {version}&#10;By CarJem Generations&#10;&#10;Special Thanks:&#10;● Eukaryot3K - Creator of Sonic 3 A.I.R.">
+                            </TextBlock>
+                            <StackPanel Grid.Row="1">
+                                <Button x:Name="checkForModManagerUpdatesButton" Content="Check for Mod Manager Updates..." Height="25" Margin="0,4,0,4" IsEnabled="False"></Button>
+                                <Button x:Name="checkForUpdatesButton" Height="25" Margin="0,0,0,4" Content="Check for Game Updates..." Click="CheckForUpdates_Click"></Button>
+                            </StackPanel>
                         </Grid>
                     </TabItem>
                 </TabControl>
             </TabItem>
         </TabControl>
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
-            <StackPanel Orientation="Horizontal" Height="34" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,2,0">
-                <Button Content="Exit" Width="75" Margin="4"></Button>
-                <Button Content="Save" Width="75" Margin="4"></Button>
-                <Button Content="Save &amp; Load" Width="85" Margin="4"></Button>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,5">
+                <TextBlock x:Name="airVersionLabel" Text="AIR Version: NULL&#10;Settings Version: NULL" Foreground="{DynamicResource NormalText}"></TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0">
-                <TextBlock Text="AIR Version: "></TextBlock>
-                <TextBlock Text="AIR Settings Version: "></TextBlock>
+            <StackPanel Orientation="Horizontal" Height="34" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                <Button Click="ExitButton_Click" x:Name="exitButton" Content="Exit" Width="100" Margin="4" Height="25"></Button>
+                <Button Click="SaveButton_Click" x:Name="saveButton" Content="Save" Width="100" Margin="4" Height="25"></Button>
+                <Button Click="RunButton_Click" x:Name="saveAndLoadButton" Content="Save &amp; Load" Width="100" Margin="4" Height="25"></Button>
             </StackPanel>
-        </StackPanel>
+
+        </Grid>
 
 
     </Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="{DynamicResource NormalBackground}"></Setter>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource NormalText}"></Setter>
+        </Style>
+    </Window.Resources>
 </Window>

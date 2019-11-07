@@ -56,22 +56,11 @@ namespace Sonic3AIR_ModLoader
 
     public partial class ModManagerV2 : Window
     {
-        public ModManagerV2 ()
-        {
-            InitializeComponent();
-        }
-    }
-
-    /*
-    public partial class ModManagerV2 : Window
-    {
         #region Variables
 
-
-        #region Winform Leftovers
-
-        System.Windows.Forms.Timer ApiInstallChecker;
-
+        #region Winforms
+        public System.Windows.Forms.NumericUpDown autoLaunchDelayUpDown;
+        private System.Windows.Forms.Timer ApiInstallChecker;
         #endregion
 
         #region Tooltips
@@ -93,6 +82,16 @@ namespace Sonic3AIR_ModLoader
         public static AIR_SDK.VersionMetadata CurrentAIRVersion;
         IList<ModViewerItem> ModsList = new List<ModViewerItem>();
         bool AllowUpdate { get; set; } = true;
+
+
+        #region WPF Columns
+
+        public System.Windows.Controls.GridViewColumn VersionColumn = new System.Windows.Controls.GridViewColumn();
+        public System.Windows.Controls.GridViewColumn PathColumn = new System.Windows.Controls.GridViewColumn();
+        public System.Windows.Controls.GridViewColumn TimestampColumn = new System.Windows.Controls.GridViewColumn();
+        public System.Windows.Controls.GridViewColumn RecVersionColumn = new System.Windows.Controls.GridViewColumn();
+
+        #endregion
 
 
         #region Hosted Elements
@@ -130,6 +129,16 @@ namespace Sonic3AIR_ModLoader
             ModViewer.View.SelectionChanged += View_SelectionChanged;
             ModViewer.View.MouseUp += View_MouseUp;
 
+            autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
+
+            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModLoader.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(9, 94);
+            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
+            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(56, 20);
+            this.autoLaunchDelayUpDown.TabIndex = 13;
+            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModLoader.Properties.Settings.Default.AutoLaunchDelay;
+
+            ApiInstallChecker = new System.Windows.Forms.Timer();
 
             VersionsViewer.View.SelectionChanged += this.VersionsListBox_SelectedValueChanged;
 
@@ -137,41 +146,41 @@ namespace Sonic3AIR_ModLoader
 
             VersionsGrid.AllowsColumnReorder = false;
 
-            var VersionColumn = new System.Windows.Controls.GridViewColumn();
-            VersionColumn.Header = "Version";
+            VersionColumn = new System.Windows.Controls.GridViewColumn();
+            VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
             VersionColumn.Width = 100;
             VersionColumn.DisplayMemberBinding = new System.Windows.Data.Binding("Name");
             VersionsGrid.Columns.Add(VersionColumn);
 
-            var PathColumn = new System.Windows.Controls.GridViewColumn();
-            PathColumn.Header = "Path";
+            PathColumn = new System.Windows.Controls.GridViewColumn();
+            PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
             PathColumn.Width = Double.NaN;
             PathColumn.DisplayMemberBinding = new System.Windows.Data.Binding("FilePath");
             VersionsGrid.Columns.Add(PathColumn);
 
             VersionsViewer.View.View = VersionsGrid;
 
-
+            RecordingsViewer.View.SelectionChanged += GameRecordingList_SelectedIndexChanged;
 
             var RecordingsGrid = new AutoSizedGridView();
 
             RecordingsGrid.AllowsColumnReorder = false;
 
-            var TimestampColumn = new System.Windows.Controls.GridViewColumn();
-            TimestampColumn.Header = "Item";
+            TimestampColumn = new System.Windows.Controls.GridViewColumn();
+            TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
             TimestampColumn.Width = 100;
             TimestampColumn.DisplayMemberBinding = new System.Windows.Data.Binding("Name");
             RecordingsGrid.Columns.Add(TimestampColumn);
 
-            var RecVersionColumn = new System.Windows.Controls.GridViewColumn();
-            RecVersionColumn.Header = "A.I.R. Version";
+            RecVersionColumn = new System.Windows.Controls.GridViewColumn();
+            RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
             RecVersionColumn.Width = Double.NaN;
             RecVersionColumn.DisplayMemberBinding = new System.Windows.Data.Binding("AIRVersion");
             RecordingsGrid.Columns.Add(RecVersionColumn);
 
-            RecordingsViewer.View.SelectionChanged += GameRecordingList_SelectedIndexChanged;
-
             RecordingsViewer.View.View = RecordingsGrid;
+
+            IntergerUpDownHost.Child = autoLaunchDelayUpDown;
         }
 
         private void UpdateWPFListViews(System.Windows.Controls.ListView listView)
@@ -187,6 +196,7 @@ namespace Sonic3AIR_ModLoader
         {
             InitializeComponent();
             StartupWPFHost();
+
             if (ValidateInstall() == true)
             {
                 SetTooltips();
@@ -226,107 +236,116 @@ namespace Sonic3AIR_ModLoader
             Instance.UpdateModsList(true);
         }
 
-        public void DownloadButtonTest_Click(object sender, EventArgs e)
+        public void DownloadButtonTest_Click(object sender, RoutedEventArgs e)
         {
             ModFileManagement.AddModFromURLLink();
         }
 
-        private void LanguageComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        private void LanguageComboBox_SelectionChangeCommitted(object sender, SelectionChangedEventArgs e)
         {
             if (AllowUpdate) UpdateCurrentLanguage();
         }
-        private void OpenDownloadsFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenDownloadsFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void OpenVersionsFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenVersionsFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void airModManagerPlacesButton_Click(object sender, EventArgs e)
+        private void airModManagerPlacesButton_Click(object sender, RoutedEventArgs e)
         {
-            modManagerPathMenuStrip.Show(airModManagerPlacesButton, new Point(0, airModManagerPlacesButton.Height));
+            airModManagerPlacesButton.ContextMenu.IsOpen = true;
         }
 
-        private void OpenConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenConfigFileToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenConfigFile();
         }
 
-        private void FromSettingsFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FromSettingsFileToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
             ChangeAIRPathFromSettings();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void CheckForUpdates_Click(object sender, RoutedEventArgs e)
         {
             if (Program.UpdaterState == Updater.UpdateState.NeverStarted || Program.UpdaterState == Updater.UpdateState.Finished) new Updater(true);
         }
 
-        private void SaveInputsButton_Click(object sender, EventArgs e)
+        private void SaveInputsButton_Click(object sender, RoutedEventArgs e)
         {
             GameConfig.Save();
         }
 
-        private void ResetInputsButton_Click(object sender, EventArgs e)
+        private void ResetInputsButton_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show(Program.LanguageResource.GetString("ResetInputMappingsDefaultFormMessage"), Program.LanguageResource.GetString("ResetInputMappingsDefaultFormTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (GameConfig != null)
+                {
+                    GameConfig.ResetDevicesToDefault();
+                    RefreshInputMappings();
+                }
+            }
 
         }
 
-        private void InputMethodsList_SelectedIndexChanged(object sender, EventArgs e)
+        private void InputMethodsList_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateInputMappings();
         }
 
-        private void InputButton_Click(object sender, EventArgs e)
+        private void InputButton_Click(object sender, RoutedEventArgs e)
         {
             if (inputMethodsList.SelectedItem != null) ChangeInputMappings(sender);
         }
 
-        private void AirPlacesButton_Click(object sender, EventArgs e)
+        private void AirPlacesButton_Click(object sender, RoutedEventArgs e)
         {
-            directoriesMenuStrip.Show(airPlacesButton, new Point(0, airPlacesButton.Height));
+            airPlacesButton.ContextMenu.IsOpen = true;
 
         }
 
-        private void AirMediaButton_Click(object sender, EventArgs e)
+        private void AirMediaButton_Click(object sender, RoutedEventArgs e)
         {
-            mediaLinksMenuStrip.Show(airMediaButton, new Point(0, airMediaButton.Height));
+            airMediaButton.ContextMenu.IsOpen = true;
 
         }
-        private void MoveToTopButton_Click(object sender, EventArgs e)
+        private void MoveToTopButton_Click(object sender, RoutedEventArgs e)
         {
             MoveModToTop();
         }
 
-        private void MoveToBottomButton_Click(object sender, EventArgs e)
+        private void MoveToBottomButton_Click(object sender, RoutedEventArgs e)
         {
             MoveModToBottom();
         }
 
-        private void MoreModOptionsButton_Click(object sender, EventArgs e)
+        private void MoreModOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            moreModOptionsMenuStrip.Show(moreModOptionsButton, new Point(0, moreModOptionsButton.Height));
+            moreModOptionsButton.ContextMenu.IsOpen = true;
         }
 
-        private void MoveDownButton_Click(object sender, EventArgs e)
+        private void MoveDownButton_Click(object sender, RoutedEventArgs e)
         {
             MoveModDown();
         }
 
-        private void MoveUpButton_Click(object sender, EventArgs e)
+        private void MoveUpButton_Click(object sender, RoutedEventArgs e)
         {
             MoveModUp();
         }
 
-        private void ModStackRadioButtons_CheckedChanged(object sender, EventArgs e)
+        private void ModStackRadioButtons_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (AllowUpdate)
             {
                 AllowUpdate = false;
-                if (enableModStackingToolStripMenuItem.Checked)
+                if (enableModStackingToolStripMenuItem.IsChecked)
                 {
                     Properties.Settings.Default.EnableNewLoaderMethod = true;
                 }
@@ -340,81 +359,81 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void S3AIRWebsiteButton_Click(object sender, EventArgs e)
+        private void S3AIRWebsiteButton_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://sonic3air.org/");
         }
 
-        private void GamebannaButton_Click(object sender, EventArgs e)
+        private void GamebannaButton_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://gamebanana.com/games/6878");
         }
 
-        private void EukaTwitterButton_Click(object sender, EventArgs e)
+        private void EukaTwitterButton_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://twitter.com/eukaryot3k");
         }
 
-        private void CarJemTwitterButton_Click(object sender, EventArgs e)
+        private void CarJemTwitterButton_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://twitter.com/carter5467_99");
         }
 
-        private void OpenModdingTemplatesFolder_Click(object sender, EventArgs e)
+        private void OpenModdingTemplatesFolder_Click(object sender, RoutedEventArgs e)
         {
             OpenModdingTemplatesFolder();
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Save();
         }
 
-        private void OpenSampleModsFolderButton_Click(object sender, EventArgs e)
+        private void OpenSampleModsFolderButton_Click(object sender, RoutedEventArgs e)
         {
             OpenSampleModsFolder();
 
         }
 
-        private void OpenUserManualButton_Click(object sender, EventArgs e)
+        private void OpenUserManualButton_Click(object sender, RoutedEventArgs e)
         {
             OpenUserManual();
         }
 
-        private void OpenModDocumentationButton_Click(object sender, EventArgs e)
+        private void OpenModDocumentationButton_Click(object sender, RoutedEventArgs e)
         {
             OpenModDocumentation();
         }
 
-        private void OpenModURLToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenModURLToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenModURL((ModList.SelectedItem as ModViewerItem).Source.URL);
         }
 
-        private void ShowLogFileButton_Click(object sender, EventArgs e)
+        private void ShowLogFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenLogFile();
         }
 
-        private void AutoRunCheckbox_CheckedChanged(object sender, EventArgs e)
+        private void AutoRunCheckbox_CheckedChanged(object sender, RoutedEventArgs e)
         {
             UpdateUI();
         }
 
-        private void ModManager_FormClosing(object sender, FormClosingEventArgs e)
+        private void ModManager_WindowClosing(object sender, CancelEventArgs e)
         {
             if (GameHandler.isGameRunning)
             {
-                e.Cancel = (e.CloseReason == CloseReason.UserClosing);
+                e.Cancel = true;
             }
         }
 
-        private void ModManager_VisibleChanged(object sender, EventArgs e)
+        private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             UpdateInGameButtons();
         }
 
-        private void DeleteRecordingButton_Click(object sender, EventArgs e)
+        private void DeleteRecordingButton_Click(object sender, RoutedEventArgs e)
         {
             if (GameRecordingList.SelectedItem != null)
             {
@@ -435,12 +454,12 @@ namespace Sonic3AIR_ModLoader
                 }
             }
         }
-        private void ExitButton_Click(object sender, EventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void RemoveModToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveModToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (ModList.SelectedItem != null)
             {
@@ -448,7 +467,7 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void OpenModFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenModFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (ModList.SelectedItem != null)
             {
@@ -458,10 +477,7 @@ namespace Sonic3AIR_ModLoader
 
         private void View_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == System.Windows.Input.MouseButton.Right)
-            {
-                modContextMenuStrip.Show(ModViewHost, ModViewHost.PointToClient(Cursor.Position));
-            }
+
         }
 
         private void View_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -469,34 +485,44 @@ namespace Sonic3AIR_ModLoader
             RefreshSelectedMobProperties();
         }
 
-        private void AddMods_Click(object sender, EventArgs e)
+        private void AddMods_Click(object sender, RoutedEventArgs e)
         {
             ModFileManagement.AddMod();
         }
 
-        private void RemoveButton_Click(object sender, EventArgs e)
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             if (ModList.SelectedItem != null)
             {
                 ModFileManagement.RemoveMod((ModList.SelectedItem as ModViewerItem).Source);
             }
         }
-        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControl1_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (tabControl1.SelectedTab == toolsPage)
+            if (e.Source is TabControl)
             {
-                CollectGameRecordings();
+                if (tabControl1.SelectedItem == toolsPage)
+                {
+                    CollectGameRecordings();
+                }
+                else if (tabControl1.SelectedItem == optionsPage)
+                {
+                    RefreshInputMappings();
+                }
             }
         }
-        private void TabControl3_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControl3_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (tabControl3.SelectedTab == recordingsPage)
+            if (e.Source is TabControl)
             {
-                CollectGameRecordings();
+                if (tabControl3.SelectedItem == recordingsPage)
+                {
+                    CollectGameRecordings();
+                }
             }
         }
 
-        private void CopyRecordingFilePath_Click(object sender, EventArgs e)
+        private void CopyRecordingFilePath_Click(object sender, RoutedEventArgs e)
         {
             if (GameRecordingList.SelectedItem != null)
             {
@@ -506,7 +532,7 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void UploadButton_Click(object sender, EventArgs e)
+        private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
             if (GameRecordingList.SelectedItem != null)
             {
@@ -519,50 +545,50 @@ namespace Sonic3AIR_ModLoader
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                openRecordingButton.Enabled = true;
-                copyRecordingFilePath.Enabled = true;
-                uploadButton.Enabled = true;
-                deleteRecordingButton.Enabled = true;
+                openRecordingButton.IsEnabled = true;
+                copyRecordingFilePath.IsEnabled = true;
+                uploadButton.IsEnabled = true;
+                deleteRecordingButton.IsEnabled = true;
             }
             else
             {
-                openRecordingButton.Enabled = false;
-                copyRecordingFilePath.Enabled = false;
-                uploadButton.Enabled = false;
-                deleteRecordingButton.Enabled = false;
+                openRecordingButton.IsEnabled = false;
+                copyRecordingFilePath.IsEnabled = false;
+                uploadButton.IsEnabled = false;
+                deleteRecordingButton.IsEnabled = false;
             }
         }
 
-        private void OpenRecordingButton_Click(object sender, EventArgs e)
+        private void OpenRecordingButton_Click(object sender, RoutedEventArgs e)
         {
             OpenRecordingLocation();
         }
 
-        private void RefreshDebugButton_Click(object sender, EventArgs e)
+        private void RefreshDebugButton_Click(object sender, RoutedEventArgs e)
         {
             CollectGameRecordings();
             GameRecordingList_SelectedIndexChanged(null, null);
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateModsList(true);
         }
 
-        private void UpdateSonic3AIRPath_Click(object sender, EventArgs e)
+        private void UpdateSonic3AIRPath_Click(object sender, RoutedEventArgs e)
         {
             GameHandler.UpdateSonic3AIRLocation(true);
             UpdateAIRSettings();
         }
 
-        private void ChangeSonic3AIRPathButton_Click(object sender, EventArgs e)
+        private void ChangeSonic3AIRPathButton_Click(object sender, RoutedEventArgs e)
         {
-            AIRPathMenuStrip.Show(updateSonic3AIRPathButton, new Point(0, updateSonic3AIRPathButton.Height));
+            updateSonic3AIRPathButton.ContextMenu.IsOpen = true;
             UpdateAIRVersionsToolstrips();
 
         }
 
-        private void ChangeRomPathButton_Click(object sender, EventArgs e)
+        private void ChangeRomPathButton_Click(object sender, RoutedEventArgs e)
         {
             ChangeS3RomPath();
         }
@@ -577,29 +603,29 @@ namespace Sonic3AIR_ModLoader
             RefreshSelectedMobProperties();
         }
 
-        private void RunButton_Click(object sender, EventArgs e)
+        private void RunButton_Click(object sender, RoutedEventArgs e)
         {
             Save();
             GameHandler.LaunchSonic3AIR();
             UpdateInGameButtons();
         }
 
-        private void OpenModsFolder_Click(object sender, EventArgs e)
+        private void OpenModsFolder_Click(object sender, RoutedEventArgs e)
         {
             OpenModsFolder();
         }
 
-        private void OpenEXEFolderButton_Click(object sender, EventArgs e)
+        private void OpenEXEFolderButton_Click(object sender, RoutedEventArgs e)
         {
             OpenEXEFolder();
         }
 
-        private void OpenAppDataFolderButton_Click(object sender, EventArgs e)
+        private void OpenAppDataFolderButton_Click(object sender, RoutedEventArgs e)
         {
             OpenAppDataFolder();
         }
 
-        private void OpenConfigFile_Click(object sender, EventArgs e)
+        private void OpenConfigFile_Click(object sender, RoutedEventArgs e)
         {
             OpenSettingsFile();
         }
@@ -609,42 +635,42 @@ namespace Sonic3AIR_ModLoader
             RefreshSelectedMobProperties();
         }
 
-        private void FixGlitchesCheckbox_Click(object sender, EventArgs e)
+        private void FixGlitchesCheckbox_Click(object sender, RoutedEventArgs e)
         {
-            UpdateBoolSettings(S3AIRSetting.FixGlitches, fixGlitchesCheckbox.Checked);
+            UpdateBoolSettings(S3AIRSetting.FixGlitches, fixGlitchesCheckbox.IsChecked.Value);
         }
 
-        private void FailSafeModeCheckbox_Click(object sender, EventArgs e)
+        private void FailSafeModeCheckbox_Click(object sender, RoutedEventArgs e)
         {
-            UpdateBoolSettings(S3AIRSetting.FailSafeMode, failSafeModeCheckbox.Checked);
+            UpdateBoolSettings(S3AIRSetting.FailSafeMode, failSafeModeCheckbox.IsChecked.Value);
         }
 
-        private void devModeCheckbox_Click(object sender, EventArgs e)
+        private void devModeCheckbox_Click(object sender, RoutedEventArgs e)
         {
-            UpdateBoolSettings(S3AIRSetting.EnableDevMode, devModeCheckbox.Checked);
+            UpdateBoolSettings(S3AIRSetting.EnableDevMode, devModeCheckbox.IsChecked.Value);
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
         }
 
-        private void OpenGamepadSettingsButton_Click(object sender, EventArgs e)
+        private void OpenGamepadSettingsButton_Click(object sender, RoutedEventArgs e)
         {
             LaunchSystemGamepadSettings();
         }
 
-        private void InputDeviceNamesList_SelectedIndexChanged(object sender, EventArgs e)
+        private void InputDeviceNamesList_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateInputDeviceNamesList();
         }
 
-        private void AddDeviceNameButton_Click(object sender, EventArgs e)
+        private void AddDeviceNameButton_Click(object sender, RoutedEventArgs e)
         {
             AddInputDeviceName();
         }
 
-        private void RemoveDeviceNameButton_Click(object sender, EventArgs e)
+        private void RemoveDeviceNameButton_Click(object sender, RoutedEventArgs e)
         {
             RemoveInputDeviceName();
         }
@@ -655,12 +681,19 @@ namespace Sonic3AIR_ModLoader
 
         public void SetTooltips()
         {
-            AddModTooltip.SetToolTip(addMods, Program.LanguageResource.GetString("AddAMod"));
-            RemoveSelectedModTooltip.SetToolTip(removeButton, Program.LanguageResource.GetString("RemoveSelectedMod"));
-            MoveModUpTooltip.SetToolTip(moveUpButton, Program.LanguageResource.GetString("IncreaseModPriority"));
-            MoveModDownTooltip.SetToolTip(moveDownButton, Program.LanguageResource.GetString("DecreaseModPriority"));
-            MoveModToTopTooltip.SetToolTip(moveToTopButton, Program.LanguageResource.GetString("IncreaseModPriorityToMax"));
-            MoveModToBottomTooltip.SetToolTip(moveToBottomButton, Program.LanguageResource.GetString("DecreaseModPriorityToMin"));
+            AddModTooltip.Content = Program.LanguageResource.GetString("AddAMod");
+            RemoveSelectedModTooltip.Content = Program.LanguageResource.GetString("RemoveSelectedMod");
+            MoveModUpTooltip.Content = Program.LanguageResource.GetString("IncreaseModPriority");
+            MoveModDownTooltip.Content = Program.LanguageResource.GetString("DecreaseModPriority");
+            MoveModToTopTooltip.Content = Program.LanguageResource.GetString("IncreaseModPriorityToMax");
+            MoveModToBottomTooltip.Content = Program.LanguageResource.GetString("DecreaseModPriorityToMin");
+
+            removeButton.ToolTip = RemoveSelectedModTooltip;
+            addMods.ToolTip = AddModTooltip;
+            moveUpButton.ToolTip = MoveModUpTooltip;
+            moveDownButton.ToolTip = MoveModDownTooltip;
+            moveToTopButton.ToolTip = MoveModToTopTooltip;
+            moveToBottomButton.ToolTip = MoveModToBottomTooltip;
 
             aboutLabel.Text = aboutLabel.Text.Replace("{version}", Program.Version);
             this.Title = this.Title.Replace("{version}", Program.Version);
@@ -669,35 +702,35 @@ namespace Sonic3AIR_ModLoader
         public void UpdateInGameButtons()
         {
             bool enabled = !GameHandler.isGameRunning;
-            saveAndLoadButton.Enabled = enabled;
-            saveButton.Enabled = enabled;
-            exitButton.Enabled = enabled;
-            keepLoaderOpenCheckBox.Enabled = enabled;
-            keepOpenOnQuitCheckBox.Enabled = enabled;
-            sonic3AIRPathBox.Enabled = enabled;
-            romPathBox.Enabled = enabled;
-            fixGlitchesCheckbox.Enabled = enabled;
-            failSafeModeCheckbox.Enabled = enabled;
-            modPanel.Enabled = enabled;
-            autoRunCheckbox.Enabled = enabled;
-            inputPanel.Enabled = enabled;
-            checkForUpdatesButton.Enabled = enabled;
-            devModeCheckbox.Enabled = enabled;
-            settingsTabControl.Enabled = enabled;
+            saveAndLoadButton.IsEnabled = enabled;
+            saveButton.IsEnabled = enabled;
+            exitButton.IsEnabled = enabled;
+            keepLoaderOpenCheckBox.IsEnabled = enabled;
+            keepOpenOnQuitCheckBox.IsEnabled = enabled;
+            sonic3AIRPathBox.IsEnabled = enabled;
+            romPathBox.IsEnabled = enabled;
+            fixGlitchesCheckbox.IsEnabled = enabled;
+            failSafeModeCheckbox.IsEnabled = enabled;
+            modPanel.IsEnabled = enabled;
+            autoRunCheckbox.IsEnabled = enabled;
+            inputPanel.IsEnabled = enabled;
+            checkForUpdatesButton.IsEnabled = enabled;
+            devModeCheckbox.IsEnabled = enabled;
+            settingsTabControl.IsEnabled = enabled;
         }
 
         private void UpdateUI()
         {
             UpdateAIRSettings();
             UpdateModStackingToggle();
-            autoLaunchDelayLabel.Enabled = Properties.Settings.Default.AutoLaunch;
+            autoLaunchDelayLabel.IsEnabled = Properties.Settings.Default.AutoLaunch;
             autoLaunchDelayUpDown.Enabled = Properties.Settings.Default.AutoLaunch;
         }
 
         private void UpdateModStackingToggle()
         {
             AllowUpdate = false;
-            enableModStackingToolStripMenuItem.Checked = Properties.Settings.Default.EnableNewLoaderMethod;
+            enableModStackingToolStripMenuItem.IsChecked = Properties.Settings.Default.EnableNewLoaderMethod;
             AllowUpdate = true;
         }
 
@@ -744,27 +777,33 @@ namespace Sonic3AIR_ModLoader
 
         private void UpdateCurrentLanguage()
         {
-            switch (languageComboBox.SelectedItem)
+            if (languageComboBox.SelectedItem != null)
             {
-                case "EN_US":
-                    UserLanguage.CurrentLanguage = UserLanguage.Language.EN_US;
-                    break;
-                case "GR":
-                    UserLanguage.CurrentLanguage = UserLanguage.Language.GR;
-                    break;
-                case "FR":
-                    UserLanguage.CurrentLanguage = UserLanguage.Language.FR;
-                    break;
-                case "NULL":
-                    UserLanguage.CurrentLanguage = UserLanguage.Language.NULL;
-                    break;
-                default:
-                    UserLanguage.CurrentLanguage = UserLanguage.Language.NULL;
-                    break;
+                switch (languageComboBox.SelectedItem.ToString())
+                {
+                    case "EN_US":
+                        UserLanguage.CurrentLanguage = UserLanguage.Language.EN_US;
+                        break;
+                    case "GR":
+                        UserLanguage.CurrentLanguage = UserLanguage.Language.GR;
+                        break;
+                    case "FR":
+                        UserLanguage.CurrentLanguage = UserLanguage.Language.FR;
+                        break;
+                    case "NULL":
+                        UserLanguage.CurrentLanguage = UserLanguage.Language.NULL;
+                        break;
+                    default:
+                        UserLanguage.CurrentLanguage = UserLanguage.Language.NULL;
+                        break;
+                }
+
+                UserLanguage.ApplyLanguage(ref Instance);
+                UpdateAIRSettings();
             }
 
-            UserLanguage.ApplyLanguage(ref Instance);
-            UpdateAIRSettings();
+
+
         }
 
         private void GetLanguageSelection()
@@ -791,9 +830,9 @@ namespace Sonic3AIR_ModLoader
         {
             sonic3AIRPathBox.Text = ProgramPaths.Sonic3AIRPath;
             romPathBox.Text = S3AIRSettings.Sonic3KRomPath;
-            fixGlitchesCheckbox.Checked = S3AIRSettings.FixGlitches;
-            failSafeModeCheckbox.Checked = S3AIRSettings.FailSafeMode;
-            devModeCheckbox.Checked = S3AIRSettings.EnableDevMode;
+            fixGlitchesCheckbox.IsChecked = S3AIRSettings.FixGlitches;
+            failSafeModeCheckbox.IsChecked = S3AIRSettings.FailSafeMode;
+            devModeCheckbox.IsChecked = S3AIRSettings.EnableDevMode;
             GetLanguageSelection();
 
             bool loaderMethodPast = Properties.Settings.Default.EnableNewLoaderMethod;
@@ -809,14 +848,14 @@ namespace Sonic3AIR_ModLoader
                         if (CurrentAIRVersion.Version.CompareTo(new Version("19.09.0.0")) >= 0)
                         {
                             Properties.Settings.Default.EnableNewLoaderMethod = true;
-                            enableModStackingToolStripMenuItem.Enabled = true;
+                            enableModStackingToolStripMenuItem.IsEnabled = true;
                             airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {CurrentAIRVersion.VersionString}";
                             airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
                         }
                         else
                         {
                             Properties.Settings.Default.EnableNewLoaderMethod = false;
-                            enableModStackingToolStripMenuItem.Enabled = false;
+                            enableModStackingToolStripMenuItem.IsEnabled = false;
                             airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {CurrentAIRVersion.VersionString}";
                             airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
                         }
@@ -843,7 +882,7 @@ namespace Sonic3AIR_ModLoader
             void NullSituation()
             {
                 Properties.Settings.Default.EnableNewLoaderMethod = false;
-                enableModStackingToolStripMenuItem.Enabled = false;
+                enableModStackingToolStripMenuItem.IsEnabled = false;
                 airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: NULL";
                 airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
             }
@@ -856,31 +895,31 @@ namespace Sonic3AIR_ModLoader
             {
                 if (Properties.Settings.Default.EnableNewLoaderMethod)
                 {
-                    moveUpButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) > 0);
-                    moveDownButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) < ModsList.Count - 1);
-                    moveToTopButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) > 0);
-                    moveToBottomButton.Enabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) < ModsList.Count - 1);
+                    moveUpButton.IsEnabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) > 0);
+                    moveDownButton.IsEnabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) < ModsList.Count - 1);
+                    moveToTopButton.IsEnabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) > 0);
+                    moveToBottomButton.IsEnabled = (ModsList.IndexOf((ModList.SelectedItem as ModViewerItem)) < ModsList.Count - 1);
                 }
                 else
                 {
-                    moveUpButton.Enabled = false;
-                    moveDownButton.Enabled = false;
-                    moveToTopButton.Enabled = false;
-                    moveToBottomButton.Enabled = false;
+                    moveUpButton.IsEnabled = false;
+                    moveDownButton.IsEnabled = false;
+                    moveToTopButton.IsEnabled = false;
+                    moveToBottomButton.IsEnabled = false;
                 }
-                removeButton.Enabled = true;
-                removeModToolStripMenuItem.Enabled = true;
-                openModFolderToolStripMenuItem.Enabled = true;
-                openModURLToolStripMenuItem.Enabled = ((ModList.SelectedItem as ModViewerItem).Source.URL != null);
+                removeButton.IsEnabled = true;
+                removeModToolStripMenuItem.IsEnabled = true;
+                openModFolderToolStripMenuItem.IsEnabled = true;
+                openModURLToolStripMenuItem.IsEnabled = ((ModList.SelectedItem as ModViewerItem).Source.URL != null);
             }
             else
             {
-                moveUpButton.Enabled = false;
-                moveDownButton.Enabled = false;
-                removeButton.Enabled = false;
-                removeModToolStripMenuItem.Enabled = false;
-                openModFolderToolStripMenuItem.Enabled = false;
-                openModURLToolStripMenuItem.Enabled = false;
+                moveUpButton.IsEnabled = false;
+                moveDownButton.IsEnabled = false;
+                removeButton.IsEnabled = false;
+                removeModToolStripMenuItem.IsEnabled = false;
+                openModFolderToolStripMenuItem.IsEnabled = false;
+                openModURLToolStripMenuItem.IsEnabled = false;
             }
 
 
@@ -891,14 +930,10 @@ namespace Sonic3AIR_ModLoader
                 if (item != null)
                 {
 
-                    modInfoTextBox.Clear();
-
-                    modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Bold);
-
-                    modInfoTextBox.AppendText($"{Program.LanguageResource.GetString("By")}: {item.Author}{nL}{Program.LanguageResource.GetString("Version")}: {item.ModVersion}{nL}{Program.LanguageResource.GetString("AIRVersion")}: {item.GameVersion}{nL}{item.TechnicalName}");
-
-                    modInfoTextBox.SelectionFont = new Font(modInfoTextBox.Font, FontStyle.Regular);
-
+                    string author = $"{Program.LanguageResource.GetString("By")}: {item.Author}";
+                    string version = $"{Program.LanguageResource.GetString("Version")}: {item.ModVersion}";
+                    string air_version = $"{Program.LanguageResource.GetString("AIRVersion")}: {item.GameVersion}";
+                    string tech_name = $"{item.TechnicalName}";
 
                     string description = item.Description;
                     if (description == "No Description Provided.")
@@ -906,16 +941,42 @@ namespace Sonic3AIR_ModLoader
                         description = Program.LanguageResource.GetString("NoModDescript");
                     }
 
-                    modInfoTextBox.AppendText($"{nL}{nL}{description}");
+                    Paragraph author_p = new Paragraph(new Run(author));
+                    Paragraph version_p = new Paragraph(new Run(version));
+                    Paragraph air_version_p = new Paragraph(new Run(air_version));
+                    Paragraph tech_name_p = new Paragraph(new Run(tech_name));
+                    Paragraph description_p = new Paragraph(new Run($"{nL}{description}"));
+
+
+                    author_p.FontWeight = FontWeights.Normal;                    
+                    version_p.FontWeight = FontWeights.Normal;
+                    air_version_p.FontWeight = FontWeights.Normal;
+                    tech_name_p.FontWeight = FontWeights.Bold;
+                    description_p.FontWeight = FontWeights.Normal;
+
+                    var no_margin = new Thickness(0);
+                    author_p.Margin = no_margin;
+                    version_p.Margin = no_margin;
+                    air_version_p.Margin = no_margin;
+                    tech_name_p.Margin = no_margin;
+                    description_p.Margin = no_margin;
+
+                    modInfoTextBox.Document.Blocks.Clear();
+
+                    modInfoTextBox.Document.Blocks.Add(author_p);
+                    modInfoTextBox.Document.Blocks.Add(version_p);
+                    modInfoTextBox.Document.Blocks.Add(air_version_p);
+                    modInfoTextBox.Document.Blocks.Add(tech_name_p);
+                    modInfoTextBox.Document.Blocks.Add(description_p);
                 }
                 else
                 {
-                    modInfoTextBox.Text = "";
+                    modInfoTextBox.Document.Blocks.Clear();
                 }
             }
             else
             {
-                modInfoTextBox.Text = "";
+                modInfoTextBox.Document.Blocks.Clear();
             }
         }
         #endregion
@@ -927,8 +988,7 @@ namespace Sonic3AIR_ModLoader
             GameRecordingList.Items.Clear();
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                recordingsErrorMessage.SendToBack();
-                recordingsErrorMessage.Visible = false;
+                recordingsErrorMessage.Visibility = Visibility.Collapsed;
 
                 string baseDirectory = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
                 if (Directory.Exists(baseDirectory))
@@ -945,9 +1005,8 @@ namespace Sonic3AIR_ModLoader
             }
             else
             {
-                recordingsErrorMessage.BringToFront();
-                recordingsErrorMessage.Visible = true;
-                recordingsErrorMessage.Enabled = false;
+                recordingsErrorMessage.Visibility = Visibility.Visible;
+                recordingsErrorMessage.IsEnabled = false;
             }
             UpdateWPFListViews(GameRecordingList);
 
@@ -955,23 +1014,44 @@ namespace Sonic3AIR_ModLoader
 
         private void CollectInputMappings()
         {
-            inputMethodsList.Items.Clear();
+            inputMethodsList.SelectionChanged -= InputMethodsList_SelectedIndexChanged;
+            AIR_SDK.InputMappings.Device selectedItem = null;
+            if (inputMethodsList.SelectedItem != null)
+            {
+                selectedItem = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+            }
+            inputMethodsList.ItemsSource = null;
+            inputMethodsList.Items.Refresh();
+            if (GameConfig != null)
+            {
+                if (inputMethodsList.Items.Count != 0 && inputMethodsList.ItemsSource == null) inputMethodsList.Items.Clear();
+                inputMethodsList.ItemsSource = GameConfig.InputDevices;
+                if (selectedItem != null && inputMethodsList.Items.Contains(selectedItem)) inputMethodsList.SelectedItem = selectedItem;
+            }
+            else
+            {
+                CollectGameConfig();
+            }
+            inputMethodsList.SelectionChanged += InputMethodsList_SelectedIndexChanged;
+        }
+
+        private void CollectGameConfig()
+        {
             if (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" && File.Exists(ProgramPaths.Sonic3AIRPath))
             {
                 string Sonic3AIREXEFolder = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
                 FileInfo config = new FileInfo($"{Sonic3AIREXEFolder}//config.json");
                 if (config.Exists)
                 {
-                    inputPanel.Enabled = true;
-                    inputErrorMessage.Visible = false;
-                    inputErrorMessage.SendToBack();
+                    inputPanel.IsEnabled = true;
+                    inputErrorMessage.Visibility = Visibility.Collapsed;
 
                     try
                     {
                         GameConfig = new AIR_SDK.GameConfig(config);
 
 
-                        foreach (var inputMethod in GameConfig.Input.Devices)
+                        foreach (var inputMethod in GameConfig.InputDevices)
                         {
                             inputMethodsList.Items.Add(inputMethod);
                         }
@@ -987,17 +1067,12 @@ namespace Sonic3AIR_ModLoader
 
             void NullSituation(int situation = 0)
             {
-                if (situation == 0) inputErrorMessage.Text = Program.LanguageResource.GetString("InputMappingError1");
-                else if (situation == 1) inputErrorMessage.Text = Program.LanguageResource.GetString("InputMappingError2");
-                else if (situation == 2) inputErrorMessage.Text = Program.LanguageResource.GetString("InputMappingError3");
+                if (situation == 0) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError1");
+                else if (situation == 1) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError2");
+                else if (situation == 2) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError3");
 
-                inputPanel.Enabled = false;
-                inputErrorMessage.Parent = inputPanel;
-                inputErrorMessage.Location = inputPanel.Location;
-                inputErrorMessage.Width = inputPanel.Width;
-                inputErrorMessage.Height = inputPanel.Height;
-                inputErrorMessage.BringToFront();
-                inputErrorMessage.Visible = true;
+                inputPanel.IsEnabled = false;
+                inputErrorMessage.Visibility = Visibility.Visible;
             }
         }
 
@@ -1012,37 +1087,53 @@ namespace Sonic3AIR_ModLoader
 
         #region Input Mapping
 
+
+        private void UpdateInputDeviceButtons()
+        {
+            if (inputMethodsList.SelectedItem != null)
+            {
+                removeInputMethodButton.IsEnabled = true;
+                exportConfigButton.IsEnabled = true;
+            }
+            else
+            {
+                removeInputMethodButton.IsEnabled = false;
+                exportConfigButton.IsEnabled = false;
+            }
+        }
+
         private void UpdateInputMappings()
         {
+            UpdateInputDeviceButtons();
             inputDeviceNamesList.Items.Clear();
             if (GameConfig != null)
             {
                 if (inputMethodsList.SelectedItem != null)
                 {
-                    if (inputMethodsList.SelectedItem is AIR_SDK.GameConfig.InputDevices.Device)
+                    if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
                     {
-                        AIR_SDK.GameConfig.InputDevices.Device device = inputMethodsList.SelectedItem as AIR_SDK.GameConfig.InputDevices.Device;
-                        aInputButton.Text = (device.A.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.A.FirstOrDefault());
-                        bInputButton.Text = (device.B.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.B.FirstOrDefault());
-                        xInputButton.Text = (device.X.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.X.FirstOrDefault());
-                        yInputButton.Text = (device.Y.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Y.FirstOrDefault());
-                        upInputButton.Text = (device.Up.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Up.FirstOrDefault());
-                        downInputButton.Text = (device.Down.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Down.FirstOrDefault());
-                        leftInputButton.Text = (device.Left.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Left.FirstOrDefault());
-                        rightInputButton.Text = (device.Right.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Right.FirstOrDefault());
-                        startInputButton.Text = (device.Start.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Start.FirstOrDefault());
-                        backInputButton.Text = (device.Back.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Back.FirstOrDefault());
+                        AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                        aInputButton.Content = (device.A.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.A.FirstOrDefault());
+                        bInputButton.Content = (device.B.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.B.FirstOrDefault());
+                        xInputButton.Content = (device.X.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.X.FirstOrDefault());
+                        yInputButton.Content = (device.Y.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Y.FirstOrDefault());
+                        upInputButton.Content = (device.Up.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Up.FirstOrDefault());
+                        downInputButton.Content = (device.Down.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Down.FirstOrDefault());
+                        leftInputButton.Content = (device.Left.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Left.FirstOrDefault());
+                        rightInputButton.Content = (device.Right.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Right.FirstOrDefault());
+                        startInputButton.Content = (device.Start.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Start.FirstOrDefault());
+                        backInputButton.Content = (device.Back.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.Back.FirstOrDefault());
 
-                        if (aInputButton.Text == "") aInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (bInputButton.Text == "") bInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (xInputButton.Text == "") xInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (yInputButton.Text == "") yInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (upInputButton.Text == "") upInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (downInputButton.Text == "") downInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (leftInputButton.Text == "") leftInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (rightInputButton.Text == "") rightInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (startInputButton.Text == "") startInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
-                        if (backInputButton.Text == "") backInputButton.Text = Program.LanguageResource.GetString("Input_NONE");
+                        if (aInputButton.Content == null) aInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (bInputButton.Content == null) bInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (xInputButton.Content == null) xInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (yInputButton.Content == null) yInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (upInputButton.Content == null) upInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (downInputButton.Content == null) downInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (leftInputButton.Content == null) leftInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (rightInputButton.Content == null) rightInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (startInputButton.Content == null) startInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
+                        if (backInputButton.Content == null) backInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
 
                         UpdateInputDeviceNamesList(true);
 
@@ -1052,6 +1143,7 @@ namespace Sonic3AIR_ModLoader
                 }
                 else
                 {
+
                     DisableMappings();
                 }
             }
@@ -1059,30 +1151,30 @@ namespace Sonic3AIR_ModLoader
 
         private void ToggleDeviceNamesUI(bool enabled)
         {
-            inputDeviceNamesList.Enabled = enabled;
-            addDeviceNameButton.Enabled = enabled;
-            removeDeviceNameButton.Enabled = (enabled == true ? inputDeviceNamesList.SelectedItem != null : enabled);
+            inputDeviceNamesList.IsEnabled = enabled;
+            addDeviceNameButton.IsEnabled = enabled;
+            removeDeviceNameButton.IsEnabled = (enabled == true ? inputDeviceNamesList.SelectedItem != null : enabled);
         }
 
         private void DisableMappings()
         {
             inputDeviceNamesList.Items.Clear();
-            aInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            bInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            xInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            yInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            upInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            downInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            leftInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            rightInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            startInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
-            backInputButton.Text = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            aInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            bInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            xInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            yInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            upInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            downInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            leftInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            rightInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            startInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            backInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
             inputDeviceNamesList.Items.Add((Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL")));
         }
 
         private void ChangeInputMappings(object sender)
         {
-            AIR_SDK.GameConfig.InputDevices.Device device = inputMethodsList.SelectedItem as AIR_SDK.GameConfig.InputDevices.Device;
+            AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
 
             if (sender.Equals(aInputButton)) ChangeMappings(ref device, "A");
             else if (sender.Equals(bInputButton)) ChangeMappings(ref device, "B");
@@ -1095,7 +1187,7 @@ namespace Sonic3AIR_ModLoader
             else if (sender.Equals(startInputButton)) ChangeMappings(ref device, "Start");
             else if (sender.Equals(backInputButton)) ChangeMappings(ref device, "Back");
 
-            void ChangeMappings(ref AIR_SDK.GameConfig.InputDevices.Device button, string input)
+            void ChangeMappings(ref AIR_SDK.InputMappings.Device button, string input)
             {
                 switch (input)
                 {
@@ -1147,12 +1239,103 @@ namespace Sonic3AIR_ModLoader
             {
                 int index = inputMethodsList.SelectedIndex;
                 string newDevice = "New Device";
-                DialogResult result = ExtraDialog.ShowInputDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
-                GameConfig.Input.Devices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
-                UpdateInputMappings();
+                DeviceNameDialog deviceNameDialog = new DeviceNameDialog();
+                DialogResult result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    GameConfig.InputDevices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
+                    UpdateInputMappings();
+                }
+
 
             }
 
+        }
+
+        private void AddInputDevice()
+        {
+            string new_name = "NewController";
+            bool finished = false;
+            char[] acceptable_char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890".ToArray();
+
+
+            while (!finished)
+            {
+                DialogResult result = ExtraDialog.ShowInputDialog(ref new_name, "Add a Input Device...", "Input Device Name:");
+                bool containsKey = GameConfig.Devices.ContainsKey(new_name);
+                bool unacceptable_char = new_name.ContainsOnly(acceptable_char);
+                if (result != System.Windows.Forms.DialogResult.Cancel && !containsKey && unacceptable_char)
+                {
+                    finished = true;
+                    GameConfig.Devices.Add(new_name, new AIR_SDK.InputMappings.Device(new_name));
+                    RefreshInputMappings();
+                }
+                else if (result != System.Windows.Forms.DialogResult.Cancel)
+                {
+                    if (containsKey)
+                    {
+                        MessageBox.Show(string.Format("\"{0}\" already exists in the directory, pick another name!", new_name));
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format("\"{0}\" uses unacceptable characters, please try to use only underscrores and numeranic/alphabettical characters.", new_name));
+                    }
+
+                }
+                else
+                {
+                    finished = true;
+                }
+            }
+
+
+
+        }
+
+        private void RemoveInputDevice()
+        {
+            if (inputMethodsList.SelectedItem != null)
+            {
+                if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
+                {
+
+                    var deviceToRemove = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                    DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(deviceToRemove.EntryName), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        GameConfig.Devices.Remove(deviceToRemove.EntryName);
+                        RefreshInputMappings();
+                    }
+                }
+            }
+        }
+
+        private void RefreshInputMappings()
+        {
+            DisableMappings();
+            CollectInputMappings();
+            UpdateInputDeviceButtons();
+        }
+
+        private void ImportInputDevice()
+        {
+            if (GameConfig != null)
+            {
+                ModFileManagement.ImportInputMappings(GameConfig);
+                RefreshInputMappings();
+            }
+        }
+
+        private void ExportInputDevice()
+        {
+            if (inputMethodsList.SelectedItem != null)
+            {
+                if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
+                {
+                    AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                    ModFileManagement.ExportInputMappings(device);
+                }
+            }
         }
 
         private void RemoveInputDeviceName()
@@ -1163,7 +1346,7 @@ namespace Sonic3AIR_ModLoader
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     int index = inputDeviceNamesList.SelectedIndex;
-                    GameConfig.Input.Devices[inputMethodsList.SelectedIndex].DeviceNames.RemoveAt(index);
+                    GameConfig.InputDevices[inputMethodsList.SelectedIndex].DeviceNames.RemoveAt(index);
                     UpdateInputMappings();
                 }
             }
@@ -1175,9 +1358,9 @@ namespace Sonic3AIR_ModLoader
             {
                 if (inputMethodsList.SelectedItem != null)
                 {
-                    if (inputMethodsList.SelectedItem is AIR_SDK.GameConfig.InputDevices.Device)
+                    if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
                     {
-                        AIR_SDK.GameConfig.InputDevices.Device device = inputMethodsList.SelectedItem as AIR_SDK.GameConfig.InputDevices.Device;
+                        AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
                         if (device.HasDeviceNames)
                         {
                             if (refreshItems)
@@ -1339,12 +1522,12 @@ namespace Sonic3AIR_ModLoader
         private void UpdateNewModsListItems()
         {
             ProgramPaths.ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings);
-            ModViewer.View.Items.Clear();
+            ModList.Items.Clear();
             foreach (ModViewerItem mod in ModsList)
             {
-                ModViewer.View.Items.Add(mod);
+                ModList.Items.Add(mod);
             }
-            ModViewer.View.Items.Refresh();
+            ModList.Items.Refresh();
 
         }
 
@@ -1508,7 +1691,7 @@ namespace Sonic3AIR_ModLoader
 
         #region Launching Events
 
-        private void AddRemoveURLHandlerButton_Click(object sender, EventArgs e)
+        private void AddRemoveURLHandlerButton_Click(object sender, RoutedEventArgs e)
         {
             string ModLoaderPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string InstallerPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "//GameBanana API Installer.exe";
@@ -1721,7 +1904,7 @@ namespace Sonic3AIR_ModLoader
 
         #region AIR EXE Version Handler Toolstrip / Path Management
 
-        private void AIRVersionZIPToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AIRVersionZIPToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
             InstallVersionFromZIP();
         }
@@ -1740,7 +1923,7 @@ namespace Sonic3AIR_ModLoader
                         string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
                         if (File.Exists(filePath))
                         {
-                            installedVersionsToolStripMenuItem.DropDownItems.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
+                            installedVersionsToolStripMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
                         }
 
 
@@ -1753,17 +1936,17 @@ namespace Sonic3AIR_ModLoader
 
         private void CleanUpInstalledVersionsToolStrip()
         {
-            foreach (var item in installedVersionsToolStripMenuItem.DropDownItems.Cast<ToolStripMenuItem>())
+            foreach (var item in installedVersionsToolStripMenuItem.Items.Cast<MenuItem>())
             {
                 item.Click -= ChangeAIRPathByInstalls;
             }
-            installedVersionsToolStripMenuItem.DropDownItems.Clear();
+            installedVersionsToolStripMenuItem.Items.Clear();
         }
 
-        private ToolStripItem GenerateInstalledVersionsToolstripItem(string name, string filepath)
+        private MenuItem GenerateInstalledVersionsToolstripItem(string name, string filepath)
         {
-            ToolStripItem item = new ToolStripMenuItem();
-            item.Text = name;
+            MenuItem item = new MenuItem();
+            item.Header = name;
             item.Tag = filepath;
             item.Click += ChangeAIRPathByInstalls;
             return item;
@@ -1771,7 +1954,7 @@ namespace Sonic3AIR_ModLoader
 
         private void ChangeAIRPathByInstalls(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            MenuItem item = sender as MenuItem;
             ProgramPaths.Sonic3AIRPath = item.Tag.ToString();
             Properties.Settings.Default.Save();
             UpdateAIRSettings();
@@ -1804,7 +1987,7 @@ namespace Sonic3AIR_ModLoader
                 Filter = $"{Program.LanguageResource.GetString("SonicAIRVersionZIP")} (*.zip)|*.zip",
                 Title = Program.LanguageResource.GetString("SelectSonicAIRVersionZIP")
             };
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
                 string output = destination;
@@ -1868,8 +2051,8 @@ namespace Sonic3AIR_ModLoader
             }
 
             bool enabled = VersionsListView.SelectedItem != null;
-            removeVersionButton.Enabled = enabled;
-            openVersionLocationButton.Enabled = enabled;
+            removeVersionButton.IsEnabled = enabled;
+            openVersionLocationButton.IsEnabled = enabled;
         }
 
         private class AIRVersionListItem
@@ -1897,20 +2080,22 @@ namespace Sonic3AIR_ModLoader
             RefreshVersionsList();
         }
 
-        private void TabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControl2_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (settingsTabControl.SelectedTab == versionsPage)
+            if (e.Source is TabControl)
             {
-                RefreshVersionsList(true);
-            }
-            else if (settingsTabControl.SelectedTab == inputPage)
-            {
-                DisableMappings();
-                CollectInputMappings();
+                if (settingsTabControl.SelectedItem == versionsPage)
+                {
+                    RefreshVersionsList(true);
+                }
+                else if (settingsTabControl.SelectedItem == inputPage)
+                {
+                    RefreshInputMappings();
+                }
             }
         }
 
-        private void OpenVersionLocationButton_Click(object sender, EventArgs e)
+        private void OpenVersionLocationButton_Click(object sender, RoutedEventArgs e)
         {
             if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is AIRVersionListItem)
             {
@@ -1919,12 +2104,12 @@ namespace Sonic3AIR_ModLoader
             }
         }
 
-        private void RemoveVersionButton_Click(object sender, EventArgs e)
+        private void RemoveVersionButton_Click(object sender, RoutedEventArgs e)
         {
             if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is AIRVersionListItem)
             {
                 AIRVersionListItem item = VersionsListView.SelectedItem as AIRVersionListItem;
-                if (MessageBox.Show(UserLanguage.RemoveVersion(item.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                if (MessageBox.Show(UserLanguage.RemoveVersion(item.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
                 {
                     try
                     {
@@ -1946,10 +2131,29 @@ namespace Sonic3AIR_ModLoader
 
         #endregion
 
-        private void ModManager_Resize(object sender, EventArgs e)
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
         }
+
+        private void addInputMethodButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddInputDevice();
+        }
+
+        private void removeInputMethodButton_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveInputDevice();
+        }
+
+        private void importConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            ImportInputDevice();
+        }
+
+        private void exportConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExportInputDevice();
+        }
     }
-    */
 }

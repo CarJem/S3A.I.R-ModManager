@@ -723,4 +723,7 @@ If you have, make sure these locations exist. The modloader can't run without th
   <data name="WaitingForInputDialogLabelTag" xml:space="preserve">
     <value>Selected Input:</value>
   </data>
+  <data name="CheckForModManagerUpdatesButton" xml:space="preserve">
+    <value>Check for Mod Manager Updates...</value>
+  </data>
 </root>

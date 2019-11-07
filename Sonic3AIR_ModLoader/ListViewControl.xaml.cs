@@ -44,7 +44,7 @@ namespace Sonic3AIR_ModLoader
             for (int i = 0; i < (listView.View as GridView).Columns.Count; i++)
                 if (i != autoFillColumnIndex)
                     remainingSpace -= (listView.View as GridView).Columns[i].ActualWidth;
-            (listView.View as GridView).Columns[autoFillColumnIndex].Width = remainingSpace >= 0 ? remainingSpace : 0;
+            (listView.View as GridView).Columns[autoFillColumnIndex].Width = remainingSpace >= 0 ? remainingSpace : 0;           
         }
     }
 
