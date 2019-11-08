@@ -431,9 +431,9 @@
       <Project>{0f33d309-0ff8-42c5-ab4a-585d31072ec2}</Project>
       <Name>AIR-SDK</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AIR_Protocol_Handler\AIR_Protocol_Handler.csproj">
+    <ProjectReference Include="..\AIR_Protocol_Handler\Sonic3AIR_MM_GBAPIInstaller.csproj">
       <Project>{11a257a9-07ac-43c5-8705-808b7afd644b}</Project>
-      <Name>AIR_Protocol_Handler</Name>
+      <Name>Sonic3AIR_MM_GBAPIInstaller</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

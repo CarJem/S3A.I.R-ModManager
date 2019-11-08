@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModManager", "Sonic3AIR_ModLoader\Sonic3AIR_ModManager.csproj", "{74887941-CE31-48E7-A4EF-75C52EC6415E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR_Protocol_Handler", "AIR_Protocol_Handler\AIR_Protocol_Handler.csproj", "{11A257A9-07AC-43C5-8705-808B7AFD644B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_MM_GBAPIInstaller", "AIR_Protocol_Handler\Sonic3AIR_MM_GBAPIInstaller.csproj", "{11A257A9-07AC-43C5-8705-808B7AFD644B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR-SDK", "AIR-SDK\AIR-SDK.csproj", "{0F33D309-0FF8-42C5-AB4A-585D31072EC2}"
 EndProject
@@ -60,7 +60,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_PrefixTranslations = False
 		SolutionGuid = {614F9ECA-E63D-44B5-961B-60BDAC46614B}
+		RESX_PrefixTranslations = False
 	EndGlobalSection
 EndGlobal
