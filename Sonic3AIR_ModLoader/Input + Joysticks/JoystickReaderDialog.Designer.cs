@@ -1,4 +1,4 @@
-﻿namespace Sonic3AIR_ModLoader
+﻿namespace Sonic3AIR_ModManager
 {
     partial class JoystickReaderDialog
     {

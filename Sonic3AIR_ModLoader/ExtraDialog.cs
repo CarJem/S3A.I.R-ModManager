@@ -34,7 +34,7 @@ using System.Reflection;
 using System.Threading;
 using System.Resources;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public static class ExtraDialog
     {

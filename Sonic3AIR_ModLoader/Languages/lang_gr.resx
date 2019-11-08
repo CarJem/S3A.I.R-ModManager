@@ -655,4 +655,70 @@ Bitte stelle sicher, dass sie existiert, oder installiere A.I.R. neu.</value>
   <data name="Updater_UpToDate" xml:space="preserve">
     <value>Du hast die aktuellste Version. Willst du sie erneut runterladen?</value>
   </data>
+  <data name="SettingsVersionLabel" xml:space="preserve">
+    <value>A.I.R. Version aus Einstellungen</value>
+  </data>
+  <data name="AIRDevMode" xml:space="preserve">
+    <value>Entwickler-Modus aktivieren</value>
+  </data>
+  <data name="ImportExpandable" xml:space="preserve">
+    <value>Import...</value>
+  </data>
+  <data name="ExportExpanable" xml:space="preserve">
+    <value>Export...</value>
+  </data>
+  <data name="ShowLogFileButton" xml:space="preserve">
+    <value>Log-Datei anzeigen</value>
+  </data>
+  <data name="PathColumnHeader" xml:space="preserve">
+    <value>Pfad</value>
+  </data>
+  <data name="AIRVersionColumnHeader" xml:space="preserve">
+    <value>A.I.R. Version</value>
+  </data>
+  <data name="TimestampColumnHeader" xml:space="preserve">
+    <value>Eintrag</value>
+  </data>
+  <data name="VersionColumnHeader" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="SaveInputMappingsButton" xml:space="preserve">
+    <value>Tastenzuordnungen speichern</value>
+  </data>
+  <data name="ResetMappingsToDefaultButton" xml:space="preserve">
+    <value>Auf Standard zurücksetzen</value>
+  </data>
+  <data name="ResetInputMappingsDefaultFormTitle" xml:space="preserve">
+    <value>Tastenzuordnungen auf Standard zurücksetzen</value>
+  </data>
+  <data name="ResetInputMappingsDefaultFormMessage" xml:space="preserve">
+    <value>Bist du sicher, deine Änderungen gehen verloren!</value>
+  </data>
+  <data name="DetectControllerExpandable" xml:space="preserve">
+    <value>Controller suchen...</value>
+  </data>
+  <data name="DetectGamepadInputExpandable" xml:space="preserve">
+    <value>Eingabe erkennen...</value>
+  </data>
+  <data name="JoystickInputSelectorFormTitle" xml:space="preserve">
+    <value>Wähle einen Controller...</value>
+  </data>
+  <data name="NoControllerFound" xml:space="preserve">
+    <value>Kein Controller gefunden!</value>
+  </data>
+  <data name="Select_Button" xml:space="preserve">
+    <value>Auswählen</value>
+  </data>
+  <data name="WaitingForInputDialogLabel" xml:space="preserve">
+    <value>Warte auf Eingabe...</value>
+  </data>
+  <data name="Reselect_Input_Button" xml:space="preserve">
+    <value>Zuordnung ändern</value>
+  </data>
+  <data name="WaitingForInputDialogLabelTag" xml:space="preserve">
+    <value>Gewählte Eingabe:</value>
+  </data>
+  <data name="CheckForModManagerUpdatesButton" xml:space="preserve">
+    <value>Nach Mod Manager Updates suchen...</value>
+  </data>
 </root>

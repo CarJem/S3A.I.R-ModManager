@@ -655,4 +655,70 @@ Assurez-vous que le fichier de configuration n'est pas endommagé ou effectuez u
   <data name="Updater_UpToDate" xml:space="preserve">
     <value>Vous avez la dernière version. Voulez-vous la retélécharger ?</value>
   </data>
+  <data name="SettingsVersionLabel" xml:space="preserve">
+    <value>Version des paramètres de A.I.R.</value>
+  </data>
+  <data name="AIRDevMode" xml:space="preserve">
+    <value>Activer le mode dev (pas le Debug Mode)</value>
+  </data>
+  <data name="ImportExpandable" xml:space="preserve">
+    <value>Importer...</value>
+  </data>
+  <data name="ExportExpanable" xml:space="preserve">
+    <value>Exporter...</value>
+  </data>
+  <data name="ShowLogFileButton" xml:space="preserve">
+    <value>Afficher le fichier journal</value>
+  </data>
+  <data name="PathColumnHeader" xml:space="preserve">
+    <value>Emplacement</value>
+  </data>
+  <data name="AIRVersionColumnHeader" xml:space="preserve">
+    <value>La version de A.I.R.</value>
+  </data>
+  <data name="TimestampColumnHeader" xml:space="preserve">
+    <value>Objet</value>
+  </data>
+  <data name="VersionColumnHeader" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="SaveInputMappingsButton" xml:space="preserve">
+    <value>Enregistrer le réglage des boutons</value>
+  </data>
+  <data name="ResetMappingsToDefaultButton" xml:space="preserve">
+    <value>Réinitialiser par défaut</value>
+  </data>
+  <data name="ResetInputMappingsDefaultFormTitle" xml:space="preserve">
+    <value>Réinitialiser le réglage des boutons</value>
+  </data>
+  <data name="ResetInputMappingsDefaultFormMessage" xml:space="preserve">
+    <value>Êtes-vous sûr d'aller plus loin ? Vos modifications actuelles seront perdues!</value>
+  </data>
+  <data name="DetectControllerExpandable" xml:space="preserve">
+    <value>Détecter la manette...</value>
+  </data>
+  <data name="DetectGamepadInputExpandable" xml:space="preserve">
+    <value>Détecter l'input de la manette...</value>
+  </data>
+  <data name="JoystickInputSelectorFormTitle" xml:space="preserve">
+    <value>Sélectionner la manette...</value>
+  </data>
+  <data name="NoControllerFound" xml:space="preserve">
+    <value>Aucune manette de jeu n'a été détectée !</value>
+  </data>
+  <data name="Select_Button" xml:space="preserve">
+    <value>Selectionner</value>
+  </data>
+  <data name="WaitingForInputDialogLabel" xml:space="preserve">
+    <value>En attente de l'input...</value>
+  </data>
+  <data name="Reselect_Input_Button" xml:space="preserve">
+    <value>Resélectionner l'input</value>
+  </data>
+  <data name="WaitingForInputDialogLabelTag" xml:space="preserve">
+    <value>Input sélectionnée :</value>
+  </data>
+  <data name="CheckForModManagerUpdatesButton" xml:space="preserve">
+    <value>Vérifier les mises à jour du Mod Manager</value>
+  </data>
 </root>

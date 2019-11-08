@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sonic3AIR_ModLoader.Languages {
+namespace Sonic3AIR_ModManager.Languages {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Sonic3AIR_ModLoader.Languages {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModLoader.Languages.lang_en", typeof(lang_en).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModManager.Languages.lang_en", typeof(lang_en).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

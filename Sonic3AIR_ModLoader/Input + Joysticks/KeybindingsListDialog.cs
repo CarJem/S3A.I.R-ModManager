@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public partial class KeybindingsListDialog : Form
     {

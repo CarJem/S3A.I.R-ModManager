@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Reflection;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public class WinformsTheming
     {

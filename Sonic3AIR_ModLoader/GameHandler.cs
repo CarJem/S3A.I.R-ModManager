@@ -13,7 +13,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public class GameHandler
     {
@@ -59,14 +59,14 @@ namespace Sonic3AIR_ModLoader
             if (!Properties.Settings.Default.KeepOpenOnQuit) Application.Exit();
             else if (!Properties.Settings.Default.KeepOpenOnLaunch)
             {
-                ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
+                ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManagerV2.Instance.Show();
+                    ModManager.Instance.Show();
                 }));
             }
-            ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
-                ModManagerV2.Instance.UpdateInGameButtons();
+                ModManager.Instance.UpdateInGameButtons();
             }));
 
         }
@@ -76,17 +76,17 @@ namespace Sonic3AIR_ModLoader
             isGameRunning = true;
             if (!Properties.Settings.Default.KeepOpenOnLaunch)
             {
-                ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
+                ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManagerV2.Instance.Hide();
+                    ModManager.Instance.Hide();
                 }));
 
             }
             else
             {
-                ModManagerV2.Instance.Dispatcher.BeginInvoke((Action)(() =>
+                ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManagerV2.Instance.UpdateInGameButtons();
+                    ModManager.Instance.UpdateInGameButtons();
                 }));
             }
         }

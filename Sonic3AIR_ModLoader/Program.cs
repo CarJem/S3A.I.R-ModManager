@@ -11,7 +11,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     static class Program
     {
@@ -79,14 +79,13 @@ namespace Sonic3AIR_ModLoader
         static void GamebanannaAPIHandler_Startup()
         {
             var app = new App();
-            app.InitializeComponent();
-            app.Run(new ModManagerV2(Arguments.gamebanana_api));
+            app.GBAPI(Arguments.gamebanana_api);
         }
 
         static void StartApplication(string[] args)
         {
             System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false); 
             UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
             ModFileManagement.CleanUpAPIRequests();
             WinformsTheming.UseDarkTheme(false);
@@ -102,20 +101,16 @@ namespace Sonic3AIR_ModLoader
                 else
                 {
                     var app = new App();
-                    app.InitializeComponent();
-                    app.Run(new ModManagerV2());
+                    app.DefaultStart();
                 }
             }
-
+            
         }
 
         static void AutoBootLoader()
         {
             var app = new App();
-            app.InitializeComponent();
-            System.Windows.Forms.Application.Run(new AutoBootDialog());
-            if (AutoBootCanceled == false) app.Run(new ModManagerV2(true));
-            else app.Run(new ModManagerV2(false));
+            app.RunAutoBoot();
         }
 
         public class Options

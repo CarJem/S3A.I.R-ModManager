@@ -9,7 +9,7 @@ using System.Diagnostics;
 using SDL2;
 using System.Runtime.InteropServices;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public class JoystickReader 
     {

@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public class UserLanguage
     {
@@ -132,151 +132,6 @@ namespace Sonic3AIR_ModLoader
         public static void ApplyLanguage(ref ModManager form)
         {
             //Main Buttons
-            form.exitButton.Text = Program.LanguageResource.GetString("Exit");
-            form.saveAndLoadButton.Text = Program.LanguageResource.GetString("Save&Load");
-            form.saveButton.Text = Program.LanguageResource.GetString("Save");
-
-            //Tab Page Headers
-            form.toolsPage.Text = Program.LanguageResource.GetString("ToolsTab");
-            form.modPage.Text = Program.LanguageResource.GetString("ModsTab");
-            form.settingsPage.Text = Program.LanguageResource.GetString("SettingsTab");
-
-            form.recordingsPage.Text = Program.LanguageResource.GetString("RecordingsTab");
-            form.guidesPage.Text = Program.LanguageResource.GetString("GuidesTab");
-
-            form.optionsPage.Text = Program.LanguageResource.GetString("GeneralTab");
-            form.inputPage.Text = Program.LanguageResource.GetString("InputTab");
-            form.versionsPage.Text = Program.LanguageResource.GetString("VersionsTab");
-            form.aboutPage.Text = Program.LanguageResource.GetString("AboutTab");
-
-            //Mod Page
-            form.groupBox3.Text = Program.LanguageResource.GetString("ModsTab_ModProperties");
-            form.refreshButton.Text = Program.LanguageResource.GetString("Reload");
-            form.moreModOptionsButton.Text = Program.LanguageResource.GetString("MoreExpandable");
-
-            form.gamebannaURLHandlerOptionsToolStripMenuItem.Text = Program.LanguageResource.GetString("GameBannaURLHandler");
-            form.enableModStackingToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking");
-            form.onForAIRVersionUnreleasedToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note1");
-            form.v1909190AndAboveOnlyToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note2");
-
-            form.openModFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenModFolder");
-            form.removeModToolStripMenuItem.Text = Program.LanguageResource.GetString("RemoveMod");
-            form.openModURLToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenModURL");
-
-            //Tools Page
-            form.recordingsPage.Text = Program.LanguageResource.GetString("RecordingsTab");
-            form.guidesPage.Text = Program.LanguageResource.GetString("GuidesTab");
-
-
-            //Recordings Page
-            form.uploadButton.Text = Program.LanguageResource.GetString("Upload");
-            form.copyRecordingFilePath.Text = Program.LanguageResource.GetString("CopyFilePath");
-            form.openRecordingButton.Text = Program.LanguageResource.GetString("Open");
-            form.deleteRecordingButton.Text = Program.LanguageResource.GetString("Delete");
-            form.refreshDebugButton.Text = Program.LanguageResource.GetString("Refresh");
-
-
-
-            form.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
-            form.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
-
-            //Guides/Shortcuts Page
-            form.groupBox6.Text = Program.LanguageResource.GetString("Delete");
-            form.openSampleModsFolderButton.Text = Program.LanguageResource.GetString("OpenSampleModsFolder");
-            form.openUserManualButton.Text = Program.LanguageResource.GetString("OpenUserManual");
-            form.openModDocumentationButton.Text = Program.LanguageResource.GetString("OpenModInstructions");
-            form.openModdingTemplatesFolder.Text = Program.LanguageResource.GetString("OpenModTemplatesFolder");
-            form.label5.Text = Program.LanguageResource.GetString("UsefulShortKeys");
-            form.airPlacesButton.Text = Program.LanguageResource.GetString("AIRPlaces");
-            form.airMediaButton.Text = Program.LanguageResource.GetString("AIRMedia");
-            form.airModManagerPlacesButton.Text = Program.LanguageResource.GetString("AIRMMPlaces");
-
-            form.openAppDataFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenAppDataFolder");
-            form.openEXEFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenEXEFolder");
-            form.openSettingsFileToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenSettingsFile");
-            form.openModsFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenModsFolder");
-            form.openConfigFileToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenConfigFile");
-
-            form.sonic3AIRHomepageToolStripMenuItem.Text = Program.LanguageResource.GetString("S3AIRHomepage");
-            form.s3AIRGamebannaToolStripMenuItem.Text = Program.LanguageResource.GetString("S3AIRGB");
-            form.eukaryot3KTwitterToolStripMenuItem.Text = Program.LanguageResource.GetString("Eukaryot3KTwitter");
-            form.carJemTwitterToolStripMenuItem.Text = Program.LanguageResource.GetString("CarJemTwitter");
-
-            form.openDownloadsFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenDownloadsFolder");
-            form.openVersionsFolderToolStripMenuItem.Text = Program.LanguageResource.GetString("OpenVersionsFolder");
-
-            form.showLogFileButton.Text = Program.LanguageResource.GetString("ShowLogFileButton");
-
-            //General Options Page
-            form.groupBox8.Text = Program.LanguageResource.GetString("ModManagerOptions");
-            form.label1.Text = Program.LanguageResource.GetString("Sonic3AIRPathLabel");
-            form.autoRunCheckbox.Text = Program.LanguageResource.GetString("EnableAutoBootMode");
-            form.autoLaunchDelayLabel.Text = Program.LanguageResource.GetString("AutoBootDelay");
-            form.keepLoaderOpenCheckBox.Text = Program.LanguageResource.GetString("StayOpenOnLoad");
-            form.keepOpenOnQuitCheckBox.Text = Program.LanguageResource.GetString("StayOpenOnExit");
-            form.checkBox1.Text = Program.LanguageResource.GetString("CheckforAIRUpdatesOnStart");
-
-            form.groupBox1.Text = Program.LanguageResource.GetString("AIRInternalSettings");
-            form.label2.Text = Program.LanguageResource.GetString("S3KROMPathLabel");
-            form.fixGlitchesCheckbox.Text = Program.LanguageResource.GetString("FixGlitches");
-            form.failSafeModeCheckbox.Text = Program.LanguageResource.GetString("FailSafeMode");
-            form.devModeCheckbox.Text = Program.LanguageResource.GetString("AIRDevMode");
-
-            form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
-
-
-            //AIR Path Context Menu Strip
-            form.setManuallyHeader.Text = Program.LanguageResource.GetString("SetManuallyHeader");
-            form.eXEPathToolStripMenuItem.Text = Program.LanguageResource.GetString("SetAIRPathManuallyClassic");
-            form.fromSettingsFileToolStripMenuItem.Text = Program.LanguageResource.GetString("SetAIRPathFromSettings");
-            form.fromInstalledHeader.Text = Program.LanguageResource.GetString("SetFromInstalledHeader");
-            form.aIRVersionZIPToolStripMenuItem.Text = Program.LanguageResource.GetString("SelectInstallFromAIRZIP");
-            form.installedVersionsToolStripMenuItem.Text = Program.LanguageResource.GetString("SelectFromInstalledVersions");
-            form.noInstalledVersionsToolStripMenuItem.Text = Program.LanguageResource.GetString("NoInstalledVersions");
-
-            //Input Page
-            form.groupBox4.Text = Program.LanguageResource.GetString("ButtonMappings");
-            form.groupBox7.Text = Program.LanguageResource.GetString("DeviceIdentifierNames");
-            form.openGamepadSettingsButton.Text = Program.LanguageResource.GetString("OpenSystemSettingsExpandable");
-
-            form.buttonALabel.Text = Program.LanguageResource.GetString("Buttons_A");
-            form.buttonBLabel.Text = Program.LanguageResource.GetString("Buttons_B");
-            form.buttonXLabel.Text = Program.LanguageResource.GetString("Buttons_X");
-            form.buttonYLabel.Text = Program.LanguageResource.GetString("Buttons_Y");
-            form.buttonUpLabel.Text = Program.LanguageResource.GetString("Buttons_Up");
-            form.buttonDownLabel.Text = Program.LanguageResource.GetString("Buttons_Down");
-            form.buttonLeftLabel.Text = Program.LanguageResource.GetString("Buttons_Left");
-            form.buttonRightLabel.Text = Program.LanguageResource.GetString("Buttons_Right");
-            form.buttonStartLabel.Text = Program.LanguageResource.GetString("Buttons_Start");
-            form.buttonBackLabel.Text = Program.LanguageResource.GetString("Buttons_Back");
-
-
-            form.importConfigButton.Text = Program.LanguageResource.GetString("ImportExpandable");
-            form.exportConfigButton.Text = Program.LanguageResource.GetString("ExportExpanable");
-
-            form.saveInputsButton.Text = Program.LanguageResource.GetString("SaveInputMappingsButton");
-            form.resetInputsButton.Text = Program.LanguageResource.GetString("ResetMappingsToDefaultButton");
-
-            //Versions Page
-            form.groupBox2.Text = Program.LanguageResource.GetString("InstalledVersions");
-
-            form.removeVersionButton.Text = Program.LanguageResource.GetString("Remove");
-            form.openVersionLocationButton.Text = Program.LanguageResource.GetString("OpenLocationExpandable");
-
-            form.VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
-            form.PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
-
-            //About Page
-            form.checkForUpdatesButton.Text = Program.LanguageResource.GetString("CheckForGameUpdatesExpandable");
-            form.checkForModManagerUpdatesButton.Text = Program.LanguageResource.GetString("CheckForModManagerUpdatesButton");
-
-            form.SetTooltips();
-
-        }
-
-        public static void ApplyLanguage(ref ModManagerV2 form)
-        {
-            //Main Buttons
             form.exitButton.Content = Program.LanguageResource.GetString("Exit");
             form.saveAndLoadButton.Content = Program.LanguageResource.GetString("Save&Load");
             form.saveButton.Content = Program.LanguageResource.GetString("Save");
@@ -319,8 +174,8 @@ namespace Sonic3AIR_ModLoader
 
 
 
-            form.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
-            form.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
+            form.RecordingsViewer.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
+            form.RecordingsViewer.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
 
             //Guides/Shortcuts Page
             form.groupBox6.Header = Program.LanguageResource.GetString("Delete");
@@ -405,8 +260,8 @@ namespace Sonic3AIR_ModLoader
             form.removeVersionButton.Content = Program.LanguageResource.GetString("Remove");
             form.openVersionLocationButton.Content = Program.LanguageResource.GetString("OpenLocationExpandable");
 
-            form.VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
-            form.PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
+            form.VersionsViewer.VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
+            form.VersionsViewer.PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
 
             //About Page
             form.checkForUpdatesButton.Content = Program.LanguageResource.GetString("CheckForGameUpdatesExpandable");
@@ -415,18 +270,10 @@ namespace Sonic3AIR_ModLoader
             form.SetTooltips();
         }
 
-        public static void ApplyLanguage(ref AutoBootDialog form)
+        public static void ApplyLanguage(ref AutoBootDialogV2 form)
         {
-            form.forceStartButton.Text = Program.LanguageResource.GetString("ForceStart");
-            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel");
-
-            form.forceStartButton.Refresh();
-            form.cancelButton.Refresh();
-
-
-            form.forceStartButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            form.cancelButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+            form.ForceStartButton.Content = Program.LanguageResource.GetString("ForceStart");
+            form.CancelButton.Content = Program.LanguageResource.GetString("Cancel");
         }
 
 
@@ -435,33 +282,6 @@ namespace Sonic3AIR_ModLoader
             form.yesButton.Text = Program.LanguageResource.GetString("Yes_Button");
             form.noButton.Text = Program.LanguageResource.GetString("No_Button");
             form.updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
-        }
-
-        public static void ApplyLanguage(ref KeyBindingDialogOriginal form)
-        {
-            form.inputDeviceRadioButton1.Text = Program.LanguageResource.GetString("KeyboardRadioButton");
-            form.inputDeviceRadioButton2.Text = Program.LanguageResource.GetString("ControllerRadioButton");
-            form.inputDeviceRadioButton3.Text = Program.LanguageResource.GetString("CustomAdvancedLabel");
-
-            form.controllerInputTypeRadio1.Text = Program.LanguageResource.GetString("ButtonLabel");
-            form.controllerInputTypeRadio2.Text = Program.LanguageResource.GetString("AxisPOVLabel");
-
-            form.axisTypeRadio1.Text = Program.LanguageResource.GetString("AxisRadioButton");
-            form.axisTypeRadio2.Text = Program.LanguageResource.GetString("POVRadioButton");
-            form.axisTypeRadio3.Text = Program.LanguageResource.GetString("CustomStringLabel");
-            form.axisTypeRadio4.Text = Program.LanguageResource.GetString("ThumbstickRadioButton");
-
-            form.axisTypeBox.Text = Program.LanguageResource.GetString("TypeGB");
-            form.axisDirectionBox.Text = Program.LanguageResource.GetString("DirectionGB");
-
-            form.resultLabel.Text = Program.LanguageResource.GetString("ResultLabel");
-            form.keyLabel.Text = Program.LanguageResource.GetString("KeyLabel");
-            form.AxisIDLabel.Text = Program.LanguageResource.GetString("IDLabel");
-
-            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
-            form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
-
-            form.Text = Program.LanguageResource.GetString("SelectInputTitleExpandable");
         }
 
         public static void ApplyLanguage(ref KeyBindingDialog form)

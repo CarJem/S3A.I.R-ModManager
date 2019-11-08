@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public static class Extensions
     {

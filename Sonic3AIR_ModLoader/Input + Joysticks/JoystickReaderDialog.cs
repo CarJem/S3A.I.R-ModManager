@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using SharpDX.DirectInput;
 using System.Diagnostics;
 
-namespace Sonic3AIR_ModLoader
+namespace Sonic3AIR_ModManager
 {
     public partial class JoystickReaderDialog : Form
     {
