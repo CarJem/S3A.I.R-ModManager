@@ -196,20 +196,27 @@ namespace Sonic3AIR_ModManager
 
         private int CheckFromSelectedVersion(Version comparision)
         {
-            string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-            if (metaDataFile != null)
+
+            string path = (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" ? Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath) : "");
+            if (path == "") return 0;
+            else
             {
-                try
+                string metaDataFile = Directory.GetFiles(path, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                if (metaDataFile != null)
                 {
-                    var metadata = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
-                    return metadata.Version.CompareTo(comparision);
+                    try
+                    {
+                        var metadata = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                        return metadata.Version.CompareTo(comparision);
+                    }
+                    catch
+                    {
+                        return 0;
+                    }
                 }
-                catch
-                {
-                    return 0;
-                }
+                else return 0;
             }
-            else return 0;
+
         }
 
         private void UpdateDownloadComplete()

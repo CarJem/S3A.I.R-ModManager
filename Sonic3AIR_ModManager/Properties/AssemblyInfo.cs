@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sonic3AIR_ModLoader")]
+[assembly: AssemblyTitle("Sonic3AIR_ModManager")]
 [assembly: AssemblyDescription("Mod Manager for Sonic 3 A.I.R (Angel Island Revisited)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]

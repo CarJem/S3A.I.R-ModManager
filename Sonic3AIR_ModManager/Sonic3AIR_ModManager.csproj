@@ -153,6 +153,7 @@
     <Compile Include="Input + Joysticks\JoystickReaderDialog.Designer.cs">
       <DependentUpon>JoystickReaderDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Styles + Controls\Controls\AutoBootDialogV2.xaml.cs">
       <DependentUpon>AutoBootDialogV2.xaml</DependentUpon>
     </Compile>

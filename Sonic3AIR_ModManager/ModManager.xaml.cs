@@ -1481,19 +1481,29 @@ namespace Sonic3AIR_ModManager
 
         private void UpdateModsList(bool FullReload = false)
         {
-            ModViewer.ItemCheck = null;
-            if (!Properties.Settings.Default.EnableNewLoaderMethod) UpdateModsListLegacy(FullReload);
-            else
+            if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-
-                if (FullReload) FetchMods();
+                modErrorText.Visibility = Visibility.Collapsed;
+                ModViewer.ItemCheck = null;
+                if (!Properties.Settings.Default.EnableNewLoaderMethod) UpdateModsListLegacy(FullReload);
                 else
                 {
-                    UpdateNewModsListItems();
+
+                    if (FullReload) FetchMods();
+                    else
+                    {
+                        UpdateNewModsListItems();
+                    }
+                    RefreshSelectedModProperties();
                 }
-                RefreshSelectedModProperties();
+                ModViewer.ItemCheck = ModsList_ItemCheck;
+
             }
-            ModViewer.ItemCheck = ModsList_ItemCheck;
+            else
+            {
+                modErrorText.Visibility = Visibility.Visible;
+            }
+
         }
 
         private void UpdateNewModsListItems()

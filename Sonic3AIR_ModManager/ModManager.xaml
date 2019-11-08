@@ -49,7 +49,6 @@
                             </ContextMenu>
                         </Grid.ContextMenu>
                     </Grid>
-
                     <Grid Grid.Row="1" Grid.ColumnSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -83,7 +82,15 @@
                             </Button>
                         </StackPanel>
                     </Grid>
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{DynamicResource NormalBackground}" IsEnabled="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextBlock.TextAlignment="Center" FontSize="9" Name="modErrorText" Visibility="Collapsed" Content="Error Loading Mods!&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.">
+                        <Label.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </Label.Resources>
+                    </Label>
                 </Grid>
+                
             </TabItem>
             <TabItem Name="toolsPage" Header="Tools">
                 <TabControl x:Name="tabControl3" SelectionChanged="TabControl3_SelectedIndexChanged" Padding="0">
@@ -109,7 +116,13 @@
                                     <Button x:Name="deleteRecordingButton" Width="75" Margin="4,0" Content="Delete" Click="DeleteRecordingButton_Click" IsEnabled="False"></Button>
                                 </StackPanel>
                             </StackPanel>
-                            <Label Name="recordingsErrorMessage" Visibility="Collapsed"></Label>
+                            <Label Name="recordingsErrorMessage" Visibility="Visible" FontSize="9" TextBlock.TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{DynamicResource NormalBackground}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Content="Error Loading Recordings!&#xD;&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options." >
+                                <Label.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
+                                </Label.Resources>
+                            </Label>
 
                         </Grid>
                     </TabItem>
@@ -179,7 +192,7 @@
             <TabItem Name="settingsPage" Header="Options">
                 <TabControl x:Name="settingsTabControl" SelectionChanged="TabControl2_SelectedIndexChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
                     <TabItem Name="optionsPage" Header="General">
-                        <Grid x:Name="inputPanel" Margin="5">
+                        <Grid Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -255,14 +268,13 @@
 
                     </TabItem>
                     <TabItem Name="inputPage" Header="Input">
-                        <Grid Margin="5">
+                        <Grid x:Name="inputPanel" Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="2*"></RowDefinition>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="30"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Label Grid.RowSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="inputErrorMessage"></Label>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
@@ -355,6 +367,13 @@
                                 <Button x:Name="saveInputsButton" Height="25" Margin="4,0" Content="Save Input Mappings..."></Button>
                                 <Button x:Name="resetInputsButton" Height="25" Grid.Column="1" Margin="4,0" Content="Reset to Defaults"></Button>
                             </Grid>
+                            <Label Background="{DynamicResource NormalBackground}" IsEnabled="False" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextBlock.TextAlignment="Center" FontSize="9" Name="inputErrorMessage"  Visibility="Collapsed">
+                                <Label.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
+                                </Label.Resources>
+                            </Label>
                         </Grid>
                     </TabItem>
                     <TabItem Name="versionsPage" Header="Versions">

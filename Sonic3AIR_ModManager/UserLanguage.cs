@@ -56,11 +56,11 @@ namespace Sonic3AIR_ModManager
 
         public static void ApplyLanguageResourcePath(Language value)
         {
-            if (value.Equals(Language.NULL)) CurrentResource = new ResourceManager("Sonic3AIR_ModLoader.Languages.lang_null", Assembly.GetExecutingAssembly());
-            else if (value.Equals(Language.EN_US)) CurrentResource = new ResourceManager("Sonic3AIR_ModLoader.Languages.lang_en", Assembly.GetExecutingAssembly());
-            else if (value.Equals(Language.GR)) CurrentResource = new ResourceManager("Sonic3AIR_ModLoader.Languages.lang_gr", Assembly.GetExecutingAssembly());
-            else if (value.Equals(Language.FR)) CurrentResource = new ResourceManager("Sonic3AIR_ModLoader.Languages.lang_fr", Assembly.GetExecutingAssembly());
-            else CurrentResource = new ResourceManager("Sonic3AIR_ModLoader.Languages.lang_en", Assembly.GetExecutingAssembly());
+            if (value.Equals(Language.NULL)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_null", Assembly.GetExecutingAssembly());
+            else if (value.Equals(Language.EN_US)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_en", Assembly.GetExecutingAssembly());
+            else if (value.Equals(Language.GR)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_gr", Assembly.GetExecutingAssembly());
+            else if (value.Equals(Language.FR)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_fr", Assembly.GetExecutingAssembly());
+            else CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_en", Assembly.GetExecutingAssembly());
         }
 
         private static void SetCurrentLanguage(Language value)

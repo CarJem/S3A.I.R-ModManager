@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModManager", "Sonic3AIR_ModLoader\Sonic3AIR_ModManager.csproj", "{74887941-CE31-48E7-A4EF-75C52EC6415E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_MM_GBAPIInstaller", "AIR_Protocol_Handler\Sonic3AIR_MM_GBAPIInstaller.csproj", "{11A257A9-07AC-43C5-8705-808B7AFD644B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR-SDK", "AIR-SDK\AIR-SDK.csproj", "{0F33D309-0FF8-42C5-AB4A-585D31072EC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModManager", "Sonic3AIR_ModManager\Sonic3AIR_ModManager.csproj", "{74887941-CE31-48E7-A4EF-75C52EC6415E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x64.Build.0 = Debug|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x86.Build.0 = Debug|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x64.ActiveCfg = Release|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x64.Build.0 = Release|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x86.ActiveCfg = Release|Any CPU
-		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x86.Build.0 = Release|Any CPU
 		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11A257A9-07AC-43C5-8705-808B7AFD644B}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -55,12 +43,24 @@ Global
 		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|x64.Build.0 = Release|Any CPU
 		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|x86.ActiveCfg = Release|Any CPU
 		{0F33D309-0FF8-42C5-AB4A-585D31072EC2}.Release|x86.Build.0 = Release|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x64.Build.0 = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Debug|x86.Build.0 = Debug|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x64.ActiveCfg = Release|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x64.Build.0 = Release|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x86.ActiveCfg = Release|Any CPU
+		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {614F9ECA-E63D-44B5-961B-60BDAC46614B}
 		RESX_PrefixTranslations = False
+		SolutionGuid = {614F9ECA-E63D-44B5-961B-60BDAC46614B}
 	EndGlobalSection
 EndGlobal
