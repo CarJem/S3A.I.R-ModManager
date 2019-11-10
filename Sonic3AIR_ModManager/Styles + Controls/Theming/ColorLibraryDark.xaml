@@ -17,7 +17,7 @@
     <SolidColorBrush x:Key="ContextMenuBorder" Color="DarkGray"/>
     <SolidColorBrush x:Key="ContextMenuSelectedColor" Color="Blue"/>
     <SolidColorBrush x:Key="ContextMenuSelectedColorBack" Color="#232370"/>
-    <SolidColorBrush x:Key="ContextMenuCheckboxColor" Color="Black"/>
+    <SolidColorBrush x:Key="ContextMenuCheckboxColor" Color="White"/>
     <SolidColorBrush x:Key="HyperLinkColor" Color="#31A2F7"/>
     <LinearGradientBrush x:Key="ComboBoxBackground" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="#404040" Offset="0.0" />

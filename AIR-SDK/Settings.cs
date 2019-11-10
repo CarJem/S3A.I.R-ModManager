@@ -14,6 +14,7 @@ namespace AIR_SDK
         public string Sonic3KRomPath = "";
         public bool FixGlitches = false;
         public bool EnableDevMode = false;
+        public int Fullscreen = 0;
 
         public string AIREXEPath = "";
         public bool HasEXEPath = true;
@@ -120,6 +121,14 @@ namespace AIR_SDK
                     AIREXEPath = "";
                     HasEXEPath = false;
                 }
+                try
+                {
+                    Fullscreen = jsonObj.Fullscreen;
+                }
+                catch (Exception ex)
+                {
+                    Fullscreen = 0;
+                }
 
             }
             catch (Exception ex)
@@ -177,6 +186,7 @@ namespace AIR_SDK
             {
                 jsonObj.DebugMode = false;
             }
+            jsonObj.Fullscreen = Fullscreen;
             jsonObj.RomPath = Sonic3KRomPath;
         }
 

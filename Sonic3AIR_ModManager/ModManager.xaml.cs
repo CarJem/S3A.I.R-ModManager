@@ -156,6 +156,13 @@ namespace Sonic3AIR_ModManager
                 UpdateUI();
                 Instance = this;
 
+
+                if (Properties.Settings.Default.WindowSize != null)
+                {
+                    this.Width = Properties.Settings.Default.WindowSize.Width;
+                    this.Height = Properties.Settings.Default.WindowSize.Height;
+                }
+
                 ApiInstallChecker.Enabled = true;
                 ApiInstallChecker.Start();
 
@@ -377,6 +384,11 @@ namespace Sonic3AIR_ModManager
             if (GameHandler.isGameRunning)
             {
                 e.Cancel = true;
+            }
+            else
+            {
+                Properties.Settings.Default.WindowSize = new System.Drawing.Size((int)this.Width, (int)this.Height);
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -820,6 +832,7 @@ namespace Sonic3AIR_ModManager
                 fixGlitchesCheckbox.IsChecked = S3AIRSettings.FixGlitches;
                 failSafeModeCheckbox.IsChecked = S3AIRSettings.FailSafeMode;
                 devModeCheckbox.IsChecked = S3AIRSettings.EnableDevMode;
+                FullscreenTypeComboBox.SelectedIndex = S3AIRSettings.Fullscreen;
             }
 
             GetLanguageSelection();
@@ -878,6 +891,69 @@ namespace Sonic3AIR_ModManager
                     airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
                 }
             }
+
+        }
+
+        private void UpdateAIRGameConfigLaunchOptions()
+        {
+            if (SceneComboBox != null && PlayerComboBox != null && StartPhaseComboBox != null)
+            {
+                SceneComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+                PlayerComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+                StartPhaseComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+
+
+                if (GameConfig != null)
+                {
+                    if ((SceneComboBox.SelectedItem as ComboBoxItem).Tag.ToString() != "NONE")
+                    {
+                        GameConfig.LoadLevel = (SceneComboBox.SelectedItem as ComboBoxItem).Tag.ToString();
+                    }
+                    else GameConfig.LoadLevel = null;
+                    if ((PlayerComboBox.SelectedItem as ComboBoxItem).Tag.ToString() != "NONE")
+                    {
+                        if (int.TryParse((PlayerComboBox.SelectedItem as ComboBoxItem).Tag.ToString(), out int result))
+                        {
+                            GameConfig.UseCharacters = result;
+                        }
+                    }
+                    else GameConfig.UseCharacters = null;
+                    if ((StartPhaseComboBox.SelectedItem as ComboBoxItem).Tag.ToString() != "NONE")
+                    {
+                        if (int.TryParse((StartPhaseComboBox.SelectedItem as ComboBoxItem).Tag.ToString(), out int result))
+                        {
+                            GameConfig.StartPhase = result;
+                        }
+                    }
+                    else GameConfig.StartPhase = null;
+
+                    GameConfig.Save();
+                }
+
+                CollectGameConfig();
+                if (GameConfig != null)
+                {
+                    if (GameConfig.LoadLevel != null) SceneComboBox.SelectedItem = SceneComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.LoadLevel.ToString());
+                    else SceneComboBox.SelectedIndex = 0;
+
+                    if (GameConfig.UseCharacters != null) PlayerComboBox.SelectedItem = PlayerComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.UseCharacters.ToString());
+                    else PlayerComboBox.SelectedIndex = 0;
+
+                    if (GameConfig.StartPhase != null) StartPhaseComboBox.SelectedItem = StartPhaseComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.StartPhase.ToString());
+                    else StartPhaseComboBox.SelectedIndex = 0;
+                }
+
+                if (GameConfig == null) AIRGameConfigNullSituation(2);
+
+                SceneComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
+                PlayerComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
+                StartPhaseComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
+            }
+
+
+
+
+
 
         }
 
@@ -980,7 +1056,7 @@ namespace Sonic3AIR_ModManager
             GameRecordingList.Items.Clear();
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                recordingsErrorMessage.Visibility = Visibility.Collapsed;
+                recordingsErrorMessagePanel.Visibility = Visibility.Collapsed;
 
                 string baseDirectory = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
                 if (Directory.Exists(baseDirectory))
@@ -997,8 +1073,7 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                recordingsErrorMessage.Visibility = Visibility.Visible;
-                recordingsErrorMessage.IsEnabled = false;
+                recordingsErrorMessagePanel.Visibility = Visibility.Visible;
             }
 
         }
@@ -1022,26 +1097,21 @@ namespace Sonic3AIR_ModManager
             else
             {
                 CollectGameConfig();
+                RecollectInputMappings();
             }
             inputMethodsList.SelectionChanged += InputMethodsList_SelectedIndexChanged;
         }
 
-        private void CollectGameConfig()
+        private void RecollectInputMappings()
         {
+            HideErrorGameConfigErrorPanels();
+
             if (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" && File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                string Sonic3AIREXEFolder = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
-                FileInfo config = new FileInfo($"{Sonic3AIREXEFolder}//config.json");
-                if (config.Exists)
+                if (GameConfig != null)
                 {
-                    inputPanel.IsEnabled = true;
-                    inputErrorMessage.Visibility = Visibility.Collapsed;
-
                     try
                     {
-                        GameConfig = new AIR_SDK.GameConfig(config);
-
-
                         foreach (var inputMethod in GameConfig.InputDevices)
                         {
                             inputMethodsList.Items.Add(inputMethod);
@@ -1049,22 +1119,74 @@ namespace Sonic3AIR_ModManager
                     }
                     catch
                     {
-                        NullSituation(1);
+                        AIRGameConfigNullSituation(1);
                     }
                 }
-                else NullSituation(2);
-            }
-            else NullSituation();
+                else AIRGameConfigNullSituation(2);
 
-            void NullSituation(int situation = 0)
+            }
+            else AIRGameConfigNullSituation();
+
+
+
+        }
+
+        private void HideErrorGameConfigErrorPanels()
+        {
+            inputPanel.IsEnabled = true;
+            inputErrorMessage.Visibility = Visibility.Collapsed;
+
+            LaunchOptionsFailureMessageBackground.Visibility = Visibility.Collapsed;
+            airLaunchPanel.IsEnabled = true;
+        }
+
+        private void ShowGameConfigErrorPanels()
+        {
+            inputPanel.IsEnabled = false;
+            inputErrorMessage.Visibility = Visibility.Visible;
+
+            airLaunchPanel.IsEnabled = false;
+            LaunchOptionsFailureMessageBackground.Visibility = Visibility.Visible;
+        }
+
+
+        private void CollectGameConfig()
+        {
+            HideErrorGameConfigErrorPanels();
+
+            if (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" && File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                if (situation == 0) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError1");
-                else if (situation == 1) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError2");
-                else if (situation == 2) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError3");
+                string Sonic3AIREXEFolder = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
+                FileInfo config = new FileInfo($"{Sonic3AIREXEFolder}//config.json");
+                if (config.Exists)
+                {
+                    try
+                    {
+                        GameConfig = new AIR_SDK.GameConfig(config);
+                    }
+                    catch
+                    {
+                        AIRGameConfigNullSituation(1);
+                    }
 
-                inputPanel.IsEnabled = false;
-                inputErrorMessage.Visibility = Visibility.Visible;
+                }
+                else AIRGameConfigNullSituation(2);
             }
+            else AIRGameConfigNullSituation();
+
+        }
+
+        private void AIRGameConfigNullSituation(int situation = 0)
+        {
+            if (situation == 0) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError1");
+            else if (situation == 1) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError2");
+            else if (situation == 2) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError3");
+
+            if (situation == 0) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError1");
+            else if (situation == 1) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError2");
+            else if (situation == 2) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError3");
+
+            ShowGameConfigErrorPanels();
         }
 
 
@@ -1497,7 +1619,7 @@ namespace Sonic3AIR_ModManager
         {
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                modErrorText.Visibility = Visibility.Collapsed;
+                modErrorTextPanel.Visibility = Visibility.Collapsed;
                 ModViewer.ItemCheck = null;
                 if (!Properties.Settings.Default.EnableNewLoaderMethod) UpdateModsListLegacy(FullReload);
                 else
@@ -1515,7 +1637,7 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                modErrorText.Visibility = Visibility.Visible;
+                modErrorTextPanel.Visibility = Visibility.Visible;
             }
 
         }
@@ -2088,9 +2210,13 @@ namespace Sonic3AIR_ModManager
                 {
                     RefreshVersionsList(true);
                 }
-                else if (settingsTabControl.SelectedItem == inputPage)
+                else if (settingsTabControl.SelectedItem == gameOptionsPage || settingsTabControl.SelectedItem == inputPage)
                 {
-                    RefreshInputMappings();
+                    CollectGameConfig();
+                    if (settingsTabControl.SelectedItem == inputPage)
+                    {
+                        RefreshInputMappings();
+                    }
                 }
             }
         }
@@ -2182,6 +2308,35 @@ namespace Sonic3AIR_ModManager
         private void LaunchOptionsUnderstandingButton_Click(object sender, RoutedEventArgs e)
         {
             LaunchOptionsWarning.Visibility = Visibility.Collapsed;
+        }
+
+        private void LaunchOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.IsLoaded) UpdateAIRGameConfigLaunchOptions();
+        }
+
+        private void CurrentWindowComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                if (GameConfig != null)
+                {
+                    S3AIRSettings.Fullscreen = FullscreenTypeComboBox.SelectedIndex;
+                    S3AIRSettings.SaveSettings();
+                    UpdateAIRSettings();
+                }
+
+            }
+        }
+
+        private void sonic3AIRPathBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+
+            ProgramPaths.Sonic3AIRPath = sonic3AIRPathBox.Text;
+            // your event handler here
+            e.Handled = true;
+            UpdateAIRSettings();
         }
     }
 }

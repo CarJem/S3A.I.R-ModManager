@@ -27,13 +27,13 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button x:Name="ForceStartButton" Content="Force Start" Padding="20,0" Margin="0,0,5,0" Foreground="Yellow" Click="ForceStartButton_Click"></Button>
-                <Button x:Name="CancelButton" Content="Cancel" Padding="20,0" Foreground="Yellow" Click="Button1_Click"></Button>
+                <Button x:Name="ForceStartButton" Content="Force Start" Padding="20,0" Margin="0,0,5,0" Foreground="Yellow" TextBlock.FontWeight="Bold" Click="ForceStartButton_Click"></Button>
+                <Button x:Name="CancelButton" Content="Cancel" Padding="20,0" Foreground="Yellow" TextBlock.FontWeight="Bold" Click="Button1_Click"></Button>
             </StackPanel>
             <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
-                <TextBlock FontSize="15" x:Name="label1" Text="   Launching in: 0:05" TextAlignment="Left" VerticalAlignment="Center" Foreground="Yellow"></TextBlock>
+                <TextBlock FontSize="15" FontWeight="Bold" x:Name="label1" Text="   Launching in: 0:05" TextAlignment="Left" VerticalAlignment="Center" Foreground="Yellow"></TextBlock>
             </StackPanel>
-            <TextBlock Foreground="Yellow" FontSize="15" TextAlignment="Center" Margin="5" x:Name="buildDetails" Grid.Row="1"><Span><Run Text="Mod Manager Version: {n}"/></Span><LineBreak/><Span><Run Text="A.I.R. Version: {n}"/></Span><LineBreak/></TextBlock>
+            <TextBlock Foreground="Yellow" FontWeight="Bold" FontSize="15" TextAlignment="Center" Margin="5" x:Name="buildDetails" Grid.Row="1"><Span><Run Text="Mod Manager Version: {n}"/></Span><LineBreak/><Span><Run Text="A.I.R. Version: {n}"/></Span><LineBreak/></TextBlock>
         </Grid>
 
     </Grid>

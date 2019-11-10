@@ -14,12 +14,14 @@ namespace AIR_SDK
 {
     public class GameConfig
     {
-        [JsonIgnore]
         public string FilePath = "";
-
-        [JsonIgnore]
-        private dynamic RawJSON;
+        private JObject RawJSONObject;
         public Dictionary<string, Device> Devices;
+
+        public string LoadLevel;
+        public int? UseCharacters;
+        public int? StartPhase;
+
         public List<Device> InputDevices
         {
             get => Devices.Values.ToList();
@@ -31,7 +33,13 @@ namespace AIR_SDK
             FilePath = config.FullName;
             Devices = new Dictionary<string, Device>();
             string data = File.ReadAllText(FilePath);
-            RawJSON = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
+            dynamic RawJSON = JsonConvert.DeserializeObject(data);
+            RawJSONObject = JObject.Parse(data);
+
+            if (RawJSONObject.Property("LoadLevel") != null) LoadLevel = (string)RawJSONObject.Property("LoadLevel").Value;
+            if (RawJSONObject.Property("StartPhase") != null) StartPhase = (int)RawJSONObject.Property("StartPhase").Value;
+            if (RawJSONObject.Property("UseCharacters") != null) UseCharacters = (int)RawJSONObject.Property("UseCharacters").Value;
+
             foreach (var device in RawJSON.InputDevices)
             {
                 if (device is Newtonsoft.Json.Linq.JProperty)
@@ -76,8 +84,38 @@ namespace AIR_SDK
 
         public void Save()
         {
-            RawJSON.InputDevices = JObject.Parse(JsonConvert.SerializeObject(Devices));
-            File.WriteAllText(FilePath, RawJSON.ToString());
+            SetProperty("LoadLevel", LoadLevel);
+            SetProperty("StartPhase", StartPhase);
+            SetProperty("UseCharacters", UseCharacters);
+
+            RawJSONObject["InputDevices"] = JProperty.Parse(JsonConvert.SerializeObject(Devices));
+            File.WriteAllText(FilePath, RawJSONObject.ToString());
+        }
+
+
+        private void SetProperty(string key, object keyValue)
+        {
+            if (keyValue != null)
+            {
+                JToken value = JToken.FromObject(keyValue);
+                if (!RawJSONObject.ContainsKey(key))
+                {
+                    RawJSONObject.Add(key, value);
+                }
+                else
+                {
+                    RawJSONObject.Property(key).Value = value;
+                }
+
+            }
+            else
+            {
+                if (RawJSONObject.ContainsKey(key))
+                {
+                    RawJSONObject.Remove(key);
+                }
+
+            }
         }
 
 
@@ -85,5 +123,26 @@ namespace AIR_SDK
 
 
         
+    }
+
+    public sealed class HexStringJsonConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return typeof(uint).Equals(objectType);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue($"0x{value:x}");
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var str = reader.ReadAsString();
+            if (str == null || !str.StartsWith("0x"))
+                throw new JsonSerializationException();
+            return Convert.ToUInt32(str);
+        }
     }
 }

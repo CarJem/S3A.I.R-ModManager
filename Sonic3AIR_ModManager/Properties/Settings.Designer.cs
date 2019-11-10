@@ -154,5 +154,17 @@ namespace Sonic3AIR_ModManager.Properties {
                 this["UseDarkTheme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size WindowSize {
+            get {
+                return ((global::System.Drawing.Size)(this["WindowSize"]));
+            }
+            set {
+                this["WindowSize"] = value;
+            }
+        }
     }
 }

@@ -83,49 +83,44 @@
                             </Button>
                         </StackPanel>
                     </Grid>
-                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{DynamicResource NormalBackground}" IsEnabled="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextBlock.TextAlignment="Center" FontSize="9" Name="modErrorText" Visibility="Collapsed" Content="Error Loading Mods!&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.">
-                        <Label.Resources>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                            </Style>
-                        </Label.Resources>
-                    </Label>
+                    <Grid Background="{DynamicResource NormalBackground}" Name="modErrorTextPanel" Grid.ColumnSpan="5" Grid.RowSpan="5" Visibility="Collapsed">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextWrapping="Wrap" TextBlock.TextAlignment="Center" FontSize="9" Name="modErrorText"  Text="Error Loading Mods!&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options."></TextBlock>
+                    </Grid>
+
                 </Grid>
                 
             </TabItem>
             <TabItem Name="toolsPage" Header="Tools">
                 <TabControl x:Name="tabControl3" SelectionChanged="TabControl3_SelectedIndexChanged" Padding="0">
                     <TabItem Name="recordingsPage" Header="Game Recordings">
-                        <Grid x:Name="recordingsPanel" Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="80"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <local:RecordingsListView x:Name="RecordingsViewer" SelectionChanged="GameRecordingList_SelectedIndexChanged" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:RecordingsListView>
-                            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="6,0">
-                                <StackPanel Height="25" Orientation="Horizontal" Margin="0,4">
-                                    <Button x:Name="uploadButton" Width="75" Margin="4,0" Content="Upload" Click="UploadButton_Click" IsEnabled="False"></Button>
-                                    <Button x:Name="copyRecordingFilePath" Width="100" Margin="4,0" Content="Copy File Path" Click="CopyRecordingFilePath_Click" IsEnabled="False"></Button>
-                                    <Button x:Name="refreshDebugButton" Width="75" Margin="4,0" Content="Refresh" Click="RefreshDebugButton_Click" IsEnabled="True"></Button>
+                        <Grid Margin="5">
+                            <Grid x:Name="recordingsPanel">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="80"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <local:RecordingsListView x:Name="RecordingsViewer" SelectionChanged="GameRecordingList_SelectedIndexChanged" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:RecordingsListView>
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="6,0">
+                                    <StackPanel Height="25" Orientation="Horizontal" Margin="0,4">
+                                        <Button x:Name="uploadButton" Width="75" Margin="4,0" Content="Upload" Click="UploadButton_Click" IsEnabled="False"></Button>
+                                        <Button x:Name="copyRecordingFilePath" Width="100" Margin="4,0" Content="Copy File Path" Click="CopyRecordingFilePath_Click" IsEnabled="False"></Button>
+                                        <Button x:Name="refreshDebugButton" Width="75" Margin="4,0" Content="Refresh" Click="RefreshDebugButton_Click" IsEnabled="True"></Button>
+                                    </StackPanel>
+                                    <StackPanel Height="25" Orientation="Horizontal">
+                                        <Button x:Name="openRecordingButton" Width="75" Margin="4,0" Content="Open" Click="OpenRecordingButton_Click" IsEnabled="False"></Button>
+                                        <Button x:Name="deleteRecordingButton" Width="75" Margin="4,0" Content="Delete" Click="DeleteRecordingButton_Click" IsEnabled="False"></Button>
+                                    </StackPanel>
                                 </StackPanel>
-                                <StackPanel Height="25" Orientation="Horizontal">
-                                    <Button x:Name="openRecordingButton" Width="75" Margin="4,0" Content="Open" Click="OpenRecordingButton_Click" IsEnabled="False"></Button>
-                                    <Button x:Name="deleteRecordingButton" Width="75" Margin="4,0" Content="Delete" Click="DeleteRecordingButton_Click" IsEnabled="False"></Button>
-                                </StackPanel>
-                            </StackPanel>
-                            <Label Name="recordingsErrorMessage" Visibility="Collapsed" FontSize="9" TextBlock.TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{DynamicResource NormalBackground}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Content="Error Loading Recordings!&#xD;&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options." >
-                                <Label.Resources>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="TextWrapping" Value="Wrap" />
-                                    </Style>
-                                </Label.Resources>
-                            </Label>
-
+                            </Grid>
+                            <Grid Background="{DynamicResource NormalBackground}" Name="recordingsErrorMessagePanel" Visibility="Collapsed">
+                                <TextBlock Name="recordingsErrorMessage" FontWeight="Bold" Visibility="Visible" FontSize="9" TextBlock.TextAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="Error Loading Recordings!&#xD;&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options."></TextBlock>
+                            </Grid>
                         </Grid>
+
                     </TabItem>
                     <TabItem Name="guidesPage" Header="Guides/Shortcuts">
                         <Grid Margin="5">
@@ -206,7 +201,7 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition Width="25"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <TextBox x:Name="sonic3AIRPathBox"></TextBox>
+                                            <TextBox x:Name="sonic3AIRPathBox" KeyUp="sonic3AIRPathBox_KeyUp"></TextBox>
                                             <Button Grid.Column="1" Content="..." Name="updateSonic3AIRPathButton" Click="ChangeSonic3AIRPathButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                                 <Button.ContextMenu>
                                                     <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="AIRPathMenuStrip">
@@ -261,7 +256,7 @@
                                     <RowDefinition Height="1*"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <GroupBox x:Name="groupBox1" Header="A.I.R. General Options">
+                                <GroupBox x:Name="groupBox1" Header="A.I.R. Internal Settings">
                                     <StackPanel Margin="5">
                                         <TextBlock x:Name="label2" Text="Sonic 3K ROM Path:" Margin="0,2"></TextBlock>
                                         <Grid Height="25">
@@ -280,35 +275,24 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <ComboBox  Name="StartupWindowComboBox" HorizontalContentAlignment="Stretch">
-                                                <ComboBoxItem Tag="Windowed" Content="Windowed" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                <ComboBoxItem Tag="Fullscreen" Content="Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                <ComboBoxItem Tag="Windowed_Fullscreen" Content="Windowed Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                            </ComboBox>
-                                        </Grid>
-                                        <TextBlock x:Name="CurrentWindowLabel" Text="Current Window:" Margin="0,2"></TextBlock>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <ComboBox  Name="CurrentWindowComboBox" HorizontalContentAlignment="Stretch">
-                                                <ComboBoxItem Tag="Windowed" Content="Windowed" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                <ComboBoxItem Tag="Fullscreen" Content="Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                <ComboBoxItem Tag="Windowed_Fullscreen" Content="Windowed Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                            <ComboBox  Name="FullscreenTypeComboBox" HorizontalContentAlignment="Stretch" SelectionChanged="CurrentWindowComboBox_SelectionChanged" SelectedIndex="0">
+                                                <ComboBoxItem Tag="0" Content="Windowed" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Tag="1" Content="Fullscreen" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Tag="2" Content="Exclusive Fullscreen" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
                                             </ComboBox>
                                         </Grid>
                                     </StackPanel>
                                 </GroupBox>
                                 <GroupBox Grid.Row="1" Header="A.I.R. Launch Options">
-                                    <Grid>
+                                    <Grid x:Name="airLaunchPanel">
                                         <StackPanel Margin="5">
                                             <TextBlock x:Name="levelSelectLable" Text="Starting Scene:" Margin="0,2"></TextBlock>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
-                                                <ComboBox  Name="sceneComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0">
-                                                    <ComboBoxItem Name="DefaultSceneItem" Tag="NONE" Content="Default (NONE)" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBox  Name="SceneComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="LaunchOptions_SelectionChanged">
+                                                    <ComboBoxItem Name="DefaultSceneItem" Tag="NONE" Content="Default (NONE)" Width="{Binding ElementName=SceneComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Name="AIZ1SceneItem" Tag="0x0000" Content="AIZ - Angel Island Zone Act 1"></ComboBoxItem>
                                                     <ComboBoxItem Name="AIZ2SceneItem" Tag="0x0001" Content="AIZ - Angel Island Zone Act 2"></ComboBoxItem>
                                                     <ComboBoxItem Name="HCZ1SceneItem" Tag="0x0100" Content="HCZ - Hydrocity Zone Act 1"></ComboBoxItem>
@@ -345,13 +329,13 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
-                                                <ComboBox  Name="PlayerComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0">
-                                                    <ComboBoxItem Name="DefaultPlayerItem" Tag="NONE" Content="Default (NONE)" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="Sonic" Content="Sonic the Hedgehog" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="Miles/Tails" Content="Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="Kunckles" Content="Knuckles the Echidna" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="Sonic/Tails" Content="Sonic &amp; Tails" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="Kunckles/Tails" Content="Kunckles &amp; Tails (If Unlocked)" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBox  Name="PlayerComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="LaunchOptions_SelectionChanged">
+                                                    <ComboBoxItem Tag="NONE" Name="DefaultPlayerItem" Content="Default (NONE)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="0" Content="Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="1" Content="Sonic the Hedgehog" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="2" Content="Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="3" Content="Knuckles the Echidna" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="4" Content="Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prowler (If Unlocked)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                 </ComboBox>
                                             </Grid>
                                             <TextBlock x:Name="StartPhaseLabel" Text="Startup Phase:**" Margin="0,2"></TextBlock>
@@ -359,10 +343,11 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
-                                                <ComboBox  Name="StartPhaseComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0">
-                                                    <ComboBoxItem Tag="NONE" Content="Disclaimer" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="SEGA Logo" Content="SEGA Logo" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="Main Menu" Content="Main Menu" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBox  Name="StartPhaseComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="LaunchOptions_SelectionChanged">
+                                                    <ComboBoxItem Tag="NONE" Content="Default (NONE)" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="0" Content="Disclaimer" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="1" Content="SEGA Logo" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="2" Content="Main Menu" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                 </ComboBox>
                                             </Grid>
                                             <Separator Height="10" Visibility="Hidden"></Separator>
@@ -379,6 +364,11 @@
                                             </TextBlock>
                                             <Button Height="25" VerticalAlignment="Bottom" Content="Understood" Name="LaunchOptionsUnderstandingButton" Margin="5" Click="LaunchOptionsUnderstandingButton_Click"></Button>
                                         </Grid>
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" x:Name="LaunchOptionsFailureMessageBackground" Visibility="Collapsed">
+                                            <Grid Background="{DynamicResource NormalBackground}" Opacity="0.8"></Grid>
+                                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Name="LaunchOptionsFailureMessage" TextWrapping="Wrap" Foreground="{DynamicResource NormalText}" TextAlignment="Center">
+                                            </TextBlock>
+                                        </Grid>
                                     </Grid>
 
                                 </GroupBox>
@@ -386,106 +376,108 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Name="inputPage" Header="Input">
-                        <Grid x:Name="inputPanel" Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="100"></RowDefinition>
-                                <RowDefinition Height="2*"></RowDefinition>
-                                <RowDefinition Height="100"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid>
+                        <Grid Margin="5">
+                            <Grid x:Name="inputPanel">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="100"></RowDefinition>
+                                    <RowDefinition Height="2*"></RowDefinition>
+                                    <RowDefinition Height="100"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputMethodsList" Margin="4,4" SelectionChanged="InputMethodsList_SelectedIndexChanged"></ListBox>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
-                                    <Button Click="addInputMethodButton_Click" x:Name="addInputMethodButton" Height="25" Width="75" Margin="4,0" Content="+"></Button>
-                                    <Button Click="removeInputMethodButton_Click" x:Name="removeInputMethodButton" Height="25" Width="75" Margin="4,0" Content="-"></Button>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
-                                    <Button Click="importConfigButton_Click" x:Name="importConfigButton" Height="25" Width="75" Margin="4,0" Content="Import..."></Button>
-                                    <Button Click="exportConfigButton_Click" x:Name="exportConfigButton" Height="25" Width="75" Margin="4,0" Content="Export..."></Button>
-                                </StackPanel>
-                            </Grid>
-                            <GroupBox Grid.Row="1" Header="Button Mappings" x:Name="groupBox4">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click" x:Name="aInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonALabel" Content="A"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="bInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonBLabel" Content="B"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="xInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonXLabel" Content="X"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="yInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonYLabel" Content="Y"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="startInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonStartLabel" Content="Start"></Label>
-                                        </StackPanel>
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="upInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonUpLabel" Content="Up"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button x:Name="downInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonDownLabel" Content="Down"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="leftInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonLeftLabel" Content="Left"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="rightInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonRightLabel" Content="Right"></Label>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,1">
-                                            <Button Click="InputButton_Click"  x:Name="backInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
-                                            <Label Name="buttonBackLabel" Content="Back"></Label>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </StackPanel>
-                            </GroupBox>
-                            <GroupBox Grid.Row="2" Header="Device Identifier Names" Name="groupBox7">
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="45"></RowDefinition>
                                         <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,0" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
-                                    </ListBox>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Grid.ColumnSpan="2">
-                                        <Button x:Name="addDeviceNameButton" Click="AddDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="+" IsEnabled="False"></Button>
-                                        <Button x:Name="removeDeviceNameButton" Click="RemoveDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="-" IsEnabled="False"></Button>
+                                    <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputMethodsList" Margin="4,4" SelectionChanged="InputMethodsList_SelectedIndexChanged"></ListBox>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
+                                        <Button Click="addInputMethodButton_Click" x:Name="addInputMethodButton" Height="25" Width="75" Margin="4,0" Content="+"></Button>
+                                        <Button Click="removeInputMethodButton_Click" x:Name="removeInputMethodButton" Height="25" Width="75" Margin="4,0" Content="-"></Button>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1">
-                                        <Button x:Name="openGamepadSettingsButton" Click="OpenGamepadSettingsButton_Click" Height="25" Width="150" Margin="4,0" Content="Open System Settings..."></Button>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+                                        <Button Click="importConfigButton_Click" x:Name="importConfigButton" Height="25" Width="75" Margin="4,0" Content="Import..."></Button>
+                                        <Button Click="exportConfigButton_Click" x:Name="exportConfigButton" Height="25" Width="75" Margin="4,0" Content="Export..."></Button>
                                     </StackPanel>
                                 </Grid>
-                            </GroupBox>
-                            <Grid Grid.Row="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="5*"></ColumnDefinition>
-                                    <ColumnDefinition Width="4*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Button x:Name="saveInputsButton" Height="25" Margin="4,0" Content="Save Input Mappings..."></Button>
-                                <Button x:Name="resetInputsButton" Height="25" Grid.Column="1" Margin="4,0" Content="Reset to Defaults"></Button>
+                                <GroupBox Grid.Row="1" Header="Button Mappings" x:Name="groupBox4">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click" x:Name="aInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonALabel" Content="A"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="bInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonBLabel" Content="B"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="xInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonXLabel" Content="X"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="yInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonYLabel" Content="Y"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="startInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonStartLabel" Content="Start"></Label>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="upInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonUpLabel" Content="Up"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button x:Name="downInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonDownLabel" Content="Down"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="leftInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonLeftLabel" Content="Left"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="rightInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonRightLabel" Content="Right"></Label>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,1">
+                                                <Button Click="InputButton_Click"  x:Name="backInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Label Name="buttonBackLabel" Content="Back"></Label>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Grid.Row="2" Header="Device Identifier Names" Name="groupBox7">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="45"></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,0" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
+                                        </ListBox>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Grid.ColumnSpan="2">
+                                            <Button x:Name="addDeviceNameButton" Click="AddDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="+" IsEnabled="False"></Button>
+                                            <Button x:Name="removeDeviceNameButton" Click="RemoveDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="-" IsEnabled="False"></Button>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1">
+                                            <Button x:Name="openGamepadSettingsButton" Click="OpenGamepadSettingsButton_Click" Height="25" Width="150" Margin="4,0" Content="Open System Settings..."></Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </GroupBox>
+                                <Grid Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="saveInputsButton" Height="25" Margin="4,0" Content="Save Input Mappings..." Click="SaveButton_Click"></Button>
+                                    <Button x:Name="resetInputsButton" Height="25" Grid.Column="1" Margin="4,0" Content="Reset to Defaults" Click="ResetInputsButton_Click"></Button>
+                                </Grid>
                             </Grid>
-                            <Label Background="{DynamicResource NormalBackground}" IsEnabled="False" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextBlock.TextAlignment="Center" FontSize="9" Name="inputErrorMessage"  Visibility="Collapsed">
+                            <Label Background="{DynamicResource NormalBackground}" FontWeight="Bold" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextBlock.TextAlignment="Center" FontSize="9" Name="inputErrorMessage"  Visibility="Collapsed">
                                 <Label.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
