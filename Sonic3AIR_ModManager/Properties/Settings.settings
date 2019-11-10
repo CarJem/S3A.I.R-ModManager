@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sonic3AIR_ModLoader.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sonic3AIR_ModManager.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="Sonic3AIRPath" Type="System.String" Scope="User">
@@ -31,6 +31,9 @@
     </Setting>
     <Setting Name="UserLanguage" Type="System.String" Scope="User">
       <Value Profile="(Default)">EN</Value>
+    </Setting>
+    <Setting Name="UseDarkTheme" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

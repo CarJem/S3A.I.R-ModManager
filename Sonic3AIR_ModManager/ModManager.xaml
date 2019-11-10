@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sonic3AIR_ModManager"
         xmlns:p="clr-namespace:Sonic3AIR_ModManager.Properties"
         mc:Ignorable="d"
-        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="600" Width="400" MinHeight="600" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="610" Width="400" MinHeight="610" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -42,12 +42,13 @@
                         </StackPanel>
                         <local:ModViewer Grid.Column="1" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
                         <Grid.ContextMenu>
-                            <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
+                            <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
                                 <MenuItem Name="removeModToolStripMenuItem"></MenuItem>
                                 <MenuItem Name="openModFolderToolStripMenuItem"></MenuItem>
                                 <MenuItem Name="openModURLToolStripMenuItem"></MenuItem>
                             </ContextMenu>
                         </Grid.ContextMenu>
+
                     </Grid>
                     <Grid Grid.Row="1" Grid.ColumnSpan="2">
                         <Grid.RowDefinitions>
@@ -70,7 +71,7 @@
                             <Button x:Name="refreshButton" Click="RefreshButton_Click" Width="75" Height="25" Margin="0,0,0.5,0" Content="Reload"></Button>
                             <Button Click="MoreModOptionsButton_Click" x:Name="moreModOptionsButton" Width="75" Height="25" Margin="4,0" Content="More..." ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                 <Button.ContextMenu>
-                                    <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="moreModOptionsMenuStrip">
+                                    <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="moreModOptionsMenuStrip">
                                         <MenuItem Name="gamebannaURLHandlerOptionsToolStripMenuItem" Click="AddRemoveURLHandlerButton_Click"></MenuItem>
                                         <Separator></Separator>
                                         <MenuItem Name="enableModStackingToolStripMenuItem" IsCheckable="True" Click="ModStackRadioButtons_CheckedChanged"></MenuItem>
@@ -116,7 +117,7 @@
                                     <Button x:Name="deleteRecordingButton" Width="75" Margin="4,0" Content="Delete" Click="DeleteRecordingButton_Click" IsEnabled="False"></Button>
                                 </StackPanel>
                             </StackPanel>
-                            <Label Name="recordingsErrorMessage" Visibility="Visible" FontSize="9" TextBlock.TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{DynamicResource NormalBackground}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Content="Error Loading Recordings!&#xD;&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options." >
+                            <Label Name="recordingsErrorMessage" Visibility="Collapsed" FontSize="9" TextBlock.TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{DynamicResource NormalBackground}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Content="Error Loading Recordings!&#xD;&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options." >
                                 <Label.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -155,7 +156,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Button x:Name="airPlacesButton" Height="23" Grid.Column="0" Margin="0,2" HorizontalAlignment="Stretch" Content="A.I.R. Places..." Click="AirPlacesButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                         <Button.ContextMenu>
-                                            <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="directoriesMenuStrip">
+                                            <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="directoriesMenuStrip">
                                                 <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
                                                 <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
                                                 <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
@@ -166,7 +167,7 @@
                                     </Button>
                                     <Button x:Name="airMediaButton" Height="23" Grid.Column="2" Margin="0,2" HorizontalAlignment="Stretch" Content="A.I.R. Media..." Click="AirMediaButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                         <Button.ContextMenu>
-                                            <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="mediaLinksMenuStrip">
+                                            <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="mediaLinksMenuStrip">
                                                 <MenuItem Name="sonic3AIRHomepageToolStripMenuItem" Click="S3AIRWebsiteButton_Click"></MenuItem>
                                                 <MenuItem Name="s3AIRGamebannaToolStripMenuItem" Click="GamebannaButton_Click"></MenuItem>
                                                 <MenuItem Name="eukaryot3KTwitterToolStripMenuItem" Click="EukaTwitterButton_Click"></MenuItem>
@@ -177,7 +178,7 @@
                                 </Grid>
                                 <Button x:Name="airModManagerPlacesButton" Height="23" Margin="0,2" Content="A.I.R. Mod Manager Places..." Click="airModManagerPlacesButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                     <Button.ContextMenu>
-                                        <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="modManagerPathMenuStrip">
+                                        <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modManagerPathMenuStrip">
                                             <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
                                             <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
                                         </ContextMenu>
@@ -192,79 +193,82 @@
             <TabItem Name="settingsPage" Header="Options">
                 <TabControl x:Name="settingsTabControl" SelectionChanged="TabControl2_SelectedIndexChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
                     <TabItem Name="optionsPage" Header="General">
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <GroupBox x:Name="groupBox8" Header="Mod Manager Options">
-                                <StackPanel Margin="5">
-                                    <TextBlock x:Name="label1" Text="Sonic 3 A.I.R. Path:" Margin="0,2"></TextBlock>
-                                    <Grid Height="25">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition Width="25"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBox x:Name="sonic3AIRPathBox"></TextBox>
-                                        <Button Grid.Column="1" Content="..." Name="updateSonic3AIRPathButton" Click="ChangeSonic3AIRPathButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
-                                            <Button.ContextMenu>
-                                                <ContextMenu Style="{StaticResource DefaultContextMenuStyle}" Name="AIRPathMenuStrip">
-                                                    <Separator></Separator>
-                                                    <MenuItem Name="setManuallyHeader" IsEnabled="False" FontWeight="Bold"></MenuItem>
-                                                    <Separator></Separator>
-                                                    <MenuItem Name="eXEPathToolStripMenuItem" Click="UpdateSonic3AIRPath_Click"></MenuItem>
-                                                    <MenuItem Name="fromSettingsFileToolStripMenuItem" Click="FromSettingsFileToolStripMenuItem_Click"></MenuItem>
-                                                    <Separator></Separator>
-                                                    <MenuItem Name="fromInstalledHeader" IsEnabled="False" FontWeight="Bold"></MenuItem>
-                                                    <Separator></Separator>
-                                                    <MenuItem Name="aIRVersionZIPToolStripMenuItem" Click="AIRVersionZIPToolStripMenuItem_Click"></MenuItem>
-                                                    <MenuItem Name="installedVersionsToolStripMenuItem">
-                                                        <MenuItem Name="noInstalledVersionsToolStripMenuItem"></MenuItem>
-                                                    </MenuItem>
-                                                </ContextMenu>
-                                            </Button.ContextMenu>
-                                        </Button>
-                                    </Grid>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="autoRunCheckbox" Content="Enable Auto Boot Mode" Margin="0,2" Checked="AutoRunCheckbox_CheckedChanged" Unchecked="AutoRunCheckbox_CheckedChanged" IsChecked="{Binding AutoLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <TextBlock x:Name="autoLaunchDelayLabel" Text="Delay (Seconds):" Margin="0,2"></TextBlock>
-                                    <WindowsFormsHost Width="90" HorizontalAlignment="Left" Name="IntergerUpDownHost"></WindowsFormsHost>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="keepLoaderOpenCheckBox" Content="Stay Open on Game Load" Margin="0,2" IsChecked="{Binding KeepOpenOnLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="keepOpenOnQuitCheckBox" Content="Stay Open on Game Exit" Margin="0,2" IsChecked="{Binding KeepOpenOnQuit, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <Separator Visibility="Hidden"></Separator>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="checkBox1" Content="Check for A.I.R. Updates on Startup" IsChecked="{Binding AutoUpdates, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                                    <TextBlock x:Name="languageLabel" Text="Language:" Margin="0,2"></TextBlock>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <ComboBox Name="languageComboBox" SelectionChanged="LanguageComboBox_SelectionChangeCommitted"></ComboBox>
-                                    </Grid>
-                                </StackPanel>
-                            </GroupBox>
-                            <GroupBox x:Name="groupBox1" Grid.Row="1" Header="A.I.R. Advanced Settings">
-                                <StackPanel Margin="5">
-                                    <TextBlock x:Name="label2" Text="Sonic 3K ROM Path:" Margin="0,2"></TextBlock>
-                                    <Grid Height="25">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition Width="25"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBox x:Name="romPathBox"></TextBox>
-                                        <Button x:Name="changeRomPathButton" Grid.Column="1" Content="..." Click="ChangeRomPathButton_Click"></Button>
-                                    </Grid>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="fixGlitchesCheckbox" Content="Fix Glitches" Margin="0,2" Click="FixGlitchesCheckbox_Click"></CheckBox>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="failSafeModeCheckbox" Content="Fail Safe Mode" Margin="0,2" Click="FailSafeModeCheckbox_Click"></CheckBox>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}" Content="Enable Dev Mode (Not Debug Mode)" Margin="0,2" Name="devModeCheckbox" Click="devModeCheckbox_Click"></CheckBox>
-                                </StackPanel>
-                            </GroupBox>
-                        </Grid>
+                        <ScrollViewer Margin="5">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <GroupBox x:Name="groupBox8" Header="Mod Manager Options">
+                                    <StackPanel Margin="5">
+                                        <TextBlock x:Name="label1" Text="Sonic 3 A.I.R. Path:" Margin="0,2"></TextBlock>
+                                        <Grid Height="25">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="25"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox x:Name="sonic3AIRPathBox"></TextBox>
+                                            <Button Grid.Column="1" Content="..." Name="updateSonic3AIRPathButton" Click="ChangeSonic3AIRPathButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                                                <Button.ContextMenu>
+                                                    <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="AIRPathMenuStrip">
+                                                        <Separator></Separator>
+                                                        <MenuItem Name="setManuallyHeader" IsEnabled="False" FontWeight="Bold"></MenuItem>
+                                                        <Separator></Separator>
+                                                        <MenuItem Name="eXEPathToolStripMenuItem" Click="UpdateSonic3AIRPath_Click"></MenuItem>
+                                                        <MenuItem Name="fromSettingsFileToolStripMenuItem" Click="FromSettingsFileToolStripMenuItem_Click"></MenuItem>
+                                                        <Separator></Separator>
+                                                        <MenuItem Name="fromInstalledHeader" IsEnabled="False" FontWeight="Bold"></MenuItem>
+                                                        <Separator></Separator>
+                                                        <MenuItem Name="aIRVersionZIPToolStripMenuItem" Click="AIRVersionZIPToolStripMenuItem_Click"></MenuItem>
+                                                        <MenuItem Name="installedVersionsToolStripMenuItem">
+                                                            <MenuItem Name="noInstalledVersionsToolStripMenuItem"></MenuItem>
+                                                        </MenuItem>
+                                                    </ContextMenu>
+                                                </Button.ContextMenu>
+                                            </Button>
+                                        </Grid>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="autoRunCheckbox" Content="Enable Auto Boot Mode" Margin="0,2" Checked="AutoRunCheckbox_CheckedChanged" Unchecked="AutoRunCheckbox_CheckedChanged" IsChecked="{Binding AutoLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <TextBlock x:Name="autoLaunchDelayLabel" Text="Delay (Seconds):" Margin="0,2"></TextBlock>
+                                        <WindowsFormsHost Width="90" HorizontalAlignment="Left" Name="IntergerUpDownHost"></WindowsFormsHost>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="keepLoaderOpenCheckBox" Content="Stay Open on Game Load" Margin="0,2" IsChecked="{Binding KeepOpenOnLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="keepOpenOnQuitCheckBox" Content="Stay Open on Game Exit" Margin="0,2" IsChecked="{Binding KeepOpenOnQuit, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="useDarkModeCheckBox" Content="Use Dark Theme" Margin="0,2" IsChecked="{Binding UseDarkTheme, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}" Click="useDarkModeCheckBox_Click"></CheckBox>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="checkBox1" Content="Check for A.I.R. Updates on Startup" IsChecked="{Binding AutoUpdates, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        <TextBlock x:Name="languageLabel" Text="Language:" Margin="0,2"></TextBlock>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <ComboBox  Name="languageComboBox" SelectionChanged="LanguageComboBox_SelectionChangeCommitted" HorizontalContentAlignment="Stretch"></ComboBox>
+                                        </Grid>
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox x:Name="groupBox1" Grid.Row="1" Header="A.I.R. Advanced Settings">
+                                    <StackPanel Margin="5">
+                                        <TextBlock x:Name="label2" Text="Sonic 3K ROM Path:" Margin="0,2"></TextBlock>
+                                        <Grid Height="25">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="25"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox x:Name="romPathBox"></TextBox>
+                                            <Button x:Name="changeRomPathButton" Grid.Column="1" Content="..." Click="ChangeRomPathButton_Click"></Button>
+                                        </Grid>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="fixGlitchesCheckbox" Content="Fix Glitches" Margin="0,2" Click="FixGlitchesCheckbox_Click"></CheckBox>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="failSafeModeCheckbox" Content="Fail Safe Mode" Margin="0,2" Click="FailSafeModeCheckbox_Click"></CheckBox>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Enable Dev Mode (Not Debug Mode)" Margin="0,2" Name="devModeCheckbox" Click="devModeCheckbox_Click"></CheckBox>
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+                        </ScrollViewer>
+
 
                     </TabItem>
                     <TabItem Name="inputPage" Header="Input">
@@ -280,7 +284,7 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <ListBox Style="{StaticResource BaseListBoxStyle}" ItemContainerStyle="{StaticResource BaseListBoxItemStyle}" x:Name="inputMethodsList" Margin="4,4" SelectionChanged="InputMethodsList_SelectedIndexChanged"></ListBox>
+                                <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputMethodsList" Margin="4,4" SelectionChanged="InputMethodsList_SelectedIndexChanged"></ListBox>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
                                     <Button Click="addInputMethodButton_Click" x:Name="addInputMethodButton" Height="25" Width="75" Margin="4,0" Content="+"></Button>
                                     <Button Click="removeInputMethodButton_Click" x:Name="removeInputMethodButton" Height="25" Width="75" Margin="4,0" Content="-"></Button>
@@ -348,7 +352,7 @@
                                         <RowDefinition Height="45"></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <ListBox Style="{StaticResource BaseListBoxStyle}" ItemContainerStyle="{StaticResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,0" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
+                                    <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,0" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
                                     </ListBox>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Grid.ColumnSpan="2">
                                         <Button x:Name="addDeviceNameButton" Click="AddDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="+" IsEnabled="False"></Button>
@@ -417,9 +421,9 @@
                 <TextBlock x:Name="airVersionLabel" Text="AIR Version: NULL&#10;Settings Version: NULL" Foreground="{DynamicResource NormalText}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="34" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
-                <Button Click="ExitButton_Click" x:Name="exitButton" Content="Exit" Width="100" Margin="4" Height="25"></Button>
-                <Button Click="SaveButton_Click" x:Name="saveButton" Content="Save" Width="100" Margin="4" Height="25"></Button>
-                <Button Click="RunButton_Click" x:Name="saveAndLoadButton" Content="Save &amp; Load" Width="100" Margin="4" Height="25"></Button>
+                <Button Click="ExitButton_Click" x:Name="exitButton" Content="Exit" Padding="20,0" MinWidth="50" Margin="4" Height="25"></Button>
+                <Button Click="SaveButton_Click" x:Name="saveButton" Content="Save" Padding="20,0" MinWidth="50" Margin="4" Height="25"></Button>
+                <Button Click="RunButton_Click" x:Name="saveAndLoadButton" Content="Save &amp; Load" MinWidth="50" Padding="20,0" Margin="4" Height="25"></Button>
             </StackPanel>
 
         </Grid>

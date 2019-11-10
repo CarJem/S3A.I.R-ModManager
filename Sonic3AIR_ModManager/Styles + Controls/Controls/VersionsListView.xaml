@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderThickness="1" BorderBrush="{DynamicResource ButtonBorder}">
         <Grid Background="{DynamicResource TextBoxBackground}">
-            <ListView SelectionChanged="View_SelectionChanged" FocusVisualStyle="{StaticResource ListViewItemFocusVisual}" Style="{StaticResource BaseListViewStyle}" ItemContainerStyle="{StaticResource BaseListViewItemStyle}" BorderBrush="{DynamicResource ComboBoxBorder}" Background="{DynamicResource TextBoxBackground}" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="View" HorizontalAlignment="Stretch" SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded">
+            <ListView SelectionChanged="View_SelectionChanged" FocusVisualStyle="{DynamicResource ListViewItemFocusVisual}" Style="{DynamicResource BaseListViewStyle}" ItemContainerStyle="{DynamicResource BaseListViewItemStyle}" BorderBrush="{DynamicResource ComboBoxBorder}" Background="{DynamicResource TextBoxBackground}" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="View" HorizontalAlignment="Stretch" SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded">
                 <ListView.View>
                     <local:AutoSizedGridView AllowsColumnReorder="False">
                         <GridView.Columns>
@@ -32,7 +32,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewColumnHeader">
                         <Grid>
-                            <Border x:Name="HeaderBorder" Background="{DynamicResource ComboBoxBorder}" BorderThickness="2">
+                            <Border x:Name="HeaderBorder"  Background="{DynamicResource ButtonBackground}" BorderBrush="{DynamicResource ButtonBorder}" BorderThickness="0,0,1,1">
                                 <ContentPresenter x:Name="HeaderContent" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             </Border>
                         </Grid>

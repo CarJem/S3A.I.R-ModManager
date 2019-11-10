@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView x:Name="View" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource TextBoxBackground}">
+        <ListView x:Name="View" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource ButtonBackground}" BorderBrush="{DynamicResource ButtonBorder}">
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="ViewTemplate">
-                    <Border BorderThickness="1" BorderBrush="{DynamicResource ComboBoxBorder}">
+                    <Border BorderThickness="1" BorderBrush="{DynamicResource ButtonBorder}">
                         <Grid Width="Auto" HorizontalAlignment="Stretch" Height="52" Margin="1">
                             <Grid.Style>
                                 <Style TargetType="{x:Type Grid}">
@@ -76,28 +76,28 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" Value="{StaticResource ListItemHoverFill}"/>
-                                <Setter Property="BorderBrush" Value="{StaticResource ListItemHoverBorder}"/>
+                                <Setter Property="Background" Value="{DynamicResource ListItemHoverFill}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource ListItemHoverBorder}"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="true">
-                                <Setter Property="Background" Value="{StaticResource ListItemSelectedFill}"/>
-                                <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedBorder}"/>
+                                <Setter Property="Background" Value="{DynamicResource ListItemSelectedFill}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource ListItemSelectedBorder}"/>
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsSelected" Value="true"/>
                                     <Condition Property="Selector.IsSelectionActive" Value="false"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource ListItemSelectedInactiveFill}"/>
-                                <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedInactiveBorder}"/>
+                                <Setter Property="Background" Value="{DynamicResource ListItemSelectedInactiveFill}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource ListItemSelectedInactiveBorder}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsSelected" Value="true"/>
                                     <Condition Property="IsMouseOver" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource ListItemSelectedHoverFill}"/>
-                                <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedHoverBorder}"/>
+                                <Setter Property="Background" Value="{DynamicResource ListItemSelectedHoverFill}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource ListItemSelectedHoverBorder}"/>
                             </MultiTrigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>

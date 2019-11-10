@@ -5,7 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles + Controls/Stylers/ColorLibrary.xaml"></ResourceDictionary>
+                <local:SkinResourceDictionary DarkSource="Styles + Controls/Theming/ColorLibraryDark.xaml" LightSource="Styles + Controls/Theming/ColorLibraryLight.xaml" />
                 <ResourceDictionary Source="Styles + Controls/Stylers/IconLibrary.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles + Controls/Stylers/CheckboxStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles + Controls/Stylers/ButtonStyle.xaml"></ResourceDictionary>
@@ -25,6 +25,18 @@
                 <ResourceDictionary Source="Styles + Controls/Stylers/AppSpecificStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles + Controls/Stylers/GroupBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="SliderStyle1" TargetType="{x:Type Slider}">
+                <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource SliderThumb.Static.Foreground}"/>
+                <Setter Property="Template" Value="{StaticResource SliderHorizontal}"/>
+                <Style.Triggers>
+                    <Trigger Property="Orientation" Value="Vertical">
+                        <Setter Property="Template" Value="{StaticResource SliderVertical}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

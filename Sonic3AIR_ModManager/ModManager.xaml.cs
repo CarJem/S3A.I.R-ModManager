@@ -758,12 +758,14 @@ namespace Sonic3AIR_ModManager
             {
                 languageComboBox.Items.Clear();
 
+                Binding LangItemsWidth = new Binding("ActualWidth") { ElementName = "languageComboBox" };
+
                 AllowUpdate = false;
 
                 ComboBoxItem EN_US = new ComboBoxItem()
                 {
                     Tag = "EN_US",
-                    Content = "English (US)"
+                    Content = "English (US)",
                 };
                 ComboBoxItem GR = new ComboBoxItem()
                 {
@@ -780,6 +782,11 @@ namespace Sonic3AIR_ModManager
                     Tag = "NULL",
                     Content = "NULL"
                 };
+
+                EN_US.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
+                GR.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
+                FR.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
+                NULL.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
 
                 languageComboBox.Items.Add(EN_US);
                 languageComboBox.Items.Add(GR);
@@ -2142,5 +2149,27 @@ namespace Sonic3AIR_ModManager
             ExportInputDevice();
         }
 
+        private void useDarkModeCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.UseDarkTheme)
+            {
+                App.ChangeSkin(Skin.Dark);
+            }
+            else
+            {
+                App.ChangeSkin(Skin.Light);
+            }
+            RefreshTheming();
+
+
+            void RefreshTheming()
+            {
+                this.InvalidateVisual();
+                foreach (UIElement element in Extensions.FindVisualChildren<UIElement>(this))
+                {
+                    element.InvalidateVisual();
+                }
+            }
+        }
     }
 }

@@ -227,6 +227,7 @@
     <Compile Include="Styles + Controls\Controls\Updater.Designer.cs">
       <DependentUpon>Updater.cs</DependentUpon>
     </Compile>
+    <Compile Include="Styles + Controls\Theming\SkinResourceDictonary.cs" />
     <Compile Include="UserLanguage.cs" />
     <Compile Include="ProgramPaths.cs" />
     <Compile Include="WinformsTheming.cs" />
@@ -351,7 +352,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Stylers\ColorLibrary.xaml">
+    <Page Include="Styles + Controls\Theming\ColorLibraryCodenameGamma.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles + Controls\Theming\ColorLibraryLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles + Controls\Theming\ColorLibraryDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -452,7 +461,19 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>:: "D:\Program Files\7-Zip\7z.exe" a "D:\Users\CarJem\Insync\cwallacecs@gmail.com\Google Drive\Projects\A.I.R. Mod Manager\TempBuild.zip" $(TargetDir) 
-:: start explorer.exe "D:\Users\CarJem\Insync\cwallacecs@gmail.com\Google Drive\Projects\A.I.R. Mod Manager\"</PostBuildEvent>
+    <PostBuildEvent>@ECHO OFF
+
+SET HOUR=%25time:~0,2%25
+SET dtStamp9=%25date:~-4%25.%25date:~4,2%25.%25date:~7,2%25_0%25time:~1,1%25-%25time:~3,2%25-%25time:~6,2%25 
+SET dtStamp24=%25date:~-4%25.%25date:~4,2%25.%25date:~7,2%25_%25time:~0,2%25-%25time:~3,2%25-%25time:~6,2%25
+
+if "%25HOUR:~0,1%25" == " " (SET dtStamp=%25dtStamp9%25) else (SET dtStamp=%25dtStamp24%25)
+
+ECHO %25dtStamp%25
+
+if $(ConfigurationName) == Release ( 
+"D:\Program Files\7-Zip\7z.exe" a "D:\Users\CarJem\Google Drive\AIR Mod Manager Development\Sonic 3 A.I.R. Mod Manager Build [%25dtStamp%25].zip" $(TargetDir) 
+start explorer.exe "D:\Users\CarJem\Google Drive\AIR Mod Manager Development\"
+)</PostBuildEvent>
   </PropertyGroup>
 </Project>

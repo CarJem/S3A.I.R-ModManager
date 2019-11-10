@@ -39,28 +39,28 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{StaticResource ListItemHoverFill}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource ListItemHoverBorder}"/>
+                            <Setter Property="Background" Value="{DynamicResource ListItemHoverFill}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ListItemHoverBorder}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" Value="{StaticResource ListItemSelectedFill}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedBorder}"/>
+                            <Setter Property="Background" Value="{DynamicResource ListItemSelectedFill}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ListItemSelectedBorder}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="true"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="false"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{StaticResource ListItemSelectedInactiveFill}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedInactiveBorder}"/>
+                            <Setter Property="Background" Value="{DynamicResource ListItemSelectedInactiveFill}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ListItemSelectedInactiveBorder}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="true"/>
                                 <Condition Property="IsMouseOver" Value="true"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{StaticResource ListItemSelectedHoverFill}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource ListItemSelectedHoverBorder}"/>
+                            <Setter Property="Background" Value="{DynamicResource ListItemSelectedHoverFill}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ListItemSelectedHoverBorder}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -74,7 +74,7 @@
 
     <Style TargetType="{x:Type ListView}" x:Key="BaseListViewStyle">
         <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource ButtonBorder}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -104,8 +104,8 @@
     </Style>
 
     <Style TargetType="{x:Type ListBox}" x:Key="BaseListBoxStyle">
-        <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
+        <Setter Property="Background" Value="{DynamicResource ListBox.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ListBox.Static.Border}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>

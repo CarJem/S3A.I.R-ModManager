@@ -6,13 +6,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="Panel">
-                        <ContentPresenter x:Name="ContentSite"
+                    <Border BorderThickness="1,1,1,0" BorderBrush="{DynamicResource ButtonBorder}">
+                        <Grid x:Name="Panel">
+                            <ContentPresenter x:Name="ContentSite"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         ContentSource="Header"
                                         Margin="10,2"/>
-                    </Grid>
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Panel" Property="Background" Value="{DynamicResource EnabledTab}" />
