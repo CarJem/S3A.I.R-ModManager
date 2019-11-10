@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sonic3AIR_ModManager"
         xmlns:p="clr-namespace:Sonic3AIR_ModManager.Properties"
         mc:Ignorable="d"
-        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="610" Width="400" MinHeight="610" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="620" Width="400" MinHeight="620" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -194,10 +194,9 @@
                 <TabControl x:Name="settingsTabControl" SelectionChanged="TabControl2_SelectedIndexChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
                     <TabItem Name="optionsPage" Header="General">
                         <ScrollViewer Margin="5">
-                            <Grid >
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="2*"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <GroupBox x:Name="groupBox8" Header="Mod Manager Options">
                                     <StackPanel Margin="5">
@@ -250,7 +249,19 @@
                                         </Grid>
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox x:Name="groupBox1" Grid.Row="1" Header="A.I.R. Advanced Settings">
+                            </Grid>
+                        </ScrollViewer>
+
+
+                    </TabItem>
+                    <TabItem Name="gameOptionsPage" Header="A.I.R. Options">
+                        <ScrollViewer Margin="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <GroupBox x:Name="groupBox1" Header="A.I.R. General Options">
                                     <StackPanel Margin="5">
                                         <TextBlock x:Name="label2" Text="Sonic 3K ROM Path:" Margin="0,2"></TextBlock>
                                         <Grid Height="25">
@@ -264,12 +275,115 @@
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="fixGlitchesCheckbox" Content="Fix Glitches" Margin="0,2" Click="FixGlitchesCheckbox_Click"></CheckBox>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="failSafeModeCheckbox" Content="Fail Safe Mode" Margin="0,2" Click="FailSafeModeCheckbox_Click"></CheckBox>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Enable Dev Mode (Not Debug Mode)" Margin="0,2" Name="devModeCheckbox" Click="devModeCheckbox_Click"></CheckBox>
+                                        <TextBlock x:Name="StartingWindowLabel" Text="Startup Window:" Margin="0,2"></TextBlock>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <ComboBox  Name="StartupWindowComboBox" HorizontalContentAlignment="Stretch">
+                                                <ComboBoxItem Tag="Windowed" Content="Windowed" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Tag="Fullscreen" Content="Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Tag="Windowed_Fullscreen" Content="Windowed Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                            </ComboBox>
+                                        </Grid>
+                                        <TextBlock x:Name="CurrentWindowLabel" Text="Current Window:" Margin="0,2"></TextBlock>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <ComboBox  Name="CurrentWindowComboBox" HorizontalContentAlignment="Stretch">
+                                                <ComboBoxItem Tag="Windowed" Content="Windowed" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Tag="Fullscreen" Content="Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Tag="Windowed_Fullscreen" Content="Windowed Fullscreen" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                            </ComboBox>
+                                        </Grid>
                                     </StackPanel>
+                                </GroupBox>
+                                <GroupBox Grid.Row="1" Header="A.I.R. Launch Options">
+                                    <Grid>
+                                        <StackPanel Margin="5">
+                                            <TextBlock x:Name="levelSelectLable" Text="Starting Scene:" Margin="0,2"></TextBlock>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <ComboBox  Name="sceneComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0">
+                                                    <ComboBoxItem Name="DefaultSceneItem" Tag="NONE" Content="Default (NONE)" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="AIZ1SceneItem" Tag="0x0000" Content="AIZ - Angel Island Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="AIZ2SceneItem" Tag="0x0001" Content="AIZ - Angel Island Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="HCZ1SceneItem" Tag="0x0100" Content="HCZ - Hydrocity Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="HCZ2SceneItem" Tag="0x0101" Content="HCZ - Hydrocity Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="MGZ1SceneItem" Tag="0x0200" Content="MGZ - Marble Garden Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="MGZ2SceneItem" Tag="0x0201" Content="MGZ - Marble Garden Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="CNZ1SceneItem" Tag="0x0300" Content="CNZ - Carnival Night Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="CNZ2SceneItem" Tag="0x0301" Content="CNZ - Carnival Night Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="ICZ1SceneItem" Tag="0x0500" Content="ICZ - IceCap Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="ICZ2SceneItem" Tag="0x0501" Content="ICZ - IceCap Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LBZ1SceneItem" Tag="0x0600" Content="LBZ - Launch Base Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LBZ2SceneItem" Tag="0x0601" Content="LBZ - Launch Base Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="MHZ1SceneItem" Tag="0x0700" Content="MHZ - Mushroom Hill Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="MHZ2SceneItem" Tag="0x0701" Content="MHZ - Mushroom Hill Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="FBZ1SceneItem" Tag="0x0400" Content="FBZ - Flying Battery Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="FBZ2SceneItem" Tag="0x0401" Content="FBZ - Flying Battery Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="SOZ1SceneItem" Tag="0x0800" Content="SOZ - Sandopolis Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="SOZ2SceneItem" Tag="0x0801" Content="SOZ - Sandopolis Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LRZ1SceneItem" Tag="0x0900" Content="LRZ - Lava Reef Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LRZ2SceneItem" Tag="0x0901" Content="LRZ - Lava Reef Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LRZ3SceneItem" Tag="0x1600" Content="LRZ - Lava Reef Zone Act 3 (Sonic/Tails)"></ComboBoxItem>
+                                                    <ComboBoxItem Name="HPZSceneItem" Tag="0x1601" Content="HPZ - Hidden Palace Zone"></ComboBoxItem>
+                                                    <ComboBoxItem Name="HPZ_SS_SceneItem" Tag="0x1701" Content="HPZ - Hidden Palace Zone (Special Stages)"></ComboBoxItem>
+                                                    <ComboBoxItem Name="SSZ_ST_SceneItem" Tag="0x0a00" Content="SSZ - Sky Sanctuary Zone (Sonic/Tails)"></ComboBoxItem>
+                                                    <ComboBoxItem Name="SSZ_K_SceneItem" Tag="0x0a01" Content="SSZ - Sky Sanctuary Zone (Knuckles)"></ComboBoxItem>
+                                                    <ComboBoxItem Name="DEZ1SceneItem" Tag="0x0b00" Content="DEZ - Death Egg Zone Act 1"></ComboBoxItem>
+                                                    <ComboBoxItem Name="DEZ2SceneItem" Tag="0x0b01" Content="DEZ - Death Egg Zone Act 2"></ComboBoxItem>
+                                                    <ComboBoxItem Name="DEZ3SceneItem" Tag="0x1700" Content="DEZ - Death Egg Zone Act 3 (Boss)"></ComboBoxItem>
+                                                    <ComboBoxItem Name="DDZSceneItem" Tag="0x0c00" Content="DDZ - Doomsday Zone"></ComboBoxItem>
+                                                </ComboBox>
+                                            </Grid>
+                                            <TextBlock x:Name="StaringPlayer" Text="Starting Player:*" Margin="0,2"></TextBlock>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <ComboBox  Name="PlayerComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0">
+                                                    <ComboBoxItem Name="DefaultPlayerItem" Tag="NONE" Content="Default (NONE)" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="Sonic" Content="Sonic the Hedgehog" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="Miles/Tails" Content="Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="Kunckles" Content="Knuckles the Echidna" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="Sonic/Tails" Content="Sonic &amp; Tails" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="Kunckles/Tails" Content="Kunckles &amp; Tails (If Unlocked)" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                </ComboBox>
+                                            </Grid>
+                                            <TextBlock x:Name="StartPhaseLabel" Text="Startup Phase:**" Margin="0,2"></TextBlock>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <ComboBox  Name="StartPhaseComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0">
+                                                    <ComboBoxItem Tag="NONE" Content="Disclaimer" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="SEGA Logo" Content="SEGA Logo" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="Main Menu" Content="Main Menu" Width="{Binding ElementName=sceneComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                </ComboBox>
+                                            </Grid>
+                                            <Separator Height="10" Visibility="Hidden"></Separator>
+                                            <TextBlock x:Name="NoteLabel" Foreground="{DynamicResource DisabledText}" Text="* Ignored if Starting Scene is Set to NONE" Margin="0,2"></TextBlock>
+                                            <TextBlock x:Name="Note2Label" Foreground="{DynamicResource DisabledText}" Text="** Ignored if Starting Scene is Set to Anything Other than NONE" Margin="0,2"></TextBlock>
+
+                                        </StackPanel>
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" x:Name="LaunchOptionsWarning" Visibility="Collapsed">
+                                            <Grid Background="{DynamicResource NormalBackground}" Opacity="0.8"></Grid>
+                                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" Foreground="Red" TextAlignment="Center" Text="NOTE: These are Debugging Options Only! &#10; Intended for Mod Developers and Debugging Purposes.&#10; This may breaks the likes of features such as Achivements. &#10; Please be careful!">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" Opacity="1" BlurRadius="2"/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                            <Button Height="25" VerticalAlignment="Bottom" Content="Understood" Name="LaunchOptionsUnderstandingButton" Margin="5" Click="LaunchOptionsUnderstandingButton_Click"></Button>
+                                        </Grid>
+                                    </Grid>
+
                                 </GroupBox>
                             </Grid>
                         </ScrollViewer>
-
-
                     </TabItem>
                     <TabItem Name="inputPage" Header="Input">
                         <Grid x:Name="inputPanel" Margin="5">

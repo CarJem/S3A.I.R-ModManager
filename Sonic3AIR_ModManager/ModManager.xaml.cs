@@ -112,6 +112,12 @@ namespace Sonic3AIR_ModManager
             StartModloader(false, gamebanana_api);
         }
 
+
+        public void SetNonDesignerRules()
+        {
+            LaunchOptionsWarning.Visibility = Visibility.Visible;
+        }
+
         #region WPF Definitions
         private void InitializeHostedComponents()
         {
@@ -140,6 +146,7 @@ namespace Sonic3AIR_ModManager
             AllowUpdate = false;
             InitializeComponent();
             InitializeHostedComponents();
+            SetNonDesignerRules();
             AllowUpdate = true;
 
             if (ValidateInstall() == true)
@@ -2170,6 +2177,11 @@ namespace Sonic3AIR_ModManager
                     element.InvalidateVisual();
                 }
             }
+        }
+
+        private void LaunchOptionsUnderstandingButton_Click(object sender, RoutedEventArgs e)
+        {
+            LaunchOptionsWarning.Visibility = Visibility.Collapsed;
         }
     }
 }
