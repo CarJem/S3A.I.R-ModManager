@@ -43,9 +43,9 @@
                         <local:ModViewer Grid.Column="1" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
                         <Grid.ContextMenu>
                             <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
-                                <MenuItem Name="removeModToolStripMenuItem"></MenuItem>
-                                <MenuItem Name="openModFolderToolStripMenuItem"></MenuItem>
-                                <MenuItem Name="openModURLToolStripMenuItem"></MenuItem>
+                                <MenuItem Name="removeModToolStripMenuItem" Click="RemoveModToolStripMenuItem_Click"></MenuItem>
+                                <MenuItem Name="openModFolderToolStripMenuItem" Click="OpenModFolderToolStripMenuItem_Click"></MenuItem>
+                                <MenuItem Name="openModURLToolStripMenuItem" Click="OpenModURLToolStripMenuItem_Click"></MenuItem>
                             </ContextMenu>
                         </Grid.ContextMenu>
 
@@ -77,7 +77,7 @@
                                         <MenuItem Name="enableModStackingToolStripMenuItem" IsCheckable="True" Click="ModStackRadioButtons_CheckedChanged"></MenuItem>
                                         <MenuItem Name="onForAIRVersionUnreleasedToolStripMenuItem" IsEnabled="False"></MenuItem>
                                         <MenuItem Name="v1909190AndAboveOnlyToolStripMenuItem" IsEnabled="False"></MenuItem>
-                                        <MenuItem Name="downloadFromURLToolStripMenuItem" Visibility="Collapsed"></MenuItem>
+                                        <MenuItem Name="downloadFromURLToolStripMenuItem" Visibility="Collapsed" Click="DownloadButtonTest_Click"></MenuItem>
                                     </ContextMenu>
                                 </Button.ContextMenu>
                             </Button>
