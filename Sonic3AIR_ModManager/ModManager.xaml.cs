@@ -1339,7 +1339,7 @@ namespace Sonic3AIR_ModManager
 
                 void MappingDialog(ref List<string> mappings)
                 {
-                    var mD = new KeybindingsListDialog(mappings);
+                    var mD = new KeybindingsListDialogV2(mappings);
                     mD.ShowDialog();
                 }
 
@@ -1352,9 +1352,9 @@ namespace Sonic3AIR_ModManager
             {
                 int index = inputMethodsList.SelectedIndex;
                 string newDevice = "New Device";
-                DeviceNameDialog deviceNameDialog = new DeviceNameDialog();
-                DialogResult result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
-                if (result == System.Windows.Forms.DialogResult.OK)
+                DeviceNameDialogV2 deviceNameDialog = new DeviceNameDialogV2();
+                bool? result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
+                if (result == true)
                 {
                     GameConfig.InputDevices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
                     UpdateInputMappings();

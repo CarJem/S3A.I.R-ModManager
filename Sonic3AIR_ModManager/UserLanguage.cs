@@ -276,57 +276,56 @@ namespace Sonic3AIR_ModManager
             form.CancelButton.Content = Program.LanguageResource.GetString("Cancel");
         }
 
-
         public static void ApplyLanguage(ref Updater form)
         {
-            form.yesButton.Text = Program.LanguageResource.GetString("Yes_Button");
-            form.noButton.Text = Program.LanguageResource.GetString("No_Button");
+            form.yesButton.Content = Program.LanguageResource.GetString("Yes_Button");
+            form.noButton.Content = Program.LanguageResource.GetString("No_Button");
             form.updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
         }
 
-        public static void ApplyLanguage(ref KeyBindingDialog form)
+        public static void ApplyLanguage(ref KeyBindingDialogV2 form)
         {
-            form.inputDeviceRadioButton1.Text = Program.LanguageResource.GetString("KeyboardRadioButton");
-            form.inputDeviceRadioButton3.Text = Program.LanguageResource.GetString("CustomAdvancedLabel");
+            form.inputDeviceRadioButton1.Content = Program.LanguageResource.GetString("KeyboardRadioButton");
+            form.inputDeviceRadioButton3.Content = Program.LanguageResource.GetString("CustomAdvancedLabel");
 
             form.resultLabel.Text = Program.LanguageResource.GetString("ResultLabel");
             form.keyLabel.Text = Program.LanguageResource.GetString("KeyLabel");
 
-            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
-            form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
+            form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
+            form.okButton.Content = Program.LanguageResource.GetString("Ok_Button");
 
-            form.Text = Program.LanguageResource.GetString("SelectInputTitleExpandable");
-            form.getInputButton.Text = Program.LanguageResource.GetString("DetectGamepadInputExpandable");
+            form.Title = Program.LanguageResource.GetString("SelectInputTitleExpandable");
+            form.getInputButton.Content = Program.LanguageResource.GetString("DetectGamepadInputExpandable");
         }
 
-        public static void ApplyLanguage(ref KeybindingsListDialog form)
+        public static void ApplyLanguage(ref KeybindingsListDialogV2 form)
         {
-            form.button1.Text = Program.LanguageResource.GetString("Ok_Button");
-            form.editButton.Text = Program.LanguageResource.GetString("EditExpandable");
-            form.groupBox1.Text = Program.LanguageResource.GetString("KeybindingsLabel");
+            form.button1.Content = Program.LanguageResource.GetString("Ok_Button");
+            form.editButton.Content = Program.LanguageResource.GetString("EditExpandable");
+            form.groupBox1.Header = Program.LanguageResource.GetString("KeybindingsLabel");
 
-            form.Text = Program.LanguageResource.GetString("EditKeybindingsTitleExpandable");
+            form.Title = Program.LanguageResource.GetString("EditKeybindingsTitleExpandable");
         }
 
-        public static void ApplyLanguage(ref DeviceNameDialog form)
+        public static void ApplyLanguage(ref DeviceNameDialogV2 form)
         {
-            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
-            form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
-            form.detectControllerButton.Text = Program.LanguageResource.GetString("DetectControllerExpandable");
+            form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
+            form.okButton.Content = Program.LanguageResource.GetString("Ok_Button");
+            form.detectControllerButton.Content = Program.LanguageResource.GetString("DetectControllerExpandable");
         }
 
-        public static void ApplyLanguage(ref JoystickInputSelectorDialog form)
+        public static void ApplyLanguage(ref JoystickInputSelectorDialogV2 form)
         {
-            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
-            form.selectButton.Text = Program.LanguageResource.GetString("Select_Button");
-            form.refreshButton.Text = Program.LanguageResource.GetString("Refresh");
+            form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
+            form.selectButton.Content = Program.LanguageResource.GetString("Select_Button");
+            form.refreshButton.Content = Program.LanguageResource.GetString("Refresh");
         }
 
-        public static void ApplyLanguage(ref JoystickReaderDialog form)
+        public static void ApplyLanguage(ref JoystickReaderDialogV2 form)
         {
-            form.cancelButton.Text = Program.LanguageResource.GetString("Cancel_Button");
-            form.okButton.Text = Program.LanguageResource.GetString("Ok_Button");
-            form.reselectInputButton.Text = Program.LanguageResource.GetString("Reselect_Input_Button");
+            form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
+            form.okButton.Content = Program.LanguageResource.GetString("Ok_Button");
+            form.reselectInputButton.Content = Program.LanguageResource.GetString("Reselect_Input_Button");
             form.testingForInputLabel.Text = Program.LanguageResource.GetString("WaitingForInputDialogLabel");
             form.testingForInputLabel.Tag = Program.LanguageResource.GetString("WaitingForInputDialogLabelTag");
         }

@@ -135,23 +135,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Input + Joysticks\DeviceNameDialog.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Styles + Controls\Controls\Input + Joysticks\JoystickReaderDialogV2.xaml.cs">
+      <DependentUpon>JoystickReaderDialogV2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Input + Joysticks\DeviceNameDialog.Designer.cs">
-      <DependentUpon>DeviceNameDialog.cs</DependentUpon>
+    <Compile Include="Styles + Controls\Controls\Input + Joysticks\KeybindingsListDialogV2.xaml.cs">
+      <DependentUpon>KeybindingsListDialogV2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Input + Joysticks\JoystickInputSelectorDialog.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Styles + Controls\Controls\Input + Joysticks\KeyBindingDialogV2.xaml.cs">
+      <DependentUpon>KeyBindingDialogV2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Input + Joysticks\JoystickInputSelectorDialog.Designer.cs">
-      <DependentUpon>JoystickInputSelectorDialog.cs</DependentUpon>
+    <Compile Include="Styles + Controls\Controls\Input + Joysticks\DeviceNameDialogV2.xaml.cs">
+      <DependentUpon>DeviceNameDialogV2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Input + Joysticks\JoystickReaderDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Input + Joysticks\JoystickReaderDialog.Designer.cs">
-      <DependentUpon>JoystickReaderDialog.cs</DependentUpon>
+    <Compile Include="Styles + Controls\Controls\Input + Joysticks\JoystickInputSelectorDialogV2.xaml.cs">
+      <DependentUpon>JoystickInputSelectorDialogV2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Styles + Controls\Controls\AutoBootDialogV2.xaml.cs">
@@ -160,19 +157,7 @@
     <Compile Include="Styles + Controls\Controls\DownloadWindow.xaml.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraDialog.cs" />
-    <Compile Include="Input + Joysticks\JoystickReader.cs" />
-    <Compile Include="Input + Joysticks\KeyBindingDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Input + Joysticks\KeyBindingDialog.Designer.cs">
-      <DependentUpon>KeyBindingDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Input + Joysticks\KeybindingsListDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Input + Joysticks\KeybindingsListDialog.Designer.cs">
-      <DependentUpon>KeybindingsListDialog.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Styles + Controls\Controls\Input + Joysticks\JoystickReader.cs" />
     <Compile Include="Languages\lang_fr.Designer.cs">
       <DependentUpon>lang_fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -190,6 +175,9 @@
     </Compile>
     <Compile Include="Styles + Controls\Controls\ItemConflictDialogV2.xaml.cs">
       <DependentUpon>ItemConflictDialogV2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles + Controls\Controls\Updater.xaml.cs">
+      <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
     <Compile Include="Styles + Controls\Controls\VersionsListView.xaml.cs">
       <DependentUpon>VersionsListView.xaml</DependentUpon>
@@ -221,31 +209,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\Updater.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Styles + Controls\Controls\Updater.Designer.cs">
-      <DependentUpon>Updater.cs</DependentUpon>
-    </Compile>
     <Compile Include="Styles + Controls\Theming\SkinResourceDictonary.cs" />
     <Compile Include="UserLanguage.cs" />
     <Compile Include="ProgramPaths.cs" />
     <Compile Include="WinformsTheming.cs" />
-    <EmbeddedResource Include="Input + Joysticks\DeviceNameDialog.resx">
-      <DependentUpon>DeviceNameDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Input + Joysticks\JoystickInputSelectorDialog.resx">
-      <DependentUpon>JoystickInputSelectorDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Input + Joysticks\JoystickReaderDialog.resx">
-      <DependentUpon>JoystickReaderDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Input + Joysticks\KeyBindingDialog.resx">
-      <DependentUpon>KeyBindingDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Input + Joysticks\KeybindingsListDialog.resx">
-      <DependentUpon>KeybindingsListDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Languages\lang_fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>lang_fr.Designer.cs</LastGenOutput>
@@ -266,9 +233,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Styles + Controls\Controls\Updater.resx">
-      <DependentUpon>Updater.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
@@ -308,6 +272,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles + Controls\Controls\Input + Joysticks\JoystickReaderDialogV2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles + Controls\Controls\Input + Joysticks\KeybindingsListDialogV2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles + Controls\Controls\Input + Joysticks\KeyBindingDialogV2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles + Controls\Controls\Input + Joysticks\DeviceNameDialogV2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles + Controls\Controls\Input + Joysticks\JoystickInputSelectorDialogV2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles + Controls\Controls\AutoBootDialogV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -317,6 +301,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles + Controls\Controls\ItemConflictDialogV2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles + Controls\Controls\Updater.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

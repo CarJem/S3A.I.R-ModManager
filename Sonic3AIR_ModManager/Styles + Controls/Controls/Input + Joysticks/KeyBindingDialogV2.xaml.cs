@@ -6,16 +6,27 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using DialogResult = System.Windows.Forms.DialogResult;
+using Binding = System.Windows.Data.Binding;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class KeyBindingDialog : Form
+    public partial class KeyBindingDialogV2 : Window
     {
-        List<string> KeyBindings { get => GetKeys(); }
+        List<ComboBoxItem> KeyBindings { get => GetKeys(); }
         string OriginalKeybinding = "";
+        bool isInitialized = false;
 
-        private List<string> GetKeys()
+        private List<ComboBoxItem> GetKeys()
         {
             List<string> functionKeys = new List<string>();
 
@@ -27,20 +38,36 @@ namespace Sonic3AIR_ModManager
             "NumpadMinus","NumpadMultiply","NumpadDivide","NumpadPeriod","Insert","Delete","Home","End","PageUp","PageDown"
             });
 
-            List<string> Keys = new List<string>();
-            Keys.Add("");
-            Keys.AddRange(functionKeys);
+            List<ComboBoxItem> Keys = new List<ComboBoxItem>();
+            functionKeys.Insert(0,"");
+            Keys.AddRange(ToComboBoxList(functionKeys));
             return Keys;
+
+            List<ComboBoxItem> ToComboBoxList(List<string> strings)
+            {
+                List<ComboBoxItem> result = new List<ComboBoxItem>();
+                foreach (var item in strings)
+                {
+                    var result_item = new ComboBoxItem() { Content = item };
+
+                    result.Add(result_item);
+                }
+                return result;
+            }
         }
 
-        private KeyBindingDialog Instance;
 
-        public KeyBindingDialog()
+
+        private KeyBindingDialogV2 Instance;
+
+        public KeyBindingDialogV2()
         {
             InitializeComponent();
+            isInitialized = true;
+            this.Owner = System.Windows.Application.Current.MainWindow;
             Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
-            keyBox.DataSource = KeyBindings;
+            keyBox.ItemsSource = KeyBindings;
             RadioButton1_CheckedChanged(null, null);
         }
 
@@ -49,8 +76,8 @@ namespace Sonic3AIR_ModManager
             OriginalKeybinding = keybind;
             resultText.Text = $"{keybind} {Program.LanguageResource.GetString("KeybindingsExistingNote")}"; ;
             resultText.Tag = keybind;
-            if (KeyBindings.Contains(keybind)) keyBox.SelectedIndex = keyBox.Items.IndexOf(OriginalKeybinding);
-            if (this.ShowDialog() == DialogResult.OK)
+            if (KeyBindings.Exists(x => x.Content.ToString() == keybind)) keyBox.SelectedIndex = keyBox.Items.IndexOf(OriginalKeybinding);
+            if (this.ShowDialog() == true)
             {
                 keybind = resultText.Tag.ToString();
             }
@@ -58,37 +85,37 @@ namespace Sonic3AIR_ModManager
             return keybind;
         }
 
-        private void FlowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void Label3_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Label3_Click(object sender, EventArgs e)
+        private void RadioButton1_CheckedChanged(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void RadioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (inputDeviceRadioButton1.Checked)
+            if (isInitialized)
             {
-                ToggleKeyboardBindingsArea(true);
-                ToggleControllerBindingsArea(false);
-                ToggleCustomBindingsArea(false);
+                if (inputDeviceRadioButton1.IsChecked.Value)
+                {
+                    ToggleKeyboardBindingsArea(true);
+                    ToggleControllerBindingsArea(false);
+                    ToggleCustomBindingsArea(false);
+                }
+                else if (inputDeviceRadioButton3.IsChecked.Value)
+                {
+                    ToggleKeyboardBindingsArea(false);
+                    ToggleControllerBindingsArea(false);
+                    ToggleCustomBindingsArea(true);
+                }
             }
-            else if (inputDeviceRadioButton3.Checked)
-            {
-                ToggleKeyboardBindingsArea(false);
-                ToggleControllerBindingsArea(false);
-                ToggleCustomBindingsArea(true);
-            }
+
 
 
             void ToggleKeyboardBindingsArea(bool enabled)
             {
-                keyBox.Enabled = enabled;
-                keyLabel.Enabled = enabled;
+                keyBox.IsEnabled = enabled;
+                keyLabel.IsEnabled = enabled;
                 UpdateResultText(enabled);
+                keyArea.IsEnabled = enabled;
             }
 
             void ToggleControllerBindingsArea(bool enabled)
@@ -99,18 +126,19 @@ namespace Sonic3AIR_ModManager
 
             void ToggleCustomBindingsArea(bool enabled)
             {
-                resultLabel.Enabled = enabled;
-                resultText.Enabled = enabled;
+                resultLabel.IsEnabled = enabled;
+                otherArea.IsEnabled = enabled;
+                resultText.IsEnabled = enabled;
                 UpdateResultText(!enabled);
             }
         }
 
         private void UpdateResultText(bool ShowExistingString = true)
         {
-            if (keyBox.SelectedIndex != 0 && inputDeviceRadioButton1.Checked)
+            if (keyBox.SelectedIndex != 0 && keyBox.SelectedItem != null && inputDeviceRadioButton1.IsChecked.Value)
             {
-                resultText.Text = keyBox.SelectedItem.ToString();
-                resultText.Tag = keyBox.SelectedItem.ToString();
+                resultText.Text = (keyBox.SelectedItem as ComboBoxItem).Content.ToString();
+                resultText.Tag = (keyBox.SelectedItem as ComboBoxItem).Content.ToString();
             }
             else
             {
@@ -126,7 +154,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void KeyBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void keyBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateResultText();
         }
@@ -157,19 +185,19 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        private void ControllerInputTypeRadio1_CheckedChanged(object sender, EventArgs e)
+        private void ControllerInputTypeRadio1_CheckedChanged(object sender, RoutedEventArgs e)
         {
             UpdateControllerInputType(true);
             UpdateResultText();
         }
 
-        private void ButtonIDNUD_ValueChanged(object sender, EventArgs e)
+        private void ButtonIDNUD_ValueChanged(object sender, RoutedEventArgs e)
         {
             UpdateResultText();
         }
 
         private int AxisCurrentDirection = 0;
-        private void Label5_Click(object sender, EventArgs e)
+        private void Label5_Click(object sender, RoutedEventArgs e)
         {
             UpdateJoyAxisUI(sender);
         }
@@ -236,48 +264,74 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void AxisTypeRadio5_CheckedChanged(object sender, EventArgs e)
+        private void AxisTypeRadio5_CheckedChanged(object sender, RoutedEventArgs e)
         {
             UpdateResultText();
         }
 
-        private void AxisRightRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void AxisRightRadioButton_CheckedChanged(object sender, RoutedEventArgs e)
         {
             UpdateResultText();
         }
 
-        private void AxisIDNUD_ValueChanged(object sender, EventArgs e)
+        private void AxisIDNUD_ValueChanged(object sender, RoutedEventArgs e)
         {
             UpdateResultText();
         }
 
-        private void AxisCustomStringBox_TextChanged(object sender, EventArgs e)
+        private void AxisCustomStringBox_TextChanged(object sender, RoutedEventArgs e)
         {
             UpdateResultText();
         }
 
-        private void resultText_TextChanged(object sender, EventArgs e)
+        private void resultText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (inputDeviceRadioButton3.Checked == true)
+            if (inputDeviceRadioButton3.IsChecked == true)
             {
                 resultText.Tag = resultText.Text;
             }
         }
 
-        private void getInputButton_Click(object sender, EventArgs e)
+        private void getInputButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            JoystickReaderDialog dlg = new JoystickReaderDialog();
-            if (dlg.ShowInputDialog() == DialogResult.OK)
+
+            JoystickReaderDialogV2 dlg = new JoystickReaderDialogV2();
+            if (dlg.ShowInputDialog() == true)
             {
-                inputDeviceRadioButton3.Checked = true;
+                inputDeviceRadioButton3.IsChecked = true;
                 resultText.Text = dlg.Result;
             }
 
-            
 
 
 
+
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+        }
+
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void keyBox_DropDownOpened(object sender, EventArgs e)
+        {
+            DropDownWidth(keyBox);
+
+            void DropDownWidth(ComboBox myCombo)
+            {
+                foreach (var obj in myCombo.Items)
+                {
+                    if (obj is ComboBoxItem)
+                    {
+                        (obj as ComboBoxItem).Width = myCombo.ActualWidth;
+                    }
+                }
+            }
         }
     }
 }

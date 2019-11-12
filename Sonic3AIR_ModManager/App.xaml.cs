@@ -29,14 +29,16 @@ namespace Sonic3AIR_ModManager
             else ChangeSkin(Skin.Light);
 
             Instance = this;
+            this.InitializeComponent();
         }
 
         public void RunAutoBoot()
         {
-            this.InitializeComponent();
+
             var auto = new AutoBootDialogV2();
             if (auto.ShowDialog() == true)
             {
+
                 if (Program.AutoBootCanceled == false) this.Run(new ModManager(true));
                 else this.Run(new ModManager(false));
             }
@@ -45,14 +47,14 @@ namespace Sonic3AIR_ModManager
 
         public void GBAPI(string Arguments)
         {
-            this.InitializeComponent();
+
             this.Run(new ModManager(Arguments));
         }
 
 
         public void DefaultStart()
         {
-            this.InitializeComponent();
+
             this.Run(new ModManager());
         }
 

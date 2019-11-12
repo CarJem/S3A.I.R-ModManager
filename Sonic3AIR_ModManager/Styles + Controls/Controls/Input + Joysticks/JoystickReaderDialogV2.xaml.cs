@@ -7,26 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharpDX.DirectInput;
-using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using DialogResult = System.Windows.Forms.DialogResult;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class JoystickReaderDialog : Form
+    public partial class JoystickReaderDialogV2 : Window
     {
         private System.Timers.Timer timer1;
         private bool PollingInput = false;
         public string Result = null;
         private IntPtr Joystick;
         private bool Allowed = true;
-        public JoystickReaderDialog()
+        public JoystickReaderDialogV2()
         {
             InitializeComponent();
+            this.Owner = System.Windows.Application.Current.MainWindow;
             var instance = this;
             UserLanguage.ApplyLanguage(ref instance);
             timer1 = new System.Timers.Timer();
             timer1.Elapsed += timer1_Tick;
-            this.reselectInputButton.Enabled = false;
+            this.reselectInputButton.IsEnabled = false;
 
 
 
@@ -34,18 +43,18 @@ namespace Sonic3AIR_ModManager
         }
 
 
-        public DialogResult ShowInputDialog()
+        public bool ShowInputDialog()
         {
-            JoystickInputSelectorDialog dlg = new JoystickInputSelectorDialog();
-            if (dlg.ShowDialog() == DialogResult.OK)
+            JoystickInputSelectorDialogV2 dlg = new JoystickInputSelectorDialogV2();
+            if (dlg.ShowDialog() == true)
             {
                 Joystick = JoystickReader.GetJoystick();
                 timer1.Start();
-                return this.ShowDialog();
+                return this.ShowDialog().Value;
             }
             else
             {
-                return DialogResult.Cancel;
+                return false;
             }
 
         }
@@ -58,17 +67,17 @@ namespace Sonic3AIR_ModManager
 
         public void EndChecks(string value)
         {
-            this.testingForInputLabel.BeginInvoke((MethodInvoker)delegate ()
+            this.Dispatcher.BeginInvoke((MethodInvoker)delegate ()
             {
                 testingForInputLabel.Text = testingForInputLabel.Tag + Environment.NewLine + value;
             });
-            this.okButton.BeginInvoke((MethodInvoker)delegate ()
+            this.Dispatcher.BeginInvoke((MethodInvoker)delegate ()
             {
-                okButton.Enabled = true;
+                okButton.IsEnabled = true;
             });
-            this.reselectInputButton.BeginInvoke((MethodInvoker)delegate ()
+            this.Dispatcher.BeginInvoke((MethodInvoker)delegate ()
             {
-                reselectInputButton.Enabled = true;
+                reselectInputButton.IsEnabled = true;
             });
             Allowed = false;
         }
@@ -85,12 +94,22 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        private void manualButton_Click(object sender, EventArgs e)
+        private void manualButton_Click(object sender, RoutedEventArgs e)
         {
             Allowed = true;
-            this.reselectInputButton.Enabled = false;
-            this.okButton.Enabled = false;
+            this.reselectInputButton.IsEnabled = false;
+            this.okButton.IsEnabled = false;
             testingForInputLabel.Text = Program.LanguageResource.GetString("WaitingForInputDialogLabel");
+        }
+
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
         }
     }
 }

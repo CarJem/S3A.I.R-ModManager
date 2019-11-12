@@ -12,10 +12,21 @@ using System.Net;
 using System.Net.NetworkInformation;
 using SharpCompress.Archives;
 using SharpCompress.Common;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Path = System.IO.Path;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class Updater : Form
+    public partial class Updater : Window
     {
         public enum UpdateResult : int
         {
@@ -48,11 +59,11 @@ namespace Sonic3AIR_ModManager
         public Updater(bool _manuallyTriggered = false)
         {
             InitializeComponent();
+            this.Owner = System.Windows.Application.Current.MainWindow;
             Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
 
             ManuallyTriggered = _manuallyTriggered;
-            richTextBox1.SelectionProtected = true;
 
             if (DisableUpdater == false) CheckForUpdates();
             else UpdateBypass();
@@ -115,7 +126,9 @@ namespace Sonic3AIR_ModManager
             string path = $"{destination}//{VersionCheckFileName}";
             FileInfo file = new FileInfo(path);
             VersionCheckInfo = new AIR_SDK.VersionCheck(file);
-            richTextBox1.Text = VersionCheckInfo.Details;
+
+            var block = new Paragraph(new Run(VersionCheckInfo.Details));
+            richTextBox1.Document.Blocks.Add(block);
 
             string settingsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR" + "\\settings.json";
             FileInfo settingsFile = new FileInfo(settingsPath);
@@ -125,7 +138,7 @@ namespace Sonic3AIR_ModManager
 
             if (File.Exists(settingsPath))
             {
-                SettingsFile = new AIR_SDK.Settings(settingsFile, new AIR_SDK.Settings.LoadOptions(true,null,true));
+                SettingsFile = new AIR_SDK.Settings(settingsFile, new AIR_SDK.Settings.LoadOptions(true, null, true));
                 var result = SettingsFile.Version.CompareTo(VersionCheckInfo.Version);
                 var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
                 if (result < 0)
@@ -157,22 +170,22 @@ namespace Sonic3AIR_ModManager
             if (Program.UpdateResult == UpdateResult.OutOfDate)
             {
                 updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
-                if (ShowDialog() == DialogResult.Yes)
-                if (ShowDialog() == DialogResult.Yes)
-                {
-                    DownloadUpdate();
-                }
-                else
-                {
-                    Program.UpdaterState = UpdateState.Finished;
-                    Close();
-                }
+                if (ShowDialog() == true)
+                    if (ShowDialog() == true)
+                    {
+                        DownloadUpdate();
+                    }
+                    else
+                    {
+                        Program.UpdaterState = UpdateState.Finished;
+                        Close();
+                    }
             }
             else if (ManuallyTriggered && Program.UpdateResult == UpdateResult.UpToDate)
             {
                 ManuallyTriggered = false;
                 updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_UpToDate");
-                if (ShowDialog() == DialogResult.Yes)
+                if (ShowDialog() == true)
                 {
                     DownloadUpdate();
                 }
@@ -247,7 +260,7 @@ namespace Sonic3AIR_ModManager
                 string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}\\sonic3air_game";
 
                 //Directory.CreateDirectory(output2);
-                if (Directory.Exists(output2)) Directory.Delete(output2,true);
+                if (Directory.Exists(output2)) Directory.Delete(output2, true);
 
                 Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
 
@@ -397,5 +410,20 @@ namespace Sonic3AIR_ModManager
         }
 
         #endregion
+
+        private void yesButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void noButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //this.DialogResult = false;
+        }
     }
 }

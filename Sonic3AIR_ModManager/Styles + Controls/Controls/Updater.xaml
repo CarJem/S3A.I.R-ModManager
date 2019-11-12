@@ -1,0 +1,27 @@
+﻿<Window x:Class="Sonic3AIR_ModManager.Updater"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sonic3AIR_ModManager"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" WindowStartupLocation="CenterOwner" MinWidth="325" MinHeight="489" MaxWidth="325" MaxHeight="489" Width="325" Height="489" Background="{DynamicResource NormalBackground}" Closing="Window_Closing">
+    <Grid Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="updateMessageLabel" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <RichTextBox x:Name="richTextBox1" Grid.Row="1" Foreground="{DynamicResource NormalText}" IsInactiveSelectionHighlightEnabled="False" IsEnabled="False"></RichTextBox>
+        <Grid Grid.Row="1"></Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="yesButton" Content="Yes" Padding="20,0" Margin="0,10,5,10" Click="yesButton_Click"></Button>
+            <Button x:Name="noButton" Content="No" Grid.Column="1" Padding="20,0" Margin="0,10,0,10" Click="noButton_Click"></Button>
+        </Grid>
+    </Grid>
+</Window>
