@@ -89,8 +89,7 @@
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -361,9 +360,9 @@
       <Project>{335800a2-f482-4ae6-9017-57d7c3c52110}</Project>
       <Name>GenerationsLib.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AIR-SDK\AIR-SDK.csproj">
-      <Project>{0f33d309-0ff8-42c5-ab4a-585d31072ec2}</Project>
-      <Name>AIR-SDK</Name>
+    <ProjectReference Include="..\AIR-API\AIR-API\AIR-API.csproj">
+      <Project>{4311f3b1-e4a1-401c-bc13-e5e80254242e}</Project>
+      <Name>AIR-API</Name>
     </ProjectReference>
     <ProjectReference Include="..\AIR_Protocol_Handler\Sonic3AIR_MM_GBAPIInstaller.csproj">
       <Project>{11a257a9-07ac-43c5-8705-808b7afd644b}</Project>

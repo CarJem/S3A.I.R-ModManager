@@ -89,9 +89,9 @@ namespace Sonic3AIR_ModManager
             ModViewer.ItemCheck?.Invoke();
         }
 
-        public AIR_SDK.Mod Source { get; set; }
+        public AIR_API.Mod Source { get; set; }
 
-        public ModViewerItem(AIR_SDK.Mod _source)
+        public ModViewerItem(AIR_API.Mod _source)
         {
             Source = _source;
         }

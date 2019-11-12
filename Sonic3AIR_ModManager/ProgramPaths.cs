@@ -201,7 +201,7 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        public static bool ValidateInstall(ref AIR_SDK.ActiveModsList S3AIRActiveMods, ref AIR_SDK.Settings S3AIRSettings)
+        public static bool ValidateInstall(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings)
         {
             Sonic3AIRAppDataFolder = AppDataFolder + "\\Sonic3AIR";
             Sonic3AIRActiveModsList = Sonic3AIRAppDataFolder + "\\mods\\active-mods.json";
@@ -247,16 +247,16 @@ namespace Sonic3AIR_ModManager
         }
 
 
-        public static bool ValidateSettingsAndActiveMods(ref AIR_SDK.ActiveModsList S3AIRActiveMods, ref AIR_SDK.Settings S3AIRSettings)
+        public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings)
         {
             if (!File.Exists(Sonic3AIRActiveModsList))
             {
-                S3AIRActiveMods = new AIR_SDK.ActiveModsList(Sonic3AIRActiveModsList);
+                S3AIRActiveMods = new AIR_API.ActiveModsList(Sonic3AIRActiveModsList);
             }
             else
             {
                 FileInfo list = new FileInfo(Sonic3AIRActiveModsList);
-                S3AIRActiveMods = new AIR_SDK.ActiveModsList(list);
+                S3AIRActiveMods = new AIR_API.ActiveModsList(list);
             }
 
 
@@ -264,7 +264,7 @@ namespace Sonic3AIR_ModManager
             FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
             try
             {
-                S3AIRSettings = new AIR_SDK.Settings(file);
+                S3AIRSettings = new AIR_API.Settings(file);
                 Version target = new Version("19.08.17.0");
                 int result = S3AIRSettings.Version.CompareTo(target);
                 if (result < 0)

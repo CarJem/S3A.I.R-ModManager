@@ -26,7 +26,7 @@ namespace Sonic3AIR_ModManager
             InitializeComponent();
         }
 
-        public System.Windows.Forms.DialogResult ShowDialog(AIR_SDK.Mod NewMod, AIR_SDK.Mod ExistingMod)
+        public System.Windows.Forms.DialogResult ShowDialog(AIR_API.Mod NewMod, AIR_API.Mod ExistingMod)
         {
             string nL = Environment.NewLine;
 

@@ -45,8 +45,8 @@ namespace Sonic3AIR_ModManager
             NeverStarted,
         }
 
-        public AIR_SDK.VersionCheck VersionCheckInfo;
-        private AIR_SDK.Settings SettingsFile;
+        public AIR_API.VersionCheck VersionCheckInfo;
+        private AIR_API.Settings SettingsFile;
 
         private string VersionCheckFileName = "";
         private string UpdateFileName = "";
@@ -125,7 +125,7 @@ namespace Sonic3AIR_ModManager
             string destination = ProgramPaths.Sonic3AIR_MM_BaseFolder;
             string path = $"{destination}//{VersionCheckFileName}";
             FileInfo file = new FileInfo(path);
-            VersionCheckInfo = new AIR_SDK.VersionCheck(file);
+            VersionCheckInfo = new AIR_API.VersionCheck(file);
 
             var block = new Paragraph(new Run(VersionCheckInfo.Details));
             richTextBox1.Document.Blocks.Add(block);
@@ -138,7 +138,7 @@ namespace Sonic3AIR_ModManager
 
             if (File.Exists(settingsPath))
             {
-                SettingsFile = new AIR_SDK.Settings(settingsFile, new AIR_SDK.Settings.LoadOptions(true, null, true));
+                SettingsFile = new AIR_API.Settings(settingsFile, new AIR_API.Settings.LoadOptions(true, null, true));
                 var result = SettingsFile.Version.CompareTo(VersionCheckInfo.Version);
                 var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
                 if (result < 0)
@@ -219,7 +219,7 @@ namespace Sonic3AIR_ModManager
                 {
                     try
                     {
-                        var metadata = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                        var metadata = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
                         return metadata.Version.CompareTo(comparision);
                     }
                     catch
@@ -254,7 +254,7 @@ namespace Sonic3AIR_ModManager
             {
                 string metaDataFile = Directory.GetFiles(output, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
                 FileInfo fileInfo = new FileInfo(metaDataFile);
-                AIR_SDK.VersionMetadata ver = new AIR_SDK.VersionMetadata(fileInfo);
+                AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(fileInfo);
 
 
                 string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}\\sonic3air_game";

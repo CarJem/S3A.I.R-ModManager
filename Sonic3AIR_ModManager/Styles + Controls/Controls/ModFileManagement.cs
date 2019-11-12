@@ -112,7 +112,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        public static void RemoveMod(AIR_SDK.Mod modToRemove)
+        public static void RemoveMod(AIR_API.Mod modToRemove)
         {
             if (MessageBox.Show($"Are you sure you want to delete {modToRemove.Name}? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
@@ -208,17 +208,17 @@ namespace Sonic3AIR_ModManager
         {
             string ModPath = Path.GetFileNameWithoutExtension(file);
             string existingMeta = ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath + "\\" + "mod.json";
-            AIR_SDK.Mod ExistingMod = null;
-            AIR_SDK.Mod NewMod = null;
+            AIR_API.Mod ExistingMod = null;
+            AIR_API.Mod NewMod = null;
 
             if (File.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath + "\\" + "mod.json"))
             {
-                ExistingMod = new AIR_SDK.Mod(new FileInfo(existingMeta));
-                NewMod = new AIR_SDK.Mod(new FileInfo(meta));
+                ExistingMod = new AIR_API.Mod(new FileInfo(existingMeta));
+                NewMod = new AIR_API.Mod(new FileInfo(meta));
             }
             else
             {
-                NewMod = new AIR_SDK.Mod(new FileInfo(meta));
+                NewMod = new AIR_API.Mod(new FileInfo(meta));
             }
 
 
@@ -455,7 +455,7 @@ namespace Sonic3AIR_ModManager
 
         #region Input Mapping Import/Exporting
 
-        public static void ExportInputMappings(AIR_SDK.InputMappings.Device mappings)
+        public static void ExportInputMappings(AIR_API.InputMappings.Device mappings)
         {
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog()
             {
@@ -468,7 +468,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        public static void ImportInputMappings(AIR_SDK.GameConfig config)
+        public static void ImportInputMappings(AIR_API.GameConfig config)
         {
             System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog()
             {

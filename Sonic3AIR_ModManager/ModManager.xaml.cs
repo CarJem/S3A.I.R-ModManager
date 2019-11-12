@@ -75,11 +75,11 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         public string nL = Environment.NewLine;
-        public static AIR_SDK.Settings S3AIRSettings;
+        public static AIR_API.Settings S3AIRSettings;
         public static ModManager Instance;
-        public static AIR_SDK.ActiveModsList S3AIRActiveMods;
-        public static AIR_SDK.GameConfig GameConfig;
-        public static AIR_SDK.VersionMetadata CurrentAIRVersion;
+        public static AIR_API.ActiveModsList S3AIRActiveMods;
+        public static AIR_API.GameConfig GameConfig;
+        public static AIR_API.VersionMetadata CurrentAIRVersion;
         IList<ModViewerItem> ModsList = new List<ModViewerItem>();
         bool AllowUpdate { get; set; } = true;
 
@@ -401,7 +401,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                AIR_SDK.Recording recording = GameRecordingList.SelectedItem as AIR_SDK.Recording;
+                AIR_API.Recording recording = GameRecordingList.SelectedItem as AIR_API.Recording;
                 if (MessageBox.Show(UserLanguage.DeleteItem(recording.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
                 {
                     try
@@ -490,7 +490,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                var item = GameRecordingList.SelectedItem as AIR_SDK.Recording;
+                var item = GameRecordingList.SelectedItem as AIR_API.Recording;
                 Clipboard.SetText(item.FilePath);
                 MessageBox.Show(Program.LanguageResource.GetString("RecordingPathCopiedToClipboard"));
             }
@@ -500,7 +500,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                UploadRecordingToFileDotIO(GameRecordingList.SelectedItem as AIR_SDK.Recording);
+                UploadRecordingToFileDotIO(GameRecordingList.SelectedItem as AIR_API.Recording);
             }
 
         }
@@ -846,7 +846,7 @@ namespace Sonic3AIR_ModManager
                 {
                     try
                     {
-                        CurrentAIRVersion = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                        CurrentAIRVersion = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
                         if (CurrentAIRVersion.Version.CompareTo(new Version("19.09.0.0")) >= 0)
                         {
                             Properties.Settings.Default.EnableNewLoaderMethod = true;
@@ -994,7 +994,7 @@ namespace Sonic3AIR_ModManager
 
             if (ModList.SelectedItem != null)
             {
-                AIR_SDK.Mod item = (ModList.SelectedItem as ModViewerItem).Source;
+                AIR_API.Mod item = (ModList.SelectedItem as ModViewerItem).Source;
                 if (item != null)
                 {
 
@@ -1066,7 +1066,7 @@ namespace Sonic3AIR_ModManager
                     FileInfo[] fileInfo = directoryInfo.GetFiles("*.bin").Where(path => reg.IsMatch(path.Name)).ToArray();
                     foreach (var file in fileInfo)
                     {
-                        AIR_SDK.Recording recording = new AIR_SDK.Recording(file);
+                        AIR_API.Recording recording = new AIR_API.Recording(file);
                         GameRecordingList.Items.Add(recording);
                     }
                 }
@@ -1081,10 +1081,10 @@ namespace Sonic3AIR_ModManager
         private void CollectInputMappings()
         {
             inputMethodsList.SelectionChanged -= InputMethodsList_SelectedIndexChanged;
-            AIR_SDK.InputMappings.Device selectedItem = null;
+            AIR_API.InputMappings.Device selectedItem = null;
             if (inputMethodsList.SelectedItem != null)
             {
-                selectedItem = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                selectedItem = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
             }
             inputMethodsList.ItemsSource = null;
             inputMethodsList.Items.Refresh();
@@ -1162,7 +1162,7 @@ namespace Sonic3AIR_ModManager
                 {
                     try
                     {
-                        GameConfig = new AIR_SDK.GameConfig(config);
+                        GameConfig = new AIR_API.GameConfig(config);
                     }
                     catch
                     {
@@ -1223,9 +1223,9 @@ namespace Sonic3AIR_ModManager
             {
                 if (inputMethodsList.SelectedItem != null)
                 {
-                    if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
+                    if (inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
                     {
-                        AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                        AIR_API.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
                         aInputButton.Content = (device.A.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.A.FirstOrDefault());
                         bInputButton.Content = (device.B.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.B.FirstOrDefault());
                         xInputButton.Content = (device.X.Count() > 1 ? Program.LanguageResource.GetString("Input_MULTI") : device.X.FirstOrDefault());
@@ -1287,7 +1287,7 @@ namespace Sonic3AIR_ModManager
 
         private void ChangeInputMappings(object sender)
         {
-            AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+            AIR_API.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
 
             if (sender.Equals(aInputButton)) ChangeMappings(ref device, "A");
             else if (sender.Equals(bInputButton)) ChangeMappings(ref device, "B");
@@ -1300,7 +1300,7 @@ namespace Sonic3AIR_ModManager
             else if (sender.Equals(startInputButton)) ChangeMappings(ref device, "Start");
             else if (sender.Equals(backInputButton)) ChangeMappings(ref device, "Back");
 
-            void ChangeMappings(ref AIR_SDK.InputMappings.Device button, string input)
+            void ChangeMappings(ref AIR_API.InputMappings.Device button, string input)
             {
                 switch (input)
                 {
@@ -1380,7 +1380,7 @@ namespace Sonic3AIR_ModManager
                 if (result != System.Windows.Forms.DialogResult.Cancel && !containsKey && unacceptable_char)
                 {
                     finished = true;
-                    GameConfig.Devices.Add(new_name, new AIR_SDK.InputMappings.Device(new_name));
+                    GameConfig.Devices.Add(new_name, new AIR_API.InputMappings.Device(new_name));
                     RefreshInputMappings();
                 }
                 else if (result != System.Windows.Forms.DialogResult.Cancel)
@@ -1409,10 +1409,10 @@ namespace Sonic3AIR_ModManager
         {
             if (inputMethodsList.SelectedItem != null)
             {
-                if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
+                if (inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
                 {
 
-                    var deviceToRemove = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                    var deviceToRemove = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
                     DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(deviceToRemove.EntryName), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (result == System.Windows.Forms.DialogResult.Yes)
                     {
@@ -1443,9 +1443,9 @@ namespace Sonic3AIR_ModManager
         {
             if (inputMethodsList.SelectedItem != null)
             {
-                if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
+                if (inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
                 {
-                    AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                    AIR_API.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
                     ModFileManagement.ExportInputMappings(device);
                 }
             }
@@ -1471,9 +1471,9 @@ namespace Sonic3AIR_ModManager
             {
                 if (inputMethodsList.SelectedItem != null)
                 {
-                    if (inputMethodsList.SelectedItem is AIR_SDK.InputMappings.Device)
+                    if (inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
                     {
-                        AIR_SDK.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_SDK.InputMappings.Device;
+                        AIR_API.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
                         if (device.HasDeviceNames)
                         {
                             if (refreshItems)
@@ -1519,7 +1519,7 @@ namespace Sonic3AIR_ModManager
             }
             UpdateModsList(true);
 
-            void UpdateMods(AIR_SDK.Mod item)
+            void UpdateMods(AIR_API.Mod item)
             {
                 if (item.IsEnabled != item.EnabledLocal)
                 {
@@ -1546,12 +1546,12 @@ namespace Sonic3AIR_ModManager
             {
                 DirectoryInfo f = new DirectoryInfo(folder.FullName);
                 var root = f.GetFiles("mod.json").FirstOrDefault();
-                AIR_SDK.Mod mod;
+                AIR_API.Mod mod;
                 if (root != null)
                 {
                     try
                     {
-                        mod = new AIR_SDK.Mod(root);
+                        mod = new AIR_API.Mod(root);
                         if (mod != null)
                         {
                             if (folder.Name.Contains("#"))
@@ -1585,7 +1585,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void DisableModLegacy(AIR_SDK.Mod mod)
+        private void DisableModLegacy(AIR_API.Mod mod)
         {
             try
             {
@@ -1598,7 +1598,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void EnableModLegacy(AIR_SDK.Mod mod)
+        private void EnableModLegacy(AIR_API.Mod mod)
         {
             try
             {
@@ -1667,22 +1667,22 @@ namespace Sonic3AIR_ModManager
         {
             DirectoryInfo d = new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder);
             DirectoryInfo[] folders = d.GetDirectories();
-            IList<Tuple<AIR_SDK.Mod, int>> ActiveMods = new List<Tuple<AIR_SDK.Mod, int>>();
+            IList<Tuple<AIR_API.Mod, int>> ActiveMods = new List<Tuple<AIR_API.Mod, int>>();
             foreach (DirectoryInfo folder in folders)
             {
                 DirectoryInfo f = new DirectoryInfo(folder.FullName);
                 var root = f.GetFiles("mod.json").FirstOrDefault();
-                AIR_SDK.Mod mod;
+                AIR_API.Mod mod;
                 if (root != null)
                 {
                     try
                     {
-                        mod = new AIR_SDK.Mod(root);
+                        mod = new AIR_API.Mod(root);
                         if (S3AIRActiveMods.ActiveMods.Contains(mod.FolderName))
                         {
                             mod.IsEnabled = true;
                             mod.EnabledLocal = true;
-                            ActiveMods.Add(new Tuple<AIR_SDK.Mod, int>(mod, S3AIRActiveMods.ActiveMods.IndexOf(mod.FolderName)));
+                            ActiveMods.Add(new Tuple<AIR_API.Mod, int>(mod, S3AIRActiveMods.ActiveMods.IndexOf(mod.FolderName)));
                         }
                         else
                         {
@@ -1765,7 +1765,7 @@ namespace Sonic3AIR_ModManager
                 S3AIRActiveMods.Save(ModsList.Where(x => x.IsEnabled).Select(x => x.Source.FolderName).Reverse().ToList());
                 UpdateModsList(true);
 
-                void UpdateMods(AIR_SDK.Mod item)
+                void UpdateMods(AIR_API.Mod item)
                 {
                     if (item.IsEnabled != item.EnabledLocal)
                     {
@@ -1776,12 +1776,12 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void DisableMod(AIR_SDK.Mod mod)
+        private void DisableMod(AIR_API.Mod mod)
         {
             S3AIRActiveMods.ActiveMods.Remove(mod.FolderName);
         }
 
-        private void EnableMod(AIR_SDK.Mod mod)
+        private void EnableMod(AIR_API.Mod mod)
         {
             S3AIRActiveMods.ActiveMods.Add(mod.FolderName);
         }
@@ -1969,7 +1969,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                AIR_SDK.Recording item = GameRecordingList.SelectedItem as AIR_SDK.Recording;
+                AIR_API.Recording item = GameRecordingList.SelectedItem as AIR_API.Recording;
                 if (File.Exists(item.FilePath))
                 {
                     Process.Start("explorer.exe", "/select, " + item.FilePath);
@@ -1982,7 +1982,7 @@ namespace Sonic3AIR_ModManager
 
         #region Information Sending
 
-        private async void UploadRecordingToFileDotIO(AIR_SDK.Recording recording)
+        private async void UploadRecordingToFileDotIO(AIR_API.Recording recording)
         {
             string expires = "/?expires=1w";
             using (var httpClient = new HttpClient())
@@ -2129,7 +2129,7 @@ namespace Sonic3AIR_ModManager
 
 
                 string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-                AIR_SDK.VersionMetadata ver = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
 
 
                 string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";

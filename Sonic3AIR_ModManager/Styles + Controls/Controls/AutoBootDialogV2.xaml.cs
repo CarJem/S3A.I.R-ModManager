@@ -58,7 +58,7 @@ namespace Sonic3AIR_ModManager
                 {
                     try
                     {
-                        var CurrentAIRVersion = new AIR_SDK.VersionMetadata(new FileInfo(metaDataFile));
+                        var CurrentAIRVersion = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
                         return CurrentAIRVersion.VersionString;
                     }
                     catch
