@@ -1,0 +1,3 @@
+[submodule "GenerationsLib"]
+	path = GenerationsLib
+	url = https://github.com/CarJem/GenerationsLib.git
