@@ -1,2 +1,2 @@
-# S3AIR_Modloader
-Sonic 3 AIR Mod Manager
+# Sonic 3 A.I.R. Mod Manager
+TO-DO: Make a Discription
