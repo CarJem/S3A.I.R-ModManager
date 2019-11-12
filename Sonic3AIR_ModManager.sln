@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIR-SDK", "AIR-SDK\AIR-SDK.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sonic3AIR_ModManager", "Sonic3AIR_ModManager\Sonic3AIR_ModManager.csproj", "{74887941-CE31-48E7-A4EF-75C52EC6415E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerationsLib.WPF", "..\GenerationsLib\GenerationsLib.WPF\GenerationsLib.WPF.csproj", "{335800A2-F482-4AE6-9017-57D7C3C52110}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,12 +57,24 @@ Global
 		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x64.Build.0 = Release|Any CPU
 		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x86.ActiveCfg = Release|Any CPU
 		{74887941-CE31-48E7-A4EF-75C52EC6415E}.Release|x86.Build.0 = Release|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Debug|x64.Build.0 = Debug|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Debug|x86.Build.0 = Debug|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Release|x64.ActiveCfg = Release|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Release|x64.Build.0 = Release|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Release|x86.ActiveCfg = Release|Any CPU
+		{335800A2-F482-4AE6-9017-57D7C3C52110}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_PrefixTranslations = False
 		SolutionGuid = {614F9ECA-E63D-44B5-961B-60BDAC46614B}
+		RESX_PrefixTranslations = False
 	EndGlobalSection
 EndGlobal
