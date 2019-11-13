@@ -31,7 +31,7 @@ namespace Sonic3AIR_ModManager
 
         public bool? ShowDeviceNameDialog(ref string input, string caption, string message = "")
         {
-            this.Title = caption;
+            this.Title = (caption != null ? caption : "");
             label1.Text = message;
             textBox1.Text = input;
 

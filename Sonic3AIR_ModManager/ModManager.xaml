@@ -276,14 +276,14 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <ComboBox  Name="FullscreenTypeComboBox" HorizontalContentAlignment="Stretch" SelectionChanged="CurrentWindowComboBox_SelectionChanged" SelectedIndex="0">
-                                                <ComboBoxItem Tag="0" Content="Windowed" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                <ComboBoxItem Tag="1" Content="Fullscreen" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                <ComboBoxItem Tag="2" Content="Exclusive Fullscreen" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Name="FullscreenOption1" Tag="0" Content="Windowed" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Name="FullscreenOption2" Tag="1" Content="Fullscreen" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                <ComboBoxItem Name="FullscreenOption3" Tag="2" Content="Exclusive Fullscreen" Width="{Binding ElementName=FullscreenTypeComboBox, Path=ActualWidth}"></ComboBoxItem>
                                             </ComboBox>
                                         </Grid>
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Grid.Row="1" Header="A.I.R. Launch Options">
+                                <GroupBox Grid.Row="1" Header="A.I.R. Launch Options" Name="LaunchOptionsGroup">
                                     <Grid x:Name="airLaunchPanel">
                                         <StackPanel Margin="5">
                                             <TextBlock x:Name="levelSelectLable" Text="Starting Scene:" Margin="0,2"></TextBlock>
@@ -331,11 +331,11 @@
                                                 </Grid.ColumnDefinitions>
                                                 <ComboBox  Name="PlayerComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="LaunchOptions_SelectionChanged">
                                                     <ComboBoxItem Tag="NONE" Name="DefaultPlayerItem" Content="Default (NONE)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="0" Content="Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="1" Content="Sonic the Hedgehog" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="2" Content="Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="3" Content="Knuckles the Echidna" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Tag="4" Content="Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prowler (If Unlocked)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerST" Tag="0" Content="Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerS" Tag="1" Content="Sonic the Hedgehog" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerT" Tag="2" Content="Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerK" Tag="3" Content="Knuckles the Echidna" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerKT" Tag="4" Content="Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prowler (If Unlocked)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                 </ComboBox>
                                             </Grid>
                                             <TextBlock x:Name="StartPhaseLabel" Text="Startup Phase:**" Margin="0,2"></TextBlock>
@@ -344,7 +344,7 @@
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
                                                 <ComboBox  Name="StartPhaseComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="LaunchOptions_SelectionChanged">
-                                                    <ComboBoxItem Tag="NONE" Content="Default (NONE)" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Tag="NONE" Name="DefaultPhaseItem" Content="Default (NONE)" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Tag="0" Content="Disclaimer" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Tag="1" Content="SEGA Logo" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Tag="2" Content="Main Menu" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
@@ -357,7 +357,7 @@
                                         </StackPanel>
                                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" x:Name="LaunchOptionsWarning" Visibility="Collapsed">
                                             <Grid Background="{DynamicResource NormalBackground}" Opacity="0.8"></Grid>
-                                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" Foreground="Red" TextAlignment="Center" Text="NOTE: These are Debugging Options Only! &#10; Intended for Mod Developers and Debugging Purposes.&#10; This may breaks the likes of features such as Achivements. &#10; Please be careful!">
+                                            <TextBlock x:Name="LaunchOptionsForewarnMessage" VerticalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" Foreground="Red" TextAlignment="Center" Text="NOTE: These are Debugging Options Only! &#10; Intended for Mod Developers and Debugging Purposes.&#10; This may breaks the likes of features such as Achivements. &#10; Please be careful!">
                                                 <TextBlock.Effect>
                                                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" Opacity="1" BlurRadius="2"/>
                                                 </TextBlock.Effect>

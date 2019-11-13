@@ -39,7 +39,7 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModManager.Languages.lang_null", typeof(lang_null).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModManager.Languages.lang.null", typeof(lang_null).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

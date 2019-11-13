@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Sonic3AIR_ModManager
 {
@@ -51,16 +52,26 @@ namespace Sonic3AIR_ModManager
         {
             string currentLang = Properties.Settings.Default.UserLanguage;
             return GetLangVar(currentLang);
-
         }
 
         public static void ApplyLanguageResourcePath(Language value)
         {
-            if (value.Equals(Language.NULL)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_null", Assembly.GetExecutingAssembly());
-            else if (value.Equals(Language.EN_US)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_en", Assembly.GetExecutingAssembly());
-            else if (value.Equals(Language.GR)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_gr", Assembly.GetExecutingAssembly());
-            else if (value.Equals(Language.FR)) CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_fr", Assembly.GetExecutingAssembly());
-            else CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang_en", Assembly.GetExecutingAssembly());
+            CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("en");
+
+            if (value.Equals(Language.NULL))
+            {
+                CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang.null", Assembly.GetExecutingAssembly());
+            }
+            else
+            {
+                CurrentResource = new ResourceManager("Sonic3AIR_ModManager.Languages.lang", Assembly.GetExecutingAssembly());
+
+                if (value.Equals(Language.EN_US)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+                else if (value.Equals(Language.GR)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                else if (value.Equals(Language.FR)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr");
+                else System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+            }
+
         }
 
         private static void SetCurrentLanguage(Language value)
@@ -204,7 +215,7 @@ namespace Sonic3AIR_ModManager
 
             form.showLogFileButton.Content = Program.LanguageResource.GetString("ShowLogFileButton");
 
-            //General Options Page
+            //General Options Page + A.I.R. Settings
             form.groupBox8.Header = Program.LanguageResource.GetString("ModManagerOptions");
             form.label1.Text = Program.LanguageResource.GetString("Sonic3AIRPathLabel");
             form.autoRunCheckbox.Content = Program.LanguageResource.GetString("EnableAutoBootMode");
@@ -218,6 +229,38 @@ namespace Sonic3AIR_ModManager
             form.fixGlitchesCheckbox.Content = Program.LanguageResource.GetString("FixGlitches");
             form.failSafeModeCheckbox.Content = Program.LanguageResource.GetString("FailSafeMode");
             form.devModeCheckbox.Content = Program.LanguageResource.GetString("AIRDevMode");
+
+            form.gameOptionsPage.Header = Program.LanguageResource.GetString("AIROptionsTab");
+
+            form.useDarkModeCheckBox.Content = Program.LanguageResource.GetString("UseDarkTheme");
+
+            form.StartingWindowLabel.Text = Program.LanguageResource.GetString("StartupWindowLabel");
+            form.FullscreenOption1.Content = Program.LanguageResource.GetString("FullscreenOption1");
+            form.FullscreenOption2.Content = Program.LanguageResource.GetString("FullscreenOption2");
+            form.FullscreenOption3.Content = Program.LanguageResource.GetString("FullscreenOption3");
+
+            form.levelSelectLable.Text = Program.LanguageResource.GetString("LaunchOptionsStartingSceneLabel");
+            form.StaringPlayer.Text = Program.LanguageResource.GetString("LaunchOptionsStartingPlayerLabel") + "*";
+            form.StartPhaseLabel.Text = Program.LanguageResource.GetString("LaunchOptionsStartingPhaseLabel") + "**";
+
+            form.NoteLabel.Text = "*" + Program.LanguageResource.GetString("LaunchOptionsWarning1");
+            form.Note2Label.Text = "**" + Program.LanguageResource.GetString("LaunchOptionsWarning2");
+
+            form.LaunchOptionsForewarnMessage.Text = Program.LanguageResource.GetString("LaunchOptionsForewarning");
+
+            form.LaunchOptionsUnderstandingButton.Content = Program.LanguageResource.GetString("UnderstoodButton");
+
+            form.LaunchOptionsGroup.Header = Program.LanguageResource.GetString("AIRLaunchOptionsGroupHeader");
+
+            form.DefaultPlayerItem.Content = Program.LanguageResource.GetString("DefaultLaunchOptionItemText");
+            form.DefaultSceneItem.Content = Program.LanguageResource.GetString("DefaultLaunchOptionItemText");
+            form.DefaultPhaseItem.Content = Program.LanguageResource.GetString("DefaultLaunchOptionItemText");
+
+            form.LaunchPlayerS.Content = Program.LanguageResource.GetString("LaunchOptionsPlayerS");
+            form.LaunchPlayerT.Content = Program.LanguageResource.GetString("LaunchOptionsPlayerT");
+            form.LaunchPlayerK.Content = Program.LanguageResource.GetString("LaunchOptionsPlayerK");
+            form.LaunchPlayerKT.Content = Program.LanguageResource.GetString("LaunchOptionsPlayerKT");
+            form.LaunchPlayerST.Content = Program.LanguageResource.GetString("LaunchOptionsPlayerST");
 
             form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
 
@@ -294,7 +337,8 @@ namespace Sonic3AIR_ModManager
             form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
             form.okButton.Content = Program.LanguageResource.GetString("Ok_Button");
 
-            form.Title = Program.LanguageResource.GetString("SelectInputTitleExpandable");
+            string title = Program.LanguageResource.GetString("SelectInputTitleExpandable");
+            form.Title = (title != null ? title : "");
             form.getInputButton.Content = Program.LanguageResource.GetString("DetectGamepadInputExpandable");
         }
 
@@ -304,7 +348,9 @@ namespace Sonic3AIR_ModManager
             form.editButton.Content = Program.LanguageResource.GetString("EditExpandable");
             form.groupBox1.Header = Program.LanguageResource.GetString("KeybindingsLabel");
 
-            form.Title = Program.LanguageResource.GetString("EditKeybindingsTitleExpandable");
+            string title = Program.LanguageResource.GetString("EditKeybindingsTitleExpandable");
+
+            form.Title = (title != null ? title : "");
         }
 
         public static void ApplyLanguage(ref DeviceNameDialogV2 form)

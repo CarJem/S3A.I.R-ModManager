@@ -22,14 +22,14 @@ namespace Sonic3AIR_ModManager.Languages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class lang_en {
+    internal class lang {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal lang_en() {
+        internal lang() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModManager.Languages.lang_en", typeof(lang_en).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sonic3AIR_ModManager.Languages.lang", typeof(lang).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -133,6 +133,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A.I.R. Launch Options.
+        /// </summary>
+        internal static string AIRLaunchOptionsGroupHeader {
+            get {
+                return ResourceManager.GetString("AIRLaunchOptionsGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A.I.R. Media....
         /// </summary>
         internal static string AIRMedia {
@@ -147,6 +156,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string AIRMMPlaces {
             get {
                 return ResourceManager.GetString("AIRMMPlaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A.I.R. Options.
+        /// </summary>
+        internal static string AIROptionsTab {
+            get {
+                return ResourceManager.GetString("AIROptionsTab", resourceCulture);
             }
         }
         
@@ -488,6 +506,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default (NONE).
+        /// </summary>
+        internal static string DefaultLaunchOptionItemText {
+            get {
+                return ResourceManager.GetString("DefaultLaunchOptionItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string Delete {
@@ -731,6 +758,33 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Windowed.
+        /// </summary>
+        internal static string FullscreenOption1 {
+            get {
+                return ResourceManager.GetString("FullscreenOption1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fullscreen.
+        /// </summary>
+        internal static string FullscreenOption2 {
+            get {
+                return ResourceManager.GetString("FullscreenOption2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclusive Fullscreen.
+        /// </summary>
+        internal static string FullscreenOption3 {
+            get {
+                return ResourceManager.GetString("FullscreenOption3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gamebanana URL Handler Options....
         /// </summary>
         internal static string GameBannaURLHandler {
@@ -969,6 +1023,107 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NOTE: These are Debugging Options Only!
+        ///Intended for Mod Developers and Debugging Purposes. This may breaks the likes of features such as Achivements.
+        ///Please be careful!.
+        /// </summary>
+        internal static string LaunchOptionsForewarning {
+            get {
+                return ResourceManager.GetString("LaunchOptionsForewarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knuckles the Echidna.
+        /// </summary>
+        internal static string LaunchOptionsPlayerK {
+            get {
+                return ResourceManager.GetString("LaunchOptionsPlayerK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prowler (If Unlocked).
+        /// </summary>
+        internal static string LaunchOptionsPlayerKT {
+            get {
+                return ResourceManager.GetString("LaunchOptionsPlayerKT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic the Hedgehog.
+        /// </summary>
+        internal static string LaunchOptionsPlayerS {
+            get {
+                return ResourceManager.GetString("LaunchOptionsPlayerS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prowler.
+        /// </summary>
+        internal static string LaunchOptionsPlayerST {
+            get {
+                return ResourceManager.GetString("LaunchOptionsPlayerST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miles &quot;Tails&quot; Prowler.
+        /// </summary>
+        internal static string LaunchOptionsPlayerT {
+            get {
+                return ResourceManager.GetString("LaunchOptionsPlayerT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Phase.
+        /// </summary>
+        internal static string LaunchOptionsStartingPhaseLabel {
+            get {
+                return ResourceManager.GetString("LaunchOptionsStartingPhaseLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Player.
+        /// </summary>
+        internal static string LaunchOptionsStartingPlayerLabel {
+            get {
+                return ResourceManager.GetString("LaunchOptionsStartingPlayerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Scene.
+        /// </summary>
+        internal static string LaunchOptionsStartingSceneLabel {
+            get {
+                return ResourceManager.GetString("LaunchOptionsStartingSceneLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignored if Starting Scene is Set to NONE.
+        /// </summary>
+        internal static string LaunchOptionsWarning1 {
+            get {
+                return ResourceManager.GetString("LaunchOptionsWarning1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignored if Starting Scene is Set to Anything Other than NONE.
+        /// </summary>
+        internal static string LaunchOptionsWarning2 {
+            get {
+                return ResourceManager.GetString("LaunchOptionsWarning2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log file not found.
         /// </summary>
         internal static string LogFileNotFound {
@@ -1046,6 +1201,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string MoreExpandable {
             get {
                 return ResourceManager.GetString("MoreExpandable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to =========================.
+        /// </summary>
+        internal static string NewStrings {
+            get {
+                return ResourceManager.GetString("NewStrings", resourceCulture);
             }
         }
         
@@ -1653,6 +1817,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Startup Window:.
+        /// </summary>
+        internal static string StartupWindowLabel {
+            get {
+                return ResourceManager.GetString("StartupWindowLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stay Open on Game Exit.
         /// </summary>
         internal static string StayOpenOnExit {
@@ -1734,6 +1907,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Understood.
+        /// </summary>
+        internal static string UnderstoodButton {
+            get {
+                return ResourceManager.GetString("UnderstoodButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An Update is Avaliable! Would You Like to Update Now?.
         /// </summary>
         internal static string UpdateAvaliable {
@@ -1775,6 +1957,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string Upload {
             get {
                 return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Dark Theme.
+        /// </summary>
+        internal static string UseDarkTheme {
+            get {
+                return ResourceManager.GetString("UseDarkTheme", resourceCulture);
             }
         }
         
