@@ -60,7 +60,8 @@ namespace Sonic3AIR_ModManager
         public Updater(bool _manuallyTriggered = false)
         {
             InitializeComponent();
-            this.Owner = System.Windows.Application.Current.MainWindow;
+            try { this.Owner = System.Windows.Application.Current.MainWindow; }
+            catch { }
             Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
 
