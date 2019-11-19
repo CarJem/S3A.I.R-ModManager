@@ -82,6 +82,9 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Publish|AnyCPU'">
+    <OutputPath>bin\Publish\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLine, Version=2.6.0.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.2.6.0\lib\net461\CommandLine.dll</HintPath>
@@ -416,7 +419,7 @@ if "%25HOUR:~0,1%25" == " " (SET dtStamp=%25dtStamp9%25) else (SET dtStamp=%25dt
 
 ECHO %25dtStamp%25
 
-if $(ConfigurationName) == Release ( 
+if $(ConfigurationName) == Publish ( 
 "D:\Program Files\7-Zip\7z.exe" a "D:\Users\CarJem\Google Drive\AIR Mod Manager Development\Sonic 3 A.I.R. Mod Manager Build [%25dtStamp%25].zip" $(TargetDir) 
 start explorer.exe "D:\Users\CarJem\Google Drive\AIR Mod Manager Development\"
 )</PostBuildEvent>
