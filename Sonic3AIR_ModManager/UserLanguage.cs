@@ -162,10 +162,10 @@ namespace Sonic3AIR_ModManager
             form.refreshButton.Content = Program.LanguageResource.GetString("Reload");
             form.moreModOptionsButton.Content = Program.LanguageResource.GetString("MoreExpandable");
 
-            form.gamebannaURLHandlerOptionsToolStripMenuItem.Header = Program.LanguageResource.GetString("GameBannaURLHandler");
-            form.enableModStackingToolStripMenuItem.Header = Program.LanguageResource.GetString("EnableModStacking");
-            form.onForAIRVersionUnreleasedToolStripMenuItem.Header = Program.LanguageResource.GetString("EnableModStacking_Note1");
-            form.v1909190AndAboveOnlyToolStripMenuItem.Header = Program.LanguageResource.GetString("EnableModStacking_Note2");
+            form.gamebannaURLHandlerOptionsToolStripMenuItem.Content = Program.LanguageResource.GetString("GameBannaURLHandler");
+            form.enableModStackingToolStripMenuItem.Content = Program.LanguageResource.GetString("EnableModStacking");
+            form.onForAIRVersionUnreleasedToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note1");
+            form.v1909190AndAboveOnlyToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note2");
 
             form.openModFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModFolder");
             form.removeModToolStripMenuItem.Header = Program.LanguageResource.GetString("RemoveMod");

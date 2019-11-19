@@ -731,64 +731,85 @@ If you have, make sure these locations exist. The modloader can't run without th
   </data>
   <data name="AIROptionsTab" xml:space="preserve">
     <value>A.I.R. Options</value>
+    
+    
   </data>
   <data name="UseDarkTheme" xml:space="preserve">
     <value>Use Dark Theme</value>
+    
   </data>
   <data name="StartupWindowLabel" xml:space="preserve">
     <value>Startup Window:</value>
+    
   </data>
   <data name="FullscreenOption1" xml:space="preserve">
     <value>Windowed</value>
+    
   </data>
   <data name="FullscreenOption2" xml:space="preserve">
     <value>Fullscreen</value>
+    
   </data>
   <data name="FullscreenOption3" xml:space="preserve">
     <value>Exclusive Fullscreen</value>
+    
   </data>
   <data name="UnderstoodButton" xml:space="preserve">
     <value>Understood</value>
+    
   </data>
   <data name="AIRLaunchOptionsGroupHeader" xml:space="preserve">
     <value>A.I.R. Launch Options</value>
+    
   </data>
   <data name="DefaultLaunchOptionItemText" xml:space="preserve">
     <value>Default (NONE)</value>
+    
   </data>
   <data name="LaunchOptionsWarning1" xml:space="preserve">
     <value>Ignored if Starting Scene is Set to NONE</value>
+    
   </data>
   <data name="LaunchOptionsWarning2" xml:space="preserve">
     <value>Ignored if Starting Scene is Set to Anything Other than NONE</value>
+    
   </data>
   <data name="LaunchOptionsPlayerS" xml:space="preserve">
     <value>Sonic the Hedgehog</value>
+    
   </data>
   <data name="LaunchOptionsPlayerST" xml:space="preserve">
     <value>Sonic the Hedgehog &amp; Miles "Tails" Prowler</value>
+    
   </data>
   <data name="LaunchOptionsPlayerK" xml:space="preserve">
     <value>Knuckles the Echidna</value>
+    
   </data>
   <data name="LaunchOptionsPlayerKT" xml:space="preserve">
     <value>Knuckles the Echidna &amp; Miles "Tails" Prowler (If Unlocked)</value>
+    
   </data>
   <data name="LaunchOptionsPlayerT" xml:space="preserve">
     <value>Miles "Tails" Prowler</value>
+    
   </data>
   <data name="LaunchOptionsStartingPlayerLabel" xml:space="preserve">
     <value>Starting Player</value>
+    
   </data>
   <data name="LaunchOptionsStartingSceneLabel" xml:space="preserve">
     <value>Starting Scene</value>
+    
   </data>
   <data name="LaunchOptionsStartingPhaseLabel" xml:space="preserve">
     <value>Starting Phase</value>
+    
   </data>
   <data name="LaunchOptionsForewarning" xml:space="preserve">
     <value>NOTE: These are Debugging Options Only!
 Intended for Mod Developers and Debugging Purposes. This may breaks the likes of features such as Achivements.
 Please be careful!</value>
+    
   </data>
 </root>

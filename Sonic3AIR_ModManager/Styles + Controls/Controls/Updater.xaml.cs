@@ -34,6 +34,7 @@ namespace Sonic3AIR_ModManager
             UpToDate,
             Offline,
             FileNotFound,
+            ValueNull,
             Null,
             Error
         }
@@ -138,26 +139,34 @@ namespace Sonic3AIR_ModManager
 
             if (File.Exists(settingsPath))
             {
-                SettingsFile = new AIR_API.Settings(settingsFile, new AIR_API.Settings.LoadOptions(true, null, true));
-                var result = SettingsFile.Version.CompareTo(VersionCheckInfo.Version);
-                var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
-                if (result < 0)
+                SettingsFile = new AIR_API.Settings(settingsFile);
+                if (SettingsFile.Version != null)
                 {
-                    if (result2 < 0)
+                    var result = SettingsFile.Version.CompareTo(VersionCheckInfo.Version);
+                    var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
+                    if (result < 0)
                     {
-                        Program.UpdateResult = UpdateResult.OutOfDate;
-                        Program.CheckedForUpdateOnStartup = true;
+                        if (result2 < 0)
+                        {
+                            Program.UpdateResult = UpdateResult.OutOfDate;
+                            Program.CheckedForUpdateOnStartup = true;
+                        }
+                        else
+                        {
+                            Program.UpdateResult = UpdateResult.UpToDate;
+                            Program.CheckedForUpdateOnStartup = true;
+                        }
+
                     }
                     else
                     {
                         Program.UpdateResult = UpdateResult.UpToDate;
                         Program.CheckedForUpdateOnStartup = true;
                     }
-
-                }
+                } 
                 else
                 {
-                    Program.UpdateResult = UpdateResult.UpToDate;
+                    Program.UpdateResult = UpdateResult.ValueNull;
                     Program.CheckedForUpdateOnStartup = true;
                 }
             }

@@ -304,7 +304,7 @@ namespace Sonic3AIR_ModManager
             if (AllowUpdate)
             {
                 AllowUpdate = false;
-                if (enableModStackingToolStripMenuItem.IsChecked)
+                if (enableModStackingToolStripMenuItem.IsChecked.Value)
                 {
                     Properties.Settings.Default.EnableNewLoaderMethod = true;
                 }
@@ -315,6 +315,7 @@ namespace Sonic3AIR_ModManager
                 Properties.Settings.Default.Save();
                 AllowUpdate = true;
                 UpdateModsList(true);
+                RefreshSelectedModProperties();
             }
         }
 
@@ -735,7 +736,7 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                S3AIRSettings.EnableDevMode = isChecked;
+                S3AIRSettings.EnableDebugMode = isChecked;
             }
             S3AIRSettings.SaveSettings();
         }
@@ -831,7 +832,7 @@ namespace Sonic3AIR_ModManager
                 romPathBox.Text = S3AIRSettings.Sonic3KRomPath;
                 fixGlitchesCheckbox.IsChecked = S3AIRSettings.FixGlitches;
                 failSafeModeCheckbox.IsChecked = S3AIRSettings.FailSafeMode;
-                devModeCheckbox.IsChecked = S3AIRSettings.EnableDevMode;
+                devModeCheckbox.IsChecked = S3AIRSettings.EnableDebugMode;
                 FullscreenTypeComboBox.SelectedIndex = S3AIRSettings.Fullscreen;
             }
 
@@ -888,7 +889,11 @@ namespace Sonic3AIR_ModManager
                 if (airVersionLabel != null)
                 {
                     airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: NULL";
-                    airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
+                    if (S3AIRSettings.Version != null)
+                    {
+                        airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {S3AIRSettings.Version.ToString()}";
+                    }
+                    else airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: NULL";
                 }
             }
 
@@ -984,6 +989,8 @@ namespace Sonic3AIR_ModManager
             {
                 moveUpButton.IsEnabled = false;
                 moveDownButton.IsEnabled = false;
+                moveToTopButton.IsEnabled = false;
+                moveToBottomButton.IsEnabled = false;
                 removeButton.IsEnabled = false;
                 removeModToolStripMenuItem.IsEnabled = false;
                 openModFolderToolStripMenuItem.IsEnabled = false;
@@ -1927,14 +1934,14 @@ namespace Sonic3AIR_ModManager
         {
             if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                if (ProgramPaths.ValidateSonic3AIRUserManualFilePath()) Process.Start(ProgramPaths.Sonic3AIRUserManualFile);
+                if (ProgramPaths.ValidateSonic3AIRUserManualFilePath()) OpenPDFViewer(ProgramPaths.Sonic3AIRUserManualFile);
             }
             else
             {
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    if (ProgramPaths.ValidateSonic3AIRUserManualFilePath()) Process.Start(ProgramPaths.Sonic3AIRUserManualFile);
+                    if (ProgramPaths.ValidateSonic3AIRUserManualFilePath()) OpenPDFViewer(ProgramPaths.Sonic3AIRUserManualFile);
                 }
             }
         }
@@ -1943,16 +1950,22 @@ namespace Sonic3AIR_ModManager
         {
             if (ProgramPaths.Sonic3AIRPath != null || ProgramPaths.Sonic3AIRPath != "")
             {
-                if (ProgramPaths.ValidateSonic3AIRModDocumentationFilePath()) Process.Start(ProgramPaths.Sonic3AIRModDocumentationFile);
+                if (ProgramPaths.ValidateSonic3AIRModDocumentationFilePath()) OpenPDFViewer(ProgramPaths.Sonic3AIRModDocumentationFile);
             }
             else
             {
                 if (GameHandler.UpdateSonic3AIRLocation())
                 {
                     UpdateAIRSettings();
-                    if (ProgramPaths.ValidateSonic3AIRModDocumentationFilePath()) Process.Start(ProgramPaths.Sonic3AIRModDocumentationFile);
+                    if (ProgramPaths.ValidateSonic3AIRModDocumentationFilePath()) OpenPDFViewer(ProgramPaths.Sonic3AIRModDocumentationFile);
                 }
             }
+        }
+
+        private void OpenPDFViewer(string file)
+        {
+            DocumentationViewer viewer = new DocumentationViewer();
+            viewer.ShowDialog(file);
         }
 
         private void OpenModURL(string url)

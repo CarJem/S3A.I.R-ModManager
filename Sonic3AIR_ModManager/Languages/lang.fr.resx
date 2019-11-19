@@ -724,4 +724,66 @@ Assurez-vous que le fichier de configuration n'est pas endommagé ou effectuez u
   <data name="NewStrings" xml:space="preserve">
     <value>=========================</value>
   </data>
+  <data name="AIROptionsTab" xml:space="preserve">
+    <value>Options de A.I.R.</value>
+  </data>
+  <data name="UseDarkTheme" xml:space="preserve">
+    <value>Utiliser le Thème Sombre</value>
+  </data>
+  <data name="StartupWindowLabel" xml:space="preserve">
+    <value>Fenêtre de démarrage :</value>
+  </data>
+  <data name="FullscreenOption1" xml:space="preserve">
+    <value>Mode Fenêtre</value>
+  </data>
+  <data name="FullscreenOption2" xml:space="preserve">
+    <value>Plein Ecran</value>
+  </data>
+  <data name="FullscreenOption3" xml:space="preserve">
+    <value>Plein Ecran Exclusif</value>
+  </data>
+  <data name="UnderstoodButton" xml:space="preserve">
+    <value>Compris</value>
+  </data>
+  <data name="AIRLaunchOptionsGroupHeader" xml:space="preserve">
+    <value>Option de lancement de A.I.R.</value>
+  </data>
+  <data name="DefaultLaunchOptionItemText" xml:space="preserve">
+    <value>Par défaut (AUCUN)</value>
+  </data>
+  <data name="LaunchOptionsWarning1" xml:space="preserve">
+    <value>Ignorer si la scène de départ est définie sur AUCUN</value>
+  </data>
+  <data name="LaunchOptionsWarning2" xml:space="preserve">
+    <value>Ignorer si la scène de départ est définie sur autre chose que AUCUN</value>
+  </data>
+  <data name="LaunchOptionsPlayerS" xml:space="preserve">
+    <value>Sonic the Hedgehog</value>
+  </data>
+  <data name="LaunchOptionsPlayerST" xml:space="preserve">
+    <value>Sonic the Hedgehog &amp; Miles "Tails" Prower</value>
+  </data>
+  <data name="LaunchOptionsPlayerK" xml:space="preserve">
+    <value>Knuckles the Echidna</value>
+  </data>
+  <data name="LaunchOptionsPlayerKT" xml:space="preserve">
+    <value>Knuckles the Echidna &amp; Miles "Tails" Prower (Si dévérrouillé)</value>
+  </data>
+  <data name="LaunchOptionsPlayerT" xml:space="preserve">
+    <value>Miles "Tails" Prower</value>
+  </data>
+  <data name="LaunchOptionsStartingPlayerLabel" xml:space="preserve">
+    <value>Joueur Débutant</value>
+  </data>
+  <data name="LaunchOptionsStartingSceneLabel" xml:space="preserve">
+    <value>Scène de départ</value>
+  </data>
+  <data name="LaunchOptionsStartingPhaseLabel" xml:space="preserve">
+    <value>Phase de démarrage</value>
+  </data>
+  <data name="LaunchOptionsForewarning" xml:space="preserve">
+    <value>NOTE: Ce ne sont que des options de débogage !
+  Destiné aux Moddeurs et aux débogages de mods. Cela peut provoquer un ou plusieurs disfonctionnement telles que les Succès du Jeu (les Achievements).
+  Veillez à utiliser ceci avec prudence !</value>
+  </data>
 </root>

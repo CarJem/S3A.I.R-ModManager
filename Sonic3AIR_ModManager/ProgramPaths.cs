@@ -232,7 +232,7 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings);
+                return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, true);
             }
         }
 
@@ -247,7 +247,7 @@ namespace Sonic3AIR_ModManager
         }
 
 
-        public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings)
+        public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, bool throwVersionMismatchError = false)
         {
             if (!File.Exists(Sonic3AIRActiveModsList))
             {
@@ -266,11 +266,13 @@ namespace Sonic3AIR_ModManager
             {
                 S3AIRSettings = new AIR_API.Settings(file);
                 Version target = new Version("19.08.17.0");
-                int result = S3AIRSettings.Version.CompareTo(target);
+                int result;
+                if (S3AIRSettings.Version != null) result = S3AIRSettings.Version.CompareTo(target);
+                else result = -1;
                 if (result < 0)
                 {
-                    MessageBox.Show(Program.LanguageResource.GetString("StartupFailureError"));
-                    return false;
+                    if (throwVersionMismatchError) MessageBox.Show(Program.LanguageResource.GetString("StartupFailureError"));
+                    return true;
                 }
                 else
                 {

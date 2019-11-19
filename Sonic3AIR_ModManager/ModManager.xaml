@@ -32,6 +32,10 @@
                             <ColumnDefinition Width="40"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
                         <StackPanel Grid.Column="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left">
                             <Button Click="AddMods_Click" x:Name="addMods" Height="25" Width="25" Margin="0,0,0,5" Content="+"></Button>
                             <Button Click="RemoveButton_Click" x:Name="removeButton" Height="25" Width="25" Margin="0,0,0,5"  Content="-"></Button>
@@ -41,6 +45,14 @@
                             <Button Click="MoveToBottomButton_Click" x:Name="moveToBottomButton" Height="25" Width="25" Margin="0,0,0,5" Content="⤓"></Button>
                         </StackPanel>
                         <local:ModViewer Grid.Column="1" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical" Margin="5,0">
+                            <CheckBox Style="{DynamicResource CheckBoxStyle1}" Name="enableModStackingToolStripMenuItem" Foreground="{DynamicResource NormalText}" Click="ModStackRadioButtons_CheckedChanged"></CheckBox>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Foreground="{DynamicResource DisabledText}" Name="onForAIRVersionUnreleasedToolStripMenuItem" IsEnabled="False"></TextBlock>
+                                <TextBlock Text=" "></TextBlock>
+                                <TextBlock Foreground="{DynamicResource DisabledText}" Name="v1909190AndAboveOnlyToolStripMenuItem" IsEnabled="False"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
                         <Grid.ContextMenu>
                             <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
                                 <MenuItem Name="removeModToolStripMenuItem" Click="RemoveModToolStripMenuItem_Click"></MenuItem>
@@ -55,9 +67,9 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="30"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <GroupBox x:Name="groupBox3" Grid.Row="0" Header="Mod Properties" Margin="10">
+                        <GroupBox x:Name="groupBox3" Grid.Row="0" Header="Mod Properties" Margin="10,5">
                             <Grid Background="Transparent">
-                                <RichTextBox x:Name="modInfoTextBox" Foreground="{DynamicResource NormalText}"  BorderBrush="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="False">
+                                <RichTextBox ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="modInfoTextBox" Foreground="{DynamicResource NormalText}"  BorderBrush="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="False">
                                     <RichTextBox.Resources>
                                         <Style TargetType="{x:Type Paragraph}">
                                             <Setter Property="Margin" Value="0"/>
@@ -69,14 +81,12 @@
                         </GroupBox>
                         <StackPanel Grid.Row="1" Margin="11,0,0,5" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button x:Name="refreshButton" Click="RefreshButton_Click" Width="75" Height="25" Margin="0,0,0.5,0" Content="Reload"></Button>
-                            <Button Click="MoreModOptionsButton_Click" x:Name="moreModOptionsButton" Width="75" Height="25" Margin="4,0" Content="More..." ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                            <Button Name="gamebannaURLHandlerOptionsToolStripMenuItem" Content="Gamebanna URL Handler Options..." Padding="10,0" Margin="4,0" MinWidth="75" Click="AddRemoveURLHandlerButton_Click"></Button>
+                            <Button Visibility="Collapsed" Click="MoreModOptionsButton_Click" x:Name="moreModOptionsButton" Width="75" Height="25" Margin="0,0,4,0" Content="More..." ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                 <Button.ContextMenu>
                                     <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="moreModOptionsMenuStrip">
-                                        <MenuItem Name="gamebannaURLHandlerOptionsToolStripMenuItem" Click="AddRemoveURLHandlerButton_Click"></MenuItem>
+                                        <MenuItem ></MenuItem>
                                         <Separator></Separator>
-                                        <MenuItem Name="enableModStackingToolStripMenuItem" IsCheckable="True" Click="ModStackRadioButtons_CheckedChanged"></MenuItem>
-                                        <MenuItem Name="onForAIRVersionUnreleasedToolStripMenuItem" IsEnabled="False"></MenuItem>
-                                        <MenuItem Name="v1909190AndAboveOnlyToolStripMenuItem" IsEnabled="False"></MenuItem>
                                         <MenuItem Name="downloadFromURLToolStripMenuItem" Visibility="Collapsed" Click="DownloadButtonTest_Click"></MenuItem>
                                     </ContextMenu>
                                 </Button.ContextMenu>
