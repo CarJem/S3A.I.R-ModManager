@@ -56,7 +56,7 @@ namespace Sonic3AIR_ModManager
         public static void GameEndHandler()
         {
             isGameRunning = false;
-            if (!Properties.Settings.Default.KeepOpenOnQuit) Application.Exit();
+            if (!Properties.Settings.Default.KeepOpenOnQuit) Environment.Exit(0);
             else if (!Properties.Settings.Default.KeepOpenOnLaunch)
             {
                 ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
