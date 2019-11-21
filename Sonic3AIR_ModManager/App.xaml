@@ -27,5 +27,7 @@
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/GroupBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+
+
     </Application.Resources>
 </Application>

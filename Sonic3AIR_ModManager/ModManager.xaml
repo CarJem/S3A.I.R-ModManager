@@ -235,7 +235,7 @@
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="autoRunCheckbox" Content="Enable Auto Boot Mode" Margin="0,2" Checked="AutoRunCheckbox_CheckedChanged" Unchecked="AutoRunCheckbox_CheckedChanged" IsChecked="{Binding AutoLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                                         <Separator Visibility="Hidden"></Separator>
                                         <TextBlock x:Name="autoLaunchDelayLabel" Text="Delay (Seconds):" Margin="0,2"></TextBlock>
-                                        <xceed:IntegerUpDown Width="90" HorizontalAlignment="Left" Name="AutoLaunchNUD" Value="{Binding AutoLaunchDelay, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></xceed:IntegerUpDown>
+                                        <xceed:IntegerUpDown Minimum="0" Width="90" HorizontalAlignment="Left" Name="AutoLaunchNUD" Maximum="255" Value="{Binding AutoLaunchDelay, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></xceed:IntegerUpDown>
                                         <Separator Visibility="Hidden"></Separator>
                                         <Separator Visibility="Hidden"></Separator>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="keepLoaderOpenCheckBox" Content="Stay Open on Game Load" Margin="0,2" IsChecked="{Binding KeepOpenOnLaunch, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}"></CheckBox>

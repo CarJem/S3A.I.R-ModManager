@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:genlib="clr-namespace:GenerationsLib.WPF.Media.Imaging;assembly=GenerationsLib.WPF"
              xmlns:local="clr-namespace:Sonic3AIR_ModManager"
              xmlns:properties="clr-namespace:Sonic3AIR_ModManager.Properties"
              mc:Ignorable="d" 
@@ -18,8 +19,22 @@
                 <RowDefinition Height="85"></RowDefinition>
             </Grid.RowDefinitions>
             <Image x:Name="background" Source="../../Resources/Sonic3AIRBackground.png" Stretch="Fill" Grid.RowSpan="2" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
-            <Image Visibility="Collapsed" x:Name="logoAlt" Source="/Sonic 3 A.I.R Mod Manager;component/Resources/Sonic3KAIRLogoV4Kuck.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-            <Image x:Name="logo" Source="../../Resources/Sonic3AIRLogov4.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+            <Grid x:Name="S3KLogo" Visibility="Collapsed">
+                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Visible">
+                    <Image.Source>
+                        <genlib:SolidColorBitmap Source="/Sonic 3 A.I.R Mod Manager;component/Resources/Sonic3KAIRLogoV4Kuck.png" SelectedColor="White"/>
+                    </Image.Source>
+                </Image>
+                <Image x:Name="logoAlt" Source="/Sonic 3 A.I.R Mod Manager;component/Resources/Sonic3KAIRLogoV4Kuck.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+            </Grid>
+            <Grid x:Name="S3Logo">
+                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Visible">
+                    <Image.Source>
+                        <genlib:SolidColorBitmap Source="../../Resources/Sonic3AIRLogov4.png" SelectedColor="White"/>
+                    </Image.Source>
+                </Image>
+                <Image Visibility="Visible" x:Name="logo" Source="../../Resources/Sonic3AIRLogov4.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2" Background="#500000FF">
             <Grid.RowDefinitions>
