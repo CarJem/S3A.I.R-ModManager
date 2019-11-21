@@ -59,7 +59,6 @@ namespace Sonic3AIR_ModManager
         #region Variables
 
         #region Winforms
-        public System.Windows.Forms.NumericUpDown autoLaunchDelayUpDown;
         private System.Windows.Forms.Timer ApiInstallChecker;
         #endregion
 
@@ -124,20 +123,13 @@ namespace Sonic3AIR_ModManager
             ModViewer.View.SelectionChanged += View_SelectionChanged;
             ModViewer.View.MouseUp += View_MouseUp;
 
-            autoLaunchDelayUpDown = new System.Windows.Forms.NumericUpDown();
-
-            this.autoLaunchDelayUpDown.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::Sonic3AIR_ModManager.Properties.Settings.Default, "AutoLaunchDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoLaunchDelayUpDown.Location = new System.Drawing.Point(9, 94);
-            this.autoLaunchDelayUpDown.Name = "autoLaunchDelayUpDown";
-            this.autoLaunchDelayUpDown.Size = new System.Drawing.Size(56, 20);
-            this.autoLaunchDelayUpDown.TabIndex = 13;
-            this.autoLaunchDelayUpDown.Value = global::Sonic3AIR_ModManager.Properties.Settings.Default.AutoLaunchDelay;
-
             ApiInstallChecker = new System.Windows.Forms.Timer();
             ApiInstallChecker.Tick += apiInstallChecker_Tick;
 
-            IntergerUpDownHost.Child = autoLaunchDelayUpDown;
+
         }
+
+
 
         #endregion
 
@@ -690,7 +682,7 @@ namespace Sonic3AIR_ModManager
             UpdateAIRSettings();
             UpdateModStackingToggle();
             autoLaunchDelayLabel.IsEnabled = Properties.Settings.Default.AutoLaunch;
-            autoLaunchDelayUpDown.Enabled = Properties.Settings.Default.AutoLaunch;
+            AutoLaunchNUD.IsEnabled = Properties.Settings.Default.AutoLaunch;
         }
 
         private void UpdateModStackingToggle()
@@ -837,6 +829,8 @@ namespace Sonic3AIR_ModManager
             }
 
             GetLanguageSelection();
+            RetriveLaunchOptions();
+
 
             bool loaderMethodPast = Properties.Settings.Default.EnableNewLoaderMethod;
 
@@ -901,15 +895,20 @@ namespace Sonic3AIR_ModManager
 
         private void UpdateAIRGameConfigLaunchOptions()
         {
+            SaveLaunchOptions();
+            RetriveLaunchOptions();
+        }
+
+        private void SaveLaunchOptions()
+        {
             if (SceneComboBox != null && PlayerComboBox != null && StartPhaseComboBox != null)
             {
-                SceneComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
-                PlayerComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
-                StartPhaseComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
-
-
                 if (GameConfig != null)
                 {
+                    SceneComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+                    PlayerComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+                    StartPhaseComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+
                     if ((SceneComboBox.SelectedItem as ComboBoxItem).Tag.ToString() != "NONE")
                     {
                         GameConfig.LoadLevel = (SceneComboBox.SelectedItem as ComboBoxItem).Tag.ToString();
@@ -933,33 +932,68 @@ namespace Sonic3AIR_ModManager
                     else GameConfig.StartPhase = null;
 
                     GameConfig.Save();
+
+
+                    SceneComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
+                    PlayerComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
+                    StartPhaseComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
                 }
 
-                CollectGameConfig();
+
+            }
+        }
+
+
+        private void RetriveLaunchOptions()
+        {
+            if (SceneComboBox != null && PlayerComboBox != null && StartPhaseComboBox != null)
+            {
                 if (GameConfig != null)
                 {
-                    if (GameConfig.LoadLevel != null) SceneComboBox.SelectedItem = SceneComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.LoadLevel.ToString());
-                    else SceneComboBox.SelectedIndex = 0;
+                    SceneComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+                    PlayerComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
+                    StartPhaseComboBox.SelectionChanged -= LaunchOptions_SelectionChanged;
 
-                    if (GameConfig.UseCharacters != null) PlayerComboBox.SelectedItem = PlayerComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.UseCharacters.ToString());
-                    else PlayerComboBox.SelectedIndex = 0;
+                    CollectGameConfig();
+                    if (GameConfig != null)
+                    {
+                        if (GameConfig.LoadLevel != null)
+                        {
+                            ComboBoxItem item = SceneComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.LoadLevel.ToString()).FirstOrDefault();
+                            SceneComboBox.SelectedItem = item;
+                        }
+                        else SceneComboBox.SelectedIndex = 0;
 
-                    if (GameConfig.StartPhase != null) StartPhaseComboBox.SelectedItem = StartPhaseComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.StartPhase.ToString());
-                    else StartPhaseComboBox.SelectedIndex = 0;
+                        if (GameConfig.UseCharacters != null)
+                        {
+                            ComboBoxItem item = PlayerComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.UseCharacters.ToString()).FirstOrDefault();
+                            PlayerComboBox.SelectedItem = item;
+                        }
+                        else PlayerComboBox.SelectedIndex = 0;
+
+                        if (GameConfig.StartPhase != null)
+                        {
+                            ComboBoxItem item = StartPhaseComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.StartPhase.ToString()).FirstOrDefault();
+                            StartPhaseComboBox.SelectedItem = item;
+                        }
+                        else StartPhaseComboBox.SelectedIndex = 0;
+
+
+                        if (SceneComboBox.SelectedIndex == 0) PlayerComboBox.IsEnabled = false;
+                        else PlayerComboBox.IsEnabled = true;
+
+                        if (SceneComboBox.SelectedIndex != 0) StartPhaseComboBox.IsEnabled = false;
+                        else StartPhaseComboBox.IsEnabled = true;
+
+                    }
+
+                    if (GameConfig == null) AIRGameConfigNullSituation(2);
+
+                    SceneComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
+                    PlayerComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
+                    StartPhaseComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
                 }
-
-                if (GameConfig == null) AIRGameConfigNullSituation(2);
-
-                SceneComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
-                PlayerComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
-                StartPhaseComboBox.SelectionChanged += LaunchOptions_SelectionChanged;
             }
-
-
-
-
-
-
         }
 
         public void RefreshSelectedModProperties()
@@ -2226,6 +2260,7 @@ namespace Sonic3AIR_ModManager
                 else if (settingsTabControl.SelectedItem == gameOptionsPage || settingsTabControl.SelectedItem == inputPage)
                 {
                     CollectGameConfig();
+                    RetriveLaunchOptions();
                     if (settingsTabControl.SelectedItem == inputPage)
                     {
                         RefreshInputMappings();

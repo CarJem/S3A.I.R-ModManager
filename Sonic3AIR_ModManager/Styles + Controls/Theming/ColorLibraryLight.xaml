@@ -11,8 +11,8 @@
     <SolidColorBrush x:Key="HintedText" Color="#363636"/>
     <SolidColorBrush x:Key="DisabledText" Color="Gray"/>
     <Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
-    <SolidColorBrush x:Key="ContextMenuBackground" Color="White"/>
-    <SolidColorBrush x:Key="ContextMenuBackground2" Color="#80EEEEEE"/>
+    <SolidColorBrush x:Key="ContextMenuBackground" Color="#ECECEC"/>
+    <SolidColorBrush x:Key="ContextMenuBackground2" Color="#FFEEEEEE"/>
     <SolidColorBrush x:Key="ContextMenuBorder" Color="Black"/>
     <SolidColorBrush x:Key="ContextMenuSelectedColor" Color="Blue"/>
     <SolidColorBrush x:Key="ContextMenuSelectedColorBack" Color="#B3D7F3"/>

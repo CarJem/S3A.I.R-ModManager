@@ -88,7 +88,6 @@ namespace Sonic3AIR_ModManager
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false); 
             UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
             ModFileManagement.CleanUpAPIRequests();
-            WinformsTheming.UseDarkTheme(false);
 
 
             if (Arguments.gamebanana_api != null)

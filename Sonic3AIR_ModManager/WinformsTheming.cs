@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Reflection;
+using System.Runtime.InteropServices;
+
 
 namespace Sonic3AIR_ModManager
 {
@@ -98,6 +100,47 @@ namespace Sonic3AIR_ModManager
                 systemColors.SetColor(KnownColor.MenuBar, SystemColors.MenuBar);
             }
 
+        }
+
+        public static void InvertGraphicsArea(Graphics g, System.Drawing.Rectangle r)
+        {
+            if (r.Height <= 0) { return; }
+            if (r.Width <= 0) { return; }
+
+            using (Bitmap bmpInvert = GetWhiteBitmap(g, r))
+            {
+                IntPtr hdcDest = g.GetHdc();
+                using (Graphics src = Graphics.FromImage(bmpInvert))
+                {
+                    int xDest = r.Left;
+                    int yDest = r.Top;
+                    int nWidth = r.Width;
+                    int nHeight = r.Height;
+                    IntPtr hdcSrc = src.GetHdc();
+                    BitBlt(hdcDest, xDest, yDest, nWidth, nHeight,
+                           hdcSrc, 0, 0, (uint)CopyPixelOperation.DestinationInvert);
+                    src.ReleaseHdc(hdcSrc);
+                }
+                g.ReleaseHdc(hdcDest);
+            }
+        }
+
+        [DllImport("gdi32.dll",EntryPoint = "BitBlt",CallingConvention = CallingConvention.StdCall)]
+        extern public static int BitBlt(
+        IntPtr hdcDesc, int nXDest, int nYDest, int nWidth, int nHeight,
+        IntPtr hdcSrc, int nXSrc, int nYSrcs, uint dwRop);
+
+        private static Bitmap GetWhiteBitmap(Graphics g, Rectangle r)
+        {
+            int w = r.Width;
+            int h = r.Height;
+
+            Bitmap bmp = new Bitmap(w, h);
+            using (Graphics gTmp = Graphics.FromImage(bmp))
+            {
+                gTmp.Clear(Color.White);
+            }
+            return bmp;
         }
     }
 }
