@@ -27,6 +27,20 @@ namespace Sonic3AIR_ModManager
         {
             InitializeComponent();
         }
+
+        private void View_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (View.SelectedItem != null && View.SelectedItem is ModViewerItem)
+            {
+                var item = View.SelectedItem as ModViewerItem;
+                if (e.Key == Key.Enter)
+                {
+                    item.IsEnabled = !item.IsEnabled;
+                }
+            } 
+
+        }
     }
 
 
@@ -43,6 +57,8 @@ namespace Sonic3AIR_ModManager
 
         public ImageSource Image { get => GetImage(); }
 
+        private BitmapImage SourceImage;
+
         public bool IsEnabled { get => GetEnabledState(); set => SetEnabledState(value); }
 
         private bool GetEnabledState()
@@ -52,17 +68,21 @@ namespace Sonic3AIR_ModManager
 
         private ImageSource GetImage()
         {
+            if (SourceImage != null)
+            {
+                SourceImage = null;
+            } 
             string ImageLocation = System.IO.Path.Combine(Source.FolderPath, "icon.png");
             if (System.IO.File.Exists(ImageLocation))
             {
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = new Uri(ImageLocation);
-                image.EndInit();
+                SourceImage = new BitmapImage();
+                SourceImage.BeginInit();
+                SourceImage.CacheOption = BitmapCacheOption.None;
+                SourceImage.UriSource = new Uri(ImageLocation);
+                SourceImage.EndInit();
 
-                if (image.PixelWidth != image.PixelHeight) return DefaultModImage(Sonic3AIR_ModManager.Properties.Resources.ModIconDefault);
-                else return image;
+                if (SourceImage.PixelWidth != SourceImage.PixelHeight) return DefaultModImage(Sonic3AIR_ModManager.Properties.Resources.ModIconDefault);
+                else return SourceImage;
             }
             else
             {

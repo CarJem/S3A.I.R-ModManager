@@ -1016,6 +1016,7 @@ namespace Sonic3AIR_ModManager
                 }
                 removeButton.IsEnabled = true;
                 removeModToolStripMenuItem.IsEnabled = true;
+                editModFolderToolStripMenuItem.IsEnabled = true;
                 openModFolderToolStripMenuItem.IsEnabled = true;
                 openModURLToolStripMenuItem.IsEnabled = ((ModList.SelectedItem as ModViewerItem).Source.URL != null);
             }
@@ -1026,6 +1027,7 @@ namespace Sonic3AIR_ModManager
                 moveToTopButton.IsEnabled = false;
                 moveToBottomButton.IsEnabled = false;
                 removeButton.IsEnabled = false;
+                editModFolderToolStripMenuItem.IsEnabled = false;
                 removeModToolStripMenuItem.IsEnabled = false;
                 openModFolderToolStripMenuItem.IsEnabled = false;
                 openModURLToolStripMenuItem.IsEnabled = false;
@@ -1062,6 +1064,7 @@ namespace Sonic3AIR_ModManager
                     air_version_p.FontWeight = FontWeights.Normal;
                     tech_name_p.FontWeight = FontWeights.Bold;
                     description_p.FontWeight = FontWeights.Normal;
+
 
                     var no_margin = new Thickness(0);
                     author_p.Margin = no_margin;
@@ -2305,6 +2308,19 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
+        #region Selected Mod Modification
+
+        private void editModFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (ModList.SelectedItem != null)
+            {
+                var item = (ModList.SelectedItem as ModViewerItem);
+                Process.Start(item.Source.FileLocation);
+            }
+        }
+
+        #endregion
+
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
@@ -2386,5 +2402,7 @@ namespace Sonic3AIR_ModManager
             e.Handled = true;
             UpdateAIRSettings();
         }
+
+
     }
 }

@@ -4,14 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Sonic3AIR_ModManager"
+             xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:genLib="clr-namespace:GenerationsLib.WPF.Controls;assembly=GenerationsLib.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView x:Name="View" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource ButtonBackground}" BorderBrush="{DynamicResource ButtonBorder}">
+        <ListView x:Name="View" HorizontalContentAlignment="Stretch" KeyDown="View_KeyDown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource ButtonBackground}" BorderBrush="{DynamicResource ButtonBorder}">
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="ViewTemplate">
                     <Border BorderThickness="1" BorderBrush="{DynamicResource ButtonBorder}">
-                        <Grid Width="Auto" HorizontalAlignment="Stretch" Height="52" Margin="1">
+                        <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="52"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
                             <Grid.Style>
                                 <Style TargetType="{x:Type Grid}">
                                     <Style.Triggers>
@@ -28,23 +34,20 @@
                                 <DockPanel>
                                     <Grid>
                                         <Border BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                            <Image RenderOptions.BitmapScalingMode="HighQuality" Width="50" Height="50" Source="{Binding Image}"></Image>
+                                            <Grid Width="50" Height="50">
+                                                <Image RenderOptions.BitmapScalingMode="HighQuality" Width="50" Height="50" Source="{Binding Image}"></Image>
+                                            </Grid>
                                         </Border>
                                     </Grid>
-                                    <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="5" Height="Auto">
-                                        <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="UniformToFill">
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="Bold" />
-                                                <TextBlock Text="{Binding Author}" TextWrapping="Wrap" FontWeight="Medium" />
-                                                <Grid>
-                                                    <TextBlock Text="{Binding Version}" HorizontalAlignment="Left" TextWrapping="Wrap" FontWeight="DemiBold" />
-                                                </Grid>
-                                            </StackPanel>
-                                        </Viewbox>
+                                    <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="1" Height="Auto">
+                                        <TextBox Cursor="Arrow" Style="{DynamicResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2" FontWeight="Bold">
+                                        </TextBox>
+                                        <TextBox Cursor="Arrow" Style="{DynamicResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
                                     </StackPanel>
                                     <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
                                 </DockPanel>
                             </StackPanel>
+                            <TextBlock Cursor="Arrow" Padding="0,0,2,0" Grid.Row="1" Text="{Binding Version}" TextAlignment="Right" Foreground="Yellow" Background="#7E000000" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap" FontWeight="DemiBold" />
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -59,6 +62,41 @@
     </Grid>
 
     <UserControl.Resources>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
+            <Setter Property="ContextMenu" Value="{DynamicResource StandardContextMenu}"/>
+            <Setter Property="SelectionBrush" Value="Transparent"></Setter>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid x:Name="background">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style TargetType="{x:Type ListViewItem}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
