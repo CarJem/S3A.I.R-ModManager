@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
             <Image x:Name="background" Source="../../Resources/Sonic3AIRBackground.png" Stretch="Fill" Grid.RowSpan="2" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
             <Grid x:Name="S3KLogo" Visibility="Collapsed">
-                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Visible">
+                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Visible" Name="logoAltShadow">
                     <Image.Source>
                         <genlib:SolidColorBitmap Source="/Sonic 3 A.I.R Mod Manager;component/Resources/Sonic3KAIRLogoV4Kuck.png" SelectedColor="White"/>
                     </Image.Source>
@@ -28,7 +28,7 @@
                 <Image x:Name="logoAlt" Source="/Sonic 3 A.I.R Mod Manager;component/Resources/Sonic3KAIRLogoV4Kuck.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
             </Grid>
             <Grid x:Name="S3Logo">
-                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Visible">
+                <Image Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" Visibility="Visible" Name="logoShadow">
                     <Image.Source>
                         <genlib:SolidColorBitmap Source="../../Resources/Sonic3AIRLogov4.png" SelectedColor="White"/>
                     </Image.Source>
@@ -42,8 +42,8 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button x:Name="ForceStartButton" Content="Force Start" Padding="20,0" Margin="0,0,5,0" Foreground="Yellow" TextBlock.FontWeight="Bold" Click="ForceStartButton_Click"></Button>
-                <Button x:Name="CancelButton" Content="Cancel" Padding="20,0" Foreground="Yellow" TextBlock.FontWeight="Bold" Click="Button1_Click"></Button>
+                <Button IsEnabled="False" x:Name="ForceStartButton" Content="Force Start" Padding="20,0" Margin="0,0,5,0" Foreground="Yellow" TextBlock.FontWeight="Bold" Click="ForceStartButton_Click"></Button>
+                <Button IsEnabled="False" x:Name="CancelButton" Content="Cancel" Padding="20,0" Foreground="Yellow" TextBlock.FontWeight="Bold" Click="Button1_Click"></Button>
             </StackPanel>
             <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
                 <TextBlock FontSize="15" FontWeight="Bold" x:Name="label1" Text="   Launching in: 0:05" TextAlignment="Left" VerticalAlignment="Center" Foreground="Yellow"></TextBlock>
@@ -80,6 +80,10 @@
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="#B3000000"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="#3D000000"/>
+                                <Setter Property="Opacity" TargetName="contentPresenter" Value="0.5"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

@@ -425,10 +425,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GenerationsLib\GenerationsLib.WPF\GenerationsLib.WPF.csproj">
-      <Project>{335800a2-f482-4ae6-9017-57d7c3c52110}</Project>
-      <Name>GenerationsLib.WPF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AIR-API\AIR-API\AIR-API.csproj">
       <Project>{4311f3b1-e4a1-401c-bc13-e5e80254242e}</Project>
       <Name>AIR-API</Name>
@@ -436,6 +432,14 @@
     <ProjectReference Include="..\AIR_Protocol_Handler\Sonic3AIR_MM_GBAPIInstaller.csproj">
       <Project>{11a257a9-07ac-43c5-8705-808b7afd644b}</Project>
       <Name>Sonic3AIR_MM_GBAPIInstaller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GenerationsLib\GenerationsLib.Core\GenerationsLib.Core.csproj">
+      <Project>{51ca42a9-58f0-4f3d-a250-bc22d8a8540e}</Project>
+      <Name>GenerationsLib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GenerationsLib\GenerationsLib.WPF\GenerationsLib.WPF.csproj">
+      <Project>{335800a2-f482-4ae6-9017-57d7c3c52110}</Project>
+      <Name>GenerationsLib.WPF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

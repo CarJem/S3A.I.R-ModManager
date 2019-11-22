@@ -27,11 +27,18 @@ namespace Sonic3AIR_ModManager
         private int TimeLeft = (int)(Properties.Settings.Default.AutoLaunchDelay - 1);
 
 
-        private double AnimationPostion = 1.0;
+        private static Color TransparentSpecial = Color.FromArgb(Colors.Transparent.A, Colors.White.R, Colors.White.G, Colors.White.B);
+        private double AnimationPostion = 1.9;
         private GradientStop WhitePoint = new GradientStop(Colors.White, 0);
-        private GradientStop TransparentPoint = new GradientStop(Color.FromArgb(Colors.White.A, Colors.White.R, Colors.White.G, Colors.White.B), 0.5);
+        private GradientStop TransparentPoint = new GradientStop(TransparentSpecial, 0.5);
         private GradientStop WhitePoint2 = new GradientStop(Colors.White, 1);
+
+
+        private GradientStop TransparentPoint2A = new GradientStop(TransparentSpecial, 0);
+        private GradientStop WhitePoint3 = new GradientStop(Colors.White, 0.5);
+        private GradientStop TransparentPoint2B = new GradientStop(TransparentSpecial, 1);
         private LinearGradientBrush BrushTest = new LinearGradientBrush();
+        private LinearGradientBrush BrushTest2 = new LinearGradientBrush();
 
         public AutoBootDialogV2()
         {
@@ -63,73 +70,105 @@ namespace Sonic3AIR_ModManager
 
         bool AllowFadeIn = false;
         bool HasPlayedSFX = false;
+        private Color CurrentTransparency = TransparentSpecial;
 
         private void AnimationLoop_Tick(object sender, EventArgs e)
         {   
             bool allowedToTick = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.UpdaterState == Updater.UpdateState.Finished : true);
             if (allowedToTick)
             {
-                if (!HasPlayedSFX)
-                {
-                    System.IO.Stream str = Properties.Resources.EntrySFX;
-                    System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-                    snd.Play();
-                    HasPlayedSFX = true;
-                }
-                if (AnimationPostion >= 1.0)
-                {
-                    if (TransparentPoint.Color.A != (byte)255)
-                    {
-                        var color = TransparentPoint.Color;
-                        color.A = (byte)(color.A + 0x0F);
-                        TransparentPoint.Color = color;
-                    }
-                    else
-                    {
-                        AnimationPostion = -2.0;
-                    }
 
-                }
-                else if (TransparentPoint.Color.A != (byte)0)
-                {
-                    var color = TransparentPoint.Color;
-                    color.A = (byte)(color.A - 0x0F);
-                    TransparentPoint.Color = color;
-                }
-                else
-                {
-                    AllowFadeIn = true;
-                }
-
-
-
-                if (!(AnimationPostion >= 1.0) && TransparentPoint.Color.A != (byte)255)
+                if (!(AnimationPostion >= 1.0) && CurrentTransparency.A != (byte)255)
                 {
                     if (AnimationPostion <= 0.0 && AllowFadeIn)
                     {
                         S3Logo.Opacity += 0.1;
                         S3KLogo.Opacity += 0.1;
+
+                        if (!HasPlayedSFX)
+                        {
+                            System.IO.Stream str = Properties.Resources.EntrySFX;
+                            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                            snd.Play();
+                            HasPlayedSFX = true;
+                        }
                     }
 
+                    if (logoAltShadow.Opacity < 1.0) logoAltShadow.Opacity += 0.06;
+                    if (logoShadow.Opacity < 1.0) logoShadow.Opacity += 0.06;
                     AnimationPostion += 0.1;
-                    TransparentPoint.Color = Colors.Transparent;
+                    CurrentTransparency = TransparentSpecial;
                 }
+
+
+                if (AnimationPostion >= 1.0)
+                {
+                    if (CurrentTransparency.A != (byte)255 && logoAltShadow.Opacity != 0 && logoShadow.Opacity != 0)
+                    {
+                        var color = CurrentTransparency;
+                        color.A = (byte)(color.A + 0x0F);
+                        CurrentTransparency = color;
+                        if (logoAltShadow.Opacity > 0.0) logoAltShadow.Opacity -= 0.05;
+                        if (logoShadow.Opacity > 0.0) logoShadow.Opacity -= 0.05;
+                    }
+                    else
+                    {
+                        if (logoAltShadow.Opacity > 0.0) logoAltShadow.Opacity -= 0.05;
+                        if (logoShadow.Opacity > 0.0) logoShadow.Opacity -= 0.05;
+                        AnimationPostion = -2.0;
+                    }
+
+                }
+                else if (CurrentTransparency.A != (byte)0)
+                {
+                    var color = CurrentTransparency;
+                    color.A = (byte)(color.A - 0x0F);
+                    CurrentTransparency = color;
+                }
+                else
+                {
+                    AllowFadeIn = true;
+                    CancelButton.IsEnabled = true;
+                    ForceStartButton.IsEnabled = true;
+                }
+
+                TransparentPoint.Color = CurrentTransparency;
+                TransparentPoint2A.Color = CurrentTransparency;
+                TransparentPoint2B.Color = CurrentTransparency;
 
                 BrushTest.StartPoint = new Point(-1, 0);
                 BrushTest.EndPoint = new Point(1, 1);
+
+                BrushTest2.StartPoint = new Point(-1, 0);
+                BrushTest2.EndPoint = new Point(1, 1);
 
                 WhitePoint.Offset = 0;
                 TransparentPoint.Offset = AnimationPostion;
                 WhitePoint2.Offset = 1;
 
+                TransparentPoint2A.Offset = 0;
+                WhitePoint3.Offset = AnimationPostion;
+                TransparentPoint2B.Offset = 1;
+
                 TransparentPoint.Offset = AnimationPostion;
                 BrushTest.GradientStops = new GradientStopCollection(new List<GradientStop>() { WhitePoint, TransparentPoint, WhitePoint2 });
+                BrushTest2.GradientStops = new GradientStopCollection(new List<GradientStop>() { TransparentPoint2A, WhitePoint3, TransparentPoint2B });
+
+                logoAltShadow.OpacityMask = BrushTest2;
+                logoAltShadow.InvalidateVisual();
 
                 logoAlt.OpacityMask = BrushTest;
                 logoAlt.InvalidateVisual();
 
+                logoShadow.OpacityMask = BrushTest2;
+                logoShadow.InvalidateVisual();
+
                 logo.OpacityMask = BrushTest;
                 logo.InvalidateVisual();
+
+
+
+
             }
 
         }
