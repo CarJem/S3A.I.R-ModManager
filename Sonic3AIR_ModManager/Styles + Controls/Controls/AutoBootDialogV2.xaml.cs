@@ -28,7 +28,7 @@ namespace Sonic3AIR_ModManager
 
 
         private static Color TransparentSpecial = Color.FromArgb(Colors.Transparent.A, Colors.White.R, Colors.White.G, Colors.White.B);
-        private double AnimationPostion = 1.9;
+        private double AnimationPostion = -2.0;
         private GradientStop WhitePoint = new GradientStop(Colors.White, 0);
         private GradientStop TransparentPoint = new GradientStop(TransparentSpecial, 0.5);
         private GradientStop WhitePoint2 = new GradientStop(Colors.White, 1);
@@ -115,7 +115,7 @@ namespace Sonic3AIR_ModManager
                     {
                         if (logoAltShadow.Opacity > 0.0) logoAltShadow.Opacity -= 0.05;
                         if (logoShadow.Opacity > 0.0) logoShadow.Opacity -= 0.05;
-                        AnimationPostion = -2.0;
+                        //AnimationPostion = -2.0;
                     }
 
                 }
