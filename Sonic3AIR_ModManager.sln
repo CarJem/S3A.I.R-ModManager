@@ -13,6 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerationsLib.WPF", "Gener
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerationsLib.Core", "GenerationsLib\GenerationsLib.Core\GenerationsLib.Core.csproj", "{51CA42A9-58F0-4F3D-A250-BC22D8A8540E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{203AFC06-5F04-4E0C-860B-F2E1AD347508}"
+	ProjectSection(SolutionItems) = preProject
+		Installer\InstallOptionsEx.nsi = Installer\InstallOptionsEx.nsi
+		Installer\MakeInstaller.bat = Installer\MakeInstaller.bat
+		Installer\Sonic 3 A.I.R. Mod Manager.nsi = Installer\Sonic 3 A.I.R. Mod Manager.nsi
+		Installer\UninstallOptions.ini = Installer\UninstallOptions.ini
+		Installer\win.bmp = Installer\win.bmp
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
