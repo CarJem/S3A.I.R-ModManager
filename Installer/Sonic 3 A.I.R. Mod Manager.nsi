@@ -10,8 +10,8 @@
 !define VERSION "0.1.4.1"
 !define COPYRIGHT "CarJem Generations © 2019"
 !define DESCRIPTION "Mod Manager for Sonic 3 A.I.R. - Angel Island Revisited"
-!define INSTALLER_NAME "D:\Users\CarJem\source\repos\Sonic3AIR_ModManager\Installer\Setup.exe"
-!define INSTALLER_DIR "D:\Users\CarJem\source\repos\Sonic3AIR_ModManager\Installer\"
+!define INSTALLER_NAME "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\Setup.exe"
+!define INSTALLER_DIR "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\"
 !define MAIN_APP_EXE "Sonic 3 A.I.R Mod Manager.exe"
 !define INSTALL_TYPE "SetShellVarContext current"
 !define REG_ROOT "HKCU"
@@ -113,8 +113,8 @@ Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
 SetOutPath "$INSTDIR"
-File /r D:\Users\CarJem\source\repos\Sonic3AIR_ModManager\Sonic3AIR_ModManager\bin\Release\*.*
-File D:\Users\CarJem\source\repos\Sonic3AIR_ModManager\Installer\UninstallOptions.ini
+File /r D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Sonic3AIR_ModManager\bin\Release\*.*
+File D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\UninstallOptions.ini
 SectionEnd
 
 ######################################################################
