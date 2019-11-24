@@ -439,7 +439,7 @@
                                                 <Label Name="buttonUpLabel" Content="Up"></Label>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,1">
-                                                <Button x:Name="downInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
+                                                <Button Click="InputButton_Click" x:Name="downInputButton" Width="100" Height="25" Margin="4,0" Content="[INPUT]"></Button>
                                                 <Label Name="buttonDownLabel" Content="Down"></Label>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,1">
