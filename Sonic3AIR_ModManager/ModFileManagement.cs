@@ -124,6 +124,84 @@ namespace Sonic3AIR_ModManager
 
         }
 
+        #region Move Mod
+        public static void MoveMod(AIR_API.Mod modToMove, string path)
+        {
+            string newPath = Path.Combine(path, modToMove.FolderName);
+            if (!Directory.Exists(newPath))
+            {
+                Directory.Move(modToMove.FolderPath, newPath);
+            }
+            else
+            {
+                AIR_API.Mod conflictingMod = new AIR_API.Mod();
+                if (File.Exists(Path.Combine(newPath, "mod.json")))
+                {
+                    conflictingMod = new AIR_API.Mod(new FileInfo(Path.Combine(newPath, "mod.json")));
+                }
+                ModMoveConflictResolve(modToMove, conflictingMod, newPath);
+
+            }
+
+            new Action(ModManager.UpdateUIFromInvoke).Invoke();
+        }
+
+        private static void ModMoveConflictResolve(AIR_API.Mod ExistingMod, AIR_API.Mod NewMod, string newPath)
+        {
+
+            var result = new ItemConflictDialogV2().ShowDialog(ExistingMod, NewMod);
+            if (result == DialogResult.Yes)
+            {
+                DeleteOldMod();
+                MoveMod();
+            }
+            else if (result == DialogResult.No)
+            {
+                MakeModCopy();
+            }
+            else
+            {
+                //Don't Import the Mod
+            }
+
+
+            #region Inside Methods
+
+            void MakeModCopy()
+            {
+                string ModPath = newPath;
+                int index = 1;
+                string OriginalPath = ExistingMod.FolderName;
+                while (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath))
+                {
+                    ModPath = $"{ModPath}({index})";
+                }
+                Directory.Move(ExistingMod.FolderPath, ModPath);
+            }
+
+            void MoveMod() { Directory.Move(ExistingMod.FolderPath, newPath); }
+            void DeleteOldMod() { Directory.Delete(newPath); }
+
+            #endregion
+        }
+        #endregion
+
+        #region Remove Sub Folder
+
+        public static void RemoveSubFolder(string subFolderToRemove)
+        {
+            if (MessageBox.Show($"Are you sure you want to delete {Path.GetDirectoryName(subFolderToRemove)}? This cannot be undone and any mods inside of this folder will be lost!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                WipeFolderContents(subFolderToRemove);
+                Directory.Delete(subFolderToRemove);
+                new Action(ModManager.UpdateUIFromInvoke).Invoke();
+            }
+
+
+        }
+
+        #endregion
+
         public static void CleanUpTempModsFolder()
         {
             WipeFolderContents(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
@@ -140,13 +218,16 @@ namespace Sonic3AIR_ModManager
 
             try
             {
-                foreach (FileInfo file in di.EnumerateFiles())
+                if (di.Exists)
                 {
-                    file.Delete();
-                }
-                foreach (DirectoryInfo dir in di.EnumerateDirectories())
-                {
-                    dir.Delete(true);
+                    foreach (FileInfo file in di.EnumerateFiles())
+                    {
+                        if (file.Exists) file.Delete();
+                    }
+                    foreach (DirectoryInfo dir in di.EnumerateDirectories())
+                    {
+                        if (dir.Exists) dir.Delete(true);
+                    }
                 }
             }
             catch

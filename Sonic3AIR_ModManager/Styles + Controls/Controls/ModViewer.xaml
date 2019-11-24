@@ -9,57 +9,45 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView x:Name="View" HorizontalContentAlignment="Stretch" KeyDown="View_KeyDown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource ButtonBackground}" BorderBrush="{DynamicResource ButtonBorder}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:Name="ViewTemplate">
-                    <Border BorderThickness="1" BorderBrush="{DynamicResource ButtonBorder}">
-                        <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="52"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.Style>
-                                <Style TargetType="{x:Type Grid}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                                            <Setter Property="Background" Value="#7F26FF04" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                                            <Setter Property="Background" Value="#7FFF0000" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Grid.Style>
-                            <StackPanel Width="Auto" Height="Auto">
-                                <DockPanel>
-                                    <Grid>
-                                        <Border BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                            <Grid Width="50" Height="50">
-                                                <Image RenderOptions.BitmapScalingMode="HighQuality" Width="50" Height="50" Source="{Binding Image}"></Image>
-                                            </Grid>
-                                        </Border>
-                                    </Grid>
-                                    <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="1" Height="Auto">
-                                        <TextBox Cursor="Arrow" Style="{DynamicResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2" FontWeight="Bold">
-                                        </TextBox>
-                                        <TextBox Cursor="Arrow" Style="{DynamicResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
-                                    </StackPanel>
-                                    <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
-                                </DockPanel>
-                            </StackPanel>
-                            <TextBlock Cursor="Arrow" Padding="0,0,2,0" Grid.Row="1" Text="{Binding Version}" TextAlignment="Right" Foreground="Yellow" Background="#7E000000" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap" FontWeight="DemiBold" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <local:ModWrapPanel2 HorizontalAlignment="Center">
-                    </local:ModWrapPanel2>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListView x:Name="ActiveView" Grid.Row="1" SelectionChanged="ActiveView_SelectionChanged" ItemTemplate="{DynamicResource ModViewTemplate}" ItemsPanel="{DynamicResource ModViewPanelTemplate}" HorizontalContentAlignment="Stretch" KeyDown="View_KeyDown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource ButtonBackground}" BorderBrush="{DynamicResource ButtonBorder}"></ListView>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListView x:Name="View" Grid.Row="1" SelectionChanged="View_SelectionChanged" ItemTemplate="{DynamicResource ModViewTemplate}" ItemsPanel="{DynamicResource ModViewPanelTemplate}" HorizontalContentAlignment="Stretch" KeyDown="View_KeyDown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource ButtonBackground}" BorderBrush="{DynamicResource ButtonBorder}"></ListView>
+        </Grid>
+        <Grid Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Name="CurrentFolderLabel" VerticalContentAlignment="Center" Content="Current Folder: "></Label>
+            <ComboBox Grid.Column="1" VerticalContentAlignment="Center" x:Name="FolderView" SelectionChanged="FolderView_SelectionChanged" BorderThickness="1,0,0,1"></ComboBox>
+                <Button Content="..." VerticalContentAlignment="Center" Name="ChangeFolderButton" Click="Button_Click" Grid.Column="2" BorderThickness="1,0,1,1">
+                <Button.ContextMenu>
+                    <ContextMenu Name="FolderListHost" ContextMenuOpening="FolderListHost_ContextMenuOpening">
+                        <MenuItem Name="RemoveCurrentFolderMenuItem" Header="Remove Current Folder" Click="RemoveCurrentFolderMenuItem_Click"></MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+        </Grid>
+
     </Grid>
+
+
 
     <UserControl.Resources>
         <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
@@ -96,7 +84,6 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-        
         <Style TargetType="{x:Type ListViewItem}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -104,6 +91,7 @@
             <Setter Property="Margin" Value="0,0,0,1"/>
             <Setter Property="Padding" Value="5,2,5,2"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Visibility" Value="{Binding Visibility}"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -145,7 +133,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style TargetType="{x:Type ListView}">
             <Setter Property="Background" Value="{DynamicResource ListBox.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ListBox.Static.Border}"/>
@@ -182,6 +169,50 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <DataTemplate x:Key="ModViewTemplate">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource ButtonBorder}" Visibility="{Binding Visibility}">
+                <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="52"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.Style>
+                        <Style TargetType="{x:Type Grid}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                    <Setter Property="Background" Value="#7F26FF04" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                    <Setter Property="Background" Value="#7FFF0000" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <StackPanel Width="Auto" Height="Auto">
+                        <DockPanel>
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                    <Grid Width="50" Height="50">
+                                        <Image RenderOptions.BitmapScalingMode="HighQuality" Width="50" Height="50" Source="{Binding Image}"></Image>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="1" Height="Auto">
+                                <TextBox Cursor="Arrow" Style="{DynamicResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2" FontWeight="Bold">
+                                </TextBox>
+                                <TextBox Cursor="Arrow" Style="{DynamicResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
+                            </StackPanel>
+                            <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
+                        </DockPanel>
+                    </StackPanel>
+                    <TextBlock Cursor="Arrow" Padding="0,0,2,0" Grid.Row="1" Text="{Binding Version}" TextAlignment="Right" Foreground="Yellow" Background="#7E000000" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap" FontWeight="DemiBold" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ModViewPanelTemplate">
+            <local:ModWrapPanel2 HorizontalAlignment="Center">
+            </local:ModWrapPanel2>
+        </ItemsPanelTemplate>
     </UserControl.Resources>
 
 </UserControl>

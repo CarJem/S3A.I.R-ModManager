@@ -140,6 +140,20 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
+        #region Other Random Strings
+
+        public static string BaseModFolderString()
+        {
+            return "Root - (Mods Directory)";
+        }
+
+        public static string SubModFolderString(string folder)
+        {
+            return string.Format("Sub-folder - ({0})", folder);
+        }
+
+        #endregion
+
         public static void ApplyLanguage(ref ModManager form)
         {
             //Main Buttons
@@ -163,9 +177,9 @@ namespace Sonic3AIR_ModManager
             form.moreModOptionsButton.Content = Program.LanguageResource.GetString("MoreExpandable");
 
             form.gamebannaURLHandlerOptionsToolStripMenuItem.Content = Program.LanguageResource.GetString("GameBannaURLHandler");
-            form.enableModStackingToolStripMenuItem.Content = Program.LanguageResource.GetString("EnableModStacking");
-            form.onForAIRVersionUnreleasedToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note1");
-            form.v1909190AndAboveOnlyToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note2");
+            //form.enableModStackingToolStripMenuItem.Content = Program.LanguageResource.GetString("EnableModStacking");
+            //form.onForAIRVersionUnreleasedToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note1");
+            //form.v1909190AndAboveOnlyToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note2");
 
             form.openModFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModFolder");
             form.removeModToolStripMenuItem.Header = Program.LanguageResource.GetString("RemoveMod");

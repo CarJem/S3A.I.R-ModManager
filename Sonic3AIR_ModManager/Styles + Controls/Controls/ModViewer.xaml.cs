@@ -23,9 +23,78 @@ namespace Sonic3AIR_ModManager
     public partial class ModViewer : UserControl
     {
         public static Action ItemCheck;
+        public SelectionChangedEventHandler SelectionChanged;
+
+        #region List Access Variables
+        public object SelectedItem { get => GetSelectedItem(); set => SetSelectedItem(value); }
+        public object SelectedFolderItem { get => GetSelectedFolderItem(); set => SetSelectedFolderItem(value); }
+        public int ActiveSelectedIndex { get => GetSelectedIndex(); set => SetSelectedIndex(value); }
+
+        private int GetSelectedIndex()
+        {
+            return ActiveView.SelectedIndex;
+        }
+
+        private void SetSelectedIndex(int value)
+        {
+            ActiveView.SelectedIndex = value;
+        }
+
+        private object GetSelectedFolderItem()
+        {
+            return FolderView.SelectedItem;
+        }
+
+        private void SetSelectedFolderItem(object value)
+        {
+            FolderView.SelectedItem = value;
+        }
+
+        private object GetSelectedItem()
+        {
+            if (ActiveView.SelectedItem != null) return ActiveView.SelectedItem;
+            else return View.SelectedItem;
+        }
+
+        private void SetSelectedItem(object value)
+        {
+            if (View.Items.Contains(value)) View.SelectedItem = value;
+            else if (ActiveView.Items.Contains(value)) ActiveView.SelectedItem = value;
+        }
+
+        #endregion
+
         public ModViewer()
         {
             InitializeComponent();
+            UpdateSelectedFolderLabel();
+        }
+
+        #region List Access Methods
+
+        public void Add(ModViewerItem item)
+        {
+            if (item.IsEnabled)
+            {
+                ActiveView.Items.Add(item);
+            }
+            else
+            {
+                View.Items.Add(item);
+            }
+
+        }
+
+        public void Refresh()
+        {
+            View.Items.Refresh();
+            ActiveView.Items.Refresh();
+        }
+
+        public void Clear()
+        {
+            View.Items.Clear();
+            ActiveView.Items.Clear();
         }
 
         private void View_KeyDown(object sender, KeyEventArgs e)
@@ -38,8 +107,82 @@ namespace Sonic3AIR_ModManager
                 {
                     item.IsEnabled = !item.IsEnabled;
                 }
-            } 
+            }
 
+        }
+
+        private void View_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ActiveView.SelectedItem != null && View.SelectedItem != null) ActiveView.SelectedItem = null;
+            SelectionChanged?.Invoke(sender, e);
+        }
+
+        private void ActiveView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ActiveView.SelectedItem != null && View.SelectedItem != null) View.SelectedItem = null;
+            SelectionChanged?.Invoke(sender, e);
+        }
+
+        private void FolderView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectionChanged?.Invoke(sender, e);
+            UpdateSelectedFolderLabel();
+
+            if (FolderView.SelectedItem != null)
+            {
+                if ((FolderView.SelectedItem as SubDirectoryItem).FilePath != ProgramPaths.Sonic3AIRModsFolder)
+                {
+                    RemoveCurrentFolderMenuItem.IsEnabled = true;
+                }
+                else
+                {
+                    RemoveCurrentFolderMenuItem.IsEnabled = false;
+                }
+            }
+        }
+
+        #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeFolderButton.ContextMenu.IsOpen = true;
+            UpdateSelectedFolderLabel();
+        }
+
+        private void UpdateSelectedFolderLabel()
+        {
+            if (FolderView.SelectedItem == null)
+            {
+                FolderView.SelectedIndex = 0;
+            }
+        }
+
+        private void RemoveCurrentFolderMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ModFileManagement.RemoveSubFolder((FolderView.SelectedValue as SubDirectoryItem).FilePath);
+        }
+
+        private void FolderListHost_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+
+        }
+    }
+
+
+    public class SubDirectoryItem
+    {
+        public string FileName { get; set; } = "";
+        public string FilePath { get; set; } = "";
+
+        public override string ToString()
+        {
+            return FileName;
+        }
+
+        public SubDirectoryItem(string name, string path)
+        {
+            FileName = name;
+            FilePath = path;
         }
     }
 
@@ -47,6 +190,9 @@ namespace Sonic3AIR_ModManager
 
     public class ModViewerItem
     {
+        public Visibility Visibility { get; set; } = Visibility.Visible;
+        public bool IsInRootFolder { get; set; } = true;
+
         public string Name { get => Source.Name; set => Source.Name = value; }
         public string Description { get => Source.Description; set => Source.Description = value; }
         public string Author { get => Source.Author; set => Source.Author = value; }
@@ -77,7 +223,7 @@ namespace Sonic3AIR_ModManager
             {
                 SourceImage = new BitmapImage();
                 SourceImage.BeginInit();
-                SourceImage.CacheOption = BitmapCacheOption.None;
+                SourceImage.CacheOption = BitmapCacheOption.OnLoad;
                 SourceImage.UriSource = new Uri(ImageLocation);
                 SourceImage.EndInit();
 
@@ -111,9 +257,10 @@ namespace Sonic3AIR_ModManager
 
         public AIR_API.Mod Source { get; set; }
 
-        public ModViewerItem(AIR_API.Mod _source)
+        public ModViewerItem(AIR_API.Mod _source, bool root = true)
         {
             Source = _source;
+            IsInRootFolder = root;
         }
     }
 }

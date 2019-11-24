@@ -45,15 +45,7 @@
                             <Button Click="MoveDownButton_Click" x:Name="moveDownButton" Height="25" Width="25" Margin="0,0,0,5"  Content="↓"></Button>
                             <Button Click="MoveToBottomButton_Click" x:Name="moveToBottomButton" Height="25" Width="25" Margin="0,0,0,5" Content="⤓"></Button>
                         </StackPanel>
-                        <local:ModViewer Grid.Column="1" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
-                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical" Margin="5,0">
-                            <CheckBox Style="{DynamicResource CheckBoxStyle1}" Name="enableModStackingToolStripMenuItem" Foreground="{DynamicResource NormalText}" Click="ModStackRadioButtons_CheckedChanged"></CheckBox>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Foreground="{DynamicResource DisabledText}" Name="onForAIRVersionUnreleasedToolStripMenuItem" IsEnabled="False"></TextBlock>
-                                <TextBlock Text=" "></TextBlock>
-                                <TextBlock Foreground="{DynamicResource DisabledText}" Name="v1909190AndAboveOnlyToolStripMenuItem" IsEnabled="False"></TextBlock>
-                            </StackPanel>
-                        </StackPanel>
+                        <local:ModViewer Grid.Column="1" Grid.RowSpan="2" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
                         <Grid.ContextMenu>
                             <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
                                 <MenuItem Name="editModFolderToolStripMenuItem" Header="Edit Config..." Click="editModFolderToolStripMenuItem_Click"></MenuItem>
@@ -61,6 +53,10 @@
                                 <MenuItem Name="removeModToolStripMenuItem" Click="RemoveModToolStripMenuItem_Click"></MenuItem>
                                 <MenuItem Name="openModFolderToolStripMenuItem" Click="OpenModFolderToolStripMenuItem_Click"></MenuItem>
                                 <MenuItem Name="openModURLToolStripMenuItem" Click="OpenModURLToolStripMenuItem_Click"></MenuItem>
+                                <MenuItem Name="moveModToSubFolderMenuItem" Header="Move Mod to Subfolder..." SubmenuOpened="moveModToSubFolderMenuItem_ContextMenuOpening">
+                                    <MenuItem Name="addNewModSubfolderMenuItem" Header="Add Subfolder..." Click="addNewModSubfolderMenuItem_Click"></MenuItem>
+                                    <Separator></Separator>
+                                </MenuItem>
                             </ContextMenu>
                         </Grid.ContextMenu>
 

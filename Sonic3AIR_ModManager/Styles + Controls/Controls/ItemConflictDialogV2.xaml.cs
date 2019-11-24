@@ -113,7 +113,10 @@ namespace Sonic3AIR_ModManager
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DialogResultForms = System.Windows.Forms.DialogResult.Abort;
+            if (this.DialogResult != true)
+            {
+                DialogResultForms = System.Windows.Forms.DialogResult.Abort;
+            }
         }
     }
 }
