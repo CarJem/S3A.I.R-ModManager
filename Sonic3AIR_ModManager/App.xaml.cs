@@ -28,6 +28,10 @@ namespace Sonic3AIR_ModManager
             if (Sonic3AIR_ModManager.Properties.Settings.Default.UseDarkTheme == true) ChangeSkin(Skin.Dark);
             else ChangeSkin(Skin.Light);
 
+            #if DEBUG
+                System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+            #endif
+
             Instance = this;
             this.InitializeComponent();
         }

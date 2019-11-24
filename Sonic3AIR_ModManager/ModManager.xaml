@@ -68,7 +68,7 @@
                         </Grid.RowDefinitions>
                         <GroupBox x:Name="groupBox3" Grid.Row="0" Header="Mod Properties" Margin="10,5">
                             <ScrollViewer Background="Transparent" CanContentScroll="True" HorizontalScrollBarVisibility="Disabled">
-                                <xceed:RichTextBox TextOptions.TextFormattingMode="Display" IsEnabled="False" x:Name="modInfoTextBox" Foreground="{DynamicResource NormalText}"  BorderBrush="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="False">
+                                <RichTextBox TextOptions.TextFormattingMode="Display" IsEnabled="False" x:Name="modInfoTextBox" Foreground="{DynamicResource NormalText}"  BorderBrush="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="False">
                                     <RichTextBox.Resources>
                                         <Style TargetType="{x:Type Paragraph}">
                                             <Setter Property="Margin" Value="0"/>
@@ -76,7 +76,7 @@
                                             <Setter Property="TextBlock.LineStackingStrategy" Value="BlockLineHeight"></Setter>
                                         </Style>
                                     </RichTextBox.Resources>
-                                </xceed:RichTextBox>
+                                </RichTextBox>
                             </ScrollViewer>
                         </GroupBox>
                         <StackPanel Grid.Row="1" Margin="11,0,0,5" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left">

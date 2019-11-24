@@ -967,12 +967,12 @@ namespace Sonic3AIR_ModManager
         {
             if (ModViewer.SelectedItem != null)
             {
-                if ((ModViewer.SelectedItem as ModViewerItem).IsEnabled)
+                if (ModViewer.ActiveView.SelectedItem != null && (ModViewer.ActiveView.SelectedItem as ModViewerItem).IsEnabled)
                 {
-                    moveUpButton.IsEnabled = (ModManagement.ModsList.IndexOf((ModViewer.SelectedItem as ModViewerItem)) > 0);
-                    moveDownButton.IsEnabled = (ModManagement.ModsList.IndexOf((ModViewer.SelectedItem as ModViewerItem)) < ModViewer.ActiveView.Items.Count - 1);
-                    moveToTopButton.IsEnabled = (ModManagement.ModsList.IndexOf((ModViewer.SelectedItem as ModViewerItem)) > 0);
-                    moveToBottomButton.IsEnabled = (ModManagement.ModsList.IndexOf((ModViewer.SelectedItem as ModViewerItem)) < ModViewer.ActiveView.Items.Count - 1);
+                    moveUpButton.IsEnabled = (ModViewer.ActiveView.Items.IndexOf((ModViewer.ActiveView.SelectedItem as ModViewerItem)) > 0);
+                    moveDownButton.IsEnabled = (ModViewer.ActiveView.Items.IndexOf((ModViewer.ActiveView.SelectedItem as ModViewerItem)) < ModViewer.ActiveView.Items.Count - 1);
+                    moveToTopButton.IsEnabled = (ModViewer.ActiveView.Items.IndexOf((ModViewer.ActiveView.SelectedItem as ModViewerItem)) > 0);
+                    moveToBottomButton.IsEnabled = (ModViewer.ActiveView.Items.IndexOf((ModViewer.ActiveView.SelectedItem as ModViewerItem)) < ModViewer.ActiveView.Items.Count - 1);
                 }
                 else
                 {

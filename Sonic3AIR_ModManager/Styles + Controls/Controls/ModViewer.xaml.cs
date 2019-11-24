@@ -30,6 +30,17 @@ namespace Sonic3AIR_ModManager
         public object SelectedFolderItem { get => GetSelectedFolderItem(); set => SetSelectedFolderItem(value); }
         public int ActiveSelectedIndex { get => GetSelectedIndex(); set => SetSelectedIndex(value); }
 
+        public object ActiveSelectedItem { get => GetActiveSelectedItem(); set => SetActiveSelectedItem(value); }
+        private object GetActiveSelectedItem()
+        {
+            return ActiveView.SelectedItem;
+        }
+
+        private void SetActiveSelectedItem(object value)
+        {
+            ActiveView.SelectedItem = value;
+        }
+
         private int GetSelectedIndex()
         {
             return ActiveView.SelectedIndex;
@@ -59,7 +70,7 @@ namespace Sonic3AIR_ModManager
         private void SetSelectedItem(object value)
         {
             if (View.Items.Contains(value)) View.SelectedItem = value;
-            else if (ActiveView.Items.Contains(value)) ActiveView.SelectedItem = value;
+            else ActiveView.SelectedItem = value;
         }
 
         #endregion

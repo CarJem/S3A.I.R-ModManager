@@ -13,6 +13,8 @@ namespace Sonic3AIR_ModManager
     {
         public AIR_API.ActiveModsList S3AIRActiveMods;
         public IList<ModViewerItem> ModsList = new List<ModViewerItem>();
+        public IList<ModViewerItem> ActiveModsList = new List<ModViewerItem>();
+
         private ModManager Parent;
         public ModManagement(ModManager _parent)
         {
@@ -39,13 +41,51 @@ namespace Sonic3AIR_ModManager
 
         }
 
+        public void UpdateActiveAndInactiveModLists()
+        {
+            IList<ModViewerItem> JustDisabledItems = new List<ModViewerItem>();
+            IList<ModViewerItem> JustEnabledItems = new List<ModViewerItem>();
+
+            foreach (ModViewerItem mod in ModsList)
+            {
+                if (mod.IsEnabled) JustEnabledItems.Add(mod);
+            }
+
+            foreach (ModViewerItem mod in ActiveModsList)
+            {
+                if (!mod.IsEnabled) JustDisabledItems.Add(mod);
+            }
+
+            foreach (ModViewerItem mod in JustDisabledItems)
+            {
+                ActiveModsList.Remove(mod);
+                ModsList.Add(mod);
+            }
+
+            foreach (ModViewerItem mod in JustEnabledItems)
+            {
+                ModsList.Remove(mod);
+                ActiveModsList.Add(mod);
+            }
+        }
+
         public void UpdateNewModsListItems()
         {
             ProgramPaths.ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref ModManager.S3AIRSettings);
+
             Parent.ModViewer.Clear();
+
+            UpdateActiveAndInactiveModLists();
+
+
             foreach (ModViewerItem mod in ModsList)
             {
-                Parent.ModViewer.Add(mod);
+                Parent.ModViewer.View.Items.Add(mod);
+            }
+
+            foreach (ModViewerItem mod in ActiveModsList)
+            {
+                Parent.ModViewer.ActiveView.Items.Add(mod);
             }
 
             string CurrentFolderPath = ProgramPaths.Sonic3AIRModsFolder;
@@ -55,10 +95,6 @@ namespace Sonic3AIR_ModManager
             {
                 ModViewerItem mod = (ModViewerItem)item;
                 if (CurrentFolderPath != null && (Parent.ModViewer.FolderView.SelectedIndex == 0 || Parent.ModViewer.FolderView.SelectedIndex == -1) && mod.IsInRootFolder)
-                {
-                    mod.Visibility = Visibility.Visible;
-                }
-                else if (mod.IsEnabled)
                 {
                     mod.Visibility = Visibility.Visible;
                 }
@@ -80,6 +116,7 @@ namespace Sonic3AIR_ModManager
 
 
             }
+
             Parent.ModViewer.Refresh();
 
         }
@@ -88,6 +125,10 @@ namespace Sonic3AIR_ModManager
         {
             ModsList.Clear();
             ModsList = new List<ModViewerItem>();
+
+            ActiveModsList.Clear();
+            ActiveModsList = new List<ModViewerItem>();
+
             EnableAllLegacyDisabledMods();
             GetAllModContainingSubFolders();
             FetchModsModern();
@@ -169,7 +210,7 @@ namespace Sonic3AIR_ModManager
             {
                 foreach (var enabledMod in ActiveMods.OrderBy(x => x.Item2).ToList())
                 {
-                    ModsList.Insert(0, enabledMod.Item1);
+                    ActiveModsList.Insert(0, enabledMod.Item1);
                 }
             }
 
@@ -207,57 +248,57 @@ namespace Sonic3AIR_ModManager
 
         public void MoveModToTop()
         {
-            int index = Parent.ModViewer.ActiveView.SelectedIndex;
+            int index = Parent.ModViewer.ActiveSelectedIndex;
             if (index != 0)
             {
-                ModsList.Move(index, 0);
+                ActiveModsList.Move(index, 0);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedIndex = 0;
+                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(0);
             }
         }
 
         public void MoveModUp()
         {
-            int index = Parent.ModViewer.ActiveView.SelectedIndex;
+            int index = Parent.ModViewer.ActiveSelectedIndex;
             if (index != 0)
             {
-                ModsList.Move(index, index - 1);
+                ActiveModsList.Move(index, index - 1);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedIndex = index - 1;
+                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(index - 1);
             }
         }
         public void MoveModDown()
         {
-            int index = Parent.ModViewer.ActiveView.SelectedIndex;
-            if (index != ModsList.Count - 1)
+            int index = Parent.ModViewer.ActiveSelectedIndex;
+            if (index != ActiveModsList.Count - 1)
             {
-                ModsList.Move(index, index + 1);
+                ActiveModsList.Move(index, index + 1);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedIndex = index + 1;
+                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(index + 1);
             }
         }
 
         public void MoveModToBottom()
         {
-            int index = Parent.ModViewer.ActiveView.SelectedIndex;
-            if (index != ModsList.Count - 1)
+            int index = Parent.ModViewer.ActiveSelectedIndex;
+            if (index != ActiveModsList.Count - 1)
             {
-                ModsList.Move(index, ModsList.Count - 1);
+                ActiveModsList.Move(index, ActiveModsList.Count - 1);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedIndex = ModsList.Count - 1;
+                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(ActiveModsList.Count - 1);
             }
         }
 
         public void Save()
         {
-            foreach (var mod in ModsList)
+            foreach (var mod in ModsList.Concat(ActiveModsList))
             {
                 UpdateMods(mod.Source);
             }
 
             List<string> NewActiveModsList = new List<string>();
 
-            foreach (var mod in ModsList.Where(x => x.IsEnabled).Reverse())
+            foreach (var mod in ModsList.Concat(ActiveModsList).Where(x => x.IsEnabled).Reverse())
             {
                 string filePath = mod.Source.FolderName;
                 if (!mod.IsInRootFolder)
