@@ -54,12 +54,6 @@ namespace Sonic3AIR_ModManager
     /// </summary>
     /// 
 
-
-    /*TODO:
-        1) I can no longer switch the controls for players 1 and 2 with Tab. It used to work before installing the mod manager.
-        2) I tried modifying the input mappings for player 2 in the mod manager, but the settings didn't stick, not even after clicking Save Input Mappings.
-        3) .
-    */
     public partial class ModManager : Window
     {
         #region Variables
