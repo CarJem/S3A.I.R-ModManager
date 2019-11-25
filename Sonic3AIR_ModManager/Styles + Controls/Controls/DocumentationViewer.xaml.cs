@@ -53,6 +53,7 @@ namespace Sonic3AIR_ModManager
 
         private void pdfViewer_PdfLoaded(object sender, EventArgs e)
         {
+            //TODO: Gut Unused Method
             PDFisLoaded = true;
         }
 

@@ -134,7 +134,7 @@
                         <ComboBox Grid.Column="1" VerticalContentAlignment="Center" x:Name="FolderView" SelectionChanged="FolderView_SelectionChanged" BorderThickness="1,0,0,1"></ComboBox>
                         <Button Content="..." VerticalContentAlignment="Center" Name="ChangeFolderButton" Click="Button_Click" Grid.Column="2" BorderThickness="1,0,1,1">
                             <Button.ContextMenu>
-                                <ContextMenu Name="FolderListHost" ContextMenuOpening="FolderListHost_ContextMenuOpening">
+                                <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="FolderListHost" ContextMenuOpening="FolderListHost_ContextMenuOpening">
                                     <MenuItem Name="AddNewSubFolderMenuItem" Header="Add New Subfolder..." Click="AddNewSubFolderMenuItem_Click"></MenuItem>
                                     <MenuItem Name="RemoveCurrentFolderMenuItem" Header="Remove Current Folder" Click="RemoveCurrentFolderMenuItem_Click"></MenuItem>
                                 </ContextMenu>

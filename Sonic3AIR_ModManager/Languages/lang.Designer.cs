@@ -241,6 +241,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sonic 3 A.I.R. Mod Manager.
+        /// </summary>
+        internal static string ApplicationTitle {
+            get {
+                return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
         internal static string AuthorSection {
@@ -1736,6 +1745,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string RemoveSelectedMod {
             get {
                 return ResourceManager.GetString("RemoveSelectedMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete {0}? This cannot be undone and any mods inside of this folder will be lost!.
+        /// </summary>
+        internal static string RemoveSubFolderWarning {
+            get {
+                return ResourceManager.GetString("RemoveSubFolderWarning", resourceCulture);
             }
         }
         

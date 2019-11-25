@@ -891,4 +891,10 @@
   <data name="UpdateFailedError" xml:space="preserve">
     <value>Update Failed!</value>
   </data>
+  <data name="RemoveSubFolderWarning" xml:space="preserve">
+    <value>Are you sure you want to delete {0}? This cannot be undone and any mods inside of this folder will be lost!</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Mod Manager</value>
+  </data>
 </root>

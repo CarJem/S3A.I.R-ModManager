@@ -431,6 +431,7 @@ namespace Sonic3AIR_ModManager
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            //TODO: Gut Unused Method
             //this.DialogResult = false;
         }
     }

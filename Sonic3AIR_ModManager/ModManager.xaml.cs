@@ -644,7 +644,7 @@ namespace Sonic3AIR_ModManager
             moveToBottomButton.ToolTip = MoveModToBottomTooltip;
 
             aboutLabel.Text = aboutLabel.Text.Replace("{version}", Program.Version);
-            this.Title = this.Title.Replace("{version}", Program.Version);
+            this.Title = string.Format("{0} {1}", Program.LanguageResource.GetString("ApplicationTitle"), Program.Version);
         }
 
         public void UpdateInGameButtons()
@@ -1993,7 +1993,7 @@ namespace Sonic3AIR_ModManager
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            //TODO: Gut unused Method
         }
 
         private void addInputMethodButton_Click(object sender, RoutedEventArgs e)
