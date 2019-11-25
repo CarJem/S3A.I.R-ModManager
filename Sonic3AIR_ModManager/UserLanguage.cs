@@ -144,10 +144,7 @@ namespace Sonic3AIR_ModManager
 
         public static string BaseModFolderString()
         {
-            string result;
-            if (Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString") != null) result = Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString");
-            else result = "";
-            return Program.LanguageResource.GetString("result");
+            return Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString");
         }
 
         public static string SubModFolderString(string folder)

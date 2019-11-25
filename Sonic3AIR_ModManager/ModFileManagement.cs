@@ -249,24 +249,42 @@ namespace Sonic3AIR_ModManager
             try
             {
                 ExtractTheMod(file);
-                string meta = FindModRoot(0);
-                if (meta != "") AddToModsFolder(meta, file);
-                else PrepModAttempt2();
-
-                void PrepModAttempt2()
-                {
-                    meta = FindModRoot(1);
-                    if (meta != "") AddToModsFolder(meta, file);
-                    else BadModMessage();
-                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something Went Wrong:" + Environment.NewLine + ex.Message);
             }
 
+
+            ModSearchLoop();
+
+            while (FindModRoot(0) != "")
+            {
+                ModSearchLoop();
+            }
             CleanUpTempModsFolder();
             new Action(ModManager.UpdateUIFromInvoke).Invoke();
+
+            void ModSearchLoop()
+            {
+                try
+                {
+                    string meta = FindModRoot(0);
+                    if (meta != "") AddToModsFolder(meta, System.IO.Path.GetDirectoryName(meta));
+                    else PrepModAttempt2();
+
+                    void PrepModAttempt2()
+                    {
+                        meta = FindModRoot(1);
+                        if (meta != "") AddToModsFolder(meta, System.IO.Path.GetDirectoryName(meta));
+                        else BadModMessage();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something Went Wrong:" + Environment.NewLine + ex.Message);
+                }
+            }
 
         }
 
