@@ -27,7 +27,7 @@ namespace Sonic3AIR_ModManager
             isDebug = true;
         }
 
-        public static string Version { get; } = "v.1.4.1";
+        public static string Version { get; } = "v.1.4.2";
 
         public static bool CheckedForUpdateOnStartup = false;
         public static Updater.UpdateState UpdaterState { get; set; } = Updater.UpdateState.NeverStarted;
