@@ -786,4 +786,105 @@
   Destiné aux Moddeurs et aux débogages de mods. Cela peut provoquer un ou plusieurs disfonctionnements (Par exemple, le blocage des Succès.)
   Veillez à utiliser ceci avec prudence !</value>
   </data>
+  <data name="NewControllerEntryName" xml:space="preserve">
+    <value>Nouvelle Manette</value>
+  </data>
+  <data name="AddInputDeviceDialogTitle" xml:space="preserve">
+    <value>Ajouter un périphérique d'entrée…</value>
+  </data>
+  <data name="AddInputDeviceDialogCaption" xml:space="preserve">
+    <value>Nom du périphérique d'entrée:</value>
+  </data>
+  <data name="AddInputDeviceError1" xml:space="preserve">
+    <value>existe déjà dans le répertoire, choisissez un autre nom !</value>
+  </data>
+  <data name="AddInputDeviceError2" xml:space="preserve">
+    <value>utilise des caractères Inadaptés, essayez d’utiliser uniquement des Underscores (tiret du 8) et des caractères numériques / alphabétiques.</value>
+  </data>
+  <data name="NewSubFolderEntryName" xml:space="preserve">
+    <value>nouveau sous-dossier</value>
+  </data>
+  <data name="CreateSubFolderDialogTitle" xml:space="preserve">
+    <value>Créer un nouveau sous-dossier</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption1" xml:space="preserve">
+    <value>Tapez le nom du sous-dossier que vous voulez créer.</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption2" xml:space="preserve">
+    <value>Ce nom de dossier existe déjà !</value>
+  </data>
+  <data name="NewDeviceEntryName" xml:space="preserve">
+    <value>Nouveau périphérique</value>
+  </data>
+  <data name="AuthorSection" xml:space="preserve">
+    <value>Auteur :</value>
+  </data>
+  <data name="NameSection" xml:space="preserve">
+    <value>Nom :</value>
+  </data>
+  <data name="ModVersionSection" xml:space="preserve">
+    <value>Version du Mod :</value>
+  </data>
+  <data name="GameVersionSection" xml:space="preserve">
+    <value>Version du jeu :</value>
+  </data>
+  <data name="ExistingModSection" xml:space="preserve">
+    <value>Mod existant :</value>
+  </data>
+  <data name="ConflictingModSection" xml:space="preserve">
+    <value>Mod en conflit :</value>
+  </data>
+  <data name="ConflictDialogCaption" xml:space="preserve">
+    <value>Comment aimeriez-vous résoudre ce conflit ?</value>
+  </data>
+  <data name="MakeCopyButton" xml:space="preserve">
+    <value>Faire une copie</value>
+  </data>
+  <data name="OverwriteButton" xml:space="preserve">
+    <value>Écraser</value>
+  </data>
+  <data name="AddNewSubFolderButton" xml:space="preserve">
+    <value>Ajouter un nouveau sous-dossier...</value>
+  </data>
+  <data name="RemoveCurrentFolderButton" xml:space="preserve">
+    <value>Retirer le dossier actuel</value>
+  </data>
+  <data name="CurrentFolderLabel" xml:space="preserve">
+    <value>Dossier actuel</value>
+  </data>
+  <data name="Viewer_ActiveModsTab" xml:space="preserve">
+    <value>Mods actifs</value>
+  </data>
+  <data name="Viewer_ModsTab" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="OpenExternally" xml:space="preserve">
+    <value>Ouverture externe…</value>
+  </data>
+  <data name="Viewer_SubFolderItemFormatString" xml:space="preserve">
+    <value>Sous-dossier - ({0})</value>
+  </data>
+  <data name="Viewer_BaseFolderItemFormatString" xml:space="preserve">
+    <value>Root - (Répertoire Mods)</value>
+  </data>
+  <data name="UpdateFailedError" xml:space="preserve">
+    <value>Échec de la mise à jour !</value>
+  </data>
+  <data name="RemoveSubFolderWarning" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir le supprimer {0} ? Cela ne peut pas être annulé et tous les mods contenus dans ce dossier seront perdus !</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Mod Manager</value>
+  </data>
+  <data name="ErrorHyperlinkClickMessage" xml:space="preserve">
+    <value>(Cliquez ici pour y aller !)</value>
+  </data>
+  <data name="ModsLoadingError" xml:space="preserve">
+    <value>Erreur lors du chargement des mods !
+Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défini dans les options.</value>
+  </data>
+  <data name="RecordingsLoadingError" xml:space="preserve">
+    <value>Erreur lors du chargement des enregistrements !
+Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défini dans les options.</value>
+  </data>
 </root>

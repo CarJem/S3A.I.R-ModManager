@@ -786,4 +786,94 @@
   <data name="UseDarkTheme" xml:space="preserve">
     <value>Dunkle Darstellung verwenden</value>
   </data>
+  <data name="NewControllerEntryName" xml:space="preserve">
+    <value>Neuer Controller</value>
+  </data>
+  <data name="AddInputDeviceDialogTitle" xml:space="preserve">
+    <value>Eingabegerät hinzufügen…</value>
+  </data>
+  <data name="AddInputDeviceDialogCaption" xml:space="preserve">
+    <value>Geräte-Name:</value>
+  </data>
+  <data name="AddInputDeviceError1" xml:space="preserve">
+    <value>existiert bereits im Ordner, wähle einen anderen Namen!</value>
+  </data>
+  <data name="AddInputDeviceError2" xml:space="preserve">
+    <value>nutzt ungültige Zeichnen, bitte verwende nur Buchstaben, Zahlen und Unterstriche.</value>
+  </data>
+  <data name="NewSubFolderEntryName" xml:space="preserve">
+    <value>neuer_ordner</value>
+  </data>
+  <data name="CreateSubFolderDialogTitle" xml:space="preserve">
+    <value>Neuen Unterordner anlegen</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption1" xml:space="preserve">
+    <value>Gib den Namen des Unterordners an, den du anlegen möchtest.</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption2" xml:space="preserve">
+    <value>Dieser Ordnername existiert bereits!</value>
+  </data>
+  <data name="NewDeviceEntryName" xml:space="preserve">
+    <value>Neues Gerät</value>
+  </data>
+  <data name="AuthorSection" xml:space="preserve">
+    <value>Autor:</value>
+  </data>
+  <data name="NameSection" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="ModVersionSection" xml:space="preserve">
+    <value>Mod-Version:</value>
+  </data>
+  <data name="GameVersionSection" xml:space="preserve">
+    <value>Spiel-Version:</value>
+  </data>
+  <data name="ExistingModSection" xml:space="preserve">
+    <value>Existierende Mod:</value>
+  </data>
+  <data name="ConflictingModSection" xml:space="preserve">
+    <value>Mod in Konflikt:</value>
+  </data>
+  <data name="ConflictDialogCaption" xml:space="preserve">
+    <value>Wie möchtest du diesen Konflikt auflösen?</value>
+  </data>
+  <data name="MakeCopyButton" xml:space="preserve">
+    <value>Kopie erzeugen</value>
+  </data>
+  <data name="OverwriteButton" xml:space="preserve">
+    <value>Überschreiben</value>
+  </data>
+  <data name="AddNewSubFolderButton" xml:space="preserve">
+    <value>Neuen Unterordner hinzufügen...</value>
+  </data>
+  <data name="RemoveCurrentFolderButton" xml:space="preserve">
+    <value>Aktuellen Ordner löschen</value>
+  </data>
+  <data name="CurrentFolderLabel" xml:space="preserve">
+    <value>Aktueller Ordner:</value>
+  </data>
+  <data name="Viewer_ActiveModsTab" xml:space="preserve">
+    <value>Aktive Mods</value>
+  </data>
+  <data name="Viewer_ModsTab" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="OpenExternally" xml:space="preserve">
+    <value>Extern öffnen…</value>
+  </data>
+  <data name="Viewer_SubFolderItemFormatString" xml:space="preserve">
+    <value>Unterordner - ({0})</value>
+  </data>
+  <data name="Viewer_BaseFolderItemFormatString" xml:space="preserve">
+    <value>Wurzel - (Mods Verzeichnis)</value>
+  </data>
+  <data name="UpdateFailedError" xml:space="preserve">
+    <value>Update fehlgeschlagen!</value>
+  </data>
+  <data name="RemoveSubFolderWarning" xml:space="preserve">
+    <value>Bist du sicher, dass du {0} löschen willst? Dies kann nicht rückgängig gemacht werden, und alle Mods in diesem Ordner werden gelöscht!</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Mod Manager</value>
+  </data>
 </root>
