@@ -876,4 +876,15 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Sonic 3 A.I.R. Mod Manager</value>
   </data>
+  <data name="ErrorHyperlinkClickMessage" xml:space="preserve">
+    <value>(Klicke hier um dort hinzuspringen!)</value>
+  </data>
+  <data name="ModsLoadingError" xml:space="preserve">
+    <value>Fehler beim Laden der Mods!
+Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zur Spielinstallation in den Einstellungen richtig gesetzt hast.</value>
+  </data>
+  <data name="RecordingsLoadingError" xml:space="preserve">
+    <value>Fehler beim Laden der Recordings!
+Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zur Spielinstallation in den Einstellungen richtig gesetzt hast.</value>
+  </data>
 </root>
