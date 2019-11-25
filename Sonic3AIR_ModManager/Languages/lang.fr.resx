@@ -250,7 +250,7 @@
     <value>Ouvrir le fichier de configuration</value>
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
-    <value>Ouvrir les options du système...</value>
+    <value>Options du système...</value>
   </data>
   <data name="OpenUserManual" xml:space="preserve">
     <value>Le manuel d'utilisation de Sonic 3 A.I.R</value>
