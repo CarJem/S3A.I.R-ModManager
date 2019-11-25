@@ -55,11 +55,7 @@ namespace Sonic3AIR_ModManager
     /// 
 
 
-
-    // TODO: Fix Version Install By Zip Crash
     // TODO: Implement Version Checking to Prevent More Stupid Bug Reports
-    // TODO: Fix Broken AIR Mod Manager Places Button Items Not Having Triggers
-    // TODO: Fix Open Mod URL Menu Item Crash
     // TODO: Fix Unable to Install Version After Download is Complete
     public partial class ModManager : Window
     {
@@ -211,12 +207,12 @@ namespace Sonic3AIR_ModManager
         }
         private void OpenDownloadsFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            Process.Start(ProgramPaths.Sonic3AIR_MM_DownloadsFolder);
         }
 
         private void OpenVersionsFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            Process.Start(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
         }
 
         private void airModManagerPlacesButton_Click(object sender, RoutedEventArgs e)
@@ -539,7 +535,7 @@ namespace Sonic3AIR_ModManager
         private void ChangeSonic3AIRPathButton_Click(object sender, RoutedEventArgs e)
         {
             updateSonic3AIRPathButton.ContextMenu.IsOpen = true;
-            UpdateAIRVersionsToolstrips();
+            UpdateAIRSettings();
 
         }
 
@@ -990,8 +986,7 @@ namespace Sonic3AIR_ModManager
                 removeModToolStripMenuItem.IsEnabled = true;
                 editModFolderToolStripMenuItem.IsEnabled = true;
                 openModFolderToolStripMenuItem.IsEnabled = true;
-                openModURLToolStripMenuItem.IsEnabled = ((ModViewer.SelectedItem as ModViewerItem).Source.URL != null);
-
+                openModURLToolStripMenuItem.IsEnabled = (ValidateURL((ModViewer.SelectedItem as ModViewerItem).Source.URL));
                 if (ModViewer.ActiveView.Items.Contains(ModViewer.SelectedItem)) moveModToSubFolderMenuItem.IsEnabled = false;
                 else moveModToSubFolderMenuItem.IsEnabled = true;
             }
@@ -1065,6 +1060,16 @@ namespace Sonic3AIR_ModManager
             else
             {
                 modInfoTextBox.Document.Blocks.Clear();
+            }
+
+
+            bool ValidateURL(string value)
+            {
+                if (value == null) return false;
+                else if (value == "" || value == "NULL") return false;
+                else if (!Uri.TryCreate(value, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps)) return false;
+                else return true;
+
             }
         }
         #endregion
@@ -1691,7 +1696,19 @@ namespace Sonic3AIR_ModManager
 
         private void OpenModURL(string url)
         {
-            Process.Start(url);
+            try
+            {
+                if (url != "")
+                {
+                    Process.Start(url);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void OpenSettingsFile()
@@ -1846,33 +1863,41 @@ namespace Sonic3AIR_ModManager
             };
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
-                string output = destination;
-
-                using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(ofd.FileName))
+                try
                 {
-                    foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                    string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
+                    string output = destination;
+
+                    using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(ofd.FileName))
                     {
-                        entry.WriteToDirectory(output, new ExtractionOptions()
+                        foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
                         {
-                            ExtractFullPath = true,
-                            Overwrite = true
-                        });
+                            entry.WriteToDirectory(output, new ExtractionOptions()
+                            {
+                                ExtractFullPath = true,
+                                Overwrite = true
+                            });
+                        }
                     }
+
+
+                    string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                    AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
+
+
+                    string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
+
+                    Directory.Move(destination, output2);
+
+                    Directory.CreateDirectory(destination);
+
+                    MessageBox.Show(UserLanguage.VersionInstalled(output2));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
 
-
-                string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-                AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
-
-
-                string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
-
-                Directory.Move(destination, output2);
-
-                Directory.CreateDirectory(destination);
-
-                MessageBox.Show(UserLanguage.VersionInstalled(output2));
             }
 
 
