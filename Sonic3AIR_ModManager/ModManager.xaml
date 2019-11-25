@@ -294,7 +294,7 @@
                                     </StackPanel>
                                 </GroupBox>
                                 <GroupBox Grid.Row="1" Header="A.I.R. Launch Options" Name="LaunchOptionsGroup" MouseUp="OpenAIRPathSettings">
-                                    <Grid x:Name="airLaunchPanel" MouseUp="OpenAIRPathSettings">
+                                    <Grid x:Name="airLaunchPanel">
                                         <StackPanel Margin="5">
                                             <TextBlock x:Name="levelSelectLable" Text="Starting Scene:" Margin="0,2"></TextBlock>
                                             <Grid>
@@ -374,9 +374,9 @@
                                             </TextBlock>
                                             <Button Height="25" VerticalAlignment="Bottom" Content="Understood" Name="LaunchOptionsUnderstandingButton" Margin="5" Click="LaunchOptionsUnderstandingButton_Click"></Button>
                                         </Grid>
-                                        <Grid MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" x:Name="LaunchOptionsFailureMessageBackground" Visibility="Collapsed">
-                                            <Grid MouseUp="OpenAIRPathSettings" Background="{DynamicResource NormalBackground}" Opacity="0.8"></Grid>
-                                            <TextBlock MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings"  VerticalAlignment="Center" FontWeight="Bold" Name="LaunchOptionsFailureMessage" TextWrapping="Wrap" Foreground="{DynamicResource NormalText}" TextAlignment="Center">
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" x:Name="LaunchOptionsFailureMessageBackground" Visibility="Collapsed">
+                                            <Grid Background="{DynamicResource NormalBackground}" Opacity="0.8"></Grid>
+                                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Name="LaunchOptionsFailureMessage" TextWrapping="Wrap" Foreground="{DynamicResource NormalText}" TextAlignment="Center">
                                             </TextBlock>
                                         </Grid>
                                     </Grid>
