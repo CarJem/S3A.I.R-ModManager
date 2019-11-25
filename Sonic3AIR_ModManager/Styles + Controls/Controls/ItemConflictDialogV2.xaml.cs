@@ -25,7 +25,7 @@ namespace Sonic3AIR_ModManager
         {
             InitializeComponent();
             var Instance = this;
-            UserLanguage.ApplyLanguage(ref Instance)
+            UserLanguage.ApplyLanguage(ref Instance);
         }
 
         public System.Windows.Forms.DialogResult ShowDialog(AIR_API.Mod NewMod, AIR_API.Mod ExistingMod)

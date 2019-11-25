@@ -45,7 +45,7 @@
                             <Button Click="MoveDownButton_Click" x:Name="moveDownButton" Height="25" Width="25" Margin="0,0,0,5"  Content="↓"></Button>
                             <Button Click="MoveToBottomButton_Click" x:Name="moveToBottomButton" Height="25" Width="25" Margin="0,0,0,5" Content="⤓"></Button>
                         </StackPanel>
-                        <local:ModViewer Grid.Column="1" Grid.RowSpan="2" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
+                        <get Grid.Column="1" Grid.RowSpan="2" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></get>
                         <Grid.ContextMenu>
                             <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
                                 <MenuItem Name="editModFolderToolStripMenuItem" Header="Edit Config..." Click="editModFolderToolStripMenuItem_Click"></MenuItem>
