@@ -790,6 +790,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Click here to go there!).
+        /// </summary>
+        internal static string ErrorHyperlinkClickMessage {
+            get {
+                return ResourceManager.GetString("ErrorHyperlinkClickMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error with loading.
         /// </summary>
         internal static string ErrorWithLoading {
@@ -1317,6 +1326,16 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error Loading Mods!
+        ///Make sure your game is up to date and you have A.I.R.&apos;s Game Path set in Options..
+        /// </summary>
+        internal static string ModsLoadingError {
+            get {
+                return ResourceManager.GetString("ModsLoadingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
         internal static string ModsTab {
@@ -1646,6 +1665,16 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string RecordingPathCopiedToClipboard {
             get {
                 return ResourceManager.GetString("RecordingPathCopiedToClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Loading Recordings!
+        ///Make sure your game is up to date and you have A.I.R.&apos;s Game Path set in Options..
+        /// </summary>
+        internal static string RecordingsLoadingError {
+            get {
+                return ResourceManager.GetString("RecordingsLoadingError", resourceCulture);
             }
         }
         

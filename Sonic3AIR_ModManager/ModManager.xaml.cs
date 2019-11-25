@@ -154,6 +154,7 @@ namespace Sonic3AIR_ModManager
                 Instance = this;
 
 
+
                 if (Properties.Settings.Default.WindowSize != null)
                 {
                     this.Width = Properties.Settings.Default.WindowSize.Width;
@@ -786,7 +787,7 @@ namespace Sonic3AIR_ModManager
                 languageComboBox.Items.Add(EN_US);
                 languageComboBox.Items.Add(GR);
                 languageComboBox.Items.Add(FR);
-                languageComboBox.Items.Add(NULL);
+                if (Program.isDebug) languageComboBox.Items.Add(NULL);
 
                 if (UserLanguage.CurrentLanguage == UserLanguage.Language.EN_US) languageComboBox.SelectedItem = EN_US;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.GR) languageComboBox.SelectedItem = GR;
@@ -813,6 +814,8 @@ namespace Sonic3AIR_ModManager
 
             GetLanguageSelection();
             RetriveLaunchOptions();
+
+            ModManagement.UpdateModsList(true);
 
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
@@ -1152,6 +1155,8 @@ namespace Sonic3AIR_ModManager
 
         private void ShowGameConfigErrorPanels()
         {
+
+
             inputPanel.IsEnabled = false;
             inputErrorMessage.Visibility = Visibility.Visible;
 
@@ -1188,13 +1193,15 @@ namespace Sonic3AIR_ModManager
 
         private void AIRGameConfigNullSituation(int situation = 0)
         {
-            if (situation == 0) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError1");
-            else if (situation == 1) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError2");
-            else if (situation == 2) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError3");
+            string hyperLink = nL + Program.LanguageResource.GetString("ErrorHyperlinkClickMessage");
+            if (situation == 0) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError1") + hyperLink;
+            else if (situation == 1) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError2") + hyperLink;
+            else if (situation == 2) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError3") + hyperLink;
 
-            if (situation == 0) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError1");
-            else if (situation == 1) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError2");
-            else if (situation == 2) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError3");
+            if (situation == 0) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError1") + hyperLink;
+            else if (situation == 1) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError2") + hyperLink;
+            else if (situation == 2) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError3") + hyperLink;
+
 
             ShowGameConfigErrorPanels();
         }
@@ -2073,6 +2080,15 @@ namespace Sonic3AIR_ModManager
             UpdateAIRSettings();
         }
 
+        private void HyperlinkToGeneralTabAIRPath()
+        {
+            settingsPage.IsSelected = true;
+            tabControl1.SelectedItem = settingsPage;
+            optionsPage.IsSelected = true;
+            settingsTabControl.SelectedItem = optionsPage;
+
+        }
+
 
 
         #region Move Mod to Subfolder Methods
@@ -2154,5 +2170,12 @@ namespace Sonic3AIR_ModManager
         }
 
         #endregion
+
+        private void OpenAIRPathSettings(object sender, MouseButtonEventArgs e)
+        {
+            if (sender.Equals(LaunchOptionsGroup) && LaunchOptionsFailureMessageBackground.Visibility == Visibility.Visible) HyperlinkToGeneralTabAIRPath();
+            else if (!sender.Equals(LaunchOptionsGroup)) HyperlinkToGeneralTabAIRPath();
+
+        }
     }
 }

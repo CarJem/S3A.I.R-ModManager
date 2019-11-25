@@ -897,4 +897,15 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Sonic 3 A.I.R. Mod Manager</value>
   </data>
+  <data name="ErrorHyperlinkClickMessage" xml:space="preserve">
+    <value>(Click here to go there!)</value>
+  </data>
+  <data name="ModsLoadingError" xml:space="preserve">
+    <value>Error Loading Mods!
+Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.</value>
+  </data>
+  <data name="RecordingsLoadingError" xml:space="preserve">
+    <value>Error Loading Recordings!
+Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.</value>
+  </data>
 </root>

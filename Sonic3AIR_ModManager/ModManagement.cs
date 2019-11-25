@@ -27,12 +27,14 @@ namespace Sonic3AIR_ModManager
         {
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
+                int PreviousSubFolderIndex = Parent.ModViewer.FolderView.SelectedIndex;
                 Parent.modErrorTextPanel.Visibility = Visibility.Collapsed;
                 Parent.UpdateModListItemCheck(true);
                 if (FullReload) FetchMods();
                 else UpdateNewModsListItems();
                 Parent.RefreshSelectedModProperties();
                 Parent.UpdateModListItemCheck(false);
+                if (Parent.ModViewer.FolderView.Items.Count > PreviousSubFolderIndex && PreviousSubFolderIndex != -1) Parent.ModViewer.FolderView.SelectedIndex = PreviousSubFolderIndex;
             }
             else
             {

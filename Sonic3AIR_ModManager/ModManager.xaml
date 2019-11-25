@@ -94,7 +94,7 @@
                         </StackPanel>
                     </Grid>
                     <Grid Background="{DynamicResource NormalBackground}" Name="modErrorTextPanel" Grid.ColumnSpan="5" Grid.RowSpan="5" Visibility="Collapsed">
-                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextWrapping="Wrap" TextBlock.TextAlignment="Center" FontSize="9" Name="modErrorText"  Text="Error Loading Mods!&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options."></TextBlock>
+                        <TextBlock MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextWrapping="Wrap" TextBlock.TextAlignment="Center" FontSize="9" Name="modErrorText"  Text=""></TextBlock>
                     </Grid>
 
                 </Grid>
@@ -127,7 +127,7 @@
                                 </StackPanel>
                             </Grid>
                             <Grid Background="{DynamicResource NormalBackground}" Name="recordingsErrorMessagePanel" Visibility="Collapsed">
-                                <TextBlock Name="recordingsErrorMessage" FontWeight="Bold" Visibility="Visible" FontSize="9" TextBlock.TextAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="Error Loading Recordings!&#xD;&#xA;Make sure your game is up to date and you have A.I.R.'s Game Path set in Options."></TextBlock>
+                                <TextBlock MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings" Name="recordingsErrorMessage" FontWeight="Bold" Visibility="Visible" FontSize="9" TextBlock.TextAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Text=""></TextBlock>
                             </Grid>
                         </Grid>
 
@@ -293,8 +293,8 @@
                                         </Grid>
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Grid.Row="1" Header="A.I.R. Launch Options" Name="LaunchOptionsGroup">
-                                    <Grid x:Name="airLaunchPanel">
+                                <GroupBox Grid.Row="1" Header="A.I.R. Launch Options" Name="LaunchOptionsGroup" MouseUp="OpenAIRPathSettings">
+                                    <Grid x:Name="airLaunchPanel" MouseUp="OpenAIRPathSettings">
                                         <StackPanel Margin="5">
                                             <TextBlock x:Name="levelSelectLable" Text="Starting Scene:" Margin="0,2"></TextBlock>
                                             <Grid>
@@ -374,9 +374,9 @@
                                             </TextBlock>
                                             <Button Height="25" VerticalAlignment="Bottom" Content="Understood" Name="LaunchOptionsUnderstandingButton" Margin="5" Click="LaunchOptionsUnderstandingButton_Click"></Button>
                                         </Grid>
-                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" x:Name="LaunchOptionsFailureMessageBackground" Visibility="Collapsed">
-                                            <Grid Background="{DynamicResource NormalBackground}" Opacity="0.8"></Grid>
-                                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Name="LaunchOptionsFailureMessage" TextWrapping="Wrap" Foreground="{DynamicResource NormalText}" TextAlignment="Center">
+                                        <Grid MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" x:Name="LaunchOptionsFailureMessageBackground" Visibility="Collapsed">
+                                            <Grid MouseUp="OpenAIRPathSettings" Background="{DynamicResource NormalBackground}" Opacity="0.8"></Grid>
+                                            <TextBlock MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings"  VerticalAlignment="Center" FontWeight="Bold" Name="LaunchOptionsFailureMessage" TextWrapping="Wrap" Foreground="{DynamicResource NormalText}" TextAlignment="Center">
                                             </TextBlock>
                                         </Grid>
                                     </Grid>
@@ -487,7 +487,7 @@
                                     <Button x:Name="resetInputsButton" Height="25" Grid.Column="1" Margin="4,0" Content="Reset to Defaults" Click="ResetInputsButton_Click"></Button>
                                 </Grid>
                             </Grid>
-                            <Label Background="{DynamicResource NormalBackground}" FontWeight="Bold" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextBlock.TextAlignment="Center" FontSize="9" Name="inputErrorMessage"  Visibility="Collapsed">
+                            <Label Background="{DynamicResource NormalBackground}" MouseUp="OpenAIRPathSettings" FontWeight="Bold" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextBlock.TextAlignment="Center" FontSize="9" Name="inputErrorMessage"  Visibility="Collapsed">
                                 <Label.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />

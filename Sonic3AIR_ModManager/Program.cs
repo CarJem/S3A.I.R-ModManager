@@ -19,6 +19,14 @@ namespace Sonic3AIR_ModManager
 
         public static Options Arguments;
 
+        public static bool isDebug;
+
+        [ConditionalAttribute("DEBUG")]
+        public static void isDebugging()
+        {
+            isDebug = true;
+        }
+
         public static string Version { get; } = "v.1.4.1";
 
         public static bool CheckedForUpdateOnStartup = false;
@@ -34,7 +42,8 @@ namespace Sonic3AIR_ModManager
         /// </summary>
         [STAThread]
         static void Main(string[] args)
-        {         
+        {
+            isDebugging();
             Parser.Default.ParseArguments<Options>(args).WithParsed<Options>( o => { Arguments = o; });
             ProgramPaths.CreateMissingModManagerFolders();
             var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;

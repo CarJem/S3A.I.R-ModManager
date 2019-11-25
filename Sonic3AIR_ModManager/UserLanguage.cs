@@ -163,6 +163,11 @@ namespace Sonic3AIR_ModManager
         {
             UserLanguage.ApplyLanguage(ref form.ModViewer);
 
+
+            string hyperLink = nL + Program.LanguageResource.GetString("ErrorHyperlinkClickMessage");
+            form.modErrorText.Text = Program.LanguageResource.GetString("ModsLoadingError") + hyperLink;
+            form.recordingsErrorMessage.Text = Program.LanguageResource.GetString("RecordingsLoadingError") + hyperLink;
+
             //Main Buttons
             form.exitButton.Content = Program.LanguageResource.GetString("Exit");
             form.saveAndLoadButton.Content = Program.LanguageResource.GetString("Save&Load");
