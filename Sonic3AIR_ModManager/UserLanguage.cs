@@ -144,12 +144,18 @@ namespace Sonic3AIR_ModManager
 
         public static string BaseModFolderString()
         {
-            return Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString");
+            string result;
+            if (Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString") != null) result = Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString");
+            else result = "";
+            return Program.LanguageResource.GetString("result");
         }
 
         public static string SubModFolderString(string folder)
         {
-            return string.Format(Program.LanguageResource.GetString("Viewer_SubFolderItemFormatString"), folder);
+            string result;
+            if (Program.LanguageResource.GetString("Viewer_SubFolderItemFormatString") != null) result = string.Format(Program.LanguageResource.GetString("Viewer_SubFolderItemFormatString"), folder);
+            else result = "";
+            return result;
         }
 
         #endregion
@@ -158,6 +164,8 @@ namespace Sonic3AIR_ModManager
 
         public static void ApplyLanguage(ref ModManager form)
         {
+            UserLanguage.ApplyLanguage(ref form.ModViewer);
+
             //Main Buttons
             form.exitButton.Content = Program.LanguageResource.GetString("Exit");
             form.saveAndLoadButton.Content = Program.LanguageResource.GetString("Save&Load");

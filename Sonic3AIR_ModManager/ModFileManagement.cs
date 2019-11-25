@@ -190,6 +190,7 @@ namespace Sonic3AIR_ModManager
 
         public static void RemoveSubFolder(string subFolderToRemove)
         {
+            //TODO: Add Language Translations
             if (MessageBox.Show($"Are you sure you want to delete {Path.GetDirectoryName(subFolderToRemove)}? This cannot be undone and any mods inside of this folder will be lost!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 WipeFolderContents(subFolderToRemove);

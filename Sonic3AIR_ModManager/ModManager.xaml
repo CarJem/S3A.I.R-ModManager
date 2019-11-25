@@ -18,7 +18,7 @@
             <RowDefinition Height="85"></RowDefinition>
         </Grid.RowDefinitions>
         <TabControl x:Name="tabControl1" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">
-            <TabItem Header="Mods" Name="modPage">
+            <TabItem Header="Mods" Name="modPage">  
                 <Grid x:Name="modPanel" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"></ColumnDefinition>
@@ -45,7 +45,7 @@
                             <Button Click="MoveDownButton_Click" x:Name="moveDownButton" Height="25" Width="25" Margin="0,0,0,5"  Content="↓"></Button>
                             <Button Click="MoveToBottomButton_Click" x:Name="moveToBottomButton" Height="25" Width="25" Margin="0,0,0,5" Content="⤓"></Button>
                         </StackPanel>
-                        <get Grid.Column="1" Grid.RowSpan="2" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></get>
+                        <local:ModViewer Grid.Column="1" Grid.RowSpan="2" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
                         <Grid.ContextMenu>
                             <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
                                 <MenuItem Name="editModFolderToolStripMenuItem" Header="Edit Config..." Click="editModFolderToolStripMenuItem_Click"></MenuItem>

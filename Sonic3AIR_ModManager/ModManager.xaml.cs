@@ -739,6 +739,7 @@ namespace Sonic3AIR_ModManager
                 }
 
                 UserLanguage.ApplyLanguage(ref Instance);
+                ModManagement.UpdateModsList(true);
                 UpdateAIRSettings();
             }
 

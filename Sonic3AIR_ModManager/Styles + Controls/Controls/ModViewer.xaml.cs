@@ -196,6 +196,7 @@ namespace Sonic3AIR_ModManager
             {
                 string newDirectoryPath = System.IO.Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName);
                 Directory.CreateDirectory(newDirectoryPath);
+                ModManager.Instance.ModManagement.UpdateModsList(true);
             }
         }
     }
