@@ -79,6 +79,42 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input Device Name:.
+        /// </summary>
+        internal static string AddInputDeviceDialogCaption {
+            get {
+                return ResourceManager.GetString("AddInputDeviceDialogCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a Input Device….
+        /// </summary>
+        internal static string AddInputDeviceDialogTitle {
+            get {
+                return ResourceManager.GetString("AddInputDeviceDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to already exists in the directory, pick another name!.
+        /// </summary>
+        internal static string AddInputDeviceError1 {
+            get {
+                return ResourceManager.GetString("AddInputDeviceError1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to uses unacceptable characters, please try to use only underscrores and numeranic/alphabettical characters..
+        /// </summary>
+        internal static string AddInputDeviceError2 {
+            get {
+                return ResourceManager.GetString("AddInputDeviceError2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter the name of the controller as it appears in the system settings or type * to target all devices..
         /// </summary>
         internal static string AddNewDeviceDescription {
@@ -93,6 +129,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string AddNewDeviceTitle {
             get {
                 return ResourceManager.GetString("AddNewDeviceTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Subfolder….
+        /// </summary>
+        internal static string AddNewSubFolderButton {
+            get {
+                return ResourceManager.GetString("AddNewSubFolderButton", resourceCulture);
             }
         }
         
@@ -192,6 +237,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string AIRVersionColumnHeader {
             get {
                 return ResourceManager.GetString("AIRVersionColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Author:.
+        /// </summary>
+        internal static string AuthorSection {
+            get {
+                return ResourceManager.GetString("AuthorSection", resourceCulture);
             }
         }
         
@@ -376,7 +430,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Cancel.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel_Button {
             get {
@@ -421,7 +475,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following files could not be found: .
+        ///   Looks up a localized string similar to The following files could not be found:.
         /// </summary>
         internal static string CollectionFilesCouldNotBeFound1 {
             get {
@@ -430,9 +484,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///If you have not run Sonic 3 A.I.R. yet, please run Sonic 3 A.I.R. once before running the modloader!.
+        ///   Looks up a localized string similar to If you have not run Sonic 3 A.I.R. yet, please run Sonic 3 A.I.R. once before running the modloader!.
         /// </summary>
         internal static string CollectionFilesCouldNotBeFound2 {
             get {
@@ -441,13 +493,29 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///If you have, make sure these locations exist. The modloader can&apos;t run without them.
+        ///   Looks up a localized string similar to If you have, make sure these locations exist. The modloader can&apos;t run without them.
         /// </summary>
         internal static string CollectionFilesCouldNotBeFound3 {
             get {
                 return ResourceManager.GetString("CollectionFilesCouldNotBeFound3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How would you like to resolve this conflict?.
+        /// </summary>
+        internal static string ConflictDialogCaption {
+            get {
+                return ResourceManager.GetString("ConflictDialogCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conflicting Mod:.
+        /// </summary>
+        internal static string ConflictingModSection {
+            get {
+                return ResourceManager.GetString("ConflictingModSection", resourceCulture);
             }
         }
         
@@ -466,6 +534,42 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string CopyFilePath {
             get {
                 return ResourceManager.GetString("CopyFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type in the name of the subfolder you want to create..
+        /// </summary>
+        internal static string CreateSubFolderDialogCaption1 {
+            get {
+                return ResourceManager.GetString("CreateSubFolderDialogCaption1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That folder name already exists!.
+        /// </summary>
+        internal static string CreateSubFolderDialogCaption2 {
+            get {
+                return ResourceManager.GetString("CreateSubFolderDialogCaption2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a New Subfolder.
+        /// </summary>
+        internal static string CreateSubFolderDialogTitle {
+            get {
+                return ResourceManager.GetString("CreateSubFolderDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Folder:.
+        /// </summary>
+        internal static string CurrentFolderLabel {
+            get {
+                return ResourceManager.GetString("CurrentFolderLabel", resourceCulture);
             }
         }
         
@@ -713,6 +817,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Existing Mod:.
+        /// </summary>
+        internal static string ExistingModSection {
+            get {
+                return ResourceManager.GetString("ExistingModSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string Exit {
@@ -799,6 +912,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string GameInstalledAt {
             get {
                 return ResourceManager.GetString("GameInstalledAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Version:.
+        /// </summary>
+        internal static string GameVersionSection {
+            get {
+                return ResourceManager.GetString("GameVersionSection", resourceCulture);
             }
         }
         
@@ -903,8 +1025,7 @@ namespace Sonic3AIR_ModManager.Languages {
         
         /// <summary>
         ///   Looks up a localized string similar to Error Loading Input Configuration File!
-        ///Make sure your game is up to date and you have A.I.R.&apos;s Game Path set in Options.
-        ///.
+        /// Make sure your game is up to date and you have A.I.R.&apos;s Game Path set in Options..
         /// </summary>
         internal static string InputMappingError1 {
             get {
@@ -1024,8 +1145,8 @@ namespace Sonic3AIR_ModManager.Languages {
         
         /// <summary>
         ///   Looks up a localized string similar to NOTE: These are Debugging Options Only!
-        ///Intended for Mod Developers and Debugging Purposes. This may breaks the likes of features such as Achivements.
-        ///Please be careful!.
+        /// Intended for Mod Developers and Debugging Purposes. This may breaks the likes of features such as Achivements.
+        /// Please be careful!.
         /// </summary>
         internal static string LaunchOptionsForewarning {
             get {
@@ -1133,6 +1254,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make Copy.
+        /// </summary>
+        internal static string MakeCopyButton {
+            get {
+                return ResourceManager.GetString("MakeCopyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sonic 3 A.I.R.&apos;s File Path is Not Set, Would you like to set it now?.
         /// </summary>
         internal static string MissingAIRSetNowAlert {
@@ -1196,6 +1326,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mod Version:.
+        /// </summary>
+        internal static string ModVersionSection {
+            get {
+                return ResourceManager.GetString("ModVersionSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to More....
         /// </summary>
         internal static string MoreExpandable {
@@ -1205,11 +1344,47 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        internal static string NameSection {
+            get {
+                return ResourceManager.GetString("NameSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NewController.
+        /// </summary>
+        internal static string NewControllerEntryName {
+            get {
+                return ResourceManager.GetString("NewControllerEntryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Device.
+        /// </summary>
+        internal static string NewDeviceEntryName {
+            get {
+                return ResourceManager.GetString("NewDeviceEntryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to =========================.
         /// </summary>
         internal static string NewStrings {
             get {
                 return ResourceManager.GetString("NewStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new_sub_folder.
+        /// </summary>
+        internal static string NewSubFolderEntryName {
+            get {
+                return ResourceManager.GetString("NewSubFolderEntryName", resourceCulture);
             }
         }
         
@@ -1250,7 +1425,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;OK.
+        ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string Ok_Button {
             get {
@@ -1300,6 +1475,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string OpenEXEFolder {
             get {
                 return ResourceManager.GetString("OpenEXEFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Externally….
+        /// </summary>
+        internal static string OpenExternally {
+            get {
+                return ResourceManager.GetString("OpenExternally", resourceCulture);
             }
         }
         
@@ -1403,6 +1587,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overwrite.
+        /// </summary>
+        internal static string OverwriteButton {
+            get {
+                return ResourceManager.GetString("OverwriteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Path.
         /// </summary>
         internal static string PathColumnHeader {
@@ -1498,6 +1691,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Current Folder.
+        /// </summary>
+        internal static string RemoveCurrentFolderButton {
+            get {
+                return ResourceManager.GetString("RemoveCurrentFolderButton", resourceCulture);
             }
         }
         
@@ -1925,6 +2127,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Failed!.
+        /// </summary>
+        internal static string UpdateFailedError {
+            get {
+                return ResourceManager.GetString("UpdateFailedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An Update is Avaliable! Would You Like to Update Now?.
         /// </summary>
         internal static string Updater_Avaliable {
@@ -1971,16 +2182,16 @@ namespace Sonic3AIR_ModManager.Languages {
         
         /// <summary>
         ///   Looks up a localized string similar to Useful In-Game Shortcuts/Keys:
-        ///
-        ///Alt + Enter - Toggle Fullscreen
-        ///F2 - Take a Game Recording Capture
-        ///Right Click - Open A.I.R Context Menu
-        ///F3 - Rescan for Game Controllers
-        ///F4 - Switches Game Controllers for P1 and P2
-        ///Numpad Plus/Minus - Adjust Global Audio Volume
-        ///Alt + B - Change Background Blur
-        ///Alt + F - Change Filter
-        ///Alt + P - Show Performance Display.
+        /// 
+        /// Alt + Enter - Toggle Fullscreen
+        /// F2 - Take a Game Recording Capture
+        /// Right Click - Open A.I.R Context Menu
+        /// F3 - Rescan for Game Controllers
+        /// F4 - Switches Game Controllers for P1 and P2
+        /// Numpad Plus/Minus - Adjust Global Audio Volume
+        /// Alt + B - Change Background Blur
+        /// Alt + F - Change Filter
+        /// Alt + P - Show Performance Display.
         /// </summary>
         internal static string UsefulShortKeys {
             get {
@@ -2012,6 +2223,42 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string VersionsTab {
             get {
                 return ResourceManager.GetString("VersionsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Mods.
+        /// </summary>
+        internal static string Viewer_ActiveModsTab {
+            get {
+                return ResourceManager.GetString("Viewer_ActiveModsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root - (Mods Directory).
+        /// </summary>
+        internal static string Viewer_BaseFolderItemFormatString {
+            get {
+                return ResourceManager.GetString("Viewer_BaseFolderItemFormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mods.
+        /// </summary>
+        internal static string Viewer_ModsTab {
+            get {
+                return ResourceManager.GetString("Viewer_ModsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub-folder - ({0}).
+        /// </summary>
+        internal static string Viewer_SubFolderItemFormatString {
+            get {
+                return ResourceManager.GetString("Viewer_SubFolderItemFormatString", resourceCulture);
             }
         }
         

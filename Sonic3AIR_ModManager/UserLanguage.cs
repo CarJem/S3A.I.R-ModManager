@@ -144,15 +144,17 @@ namespace Sonic3AIR_ModManager
 
         public static string BaseModFolderString()
         {
-            return "Root - (Mods Directory)";
+            return Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString");
         }
 
         public static string SubModFolderString(string folder)
         {
-            return string.Format("Sub-folder - ({0})", folder);
+            return string.Format(Program.LanguageResource.GetString("Viewer_SubFolderItemFormatString"), folder);
         }
 
         #endregion
+
+
 
         public static void ApplyLanguage(ref ModManager form)
         {
@@ -325,6 +327,28 @@ namespace Sonic3AIR_ModManager
             form.checkForModManagerUpdatesButton.Content = Program.LanguageResource.GetString("CheckForModManagerUpdatesButton");
 
             form.SetTooltips();
+        }
+
+        public static void ApplyLanguage(ref ModViewer form)
+        {
+
+            form.AddNewSubFolderMenuItem.Header = Program.LanguageResource.GetString("AddNewSubFolderButton");
+            form.RemoveCurrentFolderMenuItem.Header = Program.LanguageResource.GetString("RemoveCurrentFolderButton");           
+            form.CurrentFolderLabel.Content = Program.LanguageResource.GetString("CurrentFolderLabel");            
+            form.ActiveModsTab.Header = Program.LanguageResource.GetString("Viewer_ActiveModsTab");            
+            form.ModsTab.Header = Program.LanguageResource.GetString("Viewer_ModsTab");           
+        }
+
+        public static void ApplyLanguage(ref ItemConflictDialogV2 form)
+        {
+            form.CancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
+            form.OverwriteButton.Content = Program.LanguageResource.GetString("OverwriteButton");
+            form.MakeCopyButton.Content = Program.LanguageResource.GetString("MakeCopyButton");
+        }
+
+        public static void ApplyLanguage(ref DocumentationViewer form)
+        {
+            form.ExternalOpenButton.Content = Program.LanguageResource.GetString("OpenExternally");
         }
 
         public static void ApplyLanguage(ref AutoBootDialogV2 form)

@@ -326,16 +326,16 @@
   </data>
   <data name="UsefulShortKeys" xml:space="preserve">
     <value>Useful In-Game Shortcuts/Keys:
-
-Alt + Enter - Toggle Fullscreen
-F2 - Take a Game Recording Capture
-Right Click - Open A.I.R Context Menu
-F3 - Rescan for Game Controllers
-F4 - Switches Game Controllers for P1 and P2
-Numpad Plus/Minus - Adjust Global Audio Volume
-Alt + B - Change Background Blur
-Alt + F - Change Filter
-Alt + P - Show Performance Display</value>
+ 
+ Alt + Enter - Toggle Fullscreen
+ F2 - Take a Game Recording Capture
+ Right Click - Open A.I.R Context Menu
+ F3 - Rescan for Game Controllers
+ F4 - Switches Game Controllers for P1 and P2
+ Numpad Plus/Minus - Adjust Global Audio Volume
+ Alt + B - Change Background Blur
+ Alt + F - Change Filter
+ Alt + P - Show Performance Display</value>
   </data>
   <data name="VersionsTab" xml:space="preserve">
     <value>Versions</value>
@@ -399,8 +399,7 @@ Alt + P - Show Performance Display</value>
   </data>
   <data name="InputMappingError1" xml:space="preserve">
     <value>Error Loading Input Configuration File!
-Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.
-</value>
+ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.</value>
   </data>
   <data name="InputMappingError2" xml:space="preserve">
     <value>There was an error reading the config file in this Version's Folder!
@@ -411,17 +410,13 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
  Please make sure the file exists or do a clean install of this version of A.I.R.</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound1" xml:space="preserve">
-    <value>The following files could not be found: </value>
+    <value>The following files could not be found:</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound2" xml:space="preserve">
-    <value>
-
-If you have not run Sonic 3 A.I.R. yet, please run Sonic 3 A.I.R. once before running the modloader!</value>
+    <value>If you have not run Sonic 3 A.I.R. yet, please run Sonic 3 A.I.R. once before running the modloader!</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound3" xml:space="preserve">
-    <value>
-
-If you have, make sure these locations exist. The modloader can't run without them</value>
+    <value>If you have, make sure these locations exist. The modloader can't run without them</value>
   </data>
   <data name="AIRChangePathNoLongerExists" xml:space="preserve">
     <value>The file defined settings does not exist anymore. Launch AIR again outside of the mod loader and try again</value>
@@ -460,10 +455,10 @@ If you have, make sure these locations exist. The modloader can't run without th
     <value>[UNSUPPORTED]</value>
   </data>
   <data name="Ok_Button" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>OK</value>
   </data>
   <data name="Cancel_Button" xml:space="preserve">
-    <value>&amp;Cancel</value>
+    <value>Cancel</value>
   </data>
   <data name="AutoBoot_Initalizing" xml:space="preserve">
     <value>Initializing...</value>
@@ -808,8 +803,92 @@ If you have, make sure these locations exist. The modloader can't run without th
   </data>
   <data name="LaunchOptionsForewarning" xml:space="preserve">
     <value>NOTE: These are Debugging Options Only!
-Intended for Mod Developers and Debugging Purposes. This may breaks the likes of features such as Achivements.
-Please be careful!</value>
+ Intended for Mod Developers and Debugging Purposes. This may breaks the likes of features such as Achivements.
+ Please be careful!</value>
     
+  </data>
+  <data name="NewControllerEntryName" xml:space="preserve">
+    <value>NewController</value>
+  </data>
+  <data name="AddInputDeviceDialogTitle" xml:space="preserve">
+    <value>Add a Input Device…</value>
+  </data>
+  <data name="AddInputDeviceDialogCaption" xml:space="preserve">
+    <value>Input Device Name:</value>
+  </data>
+  <data name="AddInputDeviceError1" xml:space="preserve">
+    <value>already exists in the directory, pick another name!</value>
+  </data>
+  <data name="AddInputDeviceError2" xml:space="preserve">
+    <value>uses unacceptable characters, please try to use only underscrores and numeranic/alphabettical characters.</value>
+  </data>
+  <data name="NewSubFolderEntryName" xml:space="preserve">
+    <value>new_sub_folder</value>
+  </data>
+  <data name="CreateSubFolderDialogTitle" xml:space="preserve">
+    <value>Create a New Subfolder</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption1" xml:space="preserve">
+    <value>Type in the name of the subfolder you want to create.</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption2" xml:space="preserve">
+    <value>That folder name already exists!</value>
+  </data>
+  <data name="NewDeviceEntryName" xml:space="preserve">
+    <value>New Device</value>
+  </data>
+  <data name="AuthorSection" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="NameSection" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="ModVersionSection" xml:space="preserve">
+    <value>Mod Version:</value>
+  </data>
+  <data name="GameVersionSection" xml:space="preserve">
+    <value>Game Version:</value>
+  </data>
+  <data name="ExistingModSection" xml:space="preserve">
+    <value>Existing Mod:</value>
+  </data>
+  <data name="ConflictingModSection" xml:space="preserve">
+    <value>Conflicting Mod:</value>
+  </data>
+  <data name="ConflictDialogCaption" xml:space="preserve">
+    <value>How would you like to resolve this conflict?</value>
+  </data>
+  <data name="MakeCopyButton" xml:space="preserve">
+    <value>Make Copy</value>
+  </data>
+  <data name="OverwriteButton" xml:space="preserve">
+    <value>Overwrite</value>
+  </data>
+  <data name="AddNewSubFolderButton" xml:space="preserve">
+    <value>Add New Subfolder…</value>
+  </data>
+  <data name="RemoveCurrentFolderButton" xml:space="preserve">
+    <value>Remove Current Folder</value>
+  </data>
+  <data name="CurrentFolderLabel" xml:space="preserve">
+    <value>Current Folder:</value>
+  </data>
+  <data name="Viewer_ActiveModsTab" xml:space="preserve">
+    <value>Active Mods</value>
+  </data>
+  <data name="Viewer_ModsTab" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="OpenExternally" xml:space="preserve">
+    <value>Open Externally…</value>
+  </data>
+  <data name="Viewer_SubFolderItemFormatString" xml:space="preserve">
+    <value>Sub-folder - ({0})</value>
+  </data>
+  <data name="Viewer_BaseFolderItemFormatString" xml:space="preserve">
+    <value>Root - (Mods Directory)</value>
+  </data>
+  <data name="UpdateFailedError" xml:space="preserve">
+    <value>Update Failed!</value>
   </data>
 </root>

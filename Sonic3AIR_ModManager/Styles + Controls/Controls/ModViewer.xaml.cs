@@ -79,6 +79,9 @@ namespace Sonic3AIR_ModManager
         {
             InitializeComponent();
             UpdateSelectedFolderLabel();
+
+            var Instance = this;
+            UserLanguage.ApplyLanguage(ref Instance);
         }
 
         #region List Access Methods
@@ -176,6 +179,24 @@ namespace Sonic3AIR_ModManager
         private void FolderListHost_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
 
+        }
+
+        private void AddNewSubFolderMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            string newFolderName = Program.LanguageResource.GetString("NewSubFolderEntryName");
+            System.Windows.Forms.DialogResult result;
+            result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption1"));
+            while (Directory.Exists(System.IO.Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName)) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+            {
+                result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption2"));
+            }
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                string newDirectoryPath = System.IO.Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName);
+                Directory.CreateDirectory(newDirectoryPath);
+            }
         }
     }
 

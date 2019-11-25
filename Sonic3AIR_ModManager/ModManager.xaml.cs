@@ -1359,8 +1359,9 @@ namespace Sonic3AIR_ModManager
         {
             if (inputMethodsList.SelectedItem != null)
             {
+
                 int index = inputMethodsList.SelectedIndex;
-                string newDevice = "New Device";
+                string newDevice = Program.LanguageResource.GetString("NewDeviceEntryName");
                 DeviceNameDialogV2 deviceNameDialog = new DeviceNameDialogV2();
                 bool? result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
                 if (result == true)
@@ -1376,14 +1377,16 @@ namespace Sonic3AIR_ModManager
 
         private void AddInputDevice()
         {
-            string new_name = "NewController";
+
+            string new_name = Program.LanguageResource.GetString("NewControllerEntryName");
             bool finished = false;
             char[] acceptable_char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890".ToArray();
 
 
             while (!finished)
             {
-                DialogResult result = ExtraDialog.ShowInputDialog(ref new_name, "Add a Input Device...", "Input Device Name:");
+
+                DialogResult result = ExtraDialog.ShowInputDialog(ref new_name, Program.LanguageResource.GetString("AddInputDeviceDialogTitle"), Program.LanguageResource.GetString("AddInputDeviceDialogCaption"));
                 bool containsKey = GameConfig.Devices.ContainsKey(new_name);
                 bool unacceptable_char = new_name.ContainsOnly(acceptable_char);
                 if (result != System.Windows.Forms.DialogResult.Cancel && !containsKey && unacceptable_char)
@@ -1396,11 +1399,11 @@ namespace Sonic3AIR_ModManager
                 {
                     if (containsKey)
                     {
-                        MessageBox.Show(string.Format("\"{0}\" already exists in the directory, pick another name!", new_name));
+                        MessageBox.Show(string.Format("\"{0}\" {1}", new_name, Program.LanguageResource.GetString("AddInputDeviceError1")));
                     }
                     else
                     {
-                        MessageBox.Show(string.Format("\"{0}\" uses unacceptable characters, please try to use only underscrores and numeranic/alphabettical characters.", new_name));
+                        MessageBox.Show(string.Format("\"{0}\" {1}", new_name, Program.LanguageResource.GetString("AddInputDeviceError2")));
                     }
 
                 }
@@ -2075,12 +2078,12 @@ namespace Sonic3AIR_ModManager
 
         private void addNewModSubfolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string newFolderName = "new_sub_folder";
+            string newFolderName = Program.LanguageResource.GetString("NewSubFolderEntryName");
             DialogResult result;
-            result = ExtraDialog.ShowInputDialog(ref newFolderName, "Create a New Subfolder", "Type in the name of the subfolder you want to create:");
+            result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption1"));
             while (Directory.Exists(Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName)) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
             {
-                result = ExtraDialog.ShowInputDialog(ref newFolderName, "Create a New Subfolder", "That folder name already exists!");
+                result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption2"));
             }
 
             if (result == System.Windows.Forms.DialogResult.OK)

@@ -26,6 +26,8 @@ namespace Sonic3AIR_ModManager
         public DocumentationViewer()
         {
             InitializeComponent();
+            var Instance = this;
+            UserLanguage.ApplyLanguage(ref Instance);
         }
 
         public void ShowDialog(string _fileName)

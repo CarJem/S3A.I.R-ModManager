@@ -269,7 +269,6 @@ namespace Sonic3AIR_ModManager
 
                 string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}\\sonic3air_game";
 
-                //Directory.CreateDirectory(output2);
                 if (Directory.Exists(output2)) Directory.Delete(output2, true);
 
                 Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
@@ -281,7 +280,7 @@ namespace Sonic3AIR_ModManager
             }
             catch
             {
-                MessageBox.Show($"Update Failed!");
+                MessageBox.Show(Program.LanguageResource.GetString("UpdateFailedError"));
 
                 Program.UpdaterState = UpdateState.Finished;
                 Close();
@@ -354,7 +353,6 @@ namespace Sonic3AIR_ModManager
             if (url != "") remote_filename = GetRemoteFileName(url);
             string filename = "temp.zip";
             if (remote_filename != "") filename = remote_filename;
-
 
             DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{destination}\\{filename}");
             downloadWindow.DownloadCompleted = finishAction;

@@ -24,6 +24,8 @@ namespace Sonic3AIR_ModManager
         public ItemConflictDialogV2()
         {
             InitializeComponent();
+            var Instance = this;
+            UserLanguage.ApplyLanguage(ref Instance)
         }
 
         public System.Windows.Forms.DialogResult ShowDialog(AIR_API.Mod NewMod, AIR_API.Mod ExistingMod)
@@ -35,47 +37,54 @@ namespace Sonic3AIR_ModManager
             this.label3.Document.Blocks.Clear();
 
 
+            string existingMod = Program.LanguageResource.GetString("ExistingModSection");
+            string conflictingMod = Program.LanguageResource.GetString("ConflictingModSection");
+            string name = Program.LanguageResource.GetString("NameSection");
+            string author = Program.LanguageResource.GetString("AuthorSection");
+            string modVersion = Program.LanguageResource.GetString("ModVersionSection");
+            string gameVersion = Program.LanguageResource.GetString("GameVersionSection");
 
             Bold(ref label1);
-            this.label1.AppendText("Existing Mod: " + nL);
+            this.label1.AppendText($"{existingMod} " + nL);            
             Bold(ref label1);
-            this.label1.AppendText(nL + "Name: ");
+            this.label1.AppendText(nL + $"{name} ");           
             Normal(ref label1);
-            this.label1.AppendText($"{(ExistingMod != null ? ExistingMod.Name : "N/A")}" + nL);
+            this.label1.AppendText($"{(ExistingMod != null ? ExistingMod.Name : "N/A")}" + nL);            
             Bold(ref label1);
-            this.label1.AppendText("Author: ");
+            this.label1.AppendText($"{author} ");            
             Normal(ref label1);
-            this.label1.AppendText($"{(ExistingMod != null ? ExistingMod.Author : "N/A")}" + nL);
+            this.label1.AppendText($"{(ExistingMod != null ? ExistingMod.Author : "N/A")}" + nL);            
             Bold(ref label1);
-            this.label1.AppendText("Mod Version: ");
+            this.label1.AppendText($"{modVersion} ");            
             Normal(ref label1);
-            this.label1.AppendText($"{(ExistingMod != null ? ExistingMod.ModVersion : "N/A")}" + nL);
+            this.label1.AppendText($"{(ExistingMod != null ? ExistingMod.ModVersion : "N/A")}" + nL);            
             Bold(ref label1);
-            this.label1.AppendText("Game Version: ");
+            this.label1.AppendText($"{gameVersion} ");            
             Normal(ref label1);
             this.label1.AppendText($"{(ExistingMod != null ? ExistingMod.GameVersion : "N/A")}" + nL);
 
+
             Bold(ref label2);
-            this.label2.AppendText("Conflicting Mod: " + nL);
+            this.label2.AppendText($"{conflictingMod} " + nL);
             Bold(ref label2);
-            this.label2.AppendText(nL + "Name: ");
+            this.label2.AppendText(nL + $"{name} ");
             Normal(ref label2);
-            this.label2.AppendText($"{(NewMod != null ? NewMod.Name : "N/A")}" + nL);
+            this.label2.AppendText($"{(NewMod != null ? NewMod.Name : "N/A")}" + nL);            
             Bold(ref label2);
-            this.label2.AppendText("Author: ");
+            this.label2.AppendText($"{author} ");
             Normal(ref label2);
-            this.label2.AppendText($"{(NewMod != null ? NewMod.Author : "N/A")}" + nL);
+            this.label2.AppendText($"{(NewMod != null ? NewMod.Author : "N/A")}" + nL);          
             Bold(ref label2);
-            this.label2.AppendText("Mod Version: ");
+            this.label2.AppendText($"{modVersion} ");
             Normal(ref label2);
-            this.label2.AppendText($"{(NewMod != null ? NewMod.ModVersion : "N/A")}" + nL);
+            this.label2.AppendText($"{(NewMod != null ? NewMod.ModVersion : "N/A")}" + nL);            
             Bold(ref label2);
-            this.label2.AppendText("Game Version: ");
+            this.label2.AppendText($"{gameVersion} ");
             Normal(ref label2);
             this.label2.AppendText($"{(NewMod != null ? NewMod.GameVersion : "N/A")}" + nL);
 
 
-            string message = "How would you like to resolve this conflict?";
+            string message = Program.LanguageResource.GetString("ConflictDialogCaption");
 
             this.label3.Document.Blocks.Add(new Paragraph(new Run(message)));
             base.ShowDialog();
