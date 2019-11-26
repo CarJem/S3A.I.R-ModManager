@@ -10,7 +10,7 @@
 !define VERSION "0.1.4.1"
 !define COPYRIGHT "CarJem Generations © 2019"
 !define DESCRIPTION "Mod Manager for Sonic 3 A.I.R. - Angel Island Revisited"
-!define INSTALLER_NAME "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\Setup.exe"
+!define INSTALLER_NAME "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\Output\Setup.exe"
 !define INSTALLER_DIR "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\"
 !define MAIN_APP_EXE "Sonic 3 A.I.R Mod Manager.exe"
 !define INSTALL_TYPE "SetShellVarContext current"
@@ -171,7 +171,7 @@ Section "Components"
 
   ReadINIStr ${TEMP1} "${UNINSTALLER_OPTIONS_NAME}" "Field 2" "State"
   DetailPrint "${TEMP1}"
-  ReadINIStr ${TEMP1} "${UNINSTALLER_OPTIONS_NAME}" "Field 2" "State"
+  ReadINIStr ${TEMP1} "${UNINSTALLER_OPTIONS_NAME}" "Field 3" "State"
   DetailPrint "${TEMP1}"
   
 SectionEnd
@@ -188,14 +188,14 @@ FunctionEnd
 
 Function un.GetUserOptions
 
-Goto CheckMM
+  Goto CheckMM
 
   CheckAIR:
-  ReadINIStr ${TEMP1} "${UNINSTALLER_OPTIONS_NAME}" "Field 2" "State"
+  ReadINIStr ${TEMP1} "${UNINSTALLER_OPTIONS_NAME}" "Field 3" "State"
   StrCmp ${TEMP1} 1 AIRSuccess AIRFail
   
   CheckMM:
-  ReadINIStr ${TEMP1} "${UNINSTALLER_OPTIONS_NAME}" "Field 3" "State"
+  ReadINIStr ${TEMP1} "${UNINSTALLER_OPTIONS_NAME}" "Field 2" "State"
   StrCmp ${TEMP1} 1 MMSuccess MMFail
   
   MMFail:
