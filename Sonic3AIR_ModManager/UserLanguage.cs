@@ -374,6 +374,13 @@ namespace Sonic3AIR_ModManager
             form.updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
         }
 
+        public static void ApplyLanguage(ref ModManagerUpdater form)
+        {
+            form.yesButton.Content = Program.LanguageResource.GetString("Yes_Button");
+            form.noButton.Content = Program.LanguageResource.GetString("No_Button");
+            form.updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
+        }
+
         public static void ApplyLanguage(ref KeyBindingDialogV2 form)
         {
             form.inputDeviceRadioButton1.Content = Program.LanguageResource.GetString("KeyboardRadioButton");

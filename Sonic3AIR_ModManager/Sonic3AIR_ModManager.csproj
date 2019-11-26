@@ -228,6 +228,9 @@
     <Compile Include="Styles + Controls\Controls\ItemConflictDialogV2.xaml.cs">
       <DependentUpon>ItemConflictDialogV2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Styles + Controls\Controls\ModManagerUpdater.xaml.cs">
+      <DependentUpon>ModManagerUpdater.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles + Controls\Controls\Updater.xaml.cs">
       <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
@@ -302,6 +305,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AIR_Original_Icon_HD.ico" />
     <Content Include="Resources\Icon_Newish.ico" />
     <Content Include="Resources\Icon_Newish_v2.ico" />
     <Content Include="Resources\Icon_Newish_v3.1.ico" />
@@ -372,6 +376,10 @@
     <Page Include="Styles + Controls\Controls\ItemConflictDialogV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles + Controls\Controls\ModManagerUpdater.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles + Controls\Controls\Updater.xaml">
       <SubType>Designer</SubType>

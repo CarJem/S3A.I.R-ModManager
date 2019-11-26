@@ -76,6 +76,11 @@ namespace Sonic3AIR_ModManager
 
         protected void WebClient_DownloadCompleted(object sender, AsyncCompletedEventArgs args)
         {
+
+            // TODO: Wait for File Unlocking
+            //var file = new System.IO.FileInfo(DestinationPath);
+            //while (GenerationsLib.Core.FileHelpers.IsFileLocked(file)) { }
+
             Dispatcher.Invoke(() =>
             {
                 Close();

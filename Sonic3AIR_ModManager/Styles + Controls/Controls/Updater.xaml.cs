@@ -28,25 +28,9 @@ namespace Sonic3AIR_ModManager
 {
     public partial class Updater : Window
     {
-        public enum UpdateResult : int
-        {
-            OutOfDate,
-            UpToDate,
-            Offline,
-            FileNotFound,
-            ValueNull,
-            Null,
-            Error
-        }
 
-        public enum UpdateState : int
-        {
-            Running,
-            Finished,
-            NeverStarted,
-        }
 
-        public AIR_API.VersionCheck VersionCheckInfo;
+        private AIR_API.VersionCheck VersionCheckInfo;
         private AIR_API.Settings SettingsFile;
 
         private string VersionCheckFileName = "";
@@ -67,14 +51,19 @@ namespace Sonic3AIR_ModManager
 
             ManuallyTriggered = _manuallyTriggered;
 
+            this.GetUpdates();
+        }
+
+        private void GetUpdates()
+        {
             if (DisableUpdater == false) CheckForUpdates();
             else UpdateBypass();
         }
 
         private void UpdateBypass()
         {
-            Program.UpdateResult = UpdateResult.UpToDate;
-            Program.UpdaterState = UpdateState.Finished;
+            Program.AIRUpdateResults = Program.UpdateResult.UpToDate;
+            Program.AIRUpdaterState = Program.UpdateState.Finished;
             Close();
         }
 
@@ -82,7 +71,7 @@ namespace Sonic3AIR_ModManager
 
         #region Updating Checking / Downloading Updates
 
-        public void CheckForUpdates()
+        private void CheckForUpdates()
         {
             try
             {
@@ -98,16 +87,16 @@ namespace Sonic3AIR_ModManager
                 }
                 else
                 {
-                    Program.UpdateResult = UpdateResult.Offline;
-                    Program.UpdaterState = UpdateState.Finished;
+                    Program.AIRUpdateResults = Program.UpdateResult.Offline;
+                    Program.AIRUpdaterState = Program.UpdateState.Finished;
                     Close();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Program.UpdateResult = UpdateResult.Error;
-                Program.UpdaterState = UpdateState.Finished;
+                Program.AIRUpdateResults = Program.UpdateResult.Error;
+                Program.AIRUpdaterState = Program.UpdateState.Finished;
                 Close();
             }
 
@@ -149,49 +138,48 @@ namespace Sonic3AIR_ModManager
                     {
                         if (result2 < 0)
                         {
-                            Program.UpdateResult = UpdateResult.OutOfDate;
+                            Program.AIRUpdateResults = Program.UpdateResult.OutOfDate;
                             Program.CheckedForUpdateOnStartup = true;
                         }
                         else
                         {
-                            Program.UpdateResult = UpdateResult.UpToDate;
+                            Program.AIRUpdateResults = Program.UpdateResult.UpToDate;
                             Program.CheckedForUpdateOnStartup = true;
                         }
 
                     }
                     else
                     {
-                        Program.UpdateResult = UpdateResult.UpToDate;
+                        Program.AIRUpdateResults = Program.UpdateResult.UpToDate;
                         Program.CheckedForUpdateOnStartup = true;
                     }
                 } 
                 else
                 {
-                    Program.UpdateResult = UpdateResult.ValueNull;
+                    Program.AIRUpdateResults = Program.UpdateResult.ValueNull;
                     Program.CheckedForUpdateOnStartup = true;
                 }
             }
             else
             {
-                Program.UpdateResult = UpdateResult.FileNotFound;
+                Program.AIRUpdateResults = Program.UpdateResult.FileNotFound;
                 Program.CheckedForUpdateOnStartup = true;
             }
 
-            if (Program.UpdateResult == UpdateResult.OutOfDate)
+            if (Program.AIRUpdateResults == Program.UpdateResult.OutOfDate)
             {
                 updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
                 if (ShowDialog() == true)
-                    if (ShowDialog() == true)
-                    {
-                        DownloadUpdate();
-                    }
-                    else
-                    {
-                        Program.UpdaterState = UpdateState.Finished;
-                        Close();
-                    }
+                {
+                    DownloadUpdate();
+                }
+                else
+                {
+                    Program.AIRUpdaterState = Program.UpdateState.Finished;
+                    Close();
+                }
             }
-            else if (ManuallyTriggered && Program.UpdateResult == UpdateResult.UpToDate)
+            else if (ManuallyTriggered && Program.AIRUpdateResults == Program.UpdateResult.UpToDate)
             {
                 ManuallyTriggered = false;
                 updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_UpToDate");
@@ -201,13 +189,13 @@ namespace Sonic3AIR_ModManager
                 }
                 else
                 {
-                    Program.UpdaterState = UpdateState.Finished;
+                    Program.AIRUpdaterState = Program.UpdateState.Finished;
                     Close();
                 }
             }
             else
             {
-                Program.UpdaterState = UpdateState.Finished;
+                Program.AIRUpdaterState = Program.UpdateState.Finished;
                 Close();
             }
 
@@ -275,14 +263,14 @@ namespace Sonic3AIR_ModManager
 
                 MessageBox.Show($"{Program.LanguageResource.GetString("GameInstalledAt")} \"{output2}\"");
 
-                Program.UpdaterState = UpdateState.Finished;
+                Program.AIRUpdaterState = Program.UpdateState.Finished;
                 Close();
             }
             catch
             {
                 MessageBox.Show(Program.LanguageResource.GetString("UpdateFailedError"));
 
-                Program.UpdaterState = UpdateState.Finished;
+                Program.AIRUpdaterState = Program.UpdateState.Finished;
                 Close();
             }
 
@@ -427,12 +415,6 @@ namespace Sonic3AIR_ModManager
         private void noButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
-        }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            //TODO: Gut Unused Method
-            //this.DialogResult = false;
         }
     }
 }

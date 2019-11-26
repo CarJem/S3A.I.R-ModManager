@@ -106,7 +106,11 @@ namespace Sonic3AIR_ModManager
         {
             if (Properties.Settings.Default.AutoUpdates)
             {
-                if (autoBoot == false && Program.UpdaterState == Updater.UpdateState.NeverStarted) new Updater();
+                if (autoBoot == false && Program.AIRUpdaterState == Program.UpdateState.NeverStarted && Program.MMUpdaterState == Program.UpdateState.NeverStarted)
+                {
+                    new Updater();
+                    new ModManagerUpdater();
+                }
             }
 
 
@@ -237,7 +241,7 @@ namespace Sonic3AIR_ModManager
 
         private void CheckForUpdates_Click(object sender, RoutedEventArgs e)
         {
-            if (Program.UpdaterState == Updater.UpdateState.NeverStarted || Program.UpdaterState == Updater.UpdateState.Finished) new Updater(true);
+            if (Program.AIRUpdaterState == Program.UpdateState.NeverStarted || Program.AIRUpdaterState == Program.UpdateState.Finished) new Updater(true);
         }
 
         private void SaveInputsButton_Click(object sender, RoutedEventArgs e)
@@ -2213,6 +2217,11 @@ namespace Sonic3AIR_ModManager
             if (sender.Equals(LaunchOptionsGroup) && LaunchOptionsFailureMessageBackground.Visibility == Visibility.Visible) HyperlinkToGeneralTabAIRPath();
             else if (!sender.Equals(LaunchOptionsGroup)) HyperlinkToGeneralTabAIRPath();
 
+        }
+
+        private void checkForModManagerUpdatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Program.MMUpdaterState == Program.UpdateState.NeverStarted || Program.MMUpdaterState == Program.UpdateState.Finished) new ModManagerUpdater(true);
         }
     }
 }

@@ -36,15 +36,18 @@ namespace Sonic3AIR_ModManager
             this.InitializeComponent();
         }
 
-        public void RunAutoBoot()
+        public void RunAutoBoot(bool isForced = false)
         {
 
             var auto = new AutoBootDialogV2();
             if (auto.ShowDialog() == true)
             {
 
-                if (Program.AutoBootCanceled == false) this.Run(new ModManager(true));
-                else this.Run(new ModManager(false));
+                if (Program.AutoBootCanceled == false)
+                {
+                   this.Run(new ModManager(true));
+                }
+                else if (!isForced) this.Run(new ModManager(false));
             }
 
         }

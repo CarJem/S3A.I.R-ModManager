@@ -27,12 +27,39 @@ namespace Sonic3AIR_ModManager
             isDebug = true;
         }
 
-        public static string Version { get; } = "v.1.4.2";
+        private static string VersionString = "1.4.2";
+
+        public static string Version { get; } = "v." + VersionString;
+        public static Version InternalVersion { get; } = new Version(VersionString);
 
         public static bool CheckedForUpdateOnStartup = false;
-        public static Updater.UpdateState UpdaterState { get; set; } = Updater.UpdateState.NeverStarted;
-        public static Updater.UpdateResult UpdateResult { get; set; } = Updater.UpdateResult.Null;
-        public static Updater.UpdateResult LastUpdateResult { get; set; } = Updater.UpdateResult.Null;
+
+        public enum UpdateResult : int
+        {
+            OutOfDate,
+            UpToDate,
+            Offline,
+            FileNotFound,
+            ValueNull,
+            Null,
+            Error
+        }
+
+        public enum UpdateState : int
+        {
+            Running,
+            Finished,
+            NeverStarted,
+        }
+
+        public static UpdateState AIRUpdaterState { get; set; } = UpdateState.NeverStarted;
+        public static UpdateState MMUpdaterState { get; set; } = UpdateState.NeverStarted;
+
+        public static UpdateResult AIRUpdateResults { get; set; } = UpdateResult.Null;
+        public static UpdateResult MMUpdateResults { get; set; } = UpdateResult.Null;
+
+        public static UpdateResult AIRLastUpdateResult { get; set; } = UpdateResult.Null;
+        public static UpdateResult MMLastUpdateResult { get; set; } = UpdateResult.Null;
 
         public static ResourceManager LanguageResource { get { return UserLanguage.CurrentResource; } set { UserLanguage.CurrentResource = value; } }
 
@@ -46,6 +73,8 @@ namespace Sonic3AIR_ModManager
             isDebugging();
             Parser.Default.ParseArguments<Options>(args).WithParsed<Options>( o => { Arguments = o; });
             ProgramPaths.CreateMissingModManagerFolders();
+
+
             var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
             if (exists) GamebannaAPIHandler(args);
             else StartApplication(args);
@@ -98,33 +127,69 @@ namespace Sonic3AIR_ModManager
             UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
             ModFileManagement.CleanUpAPIRequests();
 
-
-            if (Arguments.gamebanana_api != null)
+            if (Arguments?.gamebanana_api != null)
             {
                 GamebanannaAPIHandler_Startup();
             }
             else
             {
-                if (Properties.Settings.Default.AutoLaunch) AutoBootLoader();
-                else
-                {
-                    var app = new App();
-                    app.DefaultStart();
-                }
+                if (Arguments?.auto_boot == true) ForcedAutoBootStartup();
+                else StockStartup();
+
             }
             
         }
 
-        static void AutoBootLoader()
+        static void ForcedAutoBootStartup()
+        {
+            // Save Original Values
+            var autoLaunchOld = Properties.Settings.Default.AutoLaunch;
+            var preStartOld = Properties.Settings.Default.KeepOpenOnLaunch;
+            var postCloseOld = Properties.Settings.Default.KeepOpenOnQuit;
+            var autoLaunchDelayOld = Properties.Settings.Default.AutoLaunchDelay;
+
+            // Set Values Specific to Forced Auto Boot Startup
+            Properties.Settings.Default.AutoLaunch = true;
+            Properties.Settings.Default.KeepOpenOnLaunch = true;
+            Properties.Settings.Default.KeepOpenOnQuit = false;
+            Properties.Settings.Default.AutoLaunchDelay = 7;
+            Properties.Settings.Default.Save();
+
+            // Start Auto-Boot
+            AutoBootLoader(true);
+
+            // Revert Options to their Original Values
+            Properties.Settings.Default.AutoLaunch = autoLaunchOld;
+            Properties.Settings.Default.KeepOpenOnLaunch = preStartOld;
+            Properties.Settings.Default.KeepOpenOnQuit = postCloseOld;
+            Properties.Settings.Default.AutoLaunchDelay = autoLaunchDelayOld;
+            Properties.Settings.Default.Save();
+
+        }
+
+        static void StockStartup()
+        {
+            if (Properties.Settings.Default.AutoLaunch) AutoBootLoader();
+            else
+            {
+                var app = new App();
+                app.DefaultStart();
+            }
+        }
+
+        static void AutoBootLoader(bool isForced = false)
         {
             var app = new App();
-            app.RunAutoBoot();
+            app.RunAutoBoot(isForced);
         }
 
         public class Options
         {
             [Option('g', "gamebanana_api", Required = false, HelpText = "Used with Gamebanna's 1 Click Install API")]
             public string gamebanana_api { get; set; }
+
+            [Option('a', "auto_boot", Required = false, HelpText = "Launch's the Application in Auto Boot Mode (Ideal for Steam Big Picture)")]
+            public bool auto_boot { get; set; } = false;
         }
 
 

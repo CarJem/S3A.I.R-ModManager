@@ -520,7 +520,7 @@
                             <TextBlock x:Name="aboutLabel" Padding="10" Text="Sonic 3 A.I.R. Mod Manager&#10;Version {version}&#10;By CarJem Generations&#10;&#10;Special Thanks:&#10;● Eukaryot3K - Creator of Sonic 3 A.I.R.">
                             </TextBlock>
                             <StackPanel Grid.Row="1">
-                                <Button x:Name="checkForModManagerUpdatesButton" Content="Check for Mod Manager Updates..." Height="25" Margin="0,4,0,4" IsEnabled="False"></Button>
+                                <Button x:Name="checkForModManagerUpdatesButton" Click="checkForModManagerUpdatesButton_Click" Content="Check for Mod Manager Updates..." Height="25" Margin="0,4,0,4"></Button>
                                 <Button x:Name="checkForUpdatesButton" Height="25" Margin="0,0,0,4" Content="Check for Game Updates..." Click="CheckForUpdates_Click"></Button>
                             </StackPanel>
                         </Grid>

@@ -74,7 +74,7 @@ namespace Sonic3AIR_ModManager
 
         private void AnimationLoop_Tick(object sender, EventArgs e)
         {   
-            bool allowedToTick = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.UpdaterState == Updater.UpdateState.Finished : true);
+            bool allowedToTick = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.AIRUpdaterState == Program.UpdateState.Finished && Program.MMUpdaterState == Program.UpdateState.Finished : true);
             if (allowedToTick)
             {
 
@@ -209,9 +209,11 @@ namespace Sonic3AIR_ModManager
         {
             this.Dispatcher.BeginInvoke((Action)(() =>
             {
-                Program.UpdaterState = Updater.UpdateState.Running;
+                Program.AIRUpdaterState = Program.UpdateState.Running;
+                Program.MMUpdaterState = Program.UpdateState.Running;
                 label1.Text = $"  {Program.LanguageResource.GetString("AutoBoot_CheckingForUpdates")}";
                 Updater updaterTask = new Updater();
+                ModManagerUpdater modManagerUpdater = new ModManagerUpdater();
 
             }));
 
@@ -228,9 +230,12 @@ namespace Sonic3AIR_ModManager
 
         private void CountDown_Tick(object sender, EventArgs evt)
         {
-            bool allowedToProcced = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.UpdaterState == Updater.UpdateState.Finished : true);
+            bool allowedToProcced = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.AIRUpdaterState == Program.UpdateState.Finished && Program.MMUpdaterState == Program.UpdateState.Finished : true);
             if (allowedToProcced)
             {
+                if (!CancelButton.IsEnabled) CancelButton.IsEnabled = true;
+                if (!ForceStartButton.IsEnabled) ForceStartButton.IsEnabled = true;
+
                 if (TimeLeft >= 1)
                 {
                     UpdateTimeLeftLabel();
@@ -244,11 +249,14 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                if (Program.UpdaterState == Updater.UpdateState.NeverStarted) StartUpdater();
-                else if (Program.UpdateResult != Updater.UpdateResult.Null && Program.CheckedForUpdateOnStartup && Program.UpdaterState == Updater.UpdateState.Finished)
+                if (Program.AIRUpdaterState == Program.UpdateState.NeverStarted && Program.MMUpdaterState == Program.UpdateState.NeverStarted) StartUpdater();
+                else if (Program.AIRUpdateResults != Program.UpdateResult.Null && Program.MMUpdateResults != Program.UpdateResult.Null && Program.CheckedForUpdateOnStartup && Program.AIRUpdaterState == Program.UpdateState.Finished && Program.MMUpdaterState == Program.UpdateState.Finished)
                 {
-                    Program.LastUpdateResult = Program.UpdateResult;
-                    Program.UpdateResult = Updater.UpdateResult.Null;
+                    Program.AIRLastUpdateResult = Program.AIRUpdateResults;
+                    Program.MMLastUpdateResult = Program.MMUpdateResults;
+
+                    Program.AIRUpdateResults = Program.UpdateResult.Null;
+                    Program.MMUpdateResults = Program.UpdateResult.Null;
                 }
             }
 
