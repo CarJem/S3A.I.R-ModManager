@@ -76,10 +76,24 @@ namespace Sonic3AIR_ModManager
 
         protected void WebClient_DownloadCompleted(object sender, AsyncCompletedEventArgs args)
         {
+            var file = new System.IO.FileInfo(DestinationPath);
+            bool cannotProceed = true;
+            while (cannotProceed)
+            {
+                if(GenerationsLib.Core.FileHelpers.IsFileLocked(file))
+                {
 
-            // TODO: Wait for File Unlocking
-            //var file = new System.IO.FileInfo(DestinationPath);
-            //while (GenerationsLib.Core.FileHelpers.IsFileLocked(file)) { }
+                    /*TODO: Add Language Translations*/ string text = $"The file: {file} is currently being used by another process, would you like to continue anyways? (Clicking No or Closing this Dialog will only recheck if the file is lost; if you get stuck here, please force close the application)";
+                    /*TODO: Add Language Translations*/ string title = "File is Busy";
+                    var result = MessageBox.Show(text, title, MessageBoxButton.YesNo,MessageBoxImage.Exclamation);
+                    if (result == MessageBoxResult.Yes) cannotProceed = false;
+                }
+                else
+                {
+                    cannotProceed = false;
+                }
+
+            }
 
             Dispatcher.Invoke(() =>
             {

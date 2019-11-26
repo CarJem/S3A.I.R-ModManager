@@ -305,7 +305,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AIR_Original_Icon_HD.ico" />
+    <Content Include="Resources\AIR_Original_Icon_HD.ico" />
     <Content Include="Resources\Icon_Newish.ico" />
     <Content Include="Resources\Icon_Newish_v2.ico" />
     <Content Include="Resources\Icon_Newish_v3.1.ico" />

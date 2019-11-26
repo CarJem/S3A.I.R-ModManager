@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerationsLib.Core", "Gene
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{203AFC06-5F04-4E0C-860B-F2E1AD347508}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Pictures\Work\Sonic3AIRCustom\AIR_Original_Icon_HD.ico = ..\..\..\Pictures\Work\Sonic3AIRCustom\AIR_Original_Icon_HD.ico
+		Installer\AIR_Original_Icon_HD.ico = Installer\AIR_Original_Icon_HD.ico
 		Installer\InstallOptionsEx.nsi = Installer\InstallOptionsEx.nsi
 		Installer\MakeInstaller.bat = Installer\MakeInstaller.bat
 		Installer\Sonic 3 A.I.R. Mod Manager.nsi = Installer\Sonic 3 A.I.R. Mod Manager.nsi

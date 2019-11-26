@@ -119,6 +119,7 @@ SetOverwrite ifnewer
 SetOutPath "$INSTDIR"
 File /r D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Sonic3AIR_ModManager\bin\Release\*.*
 File D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\UninstallOptions.ini
+File D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\AIR_Original_Icon_HD.ico
 SectionEnd
 
 ######################################################################
@@ -135,7 +136,7 @@ WriteUninstaller "$INSTDIR\uninstall.exe"
 !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 CreateDirectory "$SMPROGRAMS\$SM_Folder"
 CreateShortCut "$SMPROGRAMS\$SM_Folder\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
-CreateShortCut "$SMPROGRAMS\$SM_Folder\${LAUNCH_GAME_SHORTCUT}.lnk" "$INSTDIR\${MAIN_APP_EXE}" "-auto_boot=true" "$INSTDIR\Sonic 3 A.I.R. Mod Manager\${EXTRA_ICON}"
+CreateShortCut "$SMPROGRAMS\$SM_Folder\${LAUNCH_GAME_SHORTCUT}.lnk" "$INSTDIR\${MAIN_APP_EXE}" "-auto_boot=true" "$SMPROGRAMS\$SM_Folder\$EXTRA_ICON"
 CreateShortCut "$SMPROGRAMS\$SM_Folder\${GB_HANDLER}.lnk" "$INSTDIR\${GB_HANDLER}.exe"
 CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
 CreateShortCut "$SMPROGRAMS\$SM_Folder\Uninstall ${APP_NAME}.lnk" "$INSTDIR\uninstall.exe"
@@ -156,7 +157,7 @@ CreateShortCut "$SMPROGRAMS\$SM_Folder\${APP_NAME} Website.lnk" "$INSTDIR\${APP_
 !ifndef REG_START_MENU
 CreateDirectory "$SMPROGRAMS\Sonic 3 A.I.R. Mod Manager"
 CreateShortCut "$SMPROGRAMS\Sonic 3 A.I.R. Mod Manager\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
-CreateShortCut "$SMPROGRAMS\Sonic 3 A.I.R. Mod Manager\${LAUNCH_GAME_SHORTCUT}.lnk" "$INSTDIR\${MAIN_APP_EXE}" "-auto_boot=true" "$INSTDIR\Sonic 3 A.I.R. Mod Manager\${EXTRA_ICON}"
+CreateShortCut "$SMPROGRAMS\Sonic 3 A.I.R. Mod Manager\${LAUNCH_GAME_SHORTCUT}.lnk" "$INSTDIR\${MAIN_APP_EXE}" "-auto_boot=true" "$INSTDIR\${EXTRA_ICON}"
 CreateShortCut "$SMPROGRAMS\Sonic 3 A.I.R. Mod Manager\${GB_HANDLER}.lnk" "$INSTDIR\${GB_HANDLER}"
 CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
 CreateShortCut "$SMPROGRAMS\Sonic 3 A.I.R. Mod Manager\Uninstall ${APP_NAME}.lnk" "$INSTDIR\uninstall.exe"
