@@ -57,6 +57,11 @@ namespace Sonic3AIR_ModManager
 
     // TODO: Implement Version Checking to Prevent More Stupid Bug Reports
     // TODO: Fix Unable to Install Version After Download is Complete
+    // TODO: Backup/Restore A.I.R. Save Data Functionality
+    // TODO: Built In Updater
+    // 
+
+
     public partial class ModManager : Window
     {
         #region Variables
