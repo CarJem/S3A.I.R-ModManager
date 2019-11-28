@@ -2221,5 +2221,32 @@ namespace Sonic3AIR_ModManager
         {
             if (Program.MMUpdaterState == Program.UpdateState.NeverStarted || Program.MMUpdaterState == Program.UpdateState.Finished) new ModManagerUpdater(true);
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var list = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
+
+            string file = @"D:\Users\CarJem\Downloads\tails_tails_sprites.zip";
+
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test1", "1", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test2", "2", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test3", "3", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test4", "4", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test5", "5", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test6", "6", file));
+
+
+            RecentsMenu.RecentItemsSource = list;
+        }
+
+        private void RecentsMenu_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MessageBox.Show($"{e.Header}{nL}{e.Content}{nL}{e.FilePath}", "Results");
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            RecentsMenu.RecentItemsSource = null;
+        }
     }
 }

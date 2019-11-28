@@ -199,7 +199,7 @@ namespace Sonic3AIR_ModManager
 
             //Tools Page
             form.recordingsPage.Header = Program.LanguageResource.GetString("RecordingsTab");
-            form.guidesPage.Header = Program.LanguageResource.GetString("GuidesTab");
+            //form.guidesPage.Header = Program.LanguageResource.GetString("GuidesTab");
 
 
             //Recordings Page
@@ -214,16 +214,17 @@ namespace Sonic3AIR_ModManager
             form.RecordingsViewer.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
             form.RecordingsViewer.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
 
-            //Guides/Shortcuts Page
-            form.groupBox6.Header = Program.LanguageResource.GetString("Delete");
-            form.openSampleModsFolderButton.Content = Program.LanguageResource.GetString("OpenSampleModsFolder");
-            form.openUserManualButton.Content = Program.LanguageResource.GetString("OpenUserManual");
-            form.openModDocumentationButton.Content = Program.LanguageResource.GetString("OpenModInstructions");
-            form.openModdingTemplatesFolder.Content = Program.LanguageResource.GetString("OpenModTemplatesFolder");
+            //File MenuItem Items
+            form.openSampleModsFolderButton.Header = Program.LanguageResource.GetString("OpenSampleModsFolder");
+            form.openUserManualButton.Header = Program.LanguageResource.GetString("OpenUserManual");
+            form.openModDocumentationButton.Header = Program.LanguageResource.GetString("OpenModInstructions");
+            form.openModdingTemplatesFolder.Header = Program.LanguageResource.GetString("OpenModTemplatesFolder");
             form.label5.Text = Program.LanguageResource.GetString("UsefulShortKeys");
-            form.airPlacesButton.Content = Program.LanguageResource.GetString("AIRPlaces");
-            form.airMediaButton.Content = Program.LanguageResource.GetString("AIRMedia");
-            form.airModManagerPlacesButton.Content = Program.LanguageResource.GetString("AIRMMPlaces");
+            form.airPlacesButton.Header = Program.LanguageResource.GetString("AIRPlaces");
+            form.airMediaButton.Header = Program.LanguageResource.GetString("AIRMedia");
+            form.airModManagerPlacesButton.Header = Program.LanguageResource.GetString("AIRMMPlaces");
+            form.airGuidesItem.Header = Program.LanguageResource.GetString("AIRGuides");
+            form.airTipsItem.Header = Program.LanguageResource.GetString("AIRTips");
 
             form.openAppDataFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAppDataFolder");
             form.openEXEFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenEXEFolder");
@@ -239,7 +240,7 @@ namespace Sonic3AIR_ModManager
             form.openDownloadsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenDownloadsFolder");
             form.openVersionsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenVersionsFolder");
 
-            form.showLogFileButton.Content = Program.LanguageResource.GetString("ShowLogFileButton");
+            form.showLogFileButton.Header = Program.LanguageResource.GetString("ShowLogFileButton");
 
             //General Options Page + A.I.R. Settings
             form.groupBox8.Header = Program.LanguageResource.GetString("ModManagerOptions");

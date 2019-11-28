@@ -11,7 +11,6 @@
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/CheckboxStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ButtonStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ItemContainerStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/MenuItemContextStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/FlatButtonStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ExpanderStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/TextBoxStyle.xaml"></ResourceDictionary>
@@ -24,6 +23,7 @@
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ToolbarStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/SliderStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles + Controls/Styles/AppSpecificStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/MenuItemContextStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/GroupBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

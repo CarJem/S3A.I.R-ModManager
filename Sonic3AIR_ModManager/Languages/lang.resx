@@ -908,4 +908,10 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
     <value>Error Loading Recordings!
 Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.</value>
   </data>
+  <data name="AIRTips" xml:space="preserve">
+    <value>A.I.R. Tips...</value>
+  </data>
+  <data name="AIRGuides" xml:space="preserve">
+    <value>A.I.R. Guides...</value>
+  </data>
 </root>

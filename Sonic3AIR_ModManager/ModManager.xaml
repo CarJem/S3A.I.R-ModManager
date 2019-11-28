@@ -6,18 +6,56 @@
         xmlns:local="clr-namespace:Sonic3AIR_ModManager"
         xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:p="clr-namespace:Sonic3AIR_ModManager.Properties"
+        xmlns:genlib="clr-namespace:GenerationsLib.WPF.Controls;assembly=GenerationsLib.WPF"
         mc:Ignorable="d"
-        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="620" Width="400" MinHeight="620" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="640" Width="400" MinHeight="640" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="85"></RowDefinition>
         </Grid.RowDefinitions>
-        <TabControl x:Name="tabControl1" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">
+        <Menu HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Background="{DynamicResource ToolbarBackground}" Foreground="{DynamicResource NormalText}">
+            <MenuItem Header="File">
+                <MenuItem Header="A.I.R. Guides..." Name="airGuidesItem">
+                    <MenuItem Header="Open Sample Mods Folder" x:Name="openSampleModsFolderButton" Click="OpenSampleModsFolderButton_Click"></MenuItem>
+                    <MenuItem Header="Sonic 3 A.I.R. User Manual" x:Name="openUserManualButton" Click="OpenUserManualButton_Click"></MenuItem>
+                    <MenuItem Header="Sonic 3 A.I.R. Modding Instructions" x:Name="openModDocumentationButton" Click="OpenModDocumentationButton_Click"></MenuItem>
+                    <MenuItem Header="Open Modding Templates Folder" x:Name="openModdingTemplatesFolder" Click="OpenModdingTemplatesFolder_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem x:Name="airTipsItem" Header="A.I.R. Tips...">
+                    <TextBlock VerticalAlignment="Center" Padding="0" x:Name="label5" Grid.Row="1" TextAlignment="Left" Text="Useful In-Game Shortcuts/Keys: &#10;Alt + Enter - Toggle Fullscreen&#10;F2 - Take a Game Recording Capture&#10;Right Click - Open A.I.R Context Menu&#10;F3 - Rescan for Game Controllers&#10;F4 - Switches Game Controllers for P1 and P2&#10;Numpad Plus/Minus - Adjust Global Audio Volume&#10;Alt + B - Change Background Blur&#10;Alt + F - Change Filter&#10;Alt + P - Show Performance Display&#10;" Margin="0,11"></TextBlock>
+                </MenuItem>
+                <MenuItem x:Name="airPlacesButton" Header="A.I.R. Places...">
+                    <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
+                    <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
+                    <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
+                    <MenuItem Name="openModsFolderToolStripMenuItem" Click="OpenModsFolder_Click"></MenuItem>
+                    <MenuItem Name="openConfigFileToolStripMenuItem" Click="OpenConfigFileToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem x:Name="showLogFileButton" Header="Show Log File" HorizontalAlignment="Stretch" Click="ShowLogFileButton_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem x:Name="airMediaButton" Header="A.I.R. Media...">
+                    <MenuItem Name="sonic3AIRHomepageToolStripMenuItem" Click="S3AIRWebsiteButton_Click"></MenuItem>
+                    <MenuItem Name="s3AIRGamebannaToolStripMenuItem" Click="GamebannaButton_Click"></MenuItem>
+                    <MenuItem Name="eukaryot3KTwitterToolStripMenuItem" Click="EukaTwitterButton_Click"></MenuItem>
+                    <MenuItem Name="carJemTwitterToolStripMenuItem" Click="CarJemTwitterButton_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem x:Name="airModManagerPlacesButton" Header="A.I.R. Mod Manager Places...">
+                    <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Misc" Visibility="Collapsed" IsEnabled="False">
+                <MenuItem Header="Clear List..." Click="MenuItem_Click_1"></MenuItem>
+                <MenuItem Header="Set List..." Click="MenuItem_Click"></MenuItem>
+                <genlib:RecentsListMenuItem Name="RecentsMenu" Header="Open Recently..." RecentItemSelected="RecentsMenu_RecentItemSelected"></genlib:RecentsListMenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl Grid.Row="1" x:Name="tabControl1" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">
             <TabItem Header="Mods" Name="modPage">  
                 <Grid x:Name="modPanel" Margin="5">
                     <Grid.ColumnDefinitions>
@@ -131,67 +169,6 @@
                             </Grid>
                         </Grid>
 
-                    </TabItem>
-                    <TabItem Name="guidesPage" Header="Guides/Shortcuts">
-                        <Grid Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="33*"/>
-                                <ColumnDefinition Width="157*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="140"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="100"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <GroupBox Header="Guides" Name="groupBox6" Grid.ColumnSpan="2" Margin="0">
-                                <StackPanel VerticalAlignment="Center" Margin="5">
-                                    <Button Content="Open Sample Mods Folder" x:Name="openSampleModsFolderButton" Height="23" Margin="0,2" Click="OpenSampleModsFolderButton_Click"></Button>
-                                    <Button Content="Sonic 3 A.I.R. User Manual" Height="23" x:Name="openUserManualButton" Margin="0,2" Click="OpenUserManualButton_Click"></Button>
-                                    <Button Content="Sonic 3 A.I.R. Modding Instructions" x:Name="openModDocumentationButton" Height="23" Margin="0,2" Click="OpenModDocumentationButton_Click"></Button>
-                                    <Button Content="Open Modding Templates Folder" x:Name="openModdingTemplatesFolder" Height="23" Margin="0,2" Click="OpenModdingTemplatesFolder_Click"></Button>
-                                </StackPanel>
-                            </GroupBox>
-                            <TextBlock FontSize="11" VerticalAlignment="Center" Padding="0" x:Name="label5" Grid.Row="1" TextAlignment="Center" Text="Useful In-Game Shortcuts/Keys: &#10;Alt + Enter - Toggle Fullscreen&#10;F2 - Take a Game Recording Capture&#10;Right Click - Open A.I.R Context Menu&#10;F3 - Rescan for Game Controllers&#10;F4 - Switches Game Controllers for P1 and P2&#10;Numpad Plus/Minus - Adjust Global Audio Volume&#10;Alt + B - Change Background Blur&#10;Alt + F - Change Filter&#10;Alt + P - Show Performance Display&#10;" Grid.ColumnSpan="2" Margin="0,11"></TextBlock>
-                            <StackPanel VerticalAlignment="Center" Grid.Row="2" Margin="6,8" Grid.ColumnSpan="2">
-                                <Grid Margin="0,1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Button x:Name="airPlacesButton" Height="23" Grid.Column="0" Margin="0,2" HorizontalAlignment="Stretch" Content="A.I.R. Places..." Click="AirPlacesButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
-                                        <Button.ContextMenu>
-                                            <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="directoriesMenuStrip">
-                                                <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
-                                                <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
-                                                <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
-                                                <MenuItem Name="openModsFolderToolStripMenuItem" Click="OpenModsFolder_Click"></MenuItem>
-                                                <MenuItem Name="openConfigFileToolStripMenuItem" Click="OpenConfigFileToolStripMenuItem_Click"></MenuItem>
-                                            </ContextMenu>
-                                        </Button.ContextMenu>
-                                    </Button>
-                                    <Button x:Name="airMediaButton" Height="23" Grid.Column="2" Margin="0,2" HorizontalAlignment="Stretch" Content="A.I.R. Media..." Click="AirMediaButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
-                                        <Button.ContextMenu>
-                                            <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="mediaLinksMenuStrip">
-                                                <MenuItem Name="sonic3AIRHomepageToolStripMenuItem" Click="S3AIRWebsiteButton_Click"></MenuItem>
-                                                <MenuItem Name="s3AIRGamebannaToolStripMenuItem" Click="GamebannaButton_Click"></MenuItem>
-                                                <MenuItem Name="eukaryot3KTwitterToolStripMenuItem" Click="EukaTwitterButton_Click"></MenuItem>
-                                                <MenuItem Name="carJemTwitterToolStripMenuItem" Click="CarJemTwitterButton_Click"></MenuItem>
-                                            </ContextMenu>
-                                        </Button.ContextMenu>
-                                    </Button>
-                                </Grid>
-                                <Button x:Name="airModManagerPlacesButton" Height="23" Margin="0,2" Content="A.I.R. Mod Manager Places..." Click="airModManagerPlacesButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
-                                    <Button.ContextMenu>
-                                        <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modManagerPathMenuStrip">
-                                            <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
-                                            <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
-                                        </ContextMenu>
-                                    </Button.ContextMenu>
-                                </Button>
-                                <Button x:Name="showLogFileButton" Height="23" Margin="0,2" Content="Show Log File" Click="ShowLogFileButton_Click"></Button>
-                            </StackPanel>
-                        </Grid>
                     </TabItem>
                 </TabControl>
             </TabItem>
@@ -389,9 +366,9 @@
                         <Grid Margin="5">
                             <Grid x:Name="inputPanel">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="100"></RowDefinition>
-                                    <RowDefinition Height="2*"></RowDefinition>
-                                    <RowDefinition Height="100"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="214"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid>
@@ -409,7 +386,7 @@
                                         <Button Click="exportConfigButton_Click" x:Name="exportConfigButton" Height="25" Width="75" Margin="4,0" Content="Export..."></Button>
                                     </StackPanel>
                                 </Grid>
-                                <GroupBox Grid.Row="1" Header="Button Mappings" x:Name="groupBox4">
+                                <GroupBox Grid.Row="1" Header="Button Mappings" x:Name="groupBox4" MinHeight="214" MaxHeight="214">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="0,1">
@@ -464,10 +441,10 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="45"></RowDefinition>
-                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="30"></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,0" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
+                                        <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,3" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
                                         </ListBox>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Grid.ColumnSpan="2">
                                             <Button x:Name="addDeviceNameButton" Click="AddDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="+" IsEnabled="False"></Button>
@@ -528,7 +505,7 @@
                 </TabControl>
             </TabItem>
         </TabControl>
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -543,8 +520,6 @@
             </StackPanel>
 
         </Grid>
-
-
     </Grid>
     <Window.Resources>
         <Style TargetType="{x:Type Grid}">

@@ -214,7 +214,6 @@ namespace Sonic3AIR_ModManager
                 label1.Text = $"  {Program.LanguageResource.GetString("AutoBoot_CheckingForUpdates")}";
                 Updater updaterTask = new Updater();
                 ModManagerUpdater modManagerUpdater = new ModManagerUpdater();
-
             }));
 
         }
@@ -227,10 +226,27 @@ namespace Sonic3AIR_ModManager
             string fromTimeString = result.ToString("mm':'ss");
             label1.Text = $" {Program.LanguageResource.GetString("AutoBoot_LaunchingIn")}: {fromTimeString}";
         }
+         
+        private bool HasUpdatesFinalized()
+        {
+            if (Program.CheckedForUpdateOnStartup)
+            {
+                return Program.AIRUpdaterState == Program.UpdateState.Finished && Program.MMUpdaterState == Program.UpdateState.Finished;
+            }
+            else
+            {
+                if (Program.MMUpdateResults == Program.UpdateResult.Offline || Program.AIRUpdateResults == Program.UpdateResult.Offline)
+                {
+                    Program.CheckedForUpdateOnStartup = true;
+                    return true;
+                }
+                else return false;
+            }
+        }
 
         private void CountDown_Tick(object sender, EventArgs evt)
         {
-            bool allowedToProcced = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.AIRUpdaterState == Program.UpdateState.Finished && Program.MMUpdaterState == Program.UpdateState.Finished : true);
+            bool allowedToProcced = (Properties.Settings.Default.AutoUpdates ? HasUpdatesFinalized() : true);
             if (allowedToProcced)
             {
                 if (!CancelButton.IsEnabled) CancelButton.IsEnabled = true;

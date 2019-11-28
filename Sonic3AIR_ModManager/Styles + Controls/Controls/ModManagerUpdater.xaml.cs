@@ -62,6 +62,7 @@ namespace Sonic3AIR_ModManager
 
         private bool DisableUpdater = false;
         private ModManagerUpdater Instance;
+        public bool isOffline = false;
 
         public ModManagerUpdater(bool _manuallyTriggered = false)
         {
@@ -100,7 +101,7 @@ namespace Sonic3AIR_ModManager
         /// </returns>
         public static bool IsNetworkAvailable()
         {
-            return IsNetworkAvailable(0);
+            return IsNetworkAvailable(100);
         }
 
         /// <summary>
@@ -151,9 +152,9 @@ namespace Sonic3AIR_ModManager
         {
             try
             {
-                bool isNetAccessable = IsNetworkAvailable();
+                isOffline = IsNetworkAvailable();
 
-                if (isNetAccessable)
+                if (isOffline)
                 {
                     string url = "";
                     url = @"https://raw.githubusercontent.com/CarJem/GenerationsLib.Updates/master/UpdateMetadata/AIR_MM_Updates.json";

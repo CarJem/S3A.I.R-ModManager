@@ -169,6 +169,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A.I.R. Guides....
+        /// </summary>
+        internal static string AIRGuides {
+            get {
+                return ResourceManager.GetString("AIRGuides", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A.I.R. Internal Settings.
         /// </summary>
         internal static string AIRInternalSettings {
@@ -219,6 +228,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string AIRPlaces {
             get {
                 return ResourceManager.GetString("AIRPlaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A.I.R. Tips....
+        /// </summary>
+        internal static string AIRTips {
+            get {
+                return ResourceManager.GetString("AIRTips", resourceCulture);
             }
         }
         

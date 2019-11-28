@@ -40,6 +40,7 @@ namespace Sonic3AIR_ModManager
 
         private bool DisableUpdater = false;
         private Updater Instance;
+        public bool isOffline = false;
 
         public Updater(bool _manuallyTriggered = false)
         {
@@ -76,9 +77,9 @@ namespace Sonic3AIR_ModManager
             try
             {
                 bool isDeveloper = false;
-                bool isNetAccessable = IsNetworkAvailable();
+                isOffline = IsNetworkAvailable();
 
-                if (isNetAccessable)
+                if (isOffline)
                 {
                     string url = "";
                     if (isDeveloper) url = @"http://sonic3air.org/sonic3air_updateinfo_dev.json";
@@ -362,7 +363,7 @@ namespace Sonic3AIR_ModManager
         /// </returns>
         public static bool IsNetworkAvailable()
         {
-            return IsNetworkAvailable(0);
+            return IsNetworkAvailable(100);
         }
 
         /// <summary>
