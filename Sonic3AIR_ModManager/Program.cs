@@ -21,15 +21,23 @@ namespace Sonic3AIR_ModManager
 
         public static bool isDebug;
 
+        private static bool isDev = true;
+
         [ConditionalAttribute("DEBUG")]
         public static void isDebugging()
         {
             isDebug = true;
         }
 
-        private static string VersionString = "1.4.2";
+        private static string VersionString = "1.4.3";
 
-        public static string Version { get; } = "v." + VersionString;
+        public static string Version { get => GetVersionString(); }
+
+        private static string GetVersionString()
+        {
+            return "v." + VersionString + (isDev ? " DEV" : "");
+        }
+
         public static Version InternalVersion { get; } = new Version(VersionString);
 
         public static bool CheckedForUpdateOnStartup = false;
