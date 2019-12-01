@@ -1,0 +1,239 @@
+﻿<Window x:Class="Sonic3AIR_ModManager.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:maniac="clr-namespace:Sonic3AIR_ModManager"       
+        Title="About Sonic 3 A.I.R. Mod Manager" Height="404" Width="472.667" Background="{DynamicResource NormalBackground}" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="16*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Width="160" Height="300">
+                <Border  BorderBrush="{DynamicResource DisabledText}" BorderThickness="2">
+                    <Image Source="Resources/win.bmp" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="0,0,0,0"></Image>
+                </Border>
+            </Grid>
+            <Button Click="Button_Click" Name="OkButton" Grid.Row="2" Content="OK" Height="25" Margin="10,10,10,10" VerticalAlignment="Center"></Button>
+        </Grid>
+
+
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+            <TextBlock TextWrapping="Wrap" x:Name="llAbout" Text="A Mod Manager and utility for the Fan Game Sonic 3 A.I.R. - Angel Island Revisted"></TextBlock>
+            <TextBlock></TextBlock>
+            <TextBlock TextWrapping="Wrap" Text="Developed by:"></TextBlock>
+            <TextBlock><TextBlock Text="● "/><Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://twitter.com/carter5467_99"><Run Text="CarJem Generations"/></Hyperlink></TextBlock>
+            <TextBlock TextWrapping="Wrap" Text="Special Thanks To:"></TextBlock>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock><TextBlock Text="● "/><Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri=""><Run Text=""/></Hyperlink></TextBlock>
+                        <TextBlock><TextBlock Text="● "/><Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri=""><Run Text=""/></Hyperlink></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="5,0,0,0">
+                        <TextBlock><TextBlock Text="● "/><Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri=""><Run Text=""/></Hyperlink></TextBlock>
+                        <TextBlock><TextBlock Text="● "/><Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri=""><Run Text=""/></Hyperlink></TextBlock>
+                        <TextBlock><TextBlock Text="● "/><Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri=""><Run Text=""/></Hyperlink></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock><TextBlock Text="● "/><Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://twitter.com/Eukaryot3K"><Run Text="Eukayrot3K (Creator of Sonic 3 A.I.R.)"/></Hyperlink></TextBlock>
+            </StackPanel>
+            
+
+
+
+
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
+            <Button x:Name="checkForModManagerUpdatesButton" Click="checkForModManagerUpdatesButton_Click" Content="Check for Mod Manager Updates..." Height="25" Margin="0,4,0,4"></Button>
+            <Button x:Name="checkForUpdatesButton" Height="25" Margin="0,0,0,4" Content="Check for Game Updates..." Click="CheckForUpdates_Click"></Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock  x:Name="buildDateLabel" Margin="0,4" Text="Build Date/CPU Type" TextWrapping="Wrap"></TextBlock>
+            <TextBlock  x:Name="labelCopyright" Margin="0,4" Text="Copyright" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <TextBlock x:Name="labelProductName" Text="Product" Margin="0,4" TextWrapping="Wrap"></TextBlock>
+            <TextBlock  x:Name="labelVersion" Text="Version" Margin="0,4" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+
+    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Image}">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.4" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Foreground" Value="{DynamicResource NormalText}" />
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource NormalText}" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource ToolbarBackground}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="DisabledToggleButton" TargetType="{x:Type ToggleButton}">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="false">
+                        <Setter Property="Foreground" Value="{DynamicResource DisabledText}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="true">
+                        <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="Flat" x:Name="FlatToggleButtons" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="border" Padding="5,0,5,0" BorderThickness="1,1,1,1" SnapsToDevicePixels="True">
+                                <ContentPresenter x:Name="contentPresenter"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ContextMenuSelectedColor}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Opacity" TargetName="border" Value="0.5"/>
+                                    <Setter Property="Opacity" TargetName="contentPresenter" Value="0.5"/>
+                                </Trigger>
+                                <Trigger Property="Control.IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ContextMenuSelectedColor}"/>
+                                    <Setter Property="Background" TargetName="border" Value="{DynamicResource ContextMenuSelectedColorBack}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorder}"/>
+            </Style>
+            <Style TargetType="{x:Type ListBox}">
+                <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorder}"/>
+            </Style>
+            <Style TargetType="{x:Type ListView}">
+                <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorder}"/>
+            </Style>
+
+
+
+            <Style x:Key="Flat2" x:Name="FlatButtons" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="border" Padding="5,0,5,0" BorderThickness="1,1,1,1" SnapsToDevicePixels="True">
+                                <ContentPresenter x:Name="contentPresenter"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Opacity" TargetName="border" Value="0.5"/>
+                                    <Setter Property="Opacity" TargetName="contentPresenter" Value="0.5"/>
+                                </Trigger>
+                                <Trigger Property="Control.IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ContextMenuSelectedColor}"/>
+                                    <Setter Property="Background" TargetName="border" Value="{DynamicResource ContextMenuSelectedColorBack}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+            <Style TargetType="{x:Type GroupBox}">
+                <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorder}"/>
+                <Setter Property="Margin" Value="4"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="6" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="6" />
+                                </Grid.RowDefinitions>
+                                <Border CornerRadius="4" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent" Background="{TemplateBinding Background}" />
+                                <Border Name="Header" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="true" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Border>
+                                <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <Border Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0">
+                                    <Border.OpacityMask>
+                                        <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
+                                            <Binding ElementName="Header" Path="ActualWidth" />
+                                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
+                                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
+                                        </MultiBinding>
+                                    </Border.OpacityMask>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="RemoveMouseOverEffect" TargetType="Button">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Name="border" 
+                            BorderThickness="1"
+                            Padding="0,0" 
+                            BorderBrush="Transparent" 
+                            CornerRadius="0" 
+                            Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+</Window>

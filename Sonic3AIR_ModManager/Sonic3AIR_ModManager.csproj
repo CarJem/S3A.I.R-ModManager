@@ -190,6 +190,9 @@
       <DependentUpon>lang.null.resx</DependentUpon>
     </Compile>
     <Compile Include="ModManagement.cs" />
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles + Controls\Controls\DocumentationViewer.xaml.cs">
       <DependentUpon>DocumentationViewer.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,7 @@
     <Content Include="Resources\ModManager.ico" />
     <Content Include="Resources\ModManagerIconTest2.ico" />
     <Resource Include="Resources\EntrySFX.wav" />
+    <Resource Include="Resources\win.bmp" />
     <Content Include="Steam Banners\banner_and_knuckles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -341,6 +345,10 @@
     <Page Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AboutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles + Controls\Controls\DocumentationViewer.xaml">
       <SubType>Designer</SubType>

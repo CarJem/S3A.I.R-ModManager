@@ -181,7 +181,7 @@ namespace Sonic3AIR_ModManager
             form.optionsPage.Header = Program.LanguageResource.GetString("GeneralTab");
             form.inputPage.Header = Program.LanguageResource.GetString("InputTab");
             form.versionsPage.Header = Program.LanguageResource.GetString("VersionsTab");
-            form.aboutPage.Header = Program.LanguageResource.GetString("AboutTab");
+
 
             //Mod Page
             form.groupBox3.Header = Program.LanguageResource.GetString("ModsTab_ModProperties");
@@ -241,6 +241,10 @@ namespace Sonic3AIR_ModManager
             form.openVersionsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenVersionsFolder");
 
             form.showLogFileButton.Header = Program.LanguageResource.GetString("ShowLogFileButton");
+
+            //Other MenuItem Items
+            form.AboutMenuItem.Header = Program.LanguageResource.GetString("AboutTab");
+
 
             //General Options Page + A.I.R. Settings
             form.groupBox8.Header = Program.LanguageResource.GetString("ModManagerOptions");
@@ -333,10 +337,6 @@ namespace Sonic3AIR_ModManager
             form.VersionsViewer.VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
             form.VersionsViewer.PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
 
-            //About Page
-            form.checkForUpdatesButton.Content = Program.LanguageResource.GetString("CheckForGameUpdatesExpandable");
-            form.checkForModManagerUpdatesButton.Content = Program.LanguageResource.GetString("CheckForModManagerUpdatesButton");
-
             form.SetTooltips();
         }
 
@@ -355,6 +355,13 @@ namespace Sonic3AIR_ModManager
             form.CancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
             form.OverwriteButton.Content = Program.LanguageResource.GetString("OverwriteButton");
             form.MakeCopyButton.Content = Program.LanguageResource.GetString("MakeCopyButton");
+        }
+
+        public static void ApplyLanguage(ref AboutWindow window)
+        {
+            window.OkButton.Content = Program.LanguageResource.GetString("Ok_Button");
+            window.checkForUpdatesButton.Content = Program.LanguageResource.GetString("CheckForGameUpdatesExpandable");
+            window.checkForModManagerUpdatesButton.Content = Program.LanguageResource.GetString("CheckForModManagerUpdatesButton");
         }
 
         public static void ApplyLanguage(ref DocumentationViewer form)

@@ -18,10 +18,17 @@ namespace Sonic3AIR_ModManager
     public class GameHandler
     {
         public static bool isGameRunning = false;
+        public static Process CurrentGameProcess;
 
         public GameHandler()
         {
 
+        }
+
+        public static void ForceQuitSonic3AIR()
+        {
+            // TODO: Add Warning Dialog
+            if (CurrentGameProcess != null && !CurrentGameProcess.HasExited) CurrentGameProcess.Kill();
         }
 
         public static void LaunchSonic3AIR()
@@ -44,12 +51,21 @@ namespace Sonic3AIR_ModManager
 
         public static void RunSonic3AIR()
         {
-            string filename = ProgramPaths.Sonic3AIRPath;
-            var start = new ProcessStartInfo() { FileName = filename, WorkingDirectory = Path.GetDirectoryName(filename) };
-            var process = Process.Start(start);
-            GameStartHandler();
-            process.WaitForExit();
-            GameEndHandler();
+            try
+            {
+                string filename = ProgramPaths.Sonic3AIRPath;
+                var start = new ProcessStartInfo() { FileName = filename, WorkingDirectory = Path.GetDirectoryName(filename) };
+                CurrentGameProcess = Process.Start(start);
+                GameStartHandler();
+                CurrentGameProcess.WaitForExit();
+                GameEndHandler();
+            }
+            catch (Exception ex)
+            {
+                //TODO: Add Language Translations
+                MessageBox.Show("Unable to Start Sonic 3 A.I.R. " + Environment.NewLine + ex.ToString() + Environment.NewLine + ex.Message);
+            }
+
         }
 
 

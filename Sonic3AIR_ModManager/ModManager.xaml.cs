@@ -193,6 +193,124 @@ namespace Sonic3AIR_ModManager
 
         #region Events
 
+        private void addInputMethodButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddInputDevice();
+        }
+
+        private void removeInputMethodButton_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveInputDevice();
+        }
+
+        private void importConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            ImportInputDevice();
+        }
+
+        private void exportConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExportInputDevice();
+        }
+
+        private void useDarkModeCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.UseDarkTheme)
+            {
+                App.ChangeSkin(Skin.Dark);
+            }
+            else
+            {
+                App.ChangeSkin(Skin.Light);
+            }
+            RefreshTheming();
+
+
+            void RefreshTheming()
+            {
+                this.InvalidateVisual();
+                foreach (UIElement element in Extensions.FindVisualChildren<UIElement>(this))
+                {
+                    element.InvalidateVisual();
+                }
+            }
+        }
+
+        private void LaunchOptionsUnderstandingButton_Click(object sender, RoutedEventArgs e)
+        {
+            LaunchOptionsWarning.Visibility = Visibility.Collapsed;
+        }
+
+        private void LaunchOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.IsLoaded) UpdateAIRGameConfigLaunchOptions();
+        }
+
+        private void CurrentWindowComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                if (GameConfig != null)
+                {
+                    S3AIRSettings.Fullscreen = FullscreenTypeComboBox.SelectedIndex;
+                    S3AIRSettings.SaveSettings();
+                    UpdateAIRSettings();
+                }
+
+            }
+        }
+
+        private void sonic3AIRPathBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+
+            ProgramPaths.Sonic3AIRPath = sonic3AIRPathBox.Text;
+            // your event handler here
+            e.Handled = true;
+            UpdateAIRSettings();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var list = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
+            //TODO: Gut unused Method
+            string file = @"D:\Users\CarJem\Downloads\tails_tails_sprites.zip";
+
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test1", "1", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test2", "2", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test3", "3", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test4", "4", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test5", "5", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test6", "6", file));
+
+
+            RecentsMenu.RecentItemsSource = list;
+        }
+
+        private void RecentsMenu_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            //TODO: Gut unused Method
+            MessageBox.Show($"{e.Header}{nL}{e.Content}{nL}{e.FilePath}", "Results");
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            //TODO: Gut unused Method
+            RecentsMenu.RecentItemsSource = null;
+        }
+
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow about = new AboutWindow();
+            about.Owner = this;
+            about.ShowDialog();
+        }
+
+        private void ForceQuitGame_Click(object sender, RoutedEventArgs e)
+        {
+            GameHandler.ForceQuitSonic3AIR();
+        }
+
         private void apiInstallChecker_Tick(object sender, EventArgs e)
         {
             ModFileManagement.GBAPIInstallTrigger();
@@ -237,10 +355,7 @@ namespace Sonic3AIR_ModManager
             ChangeAIRPathFromSettings();
         }
 
-        private void CheckForUpdates_Click(object sender, RoutedEventArgs e)
-        {
-            if (Program.AIRUpdaterState == Program.UpdateState.NeverStarted || Program.AIRUpdaterState == Program.UpdateState.Finished) new Updater(true);
-        }
+
 
         private void SaveInputsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -654,13 +769,14 @@ namespace Sonic3AIR_ModManager
             moveToTopButton.ToolTip = MoveModToTopTooltip;
             moveToBottomButton.ToolTip = MoveModToBottomTooltip;
 
-            aboutLabel.Text = aboutLabel.Text.Replace("{version}", Program.Version);
             this.Title = string.Format("{0} {1}", Program.LanguageResource.GetString("ApplicationTitle"), Program.Version);
         }
 
         public void UpdateInGameButtons()
         {
             bool enabled = !GameHandler.isGameRunning;
+            ModManagerButtons.Visibility = (enabled ? Visibility.Visible : Visibility.Hidden);
+            InGameButtons.Visibility = (enabled ? Visibility.Hidden : Visibility.Visible);
             saveAndLoadButton.IsEnabled = enabled;
             saveButton.IsEnabled = enabled;
             exitButton.IsEnabled = enabled;
@@ -673,7 +789,7 @@ namespace Sonic3AIR_ModManager
             modPanel.IsEnabled = enabled;
             autoRunCheckbox.IsEnabled = enabled;
             inputPanel.IsEnabled = enabled;
-            checkForUpdatesButton.IsEnabled = enabled;
+            AboutMenuItem.IsEnabled = enabled;
             devModeCheckbox.IsEnabled = enabled;
             settingsTabControl.IsEnabled = enabled;
         }
@@ -2045,99 +2161,6 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //TODO: Gut unused Method
-        }
-
-        private void addInputMethodButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddInputDevice();
-        }
-
-        private void removeInputMethodButton_Click(object sender, RoutedEventArgs e)
-        {
-            RemoveInputDevice();
-        }
-
-        private void importConfigButton_Click(object sender, RoutedEventArgs e)
-        {
-            ImportInputDevice();
-        }
-
-        private void exportConfigButton_Click(object sender, RoutedEventArgs e)
-        {
-            ExportInputDevice();
-        }
-
-        private void useDarkModeCheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            if (Properties.Settings.Default.UseDarkTheme)
-            {
-                App.ChangeSkin(Skin.Dark);
-            }
-            else
-            {
-                App.ChangeSkin(Skin.Light);
-            }
-            RefreshTheming();
-
-
-            void RefreshTheming()
-            {
-                this.InvalidateVisual();
-                foreach (UIElement element in Extensions.FindVisualChildren<UIElement>(this))
-                {
-                    element.InvalidateVisual();
-                }
-            }
-        }
-
-        private void LaunchOptionsUnderstandingButton_Click(object sender, RoutedEventArgs e)
-        {
-            LaunchOptionsWarning.Visibility = Visibility.Collapsed;
-        }
-
-        private void LaunchOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.IsLoaded) UpdateAIRGameConfigLaunchOptions();
-        }
-
-        private void CurrentWindowComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.IsLoaded)
-            {
-                if (GameConfig != null)
-                {
-                    S3AIRSettings.Fullscreen = FullscreenTypeComboBox.SelectedIndex;
-                    S3AIRSettings.SaveSettings();
-                    UpdateAIRSettings();
-                }
-
-            }
-        }
-
-        private void sonic3AIRPathBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key != System.Windows.Input.Key.Enter) return;
-
-            ProgramPaths.Sonic3AIRPath = sonic3AIRPathBox.Text;
-            // your event handler here
-            e.Handled = true;
-            UpdateAIRSettings();
-        }
-
-        private void HyperlinkToGeneralTabAIRPath()
-        {
-            settingsPage.IsSelected = true;
-            tabControl1.SelectedItem = settingsPage;
-            optionsPage.IsSelected = true;
-            settingsTabControl.SelectedItem = optionsPage;
-
-        }
-
-
-
         #region Move Mod to Subfolder Methods
 
         private void addNewModSubfolderMenuItem_Click(object sender, RoutedEventArgs e)
@@ -2218,43 +2241,20 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
+        private void HyperlinkToGeneralTabAIRPath()
+        {
+            settingsPage.IsSelected = true;
+            tabControl1.SelectedItem = settingsPage;
+            optionsPage.IsSelected = true;
+            settingsTabControl.SelectedItem = optionsPage;
+
+        }
+
         private void OpenAIRPathSettings(object sender, MouseButtonEventArgs e)
         {
             if (sender.Equals(LaunchOptionsGroup) && LaunchOptionsFailureMessageBackground.Visibility == Visibility.Visible) HyperlinkToGeneralTabAIRPath();
             else if (!sender.Equals(LaunchOptionsGroup)) HyperlinkToGeneralTabAIRPath();
 
-        }
-
-        private void checkForModManagerUpdatesButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (Program.MMUpdaterState == Program.UpdateState.NeverStarted || Program.MMUpdaterState == Program.UpdateState.Finished) new ModManagerUpdater(true);
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            var list = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
-
-            string file = @"D:\Users\CarJem\Downloads\tails_tails_sprites.zip";
-
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test1", "1", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test2", "2", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test3", "3", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test4", "4", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test5", "5", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test6", "6", file));
-
-
-            RecentsMenu.RecentItemsSource = list;
-        }
-
-        private void RecentsMenu_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-            MessageBox.Show($"{e.Header}{nL}{e.Content}{nL}{e.FilePath}", "Results");
-        }
-
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            RecentsMenu.RecentItemsSource = null;
         }
 
 

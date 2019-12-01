@@ -8,7 +8,7 @@
         xmlns:p="clr-namespace:Sonic3AIR_ModManager.Properties"
         xmlns:genlib="clr-namespace:GenerationsLib.WPF.Controls;assembly=GenerationsLib.WPF"
         mc:Ignorable="d"
-        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="640" Width="400" MinHeight="640" MinWidth="400" Closing="ModManager_WindowClosing" SizeChanged="Window_SizeChanged" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="640" Width="400" MinHeight="640" MinWidth="400" Closing="ModManager_WindowClosing" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -48,6 +48,9 @@
                     <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
                     <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
                 </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Other" Name="OtherMenuItem">
+                <MenuItem Header="About" Name="AboutMenuItem" Click="AboutMenuItem_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Misc" Visibility="Collapsed" IsEnabled="False">
                 <MenuItem Header="Clear List..." Click="MenuItem_Click_1"></MenuItem>
@@ -488,20 +491,6 @@
                             </Grid>
                         </GroupBox>
                     </TabItem>
-                    <TabItem Name="aboutPage" Header="About">
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="60"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock x:Name="aboutLabel" Padding="10" Text="Sonic 3 A.I.R. Mod Manager&#10;Version {version}&#10;By CarJem Generations&#10;&#10;Special Thanks:&#10;● Eukaryot3K - Creator of Sonic 3 A.I.R.">
-                            </TextBlock>
-                            <StackPanel Grid.Row="1">
-                                <Button x:Name="checkForModManagerUpdatesButton" Click="checkForModManagerUpdatesButton_Click" Content="Check for Mod Manager Updates..." Height="25" Margin="0,4,0,4"></Button>
-                                <Button x:Name="checkForUpdatesButton" Height="25" Margin="0,0,0,4" Content="Check for Game Updates..." Click="CheckForUpdates_Click"></Button>
-                            </StackPanel>
-                        </Grid>
-                    </TabItem>
                 </TabControl>
             </TabItem>
         </TabControl>
@@ -513,10 +502,13 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,5">
                 <TextBlock x:Name="airVersionLabel" Text="AIR Version: NULL&#10;Settings Version: NULL" Foreground="{DynamicResource NormalText}"></TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="34" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+            <StackPanel x:Name="ModManagerButtons" Orientation="Horizontal" Height="34" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
                 <Button Click="ExitButton_Click" x:Name="exitButton" Content="Exit" Padding="20,0" MinWidth="50" Margin="4" Height="25"></Button>
                 <Button Click="SaveButton_Click" x:Name="saveButton" Content="Save" Padding="20,0" MinWidth="50" Margin="4" Height="25"></Button>
                 <Button Click="RunButton_Click" x:Name="saveAndLoadButton" Content="Save &amp; Load" MinWidth="50" Padding="20,0" Margin="4" Height="25"></Button>
+            </StackPanel>
+            <StackPanel x:Name="InGameButtons" Visibility="Collapsed" Orientation="Horizontal" Height="34" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                <Button Click="ForceQuitGame_Click" x:Name="ForceQuitGame" Content="Force Close" MinWidth="50" Padding="20,0" Margin="4" Height="25"></Button>
             </StackPanel>
 
         </Grid>
