@@ -191,7 +191,7 @@
                                             <TextBox x:Name="sonic3AIRPathBox" KeyUp="sonic3AIRPathBox_KeyUp"></TextBox>
                                             <Button Grid.Column="1" Content="..." Name="updateSonic3AIRPathButton" Click="ChangeSonic3AIRPathButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                                 <Button.ContextMenu>
-                                                    <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="AIRPathMenuStrip">
+                                                    <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="AIRPathMenuStrip" ContextMenuOpening="AIRPathMenuStrip_ContextMenuOpening">
                                                         <Separator></Separator>
                                                         <MenuItem Name="setManuallyHeader" IsEnabled="False" FontWeight="Bold"></MenuItem>
                                                         <Separator></Separator>

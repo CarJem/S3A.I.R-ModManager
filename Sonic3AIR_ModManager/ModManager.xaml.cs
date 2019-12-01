@@ -57,7 +57,7 @@ namespace Sonic3AIR_ModManager
 
     // TODO: Implement Version Checking to Prevent More Stupid Bug Reports
     // TODO: Fix Unable to Install Version After Download is Complete
-    // TODO: Backup/Restore A.I.R. Save Data Functionality
+    // TODO: Backup/Restore A.I.R. Save Data Functionalitys
 
 
     public partial class ModManager : Window
@@ -244,7 +244,7 @@ namespace Sonic3AIR_ModManager
 
         private void SaveInputsButton_Click(object sender, RoutedEventArgs e)
         {
-            GameConfig.Save();
+            InputDevicesHandler.SaveInputs();
         }
 
         private void ResetInputsButton_Click(object sender, RoutedEventArgs e)
@@ -254,7 +254,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (GameConfig != null)
                 {
-                    GameConfig.ResetDevicesToDefault();
+                    InputDevicesHandler.InputDevices.ResetDevicesToDefault();
                     RefreshInputMappings();
                 }
             }
@@ -542,8 +542,8 @@ namespace Sonic3AIR_ModManager
         private void ChangeSonic3AIRPathButton_Click(object sender, RoutedEventArgs e)
         {
             updateSonic3AIRPathButton.ContextMenu.IsOpen = true;
+            UpdateAIRVersionsToolstrips();
             UpdateAIRSettings();
-
         }
 
         private void ChangeRomPathButton_Click(object sender, RoutedEventArgs e)
@@ -1086,11 +1086,11 @@ namespace Sonic3AIR_ModManager
         private void CollectGameRecordings()
         {
             GameRecordingList.Items.Clear();
-            if (File.Exists(ProgramPaths.Sonic3AIRPath))
+            if (ProgramPaths.DoesSonic3AIRGameRecordingsFolderPathExist())
             {
                 recordingsErrorMessagePanel.Visibility = Visibility.Collapsed;
 
-                string baseDirectory = Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
+                string baseDirectory = ProgramPaths.GetSonic3AIRGameRecordingsFolderPath();
                 if (Directory.Exists(baseDirectory))
                 {
                     Regex reg = new Regex(@"(gamerecording_)\d{6}(_)\d{6}");
@@ -1120,10 +1120,10 @@ namespace Sonic3AIR_ModManager
             }
             inputMethodsList.ItemsSource = null;
             inputMethodsList.Items.Refresh();
-            if (GameConfig != null)
+            if (InputDevicesHandler.InputDevices != null)
             {
                 if (inputMethodsList.Items.Count != 0 && inputMethodsList.ItemsSource == null) inputMethodsList.Items.Clear();
-                inputMethodsList.ItemsSource = GameConfig.InputDevices;
+                inputMethodsList.ItemsSource = InputDevicesHandler.InputDevices.Items;
                 if (selectedItem != null && inputMethodsList.Items.Contains(selectedItem)) inputMethodsList.SelectedItem = selectedItem;
             }
             else
@@ -1140,11 +1140,11 @@ namespace Sonic3AIR_ModManager
 
             if (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" && File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                if (GameConfig != null)
+                if (InputDevicesHandler.InputDevices != null)
                 {
                     try
                     {
-                        foreach (var inputMethod in GameConfig.InputDevices)
+                        foreach (var inputMethod in InputDevicesHandler.InputDevices.Items)
                         {
                             inputMethodsList.Items.Add(inputMethod);
                         }
@@ -1393,7 +1393,7 @@ namespace Sonic3AIR_ModManager
                 bool? result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
                 if (result == true)
                 {
-                    GameConfig.InputDevices[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
+                    InputDevicesHandler.InputDevices.Items[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
                     UpdateInputMappings();
                 }
 
@@ -1414,12 +1414,12 @@ namespace Sonic3AIR_ModManager
             {
 
                 DialogResult result = ExtraDialog.ShowInputDialog(ref new_name, Program.LanguageResource.GetString("AddInputDeviceDialogTitle"), Program.LanguageResource.GetString("AddInputDeviceDialogCaption"));
-                bool containsKey = GameConfig.Devices.ContainsKey(new_name);
+                bool containsKey = InputDevicesHandler.Devices.ContainsKey(new_name);
                 bool unacceptable_char = new_name.ContainsOnly(acceptable_char);
                 if (result != System.Windows.Forms.DialogResult.Cancel && !containsKey && unacceptable_char)
                 {
                     finished = true;
-                    GameConfig.Devices.Add(new_name, new AIR_API.InputMappings.Device(new_name));
+                    InputDevicesHandler.Devices.Add(new_name, new AIR_API.InputMappings.Device(new_name));
                     RefreshInputMappings();
                 }
                 else if (result != System.Windows.Forms.DialogResult.Cancel)
@@ -1455,7 +1455,7 @@ namespace Sonic3AIR_ModManager
                     DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(deviceToRemove.EntryName), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (result == System.Windows.Forms.DialogResult.Yes)
                     {
-                        GameConfig.Devices.Remove(deviceToRemove.EntryName);
+                        InputDevicesHandler.Devices.Remove(deviceToRemove.EntryName);
                         RefreshInputMappings();
                     }
                 }
@@ -1464,6 +1464,9 @@ namespace Sonic3AIR_ModManager
 
         private void RefreshInputMappings()
         {
+            if (S3AIRSettings.RawSettings is AIR_API.AIRSettingsMK2) InputDevicesHandler.InputDevices = S3AIRSettings.InputDevices;
+            else InputDevicesHandler.InputDevices = S3AIRSettings.InputDevices;
+
             DisableMappings();
             CollectInputMappings();
             UpdateInputDeviceButtons();
@@ -1473,7 +1476,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameConfig != null)
             {
-                ModFileManagement.ImportInputMappings(GameConfig);
+                ModFileManagement.ImportInputMappings();
                 RefreshInputMappings();
             }
         }
@@ -1498,7 +1501,7 @@ namespace Sonic3AIR_ModManager
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     int index = inputDeviceNamesList.SelectedIndex;
-                    GameConfig.InputDevices[inputMethodsList.SelectedIndex].DeviceNames.RemoveAt(index);
+                    InputDevicesHandler.InputDevices.Items[inputMethodsList.SelectedIndex].DeviceNames.RemoveAt(index);
                     UpdateInputMappings();
                 }
             }
@@ -1790,7 +1793,12 @@ namespace Sonic3AIR_ModManager
             InstallVersionFromZIP();
         }
 
-        private void I ()
+        private void AIRPathMenuStrip_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            UpdateAIRVersionsToolstrips();
+        }
+
+        private void UpdateAIRVersionsToolstrips()
         {
             CleanUpInstalledVersionsToolStrip();
             if (Directory.Exists(ProgramPaths.Sonic3AIR_MM_VersionsFolder))
@@ -2248,5 +2256,7 @@ namespace Sonic3AIR_ModManager
         {
             RecentsMenu.RecentItemsSource = null;
         }
+
+
     }
 }

@@ -183,6 +183,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InputDevicesHandler.cs" />
     <Compile Include="Languages\lang.null.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

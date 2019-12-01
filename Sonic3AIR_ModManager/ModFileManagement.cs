@@ -568,7 +568,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        public static void ImportInputMappings(AIR_API.GameConfig config)
+        public static void ImportInputMappings()
         {
             System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog()
             {
@@ -576,7 +576,7 @@ namespace Sonic3AIR_ModManager
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                config.ImportDevice(ofd.FileName);
+                InputDevicesHandler.InputDevices.ImportDevice(ofd.FileName);
             }
         }
 
