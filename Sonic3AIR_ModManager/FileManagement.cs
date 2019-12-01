@@ -36,10 +36,10 @@ using System.Resources;
 
 namespace Sonic3AIR_ModManager
 {
-    public static class ModFileManagement
+    public static class FileManagement
     {
 
-        #region File Watcher
+        #region Mod File Watcher
 
         public static FileSystemWatcher GBAPIWatcher = new FileSystemWatcher(ProgramPaths.Sonic3AIR_MM_GBRequestsFolder);
         public static bool isDownloadAllowed = true;
@@ -47,7 +47,7 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        #region File Management
+        #region Mod File Management
 
         public static void AddMod()
         {
@@ -389,7 +389,7 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        #region Downloading
+        #region Mod Downloading
 
         public static void GBAPIWatcher_Changed(object sender, FileSystemEventArgs e)
         {
@@ -398,12 +398,12 @@ namespace Sonic3AIR_ModManager
 
         public static void GBAPIInstallTrigger()
         {
-            if (ModFileManagement.isDownloadAllowed && ModFileManagement.HasAPIChangeBeenDetected)
+            if (FileManagement.isDownloadAllowed && FileManagement.HasAPIChangeBeenDetected)
             {
-                ModFileManagement.HasAPIChangeBeenDetected = false;
-                ModFileManagement.isDownloadAllowed = false;
-                ModFileManagement.GetNextAPIPendingInstall();
-                ModFileManagement.isDownloadAllowed = true;
+                FileManagement.HasAPIChangeBeenDetected = false;
+                FileManagement.isDownloadAllowed = false;
+                FileManagement.GetNextAPIPendingInstall();
+                FileManagement.isDownloadAllowed = true;
             }
         }
 
@@ -553,6 +553,214 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
+        #region Mod SubFolder Management
+
+        public static void AddNewModSubfolder(object selectedItem)
+        {
+            string newFolderName = Program.LanguageResource.GetString("NewSubFolderEntryName");
+            DialogResult result;
+            result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption1"));
+            while (Directory.Exists(Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName)) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+            {
+                result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption2"));
+            }
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                string newDirectoryPath = Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName);
+                Directory.CreateDirectory(newDirectoryPath);
+                if (selectedItem != null && selectedItem is ModViewerItem)
+                {
+                    FileManagement.MoveMod((selectedItem as ModViewerItem).Source, newDirectoryPath);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Version Management
+
+        public static void RemoveVersion(object version)
+        {
+            if (version != null && version is AIRVersionListItem)
+            {
+                AIRVersionListItem item = version as AIRVersionListItem;
+                if (MessageBox.Show(UserLanguage.RemoveVersion(item.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try
+                    {
+                        FileManagement.WipeFolderContents(item.FilePath);
+                        Directory.Delete(item.FilePath);
+                    }
+                    catch
+                    {
+                        MessageBox.Show(Program.LanguageResource.GetString("UnableToRemoveVersion"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    ModManager.Instance.RefreshVersionsList(true);
+                }
+
+            }
+        }
+
+        public class AIRVersionListItem
+        {
+            public string Name { get { return _name; } }
+            private string _name;
+
+            public string FilePath { get { return _filePath; } }
+            private string _filePath;
+
+            public override string ToString()
+            {
+                return $"{Program.LanguageResource.GetString("Version")} {Name}";
+            }
+
+            public AIRVersionListItem(string name, string filePath)
+            {
+                _name = name;
+                _filePath = filePath;
+            }
+        }
+
+        #endregion
+
+        #region Recording Management
+
+        public static async void UploadRecordingToFileDotIO(AIR_API.Recording recording)
+        {
+            string expires = "/?expires=1w";
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://file.io" + expires))
+                {
+                    var multipartContent = new MultipartFormDataContent();
+                    multipartContent.Add(new ByteArrayContent(File.ReadAllBytes(recording.FilePath)), "file", Path.GetFileName(recording.FilePath));
+                    request.Content = multipartContent;
+
+                    var response = await httpClient.SendAsync(request);
+                    string result = await response.Content.ReadAsStringAsync();
+                    dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
+                    string url = jsonObj.link;
+
+                    string message = UserLanguage.RecordingUploaded(url);
+                    Clipboard.SetText(url);
+                    MessageBox.Show(message);
+
+                }
+            }
+        }
+
+        public static bool DeleteRecording(AIR_API.Recording recording)
+        {
+            if (MessageBox.Show(UserLanguage.DeleteItem(recording.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
+            {
+                try
+                {
+                    File.Delete(recording.FilePath);
+                    return true;
+                }
+                catch
+                {
+                    MessageBox.Show(Program.LanguageResource.GetString("UnableToDeleteFile"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+                }
+            }
+            else return false;
+        }
+
+        public static void CopyRecordingLocationToClipboard(AIR_API.Recording item)
+        {
+            Clipboard.SetText(item.FilePath);
+            MessageBox.Show(Program.LanguageResource.GetString("RecordingPathCopiedToClipboard"));
+        }
+
+        #endregion
+
+        #region Input Mapping Input Managamenet
+
+        public static bool AddInputDevice()
+        {
+            string new_name = Program.LanguageResource.GetString("NewControllerEntryName");
+            bool finished = false;
+            char[] acceptable_char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890".ToArray();
+            bool success = false;
+
+            while (!finished)
+            {
+
+                DialogResult result = ExtraDialog.ShowInputDialog(ref new_name, Program.LanguageResource.GetString("AddInputDeviceDialogTitle"), Program.LanguageResource.GetString("AddInputDeviceDialogCaption"));
+                bool containsKey = InputDevicesHandler.Devices.ContainsKey(new_name);
+                bool unacceptable_char = new_name.ContainsOnly(acceptable_char);
+                if (result != System.Windows.Forms.DialogResult.Cancel && !containsKey && unacceptable_char)
+                {
+                    finished = true;
+                    InputDevicesHandler.Devices.Add(new_name, new AIR_API.InputMappings.Device(new_name));
+                    success = true;
+                }
+                else if (result != System.Windows.Forms.DialogResult.Cancel)
+                {
+                    if (containsKey)
+                    {
+                        MessageBox.Show(string.Format("\"{0}\" {1}", new_name, Program.LanguageResource.GetString("AddInputDeviceError1")));
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format("\"{0}\" {1}", new_name, Program.LanguageResource.GetString("AddInputDeviceError2")));
+                    }
+
+                }
+                else
+                {
+                    finished = true;
+                }
+            }
+
+
+            return success;
+
+
+        }
+
+        public static bool AddInputDeviceName(int index)
+        {
+            string newDevice = Program.LanguageResource.GetString("NewDeviceEntryName");
+            DeviceNameDialogV2 deviceNameDialog = new DeviceNameDialogV2();
+            bool? result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
+            if (result == true)
+            {
+                InputDevicesHandler.InputDevices.Items[index].DeviceNames.Add(newDevice);
+                return true;
+            }
+            else return false;
+        }
+
+        public static bool RemoveInputDevice(AIR_API.InputMappings.Device deviceToRemove)
+        {
+            DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(deviceToRemove.EntryName), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                InputDevicesHandler.Devices.Remove(deviceToRemove.EntryName);
+                return true;
+            }
+            else return false;
+
+        }
+
+        public static bool RemoveInputDeviceName(string selectedItemToRemove, int inputIndex, int nameIndex)
+        {
+            DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(selectedItemToRemove), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                int index = nameIndex;
+                InputDevicesHandler.InputDevices.Items[inputIndex].DeviceNames.RemoveAt(index);
+                return true;
+            }
+            return false;
+
+        }
+
+        #endregion
+
         #region Input Mapping Import/Exporting
 
         public static void ExportInputMappings(AIR_API.InputMappings.Device mappings)
@@ -580,6 +788,105 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+
+        #endregion
+
+        #region A.I.R. Version Installation 
+
+        public static void InstallVersionFromZIP()
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Filter = $"{Program.LanguageResource.GetString("SonicAIRVersionZIP")} (*.zip)|*.zip",
+                Title = Program.LanguageResource.GetString("SelectSonicAIRVersionZIP")
+            };
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
+                    string output = destination;
+
+                    using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(ofd.FileName))
+                    {
+                        foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                        {
+                            entry.WriteToDirectory(output, new ExtractionOptions()
+                            {
+                                ExtractFullPath = true,
+                                Overwrite = true
+                            });
+                        }
+                    }
+
+
+                    string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                    AIR_API.VersionMetadata ver;
+                    string output2;
+                    string baseFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\";
+
+                    try
+                    {
+                        ver = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
+                        output2 = $"{baseFolder}{ver.VersionString}";
+                        if (Directory.Exists(output2)) throw new Exception();
+                        try
+                        {
+                            AddVersion(destination, output2);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    catch
+                    {
+                        //TODO : Add Language Translations
+                        string exceptionVersion = "";
+                        DialogResult result;
+                        result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", "Can not determine version name, please specify your own:");
+                        while (Directory.Exists($"{baseFolder}{exceptionVersion}") && !Uri.IsWellFormedUriString($"{baseFolder}{exceptionVersion}", UriKind.Absolute) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+                        {
+                            result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", "A Version with that name already exists, or the name contains invalid characters for a folder, please specify a diffrent one:");
+                        }
+
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                        {
+                            output2 = exceptionVersion;
+                            AddVersion(destination, output2);
+                        }
+                        else
+                        {
+                            System.IO.DirectoryInfo di = new DirectoryInfo(destination);
+
+                            foreach (FileInfo file in di.GetFiles())
+                            {
+                                file.Delete();
+                            }
+                            foreach (DirectoryInfo dir in di.GetDirectories())
+                            {
+                                dir.Delete(true);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+
+            void AddVersion(string destination, string output2)
+            {
+                Directory.Move(destination, output2);
+
+                Directory.CreateDirectory(destination);
+
+                MessageBox.Show(UserLanguage.VersionInstalled(output2));
+            }
+
+        }
 
         #endregion
     }

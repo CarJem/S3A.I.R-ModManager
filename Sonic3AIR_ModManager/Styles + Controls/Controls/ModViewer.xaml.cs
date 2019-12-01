@@ -173,7 +173,7 @@ namespace Sonic3AIR_ModManager
 
         private void RemoveCurrentFolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ModFileManagement.RemoveSubFolder((FolderView.SelectedValue as SubDirectoryItem).FilePath);
+            FileManagement.RemoveSubFolder((FolderView.SelectedValue as SubDirectoryItem).FilePath);
         }
 
         private void FolderListHost_ContextMenuOpening(object sender, ContextMenuEventArgs e)

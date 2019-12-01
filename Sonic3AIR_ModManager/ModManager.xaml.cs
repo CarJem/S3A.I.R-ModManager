@@ -174,13 +174,13 @@ namespace Sonic3AIR_ModManager
                 ApiInstallChecker.Enabled = true;
                 ApiInstallChecker.Start();
 
-                ModFileManagement.GBAPIWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
-                ModFileManagement.GBAPIWatcher.EnableRaisingEvents = true;
-                ModFileManagement.GBAPIWatcher.Changed += ModFileManagement.GBAPIWatcher_Changed;
+                FileManagement.GBAPIWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
+                FileManagement.GBAPIWatcher.EnableRaisingEvents = true;
+                FileManagement.GBAPIWatcher.Changed += FileManagement.GBAPIWatcher_Changed;
 
                 UserLanguage.ApplyLanguage(ref Instance);
                 if (autoBoot) GameHandler.LaunchSonic3AIR();
-                if (gamebanana_api != "") ModFileManagement.GamebananaAPI_Install(gamebanana_api);
+                if (gamebanana_api != "") FileManagement.GamebananaAPI_Install(gamebanana_api);
             }
             else
             {
@@ -313,7 +313,7 @@ namespace Sonic3AIR_ModManager
 
         private void apiInstallChecker_Tick(object sender, EventArgs e)
         {
-            ModFileManagement.GBAPIInstallTrigger();
+            FileManagement.GBAPIInstallTrigger();
         }
 
         public static void UpdateUIFromInvoke()
@@ -323,7 +323,7 @@ namespace Sonic3AIR_ModManager
 
         public void DownloadButtonTest_Click(object sender, RoutedEventArgs e)
         {
-            ModFileManagement.AddModFromURLLink();
+            FileManagement.AddModFromURLLink();
         }
 
         private void LanguageComboBox_SelectionChangeCommitted(object sender, SelectionChangedEventArgs e)
@@ -367,11 +367,8 @@ namespace Sonic3AIR_ModManager
             var result = MessageBox.Show(Program.LanguageResource.GetString("ResetInputMappingsDefaultFormMessage"), Program.LanguageResource.GetString("ResetInputMappingsDefaultFormTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                if (GameConfig != null)
-                {
-                    InputDevicesHandler.InputDevices.ResetDevicesToDefault();
-                    RefreshInputMappings();
-                }
+                InputDevicesHandler.InputDevices.ResetDevicesToDefault();
+                RefreshInputMappings();
             }
 
         }
@@ -503,20 +500,10 @@ namespace Sonic3AIR_ModManager
 
         private void DeleteRecordingButton_Click(object sender, RoutedEventArgs e)
         {
-            if (GameRecordingList.SelectedItem != null)
+            if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording)
             {
-                AIR_API.Recording recording = GameRecordingList.SelectedItem as AIR_API.Recording;
-                if (MessageBox.Show(UserLanguage.DeleteItem(recording.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
+                if (FileManagement.DeleteRecording(GameRecordingList.SelectedItem as AIR_API.Recording) == true)
                 {
-                    try
-                    {
-                        File.Delete(recording.FilePath);
-                    }
-                    catch
-                    {
-                        MessageBox.Show(Program.LanguageResource.GetString("UnableToDeleteFile"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
                     CollectGameRecordings();
                     GameRecordingList_SelectedIndexChanged(null, null);
                 }
@@ -531,7 +518,7 @@ namespace Sonic3AIR_ModManager
         {
             if (ModViewer.SelectedItem != null)
             {
-                ModFileManagement.RemoveMod((ModViewer.SelectedItem as ModViewerItem).Source);
+                FileManagement.RemoveMod((ModViewer.SelectedItem as ModViewerItem).Source);
             }
         }
 
@@ -560,14 +547,14 @@ namespace Sonic3AIR_ModManager
 
         private void AddMods_Click(object sender, RoutedEventArgs e)
         {
-            ModFileManagement.AddMod();
+            FileManagement.AddMod();
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             if (ModViewer.SelectedItem != null)
             {
-                ModFileManagement.RemoveMod((ModViewer.SelectedItem as ModViewerItem).Source);
+                FileManagement.RemoveMod((ModViewer.SelectedItem as ModViewerItem).Source);
             }
         }
         private void TabControl1_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
@@ -599,9 +586,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                var item = GameRecordingList.SelectedItem as AIR_API.Recording;
-                Clipboard.SetText(item.FilePath);
-                MessageBox.Show(Program.LanguageResource.GetString("RecordingPathCopiedToClipboard"));
+                FileManagement.CopyRecordingLocationToClipboard(GameRecordingList.SelectedItem as AIR_API.Recording);
             }
         }
 
@@ -609,7 +594,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                UploadRecordingToFileDotIO(GameRecordingList.SelectedItem as AIR_API.Recording);
+                FileManagement.UploadRecordingToFileDotIO(GameRecordingList.SelectedItem as AIR_API.Recording);
             }
 
         }
@@ -1034,7 +1019,6 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-
         private void RetriveLaunchOptions()
         {
             if (SceneComboBox != null && PlayerComboBox != null && StartPhaseComboBox != null)
@@ -1252,7 +1236,7 @@ namespace Sonic3AIR_ModManager
 
         private void RecollectInputMappings()
         {
-            HideErrorGameConfigErrorPanels();
+            HideInputMappingErrorPanels();
 
             if (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" && File.Exists(ProgramPaths.Sonic3AIRPath))
             {
@@ -1267,13 +1251,13 @@ namespace Sonic3AIR_ModManager
                     }
                     catch
                     {
-                        AIRGameConfigNullSituation(1);
+                        AIRInputMappingsNullSituation(1);
                     }
                 }
-                else AIRGameConfigNullSituation(2);
+                else AIRInputMappingsNullSituation(2);
 
             }
-            else AIRGameConfigNullSituation();
+            else AIRInputMappingsNullSituation();
 
 
 
@@ -1281,24 +1265,27 @@ namespace Sonic3AIR_ModManager
 
         private void HideErrorGameConfigErrorPanels()
         {
-            inputPanel.IsEnabled = true;
-            inputErrorMessage.Visibility = Visibility.Collapsed;
-
             LaunchOptionsFailureMessageBackground.Visibility = Visibility.Collapsed;
             airLaunchPanel.IsEnabled = true;
         }
 
         private void ShowGameConfigErrorPanels()
         {
-
-
-            inputPanel.IsEnabled = false;
-            inputErrorMessage.Visibility = Visibility.Visible;
-
             airLaunchPanel.IsEnabled = false;
             LaunchOptionsFailureMessageBackground.Visibility = Visibility.Visible;
         }
 
+        private void HideInputMappingErrorPanels()
+        {
+            inputPanel.IsEnabled = true;
+            inputErrorMessage.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowInputMappingErrorPanels()
+        {
+            inputPanel.IsEnabled = false;
+            inputErrorMessage.Visibility = Visibility.Visible;
+        }
 
         private void CollectGameConfig()
         {
@@ -1329,10 +1316,6 @@ namespace Sonic3AIR_ModManager
         private void AIRGameConfigNullSituation(int situation = 0)
         {
             string hyperLink = nL + Program.LanguageResource.GetString("ErrorHyperlinkClickMessage");
-            if (situation == 0) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError1") + hyperLink;
-            else if (situation == 1) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError2") + hyperLink;
-            else if (situation == 2) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError3") + hyperLink;
-
             if (situation == 0) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError1") + hyperLink;
             else if (situation == 1) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError2") + hyperLink;
             else if (situation == 2) LaunchOptionsFailureMessage.Text = Program.LanguageResource.GetString("InputMappingError3") + hyperLink;
@@ -1341,7 +1324,15 @@ namespace Sonic3AIR_ModManager
             ShowGameConfigErrorPanels();
         }
 
+        private void AIRInputMappingsNullSituation(int situation = 0)
+        {
+            string hyperLink = nL + Program.LanguageResource.GetString("ErrorHyperlinkClickMessage");
+            if (situation == 0) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError1") + hyperLink;
+            else if (situation == 1) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError2") + hyperLink;
+            else if (situation == 2) inputErrorMessage.Content = Program.LanguageResource.GetString("InputMappingError3") + hyperLink;
 
+            ShowInputMappingErrorPanels();
+        }
 
         private bool ValidateInstall()
         {
@@ -1502,79 +1493,27 @@ namespace Sonic3AIR_ModManager
         {
             if (inputMethodsList.SelectedItem != null)
             {
-
-                int index = inputMethodsList.SelectedIndex;
-                string newDevice = Program.LanguageResource.GetString("NewDeviceEntryName");
-                DeviceNameDialogV2 deviceNameDialog = new DeviceNameDialogV2();
-                bool? result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
-                if (result == true)
+                if (FileManagement.AddInputDeviceName(inputMethodsList.SelectedIndex) == true)
                 {
-                    InputDevicesHandler.InputDevices.Items[inputMethodsList.SelectedIndex].DeviceNames.Add(newDevice);
                     UpdateInputMappings();
                 }
-
-
             }
 
         }
 
         private void AddInputDevice()
         {
-
-            string new_name = Program.LanguageResource.GetString("NewControllerEntryName");
-            bool finished = false;
-            char[] acceptable_char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890".ToArray();
-
-
-            while (!finished)
+            if (FileManagement.AddInputDevice() == true)
             {
-
-                DialogResult result = ExtraDialog.ShowInputDialog(ref new_name, Program.LanguageResource.GetString("AddInputDeviceDialogTitle"), Program.LanguageResource.GetString("AddInputDeviceDialogCaption"));
-                bool containsKey = InputDevicesHandler.Devices.ContainsKey(new_name);
-                bool unacceptable_char = new_name.ContainsOnly(acceptable_char);
-                if (result != System.Windows.Forms.DialogResult.Cancel && !containsKey && unacceptable_char)
-                {
-                    finished = true;
-                    InputDevicesHandler.Devices.Add(new_name, new AIR_API.InputMappings.Device(new_name));
-                    RefreshInputMappings();
-                }
-                else if (result != System.Windows.Forms.DialogResult.Cancel)
-                {
-                    if (containsKey)
-                    {
-                        MessageBox.Show(string.Format("\"{0}\" {1}", new_name, Program.LanguageResource.GetString("AddInputDeviceError1")));
-                    }
-                    else
-                    {
-                        MessageBox.Show(string.Format("\"{0}\" {1}", new_name, Program.LanguageResource.GetString("AddInputDeviceError2")));
-                    }
-
-                }
-                else
-                {
-                    finished = true;
-                }
+                RefreshInputMappings();
             }
-
-
-
         }
 
         private void RemoveInputDevice()
         {
-            if (inputMethodsList.SelectedItem != null)
+            if (inputMethodsList.SelectedItem != null && inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
             {
-                if (inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
-                {
-
-                    var deviceToRemove = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
-                    DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(deviceToRemove.EntryName), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == System.Windows.Forms.DialogResult.Yes)
-                    {
-                        InputDevicesHandler.Devices.Remove(deviceToRemove.EntryName);
-                        RefreshInputMappings();
-                    }
-                }
+                FileManagement.RemoveInputDevice(inputMethodsList.SelectedItem as AIR_API.InputMappings.Device);
             }
         }
 
@@ -1592,7 +1531,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameConfig != null)
             {
-                ModFileManagement.ImportInputMappings();
+                FileManagement.ImportInputMappings();
                 RefreshInputMappings();
             }
         }
@@ -1604,7 +1543,7 @@ namespace Sonic3AIR_ModManager
                 if (inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
                 {
                     AIR_API.InputMappings.Device device = inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
-                    ModFileManagement.ExportInputMappings(device);
+                    FileManagement.ExportInputMappings(device);
                 }
             }
         }
@@ -1613,11 +1552,8 @@ namespace Sonic3AIR_ModManager
         {
             if (inputMethodsList.SelectedItem != null && inputDeviceNamesList.SelectedItem != null)
             {
-                DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(inputDeviceNamesList.SelectedItem.ToString()), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == System.Windows.Forms.DialogResult.Yes)
+                if (FileManagement.RemoveInputDeviceName(inputDeviceNamesList.SelectedItem.ToString(), inputMethodsList.SelectedIndex, inputDeviceNamesList.SelectedIndex) == true)
                 {
-                    int index = inputDeviceNamesList.SelectedIndex;
-                    InputDevicesHandler.InputDevices.Items[inputMethodsList.SelectedIndex].DeviceNames.RemoveAt(index);
                     UpdateInputMappings();
                 }
             }
@@ -1857,34 +1793,6 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        #region Information Sending
-
-        private async void UploadRecordingToFileDotIO(AIR_API.Recording recording)
-        {
-            string expires = "/?expires=1w";
-            using (var httpClient = new HttpClient())
-            {
-                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://file.io" + expires))
-                {
-                    var multipartContent = new MultipartFormDataContent();
-                    multipartContent.Add(new ByteArrayContent(File.ReadAllBytes(recording.FilePath)), "file", Path.GetFileName(recording.FilePath));
-                    request.Content = multipartContent;
-
-                    var response = await httpClient.SendAsync(request);
-                    string result = await response.Content.ReadAsStringAsync();
-                    dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
-                    string url = jsonObj.link;
-
-                    string message = UserLanguage.RecordingUploaded(url);
-                    Clipboard.SetText(url);
-                    MessageBox.Show(message);
-
-                }
-            }
-        }
-
-        #endregion
-
         #region Protocol Handler
 
         public void CreateGameBananaShortcut()
@@ -1906,7 +1814,7 @@ namespace Sonic3AIR_ModManager
 
         private void AIRVersionZIPToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            InstallVersionFromZIP();
+            FileManagement.InstallVersionFromZIP();
         }
 
         private void AIRPathMenuStrip_ContextMenuOpening(object sender, ContextMenuEventArgs e)
@@ -1984,63 +1892,11 @@ namespace Sonic3AIR_ModManager
                 }
             }
         }
-
-        private void InstallVersionFromZIP()
-        {
-            OpenFileDialog ofd = new OpenFileDialog()
-            {
-                Filter = $"{Program.LanguageResource.GetString("SonicAIRVersionZIP")} (*.zip)|*.zip",
-                Title = Program.LanguageResource.GetString("SelectSonicAIRVersionZIP")
-            };
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                try
-                {
-                    string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
-                    string output = destination;
-
-                    using (var archive = SharpCompress.Archives.Zip.ZipArchive.Open(ofd.FileName))
-                    {
-                        foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
-                        {
-                            entry.WriteToDirectory(output, new ExtractionOptions()
-                            {
-                                ExtractFullPath = true,
-                                Overwrite = true
-                            });
-                        }
-                    }
-
-
-                    string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-                    AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
-
-
-                    string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}";
-
-                    Directory.Move(destination, output2);
-
-                    Directory.CreateDirectory(destination);
-
-                    MessageBox.Show(UserLanguage.VersionInstalled(output2));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-            }
-
-
-        }
-
-
-
         #endregion
 
         #region A.I.R. Version Manager List
 
-        private void RefreshVersionsList(bool fullRefresh = false)
+        public void RefreshVersionsList(bool fullRefresh = false)
         {
             if (fullRefresh)
             {
@@ -2054,7 +1910,7 @@ namespace Sonic3AIR_ModManager
                         string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
                         if (File.Exists(filePath))
                         {
-                            VersionsListView.Items.Add(new AIRVersionListItem(folder.Name, folder.FullName));
+                            VersionsListView.Items.Add(new FileManagement.AIRVersionListItem(folder.Name, folder.FullName));
                         }
 
 
@@ -2066,27 +1922,6 @@ namespace Sonic3AIR_ModManager
             removeVersionButton.IsEnabled = enabled;
             openVersionLocationButton.IsEnabled = enabled;
         }
-
-        private class AIRVersionListItem
-        {
-            public string Name { get { return _name; } }
-            private string _name;
-
-            public string FilePath { get { return _filePath; } }
-            private string _filePath;
-
-            public override string ToString()
-            {
-                return $"{Program.LanguageResource.GetString("Version")} {Name}";
-            }
-
-            public AIRVersionListItem(string name, string filePath)
-            {
-                _name = name;
-                _filePath = filePath;
-            }
-        }
-
         private void VersionsListBox_SelectedValueChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshVersionsList();
@@ -2114,37 +1949,17 @@ namespace Sonic3AIR_ModManager
 
         private void OpenVersionLocationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is AIRVersionListItem)
+            if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is FileManagement.AIRVersionListItem)
             {
-                AIRVersionListItem item = VersionsListView.SelectedItem as AIRVersionListItem;
+                FileManagement.AIRVersionListItem item = VersionsListView.SelectedItem as FileManagement.AIRVersionListItem;
                 Process.Start(item.FilePath);
             }
         }
 
         private void RemoveVersionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is AIRVersionListItem)
-            {
-                AIRVersionListItem item = VersionsListView.SelectedItem as AIRVersionListItem;
-                if (MessageBox.Show(UserLanguage.RemoveVersion(item.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
-                {
-                    try
-                    {
-                        ModFileManagement.WipeFolderContents(item.FilePath);
-                        Directory.Delete(item.FilePath);
-                    }
-                    catch
-                    {
-                        MessageBox.Show(Program.LanguageResource.GetString("UnableToRemoveVersion"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    RefreshVersionsList(true);
-                }
-
-            }
+            FileManagement.RemoveVersion(VersionsListView.SelectedItem);
         }
-
-
-
 
         #endregion
 
@@ -2165,24 +1980,7 @@ namespace Sonic3AIR_ModManager
 
         private void addNewModSubfolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string newFolderName = Program.LanguageResource.GetString("NewSubFolderEntryName");
-            DialogResult result;
-            result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption1"));
-            while (Directory.Exists(Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName)) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
-            {
-                result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption2"));
-            }
-
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                string newDirectoryPath = Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName);
-                Directory.CreateDirectory(newDirectoryPath);
-                if (ModViewer.View.SelectedItem != null && ModViewer.View.SelectedItem is ModViewerItem)
-                {
-                    ModFileManagement.MoveMod((ModViewer.View.SelectedItem as ModViewerItem).Source, newDirectoryPath);
-                }
-            }
-
+            FileManagement.AddNewModSubfolder(ModViewer.View.SelectedItem);
         }
 
         private void moveModToSubFolderMenuItem_ContextMenuOpening(object sender, RoutedEventArgs e)
@@ -2215,8 +2013,6 @@ namespace Sonic3AIR_ModManager
                     var menuItem = GenerateSubDirectoryToolstripItem(realItem.FileName, realItem.FilePath);
                     moveModToSubFolderMenuItem.Items.Add(menuItem);
                 }
-
-
             }
 
         }
@@ -2234,12 +2030,14 @@ namespace Sonic3AIR_ModManager
         {
             if (ModViewer.View.SelectedItem != null && ModViewer.View.SelectedItem is ModViewerItem)
             {
-                ModFileManagement.MoveMod((ModViewer.View.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
+                FileManagement.MoveMod((ModViewer.View.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
             }
 
         }
 
         #endregion
+
+        #region Error Message Helpers
 
         private void HyperlinkToGeneralTabAIRPath()
         {
@@ -2256,6 +2054,8 @@ namespace Sonic3AIR_ModManager
             else if (!sender.Equals(LaunchOptionsGroup)) HyperlinkToGeneralTabAIRPath();
 
         }
+
+        #endregion
 
 
     }

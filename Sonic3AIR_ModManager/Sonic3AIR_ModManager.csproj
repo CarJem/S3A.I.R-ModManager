@@ -250,7 +250,7 @@
     <Compile Include="ModManager.xaml.cs">
       <DependentUpon>ModManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModFileManagement.cs" />
+    <Compile Include="FileManagement.cs" />
     <Compile Include="Styles + Controls\Controls\ModViewer.xaml.cs">
       <DependentUpon>ModViewer.xaml</DependentUpon>
     </Compile>
