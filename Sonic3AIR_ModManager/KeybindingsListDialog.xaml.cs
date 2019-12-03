@@ -19,10 +19,10 @@ using System.Windows.Shapes;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class KeybindingsListDialogV2 : Window
+    public partial class KeybindingsListDialog : Window
     {
         public List<string> KeybindList;
-        public KeybindingsListDialogV2(List<string> _keybindList)
+        public KeybindingsListDialog(List<string> _keybindList)
         {
             InitializeComponent();
             this.Owner = System.Windows.Application.Current.MainWindow;
@@ -32,9 +32,9 @@ namespace Sonic3AIR_ModManager
             keybindsList.ItemsSource = KeybindList;
         }
 
-        private KeybindingsListDialogV2 Instance;
+        private KeybindingsListDialog Instance;
 
-        public KeybindingsListDialogV2()
+        public KeybindingsListDialog()
         {
             InitializeComponent();
             this.Owner = System.Windows.Application.Current.MainWindow;
@@ -44,7 +44,7 @@ namespace Sonic3AIR_ModManager
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            KeyBindingDialogV2 kb = new KeyBindingDialogV2();
+            KeyBindingDialog kb = new KeyBindingDialog();
             string newKeybind = kb.ShowInputDialog("NONE");
             if (newKeybind != "NONE")
             {
@@ -73,7 +73,7 @@ namespace Sonic3AIR_ModManager
             if (keybindsList.SelectedItem != null)
             {
                 int index = KeybindList.IndexOf(keybindsList.SelectedItem as string);
-                KeyBindingDialogV2 kb = new KeyBindingDialogV2();
+                KeyBindingDialog kb = new KeyBindingDialog();
                 KeybindList[index] = kb.ShowInputDialog(KeybindList[index]);
                 RefreshDataSource();
             }

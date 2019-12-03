@@ -18,9 +18,9 @@ using Path = System.IO.Path;
 namespace Sonic3AIR_ModManager
 {
     /// <summary>
-    /// Interaction logic for AutoBootDialogV2.xaml
+    /// Interaction logic for AutoBootDialog.xaml
     /// </summary>
-    public partial class AutoBootDialogV2 : Window
+    public partial class AutoBootDialog : Window
     {
         private System.Windows.Forms.Timer CountDown = new System.Windows.Forms.Timer();
         private System.Windows.Forms.Timer AnimationLoop = new System.Windows.Forms.Timer();
@@ -40,11 +40,11 @@ namespace Sonic3AIR_ModManager
         private LinearGradientBrush BrushTest = new LinearGradientBrush();
         private LinearGradientBrush BrushTest2 = new LinearGradientBrush();
 
-        public AutoBootDialogV2()
+        public AutoBootDialog()
         {
             InitializeComponent();
 
-            AutoBootDialogV2 Instance = this;
+            AutoBootDialog Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
 
             buildDetails.Text = $"{Program.LanguageResource.GetString("ModManagerVersion")}: {Program.Version}" + Environment.NewLine + $"{Program.LanguageResource.GetString("AIRVersion")}: {GetAIRVersion()}";

@@ -19,9 +19,9 @@ using System.Windows.Shapes;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class DeviceNameDialogV2 : Window
+    public partial class DeviceNameDialog : Window
     {
-        public DeviceNameDialogV2()
+        public DeviceNameDialog()
         {
             InitializeComponent();
             this.Owner = System.Windows.Application.Current.MainWindow;
@@ -44,7 +44,7 @@ namespace Sonic3AIR_ModManager
 
         private void detectControllerButton_Click(object sender, RoutedEventArgs e)
         {
-            JoystickInputSelectorDialogV2 dlg = new JoystickInputSelectorDialogV2();
+            JoystickInputSelectorDialog dlg = new JoystickInputSelectorDialog();
             if (dlg.ShowDialog().Value == true)
             {
                 textBox1.Text = dlg.ResultString;

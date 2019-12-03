@@ -125,9 +125,19 @@ namespace Sonic3AIR_ModManager
 
         public void FetchMods()
         {
+            for (int i = 0; i < ModsList.Count; i++)
+            {
+                ModsList[i].DisposeImage();
+                ModsList[i] = null;
+            }
             ModsList.Clear();
             ModsList = new List<ModViewerItem>();
 
+            for (int i = 0; i < ActiveModsList.Count; i++)
+            {
+                ActiveModsList[i].DisposeImage();
+                ActiveModsList[i] = null;
+            }
             ActiveModsList.Clear();
             ActiveModsList = new List<ModViewerItem>();
 

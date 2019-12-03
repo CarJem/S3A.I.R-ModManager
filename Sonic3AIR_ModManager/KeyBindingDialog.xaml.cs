@@ -20,7 +20,7 @@ using Binding = System.Windows.Data.Binding;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class KeyBindingDialogV2 : Window
+    public partial class KeyBindingDialog : Window
     {
         List<ComboBoxItem> KeyBindings { get => GetKeys(); }
         string OriginalKeybinding = "";
@@ -58,9 +58,9 @@ namespace Sonic3AIR_ModManager
 
 
 
-        private KeyBindingDialogV2 Instance;
+        private KeyBindingDialog Instance;
 
-        public KeyBindingDialogV2()
+        public KeyBindingDialog()
         {
             InitializeComponent();
             isInitialized = true;
@@ -295,7 +295,7 @@ namespace Sonic3AIR_ModManager
         private void getInputButton_Click(object sender, RoutedEventArgs e)
         {
 
-            JoystickReaderDialogV2 dlg = new JoystickReaderDialogV2();
+            JoystickReaderDialog dlg = new JoystickReaderDialog();
             if (dlg.ShowInputDialog() == true)
             {
                 inputDeviceRadioButton3.IsChecked = true;

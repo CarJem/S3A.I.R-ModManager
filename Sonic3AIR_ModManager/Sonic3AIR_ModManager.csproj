@@ -193,32 +193,32 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\DocumentationViewer.xaml.cs">
+    <Compile Include="DocumentationViewer.xaml.cs">
       <DependentUpon>DocumentationViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\Input + Joysticks\JoystickReaderDialogV2.xaml.cs">
-      <DependentUpon>JoystickReaderDialogV2.xaml</DependentUpon>
+    <Compile Include="JoystickReaderDialog.xaml.cs">
+      <DependentUpon>JoystickReaderDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\Input + Joysticks\KeybindingsListDialogV2.xaml.cs">
-      <DependentUpon>KeybindingsListDialogV2.xaml</DependentUpon>
+    <Compile Include="KeybindingsListDialog.xaml.cs">
+      <DependentUpon>KeybindingsListDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\Input + Joysticks\KeyBindingDialogV2.xaml.cs">
-      <DependentUpon>KeyBindingDialogV2.xaml</DependentUpon>
+    <Compile Include="KeyBindingDialog.xaml.cs">
+      <DependentUpon>KeyBindingDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\Input + Joysticks\DeviceNameDialogV2.xaml.cs">
-      <DependentUpon>DeviceNameDialogV2.xaml</DependentUpon>
+    <Compile Include="DeviceNameDialog.xaml.cs">
+      <DependentUpon>DeviceNameDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\Input + Joysticks\JoystickInputSelectorDialogV2.xaml.cs">
-      <DependentUpon>JoystickInputSelectorDialogV2.xaml</DependentUpon>
+    <Compile Include="JoystickInputSelectorDialog.xaml.cs">
+      <DependentUpon>JoystickInputSelectorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Styles + Controls\Controls\AutoBootDialogV2.xaml.cs">
-      <DependentUpon>AutoBootDialogV2.xaml</DependentUpon>
+    <Compile Include="AutoBootDialog.xaml.cs">
+      <DependentUpon>AutoBootDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\DownloadWindow.xaml.cs" />
+    <Compile Include="DownloadWindow.xaml.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraDialog.cs" />
-    <Compile Include="Styles + Controls\Controls\Input + Joysticks\JoystickReader.cs" />
+    <Compile Include="JoystickReader.cs" />
     <Compile Include="Languages\lang.fr.Designer.cs">
       <DependentUpon>lang.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -229,32 +229,32 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\ItemConflictDialogV2.xaml.cs">
-      <DependentUpon>ItemConflictDialogV2.xaml</DependentUpon>
+    <Compile Include="ItemConflictDialog.xaml.cs">
+      <DependentUpon>ItemConflictDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\ModManagerUpdater.xaml.cs">
+    <Compile Include="ModManagerUpdater.xaml.cs">
       <DependentUpon>ModManagerUpdater.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\Updater.xaml.cs">
+    <Compile Include="Updater.xaml.cs">
       <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\VersionsListView.xaml.cs">
+    <Compile Include="VersionsListView.xaml.cs">
       <DependentUpon>VersionsListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\RecordingsListView.xaml.cs">
+    <Compile Include="RecordingsListView.xaml.cs">
       <DependentUpon>RecordingsListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\ListViewControl.xaml.cs">
+    <Compile Include="ListViewControl.xaml.cs">
       <DependentUpon>ListViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModManager.xaml.cs">
       <DependentUpon>ModManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileManagement.cs" />
-    <Compile Include="Styles + Controls\Controls\ModViewer.xaml.cs">
+    <Compile Include="ModViewer.xaml.cs">
       <DependentUpon>ModViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles + Controls\Controls\ModWrapPanel.cs" />
+    <Compile Include="ModWrapPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameHandler.cs" />
@@ -350,59 +350,59 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\DocumentationViewer.xaml">
+    <Page Include="DocumentationViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles + Controls\Controls\Input + Joysticks\JoystickReaderDialogV2.xaml">
+    <Page Include="JoystickReaderDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\Input + Joysticks\KeybindingsListDialogV2.xaml">
+    <Page Include="KeybindingsListDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\Input + Joysticks\KeyBindingDialogV2.xaml">
+    <Page Include="KeyBindingDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\Input + Joysticks\DeviceNameDialogV2.xaml">
+    <Page Include="DeviceNameDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\Input + Joysticks\JoystickInputSelectorDialogV2.xaml">
+    <Page Include="JoystickInputSelectorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles + Controls\Controls\AutoBootDialogV2.xaml">
+    <Page Include="AutoBootDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles + Controls\Controls\DownloadWindow.xaml">
+    <Page Include="DownloadWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\ItemConflictDialogV2.xaml">
+    <Page Include="ItemConflictDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles + Controls\Controls\ModManagerUpdater.xaml">
+    <Page Include="ModManagerUpdater.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\Updater.xaml">
+    <Page Include="Updater.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles + Controls\Controls\VersionsListView.xaml">
+    <Page Include="VersionsListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\RecordingsListView.xaml">
+    <Page Include="RecordingsListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\ListViewControl.xaml">
+    <Page Include="ListViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -410,7 +410,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles + Controls\Controls\ModViewer.xaml">
+    <Page Include="ModViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

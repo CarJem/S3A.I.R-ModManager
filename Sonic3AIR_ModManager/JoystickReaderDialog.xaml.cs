@@ -20,14 +20,14 @@ using DialogResult = System.Windows.Forms.DialogResult;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class JoystickReaderDialogV2 : Window
+    public partial class JoystickReaderDialog : Window
     {
         private System.Timers.Timer timer1;
         private bool PollingInput = false;
         public string Result = null;
         private IntPtr Joystick;
         private bool Allowed = true;
-        public JoystickReaderDialogV2()
+        public JoystickReaderDialog()
         {
             InitializeComponent();
             this.Owner = System.Windows.Application.Current.MainWindow;
@@ -45,7 +45,7 @@ namespace Sonic3AIR_ModManager
 
         public bool ShowInputDialog()
         {
-            JoystickInputSelectorDialogV2 dlg = new JoystickInputSelectorDialogV2();
+            JoystickInputSelectorDialog dlg = new JoystickInputSelectorDialog();
             if (dlg.ShowDialog() == true)
             {
                 Joystick = JoystickReader.GetJoystick();

@@ -19,12 +19,12 @@ using System.Windows.Shapes;
 
 namespace Sonic3AIR_ModManager
 {
-    public partial class JoystickInputSelectorDialogV2 : Window
+    public partial class JoystickInputSelectorDialog : Window
     {
         public int Result = -1;
         public string ResultString = "";
         private bool NoDevicesFound = false;
-        public JoystickInputSelectorDialogV2()
+        public JoystickInputSelectorDialog()
         {
             InitializeComponent();
             this.Owner = System.Windows.Application.Current.MainWindow;

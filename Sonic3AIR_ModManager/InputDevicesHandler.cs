@@ -11,7 +11,7 @@ namespace Sonic3AIR_ModManager
     public static class InputDevicesHandler
     {
         public static InputDevices InputDevices { get; set; }
-        public static Dictionary<string, Device> Devices { get => InputDevices.KeyPairs; set => InputDevices.KeyPairs = value; }
+        public static Dictionary<string, Device> Devices { get => KeyPairListToDictionaryHelper.ToDictionary(InputDevices.Items, x => x.Key, x => x.Value); set => InputDevices.Items = value.ToList(); }
 
 
 

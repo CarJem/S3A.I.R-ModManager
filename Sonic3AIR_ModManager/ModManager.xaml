@@ -321,11 +321,11 @@
                                                 </Grid.ColumnDefinitions>
                                                 <ComboBox  Name="PlayerComboBox" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="LaunchOptions_SelectionChanged">
                                                     <ComboBoxItem Tag="NONE" Name="DefaultPlayerItem" Content="Default (NONE)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Name="LaunchPlayerST" Tag="0" Content="Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerST" Tag="0" Content="Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prower" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Name="LaunchPlayerS" Tag="1" Content="Sonic the Hedgehog" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Name="LaunchPlayerT" Tag="2" Content="Miles &quot;Tails&quot; Prowler" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerT" Tag="2" Content="Miles &quot;Tails&quot; Prower" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Name="LaunchPlayerK" Tag="3" Content="Knuckles the Echidna" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
-                                                    <ComboBoxItem Name="LaunchPlayerKT" Tag="4" Content="Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prowler (If Unlocked)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="LaunchPlayerKT" Tag="4" Content="Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prower (If Unlocked)" Width="{Binding ElementName=PlayerComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                 </ComboBox>
                                             </Grid>
                                             <TextBlock x:Name="StartPhaseLabel" Text="Startup Phase:**" Margin="0,2"></TextBlock>
@@ -338,6 +338,7 @@
                                                     <ComboBoxItem Tag="0" Content="Disclaimer" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Tag="1" Content="SEGA Logo" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                     <ComboBoxItem Tag="2" Content="Main Menu" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
+                                                    <ComboBoxItem Name="DeveloperOnlyStartPhaseItem" IsEnabled="False" Tag="3" Content="Phase Three &amp; Knuckles" Width="{Binding ElementName=StartPhaseComboBox, Path=ActualWidth}"></ComboBoxItem>
                                                 </ComboBox>
                                             </Grid>
                                             <Separator Height="10" Visibility="Hidden"></Separator>
@@ -381,8 +382,12 @@
                                     </Grid.RowDefinitions>
                                     <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputMethodsList" Margin="4,4" SelectionChanged="InputMethodsList_SelectedIndexChanged"></ListBox>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
-                                        <Button Click="addInputMethodButton_Click" x:Name="addInputMethodButton" Height="25" Width="75" Margin="4,0" Content="+"></Button>
-                                        <Button Click="removeInputMethodButton_Click" x:Name="removeInputMethodButton" Height="25" Width="75" Margin="4,0" Content="-"></Button>
+                                        <Button Click="addInputMethodButton_Click" x:Name="addInputMethodButton" Height="25" Width="25" Margin="4,0,2,0" Content="+"></Button>
+                                        <Button Click="removeInputMethodButton_Click" x:Name="removeInputMethodButton" Height="25" Width="25" Margin="2,0,2,0" Content="-"></Button>
+                                        <Button Click="moveInputMethodToTopButton_Click" x:Name="moveInputMethodToTopButton" Height="25" Width="25" Margin="2,0,2,0" Content="⤒"></Button>
+                                        <Button Click="moveInputMethodUpButton_Click" x:Name="moveInputMethodUpButton" Height="25" Width="25" Margin="2,0,2,0" Content="↑"></Button>
+                                        <Button Click="moveInputMethodDownButton_Click" x:Name="moveInputMethodDownButton" Height="25" Width="25" Margin="2,0,2,0" Content="↓"></Button>
+                                        <Button Click="moveInputMethodToBottomButton_Click" x:Name="moveInputMethodToBottomButton" Height="25" Width="25" Margin="2,0,2,0" Content="⤓"></Button>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
                                         <Button Click="importConfigButton_Click" x:Name="importConfigButton" Height="25" Width="75" Margin="4,0" Content="Import..."></Button>
@@ -450,8 +455,12 @@
                                         <ListBox Style="{DynamicResource BaseListBoxStyle}" ItemContainerStyle="{DynamicResource BaseListBoxItemStyle}" x:Name="inputDeviceNamesList" Margin="4,3" Grid.ColumnSpan="2" SelectionChanged="InputDeviceNamesList_SelectedIndexChanged" IsEnabled="False">
                                         </ListBox>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Grid.ColumnSpan="2">
-                                            <Button x:Name="addDeviceNameButton" Click="AddDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="+" IsEnabled="False"></Button>
-                                            <Button x:Name="removeDeviceNameButton" Click="RemoveDeviceNameButton_Click" Height="25" Width="75" Margin="4,0" Content="-" IsEnabled="False"></Button>
+                                            <Button x:Name="addDeviceNameButton" Click="AddDeviceNameButton_Click" Height="25" Width="25" Margin="4,0,2,0" Content="+" IsEnabled="False"></Button>
+                                            <Button x:Name="removeDeviceNameButton" Click="RemoveDeviceNameButton_Click" Height="25" Width="25" Margin="2,0,2,0" Content="-" IsEnabled="False"></Button>
+                                            <Button Click="moveDeviceNameToTopButton_Click" x:Name="moveDeviceNameToTopButton" Height="25" Width="25" Margin="2,0,2,0" Content="⤒" IsEnabled="False"></Button>
+                                            <Button Click="moveDeviceNameUpButton_Click" x:Name="moveDeviceNameUpButton" Height="25" Width="25" Margin="2,0,2,0" Content="↑" IsEnabled="False"></Button>
+                                            <Button Click="moveDeviceNameDownButton_Click" x:Name="moveDeviceNameDownButton" Height="25" Width="25" Margin="2,0,2,0" Content="↓" IsEnabled="False"></Button>
+                                            <Button Click="moveDeviceNameToBottomButton_Click" x:Name="moveDeviceNameToBottomButton" Height="25" Width="25" Margin="2,0,2,0" Content="⤓" IsEnabled="False"></Button>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1">
                                             <Button x:Name="openGamepadSettingsButton" Click="OpenGamepadSettingsButton_Click" Height="25" Width="150" Margin="4,0" Content="Open System Settings..."></Button>

@@ -21,6 +21,8 @@ namespace Sonic3AIR_ModManager
 
         public static bool isDebug;
 
+        public static bool isDeveloper = false;
+
         private static bool isDev = true;
 
         [ConditionalAttribute("DEBUG")]

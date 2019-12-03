@@ -39,7 +39,7 @@ namespace Sonic3AIR_ModManager
         public void RunAutoBoot(bool isForced = false)
         {
 
-            var auto = new AutoBootDialogV2();
+            var auto = new AutoBootDialog();
             if (auto.ShowDialog() == true)
             {
 

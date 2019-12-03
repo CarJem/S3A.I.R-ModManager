@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using System.IO;
+using System.ComponentModel;
 
 namespace Sonic3AIR_ModManager
 {
@@ -78,10 +79,16 @@ namespace Sonic3AIR_ModManager
         public ModViewer()
         {
             InitializeComponent();
-            UpdateSelectedFolderLabel();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
+            {
+                // Do runtime stuff
+                UpdateSelectedFolderLabel();
+                var Instance = this;
+                UserLanguage.ApplyLanguage(ref Instance);
+            }
 
-            var Instance = this;
-            UserLanguage.ApplyLanguage(ref Instance);
+
+
         }
 
         #region List Access Methods
@@ -245,6 +252,11 @@ namespace Sonic3AIR_ModManager
             return Source.IsEnabled;
         }
 
+        public void DisposeImage()
+        {
+            SourceImage = null;
+        }
+
         private ImageSource GetImage()
         {
             if (SourceImage != null)
@@ -256,7 +268,10 @@ namespace Sonic3AIR_ModManager
             {
                 SourceImage = new BitmapImage();
                 SourceImage.BeginInit();
+                SourceImage.CacheOption = BitmapCacheOption.None;
+                SourceImage.UriCachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.BypassCache);
                 SourceImage.CacheOption = BitmapCacheOption.OnLoad;
+                SourceImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 SourceImage.UriSource = new Uri(ImageLocation);
                 SourceImage.EndInit();
 

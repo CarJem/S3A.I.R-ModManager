@@ -350,7 +350,7 @@ namespace Sonic3AIR_ModManager
             form.ModsTab.Header = Program.LanguageResource.GetString("Viewer_ModsTab");           
         }
 
-        public static void ApplyLanguage(ref ItemConflictDialogV2 form)
+        public static void ApplyLanguage(ref ItemConflictDialog form)
         {
             form.CancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
             form.OverwriteButton.Content = Program.LanguageResource.GetString("OverwriteButton");
@@ -369,7 +369,7 @@ namespace Sonic3AIR_ModManager
             form.ExternalOpenButton.Content = Program.LanguageResource.GetString("OpenExternally");
         }
 
-        public static void ApplyLanguage(ref AutoBootDialogV2 form)
+        public static void ApplyLanguage(ref AutoBootDialog form)
         {
             form.ForceStartButton.Content = Program.LanguageResource.GetString("ForceStart");
             form.CancelButton.Content = Program.LanguageResource.GetString("Cancel");
@@ -389,7 +389,7 @@ namespace Sonic3AIR_ModManager
             form.updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
         }
 
-        public static void ApplyLanguage(ref KeyBindingDialogV2 form)
+        public static void ApplyLanguage(ref KeyBindingDialog form)
         {
             form.inputDeviceRadioButton1.Content = Program.LanguageResource.GetString("KeyboardRadioButton");
             form.inputDeviceRadioButton3.Content = Program.LanguageResource.GetString("CustomAdvancedLabel");
@@ -405,7 +405,7 @@ namespace Sonic3AIR_ModManager
             form.getInputButton.Content = Program.LanguageResource.GetString("DetectGamepadInputExpandable");
         }
 
-        public static void ApplyLanguage(ref KeybindingsListDialogV2 form)
+        public static void ApplyLanguage(ref KeybindingsListDialog form)
         {
             form.button1.Content = Program.LanguageResource.GetString("Ok_Button");
             form.editButton.Content = Program.LanguageResource.GetString("EditExpandable");
@@ -416,21 +416,21 @@ namespace Sonic3AIR_ModManager
             form.Title = (title != null ? title : "");
         }
 
-        public static void ApplyLanguage(ref DeviceNameDialogV2 form)
+        public static void ApplyLanguage(ref DeviceNameDialog form)
         {
             form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
             form.okButton.Content = Program.LanguageResource.GetString("Ok_Button");
             form.detectControllerButton.Content = Program.LanguageResource.GetString("DetectControllerExpandable");
         }
 
-        public static void ApplyLanguage(ref JoystickInputSelectorDialogV2 form)
+        public static void ApplyLanguage(ref JoystickInputSelectorDialog form)
         {
             form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
             form.selectButton.Content = Program.LanguageResource.GetString("Select_Button");
             form.refreshButton.Content = Program.LanguageResource.GetString("Refresh");
         }
 
-        public static void ApplyLanguage(ref JoystickReaderDialogV2 form)
+        public static void ApplyLanguage(ref JoystickReaderDialog form)
         {
             form.cancelButton.Content = Program.LanguageResource.GetString("Cancel_Button");
             form.okButton.Content = Program.LanguageResource.GetString("Ok_Button");

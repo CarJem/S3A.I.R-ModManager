@@ -149,7 +149,7 @@ namespace Sonic3AIR_ModManager
         private static void ModMoveConflictResolve(AIR_API.Mod ExistingMod, AIR_API.Mod NewMod, string newPath)
         {
 
-            var result = new ItemConflictDialogV2().ShowDialog(ExistingMod, NewMod);
+            var result = new ItemConflictDialog().ShowDialog(ExistingMod, NewMod);
             if (result == DialogResult.Yes)
             {
                 DeleteOldMod();
@@ -323,7 +323,7 @@ namespace Sonic3AIR_ModManager
 
 
 
-            var result = new ItemConflictDialogV2().ShowDialog(ExistingMod, NewMod);
+            var result = new ItemConflictDialog().ShowDialog(ExistingMod, NewMod);
             if (result == DialogResult.Yes)
             {
                 DeleteOldMod();
@@ -724,11 +724,11 @@ namespace Sonic3AIR_ModManager
         public static bool AddInputDeviceName(int index)
         {
             string newDevice = Program.LanguageResource.GetString("NewDeviceEntryName");
-            DeviceNameDialogV2 deviceNameDialog = new DeviceNameDialogV2();
+            DeviceNameDialog deviceNameDialog = new DeviceNameDialog();
             bool? result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
             if (result == true)
             {
-                InputDevicesHandler.InputDevices.Items[index].DeviceNames.Add(newDevice);
+                InputDevicesHandler.InputDevices.Items[index].Value.DeviceNames.Add(newDevice);
                 return true;
             }
             else return false;
@@ -752,11 +752,117 @@ namespace Sonic3AIR_ModManager
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
                 int index = nameIndex;
-                InputDevicesHandler.InputDevices.Items[inputIndex].DeviceNames.RemoveAt(index);
+                InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.RemoveAt(index);
                 return true;
             }
             return false;
 
+        }
+
+        public enum MoveListItemDirection : int
+        {
+            MoveToTop = 0,
+            MoveUp = 1,
+            MoveDown = 2,
+            MoveToBottom = 3
+        }
+
+        public static void MoveInputDevice(ref ModManager parent, MoveListItemDirection direction)
+        {
+            int index = -1;
+            switch (direction)
+            {
+                case MoveListItemDirection.MoveToTop:
+                    index = parent.inputMethodsList.SelectedIndex;
+                    if (index != 0)
+                    {
+                        InputDevicesHandler.InputDevices.Items.Move(index, 0);
+
+                        parent.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(0);
+                        parent.UpdateInputMappings();
+                    }
+                    break;
+                case MoveListItemDirection.MoveUp:
+                    index = parent.inputMethodsList.SelectedIndex;
+                    if (index != 0)
+                    {
+                        InputDevicesHandler.InputDevices.Items.Move(index, index - 1);
+
+                        parent.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(index - 1);
+                        parent.UpdateInputMappings();
+                    }
+                    break;
+                case MoveListItemDirection.MoveDown:
+                    index = parent.inputMethodsList.SelectedIndex;
+                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    {
+                        InputDevicesHandler.InputDevices.Items.Move(index, index + 1);
+
+                        parent.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(index + 1);
+                        parent.UpdateInputMappings();
+                    }
+                    break;
+                case MoveListItemDirection.MoveToBottom:
+                    index = parent.inputMethodsList.SelectedIndex;
+                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    {
+                        InputDevicesHandler.InputDevices.Items.Move(index, InputDevicesHandler.InputDevices.Items.Count - 1);
+
+                        parent.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(InputDevicesHandler.InputDevices.Items.Count - 1);
+                        parent.UpdateInputMappings();
+                    }
+                    break;
+            }
+        }
+
+        public static void MoveInputDeviceIdentifier(ref ModManager parent, MoveListItemDirection direction)
+        {
+            var selectedItem = parent.inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;            
+            int index = -1;
+            int inputIndex = InputDevicesHandler.InputDevices.Items.FindIndex(x => x.Value == selectedItem);
+            switch (direction)
+            {
+                case MoveListItemDirection.MoveToTop:
+                    index = parent.inputDeviceNamesList.SelectedIndex;
+                    if (index != 0)
+                    {
+                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, 0);
+                        parent.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(0);
+                    }
+                    break;
+                case MoveListItemDirection.MoveUp:
+                    index = parent.inputDeviceNamesList.SelectedIndex;
+                    if (index != 0)
+                    {
+                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, index - 1);
+                        parent.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(index - 1);
+                    }
+                    break;
+                case MoveListItemDirection.MoveDown:
+                    index = parent.inputDeviceNamesList.SelectedIndex;
+                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    {
+                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, index + 1);
+                        parent.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(index + 1);
+                    }
+                    break;
+                case MoveListItemDirection.MoveToBottom:
+                    index = parent.inputDeviceNamesList.SelectedIndex;
+                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    {
+                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, InputDevicesHandler.InputDevices.Items.Count - 1);
+                        parent.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Count - 1);
+                    }
+                    break;
+            }
         }
 
         #endregion

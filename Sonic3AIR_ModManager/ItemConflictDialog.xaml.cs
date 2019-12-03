@@ -18,10 +18,10 @@ namespace Sonic3AIR_ModManager
     /// <summary>
     /// Interaction logic for ItemConflictDialogV2.xaml
     /// </summary>
-    public partial class ItemConflictDialogV2 : Window
+    public partial class ItemConflictDialog : Window
     {
         System.Windows.Forms.DialogResult DialogResultForms { get; set; } = System.Windows.Forms.DialogResult.None;
-        public ItemConflictDialogV2()
+        public ItemConflictDialog()
         {
             InitializeComponent();
             var Instance = this;

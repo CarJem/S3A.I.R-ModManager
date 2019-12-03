@@ -57,7 +57,7 @@ namespace Sonic3AIR_ModManager
 
     // TODO: Implement Version Checking to Prevent More Stupid Bug Reports
     // TODO: Fix Unable to Install Version After Download is Complete
-    // TODO: Backup/Restore A.I.R. Save Data Functionalitys
+    // TODO: Backup/Restore A.I.R. Save Data Functionality
 
 
     public partial class ModManager : Window
@@ -355,7 +355,25 @@ namespace Sonic3AIR_ModManager
             ChangeAIRPathFromSettings();
         }
 
+        private void moveDeviceNameToTopButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveDeviceName(FileManagement.MoveListItemDirection.MoveToTop);
+        }
 
+        private void moveDeviceNameUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveDeviceName(FileManagement.MoveListItemDirection.MoveUp);
+        }
+
+        private void moveDeviceNameDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveDeviceName(FileManagement.MoveListItemDirection.MoveDown);
+        }
+
+        private void moveDeviceNameToBottomButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveDeviceName(FileManagement.MoveListItemDirection.MoveToBottom);
+        }
 
         private void SaveInputsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -637,6 +655,26 @@ namespace Sonic3AIR_ModManager
         {
             GameHandler.UpdateSonic3AIRLocation(true);
             UpdateAIRSettings();
+        }
+
+        private void moveInputMethodUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveInputMethod(FileManagement.MoveListItemDirection.MoveUp);
+        }
+
+        private void moveInputMethodDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveInputMethod(FileManagement.MoveListItemDirection.MoveDown);
+        }
+
+        private void moveInputMethodToBottomButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveInputMethod(FileManagement.MoveListItemDirection.MoveToBottom);
+        }
+
+        private void moveInputMethodToTopButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoveInputMethod(FileManagement.MoveListItemDirection.MoveToTop);
         }
 
         private void ChangeSonic3AIRPathButton_Click(object sender, RoutedEventArgs e)
@@ -1048,7 +1086,9 @@ namespace Sonic3AIR_ModManager
 
                         if (GameConfig.StartPhase != null)
                         {
-                            ComboBoxItem item = StartPhaseComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == GameConfig.StartPhase.ToString()).FirstOrDefault();
+                            string phase = GameConfig.StartPhase.ToString();
+                            if (GameConfig.StartPhase.ToString() == "3" && !Program.isDeveloper) phase = "NONE";
+                            ComboBoxItem item = StartPhaseComboBox.Items.Cast<ComboBoxItem>().Where(x => x.Tag.ToString() == phase).FirstOrDefault();
                             StartPhaseComboBox.SelectedItem = item;
                         }
                         else StartPhaseComboBox.SelectedIndex = 0;
@@ -1057,8 +1097,21 @@ namespace Sonic3AIR_ModManager
                         if (SceneComboBox.SelectedIndex == 0) PlayerComboBox.IsEnabled = false;
                         else PlayerComboBox.IsEnabled = true;
 
-                        if (SceneComboBox.SelectedIndex != 0) StartPhaseComboBox.IsEnabled = false;
-                        else StartPhaseComboBox.IsEnabled = true;
+                        if (!Program.isDeveloper)
+                        {
+                            DeveloperOnlyStartPhaseItem.Visibility = Visibility.Collapsed;
+                            DeveloperOnlyStartPhaseItem.IsEnabled = false;
+
+                            if (SceneComboBox.SelectedIndex != 0) StartPhaseComboBox.IsEnabled = false;
+                            else StartPhaseComboBox.IsEnabled = true;
+                        }
+                        else
+                        {
+                            StartPhaseComboBox.IsEnabled = true;
+                            DeveloperOnlyStartPhaseItem.Visibility = Visibility.Visible;
+                            DeveloperOnlyStartPhaseItem.IsEnabled = true;
+                        }
+
 
                     }
 
@@ -1210,7 +1263,7 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        private void CollectInputMappings()
+        public void CollectInputMappings()
         {
             inputMethodsList.SelectionChanged -= InputMethodsList_SelectedIndexChanged;
             AIR_API.InputMappings.Device selectedItem = null;
@@ -1223,7 +1276,7 @@ namespace Sonic3AIR_ModManager
             if (InputDevicesHandler.InputDevices != null)
             {
                 if (inputMethodsList.Items.Count != 0 && inputMethodsList.ItemsSource == null) inputMethodsList.Items.Clear();
-                inputMethodsList.ItemsSource = InputDevicesHandler.InputDevices.Items;
+                inputMethodsList.ItemsSource = InputDevicesHandler.InputDevices.Items.Select(x => x.Value);
                 if (selectedItem != null && inputMethodsList.Items.Contains(selectedItem)) inputMethodsList.SelectedItem = selectedItem;
             }
             else
@@ -1344,10 +1397,15 @@ namespace Sonic3AIR_ModManager
         #region Input Mapping
 
 
-        private void UpdateInputDeviceButtons()
+        public void UpdateInputDeviceButtons()
         {
             if (inputMethodsList.SelectedItem != null)
             {
+                moveInputMethodUpButton.IsEnabled = inputMethodsList.Items.IndexOf(inputMethodsList.SelectedItem) > 0;
+                moveInputMethodDownButton.IsEnabled = inputMethodsList.Items.IndexOf(inputMethodsList.SelectedItem) < inputMethodsList.Items.Count - 1;
+                moveInputMethodToTopButton.IsEnabled = inputMethodsList.Items.IndexOf(inputMethodsList.SelectedItem) > 0;
+                moveInputMethodToBottomButton.IsEnabled = inputMethodsList.Items.IndexOf(inputMethodsList.SelectedItem) < inputMethodsList.Items.Count - 1;
+
                 removeInputMethodButton.IsEnabled = true;
                 exportConfigButton.IsEnabled = true;
             }
@@ -1355,10 +1413,14 @@ namespace Sonic3AIR_ModManager
             {
                 removeInputMethodButton.IsEnabled = false;
                 exportConfigButton.IsEnabled = false;
+                moveInputMethodUpButton.IsEnabled = false;
+                moveInputMethodDownButton.IsEnabled = false;
+                moveInputMethodToTopButton.IsEnabled = false;
+                moveInputMethodToBottomButton.IsEnabled = false;
             }
         }
 
-        private void UpdateInputMappings()
+        public void UpdateInputMappings()
         {
             UpdateInputDeviceButtons();
             inputDeviceNamesList.Items.Clear();
@@ -1410,6 +1472,21 @@ namespace Sonic3AIR_ModManager
             inputDeviceNamesList.IsEnabled = enabled;
             addDeviceNameButton.IsEnabled = enabled;
             removeDeviceNameButton.IsEnabled = (enabled == true ? inputDeviceNamesList.SelectedItem != null : enabled);
+
+            if (inputDeviceNamesList.SelectedItem != null)
+            {
+                moveDeviceNameUpButton.IsEnabled = inputDeviceNamesList.Items.IndexOf(inputDeviceNamesList.SelectedItem) > 0 && enabled;
+                moveDeviceNameDownButton.IsEnabled = inputDeviceNamesList.Items.IndexOf(inputDeviceNamesList.SelectedItem) < inputDeviceNamesList.Items.Count - 1 && enabled;
+                moveDeviceNameToTopButton.IsEnabled = inputDeviceNamesList.Items.IndexOf(inputDeviceNamesList.SelectedItem) > 0 && enabled;
+                moveDeviceNameToBottomButton.IsEnabled = inputDeviceNamesList.Items.IndexOf(inputDeviceNamesList.SelectedItem) < inputDeviceNamesList.Items.Count - 1 && enabled;
+            }
+            else
+            {
+                moveDeviceNameUpButton.IsEnabled = false;
+                moveDeviceNameDownButton.IsEnabled = false;
+                moveDeviceNameToTopButton.IsEnabled = false;
+                moveDeviceNameToBottomButton.IsEnabled = false;
+            }
         }
 
         private void DisableMappings()
@@ -1482,7 +1559,7 @@ namespace Sonic3AIR_ModManager
 
                 void MappingDialog(ref List<string> mappings)
                 {
-                    var mD = new KeybindingsListDialogV2(mappings);
+                    var mD = new KeybindingsListDialog(mappings);
                     mD.ShowDialog();
                 }
 
@@ -1517,7 +1594,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void RefreshInputMappings()
+        public void RefreshInputMappings()
         {
             if (S3AIRSettings.RawSettings is AIR_API.AIRSettingsMK2) InputDevicesHandler.InputDevices = S3AIRSettings.InputDevices;
             else InputDevicesHandler.InputDevices = S3AIRSettings.InputDevices;
@@ -1593,6 +1670,18 @@ namespace Sonic3AIR_ModManager
         {
             Process.Start("joy.cpl");
 
+        }
+
+        private void MoveInputMethod(FileManagement.MoveListItemDirection direction)
+        {
+            var Instance = this;
+            FileManagement.MoveInputDevice(ref Instance, direction);
+        }
+
+        private void MoveDeviceName(FileManagement.MoveListItemDirection direction)
+        {
+            var Instance = this;
+            FileManagement.MoveInputDeviceIdentifier(ref Instance, direction);
         }
 
         #endregion
@@ -2055,8 +2144,7 @@ namespace Sonic3AIR_ModManager
 
         }
 
+
         #endregion
-
-
     }
 }
