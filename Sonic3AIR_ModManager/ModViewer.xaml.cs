@@ -231,7 +231,12 @@ namespace Sonic3AIR_ModManager
     public class ModViewerItem
     {
         public Visibility Visibility { get; set; } = Visibility.Visible;
+
+        public Visibility CheckBoxVisibility { get; set; } = Visibility.Visible;
+
         public bool IsInRootFolder { get; set; } = true;
+
+        public ModManagement ParentManager { get; set; }
 
         public string Name { get => Source.Name; set => Source.Name = value; }
         public string Description { get => Source.Description; set => Source.Description = value; }
@@ -249,7 +254,14 @@ namespace Sonic3AIR_ModManager
 
         private bool GetEnabledState()
         {
-            return Source.IsEnabled;
+            if (!ParentManager.S3AIRActiveMods.UseLegacyLoading)
+            {
+                return Source.IsEnabled;
+            }
+            else
+            {
+                return IsInRootFolder;
+            }
         }
 
         public void DisposeImage()
@@ -299,14 +311,19 @@ namespace Sonic3AIR_ModManager
 
         private void SetEnabledState(bool value)
         {
-            Source.IsEnabled = value;
-            ModViewer.ItemCheck?.Invoke();
+            if (!ParentManager.S3AIRActiveMods.UseLegacyLoading)
+            {
+                Source.IsEnabled = value;
+                ModViewer.ItemCheck?.Invoke();
+            }
+
         }
 
         public AIR_API.Mod Source { get; set; }
 
-        public ModViewerItem(AIR_API.Mod _source, bool root = true)
+        public ModViewerItem(ModManagement parent, AIR_API.Mod _source, bool root = true)
         {
+            ParentManager = parent;
             Source = _source;
             IsInRootFolder = root;
         }

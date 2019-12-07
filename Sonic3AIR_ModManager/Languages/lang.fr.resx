@@ -884,7 +884,6 @@
 Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défini dans les options.</value>
   </data>
   <data name="RecordingsLoadingError" xml:space="preserve">
-    <value>Erreur lors du chargement des enregistrements !
-Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défini dans les options.</value>
+    <value>Erreur lors du chargement des enregistrements !</value>
   </data>
 </root>

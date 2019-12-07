@@ -8,7 +8,7 @@
         xmlns:p="clr-namespace:Sonic3AIR_ModManager.Properties"
         xmlns:genlib="clr-namespace:GenerationsLib.WPF.Controls;assembly=GenerationsLib.WPF"
         mc:Ignorable="d"
-        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="640" Width="400" MinHeight="640" MinWidth="400" Closing="ModManager_WindowClosing" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="Sonic 3 A.I.R. Mod Manager {version}" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Height="640" Width="420" MinHeight="640" MinWidth="420" Closing="ModManager_WindowClosing" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -21,6 +21,38 @@
         </Grid.RowDefinitions>
         <Menu HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Background="{DynamicResource ToolbarBackground}" Foreground="{DynamicResource NormalText}">
             <MenuItem Header="File">
+                <MenuItem Visibility="Collapsed" IsEnabled="False">
+                    <Separator></Separator>
+                    <MenuItem Header="Load Launch Presets..."></MenuItem>
+                    <MenuItem Header="Save Current A.I.R. Settings as Launch Presets"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Load Mod Collection..."></MenuItem>
+                    <MenuItem Header="Save Active Mods as Mod Collection"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Launch...">
+                        <MenuItem Header="Sonic 3 A.I.R."></MenuItem>
+                        <MenuItem Header="Sonic 3 A.I.R. (No Mods)"></MenuItem>
+                        <MenuItem Header="Sonic 3 A.I.R. (Developer Mode)"></MenuItem>
+                    </MenuItem>
+                    <Separator></Separator>
+                </MenuItem>
+                <MenuItem x:Name="exitMenuItem" Header="Exit" Click="ExitButton_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem x:Name="airPlacesButton" Header="A.I.R. Places...">
+                    <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
+                    <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
+                    <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
+                    <MenuItem Name="openModsFolderToolStripMenuItem" Click="OpenModsFolder_Click"></MenuItem>
+                    <MenuItem Name="openConfigFileToolStripMenuItem" Click="OpenConfigFileToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem x:Name="showLogFileButton" Header="Show Log File" HorizontalAlignment="Stretch" Click="ShowLogFileButton_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem x:Name="airModManagerPlacesButton" Header="A.I.R. Mod Manager Places...">
+                    <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
                 <MenuItem Header="A.I.R. Guides..." Name="airGuidesItem">
                     <MenuItem Header="Open Sample Mods Folder" x:Name="openSampleModsFolderButton" Click="OpenSampleModsFolderButton_Click"></MenuItem>
                     <MenuItem Header="Sonic 3 A.I.R. User Manual" x:Name="openUserManualButton" Click="OpenUserManualButton_Click"></MenuItem>
@@ -30,27 +62,15 @@
                 <MenuItem x:Name="airTipsItem" Header="A.I.R. Tips...">
                     <TextBlock VerticalAlignment="Center" Padding="0" x:Name="label5" Grid.Row="1" TextAlignment="Left" Text="Useful In-Game Shortcuts/Keys: &#10;Alt + Enter - Toggle Fullscreen&#10;F2 - Take a Game Recording Capture&#10;Right Click - Open A.I.R Context Menu&#10;F3 - Rescan for Game Controllers&#10;F4 - Switches Game Controllers for P1 and P2&#10;Numpad Plus/Minus - Adjust Global Audio Volume&#10;Alt + B - Change Background Blur&#10;Alt + F - Change Filter&#10;Alt + P - Show Performance Display&#10;" Margin="0,11"></TextBlock>
                 </MenuItem>
-                <MenuItem x:Name="airPlacesButton" Header="A.I.R. Places...">
-                    <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
-                    <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
-                    <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
-                    <MenuItem Name="openModsFolderToolStripMenuItem" Click="OpenModsFolder_Click"></MenuItem>
-                    <MenuItem Name="openConfigFileToolStripMenuItem" Click="OpenConfigFileToolStripMenuItem_Click"></MenuItem>
-                    <MenuItem x:Name="showLogFileButton" Header="Show Log File" HorizontalAlignment="Stretch" Click="ShowLogFileButton_Click"></MenuItem>
-                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Other" Name="OtherMenuItem">
+                <MenuItem Header="About" Name="AboutMenuItem" Click="AboutMenuItem_Click"></MenuItem>
                 <MenuItem x:Name="airMediaButton" Header="A.I.R. Media...">
                     <MenuItem Name="sonic3AIRHomepageToolStripMenuItem" Click="S3AIRWebsiteButton_Click"></MenuItem>
                     <MenuItem Name="s3AIRGamebannaToolStripMenuItem" Click="GamebannaButton_Click"></MenuItem>
                     <MenuItem Name="eukaryot3KTwitterToolStripMenuItem" Click="EukaTwitterButton_Click"></MenuItem>
                     <MenuItem Name="carJemTwitterToolStripMenuItem" Click="CarJemTwitterButton_Click"></MenuItem>
                 </MenuItem>
-                <MenuItem x:Name="airModManagerPlacesButton" Header="A.I.R. Mod Manager Places...">
-                    <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
-                    <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="Other" Name="OtherMenuItem">
-                <MenuItem Header="About" Name="AboutMenuItem" Click="AboutMenuItem_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Misc" Visibility="Collapsed" IsEnabled="False">
                 <MenuItem Header="Clear List..." Click="MenuItem_Click_1"></MenuItem>
@@ -76,7 +96,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Column="0" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left">
                             <Button Click="AddMods_Click" x:Name="addMods" Height="25" Width="25" Margin="0,0,0,5" Content="+"></Button>
@@ -86,7 +106,11 @@
                             <Button Click="MoveDownButton_Click" x:Name="moveDownButton" Height="25" Width="25" Margin="0,0,0,5"  Content="↓"></Button>
                             <Button Click="MoveToBottomButton_Click" x:Name="moveToBottomButton" Height="25" Width="25" Margin="0,0,0,5" Content="⤓"></Button>
                         </StackPanel>
-                        <local:ModViewer Grid.Column="1" Grid.RowSpan="2" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
+                        <local:ModViewer Grid.Column="1" Grid.RowSpan="1" x:Name="ModViewer" Margin="4" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"></local:ModViewer>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="5,5,5,0" HorizontalAlignment="Left">
+                            <CheckBox x:Name="LegacyLoadingCheckbox" Style="{DynamicResource CheckBoxStyle1}" VerticalAlignment="Center" IsChecked="False" Click="LegacyLoadingCheckbox_Click" ></CheckBox>
+                            <TextBlock x:Name="LegacyLoadingText" Text="Use Legacy / Stackless Loading&#10;(Pre-19.09.19.0; Limited Support)" Margin="5,0,0,0"></TextBlock>
+                        </StackPanel>
                         <Grid.ContextMenu>
                             <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="modContextMenuStrip">
                                 <MenuItem Name="editModFolderToolStripMenuItem" Header="Edit Config..." Click="editModFolderToolStripMenuItem_Click"></MenuItem>
@@ -154,7 +178,32 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition Height="80"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <local:RecordingsListView x:Name="RecordingsViewer" SelectionChanged="GameRecordingList_SelectedIndexChanged" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:RecordingsListView>
+                                <Grid Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Selected Location:" Name="RecordingsSelectedLocationLabel" VerticalAlignment="Center"></TextBlock>
+                                        <ComboBox Grid.Column="1" SelectedIndex="0" VerticalContentAlignment="Center" x:Name="RecordingsSelectedLocationCombobox" SelectionChanged="RecordingsSelectedLocationCombobox_SelectionChanged">
+                                            <ComboBoxItem Name="RecordingsLocationDefault" Content="Default Folder" Width="{Binding ElementName=RecordingsSelectedLocationCombobox, Path=ActualWidth}"></ComboBoxItem>
+                                            <ComboBoxItem Name="RecordingsLocationAppData" Content="Sonic 3 A.I.R. AppData Folder" Width="{Binding ElementName=RecordingsSelectedLocationCombobox, Path=ActualWidth}"></ComboBoxItem>
+                                            <ComboBoxItem Name="RecordingsLocationRecordingsFolder" Content="Sonic 3 A.I.R. Recordings Folder" Width="{Binding ElementName=RecordingsSelectedLocationCombobox, Path=ActualWidth}"></ComboBoxItem>
+                                            <ComboBoxItem Name="RecordingsLocationEXEFolder" Content="Sonic 3 A.I.R. EXE Folder" Width="{Binding ElementName=RecordingsSelectedLocationCombobox, Path=ActualWidth}"></ComboBoxItem>
+                                            <ComboBoxItem Name="RecordingsLocationBrowse" Tag="Browse..." Content="Browse..." Width="{Binding ElementName=RecordingsSelectedLocationCombobox, Path=ActualWidth}"></ComboBoxItem>
+                                        </ComboBox>
+                                        <Button Content="..." Grid.Column="2" Name="RecordingsSelectedLocationBrowseButton" IsEnabled="False" Click="RecordingsSelectedLocationBrowseButton_Click"></Button>
+                                    </Grid>
+                                    <local:RecordingsListView Grid.Row="1" MouseRightButtonDown="RecordingsViewer_MouseRightButtonDown" x:Name="RecordingsViewer" SelectionChanged="GameRecordingList_SelectedIndexChanged"></local:RecordingsListView>
+                                    <Grid Background="{DynamicResource NormalBackground}" Name="recordingsErrorMessagePanel" Visibility="Collapsed" Grid.Row="1">
+                                        <TextBlock MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings" Name="recordingsErrorMessage" FontWeight="Bold" Visibility="Visible" FontSize="9" TextBlock.TextAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Text=""></TextBlock>
+                                    </Grid>
+                                </Grid>
                                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="6,0">
                                     <StackPanel Height="25" Orientation="Horizontal" Margin="0,4">
                                         <Button x:Name="uploadButton" Width="75" Margin="4,0" Content="Upload" Click="UploadButton_Click" IsEnabled="False"></Button>
@@ -162,13 +211,33 @@
                                         <Button x:Name="refreshDebugButton" Width="75" Margin="4,0" Content="Refresh" Click="RefreshDebugButton_Click" IsEnabled="True"></Button>
                                     </StackPanel>
                                     <StackPanel Height="25" Orientation="Horizontal">
+                                        <Button x:Name="playbackRecordingButton" Width="75" Margin="4,0" Content="Play..." Click="playbackRecordingButton_Click" IsEnabled="False">
+                                            <Button.ContextMenu>
+                                                <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="PlaybackContextMenu" ContextMenuOpening="PlaybackContextMenu_ContextMenuOpening">
+                                                    <MenuItem Header="Play Using Current Version" Name="playUsingCurrentVersionMenuItem" Click="playUsingCurrentVersionMenuItem_Click"></MenuItem>
+                                                    <MenuItem Header="Play Using Recording Version" Name="playUsingMatchingVersionMenuItem" Click="playUsingMatchingVersionMenuItem_Click"></MenuItem>
+                                                    <MenuItem Name="PlayUsingOtherVersionMenuItem" Header="Play Using..."></MenuItem>
+                                                </ContextMenu>
+                                            </Button.ContextMenu>
+                                        </Button>
                                         <Button x:Name="openRecordingButton" Width="75" Margin="4,0" Content="Open" Click="OpenRecordingButton_Click" IsEnabled="False"></Button>
                                         <Button x:Name="deleteRecordingButton" Width="75" Margin="4,0" Content="Delete" Click="DeleteRecordingButton_Click" IsEnabled="False"></Button>
                                     </StackPanel>
                                 </StackPanel>
-                            </Grid>
-                            <Grid Background="{DynamicResource NormalBackground}" Name="recordingsErrorMessagePanel" Visibility="Collapsed">
-                                <TextBlock MouseUp="OpenAIRPathSettings" MouseLeftButtonDown="OpenAIRPathSettings" Name="recordingsErrorMessage" FontWeight="Bold" Visibility="Visible" FontSize="9" TextBlock.TextAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2" Text=""></TextBlock>
+                                <Grid.ContextMenu>
+                                    <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}">
+                                        <MenuItem Name="recordingUploadMenuItem" Header="Upload" Click="UploadButton_Click"></MenuItem>
+                                        <MenuItem Name="copyRecordingFilePathMenuItem" Header="Copy File Path" Click="CopyRecordingFilePath_Click"></MenuItem>
+                                        <MenuItem Name="refreshRecordingsMenuItem" Header="Refresh" Click="RefreshDebugButton_Click"></MenuItem>
+                                        <MenuItem Name="playbackRecordingMenuItem" Header="Play..." SubmenuOpened="PlaybackContextMenu_ContextMenuOpening">
+                                            <MenuItem Header="Play Using Current Version" Name="playUsingCurrentVersionHoverMenuItem" Click="playUsingCurrentVersionMenuItem_Click"></MenuItem>
+                                            <MenuItem Header="Play Using Recording Version" Name="playUsingMatchingVersionHoverMenuItem" Click="playUsingMatchingVersionMenuItem_Click"></MenuItem>
+                                            <MenuItem Name="PlayUsingOtherVersionHoverMenuItem" Header="Play Using..."></MenuItem>
+                                        </MenuItem>
+                                        <MenuItem Name="openRecordingMenuItem" Header="Open" Click="OpenRecordingButton_Click"></MenuItem>
+                                        <MenuItem Name="deleteRecordingMenuItem" Header="Delete" Click="DeleteRecordingButton_Click"></MenuItem>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
                             </Grid>
                         </Grid>
 

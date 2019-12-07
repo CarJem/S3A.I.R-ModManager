@@ -83,8 +83,8 @@ namespace Sonic3AIR_ModManager
                 if(GenerationsLib.Core.FileHelpers.IsFileLocked(file))
                 {
 
-                    /*TODO: Add Language Translations*/ string text = $"The file: {file} is currently being used by another process, would you like to continue anyways? (Clicking No or Closing this Dialog will only recheck if the file is lost; if you get stuck here, please force close the application)";
-                    /*TODO: Add Language Translations*/ string title = "File is Busy";
+                    string text = UserLanguage.GetOutputString("FileIsBusyCaption").Replace("{0}", file.FullName);
+                    string title = UserLanguage.GetOutputString("FileIsBusyTitle");
                     var result = MessageBox.Show(text, title, MessageBoxButton.YesNo,MessageBoxImage.Exclamation);
                     if (result == MessageBoxResult.Yes) cannotProceed = false;
                 }

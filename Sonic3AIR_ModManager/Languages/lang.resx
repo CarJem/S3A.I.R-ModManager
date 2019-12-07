@@ -905,13 +905,84 @@
 Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.</value>
   </data>
   <data name="RecordingsLoadingError" xml:space="preserve">
-    <value>Error Loading Recordings!
-Make sure your game is up to date and you have A.I.R.'s Game Path set in Options.</value>
+    <value>Error Loading Recordings!</value>
   </data>
   <data name="AIRTips" xml:space="preserve">
     <value>A.I.R. Tips...</value>
   </data>
   <data name="AIRGuides" xml:space="preserve">
     <value>A.I.R. Guides...</value>
+  </data>
+  <data name="DoesNotExist" xml:space="preserve">
+    <value>does not exist!</value>
+  </data>
+  <data name="FileString" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FolderString" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="CustomWordString" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="AboutString" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="BuildDateString" xml:space="preserve">
+    <value>Build Date</value>
+  </data>
+  <data name="ArchitectureString" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="UnsetFolderPathString" xml:space="preserve">
+    <value>UNSET_FOLDER_PATH</value>
+  </data>
+  <data name="SetCustomGameRecordingFolderTitle" xml:space="preserve">
+    <value>Select a Custom Game Recordings Folder...</value>
+  </data>
+  <data name="FileIsBusyTitle" xml:space="preserve">
+    <value>File is Busy</value>
+  </data>
+  <data name="FileIsBusyCaption" xml:space="preserve">
+    <value>The file: {0} is currently being used by another process, would you like to continue anyways? (Clicking No or Closing this Dialog will only recheck if the file is lost; if you get stuck here, please force close the application)</value>
+  </data>
+  <data name="UnableToStartS3AIR" xml:space="preserve">
+    <value>Unable to Start Sonic 3 A.I.R.</value>
+  </data>
+  <data name="UnableToStartS3AIRRecordingViewer" xml:space="preserve">
+    <value>Unable to Start Sonic 3 A.I.R. Recording Viewer</value>
+  </data>
+  <data name="VersionSelectCaption1" xml:space="preserve">
+    <value>Can not determine version name, please specify your own:</value>
+  </data>
+  <data name="VersionSelectCaption2" xml:space="preserve">
+    <value>A Version with that name already exists, or the name contains invalid characters for a folder, please specify a diffrent one:</value>
+  </data>
+  <data name="BackupFailed" xml:space="preserve">
+    <value>Backup Failed</value>
+  </data>
+  <data name="RestoreFailed" xml:space="preserve">
+    <value>Restore Failed</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try Again?</value>
+  </data>
+  <data name="RecordingsLocationDefault" xml:space="preserve">
+    <value>Default Folder</value>
+  </data>
+  <data name="RecordingsLocationAppData" xml:space="preserve">
+    <value>Sonic 3 A.I.R. AppData Folder</value>
+  </data>
+  <data name="RecordingsLocationRecordingsFolder" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Recordings Folder</value>
+  </data>
+  <data name="RecordingsLocationEXEFolder" xml:space="preserve">
+    <value>Sonic 3 A.I.R. EXE Folder</value>
+  </data>
+  <data name="RecordingsLocationBrowse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="RecordingsLocationLabel" xml:space="preserve">
+    <value>Selected Location:</value>
   </data>
 </root>

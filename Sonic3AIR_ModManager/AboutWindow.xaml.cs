@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 
 namespace Sonic3AIR_ModManager
@@ -18,13 +19,16 @@ namespace Sonic3AIR_ModManager
             InitializeComponent();
             var Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
-			Title = String.Format("About {0}", Program.LanguageResource.GetString("ApplicationTitle")); //TODO: Add Language Translations
+			Title = String.Format("{1} {0}", Program.LanguageResource.GetString("ApplicationTitle"), Program.LanguageResource.GetString("AboutString"));
             labelProductName.Text = AssemblyProduct;
-			labelVersion.Text = String.Format("Version {0}", Program.Version); //TODO: Add Language Translations
-            buildDateLabel.Text = String.Format("Build Date: {0}", GetBuildTime) + Environment.NewLine + String.Format("Architecture: {0}", GetProgramType); //TODO: Add Language Translations
-            labelCopyright.Text = AssemblyCopyright;
+			labelVersion.Text = String.Format("{1}: {0}", Program.Version, Program.LanguageResource.GetString("BuildDateString"));
+            buildDateLabel.Text = String.Format("{1}: {0}", GetBuildTime, Program.LanguageResource.GetString("BuildDateString"))
+            + Environment.NewLine + String.Format("{1}: {0}", GetProgramType, Program.LanguageResource.GetString("ArchitectureString"));
 
-		}
+            labelCopyright.Text = AssemblyCopyright;
+            labelCopyright.Text = labelCopyright.Text.Replace("�", "©");
+
+        }
 
 		#region Assembly Attribute Accessors
 

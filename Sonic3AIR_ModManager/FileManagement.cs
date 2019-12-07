@@ -674,6 +674,31 @@ namespace Sonic3AIR_ModManager
             MessageBox.Show(Program.LanguageResource.GetString("RecordingPathCopiedToClipboard"));
         }
 
+        public static void CopyRecordingToDestination(string file, string exe_directory)
+        {
+            try
+            {
+                File.Copy(file, Path.Combine(exe_directory, "gamerecording.bin"), true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public static void DeletePlaybackRecording(string exe_directory)
+        {
+            try
+            {
+                File.Delete(Path.Combine(exe_directory, "gamerecording.bin"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Input Mapping Input Managamenet
@@ -947,13 +972,12 @@ namespace Sonic3AIR_ModManager
                     }
                     catch
                     {
-                        //TODO : Add Language Translations
                         string exceptionVersion = "";
                         DialogResult result;
-                        result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", "Can not determine version name, please specify your own:");
+                        result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption1"));
                         while (Directory.Exists($"{baseFolder}{exceptionVersion}") && !Uri.IsWellFormedUriString($"{baseFolder}{exceptionVersion}", UriKind.Absolute) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
                         {
-                            result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", "A Version with that name already exists, or the name contains invalid characters for a folder, please specify a diffrent one:");
+                            result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption2"));
                         }
 
                         if (result == System.Windows.Forms.DialogResult.OK)
@@ -992,6 +1016,67 @@ namespace Sonic3AIR_ModManager
                 MessageBox.Show(UserLanguage.VersionInstalled(output2));
             }
 
+        }
+
+        #endregion
+
+
+        #region Full Game Backup
+
+        public static bool BackupEntireGame()
+        {
+            DialogResult result = DialogResult.Yes;
+            while (result == DialogResult.Yes)
+            {
+                try
+                {
+                    BackupGame();
+                    result = DialogResult.Ignore;
+                }
+                catch (Exception ex)
+                {
+                    result = MessageBox.Show(ex.Message + Environment.NewLine + UserLanguage.GetOutputString("TryAgain"), UserLanguage.GetOutputString("BackupFailed"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                }
+            }
+
+            return (result == DialogResult.Cancel ? false : true);
+
+        }
+
+        private static void BackupGame()
+        {
+            //Microsoft.VisualBasic.FileIO.FileSystem.RenameDirectory(ProgramPaths.Sonic3AIRAppDataFolder, "Sonic3AIR_Temp");
+            string backupPath = Path.Combine(ProgramPaths.Sonic3AIR_MM_BaseFolder, "air_latest_version_backup");
+            if (Directory.Exists(backupPath)) Directory.Delete(backupPath, true);
+            GenerationsLib.Core.FileHelpers.MoveFilesRecursively(new DirectoryInfo(ProgramPaths.Sonic3AIRAppDataFolder), new DirectoryInfo(backupPath), new List<string>() { "mods" });
+        }
+
+        public static bool RestoreEntireGame()
+        {
+            DialogResult result = DialogResult.Yes;
+            while (result == DialogResult.Yes)
+            {
+                try
+                {
+                    RestoreGame();
+                    result = DialogResult.Ignore;
+                }
+                catch (Exception ex)
+                {
+                    result = MessageBox.Show(ex.Message + Environment.NewLine + UserLanguage.GetOutputString("TryAgain"), UserLanguage.GetOutputString("RestoreFailed"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                }
+            }
+
+            return (result == DialogResult.Cancel ? false : true);
+        }
+
+        private static void RestoreGame()
+        {
+            //Microsoft.VisualBasic.FileIO.FileSystem.RenameDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Sonic3AIR_Temp"), "Sonic3AIR");
+            string backupPath = Path.Combine(ProgramPaths.Sonic3AIR_MM_BaseFolder, "air_latest_version_backup");
+            if (Directory.Exists(ProgramPaths.Sonic3AIRAppDataFolder)) GenerationsLib.Core.FileHelpers.DeleteFilesFiltered(new DirectoryInfo(ProgramPaths.Sonic3AIRAppDataFolder), new List<string>() { "mods" });
+            GenerationsLib.Core.FileHelpers.CopyDirectory(new DirectoryInfo(backupPath), new DirectoryInfo(ProgramPaths.Sonic3AIRAppDataFolder));
+            if (Directory.Exists(backupPath)) Directory.Delete(backupPath, true);
         }
 
         #endregion

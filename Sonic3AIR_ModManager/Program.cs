@@ -31,7 +31,15 @@ namespace Sonic3AIR_ModManager
             isDebug = true;
         }
 
-        private static string VersionString = "1.4.3";
+        private static string VersionString
+        {
+            get
+            {
+                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                return fvi.FileVersion;               
+            }
+        }
 
         public static string Version { get => GetVersionString(); }
 
@@ -82,7 +90,7 @@ namespace Sonic3AIR_ModManager
         {
             isDebugging();
             Parser.Default.ParseArguments<Options>(args).WithParsed<Options>( o => { Arguments = o; });
-            ProgramPaths.CreateMissingModManagerFolders();
+            //ProgramPaths.CreateMissingModManagerFolders();
 
 
             var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;

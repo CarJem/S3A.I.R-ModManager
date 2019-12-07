@@ -20,7 +20,7 @@ namespace Sonic3AIR_ModManager
             ModManager.S3AIRSettings.InputDevices = InputDevices;
             ModManager.GameConfig.InputDevices = InputDevices;
 
-            ModManager.S3AIRSettings.SaveSettings();
+            ModManager.S3AIRSettings.Save();
             ModManager.GameConfig.Save();
         }
     }

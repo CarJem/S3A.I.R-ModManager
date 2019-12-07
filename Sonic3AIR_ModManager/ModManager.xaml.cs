@@ -83,10 +83,11 @@ namespace Sonic3AIR_ModManager
         public string nL = Environment.NewLine;
         public static AIR_API.Settings S3AIRSettings;
         public static ModManager Instance;
-        public static AIR_API.GameConfig GameConfig;
+        public static AIR_API.GameConfig GameConfig { get; set; }
         public static AIR_API.VersionMetadata CurrentAIRVersion;
 
         bool AllowUpdate { get; set; } = true;
+        bool HasInitilizationCompleted { get; set; } = false;
 
 
         #region Hosted Elements
@@ -181,6 +182,7 @@ namespace Sonic3AIR_ModManager
                 UserLanguage.ApplyLanguage(ref Instance);
                 if (autoBoot) GameHandler.LaunchSonic3AIR();
                 if (gamebanana_api != "") FileManagement.GamebananaAPI_Install(gamebanana_api);
+                HasInitilizationCompleted = true;
             }
             else
             {
@@ -192,6 +194,12 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         #region Events
+
+        private void LegacyLoadingCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+            ModManagement.S3AIRActiveMods.UseLegacyLoading = LegacyLoadingCheckbox.IsChecked.Value;
+            ModManagement.Save();
+        }
 
         private void addInputMethodButton_Click(object sender, RoutedEventArgs e)
         {
@@ -253,7 +261,7 @@ namespace Sonic3AIR_ModManager
                 if (GameConfig != null)
                 {
                     S3AIRSettings.Fullscreen = FullscreenTypeComboBox.SelectedIndex;
-                    S3AIRSettings.SaveSettings();
+                    S3AIRSettings.Save();
                     UpdateAIRSettings();
                 }
 
@@ -625,6 +633,13 @@ namespace Sonic3AIR_ModManager
                 copyRecordingFilePath.IsEnabled = true;
                 uploadButton.IsEnabled = true;
                 deleteRecordingButton.IsEnabled = true;
+                playbackRecordingButton.IsEnabled = true;
+
+                openRecordingMenuItem.IsEnabled = true;
+                copyRecordingFilePathMenuItem.IsEnabled = true;
+                recordingUploadMenuItem.IsEnabled = true;
+                deleteRecordingMenuItem.IsEnabled = true;
+                playbackRecordingMenuItem.IsEnabled = true;
             }
             else
             {
@@ -632,6 +647,13 @@ namespace Sonic3AIR_ModManager
                 copyRecordingFilePath.IsEnabled = false;
                 uploadButton.IsEnabled = false;
                 deleteRecordingButton.IsEnabled = false;
+                playbackRecordingButton.IsEnabled = false;
+
+                openRecordingMenuItem.IsEnabled = false;
+                copyRecordingFilePathMenuItem.IsEnabled = false;
+                recordingUploadMenuItem.IsEnabled = false;
+                deleteRecordingMenuItem.IsEnabled = false;
+                playbackRecordingMenuItem.IsEnabled = false;
             }
         }
 
@@ -836,7 +858,7 @@ namespace Sonic3AIR_ModManager
             if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 S3AIRSettings.Sonic3KRomPath = fileDialog.FileName;
-                S3AIRSettings.SaveSettings();
+                S3AIRSettings.Save();
             }
             UpdateAIRSettings();
         }
@@ -862,7 +884,7 @@ namespace Sonic3AIR_ModManager
             {
                 S3AIRSettings.EnableDebugMode = isChecked;
             }
-            S3AIRSettings.SaveSettings();
+            S3AIRSettings.Save();
         }
 
         private void UpdateCurrentLanguage()
@@ -949,7 +971,7 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        private void UpdateAIRSettings()
+        public void UpdateAIRSettings()
         {
             sonic3AIRPathBox.Text = ProgramPaths.Sonic3AIRPath;
             if (S3AIRSettings != null)
@@ -1007,7 +1029,7 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        private void UpdateAIRGameConfigLaunchOptions()
+        public void UpdateAIRGameConfigLaunchOptions()
         {
             SaveLaunchOptions();
             RetriveLaunchOptions();
@@ -1057,7 +1079,7 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void RetriveLaunchOptions()
+        public void RetriveLaunchOptions()
         {
             if (SceneComboBox != null && PlayerComboBox != null && StartPhaseComboBox != null)
             {
@@ -1128,7 +1150,7 @@ namespace Sonic3AIR_ModManager
         {
             if (ModViewer.SelectedItem != null)
             {
-                if (ModViewer.ActiveView.SelectedItem != null && (ModViewer.ActiveView.SelectedItem as ModViewerItem).IsEnabled)
+                if (ModViewer.ActiveView.SelectedItem != null && (ModViewer.ActiveView.SelectedItem as ModViewerItem).IsEnabled && !ModManagement.S3AIRActiveMods.UseLegacyLoading)
                 {
                     moveUpButton.IsEnabled = (ModViewer.ActiveView.Items.IndexOf((ModViewer.ActiveView.SelectedItem as ModViewerItem)) > 0);
                     moveDownButton.IsEnabled = (ModViewer.ActiveView.Items.IndexOf((ModViewer.ActiveView.SelectedItem as ModViewerItem)) < ModViewer.ActiveView.Items.Count - 1);
@@ -1147,7 +1169,7 @@ namespace Sonic3AIR_ModManager
                 editModFolderToolStripMenuItem.IsEnabled = true;
                 openModFolderToolStripMenuItem.IsEnabled = true;
                 openModURLToolStripMenuItem.IsEnabled = (ValidateURL((ModViewer.SelectedItem as ModViewerItem).Source.URL));
-                if (ModViewer.ActiveView.Items.Contains(ModViewer.SelectedItem)) moveModToSubFolderMenuItem.IsEnabled = false;
+                if (ModViewer.ActiveView.Items.Contains(ModViewer.SelectedItem) && !ModManagement.S3AIRActiveMods.UseLegacyLoading) moveModToSubFolderMenuItem.IsEnabled = false;
                 else moveModToSubFolderMenuItem.IsEnabled = true;
             }
             else
@@ -1162,6 +1184,21 @@ namespace Sonic3AIR_ModManager
                 openModFolderToolStripMenuItem.IsEnabled = false;
                 moveModToSubFolderMenuItem.IsEnabled = false;
                 openModURLToolStripMenuItem.IsEnabled = false;
+            }
+
+            if (ModManagement.S3AIRActiveMods.UseLegacyLoading)
+            {
+                moveUpButton.Visibility = Visibility.Collapsed;
+                moveDownButton.Visibility = Visibility.Collapsed;
+                moveToTopButton.Visibility = Visibility.Collapsed;
+                moveToBottomButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                moveUpButton.Visibility = Visibility.Visible;
+                moveDownButton.Visibility = Visibility.Visible;
+                moveToTopButton.Visibility = Visibility.Visible;
+                moveToBottomButton.Visibility = Visibility.Visible;
             }
 
 
@@ -1235,33 +1272,6 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         #region Information Retriving
-
-        private void CollectGameRecordings()
-        {
-            GameRecordingList.Items.Clear();
-            if (ProgramPaths.DoesSonic3AIRGameRecordingsFolderPathExist())
-            {
-                recordingsErrorMessagePanel.Visibility = Visibility.Collapsed;
-
-                string baseDirectory = ProgramPaths.GetSonic3AIRGameRecordingsFolderPath();
-                if (Directory.Exists(baseDirectory))
-                {
-                    Regex reg = new Regex(@"(gamerecording_)\d{6}(_)\d{6}");
-                    DirectoryInfo directoryInfo = new DirectoryInfo(baseDirectory);
-                    FileInfo[] fileInfo = directoryInfo.GetFiles("*.bin").Where(path => reg.IsMatch(path.Name)).ToArray();
-                    foreach (var file in fileInfo)
-                    {
-                        AIR_API.Recording recording = new AIR_API.Recording(file);
-                        GameRecordingList.Items.Add(recording);
-                    }
-                }
-            }
-            else
-            {
-                recordingsErrorMessagePanel.Visibility = Visibility.Visible;
-            }
-
-        }
 
         public void CollectInputMappings()
         {
@@ -2059,7 +2069,20 @@ namespace Sonic3AIR_ModManager
             if (ModViewer.SelectedItem != null)
             {
                 var item = (ModViewer.SelectedItem as ModViewerItem);
-                Process.Start(item.Source.FileLocation);
+                var parent = this as Window;
+                ConfigEditorDialog cfg = new ConfigEditorDialog(ref parent);
+                if(cfg.ShowConfigEditDialog(item.Source).Value == true)
+                {
+                    (ModViewer.SelectedItem as ModViewerItem).Source.Name = cfg.EditorNameField.Text;
+                    (ModViewer.SelectedItem as ModViewerItem).Source.Author = cfg.EditorAuthorField.Text;
+                    (ModViewer.SelectedItem as ModViewerItem).Source.Description = cfg.EditorDescriptionField.Text;
+                    (ModViewer.SelectedItem as ModViewerItem).Source.URL = cfg.EditorURLField.Text;
+                    (ModViewer.SelectedItem as ModViewerItem).Source.GameVersion = cfg.EditorGameVersionField.Text;
+                    (ModViewer.SelectedItem as ModViewerItem).Source.ModVersion = cfg.EditorModVersionField.Text;
+
+                    (ModViewer.SelectedItem as ModViewerItem).Source.Save();
+                    ModManagement.UpdateModsList(true);
+                }
             }
         }
 
@@ -2121,6 +2144,15 @@ namespace Sonic3AIR_ModManager
             {
                 FileManagement.MoveMod((ModViewer.View.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
             }
+            else if (ModManagement.S3AIRActiveMods.UseLegacyLoading)
+            {
+                if (ModViewer.ActiveView.SelectedItem != null && ModViewer.ActiveView.SelectedItem is ModViewerItem)
+                {
+                    FileManagement.MoveMod((ModViewer.ActiveView.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
+                }
+            }
+
+
 
         }
 
@@ -2146,5 +2178,239 @@ namespace Sonic3AIR_ModManager
 
 
         #endregion
+
+        #region Game Recording Management
+
+        private void CollectGameRecordings()
+        {
+            GameRecordingList.Items.Clear();
+
+            if (ProgramPaths.GameRecordingsFolderDesiredPath == ProgramPaths.GameRecordingSearchLocation.S3AIR_Custom)
+            {
+                if (Directory.Exists(ProgramPaths.CustomGameRecordingsFolderPath))
+                {
+                    RecordingsLocationBrowse.Content = $"{UserLanguage.GetOutputString("CustomWordString")} ({ProgramPaths.CustomGameRecordingsFolderPath})"; 
+                }
+                else
+                {
+                    RecordingsLocationBrowse.Content = RecordingsLocationBrowse.Tag.ToString();
+                }
+                RecordingsSelectedLocationBrowseButton.IsEnabled = true;
+            }
+            else
+            {
+                RecordingsSelectedLocationBrowseButton.IsEnabled = false;
+            }
+
+            if (ProgramPaths.DoesSonic3AIRGameRecordingsFolderPathExist())
+            {
+                recordingsErrorMessagePanel.Visibility = Visibility.Collapsed;
+
+                string baseDirectory = ProgramPaths.GetSonic3AIRGameRecordingsFolderPath();
+                if (Directory.Exists(baseDirectory))
+                {
+                    Regex reg = new Regex(@"(gamerecording_)\d{6}(_)\d{6}");
+                    DirectoryInfo directoryInfo = new DirectoryInfo(baseDirectory);
+                    FileInfo[] fileInfo = directoryInfo.GetFiles("*.bin").Where(path => reg.IsMatch(path.Name)).ToArray();
+                    foreach (var file in fileInfo)
+                    {
+                        AIR_API.Recording recording = new AIR_API.Recording(file);
+                        GameRecordingList.Items.Add(recording);
+                    }
+                }
+            }
+            else
+            {
+                recordingsErrorMessage.Text = recordingsErrorMessage.Tag.ToString().Replace("{0}", UserLanguage.FolderOrFileDoesNotExist(ProgramPaths.GetSonic3AIRGameRecordingsFolderPath(), false));
+                recordingsErrorMessagePanel.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        private void RecordingsSelectedLocationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (HasInitilizationCompleted)
+            {
+                if (RecordingsSelectedLocationCombobox.SelectedItem == RecordingsLocationDefault)
+                {
+                    ProgramPaths.GameRecordingsFolderDesiredPath = ProgramPaths.GameRecordingSearchLocation.S3AIR_Default;
+                    CollectGameRecordings();
+                }
+                else if (RecordingsSelectedLocationCombobox.SelectedItem == RecordingsLocationAppData)
+                {
+                    ProgramPaths.GameRecordingsFolderDesiredPath = ProgramPaths.GameRecordingSearchLocation.S3AIR_AppData;
+                    CollectGameRecordings();
+                }
+                else if (RecordingsSelectedLocationCombobox.SelectedItem == RecordingsLocationRecordingsFolder)
+                {
+                    ProgramPaths.GameRecordingsFolderDesiredPath = ProgramPaths.GameRecordingSearchLocation.S3AIR_RecordingsFolder;
+                    CollectGameRecordings();
+                }
+                else if (RecordingsSelectedLocationCombobox.SelectedItem == RecordingsLocationEXEFolder)
+                {
+                    ProgramPaths.GameRecordingsFolderDesiredPath = ProgramPaths.GameRecordingSearchLocation.S3AIR_EXE_Folder;
+                    CollectGameRecordings();
+                }
+                else if (RecordingsSelectedLocationCombobox.SelectedItem == RecordingsLocationBrowse)
+                {
+                    ProgramPaths.GameRecordingsFolderDesiredPath = ProgramPaths.GameRecordingSearchLocation.S3AIR_Custom;
+                    if (!Directory.Exists(ProgramPaths.CustomGameRecordingsFolderPath)) SearchForCustomGameRecordingFolder();
+                    else CollectGameRecordings();
+                }
+            }
+
+        }
+
+        private void RecordingsSelectedLocationBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchForCustomGameRecordingFolder();
+        }
+
+        private void SearchForCustomGameRecordingFolder()
+        {
+            ProgramPaths.SetCustomGameRecordingsFolderPath();
+            CollectGameRecordings();
+        }
+
+        private Dictionary<string, string> RecordingVersions = new Dictionary<string, string>();
+
+        #region AIR Gamerecording Playback Feature
+        private void playbackRecordingButton_Click(object sender, RoutedEventArgs e)
+        {
+            playbackRecordingButton.ContextMenu.IsOpen = true;
+            UpdateAIRVersionsForPlaybackToolstrips();
+        }
+
+        private void playUsingCurrentVersionMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording)
+            {
+                CollectGameConfig();
+                var recordingFile = GameRecordingList.SelectedItem as AIR_API.Recording;
+                GameHandler.LaunchGameRecording(recordingFile.FilePath, ProgramPaths.Sonic3AIRPath);
+                UpdateInGameButtons();
+            }
+        }
+
+        private void PlaybackContextMenu_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            UpdateAIRVersionsForPlaybackToolstrips();
+        }
+
+        private void UpdateAIRVersionsForPlaybackToolstrips()
+        {
+            GameRecordingList_SelectedIndexChanged(null, null);
+            CleanUpInstalledVersionsForPlaybackToolStrip();
+            PlayUsingOtherVersionMenuItem.IsEnabled = false;
+            PlayUsingOtherVersionHoverMenuItem.IsEnabled = false;
+            if (Directory.Exists(ProgramPaths.Sonic3AIR_MM_VersionsFolder))
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
+                var folders = directoryInfo.GetDirectories().ToList();
+                if (folders.Count != 0)
+                {
+                    foreach (var folder in folders.VersionSort().Reverse())
+                    {
+                        string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
+                        if (File.Exists(filePath))
+                        {
+                            PlayUsingOtherVersionMenuItem.Items.Add(GenerateInstalledVersionsForPlaybackToolstripItem(folder.Name, filePath));
+                            PlayUsingOtherVersionHoverMenuItem.Items.Add(GenerateInstalledVersionsForPlaybackToolstripItem(folder.Name, filePath));
+                            string versionID = folder.Name;
+                            if (File.Exists(Path.Combine(folder.FullName, "sonic3air_game","data","metadata.json")))
+                            {
+                                AIR_API.VersionMetadata meta = new AIR_API.VersionMetadata(new FileInfo(Path.Combine(folder.FullName, "sonic3air_game", "data", "metadata.json")));
+                                versionID = meta.VersionString;
+
+                                PlayUsingOtherVersionMenuItem.IsEnabled = true;
+                                PlayUsingOtherVersionHoverMenuItem.IsEnabled = true;
+                            }
+                            RecordingVersions.Add(versionID, filePath);
+                        }
+
+
+                    }
+                }
+
+            }
+
+        }
+
+        private void CleanUpInstalledVersionsForPlaybackToolStrip()
+        {
+            foreach (var item in PlayUsingOtherVersionMenuItem.Items.Cast<MenuItem>())
+            {
+                item.Click -= ChangeAIRPathByInstalls;
+            }
+            foreach (var item in PlayUsingOtherVersionHoverMenuItem.Items.Cast<MenuItem>())
+            {
+                item.Click -= ChangeAIRPathByInstalls;
+            }
+            PlayUsingOtherVersionMenuItem.Items.Clear();
+            PlayUsingOtherVersionHoverMenuItem.Items.Clear();
+            RecordingVersions.Clear();
+        }
+
+        private MenuItem GenerateInstalledVersionsForPlaybackToolstripItem(string name, string filepath)
+        {
+            MenuItem item = new MenuItem();
+            item.Header = name;
+            item.Tag = filepath;
+            item.Click += LaunchPlaybackOnThisVersion;
+            return item;
+        }
+
+        private void LaunchPlaybackOnThisVersion(object sender, EventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+            if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording)
+            {
+                CollectGameConfig();
+                var recordingFile = GameRecordingList.SelectedItem as AIR_API.Recording;
+                GameHandler.LaunchGameRecording(recordingFile.FilePath, item.Tag.ToString());
+                UpdateInGameButtons();
+            }
+        }
+
+        private void playUsingMatchingVersionMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording)
+            {
+                CollectGameConfig();
+                var recordingFile = GameRecordingList.SelectedItem as AIR_API.Recording;
+                if (RecordingVersions.Keys.ToList().Contains(recordingFile.AIRVersion))
+                {
+                    var exe_path = RecordingVersions.Where(x => x.Key == recordingFile.AIRVersion).FirstOrDefault().Value;
+                    GameHandler.LaunchGameRecording(recordingFile.FilePath, exe_path);
+                    UpdateInGameButtons();
+                }
+
+            }
+        }
+
+        private void PlaybackContextMenu_ContextMenuOpening(object sender, RoutedEventArgs e)
+        {
+            UpdateAIRVersionsForPlaybackToolstrips();
+        }
+
+        private void RecordingsViewer_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Right)
+            {
+                if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording && GameRecordingList.IsMouseOver)
+                {
+                    recordingsPanel.ContextMenu.IsOpen = !GameHandler.isGameRunning;
+                }
+            }
+
+        }
+
+
+
+        #endregion
+
+        #endregion
+
+
     }
 }

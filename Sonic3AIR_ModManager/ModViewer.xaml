@@ -251,7 +251,7 @@
                                 </TextBox>
                                 <TextBox Cursor="Arrow" Style="{StaticResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
                             </StackPanel>
-                            <CheckBox IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
+                            <CheckBox Visibility="{Binding CheckBoxVisibility}" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
                         </DockPanel>
                     </StackPanel>
                     <TextBlock Cursor="Arrow" Padding="0,0,2,0" Grid.Row="1" Text="{Binding Version}" TextAlignment="Right" Foreground="Yellow" Background="#7E000000" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap" FontWeight="DemiBold" />

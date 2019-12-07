@@ -83,7 +83,7 @@ namespace Sonic3AIR_ModManager
 
         public static string RecordingUploaded(string url)
         {
-           return (Program.LanguageResource.GetString("RecordingUploaded1") == null ? "" : Program.LanguageResource.GetString("RecordingUploaded1")) + Environment.NewLine + (Program.LanguageResource.GetString("RecordingUploaded2") == null ? "" : Program.LanguageResource.GetString("RecordingUploaded2")) + Environment.NewLine + url;
+            return (Program.LanguageResource.GetString("RecordingUploaded1") == null ? "" : Program.LanguageResource.GetString("RecordingUploaded1")) + Environment.NewLine + (Program.LanguageResource.GetString("RecordingUploaded2") == null ? "" : Program.LanguageResource.GetString("RecordingUploaded2")) + Environment.NewLine + url;
         }
 
         public static string VersionInstalled(string output)
@@ -126,6 +126,18 @@ namespace Sonic3AIR_ModManager
             return $"{GetOutputString("UnableToValididatePath")}: {Environment.NewLine}{text}{Environment.NewLine}{GetOutputString("Reason")}: {Environment.NewLine}{GetOutputString("SpecifiedFileDirNotExist")}";
         }
 
+        public static string FolderOrFileDoesNotExist(string path, bool isFile = false)
+        {
+            if (isFile)
+            {
+                return $"{GetOutputString("FileString")} \"{path}\" {GetOutputString("DoesNotExist")}";
+            }
+            else
+            {
+                return $"{GetOutputString("FolderString")} \"{path}\" {GetOutputString("DoesNotExist")}";
+            }
+        }
+
         public static string LegacyModError1(string folderName, string exMessage)
         {
             return $"{GetOutputString("ErrorWithLoading")} {folderName}!{Environment.NewLine}{GetOutputString("JSONErrorPossible")}{Environment.NewLine}{exMessage}";
@@ -166,10 +178,13 @@ namespace Sonic3AIR_ModManager
 
             string hyperLink = nL + Program.LanguageResource.GetString("ErrorHyperlinkClickMessage");
             form.modErrorText.Text = Program.LanguageResource.GetString("ModsLoadingError") + hyperLink;
-            form.recordingsErrorMessage.Text = Program.LanguageResource.GetString("RecordingsLoadingError") + hyperLink;
+
+            form.recordingsErrorMessage.Tag = Program.LanguageResource.GetString("RecordingsLoadingError") + Environment.NewLine + "{0}";
+            form.recordingsErrorMessage.Text = Program.LanguageResource.GetString("RecordingsLoadingError") + Environment.NewLine + "{0}";
 
             //Main Buttons
             form.exitButton.Content = Program.LanguageResource.GetString("Exit");
+            form.exitMenuItem.Header = Program.LanguageResource.GetString("Exit");
             form.saveAndLoadButton.Content = Program.LanguageResource.GetString("Save&Load");
             form.saveButton.Content = Program.LanguageResource.GetString("Save");
 
@@ -209,7 +224,13 @@ namespace Sonic3AIR_ModManager
             form.deleteRecordingButton.Content = Program.LanguageResource.GetString("Delete");
             form.refreshDebugButton.Content = Program.LanguageResource.GetString("Refresh");
 
-
+            form.RecordingsLocationDefault.Content = GetOutputString("RecordingsLocationDefault");
+            form.RecordingsLocationAppData.Content = GetOutputString("RecordingsLocationAppData");
+            form.RecordingsLocationEXEFolder.Content = GetOutputString("RecordingsLocationEXEFolder");
+            form.RecordingsLocationRecordingsFolder.Content = GetOutputString("RecordingsLocationRecordingsFolder");
+            form.RecordingsLocationBrowse.Content = GetOutputString("RecordingsLocationBrowse");
+            form.RecordingsLocationBrowse.Tag = GetOutputString("RecordingsLocationBrowse");
+            form.RecordingsSelectedLocationLabel.Text = GetOutputString("RecordingsLocationLabel");
 
             form.RecordingsViewer.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
             form.RecordingsViewer.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");

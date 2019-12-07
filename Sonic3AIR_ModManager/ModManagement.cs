@@ -48,15 +48,35 @@ namespace Sonic3AIR_ModManager
             IList<ModViewerItem> JustDisabledItems = new List<ModViewerItem>();
             IList<ModViewerItem> JustEnabledItems = new List<ModViewerItem>();
 
-            foreach (ModViewerItem mod in ModsList)
+            if (!S3AIRActiveMods.UseLegacyLoading)
             {
-                if (mod.IsEnabled) JustEnabledItems.Add(mod);
+                foreach (ModViewerItem mod in ModsList)
+                {
+                    mod.CheckBoxVisibility = Visibility.Visible;
+                    if (mod.IsEnabled) JustEnabledItems.Add(mod);
+                }
+
+                foreach (ModViewerItem mod in ActiveModsList)
+                {
+                    mod.CheckBoxVisibility = Visibility.Visible;
+                    if (!mod.IsEnabled) JustDisabledItems.Add(mod);
+                }
+            }
+            else
+            {
+                foreach (ModViewerItem mod in ModsList)
+                {
+                    mod.CheckBoxVisibility = Visibility.Collapsed;
+                    if (mod.IsInRootFolder) JustEnabledItems.Add(mod);
+                }
+
+                foreach (ModViewerItem mod in ActiveModsList)
+                {
+                    mod.CheckBoxVisibility = Visibility.Collapsed;
+                    if (!mod.IsInRootFolder) JustDisabledItems.Add(mod);
+                }
             }
 
-            foreach (ModViewerItem mod in ActiveModsList)
-            {
-                if (!mod.IsEnabled) JustDisabledItems.Add(mod);
-            }
 
             foreach (ModViewerItem mod in JustDisabledItems)
             {
@@ -145,6 +165,8 @@ namespace Sonic3AIR_ModManager
             GetAllModContainingSubFolders();
             FetchModsModern();
             UpdateNewModsListItems();
+
+            Parent.LegacyLoadingCheckbox.IsChecked = S3AIRActiveMods.UseLegacyLoading;
         }
 
         public void GetAllModContainingSubFolders()
@@ -237,13 +259,13 @@ namespace Sonic3AIR_ModManager
                     {
                         mod.IsEnabled = true;
                         mod.EnabledLocal = true;
-                        ActiveMods.Add(new Tuple<ModViewerItem, int>(new ModViewerItem(mod, !isSubFolder), S3AIRActiveMods.ActiveMods.IndexOf(modPath)));
+                        ActiveMods.Add(new Tuple<ModViewerItem, int>(new ModViewerItem(this, mod, !isSubFolder), S3AIRActiveMods.ActiveMods.IndexOf(modPath)));
                     }
                     else
                     {
                         mod.IsEnabled = false;
                         mod.EnabledLocal = false;
-                        ModsList.Add(new ModViewerItem(mod, !isSubFolder));
+                        ModsList.Add(new ModViewerItem(this, mod, !isSubFolder));
                     }
                 }
                 catch (Newtonsoft.Json.JsonReaderException ex)
@@ -279,6 +301,7 @@ namespace Sonic3AIR_ModManager
                 Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(index - 1);
             }
         }
+
         public void MoveModDown()
         {
             int index = Parent.ModViewer.ActiveSelectedIndex;

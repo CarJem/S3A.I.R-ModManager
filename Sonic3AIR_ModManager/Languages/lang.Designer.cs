@@ -63,6 +63,15 @@ namespace Sonic3AIR_ModManager.Languages {
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
+        internal static string AboutString {
+            get {
+                return ResourceManager.GetString("AboutString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
         internal static string AboutTab {
             get {
                 return ResourceManager.GetString("AboutTab", resourceCulture);
@@ -268,6 +277,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Architecture.
+        /// </summary>
+        internal static string ArchitectureString {
+            get {
+                return ResourceManager.GetString("ArchitectureString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
         internal static string AuthorSection {
@@ -327,6 +345,24 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string AxisRadioButton {
             get {
                 return ResourceManager.GetString("AxisRadioButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup Failed.
+        /// </summary>
+        internal static string BackupFailed {
+            get {
+                return ResourceManager.GetString("BackupFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build Date.
+        /// </summary>
+        internal static string BuildDateString {
+            get {
+                return ResourceManager.GetString("BuildDateString", resourceCulture);
             }
         }
         
@@ -619,6 +655,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string CustomWordString {
+            get {
+                return ResourceManager.GetString("CustomWordString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decrease Selected Mod Priority....
         /// </summary>
         internal static string DecreaseModPriority {
@@ -732,6 +777,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string DirectionGB {
             get {
                 return ResourceManager.GetString("DirectionGB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to does not exist!.
+        /// </summary>
+        internal static string DoesNotExist {
+            get {
+                return ResourceManager.GetString("DoesNotExist", resourceCulture);
             }
         }
         
@@ -889,11 +943,47 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file: {0} is currently being used by another process, would you like to continue anyways? (Clicking No or Closing this Dialog will only recheck if the file is lost; if you get stuck here, please force close the application).
+        /// </summary>
+        internal static string FileIsBusyCaption {
+            get {
+                return ResourceManager.GetString("FileIsBusyCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File is Busy.
+        /// </summary>
+        internal static string FileIsBusyTitle {
+            get {
+                return ResourceManager.GetString("FileIsBusyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        internal static string FileString {
+            get {
+                return ResourceManager.GetString("FileString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fix Glitches.
         /// </summary>
         internal static string FixGlitches {
             get {
                 return ResourceManager.GetString("FixGlitches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        internal static string FolderString {
+            get {
+                return ResourceManager.GetString("FolderString", resourceCulture);
             }
         }
         
@@ -1687,12 +1777,65 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error Loading Recordings!
-        ///Make sure your game is up to date and you have A.I.R.&apos;s Game Path set in Options..
+        ///   Looks up a localized string similar to Error Loading Recordings!.
         /// </summary>
         internal static string RecordingsLoadingError {
             get {
                 return ResourceManager.GetString("RecordingsLoadingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic 3 A.I.R. AppData Folder.
+        /// </summary>
+        internal static string RecordingsLocationAppData {
+            get {
+                return ResourceManager.GetString("RecordingsLocationAppData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        internal static string RecordingsLocationBrowse {
+            get {
+                return ResourceManager.GetString("RecordingsLocationBrowse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Folder.
+        /// </summary>
+        internal static string RecordingsLocationDefault {
+            get {
+                return ResourceManager.GetString("RecordingsLocationDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic 3 A.I.R. EXE Folder.
+        /// </summary>
+        internal static string RecordingsLocationEXEFolder {
+            get {
+                return ResourceManager.GetString("RecordingsLocationEXEFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected Location:.
+        /// </summary>
+        internal static string RecordingsLocationLabel {
+            get {
+                return ResourceManager.GetString("RecordingsLocationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonic 3 A.I.R. Recordings Folder.
+        /// </summary>
+        internal static string RecordingsLocationRecordingsFolder {
+            get {
+                return ResourceManager.GetString("RecordingsLocationRecordingsFolder", resourceCulture);
             }
         }
         
@@ -1850,6 +1993,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore Failed.
+        /// </summary>
+        internal static string RestoreFailed {
+            get {
+                return ResourceManager.GetString("RestoreFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Result:.
         /// </summary>
         internal static string ResultLabel {
@@ -1990,6 +2142,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string SetAIRPathManuallyClassic {
             get {
                 return ResourceManager.GetString("SetAIRPathManuallyClassic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a Custom Game Recordings Folder....
+        /// </summary>
+        internal static string SetCustomGameRecordingFolderTitle {
+            get {
+                return ResourceManager.GetString("SetCustomGameRecordingFolderTitle", resourceCulture);
             }
         }
         
@@ -2138,6 +2299,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Try Again?.
+        /// </summary>
+        internal static string TryAgain {
+            get {
+                return ResourceManager.GetString("TryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         internal static string TypeGB {
@@ -2165,6 +2335,24 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to Start Sonic 3 A.I.R..
+        /// </summary>
+        internal static string UnableToStartS3AIR {
+            get {
+                return ResourceManager.GetString("UnableToStartS3AIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to Start Sonic 3 A.I.R. Recording Viewer.
+        /// </summary>
+        internal static string UnableToStartS3AIRRecordingViewer {
+            get {
+                return ResourceManager.GetString("UnableToStartS3AIRRecordingViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to Validate Path.
         /// </summary>
         internal static string UnableToValididatePath {
@@ -2179,6 +2367,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string UnderstoodButton {
             get {
                 return ResourceManager.GetString("UnderstoodButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UNSET_FOLDER_PATH.
+        /// </summary>
+        internal static string UnsetFolderPathString {
+            get {
+                return ResourceManager.GetString("UnsetFolderPathString", resourceCulture);
             }
         }
         
@@ -2279,6 +2476,24 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string VersionColumnHeader {
             get {
                 return ResourceManager.GetString("VersionColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not determine version name, please specify your own:.
+        /// </summary>
+        internal static string VersionSelectCaption1 {
+            get {
+                return ResourceManager.GetString("VersionSelectCaption1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Version with that name already exists, or the name contains invalid characters for a folder, please specify a diffrent one:.
+        /// </summary>
+        internal static string VersionSelectCaption2 {
+            get {
+                return ResourceManager.GetString("VersionSelectCaption2", resourceCulture);
             }
         }
         

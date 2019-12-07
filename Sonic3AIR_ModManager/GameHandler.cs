@@ -20,6 +20,10 @@ namespace Sonic3AIR_ModManager
         public static bool isGameRunning = false;
         public static Process CurrentGameProcess;
 
+        private static AIR_API.GameConfig GameRecordingCurrentGameConfig { get; set; }
+        private static AIR_API.Settings GameRecordingCurrentSettings { get; set; }
+        private static AIR_API.Settings GameRecordingLastSettings { get; set; }
+
         public GameHandler()
         {
 
@@ -49,6 +53,47 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+
+        public static void LaunchGameRecording(string file, string viewer_exe)
+        {
+            try
+            {
+                string config_file = Path.Combine(Path.GetDirectoryName(viewer_exe), "config.json");
+                GameRecordingLastSettings = ModManager.S3AIRSettings;
+                GameRecordingCurrentGameConfig = new AIR_API.GameConfig(new FileInfo(config_file));
+                GameRecordingCurrentSettings = new AIR_API.Settings(new FileInfo(ProgramPaths.Sonic3AIRSettingsFile));
+                System.Threading.Thread thread = new System.Threading.Thread(() => GameHandler.RunGameRecordingViewer(file, viewer_exe));
+                thread.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public static void RunGameRecordingViewer(string file, string viewer_exe)
+        {
+            try
+            {
+                string filename = viewer_exe;
+                var start = new ProcessStartInfo() { FileName = filename, WorkingDirectory = Path.GetDirectoryName(filename) };
+                if (RecordingPreStartHandler(file, Path.GetDirectoryName(viewer_exe)) == true)
+                {
+                    CurrentGameProcess = Process.Start(start);
+                    RecordingStartHandler();
+                    CurrentGameProcess.WaitForExit();
+                    RecordingEndHandler(viewer_exe);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(UserLanguage.GetOutputString("UnableToStartS3AIRRecordingViewer") + Environment.NewLine + ex.ToString() + Environment.NewLine + ex.Message);
+            }
+
+        }
+
         public static void RunSonic3AIR()
         {
             try
@@ -62,10 +107,77 @@ namespace Sonic3AIR_ModManager
             }
             catch (Exception ex)
             {
-                //TODO: Add Language Translations
-                MessageBox.Show("Unable to Start Sonic 3 A.I.R. " + Environment.NewLine + ex.ToString() + Environment.NewLine + ex.Message);
+                MessageBox.Show(UserLanguage.GetOutputString("UnableToStartS3AIR") + Environment.NewLine + ex.ToString() + Environment.NewLine + ex.Message);
             }
 
+        }
+
+        private static int LastFullscreen = (int)AIR_API.Settings.FullscreenType.ExclusiveFS;
+        private static int LastStartPhase = 0;
+        private static int LastGameRecording = -1;
+
+
+
+        public static bool RecordingPreStartHandler(string file, string exe_directory)
+        {
+            isGameRunning = true;
+            FileManagement.CopyRecordingToDestination(file, exe_directory);
+            if (FileManagement.BackupEntireGame() == true)
+            {
+                ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    LastFullscreen = GameRecordingCurrentSettings.Fullscreen;
+                    LastStartPhase = GameRecordingCurrentGameConfig.StartPhase ?? 0;
+                    LastGameRecording = GameRecordingCurrentGameConfig.GameRecording ?? -1;
+                    GameRecordingCurrentSettings.Fullscreen = (int)AIR_API.Settings.FullscreenType.Windowed;
+                    GameRecordingCurrentGameConfig.StartPhase = 3;
+                    GameRecordingCurrentGameConfig.GameRecording = 2;
+
+                    GameRecordingCurrentSettings.Save();
+                    GameRecordingCurrentGameConfig.Save();
+                }));
+                return true;
+            }
+            else return false;
+
+        }
+
+        public static void RecordingPostEndHandler(string viewer_exe)
+        {
+            FileManagement.DeletePlaybackRecording(Path.GetDirectoryName(viewer_exe));
+            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                
+                GameRecordingCurrentGameConfig.StartPhase = LastStartPhase;
+                GameRecordingCurrentGameConfig.GameRecording = LastGameRecording;
+
+                GameRecordingCurrentGameConfig.Save();
+
+                FileManagement.RestoreEntireGame();
+
+                ModManager.Instance.UpdateAIRSettings();
+                ModManager.Instance.RetriveLaunchOptions();
+            }));
+        }
+
+        public static void RecordingEndHandler(string viewer_exe)
+        {
+            RecordingPostEndHandler(viewer_exe);
+            isGameRunning = false;
+            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                ModManager.Instance.UpdateInGameButtons();
+            }));
+
+
+        }
+
+        public static void RecordingStartHandler()
+        {
+            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                ModManager.Instance.UpdateInGameButtons();
+            }));
         }
 
 

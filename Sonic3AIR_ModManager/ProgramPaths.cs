@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using GenerationsLib.Core;
 
 namespace Sonic3AIR_ModManager
 {
@@ -202,24 +203,118 @@ namespace Sonic3AIR_ModManager
 
         #region Recordings Path Validation
 
+
+        public static string CustomGameRecordingsFolderPath { get; set; } = GetCustomGameRecordingsFolderPathUnsetString();
+
+        public static string GetCustomGameRecordingsFolderPathUnsetString()
+        {
+            return UserLanguage.GetOutputString("UnsetFolderPathString");
+        }
+
+        public static GameRecordingSearchLocation GameRecordingsFolderDesiredPath { get; set; } = GameRecordingSearchLocation.S3AIR_Default;
+
+        public enum GameRecordingSearchLocation : int
+        {
+            S3AIR_Default = 0,
+            S3AIR_AppData = 1,
+            S3AIR_EXE_Folder = 2,
+            S3AIR_RecordingsFolder = 3,
+            S3AIR_Custom = 4
+
+        }
+
+        public static void SetCustomGameRecordingsFolderPath()
+        {
+            FolderSelectDialog fsd = new FolderSelectDialog()
+            {
+                Title = UserLanguage.GetOutputString("SetCustomGameRecordingFolderTitle")
+            };
+            if (fsd.ShowDialog() == true)
+            {
+                CustomGameRecordingsFolderPath = fsd.FileName;
+            }
+            else
+            {
+                CustomGameRecordingsFolderPath = GetCustomGameRecordingsFolderPathUnsetString();
+            }
+        }
+
         public static bool DoesSonic3AIRGameRecordingsFolderPathExist()
+        {
+            switch (GameRecordingsFolderDesiredPath)
+            {
+                case GameRecordingSearchLocation.S3AIR_Default:
+                    return DoesDefaultGameRecordingsFolderPathExist();
+                case GameRecordingSearchLocation.S3AIR_AppData:
+                    return Directory.Exists(Sonic3AIRAppDataFolder);
+                case GameRecordingSearchLocation.S3AIR_EXE_Folder:
+                    return Directory.Exists(Path.GetDirectoryName(Sonic3AIRPath));
+                case GameRecordingSearchLocation.S3AIR_RecordingsFolder:
+                    return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "recordings"));
+                case GameRecordingSearchLocation.S3AIR_Custom:
+                    return Directory.Exists(CustomGameRecordingsFolderPath);
+                default:
+                    return DoesDefaultGameRecordingsFolderPathExist();
+            }
+        }
+
+        public static string GetSonic3AIRGameRecordingsFolderPath()
+        {
+            switch (GameRecordingsFolderDesiredPath)
+            {
+                case GameRecordingSearchLocation.S3AIR_Default:
+                    return GetDefaultGameRecordingsFolderPath();
+                case GameRecordingSearchLocation.S3AIR_AppData:
+                    return Sonic3AIRAppDataFolder;
+                case GameRecordingSearchLocation.S3AIR_EXE_Folder:
+                    return Path.GetDirectoryName(Sonic3AIRPath);
+                case GameRecordingSearchLocation.S3AIR_RecordingsFolder:
+                    return Path.Combine(Sonic3AIRAppDataFolder, "recordings");
+                case GameRecordingSearchLocation.S3AIR_Custom:
+                    return CustomGameRecordingsFolderPath;
+                default:
+                    return GetDefaultGameRecordingsFolderPath();
+            }
+        }
+
+        private static bool DoesDefaultGameRecordingsFolderPathExist()
         {
             if (ModManager.S3AIRSettings.RawSettings is AIR_API.AIRSettingsMK2)
             {
-                return Directory.Exists(Sonic3AIRAppDataFolder);
+                //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
+                if (ModManager.S3AIRSettings.Version >= new Version("19.12.7.0"))
+                {
+                    //return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "recordings"));
+                    return Directory.Exists(Sonic3AIRAppDataFolder);
+                }
+                else
+                {
+                    return Directory.Exists(Sonic3AIRAppDataFolder);
+                }
+
             }
             else
             {
                 return File.Exists(ProgramPaths.Sonic3AIRPath);
             }
-
         }
 
-        public static string GetSonic3AIRGameRecordingsFolderPath()
+
+        private static string GetDefaultGameRecordingsFolderPath()
         {
             if (ModManager.S3AIRSettings.RawSettings is AIR_API.AIRSettingsMK2)
             {
-                return Sonic3AIRAppDataFolder;
+                //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
+                if (ModManager.S3AIRSettings.Version >= new Version("19.12.7.0"))
+                {
+                    //return Path.Combine(Sonic3AIRAppDataFolder, "recordings");
+                    return Sonic3AIRAppDataFolder;
+                }
+                else
+                {
+                    return Sonic3AIRAppDataFolder;
+                }
+
             }
             else
             {

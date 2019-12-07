@@ -884,7 +884,6 @@
 Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zur Spielinstallation in den Einstellungen richtig gesetzt hast.</value>
   </data>
   <data name="RecordingsLoadingError" xml:space="preserve">
-    <value>Fehler beim Laden der Recordings!
-Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zur Spielinstallation in den Einstellungen richtig gesetzt hast.</value>
+    <value>Fehler beim Laden der Recordings!</value>
   </data>
 </root>
