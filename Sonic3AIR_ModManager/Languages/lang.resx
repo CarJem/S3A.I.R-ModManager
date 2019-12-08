@@ -774,7 +774,7 @@
     
   </data>
   <data name="LaunchOptionsPlayerST" xml:space="preserve">
-    <value>Sonic the Hedgehog &amp; Miles "Tails" Prowler</value>
+    <value>Sonic the Hedgehog &amp; Miles "Tails" Prower</value>
     
   </data>
   <data name="LaunchOptionsPlayerK" xml:space="preserve">
@@ -782,11 +782,11 @@
     
   </data>
   <data name="LaunchOptionsPlayerKT" xml:space="preserve">
-    <value>Knuckles the Echidna &amp; Miles "Tails" Prowler (If Unlocked)</value>
+    <value>Knuckles the Echidna &amp; Miles "Tails" Prower (If Unlocked)</value>
     
   </data>
   <data name="LaunchOptionsPlayerT" xml:space="preserve">
-    <value>Miles "Tails" Prowler</value>
+    <value>Miles "Tails" Prower</value>
     
   </data>
   <data name="LaunchOptionsStartingPlayerLabel" xml:space="preserve">
@@ -984,5 +984,71 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
   </data>
   <data name="RecordingsLocationLabel" xml:space="preserve">
     <value>Selected Location:</value>
+  </data>
+  <data name="GameRecordingsPlayButton" xml:space="preserve">
+    <value>Play...</value>
+  </data>
+  <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
+    <value>Play Using Current Version</value>
+  </data>
+  <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
+    <value>Play Using Recording Version</value>
+  </data>
+  <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
+    <value>Play Using...</value>
+  </data>
+  <data name="FileTab" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="ViewTab" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="HelpTab" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="OtherTab" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="LaunchPresetsMenuItem" xml:space="preserve">
+    <value>Launch Presets...</value>
+  </data>
+  <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Load Launch Preset...</value>
+  </data>
+  <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Rename Launch Preset...</value>
+  </data>
+  <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Delete Launch Preset...</value>
+  </data>
+  <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
+    <value>Replace Existing Current Settings...</value>
+  </data>
+  <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Delete All Launch Presets</value>
+  </data>
+  <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
+    <value>Save Current Settings as Launch Preset</value>
+  </data>
+  <data name="ModCollectionsMenuItem" xml:space="preserve">
+    <value>Mod Collections...</value>
+  </data>
+  <data name="LoadModCollectionMenuItem" xml:space="preserve">
+    <value>Load Mod Collection...</value>
+  </data>
+  <data name="RenameModCollectionMenuItem" xml:space="preserve">
+    <value>Rename Mod Collection...</value>
+  </data>
+  <data name="DeleteModCollectionMenuItem" xml:space="preserve">
+    <value>Delete Mod Collection...</value>
+  </data>
+  <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
+    <value>Replace Existing Mod Collection...</value>
+  </data>
+  <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
+    <value>Delete All Mod Collections</value>
+  </data>
+  <data name="SaveModCollectonMenuItem" xml:space="preserve">
+    <value>Save Active Mods as Mod Collection</value>
   </data>
 </root>

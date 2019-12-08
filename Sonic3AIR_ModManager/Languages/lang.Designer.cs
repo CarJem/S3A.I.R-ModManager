@@ -700,6 +700,24 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete All Launch Presets.
+        /// </summary>
+        internal static string DeleteAllLaunchPresetsMenuItem {
+            get {
+                return ResourceManager.GetString("DeleteAllLaunchPresetsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete All Mod Collections.
+        /// </summary>
+        internal static string DeleteAllModCollectionsMenuItem {
+            get {
+                return ResourceManager.GetString("DeleteAllModCollectionsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete Device.
         /// </summary>
         internal static string DeleteDeviceTitle {
@@ -741,6 +759,24 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string DeleteKeybindVerification2 {
             get {
                 return ResourceManager.GetString("DeleteKeybindVerification2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Launch Preset....
+        /// </summary>
+        internal static string DeleteLaunchPresetsMenuItem {
+            get {
+                return ResourceManager.GetString("DeleteLaunchPresetsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Mod Collection....
+        /// </summary>
+        internal static string DeleteModCollectionMenuItem {
+            get {
+                return ResourceManager.GetString("DeleteModCollectionMenuItem", resourceCulture);
             }
         }
         
@@ -970,6 +1006,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        internal static string FileTab {
+            get {
+                return ResourceManager.GetString("FileTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fix Glitches.
         /// </summary>
         internal static string FixGlitches {
@@ -1042,6 +1087,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Play....
+        /// </summary>
+        internal static string GameRecordingsPlayButton {
+            get {
+                return ResourceManager.GetString("GameRecordingsPlayButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game Version:.
         /// </summary>
         internal static string GameVersionSection {
@@ -1065,6 +1119,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string GuidesTab {
             get {
                 return ResourceManager.GetString("GuidesTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        internal static string HelpTab {
+            get {
+                return ResourceManager.GetString("HelpTab", resourceCulture);
             }
         }
         
@@ -1290,7 +1353,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prowler (If Unlocked).
+        ///   Looks up a localized string similar to Knuckles the Echidna &amp; Miles &quot;Tails&quot; Prower (If Unlocked).
         /// </summary>
         internal static string LaunchOptionsPlayerKT {
             get {
@@ -1308,7 +1371,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prowler.
+        ///   Looks up a localized string similar to Sonic the Hedgehog &amp; Miles &quot;Tails&quot; Prower.
         /// </summary>
         internal static string LaunchOptionsPlayerST {
             get {
@@ -1317,7 +1380,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Miles &quot;Tails&quot; Prowler.
+        ///   Looks up a localized string similar to Miles &quot;Tails&quot; Prower.
         /// </summary>
         internal static string LaunchOptionsPlayerT {
             get {
@@ -1371,6 +1434,33 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Launch Presets....
+        /// </summary>
+        internal static string LaunchPresetsMenuItem {
+            get {
+                return ResourceManager.GetString("LaunchPresetsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Launch Preset....
+        /// </summary>
+        internal static string LoadLaunchPresetsMenuItem {
+            get {
+                return ResourceManager.GetString("LoadLaunchPresetsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Mod Collection....
+        /// </summary>
+        internal static string LoadModCollectionMenuItem {
+            get {
+                return ResourceManager.GetString("LoadModCollectionMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log file not found.
         /// </summary>
         internal static string LogFileNotFound {
@@ -1394,6 +1484,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string MissingAIRSetNowAlert {
             get {
                 return ResourceManager.GetString("MissingAIRSetNowAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Collections....
+        /// </summary>
+        internal static string ModCollectionsMenuItem {
+            get {
+                return ResourceManager.GetString("ModCollectionsMenuItem", resourceCulture);
             }
         }
         
@@ -1723,6 +1822,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        internal static string OtherTab {
+            get {
+                return ResourceManager.GetString("OtherTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overwrite.
         /// </summary>
         internal static string OverwriteButton {
@@ -1737,6 +1845,33 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string PathColumnHeader {
             get {
                 return ResourceManager.GetString("PathColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Using Current Version.
+        /// </summary>
+        internal static string PlayUsingCurrentVersionMenuItem {
+            get {
+                return ResourceManager.GetString("PlayUsingCurrentVersionMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Using Recording Version.
+        /// </summary>
+        internal static string PlayUsingMatchingVersionMenuItem {
+            get {
+                return ResourceManager.GetString("PlayUsingMatchingVersionMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Using....
+        /// </summary>
+        internal static string PlayUsingOtherVersionMenuItem {
+            get {
+                return ResourceManager.GetString("PlayUsingOtherVersionMenuItem", resourceCulture);
             }
         }
         
@@ -1957,6 +2092,24 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rename Launch Preset....
+        /// </summary>
+        internal static string RenameLaunchPresetsMenuItem {
+            get {
+                return ResourceManager.GetString("RenameLaunchPresetsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename Mod Collection....
+        /// </summary>
+        internal static string RenameModCollectionMenuItem {
+            get {
+                return ResourceManager.GetString("RenameModCollectionMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reselect Input.
         /// </summary>
         internal static string Reselect_Input_Button {
@@ -2070,6 +2223,42 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string SaveInputMappingsButton {
             get {
                 return ResourceManager.GetString("SaveInputMappingsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace Existing Current Settings....
+        /// </summary>
+        internal static string SaveLaunchPresetAsMenuItem {
+            get {
+                return ResourceManager.GetString("SaveLaunchPresetAsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Current Settings as Launch Preset.
+        /// </summary>
+        internal static string SaveLaunchPresetMenuItem {
+            get {
+                return ResourceManager.GetString("SaveLaunchPresetMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace Existing Mod Collection....
+        /// </summary>
+        internal static string SaveModCollectonAsMenuItem {
+            get {
+                return ResourceManager.GetString("SaveModCollectonAsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Active Mods as Mod Collection.
+        /// </summary>
+        internal static string SaveModCollectonMenuItem {
+            get {
+                return ResourceManager.GetString("SaveModCollectonMenuItem", resourceCulture);
             }
         }
         
@@ -2539,6 +2728,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string Viewer_SubFolderItemFormatString {
             get {
                 return ResourceManager.GetString("Viewer_SubFolderItemFormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        internal static string ViewTab {
+            get {
+                return ResourceManager.GetString("ViewTab", resourceCulture);
             }
         }
         

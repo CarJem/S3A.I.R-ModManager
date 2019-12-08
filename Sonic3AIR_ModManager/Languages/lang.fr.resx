@@ -886,4 +886,148 @@ Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défin
   <data name="RecordingsLoadingError" xml:space="preserve">
     <value>Erreur lors du chargement des enregistrements !</value>
   </data>
+  <data name="AIRTips" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="AIRGuides" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DoesNotExist" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="FileString" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="FolderString" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="CustomWordString" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="AboutString" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="BuildDateString" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="ArchitectureString" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="UnsetFolderPathString" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SetCustomGameRecordingFolderTitle" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="FileIsBusyTitle" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="FileIsBusyCaption" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="UnableToStartS3AIR" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="UnableToStartS3AIRRecordingViewer" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="VersionSelectCaption1" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="VersionSelectCaption2" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="BackupFailed" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RestoreFailed" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RecordingsLocationDefault" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RecordingsLocationAppData" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RecordingsLocationRecordingsFolder" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RecordingsLocationEXEFolder" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RecordingsLocationBrowse" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RecordingsLocationLabel" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="GameRecordingsPlayButton" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="FileTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="ViewTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="HelpTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="OtherTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="LaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="ModCollectionsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="LoadModCollectionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RenameModCollectionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteModCollectionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveModCollectonMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
 </root>

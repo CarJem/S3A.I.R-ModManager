@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <local:SkinResourceDictionary DarkSource="Styles + Controls/Theming/ColorLibraryDark.xaml" LightSource="Styles + Controls/Theming/ColorLibraryLight.xaml" />
+                <local:SkinResourceDictionary DarkSource="Styles/ColorLibraryDark.xaml" LightSource="Styles/ColorLibraryLight.xaml" />
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/IconLibrary.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/CheckboxStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ButtonStyle.xaml"></ResourceDictionary>
@@ -22,7 +22,7 @@
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/RepeatButtonStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ToolbarStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/SliderStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Styles + Controls/Styles/AppSpecificStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/AppSpecificStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/MenuItemContextStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/GroupBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

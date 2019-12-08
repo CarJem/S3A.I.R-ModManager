@@ -20,25 +20,29 @@
             <RowDefinition Height="85"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Background="{DynamicResource ToolbarBackground}" Foreground="{DynamicResource NormalText}">
-            <MenuItem Header="File">
-                <MenuItem Visibility="Collapsed" IsEnabled="False">
-                    <Separator></Separator>
-                    <MenuItem Header="Load Launch Presets..."></MenuItem>
-                    <MenuItem Header="Save Current A.I.R. Settings as Launch Presets"></MenuItem>
-                    <Separator></Separator>
-                    <MenuItem Header="Load Mod Collection..."></MenuItem>
-                    <MenuItem Header="Save Active Mods as Mod Collection"></MenuItem>
-                    <Separator></Separator>
-                    <MenuItem Header="Launch...">
-                        <MenuItem Header="Sonic 3 A.I.R."></MenuItem>
-                        <MenuItem Header="Sonic 3 A.I.R. (No Mods)"></MenuItem>
-                        <MenuItem Header="Sonic 3 A.I.R. (Developer Mode)"></MenuItem>
-                    </MenuItem>
-                    <Separator></Separator>
+            <MenuItem Name="FileMenuItem" Header="File" SubmenuOpened="FileMenuItem_SubmenuOpened">
+                <MenuItem Visibility="Collapsed" Name="LaunchPresetsMenuItem" Header="Launch Presets...">
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="LoadLaunchPresetsMenuItem_RecentItemSelected" Name="LoadLaunchPresetsMenuItem" Header="Load Launch Preset..."></genlib:RecentsListMenuItem>
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="RenameLaunchPresetsMenuItem_RecentItemSelected" Name="RenameLaunchPresetsMenuItem" Header="Rename Launch Preset..."></genlib:RecentsListMenuItem>
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="DeleteLaunchPresetsMenuItem_RecentItemSelected" Name="DeleteLaunchPresetsMenuItem" Header="Delete Launch Preset..."></genlib:RecentsListMenuItem>
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="SaveLaunchPresetAsMenuItem_RecentItemSelected" Name="SaveLaunchPresetAsMenuItem" Header="Save Current Settings as..."></genlib:RecentsListMenuItem>
+                    <Separator Visibility="Visible" Height="2"></Separator>
+                    <MenuItem Click="DeleteAllLaunchPresetsMenuItem_Click" Name="DeleteAllLaunchPresetsMenuItem" Header="Delete All Launch Presets"></MenuItem>
+                    <MenuItem Click="SaveLaunchPresetMenuItem_Click" Name="SaveLaunchPresetMenuItem" Header="Save Current Settings as Launch Preset"></MenuItem>
                 </MenuItem>
+                <MenuItem Name="ModCollectionsMenuItem" Header="Mod Collections...">
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="LoadModCollectionMenuItem_RecentItemSelected" Name="LoadModCollectionMenuItem" Header="Load Mod Collection..."></genlib:RecentsListMenuItem>
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="RenameModCollectionMenuItem_RecentItemSelected" Name="RenameModCollectionMenuItem" Header="Rename Mod Collection..."></genlib:RecentsListMenuItem>
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="DeleteModCollectionMenuItem_RecentItemSelected" Name="DeleteModCollectionMenuItem" Header="Delete Mod Collection..."></genlib:RecentsListMenuItem>
+                    <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="SaveModCollectonAsMenuItem_RecentItemSelected" Name="SaveModCollectonAsMenuItem" Header="Save Active Mods as..."></genlib:RecentsListMenuItem>
+                    <Separator Visibility="Visible" Height="2"></Separator>
+                    <MenuItem Click="DeleteAllModCollectionsMenuItem_Click" Name="DeleteAllModCollectionsMenuItem" Header="Delete All Mod Collections"></MenuItem>
+                    <MenuItem Click="SaveModCollectonMenuItem_Click" Name="SaveModCollectonMenuItem" Header="Save Active Mods as Mod Collection"></MenuItem>
+                </MenuItem>
+                <Separator></Separator>
                 <MenuItem x:Name="exitMenuItem" Header="Exit" Click="ExitButton_Click"></MenuItem>
             </MenuItem>
-            <MenuItem Header="View">
+            <MenuItem Name="ViewMenuItem" Header="View">
                 <MenuItem x:Name="airPlacesButton" Header="A.I.R. Places...">
                     <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
                     <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
@@ -52,7 +56,7 @@
                     <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Help">
+            <MenuItem Name="HelpMenuItem" Header="Help">
                 <MenuItem Header="A.I.R. Guides..." Name="airGuidesItem">
                     <MenuItem Header="Open Sample Mods Folder" x:Name="openSampleModsFolderButton" Click="OpenSampleModsFolderButton_Click"></MenuItem>
                     <MenuItem Header="Sonic 3 A.I.R. User Manual" x:Name="openUserManualButton" Click="OpenUserManualButton_Click"></MenuItem>

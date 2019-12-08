@@ -261,6 +261,25 @@ namespace Sonic3AIR_ModManager
             form.openDownloadsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenDownloadsFolder");
             form.openVersionsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenVersionsFolder");
 
+            form.LaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("LaunchPresetsMenuItem");
+            form.LoadLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("LoadLaunchPresetsMenuItem");
+            form.RenameLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("RenameLaunchPresetsMenuItem");
+            form.DeleteLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("DeleteLaunchPresetsMenuItem");
+            form.SaveLaunchPresetAsMenuItem.Header = Program.LanguageResource.GetString("SaveLaunchPresetAsMenuItem");
+            form.DeleteAllLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("DeleteAllLaunchPresetsMenuItem");
+            form.SaveLaunchPresetMenuItem.Header = Program.LanguageResource.GetString("SaveLaunchPresetMenuItem");
+            form.ModCollectionsMenuItem.Header = Program.LanguageResource.GetString("ModCollectionsMenuItem");
+            form.LoadModCollectionMenuItem.Header = Program.LanguageResource.GetString("LoadModCollectionMenuItem");
+            form.RenameModCollectionMenuItem.Header = Program.LanguageResource.GetString("RenameModCollectionMenuItem");
+            form.DeleteModCollectionMenuItem.Header = Program.LanguageResource.GetString("DeleteModCollectionMenuItem");
+            form.SaveModCollectonAsMenuItem.Header = Program.LanguageResource.GetString("SaveModCollectonAsMenuItem");
+            form.DeleteAllModCollectionsMenuItem.Header = Program.LanguageResource.GetString("DeleteAllModCollectionsMenuItem");
+            form.SaveModCollectonMenuItem.Header = Program.LanguageResource.GetString("SaveModCollectonMenuItem");
+
+
+
+
+
             form.showLogFileButton.Header = Program.LanguageResource.GetString("ShowLogFileButton");
 
             //Other MenuItem Items

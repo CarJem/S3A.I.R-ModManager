@@ -1,35 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CommandLine;
-using System.Resources;
-using System.Reflection;
-using System.Threading;
-using System.IO;
+﻿using CommandLine;
+using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Windows;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
 
 namespace Sonic3AIR_ModManager
 {
     static class Program
     {
+        #region Variables
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public static bool AutoBootCanceled = false;
 
         public static Options Arguments;
 
         public static bool isDebug;
 
-        public static bool isDeveloper = false;
+        public static bool ShowAllExceptions { get; set; } = false;
 
-        private static bool isDev = true;
+        public static bool isDeveloper { get; set; } = false;
+
+        public static bool isDebugger { get; set; } = true;
 
         [ConditionalAttribute("DEBUG")]
         public static void isDebugging()
         {
             isDebug = true;
         }
+
+        public static ResourceManager LanguageResource { get { return UserLanguage.CurrentResource; } set { UserLanguage.CurrentResource = value; } }
+
+        #endregion
+
+        #region Version Variables
 
         private static string VersionString
         {
@@ -45,10 +51,14 @@ namespace Sonic3AIR_ModManager
 
         private static string GetVersionString()
         {
-            return "v." + VersionString + (isDev ? " DEV" : "");
+            return "v." + VersionString + (isDebugger ? " DEV" : "");
         }
 
         public static Version InternalVersion { get; } = new Version(VersionString);
+       
+        #endregion
+
+        #region Update Variables
 
         public static bool CheckedForUpdateOnStartup = false;
 
@@ -79,25 +89,43 @@ namespace Sonic3AIR_ModManager
         public static UpdateResult AIRLastUpdateResult { get; set; } = UpdateResult.Null;
         public static UpdateResult MMLastUpdateResult { get; set; } = UpdateResult.Null;
 
-        public static ResourceManager LanguageResource { get { return UserLanguage.CurrentResource; } set { UserLanguage.CurrentResource = value; } }
+        #endregion
 
 
+        #region Main Region
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            isDebugging();
-            Parser.Default.ParseArguments<Options>(args).WithParsed<Options>( o => { Arguments = o; });
-            //ProgramPaths.CreateMissingModManagerFolders();
-
-
-            var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
-            if (exists) GamebannaAPIHandler(args);
-            else StartApplication(args);
-
+            StartLogging();
+            RealMain(args);
+            EndLogging();
         }
+
+        static void RealMain(string[] args)
+        {
+            log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
+            try
+            {
+                ProgramPaths.CreateMissingModManagerFolders();
+                isDebugging();
+                Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => { Arguments = o; });
+                var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
+                if (exists) GamebannaAPIHandler(args);
+                else StartApplication(args);
+
+            }
+            catch
+            {
+               
+            }
+            log.InfoFormat("Shuting Down!");
+        }
+        #endregion
+
+        #region Startup Region
 
         static void GamebannaAPIHandler(string[] args)
         {
@@ -195,11 +223,15 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+
+
         static void AutoBootLoader(bool isForced = false)
         {
             var app = new App();
             app.RunAutoBoot(isForced);
         }
+
+        #endregion
 
         public class Options
         {
@@ -209,6 +241,64 @@ namespace Sonic3AIR_ModManager
             [Option('a', "auto_boot", Required = false, HelpText = "Launch's the Application in Auto Boot Mode (Ideal for Steam Big Picture)")]
             public bool auto_boot { get; set; } = false;
         }
+
+        #region Logging
+
+        static void StartLogging()
+        {
+            //ConsoleManager.Show();
+            AppDomain.CurrentDomain.FirstChanceException += (sender, e) => {
+                if (e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly() && ShowAllExceptions)
+                {
+                    log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                }
+                else
+                {
+                    log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                }
+            };
+
+
+
+        }
+
+        static string RemoveNewLineChars(string string_to_search, string replacement_string = " ")
+        {
+            return System.Text.RegularExpressions.Regex.Replace(string_to_search, @"\t|\n|\r", replacement_string);
+        }
+
+        static void CleanUpLogsFolder()
+        {
+            if (Directory.Exists(ProgramPaths.Sonic3AIR_MM_LogsFolder))
+            {
+                string app_log_filepath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "app.log");
+
+                string log_filename = string.Format("S3AIR_MM_{0}_{1}.log", string.Format("[{0}]", GetVersionString()), DateTime.Now.ToString("[M-dd-yyyy]_[hh-mm-ss]"));
+                string log_filepath = Path.Combine(ProgramPaths.Sonic3AIR_MM_LogsFolder, log_filename);
+
+                if (File.Exists(app_log_filepath)) File.Copy(app_log_filepath, log_filepath);
+                DirectoryInfo logsFolder = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_LogsFolder);
+                var fileList = logsFolder.GetFiles("*.log", SearchOption.AllDirectories).ToList();
+                if (fileList.Count > 10)
+                {
+                    foreach (var file in fileList.OrderByDescending(file => file.CreationTime).Skip(10))
+                    {
+                        file.Delete();
+                    }
+                }
+
+            }
+        }
+
+        static void EndLogging()
+        {
+            CleanUpLogsFolder();
+            //ConsoleManager.Hide();
+        }
+
+        #endregion
+
+
 
 
     }

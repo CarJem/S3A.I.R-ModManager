@@ -886,4 +886,148 @@ Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zu
   <data name="RecordingsLoadingError" xml:space="preserve">
     <value>Fehler beim Laden der Recordings!</value>
   </data>
+  <data name="DoesNotExist" xml:space="preserve">
+    <value>existiert nicht!</value>
+  </data>
+  <data name="FileString" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="FolderString" xml:space="preserve">
+    <value>Ordner</value>
+  </data>
+  <data name="AIRTips" xml:space="preserve">
+    <value>A.I.R. Tipps...</value>
+  </data>
+  <data name="AIRGuides" xml:space="preserve">
+    <value>A.I.R. Anleitungen...</value>
+  </data>
+  <data name="CustomWordString" xml:space="preserve">
+    <value>Eigenes</value>
+  </data>
+  <data name="AboutString" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="BuildDateString" xml:space="preserve">
+    <value>Versionsdatum</value>
+  </data>
+  <data name="ArchitectureString" xml:space="preserve">
+    <value>Architektur</value>
+  </data>
+  <data name="UnsetFolderPathString" xml:space="preserve">
+    <value>ORDNERPFAD_NICHT_GESETZT</value>
+  </data>
+  <data name="SetCustomGameRecordingFolderTitle" xml:space="preserve">
+    <value>Eigenen Ordner für Game Recordings suchen...</value>
+  </data>
+  <data name="FileIsBusyTitle" xml:space="preserve">
+    <value>Datei in Verwendung</value>
+  </data>
+  <data name="FileIsBusyCaption" xml:space="preserve">
+    <value>Die Datei {0} wird gerade von einem anderen Prozess verwendet, willst du trotzdem fortfahren? (Nach Klick auf Nein oder beim Schließen dieses Dialogs wird nochmal geprüft, ob die Datei noch geöffnet ist; wenn du hier hängen bleibst, schließe bitte die Anwendung)</value>
+  </data>
+  <data name="UnableToStartS3AIR" xml:space="preserve">
+    <value>Kann Sonic 3 A.I.R. nicht starten</value>
+  </data>
+  <data name="UnableToStartS3AIRRecordingViewer" xml:space="preserve">
+    <value>Kann die Sonic 3 A.I.R. Recording Wiedergabe nicht starten</value>
+  </data>
+  <data name="VersionSelectCaption1" xml:space="preserve">
+    <value>Can not determine version name, please specify your own:</value>
+  </data>
+  <data name="VersionSelectCaption2" xml:space="preserve">
+    <value>Eine Version mit diesem Namen existiert bereits, oder der Name enthält ungültige Zeichen für einen Ordner, bitte gib einen anderen ein:</value>
+  </data>
+  <data name="BackupFailed" xml:space="preserve">
+    <value>Sicherung fehlgeschlagen</value>
+  </data>
+  <data name="RestoreFailed" xml:space="preserve">
+    <value>Wiederherstellen der Sicherung fehlgeschlagen</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Nochmal probieren?</value>
+  </data>
+  <data name="RecordingsLocationDefault" xml:space="preserve">
+    <value>Standard-Ordner</value>
+  </data>
+  <data name="RecordingsLocationAppData" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Spielerdaten-Ordner</value>
+  </data>
+  <data name="RecordingsLocationRecordingsFolder" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Recordings Ordner</value>
+  </data>
+  <data name="RecordingsLocationEXEFolder" xml:space="preserve">
+    <value>Sonic 3 A.I.R. EXE Ordner</value>
+  </data>
+  <data name="RecordingsLocationBrowse" xml:space="preserve">
+    <value>Suchen...</value>
+  </data>
+  <data name="RecordingsLocationLabel" xml:space="preserve">
+    <value>Gewählter Ort:</value>
+  </data>
+  <data name="GameRecordingsPlayButton" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="FileTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="ViewTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="HelpTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="OtherTab" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="LaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="ModCollectionsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="LoadModCollectionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="RenameModCollectionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteModCollectionMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+  <data name="SaveModCollectonMenuItem" xml:space="preserve">
+    <value>NULL</value>
+  </data>
 </root>

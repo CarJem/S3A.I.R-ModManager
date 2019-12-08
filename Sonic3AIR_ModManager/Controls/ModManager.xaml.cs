@@ -80,6 +80,11 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         public ModManagement ModManagement;
+        public static Settings.ModManagerSettings Settings { get; set; }
+
+        public static Dictionary<int, List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>> ModCollectionMenuItems { get; set; } = new Dictionary<int, List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>>();
+        public static Dictionary<int, List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>> LaunchPresetMenuItems { get; set; } = new Dictionary<int, List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>>();
+
         public string nL = Environment.NewLine;
         public static AIR_API.Settings S3AIRSettings;
         public static ModManager Instance;
@@ -164,7 +169,7 @@ namespace Sonic3AIR_ModManager
                 UpdateUI();
                 Instance = this;
 
-
+                Settings = new Settings.ModManagerSettings(ProgramPaths.Sonic3AIR_MM_SettingsFile);
 
                 if (Properties.Settings.Default.WindowSize != null)
                 {
@@ -284,12 +289,12 @@ namespace Sonic3AIR_ModManager
             //TODO: Gut unused Method
             string file = @"D:\Users\CarJem\Downloads\tails_tails_sprites.zip";
 
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test1", "1", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test2", "2", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test3", "3", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test4", "4", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test5", "5", file));
-            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test6", "6", file));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test1", "1"));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test2", "2"));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test3", "3"));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test4", "4"));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test5", "5"));
+            list.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem("test6", "6"));
 
 
             RecentsMenu.RecentItemsSource = list;
@@ -298,7 +303,7 @@ namespace Sonic3AIR_ModManager
         private void RecentsMenu_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
         {
             //TODO: Gut unused Method
-            MessageBox.Show($"{e.Header}{nL}{e.Content}{nL}{e.FilePath}", "Results");
+            MessageBox.Show($"{e.Header}{nL}{e.Content}{nL}", "Results");
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -1264,9 +1269,14 @@ namespace Sonic3AIR_ModManager
             {
                 if (value == null) return false;
                 else if (value == "" || value == "NULL") return false;
-                else if (!Uri.TryCreate(value, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps)) return false;
+                else if (!Uri.TryCreate(value, UriKind.Absolute, out Uri uriResult) && ValidateURI(uriResult)) return false;
                 else return true;
 
+                bool ValidateURI(Uri uriResult)
+                {
+                    if (uriResult == null) return false;
+                    else return (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                }
             }
         }
         #endregion
@@ -2407,10 +2417,204 @@ namespace Sonic3AIR_ModManager
 
 
 
-        #endregion
 
         #endregion
 
+        #endregion
+
+        #region Mod Manager Settings Management
+
+
+
+        #region Mod Collections / Launch Presets Mananagement
+        private void FileMenuItem_SubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            CollectModCollectionMenuItemsDictionary();
+            CollectLaunchPresetsMenuItemsDictionary();
+        }
+
+        private void CollectModCollectionMenuItemsDictionary()
+        {
+
+            LoadModCollectionMenuItem.RecentItemsSource = null;
+            RenameModCollectionMenuItem.RecentItemsSource = null;
+            DeleteModCollectionMenuItem.RecentItemsSource = null;
+            SaveModCollectonAsMenuItem.RecentItemsSource = null;
+
+            if (ModCollectionMenuItems.ContainsKey(0)) ModCollectionMenuItems[0].Clear();
+            if (ModCollectionMenuItems.ContainsKey(1)) ModCollectionMenuItems[1].Clear();
+            if (ModCollectionMenuItems.ContainsKey(2)) ModCollectionMenuItems[2].Clear();
+            if (ModCollectionMenuItems.ContainsKey(3)) ModCollectionMenuItems[3].Clear();
+
+            ModCollectionMenuItems.Clear();
+            for (int i = 0; i < 4; i++)
+            {
+                ModCollectionMenuItems.Add(i, CollectModCollectionsMenuItems());
+            }
+
+            LoadModCollectionMenuItem.RecentItemsSource = ModCollectionMenuItems[0];
+            RenameModCollectionMenuItem.RecentItemsSource = ModCollectionMenuItems[1];
+            DeleteModCollectionMenuItem.RecentItemsSource = ModCollectionMenuItems[2];
+            SaveModCollectonAsMenuItem.RecentItemsSource = ModCollectionMenuItems[3];
+
+
+        }
+
+        private List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> CollectModCollectionsMenuItems()
+        {
+            List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> collections = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
+            foreach (var collection in Settings.Options.ModCollections)
+            {
+                collections.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem(collection.Name, collection));
+            }
+            return collections;
+        }
+
+        private void CollectLaunchPresetsMenuItemsDictionary()
+        {
+            LoadLaunchPresetsMenuItem.RecentItemsSource.Clear();
+            RenameLaunchPresetsMenuItem.RecentItemsSource.Clear();
+            DeleteLaunchPresetsMenuItem.RecentItemsSource.Clear();
+            SaveLaunchPresetAsMenuItem.RecentItemsSource.Clear();
+
+            LoadLaunchPresetsMenuItem.RecentItemsSource = null;
+            RenameLaunchPresetsMenuItem.RecentItemsSource = null;
+            DeleteLaunchPresetsMenuItem.RecentItemsSource = null;
+            SaveLaunchPresetAsMenuItem.RecentItemsSource = null;
+
+            LoadLaunchPresetsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
+            RenameLaunchPresetsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
+            DeleteLaunchPresetsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
+            SaveLaunchPresetAsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
+
+        }
+
+        private List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> CollectLaunchPresetsMenuItems()
+        {
+            List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> collections = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
+            foreach (var collection in Settings.Options.LaunchPresets)
+            {
+                collections.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem(collection.Name, collection));
+            }
+            return collections;
+        }
+
+        private void LoadLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            
+        }
+
+        private void RenameLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+
+        }
+
+        private void DeleteLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+
+        }
+
+        private void SaveLaunchPresetAsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+
+        }
+
+        private void DeleteAllLaunchPresetsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveLaunchPresetMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LoadModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            var collection = e.Content as Settings.ModCollection;
+            ModManagement.S3AIRActiveMods.Save(collection.Mods);
+            ModManagement.UpdateModsList(true);
+        }
+
+        private void RenameModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            var collection = e.Content as Settings.ModCollection;
+            string name = collection.Name;
+            string caption = "Rename Mod Collection"; //TODO : Add Language Translations
+            string message = "Enter the new name of this mod collection:"; //TODO : Add Language Translations
+            var result = ExtraDialog.ShowInputDialog(ref name, caption, message);
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                ModManagement.Save();
+                int collectionsIndex = Settings.Options.ModCollections.IndexOf(collection);
+                Settings.Options.ModCollections[collectionsIndex].Name = name;
+                SaveModManagerSettings();
+            }
+        }
+
+        private void DeleteModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            var collection = e.Content as Settings.ModCollection;
+            Settings.Options.ModCollections.Remove(collection);
+            SaveModManagerSettings();
+        }
+
+        private void SaveModCollectonAsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            string caption = "Replace Existing Mod Collection"; //TODO : Add Language Translations
+            string message = "Are you sure you want to replace the existing mod collection? (This can not be undone)"; //TODO : Add Language Translations
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
+            {
+                ModManagement.Save();
+                var collection = e.Content as Settings.ModCollection;
+                int collectionsIndex = Settings.Options.ModCollections.IndexOf(collection);
+                Settings.Options.ModCollections[collectionsIndex] = new Sonic3AIR_ModManager.Settings.ModCollection(ModManagement.S3AIRActiveMods.ActiveClass, collection.Name);
+                SaveModManagerSettings();
+            }
+        }
+
+        private void DeleteAllModCollectionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string caption = "Delete all Mod Collections"; //TODO : Add Language Translations
+            string message = "Are you sure you want to delete all your saved mod collections? (This can not be undone)"; //TODO : Add Language Translations
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
+            {
+                Settings.Options.ModCollections.Clear();
+                SaveModManagerSettings();
+            }
+        }
+
+        private void SaveModCollectonMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string name = "New Mod Collection"; //TODO : Add Language Translations
+            string caption = "Save New Mod Collection"; //TODO : Add Language Translations
+            string message = "Enter the Name of this New Mod Collection:"; //TODO : Add Language Translations
+            var result = ExtraDialog.ShowInputDialog(ref name, caption, message);
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                ModManagement.Save();
+                Settings.Options.ModCollections.Add(new Sonic3AIR_ModManager.Settings.ModCollection(ModManagement.S3AIRActiveMods.ActiveClass, name));
+                SaveModManagerSettings();
+            }
+
+        }
+
+        #endregion
+
+        private void SaveModManagerSettings()
+        {
+            Settings.Save();
+        }
+
+        private void LoadModManagerSettings()
+        {
+            Settings = null;
+            Settings = new Settings.ModManagerSettings(ProgramPaths.Sonic3AIR_MM_SettingsFile);
+        }
+
+
+
+        #endregion
 
     }
 }

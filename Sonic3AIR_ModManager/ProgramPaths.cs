@@ -21,16 +21,18 @@ namespace Sonic3AIR_ModManager
         public static string Sonic3AIRActiveModsList = "";
         public static string Sonic3AIRSettingsFile = "";
         public static string Sonic3AIRGBLinkPath = "";
-        public static string Sonic3AIR_MM_BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM";
-        public static string Sonic3AIR_MM_GBRequestsFolder = Sonic3AIR_MM_BaseFolder + "\\gb_api_urls";
-        public static string Sonic3AIR_MM_TempModsFolder = Sonic3AIR_MM_BaseFolder + "\\temp_mod_install";
-        public static string Sonic3AIR_MM_DownloadsFolder = Sonic3AIR_MM_BaseFolder + "\\downloads";
-        public static string Sonic3AIR_MM_VersionsFolder = Sonic3AIR_MM_BaseFolder + "\\air_versions";
+        public static string Sonic3AIR_MM_BaseFolder { get => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM"; }
+        public static string Sonic3AIR_MM_GBRequestsFolder { get => Sonic3AIR_MM_BaseFolder + "\\gb_api_urls"; }
+        public static string Sonic3AIR_MM_TempModsFolder  { get => Sonic3AIR_MM_BaseFolder + "\\temp_mod_install"; }
+        public static string Sonic3AIR_MM_DownloadsFolder { get => Sonic3AIR_MM_BaseFolder + "\\downloads"; }
+        public static string Sonic3AIR_MM_VersionsFolder { get => Sonic3AIR_MM_BaseFolder + "\\air_versions"; }
+        public static string Sonic3AIR_MM_LogsFolder { get => Sonic3AIR_MM_BaseFolder + "\\logs"; }
+        public static string Sonic3AIR_MM_SettingsFile { get => Sonic3AIR_MM_BaseFolder + "\\settings.json"; }
 
-        #endregion
+    #endregion
 
         #region Sonic 3 A.I.R. Path
-        public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
+    public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
         public static string GetSonic3AIRPath()
         {
             return Properties.Settings.Default.Sonic3AIRPath;
@@ -204,11 +206,15 @@ namespace Sonic3AIR_ModManager
         #region Recordings Path Validation
 
 
-        public static string CustomGameRecordingsFolderPath { get; set; } = GetCustomGameRecordingsFolderPathUnsetString();
+        public static string CustomGameRecordingsFolderPath { get; set; } = "UNSET_FOLDER_PATH";
 
         public static string GetCustomGameRecordingsFolderPathUnsetString()
         {
-            return UserLanguage.GetOutputString("UnsetFolderPathString");
+            if (UserLanguage.GetOutputString("UnsetFolderPathString") == null)
+            {
+                return "UNSET_FOLDER_PATH";
+            }
+            else return UserLanguage.GetOutputString("UnsetFolderPathString");
         }
 
         public static GameRecordingSearchLocation GameRecordingsFolderDesiredPath { get; set; } = GameRecordingSearchLocation.S3AIR_Default;
@@ -362,11 +368,20 @@ namespace Sonic3AIR_ModManager
 
         public static void CreateMissingModManagerFolders()
         {
-            if (!Directory.Exists(Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_TempModsFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_BaseFolder)) Directory.CreateDirectory(Sonic3AIR_MM_BaseFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_DownloadsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_DownloadsFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_VersionsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_VersionsFolder);
-            if (!Directory.Exists(Sonic3AIR_MM_GBRequestsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_GBRequestsFolder);
+            try
+            {
+                if (!Directory.Exists(Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_TempModsFolder);
+                if (!Directory.Exists(Sonic3AIR_MM_BaseFolder)) Directory.CreateDirectory(Sonic3AIR_MM_BaseFolder);
+                if (!Directory.Exists(Sonic3AIR_MM_DownloadsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_DownloadsFolder);
+                if (!Directory.Exists(Sonic3AIR_MM_VersionsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_VersionsFolder);
+                if (!Directory.Exists(Sonic3AIR_MM_GBRequestsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_GBRequestsFolder);
+                if (!Directory.Exists(Sonic3AIR_MM_LogsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_LogsFolder);
+            }
+            catch
+            {
+
+            }
+
         }
 
         public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, bool throwVersionMismatchError = false)

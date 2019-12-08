@@ -10,6 +10,3 @@ call "%SolutionDir%Properties\Versioning\GenerationsLib.Versioning.exe" "%Soluti
 if %ConfigurationName% == "Release" (
 call "%SolutionDir%Properties\Versioning\GenerationsLib.Versioning.exe" "%SolutionDir%Properties\AssemblyInfo.cs" "Sonic3AIR_ModManager" %ignoreFile% %ignoreInternal%
 )
-if %ConfigurationName% == "Debug" (
-call "%SolutionDir%Properties\Versioning\GenerationsLib.Versioning.exe" "%SolutionDir%Properties\AssemblyInfo.cs" "Sonic3AIR_ModManager" %ignoreFile% %ignoreInternal%
-)
