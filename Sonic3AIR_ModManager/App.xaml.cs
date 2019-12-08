@@ -38,7 +38,8 @@ namespace Sonic3AIR_ModManager
 
         public void RunAutoBoot(bool isForced = false)
         {
-
+            if (isForced) Program.Log.InfoFormat("Starting in forced auto-boot mode...");
+            else Program.Log.InfoFormat("Starting Auto-Boot Mode...");
             var auto = new AutoBootDialog();
             if (auto.ShowDialog() == true)
             {
@@ -54,14 +55,14 @@ namespace Sonic3AIR_ModManager
 
         public void GBAPI(string Arguments)
         {
-
+            Program.Log.InfoFormat("Starting Mod Manager with GB API Arguments...");
             this.Run(new ModManager(Arguments));
         }
 
 
         public void DefaultStart()
         {
-
+            Program.Log.InfoFormat("Starting Mod Manager...");
             this.Run(new ModManager());
         }
 

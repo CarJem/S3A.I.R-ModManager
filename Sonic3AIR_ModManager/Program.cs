@@ -11,7 +11,7 @@ namespace Sonic3AIR_ModManager
     static class Program
     {
         #region Variables
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static bool AutoBootCanceled = false;
 
@@ -106,14 +106,18 @@ namespace Sonic3AIR_ModManager
 
         static void RealMain(string[] args)
         {
-            log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
+            Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
             try
             {
                 ProgramPaths.CreateMissingModManagerFolders();
                 isDebugging();
                 Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => { Arguments = o; });
                 var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
-                if (exists) GamebannaAPIHandler(args);
+                if (exists)
+                {
+                    Log.InfoFormat("Application Already Open! Adding Potential URL to Gamebanana 1-Click Install Handler...");
+                    GamebannaAPIHandler(args);
+                }
                 else StartApplication(args);
 
             }
@@ -121,7 +125,7 @@ namespace Sonic3AIR_ModManager
             {
                
             }
-            log.InfoFormat("Shuting Down!");
+            Log.InfoFormat("Shuting Down!");
         }
         #endregion
 
@@ -131,21 +135,28 @@ namespace Sonic3AIR_ModManager
         {
             if (Arguments.gamebanana_api != null)
             {
-
+                Log.InfoFormat("1-Click Install Detected! (URL: {0})", Arguments?.gamebanana_api);
                 int currentFileIndex = 0;
                 bool fileCreated = false;
                 while (!fileCreated)
                 {
                     string path = Path.Combine(ProgramPaths.Sonic3AIR_MM_GBRequestsFolder, $"gb_api{currentFileIndex}.txt");
+                    Log.InfoFormat("Attempting to creating file at \"{0}\"...", path);
                     if (!File.Exists(path))
                     {
                         CreateFile(path, Arguments.gamebanana_api);
                         fileCreated = true;
+                        Log.InfoFormat("File created at \"{0}\"!", path);
                     }
-                    else currentFileIndex++;
+                    else
+                    {
+                        Log.InfoFormat("Unable to create file at \"{0}\", it already exists, trying again...", path);
+                        currentFileIndex++;
+                    }
                 }
 
             }
+            else Log.InfoFormat("No 1-Click Install Detected!");
             Environment.Exit(Environment.ExitCode);
 
 
@@ -175,6 +186,7 @@ namespace Sonic3AIR_ModManager
 
             if (Arguments?.gamebanana_api != null)
             {
+                Log.InfoFormat("1-Click Install Detected! (URL: {0})", Arguments?.gamebanana_api);
                 GamebanannaAPIHandler_Startup();
             }
             else
@@ -188,6 +200,7 @@ namespace Sonic3AIR_ModManager
 
         static void ForcedAutoBootStartup()
         {
+
             // Save Original Values
             var autoLaunchOld = Properties.Settings.Default.AutoLaunch;
             var preStartOld = Properties.Settings.Default.KeepOpenOnLaunch;
@@ -250,11 +263,11 @@ namespace Sonic3AIR_ModManager
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) => {
                 if (e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly() && ShowAllExceptions)
                 {
-                    log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                    Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
                 else
                 {
-                    log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                    Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
             };
 
