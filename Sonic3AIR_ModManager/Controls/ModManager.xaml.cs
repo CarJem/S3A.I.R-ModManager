@@ -2560,8 +2560,8 @@ namespace Sonic3AIR_ModManager
         {
             var collection = e.Content as Settings.ModCollection;
             string name = collection.Name;
-            string caption = "Rename Mod Collection"; //TODO : Add Language Translations
-            string message = "Enter the new name of this mod collection:"; //TODO : Add Language Translations
+            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Rename");
+            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_Rename");
             var result = ExtraDialog.ShowInputDialog(ref name, caption, message);
             if (result == System.Windows.Forms.DialogResult.OK)
             {
@@ -2575,14 +2575,19 @@ namespace Sonic3AIR_ModManager
         private void DeleteModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
         {
             var collection = e.Content as Settings.ModCollection;
-            Settings.Options.ModCollections.Remove(collection);
-            SaveModManagerSettings();
+            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Delete");
+            string message = string.Format(UserLanguage.GetOutputString("ModCollectionDialog_Message_Delete"), collection.Name);
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
+            {
+                Settings.Options.ModCollections.Remove(collection);
+                SaveModManagerSettings();
+            }
         }
 
         private void SaveModCollectonAsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
         {
-            string caption = "Replace Existing Mod Collection"; //TODO : Add Language Translations
-            string message = "Are you sure you want to replace the existing mod collection? (This can not be undone)"; //TODO : Add Language Translations
+            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Replace");
+            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_Replace");
             if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
             {
                 ModManagement.Save();
@@ -2595,8 +2600,8 @@ namespace Sonic3AIR_ModManager
 
         private void DeleteAllModCollectionsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string caption = "Delete all Mod Collections"; //TODO : Add Language Translations
-            string message = "Are you sure you want to delete all your saved mod collections? (This can not be undone)"; //TODO : Add Language Translations
+            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_DeleteAll");
+            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_DeleteAll");
             if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
             {
                 Settings.Options.ModCollections.Clear();
@@ -2606,9 +2611,9 @@ namespace Sonic3AIR_ModManager
 
         private void SaveModCollectonMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string name = "New Mod Collection"; //TODO : Add Language Translations
-            string caption = "Save New Mod Collection"; //TODO : Add Language Translations
-            string message = "Enter the Name of this New Mod Collection:"; //TODO : Add Language Translations
+            string name = UserLanguage.GetOutputString("ModCollectionDialog_Name_Save");
+            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Save");
+            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_Save");
             var result = ExtraDialog.ShowInputDialog(ref name, caption, message);
             if (result == System.Windows.Forms.DialogResult.OK)
             {
@@ -2635,5 +2640,10 @@ namespace Sonic3AIR_ModManager
 
 
         #endregion
+
+        private void FullDebugOutputCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
     }
 }

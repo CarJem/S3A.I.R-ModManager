@@ -79,6 +79,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add an A.I.R. Build....
+        /// </summary>
+        internal static string AddAIRVersion {
+            get {
+                return ResourceManager.GetString("AddAIRVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a Mod....
         /// </summary>
         internal static string AddAMod {
@@ -507,6 +516,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string CarJemTwitter {
             get {
                 return ResourceManager.GetString("CarJemTwitter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change A.I.R. Build....
+        /// </summary>
+        internal static string ChangeAIRVersion {
+            get {
+                return ResourceManager.GetString("ChangeAIRVersion", resourceCulture);
             }
         }
         
@@ -1042,6 +1060,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log Full Debug Output.
+        /// </summary>
+        internal static string FullDebugOutputOption {
+            get {
+                return ResourceManager.GetString("FullDebugOutputOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Windowed.
         /// </summary>
         internal static string FullscreenOption1 {
@@ -1443,6 +1470,24 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Legacy / Stackless Loading.
+        /// </summary>
+        internal static string LegacyLoadingText_Line1 {
+            get {
+                return ResourceManager.GetString("LegacyLoadingText_Line1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Pre-19.09.19.0; Limited Support).
+        /// </summary>
+        internal static string LegacyLoadingText_Line2 {
+            get {
+                return ResourceManager.GetString("LegacyLoadingText_Line2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load Launch Preset....
         /// </summary>
         internal static string LoadLaunchPresetsMenuItem {
@@ -1479,11 +1524,119 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage A.I.R. Builds.
+        /// </summary>
+        internal static string ManageAIRVersions {
+            get {
+                return ResourceManager.GetString("ManageAIRVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sonic 3 A.I.R.&apos;s File Path is Not Set, Would you like to set it now?.
         /// </summary>
         internal static string MissingAIRSetNowAlert {
             get {
                 return ResourceManager.GetString("MissingAIRSetNowAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Mod Collection.
+        /// </summary>
+        internal static string ModCollectionDialog_Caption_Delete {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Caption_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete all Mod Collections.
+        /// </summary>
+        internal static string ModCollectionDialog_Caption_DeleteAll {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Caption_DeleteAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename Mod Collection.
+        /// </summary>
+        internal static string ModCollectionDialog_Caption_Rename {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Caption_Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace Existing Mod Collection.
+        /// </summary>
+        internal static string ModCollectionDialog_Caption_Replace {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Caption_Replace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save New Mod Collection.
+        /// </summary>
+        internal static string ModCollectionDialog_Caption_Save {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Caption_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to the &quot;{0}&quot; mod collection? (This can not be undone).
+        /// </summary>
+        internal static string ModCollectionDialog_Message_Delete {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Message_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete all your saved mod collections? (This can not be undone).
+        /// </summary>
+        internal static string ModCollectionDialog_Message_DeleteAll {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Message_DeleteAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the new name of this mod collection:.
+        /// </summary>
+        internal static string ModCollectionDialog_Message_Rename {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Message_Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to replace the existing mod collection? (This can not be undone).
+        /// </summary>
+        internal static string ModCollectionDialog_Message_Replace {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Message_Replace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the Name of this New Mod Collection:.
+        /// </summary>
+        internal static string ModCollectionDialog_Message_Save {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Message_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Mod Collection.
+        /// </summary>
+        internal static string ModCollectionDialog_Name_Save {
+            get {
+                return ResourceManager.GetString("ModCollectionDialog_Name_Save", resourceCulture);
             }
         }
         
@@ -2272,29 +2425,11 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select from Installed A.I.R. Versions....
-        /// </summary>
-        internal static string SelectFromInstalledVersions {
-            get {
-                return ResourceManager.GetString("SelectFromInstalledVersions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select Input....
         /// </summary>
         internal static string SelectInputTitleExpandable {
             get {
                 return ResourceManager.GetString("SelectInputTitleExpandable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select/Install from A.I.R. Version ZIP....
-        /// </summary>
-        internal static string SelectInstallFromAIRZIP {
-            get {
-                return ResourceManager.GetString("SelectInstallFromAIRZIP", resourceCulture);
             }
         }
         
@@ -2317,20 +2452,20 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set A.I.R. Path from Settings File....
+        ///   Looks up a localized string similar to Set A.I.R. Path from previous data....
         /// </summary>
-        internal static string SetAIRPathFromSettings {
+        internal static string SetAIRPathFromPreviousData {
             get {
-                return ResourceManager.GetString("SetAIRPathFromSettings", resourceCulture);
+                return ResourceManager.GetString("SetAIRPathFromPreviousData", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set A.I.R. Path Manually (Classic)....
+        ///   Looks up a localized string similar to Set A.I.R. Path Manually....
         /// </summary>
-        internal static string SetAIRPathManuallyClassic {
+        internal static string SetAIRPathManually {
             get {
-                return ResourceManager.GetString("SetAIRPathManuallyClassic", resourceCulture);
+                return ResourceManager.GetString("SetAIRPathManually", resourceCulture);
             }
         }
         
@@ -2340,24 +2475,6 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string SetCustomGameRecordingFolderTitle {
             get {
                 return ResourceManager.GetString("SetCustomGameRecordingFolderTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Get/Set from Installed Versions:.
-        /// </summary>
-        internal static string SetFromInstalledHeader {
-            get {
-                return ResourceManager.GetString("SetFromInstalledHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set Manually:.
-        /// </summary>
-        internal static string SetManuallyHeader {
-            get {
-                return ResourceManager.GetString("SetManuallyHeader", resourceCulture);
             }
         }
         

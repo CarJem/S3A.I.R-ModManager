@@ -89,7 +89,7 @@
             </MenuItem>
         </Menu>
         <TabControl Grid.Row="1" x:Name="PrimaryTabControl" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">
-            <TabItem Header="Mods" Name="modPage">  
+            <TabItem Header="Mods" Name="modPage">
                 <Grid x:Name="modPanel" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"></ColumnDefinition>
@@ -173,7 +173,7 @@
                     </Grid>
 
                 </Grid>
-                
+
             </TabItem>
             <TabItem Name="toolsPage" Header="Tools">
                 <TabControl x:Name="tabControl3" SelectionChanged="TabControl3_SelectedIndexChanged" Padding="0">
@@ -259,10 +259,14 @@
                     <TabItem Name="optionsPage" Header="General">
                         <ScrollViewer Margin="5">
                             <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="82*"/>
+                                    <ColumnDefinition Width="299*"/>
+                                </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="2*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <GroupBox x:Name="groupBox8" Header="Mod Manager Options">
+                                <GroupBox x:Name="groupBox8" Header="Mod Manager Options" Grid.ColumnSpan="2">
                                     <StackPanel Margin="5">
                                         <TextBlock x:Name="label1" Text="Sonic 3 A.I.R. Path:" Margin="0,2"></TextBlock>
                                         <Grid Height="25">
@@ -306,6 +310,8 @@
                                             </Grid.ColumnDefinitions>
                                             <ComboBox  Name="languageComboBox" SelectionChanged="LanguageComboBox_SelectionChangeCommitted" HorizontalContentAlignment="Stretch"></ComboBox>
                                         </Grid>
+                                        <Separator Visibility="Hidden"></Separator>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="FullDebugOutputCheckBox" Content="Log Full Debug Output" Margin="0,2" IsChecked="{Binding ShowFullDebugOutput, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}" Click="FullDebugOutputCheckBox_Click"></CheckBox>
                                     </StackPanel>
                                 </GroupBox>
                             </Grid>

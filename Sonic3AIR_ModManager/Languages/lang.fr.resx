@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutTab" xml:space="preserve">
-    <value>En savoir plus...</value>
+    <value>À propos</value>
   </data>
   <data name="AIRInternalSettings" xml:space="preserve">
     <value>Paramètre interne de A.I.R</value>
@@ -287,24 +287,6 @@
   </data>
   <data name="Save&amp;Load" xml:space="preserve">
     <value>Sauvegarder et Charger</value>
-  </data>
-  <data name="SelectFromInstalledVersions" xml:space="preserve">
-    <value>Sélectionnez dans "Installer" la version de A.I.R...</value>
-  </data>
-  <data name="SelectInstallFromAIRZIP" xml:space="preserve">
-    <value>Sélectionnez/Installez à partir d'une version archivée(ZIP) de A.I.R...</value>
-  </data>
-  <data name="SetAIRPathFromSettings" xml:space="preserve">
-    <value>Régler l'emplacement du fichier de paramètre de A.I.R...</value>
-  </data>
-  <data name="SetAIRPathManuallyClassic" xml:space="preserve">
-    <value>Régler manuellement (Classique) l'emplacement du fichier de paramètre de A.I.R...</value>
-  </data>
-  <data name="SetFromInstalledHeader" xml:space="preserve">
-    <value>Obtenir/Définir à partir de versions installées :</value>
-  </data>
-  <data name="SetManuallyHeader" xml:space="preserve">
-    <value>Régler Manuellement :</value>
   </data>
   <data name="SettingsTab" xml:space="preserve">
     <value>Paramètres</value>
@@ -887,147 +869,147 @@ Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défin
     <value>Erreur lors du chargement des enregistrements !</value>
   </data>
   <data name="AIRTips" xml:space="preserve">
-    <value>NULL</value>
+    <value>A.I.R. Conseils...</value>
   </data>
   <data name="AIRGuides" xml:space="preserve">
-    <value>NULL</value>
+    <value>A.I.R. Guides...</value>
   </data>
   <data name="DoesNotExist" xml:space="preserve">
-    <value>NULL</value>
+    <value>il n'existe pas!</value>
   </data>
   <data name="FileString" xml:space="preserve">
-    <value>NULL</value>
+    <value>Fichier</value>
   </data>
   <data name="FolderString" xml:space="preserve">
-    <value>NULL</value>
+    <value>Dossier</value>
   </data>
   <data name="CustomWordString" xml:space="preserve">
-    <value>NULL</value>
+    <value>Personnalisation</value>
   </data>
   <data name="AboutString" xml:space="preserve">
-    <value>NULL</value>
+    <value>À propos</value>
   </data>
   <data name="BuildDateString" xml:space="preserve">
-    <value>NULL</value>
+    <value>Date de création</value>
   </data>
   <data name="ArchitectureString" xml:space="preserve">
-    <value>NULL</value>
+    <value>Architecture</value>
   </data>
   <data name="UnsetFolderPathString" xml:space="preserve">
-    <value>NULL</value>
+    <value>EMPLACEMENT_DOSSIER_NON_RÉGLÉ</value>
   </data>
   <data name="SetCustomGameRecordingFolderTitle" xml:space="preserve">
-    <value>NULL</value>
+    <value>Sélectionnez un dossier d'enregistrements de jeu personnalisé ...</value>
   </data>
   <data name="FileIsBusyTitle" xml:space="preserve">
-    <value>NULL</value>
+    <value>Le fichier est déjà en cours d'utilisation</value>
   </data>
   <data name="FileIsBusyCaption" xml:space="preserve">
-    <value>NULL</value>
+    <value>Le fichier: {0} est actuellement utilisé par un autre processus. Voulez-vous quand même continuer? (Cliquer sur Non ou fermer cette boîte de dialogue ne revérifiera que si le fichier est perdu; si vous êtes bloqué ici, veuillez forcer la fermeture de l'application)</value>
   </data>
   <data name="UnableToStartS3AIR" xml:space="preserve">
-    <value>NULL</value>
+    <value>Impossible de démarrer Sonic 3 A.I.R.</value>
   </data>
   <data name="UnableToStartS3AIRRecordingViewer" xml:space="preserve">
-    <value>NULL</value>
+    <value>Impossible de démarrer Sonic 3 A.I.R. Visionneuse d'enregistrement</value>
   </data>
   <data name="VersionSelectCaption1" xml:space="preserve">
-    <value>NULL</value>
+    <value>Impossible de déterminer le nom de la version, veuillez spécifier le vôtre:</value>
   </data>
   <data name="VersionSelectCaption2" xml:space="preserve">
-    <value>NULL</value>
+    <value>Une version portant ce nom existe déjà ou le nom contient des caractères non valides pour un dossier, veuillez en spécifier une différente:</value>
   </data>
   <data name="BackupFailed" xml:space="preserve">
-    <value>NULL</value>
+    <value>Échec de la sauvegarde</value>
   </data>
   <data name="RestoreFailed" xml:space="preserve">
-    <value>NULL</value>
+    <value>Échec de la restauration</value>
   </data>
   <data name="TryAgain" xml:space="preserve">
-    <value>NULL</value>
+    <value>Réessayer ?</value>
   </data>
   <data name="RecordingsLocationDefault" xml:space="preserve">
-    <value>NULL</value>
+    <value>Dossier par défaut</value>
   </data>
   <data name="RecordingsLocationAppData" xml:space="preserve">
-    <value>NULL</value>
+    <value>Sonic 3 A.I.R. Dossier AppData</value>
   </data>
   <data name="RecordingsLocationRecordingsFolder" xml:space="preserve">
-    <value>NULL</value>
+    <value>Sonic 3 A.I.R. Dossier de capture (enregistrements)</value>
   </data>
   <data name="RecordingsLocationEXEFolder" xml:space="preserve">
-    <value>NULL</value>
+    <value>Sonic 3 A.I.R. Dossier EXE</value>
   </data>
   <data name="RecordingsLocationBrowse" xml:space="preserve">
-    <value>NULL</value>
+    <value>Parcourir...</value>
   </data>
   <data name="RecordingsLocationLabel" xml:space="preserve">
-    <value>NULL</value>
+    <value>Emplacement sélectionné:</value>
   </data>
   <data name="GameRecordingsPlayButton" xml:space="preserve">
-    <value>NULL</value>
+    <value>Lire...</value>
   </data>
   <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Lire avec la version actuelle</value>
   </data>
   <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Lire avec la version de la capture</value>
   </data>
   <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Lire avec...</value>
   </data>
   <data name="FileTab" xml:space="preserve">
-    <value>NULL</value>
+    <value>Fichier</value>
   </data>
   <data name="ViewTab" xml:space="preserve">
-    <value>NULL</value>
+    <value>Afficher</value>
   </data>
   <data name="HelpTab" xml:space="preserve">
-    <value>NULL</value>
+    <value>Aide</value>
   </data>
   <data name="OtherTab" xml:space="preserve">
-    <value>NULL</value>
+    <value>Autre</value>
   </data>
   <data name="LaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Lancer les préréglages...</value>
   </data>
   <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Charger le préréglage de lancement...</value>
   </data>
   <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Renommer le préréglage de lancement...</value>
   </data>
   <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Supprimer le préréglage de lancement...</value>
   </data>
   <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Remplacer les paramètres actuels existants ...</value>
   </data>
   <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Supprimer tous les préréglages de lancement</value>
   </data>
   <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Enregistrer les paramètres actuels en tant que préréglage de lancement</value>
   </data>
   <data name="ModCollectionsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Collection de mods...</value>
   </data>
   <data name="LoadModCollectionMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Charger la Collection de mods...</value>
   </data>
   <data name="RenameModCollectionMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Renommer la Collection de mods...</value>
   </data>
   <data name="DeleteModCollectionMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Supprimer la Collection de mods...</value>
   </data>
   <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Remplacer la Collection de mods existante...</value>
   </data>
   <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Supprimer la Collection de mods existante...</value>
   </data>
   <data name="SaveModCollectonMenuItem" xml:space="preserve">
-    <value>NULL</value>
+    <value>Enregistrer les mods actifs en tant que "Collection de mods"</value>
   </data>
 </root>

@@ -19,11 +19,7 @@ namespace Sonic3AIR_ModManager
 
         public static bool isDebug;
 
-        public static bool ShowAllExceptions { get; set; } = false;
-
         public static bool isDeveloper { get; set; } = false;
-
-        public static bool isDebugger { get; set; } = true;
 
         [ConditionalAttribute("DEBUG")]
         public static void isDebugging()
@@ -51,7 +47,7 @@ namespace Sonic3AIR_ModManager
 
         private static string GetVersionString()
         {
-            return "v." + VersionString + (isDebugger ? " DEV" : "");
+            return (isDebug ? "DEV" : "v." + VersionString);
         }
 
         public static Version InternalVersion { get; } = new Version(VersionString);
@@ -265,7 +261,7 @@ namespace Sonic3AIR_ModManager
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
-                else if (ShowAllExceptions)
+                else if (Properties.Settings.Default.ShowFullDebugOutput)
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }

@@ -154,5 +154,17 @@ namespace Sonic3AIR_ModManager.Properties {
                 this["WindowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowFullDebugOutput {
+            get {
+                return ((bool)(this["ShowFullDebugOutput"]));
+            }
+            set {
+                this["ShowFullDebugOutput"] = value;
+            }
+        }
     }
 }

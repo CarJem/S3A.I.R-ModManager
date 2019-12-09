@@ -78,7 +78,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
@@ -314,6 +314,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\PostBuild.bat" />
     <None Include="Properties\PreBuild.bat" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -502,30 +503,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@ECHO OFF
-
-SET HOUR=%25time:~0,2%25
-
-SET dtStamp9=%25date:~-4%25.%25date:~4,2%25.%25date:~7,2%25_0%25time:~1,1%25-%25time:~3,2%25-%25time:~6,2%25 
-
-SET dtStamp24=%25date:~-4%25.%25date:~4,2%25.%25date:~7,2%25_%25time:~0,2%25-%25time:~3,2%25-%25time:~6,2%25
-
-
-if "%25HOUR:~0,1%25" == " " (SET dtStamp=%25dtStamp9%25)
-else (SET dtStamp=%25dtStamp24%25)
-
-ECHO %25dtStamp%25 
-
-
-
-if $(ConfigurationName) == Publish (
-
-call "$(SolutionDir)Installer\MakeInstaller.bat"
-
-)
-EXIT 0</PostBuildEvent>
+    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "Publish" "$(SolutionDir)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>call "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Sonic3AIR_ModManager\Properties\PreBuild.bat" "Release" "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Sonic3AIR_ModManager\" "false" "true"</PreBuildEvent>
+    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "Publish" "$(SolutionDir)Sonic3AIR_ModManager\" "false" "true"</PreBuildEvent>
   </PropertyGroup>
 </Project>

@@ -288,24 +288,6 @@
   <data name="Save&amp;Load" xml:space="preserve">
     <value>Speichern &amp; Starten</value>
   </data>
-  <data name="SelectFromInstalledVersions" xml:space="preserve">
-    <value>Aus installierten A.I.R. Versionen wählen...</value>
-  </data>
-  <data name="SelectInstallFromAIRZIP" xml:space="preserve">
-    <value>Aus A.I.R. Version ZIP installieren und auswählen...</value>
-  </data>
-  <data name="SetAIRPathFromSettings" xml:space="preserve">
-    <value>A.I.R. Pfad aus Spieleinstellungen auslesen...</value>
-  </data>
-  <data name="SetAIRPathManuallyClassic" xml:space="preserve">
-    <value>A.I.R. Pfad manuell setzen (klassisch)...</value>
-  </data>
-  <data name="SetFromInstalledHeader" xml:space="preserve">
-    <value>Aus installierten Versionen holen/setzen</value>
-  </data>
-  <data name="SetManuallyHeader" xml:space="preserve">
-    <value>Manuell setzen:</value>
-  </data>
   <data name="SettingsTab" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
@@ -963,71 +945,5 @@ Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zu
   </data>
   <data name="RecordingsLocationLabel" xml:space="preserve">
     <value>Gewählter Ort:</value>
-  </data>
-  <data name="GameRecordingsPlayButton" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="FileTab" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="ViewTab" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="HelpTab" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="OtherTab" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="LaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="ModCollectionsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="LoadModCollectionMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="RenameModCollectionMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="DeleteModCollectionMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
-    <value>NULL</value>
-  </data>
-  <data name="SaveModCollectonMenuItem" xml:space="preserve">
-    <value>NULL</value>
   </data>
 </root>

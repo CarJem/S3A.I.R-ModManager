@@ -176,34 +176,134 @@ namespace Sonic3AIR_ModManager
             UserLanguage.ApplyLanguage(ref form.ModViewer);
 
 
+            #region Errors
             string hyperLink = nL + Program.LanguageResource.GetString("ErrorHyperlinkClickMessage");
             form.modErrorText.Text = Program.LanguageResource.GetString("ModsLoadingError") + hyperLink;
 
+
             form.recordingsErrorMessage.Tag = Program.LanguageResource.GetString("RecordingsLoadingError") + Environment.NewLine + "{0}";
             form.recordingsErrorMessage.Text = Program.LanguageResource.GetString("RecordingsLoadingError") + Environment.NewLine + "{0}";
+            #endregion
 
-            //Main Buttons
-            form.exitButton.Content = Program.LanguageResource.GetString("Exit");
+            #region Menu Bar
+
+            form.FileMenuItem.Header = Program.LanguageResource.GetString("FileTab");
+            form.ViewMenuItem.Header = Program.LanguageResource.GetString("ViewTab");
+            form.HelpMenuItem.Header = Program.LanguageResource.GetString("HelpTab");
+            form.OtherMenuItem.Header = Program.LanguageResource.GetString("OtherTab");
+
+    
+
+
+            #region File Section
+            form.AddAIRVersionFileMenuItem.Header = GetOutputString("AddAIRVersion");
+            form.ChangeAIRVersionFileMenuItem.Header = GetOutputString("ChangeAIRVersion");
+            form.ManageAIRVersionsMenuItem.Header = GetOutputString("ManageAIRVersions");
+            form.noInstalledVersionsFileToolStripMenuItem.Header = Program.LanguageResource.GetString("NoInstalledVersions");
             form.exitMenuItem.Header = Program.LanguageResource.GetString("Exit");
+
+            #region Mod Collections Section
+            form.ModCollectionsMenuItem.Header = Program.LanguageResource.GetString("ModCollectionsMenuItem");
+            form.LoadModCollectionMenuItem.Header = Program.LanguageResource.GetString("LoadModCollectionMenuItem");
+            form.RenameModCollectionMenuItem.Header = Program.LanguageResource.GetString("RenameModCollectionMenuItem");
+            form.DeleteModCollectionMenuItem.Header = Program.LanguageResource.GetString("DeleteModCollectionMenuItem");
+            form.SaveModCollectonAsMenuItem.Header = Program.LanguageResource.GetString("SaveModCollectonAsMenuItem");
+            form.DeleteAllModCollectionsMenuItem.Header = Program.LanguageResource.GetString("DeleteAllModCollectionsMenuItem");
+            form.SaveModCollectonMenuItem.Header = Program.LanguageResource.GetString("SaveModCollectonMenuItem");
+            #endregion
+
+            #region Launch Presets Section
+            form.LaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("LaunchPresetsMenuItem");
+            form.LoadLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("LoadLaunchPresetsMenuItem");
+            form.RenameLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("RenameLaunchPresetsMenuItem");
+            form.DeleteLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("DeleteLaunchPresetsMenuItem");
+            form.SaveLaunchPresetAsMenuItem.Header = Program.LanguageResource.GetString("SaveLaunchPresetAsMenuItem");
+            form.DeleteAllLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("DeleteAllLaunchPresetsMenuItem");
+            form.SaveLaunchPresetMenuItem.Header = Program.LanguageResource.GetString("SaveLaunchPresetMenuItem");
+            #endregion
+
+
+
+            #endregion
+
+            #region View Section
+
+            form.airPlacesButton.Header = Program.LanguageResource.GetString("AIRPlaces");
+            form.airModManagerPlacesButton.Header = Program.LanguageResource.GetString("AIRMMPlaces");
+
+            #region AIR Places Section
+            form.openAppDataFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAppDataFolder");
+            form.openEXEFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenEXEFolder");
+            form.openSettingsFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenSettingsFile");
+            form.openModsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModsFolder");
+            form.openConfigFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenConfigFile");
+            form.showLogFileButton.Header = Program.LanguageResource.GetString("ShowLogFileButton");
+            #endregion
+
+            #region AIR Mod Manager Places Section
+            form.openDownloadsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenDownloadsFolder");
+            form.openVersionsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenVersionsFolder");
+            #endregion
+
+
+
+
+            #endregion
+
+            #region Help Section
+
+            form.airGuidesItem.Header = Program.LanguageResource.GetString("AIRGuides");
+            form.airTipsItem.Header = Program.LanguageResource.GetString("AIRTips");
+
+            #region AIR Guides Section
+            form.openSampleModsFolderButton.Header = Program.LanguageResource.GetString("OpenSampleModsFolder");
+            form.openUserManualButton.Header = Program.LanguageResource.GetString("OpenUserManual");
+            form.openModDocumentationButton.Header = Program.LanguageResource.GetString("OpenModInstructions");
+            form.openModdingTemplatesFolder.Header = Program.LanguageResource.GetString("OpenModTemplatesFolder");
+            #endregion
+
+            #region AIR Tips Section
+            form.label5.Text = Program.LanguageResource.GetString("UsefulShortKeys");
+            #endregion
+
+
+
+            #endregion
+
+            #region Other Section
+            form.AboutMenuItem.Header = Program.LanguageResource.GetString("AboutTab");
+            form.airMediaButton.Header = Program.LanguageResource.GetString("AIRMedia");
+
+            #region AIR Media Section
+            form.sonic3AIRHomepageToolStripMenuItem.Header = Program.LanguageResource.GetString("S3AIRHomepage");
+            form.s3AIRGamebannaToolStripMenuItem.Header = Program.LanguageResource.GetString("S3AIRGB");
+            form.eukaryot3KTwitterToolStripMenuItem.Header = Program.LanguageResource.GetString("Eukaryot3KTwitter");
+            form.carJemTwitterToolStripMenuItem.Header = Program.LanguageResource.GetString("CarJemTwitter");
+            #endregion
+
+            #endregion
+
+            #endregion
+
+            #region Main Buttons
+            form.exitButton.Content = Program.LanguageResource.GetString("Exit");
             form.saveAndLoadButton.Content = Program.LanguageResource.GetString("Save&Load");
             form.saveButton.Content = Program.LanguageResource.GetString("Save");
+            #endregion
 
-            //Tab Page Headers
+            #region Main Tab Control
+
             form.toolsPage.Header = Program.LanguageResource.GetString("ToolsTab");
             form.modPage.Header = Program.LanguageResource.GetString("ModsTab");
             form.settingsPage.Header = Program.LanguageResource.GetString("SettingsTab");
 
-            form.optionsPage.Header = Program.LanguageResource.GetString("GeneralTab");
-            form.inputPage.Header = Program.LanguageResource.GetString("InputTab");
-            form.versionsPage.Header = Program.LanguageResource.GetString("VersionsTab");
-
-
-            //Mod Page
+            #region Mod Page
             form.groupBox3.Header = Program.LanguageResource.GetString("ModsTab_ModProperties");
             form.refreshButton.Content = Program.LanguageResource.GetString("Reload");
             form.moreModOptionsButton.Content = Program.LanguageResource.GetString("MoreExpandable");
 
             form.gamebannaURLHandlerOptionsToolStripMenuItem.Content = Program.LanguageResource.GetString("GameBannaURLHandler");
+            form.LegacyLoadingText.Text = Program.LanguageResource.GetString("LegacyLoadingText_Line1") + Environment.NewLine + Program.LanguageResource.GetString("LegacyLoadingText_Line2");
             //form.enableModStackingToolStripMenuItem.Content = Program.LanguageResource.GetString("EnableModStacking");
             //form.onForAIRVersionUnreleasedToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note1");
             //form.v1909190AndAboveOnlyToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note2");
@@ -211,13 +311,12 @@ namespace Sonic3AIR_ModManager
             form.openModFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModFolder");
             form.removeModToolStripMenuItem.Header = Program.LanguageResource.GetString("RemoveMod");
             form.openModURLToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModURL");
+            #endregion
 
-            //Tools Page
+            #region Tools Page
             form.recordingsPage.Header = Program.LanguageResource.GetString("RecordingsTab");
-            //form.guidesPage.Header = Program.LanguageResource.GetString("GuidesTab");
 
-
-            //Recordings Page
+            #region Recordings Page
             form.uploadButton.Content = Program.LanguageResource.GetString("Upload");
             form.copyRecordingFilePath.Content = Program.LanguageResource.GetString("CopyFilePath");
             form.openRecordingButton.Content = Program.LanguageResource.GetString("Open");
@@ -234,64 +333,19 @@ namespace Sonic3AIR_ModManager
 
             form.RecordingsViewer.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
             form.RecordingsViewer.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
+            #endregion
 
-            //File MenuItem Items
-            form.AddAIRVersionFileMenuItem.Header = "Add an A.I.R. Build..."; //TODO : Add Language Translations
-            form.ChangeAIRVersionFileMenuItem.Header = "Change A.I.R. Build..."; //TODO : Add Language Translations
-            form.ManageAIRVersionsMenuItem.Header = "Manage A.I.R. Builds"; //TODO : Add Language Translations
-            form.noInstalledVersionsFileToolStripMenuItem.Header = Program.LanguageResource.GetString("NoInstalledVersions");//TODO : Add Language Translations
+            #endregion
 
-            form.openSampleModsFolderButton.Header = Program.LanguageResource.GetString("OpenSampleModsFolder");
-            form.openUserManualButton.Header = Program.LanguageResource.GetString("OpenUserManual");
-            form.openModDocumentationButton.Header = Program.LanguageResource.GetString("OpenModInstructions");
-            form.openModdingTemplatesFolder.Header = Program.LanguageResource.GetString("OpenModTemplatesFolder");
-            form.label5.Text = Program.LanguageResource.GetString("UsefulShortKeys");
-            form.airPlacesButton.Header = Program.LanguageResource.GetString("AIRPlaces");
-            form.airMediaButton.Header = Program.LanguageResource.GetString("AIRMedia");
-            form.airModManagerPlacesButton.Header = Program.LanguageResource.GetString("AIRMMPlaces");
-            form.airGuidesItem.Header = Program.LanguageResource.GetString("AIRGuides");
-            form.airTipsItem.Header = Program.LanguageResource.GetString("AIRTips");
+            #region Settings Page
 
-            form.openAppDataFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAppDataFolder");
-            form.openEXEFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenEXEFolder");
-            form.openSettingsFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenSettingsFile");
-            form.openModsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModsFolder");
-            form.openConfigFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenConfigFile");
+            form.gameOptionsPage.Header = Program.LanguageResource.GetString("AIROptionsTab");
+            form.optionsPage.Header = Program.LanguageResource.GetString("GeneralTab");
+            form.inputPage.Header = Program.LanguageResource.GetString("InputTab");
+            form.versionsPage.Header = Program.LanguageResource.GetString("VersionsTab");
 
-            form.sonic3AIRHomepageToolStripMenuItem.Header = Program.LanguageResource.GetString("S3AIRHomepage");
-            form.s3AIRGamebannaToolStripMenuItem.Header = Program.LanguageResource.GetString("S3AIRGB");
-            form.eukaryot3KTwitterToolStripMenuItem.Header = Program.LanguageResource.GetString("Eukaryot3KTwitter");
-            form.carJemTwitterToolStripMenuItem.Header = Program.LanguageResource.GetString("CarJemTwitter");
+            #region General Settings Page
 
-            form.openDownloadsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenDownloadsFolder");
-            form.openVersionsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenVersionsFolder");
-
-            form.LaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("LaunchPresetsMenuItem");
-            form.LoadLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("LoadLaunchPresetsMenuItem");
-            form.RenameLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("RenameLaunchPresetsMenuItem");
-            form.DeleteLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("DeleteLaunchPresetsMenuItem");
-            form.SaveLaunchPresetAsMenuItem.Header = Program.LanguageResource.GetString("SaveLaunchPresetAsMenuItem");
-            form.DeleteAllLaunchPresetsMenuItem.Header = Program.LanguageResource.GetString("DeleteAllLaunchPresetsMenuItem");
-            form.SaveLaunchPresetMenuItem.Header = Program.LanguageResource.GetString("SaveLaunchPresetMenuItem");
-            form.ModCollectionsMenuItem.Header = Program.LanguageResource.GetString("ModCollectionsMenuItem");
-            form.LoadModCollectionMenuItem.Header = Program.LanguageResource.GetString("LoadModCollectionMenuItem");
-            form.RenameModCollectionMenuItem.Header = Program.LanguageResource.GetString("RenameModCollectionMenuItem");
-            form.DeleteModCollectionMenuItem.Header = Program.LanguageResource.GetString("DeleteModCollectionMenuItem");
-            form.SaveModCollectonAsMenuItem.Header = Program.LanguageResource.GetString("SaveModCollectonAsMenuItem");
-            form.DeleteAllModCollectionsMenuItem.Header = Program.LanguageResource.GetString("DeleteAllModCollectionsMenuItem");
-            form.SaveModCollectonMenuItem.Header = Program.LanguageResource.GetString("SaveModCollectonMenuItem");
-
-
-
-
-
-            form.showLogFileButton.Header = Program.LanguageResource.GetString("ShowLogFileButton");
-
-            //Other MenuItem Items
-            form.AboutMenuItem.Header = Program.LanguageResource.GetString("AboutTab");
-
-
-            //General Options Page + A.I.R. Settings
             form.groupBox8.Header = Program.LanguageResource.GetString("ModManagerOptions");
             form.label1.Text = Program.LanguageResource.GetString("Sonic3AIRPathLabel");
             form.autoRunCheckbox.Content = Program.LanguageResource.GetString("EnableAutoBootMode");
@@ -299,6 +353,21 @@ namespace Sonic3AIR_ModManager
             form.keepLoaderOpenCheckBox.Content = Program.LanguageResource.GetString("StayOpenOnLoad");
             form.keepOpenOnQuitCheckBox.Content = Program.LanguageResource.GetString("StayOpenOnExit");
             form.checkBox1.Content = Program.LanguageResource.GetString("CheckforAIRUpdatesOnStart");
+            form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
+            form.FullDebugOutputCheckBox.Content = Program.LanguageResource.GetString("FullDebugOutputOption");
+
+            #region AIR Path Context Menu Strip
+            form.SetAIRpathManuallyMenuItem.Header = GetOutputString("SetAIRPathManually");
+            form.SetAIRPathFromPreviousDataMenuItem.Header = GetOutputString("SetAIRPathFromPreviousData");
+            form.AddAIRVersionMenuItem.Header = GetOutputString("AddAIRVersion");
+            form.ChangeAIRVersionMenuItem.Header = GetOutputString("ChangeAIRVersion");
+
+            form.noInstalledVersionsToolStripMenuItem.Header = Program.LanguageResource.GetString("NoInstalledVersions");
+            #endregion
+
+            #endregion
+
+            #region AIR Internal Settings Page
 
             form.groupBox1.Header = Program.LanguageResource.GetString("AIRInternalSettings");
             form.label2.Text = Program.LanguageResource.GetString("S3KROMPathLabel");
@@ -306,7 +375,7 @@ namespace Sonic3AIR_ModManager
             form.failSafeModeCheckbox.Content = Program.LanguageResource.GetString("FailSafeMode");
             form.devModeCheckbox.Content = Program.LanguageResource.GetString("AIRDevMode");
 
-            form.gameOptionsPage.Header = Program.LanguageResource.GetString("AIROptionsTab");
+
 
             form.useDarkModeCheckBox.Content = Program.LanguageResource.GetString("UseDarkTheme");
 
@@ -338,31 +407,9 @@ namespace Sonic3AIR_ModManager
             form.LaunchPlayerKT.Content = Program.LanguageResource.GetString("LaunchOptionsPlayerKT");
             form.LaunchPlayerST.Content = Program.LanguageResource.GetString("LaunchOptionsPlayerST");
 
-            form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
+            #endregion
 
-
-            //AIR Path Context Menu Strip
-
-
-            /* TODO: (cont.)
-            * Remove:
-            * - SetManuallyHeader
-            * - SetAIRPathManuallyClassic
-            * - SetAIRPathFromSettings
-            * - SetFromInstalledHeader
-            * - SelectInstallFromAIRZIP
-            * - SelectFromInstalledVersions
-            * Add New Translations for the Following
-            */
-
-            form.SetAIRpathManuallyMenuItem.Header = "Set A.I.R. Path Manually...";
-            form.SetAIRPathFromPreviousDataMenuItem.Header = "Set A.I.R. Path from previous data...";
-            form.AddAIRVersionMenuItem.Header = "Add an A.I.R. Build...";
-            form.ChangeAIRVersionMenuItem.Header = "Change A.I.R. Build...";
-
-            form.noInstalledVersionsToolStripMenuItem.Header = Program.LanguageResource.GetString("NoInstalledVersions");
-
-            //Input Page
+            #region Input Page
             form.groupBox4.Header = Program.LanguageResource.GetString("ButtonMappings");
             form.groupBox7.Header = Program.LanguageResource.GetString("DeviceIdentifierNames");
             form.openGamepadSettingsButton.Content = Program.LanguageResource.GetString("OpenSystemSettingsExpandable");
@@ -384,8 +431,9 @@ namespace Sonic3AIR_ModManager
 
             form.saveInputsButton.Content = Program.LanguageResource.GetString("SaveInputMappingsButton");
             form.resetInputsButton.Content = Program.LanguageResource.GetString("ResetMappingsToDefaultButton");
+            #endregion
 
-            //Versions Page
+            #region Versions Page
             form.groupBox2.Header = Program.LanguageResource.GetString("InstalledVersions");
 
             form.removeVersionButton.Content = Program.LanguageResource.GetString("Remove");
@@ -393,6 +441,11 @@ namespace Sonic3AIR_ModManager
 
             form.VersionsViewer.VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
             form.VersionsViewer.PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");
+            #endregion
+
+            #endregion
+
+            #endregion
 
             form.SetTooltips();
         }

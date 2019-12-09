@@ -21,7 +21,7 @@ namespace Sonic3AIR_ModManager
             UserLanguage.ApplyLanguage(ref Instance);
 			Title = String.Format("{1} {0}", Program.LanguageResource.GetString("ApplicationTitle"), Program.LanguageResource.GetString("AboutString"));
             labelProductName.Text = AssemblyProduct;
-			labelVersion.Text = String.Format("{1}: {0}", Program.Version, Program.LanguageResource.GetString("BuildDateString"));
+			labelVersion.Text = String.Format("{1}: {0}", Program.Version, Program.LanguageResource.GetString("Version"));
             buildDateLabel.Text = String.Format("{1}: {0}", GetBuildTime, Program.LanguageResource.GetString("BuildDateString"))
             + Environment.NewLine + String.Format("{1}: {0}", GetProgramType, Program.LanguageResource.GetString("ArchitectureString"));
 
