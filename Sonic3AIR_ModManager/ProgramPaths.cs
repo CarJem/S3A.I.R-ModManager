@@ -402,19 +402,7 @@ namespace Sonic3AIR_ModManager
             try
             {
                 S3AIRSettings = new AIR_API.Settings(file);
-                Version target = new Version("19.08.17.0");
-                int result;
-                if (S3AIRSettings.Version != null) result = S3AIRSettings.Version.CompareTo(target);
-                else result = -1;
-                if (result < 0)
-                {
-                    if (throwVersionMismatchError) MessageBox.Show(Program.LanguageResource.GetString("StartupFailureError"));
-                    return true;
-                }
-                else
-                {
-                    return true;
-                }
+                return true;
             }
             catch
             {
