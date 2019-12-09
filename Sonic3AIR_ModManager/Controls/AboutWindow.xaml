@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
             <Grid Width="160" Height="300">
                 <Border  BorderBrush="{DynamicResource DisabledText}" BorderThickness="2">
-                    <Image Source="Resources/win.bmp" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="0,0,0,0"></Image>
+                    <Image Source="/Resources/win.bmp" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="0,0,0,0"></Image>
                 </Border>
             </Grid>
             <Button Click="Button_Click" Name="OkButton" Grid.Row="2" Content="OK" Height="25" Margin="10,10,10,10" VerticalAlignment="Center"></Button>
