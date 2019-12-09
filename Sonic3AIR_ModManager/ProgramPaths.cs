@@ -285,7 +285,7 @@ namespace Sonic3AIR_ModManager
 
         private static bool DoesDefaultGameRecordingsFolderPathExist()
         {
-            if (ModManager.S3AIRSettings.RawSettings is AIR_API.AIRSettingsMK2)
+            if (ModManager.S3AIRSettings.RawSettings is AIR_API.Raw.Settings.Interfaces.AIRSettingsMK2)
             {
                 //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
                 if (ModManager.S3AIRSettings.Version >= new Version("19.12.7.0"))
@@ -308,7 +308,7 @@ namespace Sonic3AIR_ModManager
 
         private static string GetDefaultGameRecordingsFolderPath()
         {
-            if (ModManager.S3AIRSettings.RawSettings is AIR_API.AIRSettingsMK2)
+            if (ModManager.S3AIRSettings.RawSettings is AIR_API.Raw.Settings.Interfaces.AIRSettingsMK2)
             {
                 //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
                 if (ModManager.S3AIRSettings.Version >= new Version("19.12.7.0"))

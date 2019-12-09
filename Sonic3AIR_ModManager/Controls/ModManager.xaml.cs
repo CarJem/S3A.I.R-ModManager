@@ -592,11 +592,11 @@ namespace Sonic3AIR_ModManager
         {
             if (e.Source is TabControl)
             {
-                if (tabControl1.SelectedItem == toolsPage)
+                if (PrimaryTabControl.SelectedItem == toolsPage)
                 {
                     CollectGameRecordings();
                 }
-                else if (tabControl1.SelectedItem == optionsPage)
+                else if (PrimaryTabControl.SelectedItem == optionsPage)
                 {
                     RefreshInputMappings();
                 }
@@ -841,7 +841,7 @@ namespace Sonic3AIR_ModManager
             inputPanel.IsEnabled = enabled;
             AboutMenuItem.IsEnabled = enabled;
             devModeCheckbox.IsEnabled = enabled;
-            settingsTabControl.IsEnabled = enabled;
+            OptionsTabControl.IsEnabled = enabled;
         }
 
         private void UpdateUI()
@@ -1616,7 +1616,7 @@ namespace Sonic3AIR_ModManager
 
         public void RefreshInputMappings()
         {
-            if (S3AIRSettings.RawSettings is AIR_API.AIRSettingsMK2) InputDevicesHandler.InputDevices = S3AIRSettings.InputDevices;
+            if (S3AIRSettings.RawSettings is AIR_API.Raw.Settings.Interfaces.AIRSettingsMK2) InputDevicesHandler.InputDevices = S3AIRSettings.InputDevices;
             else InputDevicesHandler.InputDevices = S3AIRSettings.InputDevices;
 
             DisableMappings();
@@ -1931,6 +1931,19 @@ namespace Sonic3AIR_ModManager
             UpdateAIRVersionsToolstrips();
         }
 
+        private void ManageAIRVersionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            GoToAIRVersionManagement();
+        }
+
+        private void GoToAIRVersionManagement()
+        {
+            settingsPage.IsSelected = true;
+            PrimaryTabControl.SelectedItem = settingsPage;
+            versionsPage.IsSelected = true;
+            OptionsTabControl.SelectedItem = versionsPage;
+        }
+
         private void UpdateAIRVersionsToolstrips()
         {
             CleanUpInstalledVersionsToolStrip();
@@ -1945,7 +1958,8 @@ namespace Sonic3AIR_ModManager
                         string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
                         if (File.Exists(filePath))
                         {
-                            installedVersionsToolStripMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
+                            ChangeAIRVersionMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
+                            ChangeAIRVersionFileMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
                         }
 
 
@@ -1958,11 +1972,16 @@ namespace Sonic3AIR_ModManager
 
         private void CleanUpInstalledVersionsToolStrip()
         {
-            foreach (var item in installedVersionsToolStripMenuItem.Items.Cast<MenuItem>())
+            foreach (var item in ChangeAIRVersionMenuItem.Items.Cast<MenuItem>())
             {
                 item.Click -= ChangeAIRPathByInstalls;
             }
-            installedVersionsToolStripMenuItem.Items.Clear();
+            foreach (var item in ChangeAIRVersionFileMenuItem.Items.Cast<MenuItem>())
+            {
+                item.Click -= ChangeAIRPathByInstalls;
+            }
+            ChangeAIRVersionMenuItem.Items.Clear();
+            ChangeAIRVersionFileMenuItem.Items.Clear();
         }
 
         private MenuItem GenerateInstalledVersionsToolstripItem(string name, string filepath)
@@ -2040,15 +2059,15 @@ namespace Sonic3AIR_ModManager
         {
             if (e.Source is TabControl)
             {
-                if (settingsTabControl.SelectedItem == versionsPage)
+                if (OptionsTabControl.SelectedItem == versionsPage)
                 {
                     RefreshVersionsList(true);
                 }
-                else if (settingsTabControl.SelectedItem == gameOptionsPage || settingsTabControl.SelectedItem == inputPage)
+                else if (OptionsTabControl.SelectedItem == gameOptionsPage || OptionsTabControl.SelectedItem == inputPage)
                 {
                     CollectGameConfig();
                     RetriveLaunchOptions();
-                    if (settingsTabControl.SelectedItem == inputPage)
+                    if (OptionsTabControl.SelectedItem == inputPage)
                     {
                         RefreshInputMappings();
                     }
@@ -2173,9 +2192,9 @@ namespace Sonic3AIR_ModManager
         private void HyperlinkToGeneralTabAIRPath()
         {
             settingsPage.IsSelected = true;
-            tabControl1.SelectedItem = settingsPage;
+            PrimaryTabControl.SelectedItem = settingsPage;
             optionsPage.IsSelected = true;
-            settingsTabControl.SelectedItem = optionsPage;
+            OptionsTabControl.SelectedItem = optionsPage;
 
         }
 
@@ -2429,6 +2448,7 @@ namespace Sonic3AIR_ModManager
         #region Mod Collections / Launch Presets Mananagement
         private void FileMenuItem_SubmenuOpened(object sender, RoutedEventArgs e)
         {
+            UpdateAIRVersionsToolstrips();
             CollectModCollectionMenuItemsDictionary();
             CollectLaunchPresetsMenuItemsDictionary();
         }
@@ -2615,6 +2635,5 @@ namespace Sonic3AIR_ModManager
 
 
         #endregion
-
     }
 }

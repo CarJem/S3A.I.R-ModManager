@@ -236,6 +236,11 @@ namespace Sonic3AIR_ModManager
             form.RecordingsViewer.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
 
             //File MenuItem Items
+            form.AddAIRVersionFileMenuItem.Header = "Add an A.I.R. Build..."; //TODO : Add Language Translations
+            form.ChangeAIRVersionFileMenuItem.Header = "Change A.I.R. Build..."; //TODO : Add Language Translations
+            form.ManageAIRVersionsMenuItem.Header = "Manage A.I.R. Builds"; //TODO : Add Language Translations
+            form.noInstalledVersionsFileToolStripMenuItem.Header = Program.LanguageResource.GetString("NoInstalledVersions");//TODO : Add Language Translations
+
             form.openSampleModsFolderButton.Header = Program.LanguageResource.GetString("OpenSampleModsFolder");
             form.openUserManualButton.Header = Program.LanguageResource.GetString("OpenUserManual");
             form.openModDocumentationButton.Header = Program.LanguageResource.GetString("OpenModInstructions");
@@ -337,12 +342,24 @@ namespace Sonic3AIR_ModManager
 
 
             //AIR Path Context Menu Strip
-            form.setManuallyHeader.Header = Program.LanguageResource.GetString("SetManuallyHeader");
-            form.eXEPathToolStripMenuItem.Header = Program.LanguageResource.GetString("SetAIRPathManuallyClassic");
-            form.fromSettingsFileToolStripMenuItem.Header = Program.LanguageResource.GetString("SetAIRPathFromSettings");
-            form.fromInstalledHeader.Header = Program.LanguageResource.GetString("SetFromInstalledHeader");
-            form.aIRVersionZIPToolStripMenuItem.Header = Program.LanguageResource.GetString("SelectInstallFromAIRZIP");
-            form.installedVersionsToolStripMenuItem.Header = Program.LanguageResource.GetString("SelectFromInstalledVersions");
+
+
+            /* TODO: (cont.)
+            * Remove:
+            * - SetManuallyHeader
+            * - SetAIRPathManuallyClassic
+            * - SetAIRPathFromSettings
+            * - SetFromInstalledHeader
+            * - SelectInstallFromAIRZIP
+            * - SelectFromInstalledVersions
+            * Add New Translations for the Following
+            */
+
+            form.SetAIRpathManuallyMenuItem.Header = "Set A.I.R. Path Manually...";
+            form.SetAIRPathFromPreviousDataMenuItem.Header = "Set A.I.R. Path from previous data...";
+            form.AddAIRVersionMenuItem.Header = "Add an A.I.R. Build...";
+            form.ChangeAIRVersionMenuItem.Header = "Change A.I.R. Build...";
+
             form.noInstalledVersionsToolStripMenuItem.Header = Program.LanguageResource.GetString("NoInstalledVersions");
 
             //Input Page

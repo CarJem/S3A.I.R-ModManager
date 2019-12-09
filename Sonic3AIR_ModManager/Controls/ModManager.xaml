@@ -21,6 +21,12 @@
         </Grid.RowDefinitions>
         <Menu HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Background="{DynamicResource ToolbarBackground}" Foreground="{DynamicResource NormalText}">
             <MenuItem Name="FileMenuItem" Header="File" SubmenuOpened="FileMenuItem_SubmenuOpened">
+                <MenuItem Header="Add an A.I.R. Build..." Name="AddAIRVersionFileMenuItem" Click="AIRVersionZIPToolStripMenuItem_Click"></MenuItem>
+                <MenuItem Header="Change A.I.R. Build..." Name="ChangeAIRVersionFileMenuItem">
+                    <MenuItem Name="noInstalledVersionsFileToolStripMenuItem" Header="No Installed Versions" IsEnabled="False"></MenuItem>
+                </MenuItem>
+                <MenuItem Name="ManageAIRVersionsMenuItem" Click="ManageAIRVersionsMenuItem_Click" Header="Manage A.I.R. Builds"></MenuItem>
+                <Separator></Separator>
                 <MenuItem Visibility="Collapsed" Name="LaunchPresetsMenuItem" Header="Launch Presets...">
                     <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="LoadLaunchPresetsMenuItem_RecentItemSelected" Name="LoadLaunchPresetsMenuItem" Header="Load Launch Preset..."></genlib:RecentsListMenuItem>
                     <genlib:RecentsListMenuItem HasItemLimit="False" RecentItemSelected="RenameLaunchPresetsMenuItem_RecentItemSelected" Name="RenameLaunchPresetsMenuItem" Header="Rename Launch Preset..."></genlib:RecentsListMenuItem>
@@ -82,7 +88,7 @@
                 <genlib:RecentsListMenuItem Name="RecentsMenu" Header="Open Recently..." RecentItemSelected="RecentsMenu_RecentItemSelected"></genlib:RecentsListMenuItem>
             </MenuItem>
         </Menu>
-        <TabControl Grid.Row="1" x:Name="tabControl1" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">
+        <TabControl Grid.Row="1" x:Name="PrimaryTabControl" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">
             <TabItem Header="Mods" Name="modPage">  
                 <Grid x:Name="modPanel" Margin="5">
                     <Grid.ColumnDefinitions>
@@ -249,7 +255,7 @@
                 </TabControl>
             </TabItem>
             <TabItem Name="settingsPage" Header="Options">
-                <TabControl x:Name="settingsTabControl" SelectionChanged="TabControl2_SelectedIndexChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
+                <TabControl x:Name="OptionsTabControl" SelectionChanged="TabControl2_SelectedIndexChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
                     <TabItem Name="optionsPage" Header="General">
                         <ScrollViewer Margin="5">
                             <Grid>
@@ -268,18 +274,13 @@
                                             <Button Grid.Column="1" Content="..." Name="updateSonic3AIRPathButton" Click="ChangeSonic3AIRPathButton_Click"  ContextMenuService.Placement="Left" ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                                 <Button.ContextMenu>
                                                     <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}" Name="AIRPathMenuStrip" ContextMenuOpening="AIRPathMenuStrip_ContextMenuOpening">
-                                                        <Separator></Separator>
-                                                        <MenuItem Name="setManuallyHeader" IsEnabled="False" FontWeight="Bold"></MenuItem>
-                                                        <Separator></Separator>
-                                                        <MenuItem Name="eXEPathToolStripMenuItem" Click="UpdateSonic3AIRPath_Click"></MenuItem>
-                                                        <MenuItem Name="fromSettingsFileToolStripMenuItem" Click="FromSettingsFileToolStripMenuItem_Click"></MenuItem>
-                                                        <Separator></Separator>
-                                                        <MenuItem Name="fromInstalledHeader" IsEnabled="False" FontWeight="Bold"></MenuItem>
-                                                        <Separator></Separator>
-                                                        <MenuItem Name="aIRVersionZIPToolStripMenuItem" Click="AIRVersionZIPToolStripMenuItem_Click"></MenuItem>
-                                                        <MenuItem Name="installedVersionsToolStripMenuItem">
+                                                        <MenuItem Name="AddAIRVersionMenuItem" Click="AIRVersionZIPToolStripMenuItem_Click"></MenuItem>
+                                                        <MenuItem Name="ChangeAIRVersionMenuItem">
                                                             <MenuItem Name="noInstalledVersionsToolStripMenuItem"></MenuItem>
                                                         </MenuItem>
+                                                        <Separator></Separator>
+                                                        <MenuItem Name="SetAIRpathManuallyMenuItem" Click="UpdateSonic3AIRPath_Click"></MenuItem>
+                                                        <MenuItem Name="SetAIRPathFromPreviousDataMenuItem" Click="FromSettingsFileToolStripMenuItem_Click"></MenuItem>
                                                     </ContextMenu>
                                                 </Button.ContextMenu>
                                             </Button>

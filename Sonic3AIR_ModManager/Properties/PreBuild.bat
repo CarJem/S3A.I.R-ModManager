@@ -7,6 +7,3 @@ set ignoreInternal=%4
 if %ConfigurationName% == "Publish" (
 call "%SolutionDir%Properties\Versioning\GenerationsLib.Versioning.exe" "%SolutionDir%Properties\AssemblyInfo.cs" "Sonic3AIR_ModManager" %ignoreFile% %ignoreInternal%
 )
-if %ConfigurationName% == "Release" (
-call "%SolutionDir%Properties\Versioning\GenerationsLib.Versioning.exe" "%SolutionDir%Properties\AssemblyInfo.cs" "Sonic3AIR_ModManager" %ignoreFile% %ignoreInternal%
-)

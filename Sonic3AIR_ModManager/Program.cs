@@ -261,11 +261,11 @@ namespace Sonic3AIR_ModManager
         {
             //ConsoleManager.Show();
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) => {
-                if (e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly() && ShowAllExceptions)
+                if (e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
-                else
+                else if (ShowAllExceptions)
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
