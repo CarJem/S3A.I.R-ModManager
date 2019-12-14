@@ -178,7 +178,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable Dev Mode (Not Debug Mode).
+        ///   Looks up a localized string similar to Enable Dev Mode.
         /// </summary>
         internal static string AIRDevMode {
             get {
@@ -597,6 +597,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string ConflictingModSection {
             get {
                 return ResourceManager.GetString("ConflictingModSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close Context Menu.
+        /// </summary>
+        internal static string ContextMenuCloseHeader {
+            get {
+                return ResourceManager.GetString("ContextMenuCloseHeader", resourceCulture);
             }
         }
         
@@ -1831,7 +1840,34 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open AppData Folder.
+        ///   Looks up a localized string similar to Open A.I.R. Game Recording Directory.
+        /// </summary>
+        internal static string OpenAIRGamerecordingsFolder {
+            get {
+                return ResourceManager.GetString("OpenAIRGamerecordingsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open A.I.R. Global Settings File.
+        /// </summary>
+        internal static string OpenAIRGlobalSettingsFile {
+            get {
+                return ResourceManager.GetString("OpenAIRGlobalSettingsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open A.I.R. Input Settings File.
+        /// </summary>
+        internal static string OpenAIRInputSettingsFile {
+            get {
+                return ResourceManager.GetString("OpenAIRInputSettingsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open A.I.R. Data Directory.
         /// </summary>
         internal static string OpenAppDataFolder {
             get {
@@ -1840,7 +1876,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Config File.
+        ///   Looks up a localized string similar to Open A.I.R. Config File.
         /// </summary>
         internal static string OpenConfigFile {
             get {
@@ -1849,7 +1885,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Downloads Folder.
+        ///   Looks up a localized string similar to Open Mod Manager Downloads Directory.
         /// </summary>
         internal static string OpenDownloadsFolder {
             get {
@@ -1858,7 +1894,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open EXE Folder.
+        ///   Looks up a localized string similar to Open A.I.R. EXE Directory.
         /// </summary>
         internal static string OpenEXEFolder {
             get {
@@ -1903,7 +1939,25 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Mods Folder.
+        ///   Looks up a localized string similar to Open Mod Manager Log Directory.
+        /// </summary>
+        internal static string OpenModManagerLogFolder {
+            get {
+                return ResourceManager.GetString("OpenModManagerLogFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Mod Manager Settings File.
+        /// </summary>
+        internal static string OpenModManagerSettingsFile {
+            get {
+                return ResourceManager.GetString("OpenModManagerSettingsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open A.I.R. Mods Directory.
         /// </summary>
         internal static string OpenModsFolder {
             get {
@@ -1912,7 +1966,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Modding Templates Folder.
+        ///   Looks up a localized string similar to Open A.I.R. Modding Templates Directory.
         /// </summary>
         internal static string OpenModTemplatesFolder {
             get {
@@ -1930,7 +1984,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Sample Mods Folder.
+        ///   Looks up a localized string similar to Open A.I.R. Sample Mods Directory.
         /// </summary>
         internal static string OpenSampleModsFolder {
             get {
@@ -1939,7 +1993,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Settings File.
+        ///   Looks up a localized string similar to Open A.I.R. Settings File.
         /// </summary>
         internal static string OpenSettingsFile {
             get {
@@ -1966,7 +2020,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Versions Folder.
+        ///   Looks up a localized string similar to Open Mod Manager Versions Directory.
         /// </summary>
         internal static string OpenVersionsFolder {
             get {
@@ -2497,7 +2551,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show Log File.
+        ///   Looks up a localized string similar to Show A.I.R. Log File.
         /// </summary>
         internal static string ShowLogFileButton {
             get {
@@ -2749,21 +2803,119 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Useful In-Game Shortcuts/Keys:
-        /// 
-        /// Alt + Enter - Toggle Fullscreen
-        /// F2 - Take a Game Recording Capture
-        /// Right Click - Open A.I.R Context Menu
-        /// F3 - Rescan for Game Controllers
-        /// F4 - Switches Game Controllers for P1 and P2
-        /// Numpad Plus/Minus - Adjust Global Audio Volume
-        /// Alt + B - Change Background Blur
-        /// Alt + F - Change Filter
-        /// Alt + P - Show Performance Display.
+        ///   Looks up a localized string similar to Numpad Plus/Minus - Adjust Global Audio Volume.
         /// </summary>
-        internal static string UsefulShortKeys {
+        internal static string UsefulShortKeysAudioAdjust {
             get {
-                return ResourceManager.GetString("UsefulShortKeys", resourceCulture);
+                return ResourceManager.GetString("UsefulShortKeysAudioAdjust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt + B - Change Background Blur.
+        /// </summary>
+        internal static string UsefulShortKeysBackgroundBlur {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysBackgroundBlur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right Click - Open A.I.R Context Menu.
+        /// </summary>
+        internal static string UsefulShortKeysContextMenu {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysContextMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dev Mode Shortcuts/Keys:.
+        /// </summary>
+        internal static string UsefulShortKeysDevHeader {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysDevHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt + F / Alt + G - Cycle Screen Filter.
+        /// </summary>
+        internal static string UsefulShortKeysFilter {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt + Enter - Toggle Fullscreen.
+        /// </summary>
+        internal static string UsefulShortKeysFullscreen {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysFullscreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F2 - Take a Game Recording Capture.
+        /// </summary>
+        internal static string UsefulShortKeysGameRecordingCapture {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysGameRecordingCapture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Useful In-Game Shortcuts/Keys:.
+        /// </summary>
+        internal static string UsefulShortKeysHeader {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt + M - Toggle Palette Debug Output.
+        /// </summary>
+        internal static string UsefulShortKeysPaletteDebug {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysPaletteDebug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt + P - Show Performance Display.
+        /// </summary>
+        internal static string UsefulShortKeysPerformanceDisplay {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysPerformanceDisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F10 - Reload Resources (Sprites/Palettes).
+        /// </summary>
+        internal static string UsefulShortKeysRefreshAssets {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysRefreshAssets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F3 - Rescan for Game Controllers.
+        /// </summary>
+        internal static string UsefulShortKeysRescanInputs {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysRescanInputs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F4 - Switches Game Controllers for P1 and P2.
+        /// </summary>
+        internal static string UsefulShortKeysSwapInput {
+            get {
+                return ResourceManager.GetString("UsefulShortKeysSwapInput", resourceCulture);
             }
         }
         

@@ -120,6 +120,9 @@
     <Reference Include="Dynamitey, Version=2.0.9.136, Culture=neutral, PublicKeyToken=cbf53ea3aeb972c6, processorArchitecture=MSIL">
       <HintPath>..\packages\Dynamitey.2.0.9.136\lib\net40\Dynamitey.dll</HintPath>
     </Reference>
+    <Reference Include="Gma.System.MouseKeyHook, Version=5.6.130.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MouseKeyHook.5.6.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -193,7 +196,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConsoleManager.cs" />
-    <Compile Include="InputDevicesHandler.cs" />
+    <Compile Include="Controls\InGameContextMenu.xaml.cs">
+      <DependentUpon>InGameContextMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Management and Data Models\InputDeviceManager.cs" />
     <Compile Include="Controls\ConfigEditorDialog.xaml.cs">
       <DependentUpon>ConfigEditorDialog.xaml</DependentUpon>
     </Compile>
@@ -202,7 +208,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>lang.null.resx</DependentUpon>
     </Compile>
-    <Compile Include="ModManagement.cs" />
+    <Compile Include="Management and Data Models\ModManagement.cs" />
     <Compile Include="Controls\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -224,6 +230,9 @@
     <Compile Include="Controls\JoystickInputSelectorDialog.xaml.cs">
       <DependentUpon>JoystickInputSelectorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Management and Data Models\MainDataModel.cs" />
+    <Compile Include="Management and Data Models\RecordingManagement.cs" />
+    <Compile Include="RightClickAssistTool.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Controls\AutoBootDialog.xaml.cs">
       <DependentUpon>AutoBootDialog.xaml</DependentUpon>
@@ -263,14 +272,14 @@
     <Compile Include="Controls\ModManager.xaml.cs">
       <DependentUpon>ModManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileManagement.cs" />
+    <Compile Include="Management and Data Models\FileManagement.cs" />
     <Compile Include="Controls\ModViewer.xaml.cs">
       <DependentUpon>ModViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModWrapPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameHandler.cs" />
+    <Compile Include="Management and Data Models\ProcessLauncher.cs" />
     <Compile Include="Languages\lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -281,12 +290,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Settings\LaunchPreset.cs" />
-    <Compile Include="Settings\ModCollection.cs" />
-    <Compile Include="Settings\ModManagerSettings.cs" />
+    <Compile Include="Personal Settings Classes\LaunchPreset.cs" />
+    <Compile Include="Personal Settings Classes\ModCollection.cs" />
+    <Compile Include="Personal Settings Classes\ModManagerSettings.cs" />
     <Compile Include="Styles\SkinResourceDictonary.cs" />
-    <Compile Include="UserLanguage.cs" />
-    <Compile Include="ProgramPaths.cs" />
+    <Compile Include="Management and Data Models\UserLanguage.cs" />
+    <Compile Include="Management and Data Models\ProgramPaths.cs" />
     <Compile Include="WinformsTheming.cs" />
     <EmbeddedResource Include="Languages\lang.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -373,6 +382,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DocumentationViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InGameContextMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -503,9 +516,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "Publish" "$(SolutionDir)"</PostBuildEvent>
+    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "$(ConfigurationName)" "$(SolutionDir)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "Publish" "$(SolutionDir)Sonic3AIR_ModManager\" "false" "true"</PreBuildEvent>
+    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "$(ConfigurationName)" "$(SolutionDir)Sonic3AIR_ModManager\" "false" "true"</PreBuildEvent>
   </PropertyGroup>
 </Project>

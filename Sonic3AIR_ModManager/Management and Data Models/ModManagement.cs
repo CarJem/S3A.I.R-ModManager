@@ -21,7 +21,7 @@ namespace Sonic3AIR_ModManager
             Parent = _parent;
         }
 
-        #region Modern Mod Management
+
 
         public void UpdateModsList(bool FullReload = false)
         {
@@ -29,11 +29,11 @@ namespace Sonic3AIR_ModManager
             {
                 int PreviousSubFolderIndex = Parent.ModViewer.FolderView.SelectedIndex;
                 Parent.modErrorTextPanel.Visibility = Visibility.Collapsed;
-                Parent.UpdateModListItemCheck(true);
+                UpdateModListItemCheck(true);
                 if (FullReload) FetchMods();
                 else UpdateNewModsListItems();
-                Parent.RefreshSelectedModProperties();
-                Parent.UpdateModListItemCheck(false);
+                MainDataModel.RefreshSelectedModProperties(ref Parent);
+                UpdateModListItemCheck(false);
                 if (Parent.ModViewer.FolderView.Items.Count > PreviousSubFolderIndex && PreviousSubFolderIndex != -1) Parent.ModViewer.FolderView.SelectedIndex = PreviousSubFolderIndex;
             }
             else
@@ -93,7 +93,7 @@ namespace Sonic3AIR_ModManager
 
         public void UpdateNewModsListItems()
         {
-            ProgramPaths.ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref ModManager.S3AIRSettings);
+            ProgramPaths.ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref MainDataModel.S3AIRSettings);
 
             Parent.ModViewer.Clear();
 
@@ -161,9 +161,8 @@ namespace Sonic3AIR_ModManager
             ActiveModsList.Clear();
             ActiveModsList = new List<ModViewerItem>();
 
-            EnableAllLegacyDisabledMods();
             GetAllModContainingSubFolders();
-            FetchModsModern();
+            PraseMods();
             UpdateNewModsListItems();
 
             Parent.LegacyLoadingCheckbox.IsChecked = S3AIRActiveMods.UseLegacyLoading;
@@ -216,7 +215,7 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        public void FetchModsModern()
+        public void PraseMods()
         {
             IList<Tuple<ModViewerItem, int>> ActiveMods = new List<Tuple<ModViewerItem, int>>();
             ModSearch(new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder));
@@ -324,6 +323,67 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        public void RefreshMoveToSubfolderList()
+        {
+            List<MenuItem> ItemsToRemove = new List<MenuItem>();
+            foreach (var item in Parent.moveModToSubFolderMenuItem.Items)
+            {
+                if (item is MenuItem && !item.Equals(Parent.addNewModSubfolderMenuItem))
+                {
+                    ItemsToRemove.Add(item as MenuItem);
+                }
+            }
+            foreach (var item in ItemsToRemove)
+            {
+                int index = Parent.moveModToSubFolderMenuItem.Items.IndexOf(item);
+                (Parent.moveModToSubFolderMenuItem.Items[index] as MenuItem).Click -= SubDirectoryMove_Click;
+                Parent.moveModToSubFolderMenuItem.Items.Remove(item);
+            }
+            ItemsToRemove.Clear();
+
+
+            foreach (var item in Parent.ModViewer.FolderView.Items)
+            {
+                SubDirectoryItem realItem;
+                if (item is SubDirectoryItem) realItem = item as SubDirectoryItem;
+                else realItem = null;
+
+                if (realItem != null)
+                {
+                    var menuItem = GenerateSubDirectoryToolstripItem(realItem.FileName, realItem.FilePath);
+                    Parent.moveModToSubFolderMenuItem.Items.Add(menuItem);
+                }
+            }
+
+        }
+
+        public MenuItem GenerateSubDirectoryToolstripItem(string name, string filepath)
+        {
+            MenuItem item = new MenuItem();
+            item.Header = name;
+            item.Tag = filepath;
+            item.Click += SubDirectoryMove_Click;
+            return item;
+        }
+
+        public void SubDirectoryMove_Click(object sender, RoutedEventArgs e)
+        {
+            if (Parent.ModViewer.View.SelectedItem != null && Parent.ModViewer.View.SelectedItem is ModViewerItem)
+            {
+                FileManagement.MoveMod((Parent.ModViewer.View.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
+            }
+            else if (MainDataModel.ModManagement.S3AIRActiveMods.UseLegacyLoading)
+            {
+                if (Parent.ModViewer.ActiveView.SelectedItem != null && Parent.ModViewer.ActiveView.SelectedItem is ModViewerItem)
+                {
+                    FileManagement.MoveMod((Parent.ModViewer.ActiveView.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
+                }
+            }
+
+
+
+        }
+
         public void Save()
         {
             foreach (var mod in ModsList.Concat(ActiveModsList))
@@ -358,6 +418,17 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        public void UpdateModListItemCheck(bool shouldEnd)
+        {
+            if (shouldEnd) ModViewer.ItemCheck = null;
+            else ModViewer.ItemCheck = ModsList_ItemCheck;
+        }
+
+        private void ModsList_ItemCheck()
+        {
+            UpdateModsList();
+        }
+
         public void DisableMod(AIR_API.Mod mod)
         {
             S3AIRActiveMods.ActiveMods.Remove(mod.FolderName);
@@ -368,30 +439,10 @@ namespace Sonic3AIR_ModManager
             S3AIRActiveMods.ActiveMods.Add(mod.FolderName);
         }
 
-        public void EnableAllLegacyDisabledMods()
+        public void ToggleLegacyModManagement(bool value)
         {
-            DirectoryInfo d = new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder);
-            DirectoryInfo[] folders = d.GetDirectories();
-            List<string> DisabledFolders = new List<string>();
-            foreach (DirectoryInfo folder in folders)
-            {
-                DirectoryInfo f = new DirectoryInfo(folder.FullName);
-                var root = f.GetFiles("mod.json").FirstOrDefault();
-                if (root != null)
-                {
-                    if (folder.Name.Contains("#")) DisabledFolders.Add(folder.Name);
-                }
-            }
-
-            foreach (string folder in DisabledFolders)
-            {
-                string destination = ProgramPaths.Sonic3AIRModsFolder + "\\" + folder.Replace("#", "");
-                string source = ProgramPaths.Sonic3AIRModsFolder + "\\" + folder;
-                Directory.Move(source, destination);
-            }
+            this.S3AIRActiveMods.UseLegacyLoading = value;
+            this.Save();
         }
-
-
-        #endregion
     }
 }

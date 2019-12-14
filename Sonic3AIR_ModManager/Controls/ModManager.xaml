@@ -54,12 +54,17 @@
                     <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
                     <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
                     <MenuItem Name="openModsFolderToolStripMenuItem" Click="OpenModsFolder_Click"></MenuItem>
+                    <MenuItem x:Name="openGameRecordingsFolderToolStripMenuItem" Header="Open Game Recordings Directory" Click="openGameRecordingsFolderToolStripMenuItem_Click"></MenuItem>
                     <MenuItem Name="openConfigFileToolStripMenuItem" Click="OpenConfigFileToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem Name="openSettingsGlobalFileToolStripMenuItem" Header="Open Global Settings File" Click="openSettingsGlobalFileToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem Name="openSettingsInputFileToolStripMenuItem" Header="Open Input File" Click="openSettingsInputFileToolStripMenuItem_Click"></MenuItem>
                     <MenuItem x:Name="showLogFileButton" Header="Show Log File" HorizontalAlignment="Stretch" Click="ShowLogFileButton_Click"></MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="airModManagerPlacesButton" Header="A.I.R. Mod Manager Places...">
                     <MenuItem Name="openDownloadsFolderToolStripMenuItem" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
                     <MenuItem Name="openVersionsFolderToolStripMenuItem" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem Name="openMMlogsFolderToolStripMenuItem" Header="Open Mod Manager Logs Folder" Click="openMMlogsFolderToolStripMenuItem_Click"></MenuItem>
+                    <MenuItem Name="openMMSettingFileToolStripMenuItem" Header="Open Mod Manager Settings File" Click="openMMSettingFileToolStripMenuItem_Click"></MenuItem>
                 </MenuItem>
             </MenuItem>
             <MenuItem Name="HelpMenuItem" Header="Help">
@@ -81,11 +86,6 @@
                     <MenuItem Name="eukaryot3KTwitterToolStripMenuItem" Click="EukaTwitterButton_Click"></MenuItem>
                     <MenuItem Name="carJemTwitterToolStripMenuItem" Click="CarJemTwitterButton_Click"></MenuItem>
                 </MenuItem>
-            </MenuItem>
-            <MenuItem Header="Misc" Visibility="Collapsed" IsEnabled="False">
-                <MenuItem Header="Clear List..." Click="MenuItem_Click_1"></MenuItem>
-                <MenuItem Header="Set List..." Click="MenuItem_Click"></MenuItem>
-                <genlib:RecentsListMenuItem Name="RecentsMenu" Header="Open Recently..." RecentItemSelected="RecentsMenu_RecentItemSelected"></genlib:RecentsListMenuItem>
             </MenuItem>
         </Menu>
         <TabControl Grid.Row="1" x:Name="PrimaryTabControl" Grid.ColumnSpan="2" SelectionChanged="TabControl1_SelectedIndexChanged" Padding="0">

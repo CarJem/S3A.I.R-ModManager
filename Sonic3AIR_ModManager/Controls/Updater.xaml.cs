@@ -23,6 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Path = System.IO.Path;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Diagnostics;
 
 namespace Sonic3AIR_ModManager
 {
@@ -210,9 +211,10 @@ namespace Sonic3AIR_ModManager
         {
 
             string path = (ProgramPaths.Sonic3AIRPath != null && ProgramPaths.Sonic3AIRPath != "" ? Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath) : "");
-            if (path == "") return 0;
+            if (path == "" || !Directory.Exists(path)) return 0;
             else
             {
+
                 string metaDataFile = Directory.GetFiles(path, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
                 if (metaDataFile != null)
                 {
@@ -226,7 +228,22 @@ namespace Sonic3AIR_ModManager
                         return 0;
                     }
                 }
-                else return 0;
+                else
+                {
+                    string exe = Directory.GetFiles(path, "Sonic3AIR.exe", SearchOption.AllDirectories).FirstOrDefault();
+                    var versInfo = FileVersionInfo.GetVersionInfo(exe);
+                    string fileVersionFull = $"{versInfo.FileMajorPart}.{versInfo.FileMinorPart}.{versInfo.FileBuildPart}.{versInfo.FilePrivatePart}";
+                    if (Version.TryParse(fileVersionFull, out Version result))
+                    {
+                        return result.CompareTo(comparision);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                
+
             }
 
         }
@@ -252,13 +269,40 @@ namespace Sonic3AIR_ModManager
             try
             {
                 string metaDataFile = Directory.GetFiles(output, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-                FileInfo fileInfo = new FileInfo(metaDataFile);
-                AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(fileInfo);
+                string version = "";
+
+                if (File.Exists(metaDataFile))
+                {
+                    FileInfo fileInfo = new FileInfo(metaDataFile);
+                    AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(fileInfo);
+                    version = ver.VersionString;
+                }
+                else
+                {
+                    string exe = Directory.GetFiles(output, "Sonic3AIR.exe", SearchOption.AllDirectories).FirstOrDefault();
+                    var versInfo = FileVersionInfo.GetVersionInfo(exe);
+                    string fileVersionFull = $"{versInfo.FileMajorPart}.{versInfo.FileMinorPart}.{versInfo.FileBuildPart}.{versInfo.FilePrivatePart}";
+                    if (Version.TryParse(fileVersionFull, out Version result))
+                    {
+                        version = result.ToString();
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
 
 
-                string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{ver.VersionString}\\sonic3air_game";
 
-                if (Directory.Exists(output2)) Directory.Delete(output2, true);
+
+                string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{version}\\sonic3air_game";
+
+                if (Directory.Exists(output2))
+                {
+                    // TODO : Add Collision Handling
+                    Directory.Delete(output2, true);
+                }
+
 
                 Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
 
@@ -266,6 +310,7 @@ namespace Sonic3AIR_ModManager
 
                 Program.AIRUpdaterState = Program.UpdateState.Finished;
                 Close();
+
             }
             catch
             {

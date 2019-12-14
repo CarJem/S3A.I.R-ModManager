@@ -29,7 +29,7 @@ namespace Sonic3AIR_ModManager
             else ChangeSkin(Skin.Light);
 
             #if DEBUG
-                System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+            System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
             #endif
 
             Instance = this;

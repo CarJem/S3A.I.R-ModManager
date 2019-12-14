@@ -3,6 +3,7 @@
                     xmlns:gen="clr-namespace:GenerationsLib.WPF.Controls;assembly=GenerationsLib.WPF"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit"
                     xmlns:local="clr-namespace:Sonic3AIR_ModManager">
+    <PopupAnimation x:Key="{x:Static SystemParameters.MenuPopupAnimationKey}">None</PopupAnimation>
     <Style x:Key="SliderStyle1" TargetType="{x:Type Slider}">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <Setter Property="Background" Value="Transparent"/>

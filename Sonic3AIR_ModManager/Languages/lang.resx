@@ -246,19 +246,19 @@
     
   </data>
   <data name="OpenAppDataFolder" xml:space="preserve">
-    <value>Open AppData Folder</value>
+    <value>Open A.I.R. Data Directory</value>
     
   </data>
   <data name="OpenConfigFile" xml:space="preserve">
-    <value>Open Config File</value>
+    <value>Open A.I.R. Config File</value>
     
   </data>
   <data name="OpenDownloadsFolder" xml:space="preserve">
-    <value>Open Downloads Folder</value>
+    <value>Open Mod Manager Downloads Directory</value>
     
   </data>
   <data name="OpenEXEFolder" xml:space="preserve">
-    <value>Open EXE Folder</value>
+    <value>Open A.I.R. EXE Directory</value>
     
   </data>
   <data name="OpenLocationExpandable" xml:space="preserve">
@@ -274,11 +274,11 @@
     
   </data>
   <data name="OpenModsFolder" xml:space="preserve">
-    <value>Open Mods Folder</value>
+    <value>Open A.I.R. Mods Directory</value>
     
   </data>
   <data name="OpenModTemplatesFolder" xml:space="preserve">
-    <value>Open Modding Templates Folder</value>
+    <value>Open A.I.R. Modding Templates Directory</value>
     
   </data>
   <data name="OpenModURL" xml:space="preserve">
@@ -286,11 +286,11 @@
     
   </data>
   <data name="OpenSampleModsFolder" xml:space="preserve">
-    <value>Open Sample Mods Folder</value>
+    <value>Open A.I.R. Sample Mods Directory</value>
     
   </data>
   <data name="OpenSettingsFile" xml:space="preserve">
-    <value>Open Settings File</value>
+    <value>Open A.I.R. Settings File</value>
     
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
@@ -302,7 +302,7 @@
     
   </data>
   <data name="OpenVersionsFolder" xml:space="preserve">
-    <value>Open Versions Folder</value>
+    <value>Open Mod Manager Versions Directory</value>
     
   </data>
   <data name="RecordingsTab" xml:space="preserve">
@@ -367,20 +367,6 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
-    
-  </data>
-  <data name="UsefulShortKeys" xml:space="preserve">
-    <value>Useful In-Game Shortcuts/Keys:
- 
- Alt + Enter - Toggle Fullscreen
- F2 - Take a Game Recording Capture
- Right Click - Open A.I.R Context Menu
- F3 - Rescan for Game Controllers
- F4 - Switches Game Controllers for P1 and P2
- Numpad Plus/Minus - Adjust Global Audio Volume
- Alt + B - Change Background Blur
- Alt + F - Change Filter
- Alt + P - Show Performance Display</value>
     
   </data>
   <data name="VersionsTab" xml:space="preserve">
@@ -811,7 +797,7 @@
     
   </data>
   <data name="AIRDevMode" xml:space="preserve">
-    <value>Enable Dev Mode (Not Debug Mode)</value>
+    <value>Enable Dev Mode</value>
     
   </data>
   <data name="ImportExpandable" xml:space="preserve">
@@ -823,7 +809,7 @@
     
   </data>
   <data name="ShowLogFileButton" xml:space="preserve">
-    <value>Show Log File</value>
+    <value>Show A.I.R. Log File</value>
     
   </data>
   <data name="PathColumnHeader" xml:space="preserve">
@@ -1386,5 +1372,62 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
   </data>
   <data name="FullDebugOutputOption" xml:space="preserve">
     <value>Log Full Debug Output</value>
+  </data>
+  <data name="UsefulShortKeysHeader" xml:space="preserve">
+    <value>Useful In-Game Shortcuts/Keys:</value>
+  </data>
+  <data name="UsefulShortKeysFullscreen" xml:space="preserve">
+    <value>Alt + Enter - Toggle Fullscreen</value>
+  </data>
+  <data name="UsefulShortKeysGameRecordingCapture" xml:space="preserve">
+    <value>F2 - Take a Game Recording Capture</value>
+  </data>
+  <data name="UsefulShortKeysContextMenu" xml:space="preserve">
+    <value>Right Click - Open A.I.R Context Menu</value>
+  </data>
+  <data name="UsefulShortKeysRescanInputs" xml:space="preserve">
+    <value>F3 - Rescan for Game Controllers</value>
+  </data>
+  <data name="UsefulShortKeysSwapInput" xml:space="preserve">
+    <value>F4 - Switches Game Controllers for P1 and P2</value>
+  </data>
+  <data name="UsefulShortKeysAudioAdjust" xml:space="preserve">
+    <value>Numpad Plus/Minus - Adjust Global Audio Volume</value>
+  </data>
+  <data name="UsefulShortKeysBackgroundBlur" xml:space="preserve">
+    <value>Alt + B - Change Background Blur</value>
+  </data>
+  <data name="UsefulShortKeysFilter" xml:space="preserve">
+    <value>Alt + F / Alt + G - Cycle Screen Filter</value>
+  </data>
+  <data name="UsefulShortKeysDevHeader" xml:space="preserve">
+    <value>Dev Mode Shortcuts/Keys:</value>
+  </data>
+  <data name="UsefulShortKeysPerformanceDisplay" xml:space="preserve">
+    <value>Alt + P - Show Performance Display</value>
+  </data>
+  <data name="UsefulShortKeysPaletteDebug" xml:space="preserve">
+    <value>Alt + M - Toggle Palette Debug Output</value>
+  </data>
+  <data name="UsefulShortKeysRefreshAssets" xml:space="preserve">
+    <value>F10 - Reload Resources (Sprites/Palettes)</value>
+  </data>
+  <data name="ContextMenuCloseHeader" xml:space="preserve">
+    <value>Close Context Menu</value>
+  </data>
+  <data name="OpenModManagerSettingsFile" xml:space="preserve">
+    <value>Open Mod Manager Settings File</value>
+  </data>
+  <data name="OpenAIRGlobalSettingsFile" xml:space="preserve">
+    <value>Open A.I.R. Global Settings File</value>
+  </data>
+  <data name="OpenAIRInputSettingsFile" xml:space="preserve">
+    <value>Open A.I.R. Input Settings File</value>
+  </data>
+  <data name="OpenModManagerLogFolder" xml:space="preserve">
+    <value>Open Mod Manager Log Directory</value>
+  </data>
+  <data name="OpenAIRGamerecordingsFolder" xml:space="preserve">
+    <value>Open A.I.R. Game Recording Directory</value>
   </data>
 </root>

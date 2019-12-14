@@ -9,18 +9,23 @@ using GenerationsLib.Core;
 
 namespace Sonic3AIR_ModManager
 {
-    public class ProgramPaths
+    public static class ProgramPaths
     {
         private static string nL = Environment.NewLine;
 
         #region File Path Strings
 
         public static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        public static string Sonic3AIRAppDataFolder = "";
-        public static string Sonic3AIRModsFolder = "";
-        public static string Sonic3AIRActiveModsList = "";
-        public static string Sonic3AIRSettingsFile = "";
-        public static string Sonic3AIRGBLinkPath = "";
+        public static string Sonic3AIRAppDataFolder { get => AppDataFolder + "\\Sonic3AIR"; }
+        public static string Sonic3AIRModsFolder { get => Sonic3AIRAppDataFolder + "\\mods"; }
+        public static string Sonic3AIRGameRecordingsFolder { get => Sonic3AIRAppDataFolder + "\\gamerecordings"; }
+        public static string Sonic3AIRActiveModsList { get => Sonic3AIRAppDataFolder + "\\mods\\active-mods.json"; }
+        public static string Sonic3AIRSettingsFile { get => Sonic3AIRAppDataFolder + "\\settings.json"; }
+        public static string Sonic3AIRConfigFile { get => Sonic3AIRAppDataFolder + "\\config.json"; }
+        public static string Sonic3AIRLogFile { get => Sonic3AIRAppDataFolder + "\\logfile.txt"; }
+        public static string Sonic3AIRGlobalSettingsFile { get => Sonic3AIRAppDataFolder + "\\settings_global.json"; }
+        public static string Sonic3AIRGlobalInputFile { get => Sonic3AIRAppDataFolder + "\\settings_input.json"; }
+
         public static string Sonic3AIR_MM_BaseFolder { get => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM"; }
         public static string Sonic3AIR_MM_GBRequestsFolder { get => Sonic3AIR_MM_BaseFolder + "\\gb_api_urls"; }
         public static string Sonic3AIR_MM_TempModsFolder  { get => Sonic3AIR_MM_BaseFolder + "\\temp_mod_install"; }
@@ -29,7 +34,7 @@ namespace Sonic3AIR_ModManager
         public static string Sonic3AIR_MM_LogsFolder { get => Sonic3AIR_MM_BaseFolder + "\\logs"; }
         public static string Sonic3AIR_MM_SettingsFile { get => Sonic3AIR_MM_BaseFolder + "\\settings.json"; }
 
-    #endregion
+        #endregion
 
         #region Sonic 3 A.I.R. Path
     public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
@@ -256,7 +261,7 @@ namespace Sonic3AIR_ModManager
                 case GameRecordingSearchLocation.S3AIR_EXE_Folder:
                     return Directory.Exists(Path.GetDirectoryName(Sonic3AIRPath));
                 case GameRecordingSearchLocation.S3AIR_RecordingsFolder:
-                    return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "recordings"));
+                    return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "gamerecordings"));
                 case GameRecordingSearchLocation.S3AIR_Custom:
                     return Directory.Exists(CustomGameRecordingsFolderPath);
                 default:
@@ -275,7 +280,7 @@ namespace Sonic3AIR_ModManager
                 case GameRecordingSearchLocation.S3AIR_EXE_Folder:
                     return Path.GetDirectoryName(Sonic3AIRPath);
                 case GameRecordingSearchLocation.S3AIR_RecordingsFolder:
-                    return Path.Combine(Sonic3AIRAppDataFolder, "recordings");
+                    return Path.Combine(Sonic3AIRAppDataFolder, "gamerecordings");
                 case GameRecordingSearchLocation.S3AIR_Custom:
                     return CustomGameRecordingsFolderPath;
                 default:
@@ -285,10 +290,10 @@ namespace Sonic3AIR_ModManager
 
         private static bool DoesDefaultGameRecordingsFolderPathExist()
         {
-            if (ModManager.S3AIRSettings.RawSettings is AIR_API.Raw.Settings.Interfaces.AIRSettingsMK2)
+            if (MainDataModel.S3AIRSettings != null && MainDataModel.S3AIRSettings.Version != null)
             {
                 //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
-                if (ModManager.S3AIRSettings.Version >= new Version("19.12.7.0"))
+                if (MainDataModel.S3AIRSettings.Version >= new Version("19.12.7.0"))
                 {
                     //return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "recordings"));
                     return Directory.Exists(Sonic3AIRAppDataFolder);
@@ -308,10 +313,10 @@ namespace Sonic3AIR_ModManager
 
         private static string GetDefaultGameRecordingsFolderPath()
         {
-            if (ModManager.S3AIRSettings.RawSettings is AIR_API.Raw.Settings.Interfaces.AIRSettingsMK2)
+            if (MainDataModel.S3AIRSettings != null && MainDataModel.S3AIRSettings.Version != null)
             {
                 //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
-                if (ModManager.S3AIRSettings.Version >= new Version("19.12.7.0"))
+                if (MainDataModel.S3AIRSettings.Version >= new Version("19.12.7.0"))
                 {
                     //return Path.Combine(Sonic3AIRAppDataFolder, "recordings");
                     return Sonic3AIRAppDataFolder;
@@ -333,37 +338,16 @@ namespace Sonic3AIR_ModManager
 
         public static bool ValidateInstall(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings)
         {
-            Sonic3AIRAppDataFolder = AppDataFolder + "\\Sonic3AIR";
-            Sonic3AIRActiveModsList = Sonic3AIRAppDataFolder + "\\mods\\active-mods.json";
-            Sonic3AIRModsFolder = Sonic3AIRAppDataFolder + "\\mods";
-            Sonic3AIRSettingsFile = Sonic3AIRAppDataFolder + "\\settings.json";
-
             CreateMissingModManagerFolders();
 
-            List<Tuple<string, bool>> MissingFilesState = new List<Tuple<string, bool>>();
+            if (!Directory.Exists(Sonic3AIRModsFolder)) Directory.CreateDirectory(Sonic3AIRModsFolder);
+            if (!Directory.Exists(Sonic3AIRAppDataFolder)) Directory.CreateDirectory(Sonic3AIRAppDataFolder);
+            if (!File.Exists(Sonic3AIRActiveModsList)) File.Create(Sonic3AIRActiveModsList);
+            if (!File.Exists(Sonic3AIRSettingsFile)) File.Create(Sonic3AIRSettingsFile);
 
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRAppDataFolder", Directory.Exists(Sonic3AIRAppDataFolder)));
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRModsFolder", Directory.Exists(Sonic3AIRModsFolder)));
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRTempModsFolder", Directory.Exists(Sonic3AIR_MM_TempModsFolder)));
-            MissingFilesState.Add(new Tuple<string, bool>("Sonic3AIRSettingsFile", File.Exists(Sonic3AIRSettingsFile)));
 
-            if (MissingFilesState.Exists(x => x.Item2.Equals(false)))
-            {
-                List<Tuple<string, bool>> MissingList = MissingFilesState.Where(x => x.Item2.Equals(false)).ToList();
-                string missingItems = Program.LanguageResource.GetString("CollectionFilesCouldNotBeFound1");
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRAppDataFolder"))) missingItems += $"{nL}- {Sonic3AIRAppDataFolder}";
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRModsFolder"))) missingItems += $"{nL}- {Sonic3AIRModsFolder}";
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRTempModsFolder"))) missingItems += $"{nL}- {Sonic3AIR_MM_TempModsFolder}";
-                if (MissingList.Exists(x => x.Item1.Equals("Sonic3AIRSettingsFile"))) missingItems += $"{nL}- {Sonic3AIRSettingsFile}";
-                missingItems += Program.LanguageResource.GetString("CollectionFilesCouldNotBeFound2");
-                missingItems += Program.LanguageResource.GetString("CollectionFilesCouldNotBeFound3");
-                MessageBox.Show(missingItems);
-                return false;
-            }
-            else
-            {
-                return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, true);
-            }
+
+            return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, false);
         }
 
         public static void CreateMissingModManagerFolders()
@@ -399,15 +383,8 @@ namespace Sonic3AIR_ModManager
 
 
             FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
-            try
-            {
-                S3AIRSettings = new AIR_API.Settings(file);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            S3AIRSettings = new AIR_API.Settings(file);
+            return true;
         }
     }
 }

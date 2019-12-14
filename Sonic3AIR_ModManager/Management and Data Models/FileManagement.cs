@@ -714,12 +714,12 @@ namespace Sonic3AIR_ModManager
             {
 
                 DialogResult result = ExtraDialog.ShowInputDialog(ref new_name, Program.LanguageResource.GetString("AddInputDeviceDialogTitle"), Program.LanguageResource.GetString("AddInputDeviceDialogCaption"));
-                bool containsKey = InputDevicesHandler.Devices.ContainsKey(new_name);
+                bool containsKey = InputDeviceManager.Devices.ContainsKey(new_name);
                 bool unacceptable_char = new_name.ContainsOnly(acceptable_char);
                 if (result != System.Windows.Forms.DialogResult.Cancel && !containsKey && unacceptable_char)
                 {
                     finished = true;
-                    InputDevicesHandler.Devices.Add(new_name, new AIR_API.InputMappings.Device(new_name));
+                    InputDeviceManager.Devices.Add(new_name, new AIR_API.InputMappings.Device(new_name));
                     success = true;
                 }
                 else if (result != System.Windows.Forms.DialogResult.Cancel)
@@ -753,7 +753,7 @@ namespace Sonic3AIR_ModManager
             bool? result = deviceNameDialog.ShowDeviceNameDialog(ref newDevice, Program.LanguageResource.GetString("AddNewDeviceTitle"), Program.LanguageResource.GetString("AddNewDeviceDescription"));
             if (result == true)
             {
-                InputDevicesHandler.InputDevices.Items[index].Value.DeviceNames.Add(newDevice);
+                InputDeviceManager.InputDevices.Items[index].Value.DeviceNames.Add(newDevice);
                 return true;
             }
             else return false;
@@ -764,7 +764,7 @@ namespace Sonic3AIR_ModManager
             DialogResult result = MessageBox.Show(UserLanguage.RemoveInputDevice(deviceToRemove.EntryName), Program.LanguageResource.GetString("DeleteDeviceTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                InputDevicesHandler.Devices.Remove(deviceToRemove.EntryName);
+                InputDeviceManager.Devices.Remove(deviceToRemove.EntryName);
                 return true;
             }
             else return false;
@@ -777,7 +777,7 @@ namespace Sonic3AIR_ModManager
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
                 int index = nameIndex;
-                InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.RemoveAt(index);
+                InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.RemoveAt(index);
                 return true;
             }
             return false;
@@ -801,44 +801,44 @@ namespace Sonic3AIR_ModManager
                     index = parent.inputMethodsList.SelectedIndex;
                     if (index != 0)
                     {
-                        InputDevicesHandler.InputDevices.Items.Move(index, 0);
+                        InputDeviceManager.InputDevices.Items.Move(index, 0);
 
-                        parent.RefreshInputMappings();
-                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(0);
-                        parent.UpdateInputMappings();
+                        InputDeviceManager.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDeviceManager.InputDevices.Items.ElementAt(0);
+                        InputDeviceManager.UpdateInputMappings();
                     }
                     break;
                 case MoveListItemDirection.MoveUp:
                     index = parent.inputMethodsList.SelectedIndex;
                     if (index != 0)
                     {
-                        InputDevicesHandler.InputDevices.Items.Move(index, index - 1);
+                        InputDeviceManager.InputDevices.Items.Move(index, index - 1);
 
-                        parent.RefreshInputMappings();
-                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(index - 1);
-                        parent.UpdateInputMappings();
+                        InputDeviceManager.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDeviceManager.InputDevices.Items.ElementAt(index - 1);
+                        InputDeviceManager.UpdateInputMappings();
                     }
                     break;
                 case MoveListItemDirection.MoveDown:
                     index = parent.inputMethodsList.SelectedIndex;
-                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    if (index != InputDeviceManager.InputDevices.Items.Count - 1)
                     {
-                        InputDevicesHandler.InputDevices.Items.Move(index, index + 1);
+                        InputDeviceManager.InputDevices.Items.Move(index, index + 1);
 
-                        parent.RefreshInputMappings();
-                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(index + 1);
-                        parent.UpdateInputMappings();
+                        InputDeviceManager.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDeviceManager.InputDevices.Items.ElementAt(index + 1);
+                        InputDeviceManager.UpdateInputMappings();
                     }
                     break;
                 case MoveListItemDirection.MoveToBottom:
                     index = parent.inputMethodsList.SelectedIndex;
-                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    if (index != InputDeviceManager.InputDevices.Items.Count - 1)
                     {
-                        InputDevicesHandler.InputDevices.Items.Move(index, InputDevicesHandler.InputDevices.Items.Count - 1);
+                        InputDeviceManager.InputDevices.Items.Move(index, InputDeviceManager.InputDevices.Items.Count - 1);
 
-                        parent.RefreshInputMappings();
-                        parent.inputMethodsList.SelectedItem = InputDevicesHandler.InputDevices.Items.ElementAt(InputDevicesHandler.InputDevices.Items.Count - 1);
-                        parent.UpdateInputMappings();
+                        InputDeviceManager.RefreshInputMappings();
+                        parent.inputMethodsList.SelectedItem = InputDeviceManager.InputDevices.Items.ElementAt(InputDeviceManager.InputDevices.Items.Count - 1);
+                        InputDeviceManager.UpdateInputMappings();
                     }
                     break;
             }
@@ -846,45 +846,45 @@ namespace Sonic3AIR_ModManager
 
         public static void MoveInputDeviceIdentifier(ref ModManager parent, MoveListItemDirection direction)
         {
-            var selectedItem = parent.inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;            
+            var selectedItem = parent.inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
             int index = -1;
-            int inputIndex = InputDevicesHandler.InputDevices.Items.FindIndex(x => x.Value == selectedItem);
+            int inputIndex = InputDeviceManager.InputDevices.Items.FindIndex(x => x.Value == selectedItem);
             switch (direction)
             {
                 case MoveListItemDirection.MoveToTop:
                     index = parent.inputDeviceNamesList.SelectedIndex;
                     if (index != 0)
                     {
-                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, 0);
-                        parent.UpdateInputMappings();
-                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(0);
+                        InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, 0);
+                        InputDeviceManager.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(0);
                     }
                     break;
                 case MoveListItemDirection.MoveUp:
                     index = parent.inputDeviceNamesList.SelectedIndex;
                     if (index != 0)
                     {
-                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, index - 1);
-                        parent.UpdateInputMappings();
-                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(index - 1);
+                        InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, index - 1);
+                        InputDeviceManager.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(index - 1);
                     }
                     break;
                 case MoveListItemDirection.MoveDown:
                     index = parent.inputDeviceNamesList.SelectedIndex;
-                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    if (index != InputDeviceManager.InputDevices.Items.Count - 1)
                     {
-                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, index + 1);
-                        parent.UpdateInputMappings();
-                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(index + 1);
+                        InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, index + 1);
+                        InputDeviceManager.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(index + 1);
                     }
                     break;
                 case MoveListItemDirection.MoveToBottom:
                     index = parent.inputDeviceNamesList.SelectedIndex;
-                    if (index != InputDevicesHandler.InputDevices.Items.Count - 1)
+                    if (index != InputDeviceManager.InputDevices.Items.Count - 1)
                     {
-                        InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, InputDevicesHandler.InputDevices.Items.Count - 1);
-                        parent.UpdateInputMappings();
-                        parent.inputDeviceNamesList.SelectedItem = InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(InputDevicesHandler.InputDevices.Items[inputIndex].Value.DeviceNames.Count - 1);
+                        InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.Move(index, InputDeviceManager.InputDevices.Items.Count - 1);
+                        InputDeviceManager.UpdateInputMappings();
+                        parent.inputDeviceNamesList.SelectedItem = InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.ElementAt(InputDeviceManager.InputDevices.Items[inputIndex].Value.DeviceNames.Count - 1);
                     }
                     break;
             }
@@ -915,7 +915,7 @@ namespace Sonic3AIR_ModManager
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                InputDevicesHandler.InputDevices.ImportDevice(ofd.FileName);
+                InputDeviceManager.InputDevices.ImportDevice(ofd.FileName);
             }
         }
 
@@ -953,7 +953,7 @@ namespace Sonic3AIR_ModManager
 
                     string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
                     AIR_API.VersionMetadata ver;
-                    string output2;
+                    string output2 = "";
                     string baseFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\";
 
                     try
@@ -972,31 +972,27 @@ namespace Sonic3AIR_ModManager
                     }
                     catch
                     {
-                        string exceptionVersion = "";
-                        DialogResult result;
-                        result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption1"));
-                        while (Directory.Exists($"{baseFolder}{exceptionVersion}") && !Uri.IsWellFormedUriString($"{baseFolder}{exceptionVersion}", UriKind.Absolute) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+                        try
                         {
-                            result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption2"));
-                        }
-
-                        if (result == System.Windows.Forms.DialogResult.OK)
-                        {
-                            output2 = exceptionVersion;
-                            AddVersion(destination, output2);
-                        }
-                        else
-                        {
-                            System.IO.DirectoryInfo di = new DirectoryInfo(destination);
-
-                            foreach (FileInfo file in di.GetFiles())
+                            //TODO : Read EXE For Version (This is Untested)
+                            string exe = Directory.GetFiles(destination, "Sonic3AIR.exe", SearchOption.AllDirectories).FirstOrDefault();
+                            var versInfo = FileVersionInfo.GetVersionInfo(exe);
+                            string fileVersionFull2 = $"{versInfo.FileMajorPart}.{versInfo.FileMinorPart}.{versInfo.FileBuildPart}.{versInfo.FilePrivatePart}";
+                            if (Version.TryParse(fileVersionFull2, out Version result))
                             {
-                                file.Delete();
+                                output2 = $"{baseFolder}{result.ToString()}";
+                                AddVersion(destination, output2);
                             }
-                            foreach (DirectoryInfo dir in di.GetDirectories())
+                            else
                             {
-                                dir.Delete(true);
+                                output2 = $"{baseFolder}{fileVersionFull2}";
+                                AddVersion(destination, output2);
                             }
+
+                        }
+                        catch
+                        {
+                            VersionException(baseFolder, output2, destination);
                         }
                     }
                 }
@@ -1018,65 +1014,155 @@ namespace Sonic3AIR_ModManager
 
         }
 
+        private static void VersionException(string baseFolder, string output2, string destination)
+        {
+            string exceptionVersion = "";
+            DialogResult result;
+            result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption1"));
+            while (Directory.Exists($"{baseFolder}{exceptionVersion}") && !Uri.IsWellFormedUriString($"{baseFolder}{exceptionVersion}", UriKind.Absolute) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+            {
+                result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption2"));
+            }
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                output2 = exceptionVersion;
+                AddVersion();
+            }
+            else
+            {
+                System.IO.DirectoryInfo di = new DirectoryInfo(destination);
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
+            }
+
+            void AddVersion()
+            {
+                Directory.Move(destination, output2);
+
+                Directory.CreateDirectory(destination);
+
+                MessageBox.Show(UserLanguage.VersionInstalled(output2));
+            }
+        }
+
         #endregion
 
 
         #region Full Game Backup
 
-        public static bool BackupEntireGame()
+        public static bool BackupEntireGame(string source, string destination)
         {
-            DialogResult result = DialogResult.Yes;
-            while (result == DialogResult.Yes)
+            if (Directory.Exists(destination)) DeleteFilesFiltered(new DirectoryInfo(destination), new List<string>() { "mods", "gamerecordings" });
+            MoveFilesRecursively(new DirectoryInfo(source), new DirectoryInfo(destination), new List<string>() { "mods", "gamerecordings" });
+            return true;
+        }
+
+        public static void DeleteFilesFiltered(DirectoryInfo source, List<string> folderNamesToIgnore = null)
+        {
+            foreach (DirectoryInfo dir in source.GetDirectories())
+            {
+                if (!(folderNamesToIgnore != null && folderNamesToIgnore.Contains(dir.Name)))
+                {
+                    DeleteDirectory(dir, true);
+                }
+            }
+
+            foreach (FileInfo file in source.GetFiles())
+            {
+                DeleteFile(file);
+            }
+
+        }
+
+
+        public static void MoveFilesRecursively(DirectoryInfo source, DirectoryInfo target, List<string> folderNamesToIgnore = null)
+        {
+            foreach (DirectoryInfo dir in source.GetDirectories())
+            {
+                if (!(folderNamesToIgnore != null && folderNamesToIgnore.Contains(dir.Name)))
+                {
+                    MoveFilesRecursivelyInternal(dir, target.CreateSubdirectory(dir.Name));
+                }
+            }
+
+            foreach (FileInfo file in source.GetFiles())
+            {
+                MoveFile(target, file);
+            }
+
+        }
+
+        private static void MoveFilesRecursivelyInternal(DirectoryInfo source, DirectoryInfo target)
+        {
+            foreach (DirectoryInfo dir in source.GetDirectories())
+            {
+                MoveFilesRecursivelyInternal(dir, target.CreateSubdirectory(dir.Name));
+            }
+
+            foreach (FileInfo file in source.GetFiles())
+            {
+                MoveFile(target, file);
+            }
+        }
+
+
+        private static void MoveFile(DirectoryInfo target, FileInfo file)
+        {
+            DialogResult result = DialogResult.Retry;
+            while (result == DialogResult.Retry)
             {
                 try
                 {
-                    BackupGame();
+                    file.MoveTo(Path.Combine(target.FullName, file.Name));
                     result = DialogResult.Ignore;
                 }
                 catch (Exception ex)
                 {
-                    result = MessageBox.Show(ex.Message + Environment.NewLine + UserLanguage.GetOutputString("TryAgain"), UserLanguage.GetOutputString("BackupFailed"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    result = MessageBox.Show(ex.Message + Environment.NewLine + UserLanguage.GetOutputString("TryAgain"), UserLanguage.GetOutputString("BackupFailed"), MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
                 }
             }
-
-            return (result == DialogResult.Cancel ? false : true);
-
         }
 
-        private static void BackupGame()
+        private static void DeleteDirectory(DirectoryInfo dir, bool recursive)
         {
-            //Microsoft.VisualBasic.FileIO.FileSystem.RenameDirectory(ProgramPaths.Sonic3AIRAppDataFolder, "Sonic3AIR_Temp");
-            string backupPath = Path.Combine(ProgramPaths.Sonic3AIR_MM_BaseFolder, "air_latest_version_backup");
-            if (Directory.Exists(backupPath)) Directory.Delete(backupPath, true);
-            GenerationsLib.Core.FileHelpers.MoveFilesRecursively(new DirectoryInfo(ProgramPaths.Sonic3AIRAppDataFolder), new DirectoryInfo(backupPath), new List<string>() { "mods" });
-        }
-
-        public static bool RestoreEntireGame()
-        {
-            DialogResult result = DialogResult.Yes;
-            while (result == DialogResult.Yes)
+            DialogResult result = DialogResult.Retry;
+            while (result == DialogResult.Retry)
             {
                 try
                 {
-                    RestoreGame();
+                    dir.Delete(recursive);
                     result = DialogResult.Ignore;
                 }
                 catch (Exception ex)
                 {
-                    result = MessageBox.Show(ex.Message + Environment.NewLine + UserLanguage.GetOutputString("TryAgain"), UserLanguage.GetOutputString("RestoreFailed"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    result = MessageBox.Show(ex.Message + Environment.NewLine + UserLanguage.GetOutputString("TryAgain"), UserLanguage.GetOutputString("BackupFailed"), MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
                 }
             }
-
-            return (result == DialogResult.Cancel ? false : true);
         }
 
-        private static void RestoreGame()
+        private static void DeleteFile(FileInfo file)
         {
-            //Microsoft.VisualBasic.FileIO.FileSystem.RenameDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Sonic3AIR_Temp"), "Sonic3AIR");
-            string backupPath = Path.Combine(ProgramPaths.Sonic3AIR_MM_BaseFolder, "air_latest_version_backup");
-            if (Directory.Exists(ProgramPaths.Sonic3AIRAppDataFolder)) GenerationsLib.Core.FileHelpers.DeleteFilesFiltered(new DirectoryInfo(ProgramPaths.Sonic3AIRAppDataFolder), new List<string>() { "mods" });
-            GenerationsLib.Core.FileHelpers.CopyDirectory(new DirectoryInfo(backupPath), new DirectoryInfo(ProgramPaths.Sonic3AIRAppDataFolder));
-            if (Directory.Exists(backupPath)) Directory.Delete(backupPath, true);
+            DialogResult result = DialogResult.Retry;
+            while (result == DialogResult.Retry)
+            {
+                try
+                {
+                    file.Delete();
+                    result = DialogResult.Ignore;
+                }
+                catch (Exception ex)
+                {
+                    result = MessageBox.Show(ex.Message + Environment.NewLine + UserLanguage.GetOutputString("TryAgain"), UserLanguage.GetOutputString("BackupFailed"), MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         #endregion

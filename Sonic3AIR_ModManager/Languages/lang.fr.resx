@@ -215,15 +215,19 @@
   </data>
   <data name="OpenAppDataFolder" xml:space="preserve">
     <value>Ouvrir le dossier AppData</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenConfigFile" xml:space="preserve">
     <value>Ouvrir le fichier de configuration</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenDownloadsFolder" xml:space="preserve">
     <value>Ouvrir le dossier de téléchargement</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenEXEFolder" xml:space="preserve">
     <value>Ouvrir le dossier du fichier EXE</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenLocationExpandable" xml:space="preserve">
     <value>Ouvrir l'emplacement du fichier...</value>
@@ -236,18 +240,22 @@
   </data>
   <data name="OpenModsFolder" xml:space="preserve">
     <value>Ouvrir le dossier des Mods</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenModTemplatesFolder" xml:space="preserve">
     <value>Ouvrir le dossier du modèle de modding</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenModURL" xml:space="preserve">
     <value>Ouvrir l'URL du Mod</value>
   </data>
   <data name="OpenSampleModsFolder" xml:space="preserve">
     <value>Ouvrir l'exemple du dossier Mods</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenSettingsFile" xml:space="preserve">
     <value>Ouvrir le fichier de configuration</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
     <value>Options du système...</value>
@@ -257,6 +265,7 @@
   </data>
   <data name="OpenVersionsFolder" xml:space="preserve">
     <value>Ouvrir le dossier des versions</value>
+    <comment>Update Required</comment>
   </data>
   <data name="RecordingsTab" xml:space="preserve">
     <value>Enregistrements(captures) du jeu</value>
@@ -305,19 +314,6 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Importer</value>
-  </data>
-  <data name="UsefulShortKeys" xml:space="preserve">
-    <value>Raccourcis/Touches utiles dans le jeu :
- 
- Alt + Entrée - Basculer en plein écran
- F2 - Faire une capture(enregistrement) du jeu
- Clic droit - Ouvrir le menu contextuel de A.I.R
- F3 - Rescanner pour les manettes de jeu
- F4 - Échanger les contrôles des manettes J1 et J2
- Pavé numérique Plus/Moins - Ajuster le volume audio global
- Alt + B - Changer le flou d'arrière-plan
- Alt + F - Changer le filtre
- Alt + P - Afficher les performances</value>
   </data>
   <data name="VersionsTab" xml:space="preserve">
     <value>Versions</value>
@@ -641,7 +637,7 @@
     <value>Version des paramètres de A.I.R.</value>
   </data>
   <data name="AIRDevMode" xml:space="preserve">
-    <value>Activer le mode dev (pas le Debug Mode)</value>
+    <value>Activer le mode dev</value>
   </data>
   <data name="ImportExpandable" xml:space="preserve">
     <value>Importer...</value>
@@ -651,6 +647,7 @@
   </data>
   <data name="ShowLogFileButton" xml:space="preserve">
     <value>Ouvrir le fichier logfile.txt</value>
+    <comment>Update Required</comment>
   </data>
   <data name="PathColumnHeader" xml:space="preserve">
     <value>Emplacement</value>
@@ -1011,5 +1008,36 @@ Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défin
   </data>
   <data name="SaveModCollectonMenuItem" xml:space="preserve">
     <value>Enregistrer les mods actifs en tant que "Collection de mods"</value>
+  </data>
+  <data name="UsefulShortKeysHeader" xml:space="preserve">
+    <value>Raccourcis/Touches utiles dans le jeu :</value>
+  </data>
+  <data name="UsefulShortKeysFullscreen" xml:space="preserve">
+    <value>Alt + Entrée - Basculer en plein écran</value>
+  </data>
+  <data name="UsefulShortKeysGameRecordingCapture" xml:space="preserve">
+    <value>F2 - Faire une capture(enregistrement) du jeu</value>
+  </data>
+  <data name="UsefulShortKeysContextMenu" xml:space="preserve">
+    <value>Clic droit - Ouvrir le menu contextuel de A.I.R</value>
+  </data>
+  <data name="UsefulShortKeysRescanInputs" xml:space="preserve">
+    <value>F3 - Rescanner pour les manettes de jeu</value>
+  </data>
+  <data name="UsefulShortKeysSwapInput" xml:space="preserve">
+    <value>F4 - Échanger les contrôles des manettes J1 et J2</value>
+  </data>
+  <data name="UsefulShortKeysAudioAdjust" xml:space="preserve">
+    <value>Pavé numérique Plus/Moins - Ajuster le volume audio global</value>
+  </data>
+  <data name="UsefulShortKeysBackgroundBlur" xml:space="preserve">
+    <value>Alt + B - Changer le flou d'arrière-plan</value>
+  </data>
+  <data name="UsefulShortKeysFilter" xml:space="preserve">
+    <value>Alt + F - Changer le filtre</value>
+    <comment>Update Required</comment>
+  </data>
+  <data name="UsefulShortKeysPerformanceDisplay" xml:space="preserve">
+    <value>Alt + P - Afficher les performances</value>
   </data>
 </root>

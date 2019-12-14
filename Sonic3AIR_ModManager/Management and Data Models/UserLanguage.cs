@@ -154,6 +154,28 @@ namespace Sonic3AIR_ModManager
 
         #region Other Random Strings
 
+        public static string GenerateUsefulShortKeysString()
+        {
+            string returnValue = "";
+            returnValue += GetOutputString("UsefulShortKeysHeader") + nL;
+            returnValue += nL;
+            returnValue += GetOutputString("UsefulShortKeysFullscreen") + nL;
+            returnValue += GetOutputString("UsefulShortKeysGameRecordingCapture") + nL;
+            returnValue += GetOutputString("UsefulShortKeysContextMenu") + nL;
+            returnValue += GetOutputString("UsefulShortKeysRescanInputs") + nL;
+            returnValue += GetOutputString("UsefulShortKeysSwapInput") + nL;
+            returnValue += GetOutputString("UsefulShortKeysAudioAdjust") + nL;
+            returnValue += GetOutputString("UsefulShortKeysBackgroundBlur") + nL;
+            returnValue += GetOutputString("UsefulShortKeysFilter") + nL;
+            returnValue += nL;
+            returnValue += GetOutputString("UsefulShortKeysDevHeader") + nL;
+            returnValue += nL;
+            returnValue += GetOutputString("UsefulShortKeysPerformanceDisplay") + nL;
+            returnValue += GetOutputString("UsefulShortKeysPaletteDebug") + nL;
+            returnValue += GetOutputString("UsefulShortKeysRefreshAssets");
+            return returnValue;
+        }
+
         public static string BaseModFolderString()
         {
             return Program.LanguageResource.GetString("Viewer_BaseFolderItemFormatString");
@@ -238,11 +260,16 @@ namespace Sonic3AIR_ModManager
             form.openModsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModsFolder");
             form.openConfigFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenConfigFile");
             form.showLogFileButton.Header = Program.LanguageResource.GetString("ShowLogFileButton");
+            form.openSettingsGlobalFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAIRGlobalSettingsFile");
+            form.openSettingsInputFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAIRInputSettingsFile");
+            form.openGameRecordingsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAIRGamerecordingsFolder");
             #endregion
 
             #region AIR Mod Manager Places Section
             form.openDownloadsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenDownloadsFolder");
             form.openVersionsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenVersionsFolder");
+            form.openMMlogsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModManagerLogFolder");
+            form.openMMSettingFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModManagerSettingsFile");
             #endregion
 
 
@@ -263,7 +290,7 @@ namespace Sonic3AIR_ModManager
             #endregion
 
             #region AIR Tips Section
-            form.label5.Text = Program.LanguageResource.GetString("UsefulShortKeys");
+            form.label5.Text = GenerateUsefulShortKeysString();
             #endregion
 
 
@@ -447,7 +474,48 @@ namespace Sonic3AIR_ModManager
 
             #endregion
 
-            form.SetTooltips();
+            MainDataModel.SetTooltips(ref form);
+        }
+
+        public static void ApplyLanguage(ref Controls.InGameContextMenu form)
+        {
+            form.airPlacesButton.Header = Program.LanguageResource.GetString("AIRPlaces");
+            form.airModManagerPlacesButton.Header = Program.LanguageResource.GetString("AIRMMPlaces");
+
+            #region AIR Places Section
+            form.openAppDataFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAppDataFolder");
+            form.openEXEFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenEXEFolder");
+            form.openSettingsFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenSettingsFile");
+            form.openModsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModsFolder");
+            form.openConfigFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenConfigFile");
+            form.showLogFileButton.Header = Program.LanguageResource.GetString("ShowLogFileButton");
+            form.openSettingsGlobalFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAIRGlobalSettingsFile");
+            form.openSettingsInputFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAIRInputSettingsFile");
+            form.openGameRecordingsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenAIRGamerecordingsFolder");
+            #endregion
+
+            #region AIR Mod Manager Places Section
+            form.openDownloadsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenDownloadsFolder");
+            form.openVersionsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenVersionsFolder");
+            form.openMMlogsFolderToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModManagerLogFolder");
+            form.openMMSettingFileToolStripMenuItem.Header = Program.LanguageResource.GetString("OpenModManagerSettingsFile");
+            #endregion
+
+            form.airGuidesItem.Header = Program.LanguageResource.GetString("AIRGuides");
+            form.airTipsItem.Header = Program.LanguageResource.GetString("AIRTips");
+
+            #region AIR Guides Section
+            form.openSampleModsFolderButton.Header = Program.LanguageResource.GetString("OpenSampleModsFolder");
+            form.openUserManualButton.Header = Program.LanguageResource.GetString("OpenUserManual");
+            form.openModDocumentationButton.Header = Program.LanguageResource.GetString("OpenModInstructions");
+            form.openModdingTemplatesFolder.Header = Program.LanguageResource.GetString("OpenModTemplatesFolder");
+            #endregion
+
+            #region AIR Tips Section
+            form.label5.Text = GenerateUsefulShortKeysString();
+            #endregion
+
+            form.CloseContextMenuButton.Header = GetOutputString("ContextMenuCloseHeader");
         }
 
         public static void ApplyLanguage(ref ModViewer form)

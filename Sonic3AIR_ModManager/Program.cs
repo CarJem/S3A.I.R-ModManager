@@ -119,7 +119,7 @@ namespace Sonic3AIR_ModManager
             }
             catch
             {
-               
+               //TODO : Add Proper Catch Statement
             }
             Log.InfoFormat("Shuting Down!");
         }

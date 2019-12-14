@@ -1,0 +1,36 @@
+﻿<ContextMenu x:Class="Sonic3AIR_ModManager.Controls.InGameContextMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sonic3AIR_ModManager.Controls"
+             mc:Ignorable="d" Background="{DynamicResource ContextMenuBackground}" Style="{DynamicResource DefaultContextMenuStyle}">
+    <MenuItem x:Name="airPlacesButton" Header="A.I.R. Places..." Foreground="{DynamicResource NormalText}">
+        <MenuItem Name="openAppDataFolderToolStripMenuItem" Click="OpenAppDataFolderButton_Click"></MenuItem>
+        <MenuItem Name="openEXEFolderToolStripMenuItem" Click="OpenEXEFolderButton_Click"></MenuItem>
+        <MenuItem Name="openSettingsFileToolStripMenuItem" Click="OpenConfigFile_Click"></MenuItem>
+        <MenuItem Name="openModsFolderToolStripMenuItem" Click="OpenModsFolder_Click"></MenuItem>
+        <MenuItem x:Name="openGameRecordingsFolderToolStripMenuItem" Header="Open Game Recordings Directory" Click="openGameRecordingsFolderToolStripMenuItem_Click"></MenuItem>
+        <MenuItem Name="openConfigFileToolStripMenuItem" Click="OpenConfigFileToolStripMenuItem_Click"></MenuItem>
+        <MenuItem Name="openSettingsGlobalFileToolStripMenuItem" Header="Open Global Settings File" Click="openSettingsGlobalFileToolStripMenuItem_Click"></MenuItem>
+        <MenuItem Name="openSettingsInputFileToolStripMenuItem" Header="Open Input File" Click="openSettingsInputFileToolStripMenuItem_Click"></MenuItem>
+        <MenuItem x:Name="showLogFileButton" Header="Show Log File" HorizontalAlignment="Stretch" Click="ShowLogFileButton_Click"></MenuItem>
+    </MenuItem>
+    <MenuItem x:Name="airModManagerPlacesButton" Header="A.I.R. Mod Manager Places..." Foreground="{DynamicResource NormalText}">
+        <MenuItem Name="openDownloadsFolderToolStripMenuItem" Header="Open Downloads Folder" Click="OpenDownloadsFolderToolStripMenuItem_Click"></MenuItem>
+        <MenuItem Name="openVersionsFolderToolStripMenuItem" Header="Open Versions Folder" Click="OpenVersionsFolderToolStripMenuItem_Click"></MenuItem>
+        <MenuItem Name="openMMlogsFolderToolStripMenuItem" Header="Open Mod Manager Logs Folder" Click="openMMlogsFolderToolStripMenuItem_Click"></MenuItem>
+        <MenuItem Name="openMMSettingFileToolStripMenuItem" Header="Open Mod Manager Settings File" Click="openMMSettingFileToolStripMenuItem_Click"></MenuItem>
+    </MenuItem>
+    <MenuItem Header="A.I.R. Guides..." Name="airGuidesItem" Foreground="{DynamicResource NormalText}">
+        <MenuItem Header="Open Sample Mods Folder" x:Name="openSampleModsFolderButton" Click="OpenSampleModsFolderButton_Click"></MenuItem>
+        <MenuItem Header="Sonic 3 A.I.R. User Manual" x:Name="openUserManualButton" Click="OpenUserManualButton_Click"></MenuItem>
+        <MenuItem Header="Sonic 3 A.I.R. Modding Instructions" x:Name="openModDocumentationButton" Click="OpenModDocumentationButton_Click"></MenuItem>
+        <MenuItem Header="Open Modding Templates Folder" x:Name="openModdingTemplatesFolder" Click="OpenModdingTemplatesFolder_Click"></MenuItem>
+    </MenuItem>
+    <MenuItem x:Name="airTipsItem" Header="A.I.R. Tips..." Foreground="{DynamicResource NormalText}">
+        <TextBlock IsEnabled="False" VerticalAlignment="Center" Padding="0" x:Name="label5" Grid.Row="1" TextAlignment="Left" Text="Useful In-Game Shortcuts/Keys: &#10;Alt + Enter - Toggle Fullscreen&#10;F2 - Take a Game Recording Capture&#10;Right Click - Open A.I.R Context Menu&#10;F3 - Rescan for Game Controllers&#10;F4 - Switches Game Controllers for P1 and P2&#10;Numpad Plus/Minus - Adjust Global Audio Volume&#10;Alt + B - Change Background Blur&#10;Alt + F - Change Filter&#10;Alt + P - Show Performance Display&#10;" Margin="0,11"></TextBlock>
+    </MenuItem>
+    <Separator></Separator>
+    <MenuItem x:Name="CloseContextMenuButton" Header="Close Context Menu..." Click="CloseContextMenuButton_Click"></MenuItem>
+</ContextMenu>

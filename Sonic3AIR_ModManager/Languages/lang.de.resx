@@ -215,15 +215,19 @@
   </data>
   <data name="OpenAppDataFolder" xml:space="preserve">
     <value>AppData Ordner öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenConfigFile" xml:space="preserve">
     <value>Config Datei öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenDownloadsFolder" xml:space="preserve">
     <value>Downloaders Ordner öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenEXEFolder" xml:space="preserve">
     <value>Spiel-EXE Ordner öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenLocationExpandable" xml:space="preserve">
     <value>Ordner öffnen...</value>
@@ -236,18 +240,22 @@
   </data>
   <data name="OpenModsFolder" xml:space="preserve">
     <value>Mod-Ordner öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenModTemplatesFolder" xml:space="preserve">
     <value>Mod-Vorlagenordner öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenModURL" xml:space="preserve">
     <value>Mod URL öffnen</value>
   </data>
   <data name="OpenSampleModsFolder" xml:space="preserve">
     <value>Beispiel-Mods öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenSettingsFile" xml:space="preserve">
     <value>Datei mit Spieleinstellungen öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
     <value>Systemeinstellungen öffnen...</value>
@@ -257,6 +265,7 @@
   </data>
   <data name="OpenVersionsFolder" xml:space="preserve">
     <value>Versions-Ordner öffnen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="RecordingsTab" xml:space="preserve">
     <value>Aufzeichnungen</value>
@@ -305,19 +314,6 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Hochladen</value>
-  </data>
-  <data name="UsefulShortKeys" xml:space="preserve">
-    <value>Nützliche Tasten im Spiel:
- 
- Alt + Enter - Vollbild ein/aus
- F2 - Game Recording (Spielaufzeichnung) speichern
- Rechtsklick - A.I.R. Kontextmenü öffnen
- F3 - Game Controller Erkennung
- F4 - Game Controllers für Spieler 1 und 2 tauschen
- Numpad Plus/Minus - Globale Lautstärke anpassen
- Alt + B - Hintergrundunschärfe ändern
- Alt + F - Grafikfilter ändern
- Alt + P - Performance-Ausgabe</value>
   </data>
   <data name="VersionsTab" xml:space="preserve">
     <value>Versionen</value>
@@ -651,6 +647,7 @@
   </data>
   <data name="ShowLogFileButton" xml:space="preserve">
     <value>Log-Datei anzeigen</value>
+    <comment>Update Required</comment>
   </data>
   <data name="PathColumnHeader" xml:space="preserve">
     <value>Pfad</value>
@@ -945,5 +942,36 @@ Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zu
   </data>
   <data name="RecordingsLocationLabel" xml:space="preserve">
     <value>Gewählter Ort:</value>
+  </data>
+  <data name="UsefulShortKeysHeader" xml:space="preserve">
+    <value>Nützliche Tasten im Spiel:</value>
+  </data>
+  <data name="UsefulShortKeysFullscreen" xml:space="preserve">
+    <value>Alt + Enter - Vollbild ein/aus</value>
+  </data>
+  <data name="UsefulShortKeysGameRecordingCapture" xml:space="preserve">
+    <value>F2 - Game Recording (Spielaufzeichnung) speichern</value>
+  </data>
+  <data name="UsefulShortKeysContextMenu" xml:space="preserve">
+    <value>Rechtsklick - A.I.R. Kontextmenü öffnen</value>
+  </data>
+  <data name="UsefulShortKeysRescanInputs" xml:space="preserve">
+    <value>F3 - Game Controller Erkennung</value>
+  </data>
+  <data name="UsefulShortKeysSwapInput" xml:space="preserve">
+    <value>F4 - Game Controllers für Spieler 1 und 2 tauschen</value>
+  </data>
+  <data name="UsefulShortKeysAudioAdjust" xml:space="preserve">
+    <value>Numpad Plus/Minus - Globale Lautstärke anpassen</value>
+  </data>
+  <data name="UsefulShortKeysBackgroundBlur" xml:space="preserve">
+    <value>Alt + B - Hintergrundunschärfe ändern</value>
+  </data>
+  <data name="UsefulShortKeysFilter" xml:space="preserve">
+    <value>Alt + F - Grafikfilter ändern</value>
+    <comment>Update Required</comment>
+  </data>
+  <data name="UsefulShortKeysPerformanceDisplay" xml:space="preserve">
+    <value>Alt + P - Performance-Ausgabe</value>
   </data>
 </root>
