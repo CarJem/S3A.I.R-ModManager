@@ -9,41 +9,40 @@ using System.Windows;
 
 namespace Sonic3AIR_ModManager
 {
-    public class ModManagement
+    public static class ModManagement
     {
-        public AIR_API.ActiveModsList S3AIRActiveMods;
-        public IList<ModViewerItem> ModsList = new List<ModViewerItem>();
-        public IList<ModViewerItem> ActiveModsList = new List<ModViewerItem>();
+        public static AIR_API.ActiveModsList S3AIRActiveMods;
+        public static IList<ModViewerItem> ModsList = new List<ModViewerItem>();
+        public static IList<ModViewerItem> ActiveModsList = new List<ModViewerItem>();
 
-        private ModManager Parent;
-        public ModManagement(ModManager _parent)
+        private static ModManager Instance;
+
+        public static void UpdateInstance(ref ModManager _Instance)
         {
-            Parent = _parent;
+            Instance = _Instance;
         }
 
-
-
-        public void UpdateModsList(bool FullReload = false)
+        public static void UpdateModsList(bool FullReload = false)
         {
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                int PreviousSubFolderIndex = Parent.ModViewer.FolderView.SelectedIndex;
-                Parent.modErrorTextPanel.Visibility = Visibility.Collapsed;
+                int PreviousSubFolderIndex = Instance.ModViewer.FolderView.SelectedIndex;
+                Instance.modErrorTextPanel.Visibility = Visibility.Collapsed;
                 UpdateModListItemCheck(true);
                 if (FullReload) FetchMods();
                 else UpdateNewModsListItems();
-                MainDataModel.RefreshSelectedModProperties(ref Parent);
+                MainDataModel.RefreshSelectedModProperties(ref Instance);
                 UpdateModListItemCheck(false);
-                if (Parent.ModViewer.FolderView.Items.Count > PreviousSubFolderIndex && PreviousSubFolderIndex != -1) Parent.ModViewer.FolderView.SelectedIndex = PreviousSubFolderIndex;
+                if (Instance.ModViewer.FolderView.Items.Count > PreviousSubFolderIndex && PreviousSubFolderIndex != -1) Instance.ModViewer.FolderView.SelectedIndex = PreviousSubFolderIndex;
             }
             else
             {
-                Parent.modErrorTextPanel.Visibility = Visibility.Visible;
+                Instance.modErrorTextPanel.Visibility = Visibility.Visible;
             }
 
         }
 
-        public void UpdateActiveAndInactiveModLists()
+        public static void UpdateActiveAndInactiveModLists()
         {
             IList<ModViewerItem> JustDisabledItems = new List<ModViewerItem>();
             IList<ModViewerItem> JustEnabledItems = new List<ModViewerItem>();
@@ -91,36 +90,36 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        public void UpdateNewModsListItems()
+        public static void UpdateNewModsListItems()
         {
             ProgramPaths.ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref MainDataModel.S3AIRSettings);
 
-            Parent.ModViewer.Clear();
+            Instance.ModViewer.Clear();
 
             UpdateActiveAndInactiveModLists();
 
 
             foreach (ModViewerItem mod in ModsList)
             {
-                Parent.ModViewer.View.Items.Add(mod);
+                Instance.ModViewer.View.Items.Add(mod);
             }
 
             foreach (ModViewerItem mod in ActiveModsList)
             {
-                Parent.ModViewer.ActiveView.Items.Add(mod);
+                Instance.ModViewer.ActiveView.Items.Add(mod);
             }
 
             string CurrentFolderPath = ProgramPaths.Sonic3AIRModsFolder;
-            if (Parent.ModViewer.FolderView.SelectedItem != null) CurrentFolderPath = (Parent.ModViewer.FolderView.SelectedItem as SubDirectoryItem).FilePath;
+            if (Instance.ModViewer.FolderView.SelectedItem != null) CurrentFolderPath = (Instance.ModViewer.FolderView.SelectedItem as SubDirectoryItem).FilePath;
 
-            foreach (var item in Parent.ModViewer.View.Items)
+            foreach (var item in Instance.ModViewer.View.Items)
             {
                 ModViewerItem mod = (ModViewerItem)item;
-                if (CurrentFolderPath != null && (Parent.ModViewer.FolderView.SelectedIndex == 0 || Parent.ModViewer.FolderView.SelectedIndex == -1) && mod.IsInRootFolder)
+                if (CurrentFolderPath != null && (Instance.ModViewer.FolderView.SelectedIndex == 0 || Instance.ModViewer.FolderView.SelectedIndex == -1) && mod.IsInRootFolder)
                 {
                     mod.Visibility = Visibility.Visible;
                 }
-                else if (!(Parent.ModViewer.FolderView.SelectedIndex == 0 || Parent.ModViewer.FolderView.SelectedIndex == -1))
+                else if (!(Instance.ModViewer.FolderView.SelectedIndex == 0 || Instance.ModViewer.FolderView.SelectedIndex == -1))
                 {
                     if (CurrentFolderPath != null && mod.Source.FileLocation.Contains(CurrentFolderPath))
                     {
@@ -139,11 +138,11 @@ namespace Sonic3AIR_ModManager
 
             }
 
-            Parent.ModViewer.Refresh();
+            Instance.ModViewer.Refresh();
 
         }
 
-        public void FetchMods()
+        public static void FetchMods()
         {
             for (int i = 0; i < ModsList.Count; i++)
             {
@@ -165,17 +164,17 @@ namespace Sonic3AIR_ModManager
             PraseMods();
             UpdateNewModsListItems();
 
-            Parent.LegacyLoadingCheckbox.IsChecked = S3AIRActiveMods.UseLegacyLoading;
+            Instance.LegacyLoadingCheckbox.IsChecked = S3AIRActiveMods.UseLegacyLoading;
         }
 
-        public void GetAllModContainingSubFolders()
+        public static void GetAllModContainingSubFolders()
         {
-            Parent.ModViewer.FolderView.Items.Clear();
+            Instance.ModViewer.FolderView.Items.Clear();
             List<SubDirectoryItem> itemsCurrent = new List<SubDirectoryItem>();
             List<SubDirectoryItem> itemsOld = new List<SubDirectoryItem>();
             List<SubDirectoryItem> removedItems = new List<SubDirectoryItem>();
 
-            foreach (SubDirectoryItem item in Parent.ModViewer.FolderView.Items)
+            foreach (SubDirectoryItem item in Instance.ModViewer.FolderView.Items)
             {
                 itemsOld.Add(item);
             }
@@ -205,17 +204,17 @@ namespace Sonic3AIR_ModManager
             {
                 if (removedItems.Contains(item))
                 {
-                    if (itemsOld.Contains(item)) Parent.ModViewer.FolderView.Items.Remove(item);
+                    if (itemsOld.Contains(item)) Instance.ModViewer.FolderView.Items.Remove(item);
                 }
                 else
                 {
-                    if (!itemsOld.Contains(item)) Parent.ModViewer.FolderView.Items.Add(item);
+                    if (!itemsOld.Contains(item)) Instance.ModViewer.FolderView.Items.Add(item);
                 }
             }
 
         }
 
-        public void PraseMods()
+        public static void PraseMods()
         {
             IList<Tuple<ModViewerItem, int>> ActiveMods = new List<Tuple<ModViewerItem, int>>();
             ModSearch(new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder));
@@ -258,13 +257,13 @@ namespace Sonic3AIR_ModManager
                     {
                         mod.IsEnabled = true;
                         mod.EnabledLocal = true;
-                        ActiveMods.Add(new Tuple<ModViewerItem, int>(new ModViewerItem(this, mod, !isSubFolder), S3AIRActiveMods.ActiveMods.IndexOf(modPath)));
+                        ActiveMods.Add(new Tuple<ModViewerItem, int>(new ModViewerItem(mod, !isSubFolder), S3AIRActiveMods.ActiveMods.IndexOf(modPath)));
                     }
                     else
                     {
                         mod.IsEnabled = false;
                         mod.EnabledLocal = false;
-                        ModsList.Add(new ModViewerItem(this, mod, !isSubFolder));
+                        ModsList.Add(new ModViewerItem(mod, !isSubFolder));
                     }
                 }
                 catch (Newtonsoft.Json.JsonReaderException ex)
@@ -279,70 +278,70 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        public void MoveModToTop()
+        public static void MoveModToTop()
         {
-            int index = Parent.ModViewer.ActiveSelectedIndex;
+            int index = Instance.ModViewer.ActiveSelectedIndex;
             if (index != 0)
             {
                 ActiveModsList.Move(index, 0);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(0);
+                Instance.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(0);
             }
         }
 
-        public void MoveModUp()
+        public static void MoveModUp()
         {
-            int index = Parent.ModViewer.ActiveSelectedIndex;
+            int index = Instance.ModViewer.ActiveSelectedIndex;
             if (index != 0)
             {
                 ActiveModsList.Move(index, index - 1);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(index - 1);
+                Instance.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(index - 1);
             }
         }
 
-        public void MoveModDown()
+        public static void MoveModDown()
         {
-            int index = Parent.ModViewer.ActiveSelectedIndex;
+            int index = Instance.ModViewer.ActiveSelectedIndex;
             if (index != ActiveModsList.Count - 1)
             {
                 ActiveModsList.Move(index, index + 1);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(index + 1);
+                Instance.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(index + 1);
             }
         }
 
-        public void MoveModToBottom()
+        public static void MoveModToBottom()
         {
-            int index = Parent.ModViewer.ActiveSelectedIndex;
+            int index = Instance.ModViewer.ActiveSelectedIndex;
             if (index != ActiveModsList.Count - 1)
             {
                 ActiveModsList.Move(index, ActiveModsList.Count - 1);
                 UpdateModsList();
-                Parent.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(ActiveModsList.Count - 1);
+                Instance.ModViewer.ActiveSelectedItem = ActiveModsList.ElementAt(ActiveModsList.Count - 1);
             }
         }
 
-        public void RefreshMoveToSubfolderList()
+        public static void RefreshMoveToSubfolderList()
         {
             List<MenuItem> ItemsToRemove = new List<MenuItem>();
-            foreach (var item in Parent.moveModToSubFolderMenuItem.Items)
+            foreach (var item in Instance.moveModToSubFolderMenuItem.Items)
             {
-                if (item is MenuItem && !item.Equals(Parent.addNewModSubfolderMenuItem))
+                if (item is MenuItem && !item.Equals(Instance.addNewModSubfolderMenuItem))
                 {
                     ItemsToRemove.Add(item as MenuItem);
                 }
             }
             foreach (var item in ItemsToRemove)
             {
-                int index = Parent.moveModToSubFolderMenuItem.Items.IndexOf(item);
-                (Parent.moveModToSubFolderMenuItem.Items[index] as MenuItem).Click -= SubDirectoryMove_Click;
-                Parent.moveModToSubFolderMenuItem.Items.Remove(item);
+                int index = Instance.moveModToSubFolderMenuItem.Items.IndexOf(item);
+                (Instance.moveModToSubFolderMenuItem.Items[index] as MenuItem).Click -= SubDirectoryMove_Click;
+                Instance.moveModToSubFolderMenuItem.Items.Remove(item);
             }
             ItemsToRemove.Clear();
 
 
-            foreach (var item in Parent.ModViewer.FolderView.Items)
+            foreach (var item in Instance.ModViewer.FolderView.Items)
             {
                 SubDirectoryItem realItem;
                 if (item is SubDirectoryItem) realItem = item as SubDirectoryItem;
@@ -351,13 +350,13 @@ namespace Sonic3AIR_ModManager
                 if (realItem != null)
                 {
                     var menuItem = GenerateSubDirectoryToolstripItem(realItem.FileName, realItem.FilePath);
-                    Parent.moveModToSubFolderMenuItem.Items.Add(menuItem);
+                    Instance.moveModToSubFolderMenuItem.Items.Add(menuItem);
                 }
             }
 
         }
 
-        public MenuItem GenerateSubDirectoryToolstripItem(string name, string filepath)
+        public static MenuItem GenerateSubDirectoryToolstripItem(string name, string filepath)
         {
             MenuItem item = new MenuItem();
             item.Header = name;
@@ -366,17 +365,17 @@ namespace Sonic3AIR_ModManager
             return item;
         }
 
-        public void SubDirectoryMove_Click(object sender, RoutedEventArgs e)
+        public static void SubDirectoryMove_Click(object sender, RoutedEventArgs e)
         {
-            if (Parent.ModViewer.View.SelectedItem != null && Parent.ModViewer.View.SelectedItem is ModViewerItem)
+            if (Instance.ModViewer.View.SelectedItem != null && Instance.ModViewer.View.SelectedItem is ModViewerItem)
             {
-                FileManagement.MoveMod((Parent.ModViewer.View.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
+                FileManagement.MoveMod((Instance.ModViewer.View.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
             }
-            else if (MainDataModel.ModManagement.S3AIRActiveMods.UseLegacyLoading)
+            else if (ModManagement.S3AIRActiveMods.UseLegacyLoading)
             {
-                if (Parent.ModViewer.ActiveView.SelectedItem != null && Parent.ModViewer.ActiveView.SelectedItem is ModViewerItem)
+                if (Instance.ModViewer.ActiveView.SelectedItem != null && Instance.ModViewer.ActiveView.SelectedItem is ModViewerItem)
                 {
-                    FileManagement.MoveMod((Parent.ModViewer.ActiveView.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
+                    FileManagement.MoveMod((Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
                 }
             }
 
@@ -384,7 +383,7 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        public void Save()
+        public static void Save()
         {
             foreach (var mod in ModsList.Concat(ActiveModsList))
             {
@@ -418,31 +417,53 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        public void UpdateModListItemCheck(bool shouldEnd)
+        public static void UpdateModListItemCheck(bool shouldEnd)
         {
             if (shouldEnd) ModViewer.ItemCheck = null;
             else ModViewer.ItemCheck = ModsList_ItemCheck;
         }
 
-        private void ModsList_ItemCheck()
+        private static void ModsList_ItemCheck()
         {
             UpdateModsList();
         }
 
-        public void DisableMod(AIR_API.Mod mod)
+        public static void DisableMod(AIR_API.Mod mod)
         {
             S3AIRActiveMods.ActiveMods.Remove(mod.FolderName);
         }
 
-        public void EnableMod(AIR_API.Mod mod)
+        public static void EnableMod(AIR_API.Mod mod)
         {
             S3AIRActiveMods.ActiveMods.Add(mod.FolderName);
         }
 
-        public void ToggleLegacyModManagement(bool value)
+        public static void EditModConfig(ref ModManager Instance)
         {
-            this.S3AIRActiveMods.UseLegacyLoading = value;
-            this.Save();
+            if (Instance.ModViewer.SelectedItem != null)
+            {
+                var item = (Instance.ModViewer.SelectedItem as ModViewerItem);
+                var parent = Instance as Window;
+                ConfigEditorDialog cfg = new ConfigEditorDialog(ref parent);
+                if (cfg.ShowConfigEditDialog(item.Source).Value == true)
+                {
+                    (Instance.ModViewer.SelectedItem as ModViewerItem).Source.Name = cfg.EditorNameField.Text;
+                    (Instance.ModViewer.SelectedItem as ModViewerItem).Source.Author = cfg.EditorAuthorField.Text;
+                    (Instance.ModViewer.SelectedItem as ModViewerItem).Source.Description = cfg.EditorDescriptionField.Text;
+                    (Instance.ModViewer.SelectedItem as ModViewerItem).Source.URL = cfg.EditorURLField.Text;
+                    (Instance.ModViewer.SelectedItem as ModViewerItem).Source.GameVersion = cfg.EditorGameVersionField.Text;
+                    (Instance.ModViewer.SelectedItem as ModViewerItem).Source.ModVersion = cfg.EditorModVersionField.Text;
+
+                    (Instance.ModViewer.SelectedItem as ModViewerItem).Source.Save();
+                    ModManagement.UpdateModsList(true);
+                }
+            }
+        }
+
+        public static void ToggleLegacyModManagement(bool value)
+        {
+            ModManagement.S3AIRActiveMods.UseLegacyLoading = value;
+            ModManagement.Save();
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace Sonic3AIR_ModManager
 {
-    public static class RightClickAssistTool
+    public static class GameContextMenuHandler
     {
         #region Window Detector
         // The GetForegroundWindow function returns a handle to the foreground window
@@ -107,28 +107,38 @@ namespace Sonic3AIR_ModManager
 
         public static void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
         {
-            System.Windows.Rect rectangle = (ProcessLauncher.CurrentGameProcess != null ? GetWindowRect(ProcessLauncher.CurrentGameProcess.MainWindowHandle) : new System.Windows.Rect());
-            System.Windows.Point MousePos = new System.Windows.Point(e.Location.X, e.Location.Y);
-
-            bool isWithin = (ProcessLauncher.CurrentGameProcess != null ? isWithinControl(rectangle, MousePos) : false);
-            //Console.WriteLine("IsWithin : {0}", isWithin.ToString());
-            //Console.WriteLine("Rect : {0}", rectangle.ToString());
-            //Console.WriteLine("MousePos : {0}", MousePos.ToString());
-            if (isWithin)
+            if (ProcessLauncher.CurrentGameProcess != null && ProcessLauncher.CurrentGameProcess.HasExited == false)
             {
-                if (e.Button == System.Windows.Forms.MouseButtons.Right && IsAIRFocused() && ProcessLauncher.isGameRunning)
+                System.Windows.Rect rectangle = (ProcessLauncher.CurrentGameProcess != null ? GetWindowRect(ProcessLauncher.CurrentGameProcess.MainWindowHandle) : new System.Windows.Rect());
+                System.Windows.Point MousePos = new System.Windows.Point(e.Location.X, e.Location.Y);
+
+                bool isWithin = (ProcessLauncher.CurrentGameProcess != null ? isWithinControl(rectangle, MousePos) : false);
+                //Console.WriteLine("IsWithin : {0}", isWithin.ToString());
+                //Console.WriteLine("Rect : {0}", rectangle.ToString());
+                //Console.WriteLine("MousePos : {0}", MousePos.ToString());
+                if (isWithin)
                 {
-                    CreateContextMenu();
-                    cm.IsOpen = true;
-                    cm.Focus();
+                    if (e.Button == System.Windows.Forms.MouseButtons.Right && IsAIRFocused() && ProcessLauncher.isGameRunning)
+                    {
+                        CreateContextMenu();
+                        cm.IsOpen = true;
+                        cm.Focus();
+                    }
+                    else
+                    {
+                        bool isOutsideOfRange = !(cm != null ? IsWithinContextMenu(new System.Windows.Point(e.Location.X, e.Location.Y)) : true);
+                        if (cm != null && cm.IsOpen && isOutsideOfRange)
+                        {
+                            cm.IsOpen = false;
+
+                        }
+                    }
                 }
                 else
                 {
-                    bool isOutsideOfRange = !(cm != null ? IsWithinContextMenu(new System.Windows.Point(e.Location.X, e.Location.Y)) : true);
-                    if (cm != null && cm.IsOpen && isOutsideOfRange)
+                    if (cm != null && cm.IsOpen)
                     {
                         cm.IsOpen = false;
-
                     }
                 }
             }

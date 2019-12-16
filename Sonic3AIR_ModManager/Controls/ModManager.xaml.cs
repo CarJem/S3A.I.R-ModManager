@@ -70,7 +70,7 @@ namespace Sonic3AIR_ModManager
         public bool AllowUpdate { get; set; } = true;
         public bool HasInitilizationCompleted { get; set; } = false;
 
-        public static ModManager Instance;
+        private static ModManager Instance;
 
         #endregion
 
@@ -119,16 +119,18 @@ namespace Sonic3AIR_ModManager
             InitializeHostedComponents();
             SetNonDesignerRules();
             AllowUpdate = true;
-            MainDataModel.ModManagement = new ModManagement(this);
 
 
-            if (ProgramPaths.ValidateInstall(ref MainDataModel.ModManagement.S3AIRActiveMods, ref MainDataModel.S3AIRSettings) == true)
+            if (ProgramPaths.ValidateInstall(ref ModManagement.S3AIRActiveMods, ref MainDataModel.S3AIRSettings) == true)
             {
                 Instance = this;
+                ModManagement.UpdateInstance(ref Instance);
+                ProcessLauncher.UpdateInstance(ref Instance);
+                InputDeviceManager.UpdateInstance(ref Instance);
                 MainDataModel.Global_Settings = new AIR_API.Settings_Global(new FileInfo(ProgramPaths.Sonic3AIRGlobalSettingsFile));
                 MainDataModel.Input_Settings = new AIR_API.Settings_Input(new FileInfo(ProgramPaths.Sonic3AIRGlobalInputFile));
                 MainDataModel.SetTooltips(ref Instance);
-                MainDataModel.ModManagement.UpdateModsList(true);
+                ModManagement.UpdateModsList(true);
                 MainDataModel.UpdateSettingsStates(ref Instance);
                 MainDataModel.SetInitialWindowSize(ref Instance);
                 MainDataModel.Settings = new Settings.ModManagerSettings(ProgramPaths.Sonic3AIR_MM_SettingsFile);
@@ -186,7 +188,7 @@ namespace Sonic3AIR_ModManager
 
         private void LegacyLoadingCheckbox_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.ToggleLegacyModManagement(LegacyLoadingCheckbox.IsChecked.Value);
+            ModManagement.ToggleLegacyModManagement(LegacyLoadingCheckbox.IsChecked.Value);
         }
 
         private void addInputMethodButton_Click(object sender, RoutedEventArgs e)
@@ -264,7 +266,7 @@ namespace Sonic3AIR_ModManager
 
         public static void UpdateUIFromInvoke()
         {
-            MainDataModel.ModManagement.UpdateModsList(true);
+            ModManagement.UpdateModsList(true);
         }
 
         public void DownloadButtonTest_Click(object sender, RoutedEventArgs e)
@@ -298,27 +300,27 @@ namespace Sonic3AIR_ModManager
 
         private void FromSettingsFileToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ChangeAIRPathFromSettings();
+            VersionManagement.ChangeAIRPathFromSettings(ref Instance);
         }
 
         private void moveDeviceNameToTopButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveDeviceName(FileManagement.MoveListItemDirection.MoveToTop);
+            InputDeviceManager.MoveDeviceName(InputDeviceManager.MoveListItemDirection.MoveToTop, ref Instance);
         }
 
         private void moveDeviceNameUpButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveDeviceName(FileManagement.MoveListItemDirection.MoveUp);
+            InputDeviceManager.MoveDeviceName(InputDeviceManager.MoveListItemDirection.MoveUp, ref Instance);
         }
 
         private void moveDeviceNameDownButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveDeviceName(FileManagement.MoveListItemDirection.MoveDown);
+            InputDeviceManager.MoveDeviceName(InputDeviceManager.MoveListItemDirection.MoveDown, ref Instance);
         }
 
         private void moveDeviceNameToBottomButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveDeviceName(FileManagement.MoveListItemDirection.MoveToBottom);
+            InputDeviceManager.MoveDeviceName(InputDeviceManager.MoveListItemDirection.MoveToBottom, ref Instance);
         }
 
         private void SaveInputsButton_Click(object sender, RoutedEventArgs e)
@@ -356,12 +358,12 @@ namespace Sonic3AIR_ModManager
 
         private void MoveToTopButton_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.MoveModToTop();
+            ModManagement.MoveModToTop();
         }
 
         private void MoveToBottomButton_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.MoveModToBottom();
+            ModManagement.MoveModToBottom();
         }
 
         private void MoreModOptionsButton_Click(object sender, RoutedEventArgs e)
@@ -371,12 +373,12 @@ namespace Sonic3AIR_ModManager
 
         private void MoveDownButton_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.MoveModDown();
+            ModManagement.MoveModDown();
         }
 
         private void MoveUpButton_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.MoveModUp();
+            ModManagement.MoveModUp();
         }
 
         private void S3AIRWebsiteButton_Click(object sender, RoutedEventArgs e)
@@ -406,7 +408,7 @@ namespace Sonic3AIR_ModManager
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.Save();
+            ModManagement.Save();
         }
 
         private void OpenSampleModsFolderButton_Click(object sender, RoutedEventArgs e)
@@ -437,7 +439,7 @@ namespace Sonic3AIR_ModManager
 
         private void AutoRunCheckbox_CheckedChanged(object sender, RoutedEventArgs e)
         {
-           if (AllowUpdate) MainDataModel.UpdateSettingsStates(ref Instance);
+            if (AllowUpdate) MainDataModel.UpdateSettingsStates(ref Instance);
         }
 
         private void ModManager_WindowClosing(object sender, CancelEventArgs e)
@@ -462,7 +464,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording)
             {
-                if (FileManagement.DeleteRecording(GameRecordingList.SelectedItem as AIR_API.Recording) == true)
+                if (RecordingManagement.DeleteRecording(GameRecordingList.SelectedItem as AIR_API.Recording) == true)
                 {
                     RecordingManagement.CollectGameRecordings(ref Instance);
                     GameRecordingList_SelectedIndexChanged(null, null);
@@ -498,12 +500,12 @@ namespace Sonic3AIR_ModManager
 
         private void View_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-           if (HasInitilizationCompleted) MainDataModel.RefreshSelectedModProperties(ref Instance);
+            if (HasInitilizationCompleted) MainDataModel.RefreshSelectedModProperties(ref Instance);
         }
 
         private void FolderView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (HasInitilizationCompleted) MainDataModel.ModManagement.UpdateModsList();
+            if (HasInitilizationCompleted) ModManagement.UpdateModsList();
         }
 
         private void AddMods_Click(object sender, RoutedEventArgs e)
@@ -541,6 +543,7 @@ namespace Sonic3AIR_ModManager
                 if (tabControl3.SelectedItem == recordingsPage)
                 {
                     RecordingManagement.CollectGameRecordings(ref Instance);
+                    RecordingManagement.UpdateGameRecordingManagerButtons(ref Instance);
                 }
             }
         }
@@ -549,7 +552,7 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                FileManagement.CopyRecordingLocationToClipboard(GameRecordingList.SelectedItem as AIR_API.Recording);
+                RecordingManagement.CopyRecordingLocationToClipboard(GameRecordingList.SelectedItem as AIR_API.Recording);
             }
         }
 
@@ -557,14 +560,14 @@ namespace Sonic3AIR_ModManager
         {
             if (GameRecordingList.SelectedItem != null)
             {
-                FileManagement.UploadRecordingToFileDotIO(GameRecordingList.SelectedItem as AIR_API.Recording);
+                RecordingManagement.UploadRecordingToFileDotIO(GameRecordingList.SelectedItem as AIR_API.Recording);
             }
 
         }
 
         private void GameRecordingList_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainDataModel.UpdateGameRecordingManagerButtons(ref Instance);
+            RecordingManagement.UpdateGameRecordingManagerButtons(ref Instance);
         }
 
         private void OpenRecordingButton_Click(object sender, RoutedEventArgs e)
@@ -580,7 +583,7 @@ namespace Sonic3AIR_ModManager
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.UpdateModsList(true);
+            ModManagement.UpdateModsList(true);
         }
 
         private void UpdateSonic3AIRPath_Click(object sender, RoutedEventArgs e)
@@ -591,28 +594,28 @@ namespace Sonic3AIR_ModManager
 
         private void moveInputMethodUpButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveInputMethod(FileManagement.MoveListItemDirection.MoveUp);
+            InputDeviceManager.MoveInputMethod(InputDeviceManager.MoveListItemDirection.MoveUp, ref Instance);
         }
 
         private void moveInputMethodDownButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveInputMethod(FileManagement.MoveListItemDirection.MoveDown);
+            InputDeviceManager.MoveInputMethod(InputDeviceManager.MoveListItemDirection.MoveDown, ref Instance);
         }
 
         private void moveInputMethodToBottomButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveInputMethod(FileManagement.MoveListItemDirection.MoveToBottom);
+            InputDeviceManager.MoveInputMethod(InputDeviceManager.MoveListItemDirection.MoveToBottom, ref Instance);
         }
 
         private void moveInputMethodToTopButton_Click(object sender, RoutedEventArgs e)
         {
-            InputDeviceManager.MoveInputMethod(FileManagement.MoveListItemDirection.MoveToTop);
+            InputDeviceManager.MoveInputMethod(InputDeviceManager.MoveListItemDirection.MoveToTop, ref Instance);
         }
 
         private void ChangeSonic3AIRPathButton_Click(object sender, RoutedEventArgs e)
         {
             updateSonic3AIRPathButton.ContextMenu.IsOpen = true;
-            UpdateAIRVersionsToolstrips();
+            VersionManagement.UpdateAIRVersionsToolstrips(ref Instance);
             MainDataModel.UpdateAIRSettings(ref Instance);
         }
 
@@ -628,7 +631,7 @@ namespace Sonic3AIR_ModManager
 
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.Save();
+            ModManagement.Save();
             ProcessLauncher.LaunchSonic3AIR();
             MainDataModel.UpdateInGameButtons(ref Instance);
         }
@@ -717,8 +720,12 @@ namespace Sonic3AIR_ModManager
 
         private void playbackRecordingButton_Click(object sender, RoutedEventArgs e)
         {
-            playbackRecordingButton.ContextMenu.IsOpen = true;
-            RecordingManagement.UpdateAIRVersionsForPlaybackToolstrips(ref Instance);
+            if (RecordingManagement.HasPlaybackWarningBeenPresented)
+            {
+                playbackRecordingButton.ContextMenu.IsOpen = true;
+                RecordingManagement.UpdateAIRVersionsForPlaybackToolstrips(ref Instance);
+            }
+            else RecordingManagement.UpdatePlayerWarning(ref Instance);
         }
 
         private void playUsingCurrentVersionMenuItem_Click(object sender, RoutedEventArgs e)
@@ -748,11 +755,12 @@ namespace Sonic3AIR_ModManager
 
         private void moveModToSubFolderMenuItem_ContextMenuOpening(object sender, RoutedEventArgs e)
         {
-            MainDataModel.ModManagement.RefreshMoveToSubfolderList();
+            ModManagement.RefreshMoveToSubfolderList();
         }
 
         private void RecordingsViewer_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            RecordingManagement.UpdateGameRecordingManagerButtons(ref Instance);
             if (e.ChangedButton == MouseButton.Right)
             {
                 if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording && GameRecordingList.IsMouseOver)
@@ -763,144 +771,9 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        #endregion
-
-        #region AIR EXE Version Handler Toolstrip / Path Management
-
-        private void AIRVersionZIPToolStripMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            FileManagement.InstallVersionFromZIP();
-        }
-
-        private void AIRPathMenuStrip_ContextMenuOpening(object sender, ContextMenuEventArgs e)
-        {
-            UpdateAIRVersionsToolstrips();
-        }
-
-        private void ManageAIRVersionsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            GoToAIRVersionManagement();
-        }
-
-        private void GoToAIRVersionManagement()
-        {
-            settingsPage.IsSelected = true;
-            PrimaryTabControl.SelectedItem = settingsPage;
-            versionsPage.IsSelected = true;
-            OptionsTabControl.SelectedItem = versionsPage;
-        }
-
-        private void UpdateAIRVersionsToolstrips()
-        {
-            CleanUpInstalledVersionsToolStrip();
-            if (Directory.Exists(ProgramPaths.Sonic3AIR_MM_VersionsFolder))
-            {
-                DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
-                var folders = directoryInfo.GetDirectories().ToList();
-                if (folders.Count != 0)
-                {
-                    foreach (var folder in folders.VersionSort().Reverse())
-                    {
-                        string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
-                        if (File.Exists(filePath))
-                        {
-                            ChangeAIRVersionMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
-                            ChangeAIRVersionFileMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath));
-                        }
-
-
-                    }
-                }
-
-            }
-
-        }
-
-        private void CleanUpInstalledVersionsToolStrip()
-        {
-            foreach (var item in ChangeAIRVersionMenuItem.Items.Cast<MenuItem>())
-            {
-                item.Click -= ChangeAIRPathByInstalls;
-            }
-            foreach (var item in ChangeAIRVersionFileMenuItem.Items.Cast<MenuItem>())
-            {
-                item.Click -= ChangeAIRPathByInstalls;
-            }
-            ChangeAIRVersionMenuItem.Items.Clear();
-            ChangeAIRVersionFileMenuItem.Items.Clear();
-        }
-
-        private MenuItem GenerateInstalledVersionsToolstripItem(string name, string filepath)
-        {
-            MenuItem item = new MenuItem();
-            item.Header = name;
-            item.Tag = filepath;
-            item.Click += ChangeAIRPathByInstalls;
-            item.IsCheckable = false;
-            item.IsChecked = (filepath == ProgramPaths.Sonic3AIRPath);
-            return item;
-        }
-
-        private void ChangeAIRPathByInstalls(object sender, EventArgs e)
-        {
-            MenuItem item = sender as MenuItem;
-            ProgramPaths.Sonic3AIRPath = item.Tag.ToString();
-            Properties.Settings.Default.Save();
-            MainDataModel.UpdateAIRSettings(ref Instance);
-        }
-
-        private void ChangeAIRPathFromSettings()
-        {
-            if (MainDataModel.S3AIRSettings != null)
-            {
-                if (MainDataModel.S3AIRSettings.HasEXEPath)
-                {
-                    if (File.Exists(MainDataModel.S3AIRSettings.AIREXEPath))
-                    {
-                        ProgramPaths.Sonic3AIRPath = MainDataModel.S3AIRSettings.AIREXEPath;
-                        Properties.Settings.Default.Save();
-                        MainDataModel.UpdateAIRSettings(ref Instance);
-                    }
-                    else
-                    {
-                        MessageBox.Show(Program.LanguageResource.GetString("AIRChangePathNoLongerExists"));
-                    }
-                }
-            }
-        }
-        #endregion
-
-        #region A.I.R. Version Manager List
-
-        public void RefreshVersionsList(bool fullRefresh = false)
-        {
-            if (fullRefresh)
-            {
-                VersionsListView.Items.Clear();
-                DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
-                var folders = directoryInfo.GetDirectories().ToList();
-                if (folders.Count != 0)
-                {
-                    foreach (var folder in folders.VersionSort().Reverse())
-                    {
-                        string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
-                        if (File.Exists(filePath))
-                        {
-                            VersionsListView.Items.Add(new FileManagement.AIRVersionListItem(folder.Name, folder.FullName));
-                        }
-
-
-                    }
-                }
-            }
-
-            bool enabled = VersionsListView.SelectedItem != null;
-            removeVersionButton.IsEnabled = enabled;
-            openVersionLocationButton.IsEnabled = enabled;
-        }
         private void VersionsListBox_SelectedValueChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshVersionsList();
+            VersionManagement.RefreshVersionsList(ref Instance);
         }
 
         private void TabControl2_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
@@ -909,7 +782,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (OptionsTabControl.SelectedItem == versionsPage)
                 {
-                    RefreshVersionsList(true);
+                    VersionManagement.RefreshVersionsList(ref Instance, true);
                 }
                 else if (OptionsTabControl.SelectedItem == gameOptionsPage || OptionsTabControl.SelectedItem == inputPage)
                 {
@@ -924,47 +797,110 @@ namespace Sonic3AIR_ModManager
 
         private void OpenVersionLocationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (VersionsListView.SelectedItem != null && VersionsListView.SelectedItem is FileManagement.AIRVersionListItem)
-            {
-                FileManagement.AIRVersionListItem item = VersionsListView.SelectedItem as FileManagement.AIRVersionListItem;
-                Process.Start(item.FilePath);
-            }
+            VersionManagement.OpenVersionFolder(ref Instance);
         }
 
         private void RemoveVersionButton_Click(object sender, RoutedEventArgs e)
         {
-            FileManagement.RemoveVersion(VersionsListView.SelectedItem);
+            VersionManagement.RemoveVersion(VersionsListView.SelectedItem, ref Instance);
         }
 
-        #endregion
+        private void AIRVersionZIPToolStripMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            VersionManagement.InstallVersionFromZIP();
+        }
 
-        #region Selected Mod Modification
+        private void AIRPathMenuStrip_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            VersionManagement.UpdateAIRVersionsToolstrips(ref Instance);
+        }
+
+        private void ManageAIRVersionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            VersionManagement.GoToAIRVersionManagement(ref Instance);
+        }
 
         private void editModFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (ModViewer.SelectedItem != null)
-            {
-                var item = (ModViewer.SelectedItem as ModViewerItem);
-                var parent = this as Window;
-                ConfigEditorDialog cfg = new ConfigEditorDialog(ref parent);
-                if(cfg.ShowConfigEditDialog(item.Source).Value == true)
-                {
-                    (ModViewer.SelectedItem as ModViewerItem).Source.Name = cfg.EditorNameField.Text;
-                    (ModViewer.SelectedItem as ModViewerItem).Source.Author = cfg.EditorAuthorField.Text;
-                    (ModViewer.SelectedItem as ModViewerItem).Source.Description = cfg.EditorDescriptionField.Text;
-                    (ModViewer.SelectedItem as ModViewerItem).Source.URL = cfg.EditorURLField.Text;
-                    (ModViewer.SelectedItem as ModViewerItem).Source.GameVersion = cfg.EditorGameVersionField.Text;
-                    (ModViewer.SelectedItem as ModViewerItem).Source.ModVersion = cfg.EditorModVersionField.Text;
+            ModManagement.EditModConfig(ref Instance);
+        }
 
-                    (ModViewer.SelectedItem as ModViewerItem).Source.Save();
-                    MainDataModel.ModManagement.UpdateModsList(true);
-                }
-            }
+        private void FileMenuItem_SubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            VersionManagement.UpdateAIRVersionsToolstrips(ref Instance);
+            MMSettingsManagement.CollectModCollectionMenuItemsDictionary(ref Instance);
+            MMSettingsManagement.CollectLaunchPresetsMenuItemsDictionary(ref Instance);
+        }
+
+        private void LoadLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.LoadLaunchPresets(e);
+        }
+
+        private void RenameLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.RenameLaunchPresets(e);
+        }
+
+        private void DeleteLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.DeleteLaunchPresets(e);
+        }
+
+        private void SaveLaunchPresetAsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.SaveLaunchPresetAs(e);
+        }
+
+        private void DeleteAllLaunchPresetsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MMSettingsManagement.DeleteAllLaunchPresets();
+        }
+
+        private void SaveLaunchPresetMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MMSettingsManagement.SaveLaunchPreset();
+        }
+
+        private void LoadModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.LoadModCollection(e);
+        }
+
+        private void RenameModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.RenameModCollection(e);
+        }
+
+        private void DeleteModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.DeleteModCollection(e);
+        }
+
+        private void SaveModCollectonAsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.SaveModCollectonAs(e);
+        }
+
+        private void DeleteAllModCollectionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MMSettingsManagement.DeleteAllModCollections();
+        }
+
+        private void SaveModCollectonMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MMSettingsManagement.SaveModCollecton();
+        }
+
+        private void RecordingsPlaybackWarningUnderstoodButton_Click(object sender, RoutedEventArgs e)
+        {
+            RecordingManagement.HasPlaybackWarningBeenPresented = true;
+            RecordingManagement.UpdatePlayerWarning(ref Instance);
         }
 
         #endregion
 
-        #region Error Message Helpers
+        #region Error Linking to Settings
 
         private void HyperlinkToGeneralTabAIRPath()
         {
@@ -979,211 +915,12 @@ namespace Sonic3AIR_ModManager
         {
             if (sender.Equals(LaunchOptionsGroup) && LaunchOptionsFailureMessageBackground.Visibility == Visibility.Visible) HyperlinkToGeneralTabAIRPath();
             else if (!sender.Equals(LaunchOptionsGroup)) HyperlinkToGeneralTabAIRPath();
-
         }
 
-
-        #endregion
-
-        #region Mod Manager Settings Management
-
-        #region Mod Collections / Launch Presets Mananagement
-        private void FileMenuItem_SubmenuOpened(object sender, RoutedEventArgs e)
-        {
-            UpdateAIRVersionsToolstrips();
-            CollectModCollectionMenuItemsDictionary();
-            CollectLaunchPresetsMenuItemsDictionary();
-        }
-
-        private void CollectModCollectionMenuItemsDictionary()
-        {
-
-            LoadModCollectionMenuItem.RecentItemsSource = null;
-            RenameModCollectionMenuItem.RecentItemsSource = null;
-            DeleteModCollectionMenuItem.RecentItemsSource = null;
-            SaveModCollectonAsMenuItem.RecentItemsSource = null;
-
-            if ( MainDataModel.ModCollectionMenuItems.ContainsKey(0))  MainDataModel.ModCollectionMenuItems[0].Clear();
-            if ( MainDataModel.ModCollectionMenuItems.ContainsKey(1))  MainDataModel.ModCollectionMenuItems[1].Clear();
-            if ( MainDataModel.ModCollectionMenuItems.ContainsKey(2))  MainDataModel.ModCollectionMenuItems[2].Clear();
-            if ( MainDataModel.ModCollectionMenuItems.ContainsKey(3))  MainDataModel.ModCollectionMenuItems[3].Clear();
-
-             MainDataModel.ModCollectionMenuItems.Clear();
-            for (int i = 0; i < 4; i++)
-            {
-                 MainDataModel.ModCollectionMenuItems.Add(i, CollectModCollectionsMenuItems());
-            }
-
-            LoadModCollectionMenuItem.RecentItemsSource =  MainDataModel.ModCollectionMenuItems[0];
-            RenameModCollectionMenuItem.RecentItemsSource =  MainDataModel.ModCollectionMenuItems[1];
-            DeleteModCollectionMenuItem.RecentItemsSource =  MainDataModel.ModCollectionMenuItems[2];
-            SaveModCollectonAsMenuItem.RecentItemsSource =  MainDataModel.ModCollectionMenuItems[3];
-
-
-        }
-
-        private List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> CollectModCollectionsMenuItems()
-        {
-            List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> collections = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
-            foreach (var collection in MainDataModel.Settings.Options.ModCollections)
-            {
-                collections.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem(collection.Name, collection));
-            }
-            return collections;
-        }
-
-        private void CollectLaunchPresetsMenuItemsDictionary()
-        {
-            LoadLaunchPresetsMenuItem.RecentItemsSource.Clear();
-            RenameLaunchPresetsMenuItem.RecentItemsSource.Clear();
-            DeleteLaunchPresetsMenuItem.RecentItemsSource.Clear();
-            SaveLaunchPresetAsMenuItem.RecentItemsSource.Clear();
-
-            LoadLaunchPresetsMenuItem.RecentItemsSource = null;
-            RenameLaunchPresetsMenuItem.RecentItemsSource = null;
-            DeleteLaunchPresetsMenuItem.RecentItemsSource = null;
-            SaveLaunchPresetAsMenuItem.RecentItemsSource = null;
-
-            LoadLaunchPresetsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
-            RenameLaunchPresetsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
-            DeleteLaunchPresetsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
-            SaveLaunchPresetAsMenuItem.RecentItemsSource = CollectLaunchPresetsMenuItems();
-
-        }
-
-        private List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> CollectLaunchPresetsMenuItems()
-        {
-            List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> collections = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
-            foreach (var collection in MainDataModel.Settings.Options.LaunchPresets)
-            {
-                collections.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem(collection.Name, collection));
-            }
-            return collections;
-        }
-
-        private void LoadLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-            
-        }
-
-        private void RenameLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-
-        }
-
-        private void DeleteLaunchPresetsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-
-        }
-
-        private void SaveLaunchPresetAsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-
-        }
-
-        private void DeleteAllLaunchPresetsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void SaveLaunchPresetMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void LoadModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-            var collection = e.Content as Settings.ModCollection;
-            MainDataModel.ModManagement.S3AIRActiveMods.Save(collection.Mods);
-            MainDataModel.ModManagement.UpdateModsList(true);
-        }
-
-        private void RenameModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-            var collection = e.Content as Settings.ModCollection;
-            string name = collection.Name;
-            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Rename");
-            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_Rename");
-            var result = ExtraDialog.ShowInputDialog(ref name, caption, message);
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                MainDataModel.ModManagement.Save();
-                int collectionsIndex = MainDataModel.Settings.Options.ModCollections.IndexOf(collection);
-                MainDataModel.Settings.Options.ModCollections[collectionsIndex].Name = name;
-                SaveModManagerSettings();
-            }
-        }
-
-        private void DeleteModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-            var collection = e.Content as Settings.ModCollection;
-            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Delete");
-            string message = string.Format(UserLanguage.GetOutputString("ModCollectionDialog_Message_Delete"), collection.Name);
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
-            {
-                MainDataModel.Settings.Options.ModCollections.Remove(collection);
-                SaveModManagerSettings();
-            }
-        }
-
-        private void SaveModCollectonAsMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
-        {
-            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Replace");
-            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_Replace");
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
-            {
-                MainDataModel.ModManagement.Save();
-                var collection = e.Content as Settings.ModCollection;
-                int collectionsIndex = MainDataModel.Settings.Options.ModCollections.IndexOf(collection);
-                MainDataModel.Settings.Options.ModCollections[collectionsIndex] = new Sonic3AIR_ModManager.Settings.ModCollection(MainDataModel.ModManagement.S3AIRActiveMods.ActiveClass, collection.Name);
-                SaveModManagerSettings();
-            }
-        }
-
-        private void DeleteAllModCollectionsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_DeleteAll");
-            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_DeleteAll");
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
-            {
-                MainDataModel.Settings.Options.ModCollections.Clear();
-                SaveModManagerSettings();
-            }
-        }
-
-        private void SaveModCollectonMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            string name = UserLanguage.GetOutputString("ModCollectionDialog_Name_Save");
-            string caption = UserLanguage.GetOutputString("ModCollectionDialog_Caption_Save");
-            string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_Save");
-            var result = ExtraDialog.ShowInputDialog(ref name, caption, message);
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                MainDataModel.ModManagement.Save();
-                MainDataModel.Settings.Options.ModCollections.Add(new Sonic3AIR_ModManager.Settings.ModCollection(MainDataModel.ModManagement.S3AIRActiveMods.ActiveClass, name));
-                SaveModManagerSettings();
-            }
-
-        }
-
-        #endregion
-
-        private void SaveModManagerSettings()
-        {
-            MainDataModel.Settings.Save();
-        }
-
-        private void LoadModManagerSettings()
-        {
-            MainDataModel.Settings = null;
-            MainDataModel.Settings = new Settings.ModManagerSettings(ProgramPaths.Sonic3AIR_MM_SettingsFile);
-        }
 
 
 
 
         #endregion
-
-
     }
 }

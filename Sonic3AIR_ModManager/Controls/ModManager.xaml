@@ -234,6 +234,35 @@
                                         <Button x:Name="deleteRecordingButton" Width="75" Margin="4,0" Content="Delete" Click="DeleteRecordingButton_Click" IsEnabled="False"></Button>
                                     </StackPanel>
                                 </StackPanel>
+                                <Grid Grid.ColumnSpan="2" Visibility="Collapsed" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{DynamicResource NormalBackground}" Name="recordingsPlaybackWarning" Grid.Row="0">
+                                    <Grid Name="recordingsPlaybackWarningMessage" Visibility="Visible" TextBlock.TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                                        <StackPanel>
+                                            <TextBlock VerticalAlignment="Center">
+                                                <Run Text="WARNING" Foreground="Red" FontWeight="Bold" FontSize="20"></Run>
+                                                <LineBreak></LineBreak>
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="1" Direction="330" Color="Black" Opacity="1" BlurRadius="1"/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" FontSize="12">
+                                                <Run Text="Recording Playback is a very dangerous feature that can (and will normally)" Foreground="{DynamicResource NormalText}"></Run>
+                                                <LineBreak></LineBreak>
+                                                <Run Text="MODIFY SETTINGS AND EVEN WIPE YOUR SAVE DATA REGARDLESS OF HOW CAREFUL YOU ARE!" FontWeight="DemiBold" Foreground="Red"></Run>
+                                                <LineBreak></LineBreak>
+                                                <LineBreak></LineBreak> 
+                                                <Run Text="It is highly recomended that you manually make a backup of A.I.R.'s save data before you use this tool if you worry about losing your data." Foreground="{DynamicResource NormalText}"></Run>
+                                                <LineBreak></LineBreak>
+                                                <Run Foreground="Red" Text="I AM NOT RESPONSIBLE FOR ANY LOST DATA BY THE USE OF THIS TOOL!" FontWeight="DemiBold"></Run>
+                                                <LineBreak></LineBreak>
+
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="1" Direction="330" Color="Black" Opacity="1" BlurRadius="1"/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Button Click="RecordingsPlaybackWarningUnderstoodButton_Click" Name="RecordingsPlaybackWarningUnderstoodButton" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,10,10,10" Content="Understood" Padding="10,5,10,5"></Button>
+                                </Grid>
                                 <Grid.ContextMenu>
                                     <ContextMenu Style="{DynamicResource DefaultContextMenuStyle}">
                                         <MenuItem Name="recordingUploadMenuItem" Header="Upload" Click="UploadButton_Click"></MenuItem>

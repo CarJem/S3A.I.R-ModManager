@@ -51,7 +51,6 @@ namespace Sonic3AIR_ModManager
 {
     public static class MainDataModel
     {
-        public static ModManagement ModManagement;
         public static Settings.ModManagerSettings Settings { get; set; }
 
         public static Dictionary<int, List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>> ModCollectionMenuItems { get; set; } = new Dictionary<int, List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>>();
@@ -103,30 +102,11 @@ namespace Sonic3AIR_ModManager
             GetLanguageSelection(ref Instance);
             RetriveLaunchOptions(ref Instance);
 
-            MainDataModel.ModManagement.UpdateModsList(true);
+            ModManagement.UpdateModsList(true);
 
             if (File.Exists(ProgramPaths.Sonic3AIRPath))
             {
-                string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-                if (metaDataFile != null)
-                {
-                    try
-                    {
-                        MainDataModel.CurrentAIRVersion = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
-                        Instance.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {MainDataModel.CurrentAIRVersion.VersionString}";
-                        Instance.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {MainDataModel.S3AIRSettings.Version.ToString()}";
-                    }
-                    catch
-                    {
-                        NullSituation(ref Instance);
-
-                    }
-
-                }
-                else
-                {
-                    NullSituation(ref Instance);
-                }
+                if (ValidateSelectedVersion(ref Instance) == false) NullSituation(ref Instance);
             }
             else NullSituation(ref Instance);
             Properties.Settings.Default.Save();
@@ -144,6 +124,48 @@ namespace Sonic3AIR_ModManager
                 }
             }
 
+        }
+
+        private static bool ValidateSelectedVersion(ref ModManager Instance)
+        {
+            string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+            if (metaDataFile != null)
+            {
+                try
+                {
+                    MainDataModel.CurrentAIRVersion = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
+                    Instance.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {MainDataModel.CurrentAIRVersion.VersionString}";
+                    Instance.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {MainDataModel.S3AIRSettings.Version.ToString()}";
+                    return true;
+                }
+                catch
+                {
+                    return PhaseTwo(ref Instance);
+                }
+
+            }
+            else
+            {
+                return PhaseTwo(ref Instance);
+            }
+
+
+            bool PhaseTwo(ref ModManager Parent)
+            {
+                var versInfo = FileVersionInfo.GetVersionInfo(ProgramPaths.Sonic3AIRPath);
+                string fileVersionFull2 = $"{versInfo.FileMajorPart.ToString().PadLeft(2, '0')}.{versInfo.FileMinorPart.ToString().PadLeft(2, '0')}.{versInfo.FileBuildPart.ToString().PadLeft(2, '0')}.{versInfo.FilePrivatePart.ToString()}";
+                if (Version.TryParse(fileVersionFull2, out Version result))
+                {
+                    MainDataModel.CurrentAIRVersion = new AIR_API.VersionMetadata(result, fileVersionFull2);
+                    Parent.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {MainDataModel.CurrentAIRVersion.VersionString}";
+                    Parent.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {MainDataModel.S3AIRSettings.Version.ToString()}";
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         private static void GetLanguageSelection(ref ModManager Instance)
@@ -250,37 +272,7 @@ namespace Sonic3AIR_ModManager
             Instance.playbackRecordingMenuItem.IsEnabled = enabled;
         }
 
-        public static void UpdateGameRecordingManagerButtons(ref ModManager Instance)
-        {
-            if (Instance.GameRecordingList.SelectedItem != null)
-            {
-                Instance.openRecordingButton.IsEnabled = true;
-                Instance.copyRecordingFilePath.IsEnabled = true;
-                Instance.uploadButton.IsEnabled = true;
-                Instance.deleteRecordingButton.IsEnabled = true;
-                Instance.playbackRecordingButton.IsEnabled = !ProcessLauncher.isGameRunning;
 
-                Instance.openRecordingMenuItem.IsEnabled = true;
-                Instance.copyRecordingFilePathMenuItem.IsEnabled = true;
-                Instance.recordingUploadMenuItem.IsEnabled = true;
-                Instance.deleteRecordingMenuItem.IsEnabled = true;
-                Instance.playbackRecordingMenuItem.IsEnabled = !ProcessLauncher.isGameRunning;
-            }
-            else
-            {
-                Instance.openRecordingButton.IsEnabled = false;
-                Instance.copyRecordingFilePath.IsEnabled = false;
-                Instance.uploadButton.IsEnabled = false;
-                Instance.deleteRecordingButton.IsEnabled = false;
-                Instance.playbackRecordingButton.IsEnabled = false;
-
-                Instance.openRecordingMenuItem.IsEnabled = false;
-                Instance.copyRecordingFilePathMenuItem.IsEnabled = false;
-                Instance.recordingUploadMenuItem.IsEnabled = false;
-                Instance.deleteRecordingMenuItem.IsEnabled = false;
-                Instance.playbackRecordingMenuItem.IsEnabled = false;
-            }
-        }
 
         public static void UpdateSettingsStates(ref ModManager Instance)
         {
@@ -357,7 +349,7 @@ namespace Sonic3AIR_ModManager
                 }
 
                 UserLanguage.ApplyLanguage(ref Instance);
-                MainDataModel.ModManagement.UpdateModsList(true);
+                ModManagement.UpdateModsList(true);
                 UpdateAIRSettings(ref Instance);
             }
 
@@ -483,7 +475,7 @@ namespace Sonic3AIR_ModManager
         {
             if (Instance.ModViewer.SelectedItem != null)
             {
-                if (Instance.ModViewer.ActiveView.SelectedItem != null && (Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem).IsEnabled && !MainDataModel.ModManagement.S3AIRActiveMods.UseLegacyLoading)
+                if (Instance.ModViewer.ActiveView.SelectedItem != null && (Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem).IsEnabled && !ModManagement.S3AIRActiveMods.UseLegacyLoading)
                 {
                     Instance.moveUpButton.IsEnabled = (Instance.ModViewer.ActiveView.Items.IndexOf((Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem)) > 0);
                     Instance.moveDownButton.IsEnabled = (Instance.ModViewer.ActiveView.Items.IndexOf((Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem)) < Instance.ModViewer.ActiveView.Items.Count - 1);
@@ -502,7 +494,7 @@ namespace Sonic3AIR_ModManager
                 Instance.editModFolderToolStripMenuItem.IsEnabled = true;
                 Instance.openModFolderToolStripMenuItem.IsEnabled = true;
                 Instance.openModURLToolStripMenuItem.IsEnabled = (ValidateURL((Instance.ModViewer.SelectedItem as ModViewerItem).Source.URL));
-                if (Instance.ModViewer.ActiveView.Items.Contains(Instance.ModViewer.SelectedItem) && !MainDataModel.ModManagement.S3AIRActiveMods.UseLegacyLoading) Instance.moveModToSubFolderMenuItem.IsEnabled = false;
+                if (Instance.ModViewer.ActiveView.Items.Contains(Instance.ModViewer.SelectedItem) && !ModManagement.S3AIRActiveMods.UseLegacyLoading) Instance.moveModToSubFolderMenuItem.IsEnabled = false;
                 else Instance.moveModToSubFolderMenuItem.IsEnabled = true;
             }
             else
@@ -519,7 +511,7 @@ namespace Sonic3AIR_ModManager
                 Instance.openModURLToolStripMenuItem.IsEnabled = false;
             }
 
-            if (MainDataModel.ModManagement.S3AIRActiveMods.UseLegacyLoading)
+            if (ModManagement.S3AIRActiveMods.UseLegacyLoading)
             {
                 Instance.moveUpButton.Visibility = Visibility.Collapsed;
                 Instance.moveDownButton.Visibility = Visibility.Collapsed;

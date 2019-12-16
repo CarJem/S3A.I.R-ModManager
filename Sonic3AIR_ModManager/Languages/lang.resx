@@ -1185,7 +1185,7 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
     
   </data>
   <data name="VersionSelectCaption2" xml:space="preserve">
-    <value>A Version with that name already exists, or the name contains invalid characters for a folder, please specify a diffrent one:</value>
+    <value>A Version with that name already exists, or the name contains invalid characters for a folder, please specify a different one:</value>
     
   </data>
   <data name="BackupFailed" xml:space="preserve">
@@ -1341,7 +1341,7 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
     <value>Remove Mod Collection</value>
   </data>
   <data name="ModCollectionDialog_Message_Delete" xml:space="preserve">
-    <value>Are you sure you want to the "{0}" mod collection? (This can not be undone)</value>
+    <value>Are you sure you want to delete the "{0}" mod collection? (This can not be undone)</value>
   </data>
   <data name="ModCollectionDialog_Caption_Replace" xml:space="preserve">
     <value>Replace Existing Mod Collection</value>
@@ -1429,5 +1429,8 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
   </data>
   <data name="OpenAIRGamerecordingsFolder" xml:space="preserve">
     <value>Open A.I.R. Game Recording Directory</value>
+  </data>
+  <data name="ForceQuitGame" xml:space="preserve">
+    <value>Force Quit</value>
   </data>
 </root>

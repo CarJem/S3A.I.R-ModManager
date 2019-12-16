@@ -124,5 +124,10 @@ namespace Sonic3AIR_ModManager.Controls
         {
             ProcessLauncher.OpenInputSettingsFile();
         }
+
+        private void ForceCloseMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessLauncher.ForceQuitSonic3AIR();
+        }
     }
 }

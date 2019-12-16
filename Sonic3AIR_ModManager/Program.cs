@@ -103,11 +103,13 @@ namespace Sonic3AIR_ModManager
         static void RealMain(string[] args)
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
+            GameContextMenuHandler.Subscribe();
             try
             {
                 ProgramPaths.CreateMissingModManagerFolders();
                 isDebugging();
                 Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => { Arguments = o; });
+                isDeveloper = Arguments.dev_mode;
                 var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
                 if (exists)
                 {
@@ -121,6 +123,7 @@ namespace Sonic3AIR_ModManager
             {
                //TODO : Add Proper Catch Statement
             }
+            GameContextMenuHandler.Unsubscribe();
             Log.InfoFormat("Shuting Down!");
         }
         #endregion
@@ -249,6 +252,9 @@ namespace Sonic3AIR_ModManager
 
             [Option('a', "auto_boot", Required = false, HelpText = "Launch's the Application in Auto Boot Mode (Ideal for Steam Big Picture)")]
             public bool auto_boot { get; set; } = false;
+
+            [Option('d', "dev_mode", Required = false, Hidden = true, Default = false)]
+            public bool dev_mode { get; set; } = false;
         }
 
         #region Logging

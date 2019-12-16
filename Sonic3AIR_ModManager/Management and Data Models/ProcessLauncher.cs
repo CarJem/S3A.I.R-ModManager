@@ -15,11 +15,11 @@ using System.IO.Compression;
 
 namespace Sonic3AIR_ModManager
 {
-    public class ProcessLauncher
+    public static class ProcessLauncher
     {
         public static bool isGameRunning = false;
         public static Process CurrentGameProcess;
-
+        private static ModManager Instance;
         public static void ForceQuitSonic3AIR()
         {
             // TODO: Add Warning Dialog
@@ -59,6 +59,12 @@ namespace Sonic3AIR_ModManager
             }
 
         }
+
+        public static void UpdateInstance(ref ModManager _Instance)
+        {
+            Instance = _Instance;
+        }
+
 
         #region Sonic 3 A.I.R. Launcher
 
@@ -101,20 +107,19 @@ namespace Sonic3AIR_ModManager
         public static void GameStartHandler()
         {
             isGameRunning = true;
-            RightClickAssistTool.Subscribe();
             if (!Properties.Settings.Default.KeepOpenOnLaunch)
             {
-                ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+                Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManager.Instance.Hide();
+                    Instance.Hide();
                 }));
 
             }
             else
             {
-                ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+                Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    MainDataModel.UpdateInGameButtons(ref ModManager.Instance);
+                    MainDataModel.UpdateInGameButtons(ref Instance);
                 }));
             }
 
@@ -123,21 +128,20 @@ namespace Sonic3AIR_ModManager
         public static void GameEndHandler()
         {
             isGameRunning = false;
-            RightClickAssistTool.Unsubscribe();
             if (!Properties.Settings.Default.KeepOpenOnQuit) Environment.Exit(0);
             else if (!Properties.Settings.Default.KeepOpenOnLaunch)
             {
-                ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+                Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    ModManager.Instance.Show();
+                    Instance.Show();
                 }));
             }
-            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
-                MainDataModel.UpdateInGameButtons(ref ModManager.Instance);
+                MainDataModel.UpdateInGameButtons(ref Instance);
                 string filePath = MainDataModel.S3AIRSettings.FilePath;
                 MainDataModel.S3AIRSettings = new AIR_API.Settings(new FileInfo(filePath));
-                MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
+                MainDataModel.UpdateAIRSettings(ref Instance);
             }));
 
         }
@@ -186,28 +190,26 @@ namespace Sonic3AIR_ModManager
         public static void RecordingStartHandler(string file, string viewer_exe)
         {
             isGameRunning = true;
-            RightClickAssistTool.Subscribe();
             BackupSettings(file, viewer_exe);
 
-            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
-                MainDataModel.UpdateInGameButtons(ref ModManager.Instance);
+                MainDataModel.UpdateInGameButtons(ref Instance);
             }));
         }
 
         public static void RecordingEndHandler(string viewer_exe)
         {
             RestoreSettings(viewer_exe);
-            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
-                MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
-                MainDataModel.RetriveLaunchOptions(ref ModManager.Instance);
+                MainDataModel.UpdateAIRSettings(ref Instance);
+                MainDataModel.RetriveLaunchOptions(ref Instance);
             }));
             isGameRunning = false;
-            RightClickAssistTool.Unsubscribe();
-            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
-                MainDataModel.UpdateInGameButtons(ref ModManager.Instance);
+                MainDataModel.UpdateInGameButtons(ref Instance);
             }));
         }
 
@@ -228,9 +230,9 @@ namespace Sonic3AIR_ModManager
             GameRecordingCurrentGameConfig = new AIR_API.GameConfig(new FileInfo(config_file));
             GameRecordingSettings = new AIR_API.Settings(new FileInfo(setting_file));
 
-            FileManagement.CopyRecordingToDestination(file, Path.GetDirectoryName(viewer_exe));
+            RecordingManagement.CopyRecordingToDestination(file, Path.GetDirectoryName(viewer_exe));
 
-            ModManager.Instance.Dispatcher.BeginInvoke((Action)(() =>
+            Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
                 GameRecordingSettings.FullscreenMode = (int)AIR_API.Settings.FullscreenType.Windowed;
                 GameRecordingCurrentGameConfig.StartPhase = 3;
@@ -257,7 +259,7 @@ namespace Sonic3AIR_ModManager
             File.Copy(setting_file_bak, setting_file);
             File.Delete(setting_file_bak);
 
-            FileManagement.DeletePlaybackRecording(Path.GetDirectoryName(viewer_exe));
+            RecordingManagement.DeletePlaybackRecording(Path.GetDirectoryName(viewer_exe));
         }
 
         #endregion
@@ -275,7 +277,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (ProcessLauncher.UpdateSonic3AIRLocation())
                 {
-                    MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
+                    MainDataModel.UpdateAIRSettings(ref Instance);
                     string filename = ProgramPaths.Sonic3AIRPath;
                     Process.Start(Path.GetDirectoryName(filename));
                 }
@@ -330,7 +332,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (ProcessLauncher.UpdateSonic3AIRLocation())
                 {
-                    MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
+                    MainDataModel.UpdateAIRSettings(ref Instance);
                     if (File.Exists(ProgramPaths.Sonic3AIRConfigFile))
                     {
                         Process.Start(ProgramPaths.Sonic3AIRConfigFile);
@@ -362,7 +364,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (ProcessLauncher.UpdateSonic3AIRLocation())
                 {
-                    MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
+                    MainDataModel.UpdateAIRSettings(ref Instance);
                     if (ProgramPaths.ValidateSonic3AIRModdingTemplatesFolderPath()) Process.Start(ProgramPaths.Sonic3AIRModdingTemplatesFolder);
                 }
             }
@@ -378,7 +380,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (ProcessLauncher.UpdateSonic3AIRLocation())
                 {
-                    MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
+                    MainDataModel.UpdateAIRSettings(ref Instance);
                     if (ProgramPaths.ValidateSonic3AIRSampleModsFolderPath()) Process.Start(ProgramPaths.Sonic3AIRSampleModsFolder);
                 }
             }
@@ -394,7 +396,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (ProcessLauncher.UpdateSonic3AIRLocation())
                 {
-                    MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
+                    MainDataModel.UpdateAIRSettings(ref Instance);
                     if (ProgramPaths.ValidateSonic3AIRUserManualFilePath()) OpenPDFViewer(ProgramPaths.Sonic3AIRUserManualFile);
                 }
             }
@@ -410,7 +412,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (ProcessLauncher.UpdateSonic3AIRLocation())
                 {
-                    MainDataModel.UpdateAIRSettings(ref ModManager.Instance);
+                    MainDataModel.UpdateAIRSettings(ref Instance);
                     if (ProgramPaths.ValidateSonic3AIRModDocumentationFilePath()) OpenPDFViewer(ProgramPaths.Sonic3AIRModDocumentationFile);
                 }
             }
@@ -456,9 +458,9 @@ namespace Sonic3AIR_ModManager
 
         public static void OpenRecordingLocation()
         {
-            if (ModManager.Instance.GameRecordingList.SelectedItem != null)
+            if (Instance.GameRecordingList.SelectedItem != null)
             {
-                AIR_API.Recording item = ModManager.Instance.GameRecordingList.SelectedItem as AIR_API.Recording;
+                AIR_API.Recording item = Instance.GameRecordingList.SelectedItem as AIR_API.Recording;
                 if (File.Exists(item.FilePath))
                 {
                     Process.Start("explorer.exe", "/select, " + item.FilePath);

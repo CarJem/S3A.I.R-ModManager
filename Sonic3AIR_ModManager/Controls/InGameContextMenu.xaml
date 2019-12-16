@@ -32,5 +32,7 @@
         <TextBlock IsEnabled="False" VerticalAlignment="Center" Padding="0" x:Name="label5" Grid.Row="1" TextAlignment="Left" Text="Useful In-Game Shortcuts/Keys: &#10;Alt + Enter - Toggle Fullscreen&#10;F2 - Take a Game Recording Capture&#10;Right Click - Open A.I.R Context Menu&#10;F3 - Rescan for Game Controllers&#10;F4 - Switches Game Controllers for P1 and P2&#10;Numpad Plus/Minus - Adjust Global Audio Volume&#10;Alt + B - Change Background Blur&#10;Alt + F - Change Filter&#10;Alt + P - Show Performance Display&#10;" Margin="0,11"></TextBlock>
     </MenuItem>
     <Separator></Separator>
+    <MenuItem x:Name="ForceCloseMenuButton" Header="Force Quit" Click="ForceCloseMenuButton_Click"></MenuItem>
+    <Separator></Separator>
     <MenuItem x:Name="CloseContextMenuButton" Header="Close Context Menu..." Click="CloseContextMenuButton_Click"></MenuItem>
 </ContextMenu>

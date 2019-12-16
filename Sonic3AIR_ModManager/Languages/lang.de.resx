@@ -214,19 +214,19 @@
     <value>Öffnen</value>
   </data>
   <data name="OpenAppDataFolder" xml:space="preserve">
-    <value>AppData Ordner öffnen</value>
+    <value>A.I.R. Datenverzeichnis öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenConfigFile" xml:space="preserve">
-    <value>Config Datei öffnen</value>
+    <value>A.I.R. Config-Datei öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenDownloadsFolder" xml:space="preserve">
-    <value>Downloaders Ordner öffnen</value>
+    <value>Mod Manager Downloads-Verzeichnis öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenEXEFolder" xml:space="preserve">
-    <value>Spiel-EXE Ordner öffnen</value>
+    <value>A.I.R. Spiel-EXE Verzeichnis öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenLocationExpandable" xml:space="preserve">
@@ -239,22 +239,22 @@
     <value>Sonic 3 A.I.R. Modding-Anleitung</value>
   </data>
   <data name="OpenModsFolder" xml:space="preserve">
-    <value>Mod-Ordner öffnen</value>
+    <value>A.I.R. Mod-Ordner öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenModTemplatesFolder" xml:space="preserve">
-    <value>Mod-Vorlagenordner öffnen</value>
+    <value>A.I.R. Mod-Vorlagenordner öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenModURL" xml:space="preserve">
     <value>Mod URL öffnen</value>
   </data>
   <data name="OpenSampleModsFolder" xml:space="preserve">
-    <value>Beispiel-Mods öffnen</value>
+    <value>A.I.R. Beispiel-Mods öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenSettingsFile" xml:space="preserve">
-    <value>Datei mit Spieleinstellungen öffnen</value>
+    <value>Datei mit A.I.R. Spieleinstellungen öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
@@ -264,7 +264,7 @@
     <value>Sonic 3 A.I.R. Handbuch</value>
   </data>
   <data name="OpenVersionsFolder" xml:space="preserve">
-    <value>Versions-Ordner öffnen</value>
+    <value>Mod Manager Versions-Verzeichnis öffnen</value>
     <comment>Update Required</comment>
   </data>
   <data name="RecordingsTab" xml:space="preserve">
@@ -646,7 +646,7 @@
     <value>Export...</value>
   </data>
   <data name="ShowLogFileButton" xml:space="preserve">
-    <value>Log-Datei anzeigen</value>
+    <value>A.I.R. Log-Datei anzeigen</value>
     <comment>Update Required</comment>
   </data>
   <data name="PathColumnHeader" xml:space="preserve">
@@ -968,10 +968,160 @@ Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zu
     <value>Alt + B - Hintergrundunschärfe ändern</value>
   </data>
   <data name="UsefulShortKeysFilter" xml:space="preserve">
-    <value>Alt + F - Grafikfilter ändern</value>
+    <value>Alt + F / Alt + G - Grafikfilter wechseln</value>
     <comment>Update Required</comment>
   </data>
   <data name="UsefulShortKeysPerformanceDisplay" xml:space="preserve">
     <value>Alt + P - Performance-Ausgabe</value>
+  </data>
+  <data name="AddAIRVersion" xml:space="preserve">
+    <value>Eine A.I.R. Version hinzufügen</value>
+  </data>
+  <data name="ChangeAIRVersion" xml:space="preserve">
+    <value>A.I.R. Version wechseln</value>
+  </data>
+  <data name="ContextMenuCloseHeader" xml:space="preserve">
+    <value>Kontextmenü schließen</value>
+  </data>
+  <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Alle Startvorlagen löschen</value>
+  </data>
+  <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
+    <value>Alle Mod-Kollektionen löschen</value>
+  </data>
+  <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Startvorlage löschen...</value>
+  </data>
+  <data name="DeleteModCollectionMenuItem" xml:space="preserve">
+    <value>Mod-Kollektion löschen...</value>
+  </data>
+  <data name="FileTab" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="FullDebugOutputOption" xml:space="preserve">
+    <value>Komplette Debug-Ausgabe ins Log schreiben</value>
+  </data>
+  <data name="GameRecordingsPlayButton" xml:space="preserve">
+    <value>Spielen...</value>
+  </data>
+  <data name="HelpTab" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="LaunchPresetsMenuItem" xml:space="preserve">
+    <value>Startvorlagen...</value>
+  </data>
+  <data name="LegacyLoadingText_Line1" xml:space="preserve">
+    <value>Altes Laden von Mods (ohne feste Reihenfolge) nutzen</value>
+  </data>
+  <data name="LegacyLoadingText_Line2" xml:space="preserve">
+    <value>(Für Spielversionen vor 19.09.19.0; nur begrenzt unterstützt)</value>
+  </data>
+  <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Startvorlage laden...</value>
+  </data>
+  <data name="LoadModCollectionMenuItem" xml:space="preserve">
+    <value>Mod-Kollektion laden...</value>
+  </data>
+  <data name="ManageAIRVersions" xml:space="preserve">
+    <value>A.I.R. Spielversionen verwalten</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Delete" xml:space="preserve">
+    <value>Mod-Kollektion entfernen</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_DeleteAll" xml:space="preserve">
+    <value>Alle Mod-Kollektionen löschen</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Rename" xml:space="preserve">
+    <value>Mod-Kollektion umbenennen</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Replace" xml:space="preserve">
+    <value>Existierende Mod-Kollektion ersetzen</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Save" xml:space="preserve">
+    <value>Neue Mod-Kollektion speichern</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Delete" xml:space="preserve">
+    <value>Bist du sicher, dass du die Mod-Kollektion "{0}" löschen willst? (Dies kann nicht rückgängiog gemacht werden)</value>
+  </data>
+  <data name="ModCollectionDialog_Message_DeleteAll" xml:space="preserve">
+    <value>Bist du sicher, dass du alle deine Mod-Kollektionen löschen willst? (Dies kann nicht rückgängiog gemacht werden)</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Rename" xml:space="preserve">
+    <value>Gib den neuen Namen für die Mod-Kollektion ein:</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Replace" xml:space="preserve">
+    <value>Bis du sicher, dass du die existierende Mod-Kollektion überschreiben willst? (Dies kann nicht rückgängiog gemacht werden)</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Save" xml:space="preserve">
+    <value>Gib den Namen für die neue Mod-Kollektion ein:</value>
+  </data>
+  <data name="ModCollectionDialog_Name_Save" xml:space="preserve">
+    <value>Neue Mod-Kollektion</value>
+  </data>
+  <data name="ModCollectionsMenuItem" xml:space="preserve">
+    <value>Mod-Kollektionen...</value>
+  </data>
+  <data name="OpenAIRGamerecordingsFolder" xml:space="preserve">
+    <value>A.I.R. Game Recording Verzeichnis öffnen</value>
+  </data>
+  <data name="OpenAIRGlobalSettingsFile" xml:space="preserve">
+    <value>A.I.R. globale Einstellungsdatei öffnen</value>
+  </data>
+  <data name="OpenAIRInputSettingsFile" xml:space="preserve">
+    <value>A.I.R. Eingabe-Einstellungsdatei öffnen</value>
+  </data>
+  <data name="OpenModManagerLogFolder" xml:space="preserve">
+    <value>Mod Manager Log-Ordner öffnen</value>
+  </data>
+  <data name="OpenModManagerSettingsFile" xml:space="preserve">
+    <value>Mod Manager Einstellungsdatei öffnen</value>
+  </data>
+  <data name="OtherTab" xml:space="preserve">
+    <value>Andere</value>
+  </data>
+  <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
+    <value>Abspielen mit aktueller Spielversion</value>
+  </data>
+  <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
+    <value>Abspielen mit Aufnahme-Spielversion</value>
+  </data>
+  <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
+    <value>Abspielen mit...</value>
+  </data>
+  <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Startvorlage umbenennen...</value>
+  </data>
+  <data name="RenameModCollectionMenuItem" xml:space="preserve">
+    <value>Mod-Kollektion umbenennen...</value>
+  </data>
+  <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
+    <value>Existierende aktuelle Einstellungen ersetzen...</value>
+  </data>
+  <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
+    <value>Aktuelle Einstellungen als Startvorlage setzen</value>
+  </data>
+  <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
+    <value>Existierende Mod-Kollektion ersetzen...</value>
+  </data>
+  <data name="SaveModCollectonMenuItem" xml:space="preserve">
+    <value>Aktive Mods als Kollektion speichern</value>
+  </data>
+  <data name="SetAIRPathFromPreviousData" xml:space="preserve">
+    <value>A.I.R. Pfad aus vorherigen Daten holen...</value>
+  </data>
+  <data name="SetAIRPathManually" xml:space="preserve">
+    <value>A.I.R. Pfad manuell setzen...</value>
+  </data>
+  <data name="UsefulShortKeysDevHeader" xml:space="preserve">
+    <value>Entwicklermodus Tasten:</value>
+  </data>
+  <data name="UsefulShortKeysPaletteDebug" xml:space="preserve">
+    <value>Alt + M - Debugausgabe für Paletten ein/aus</value>
+  </data>
+  <data name="UsefulShortKeysRefreshAssets" xml:space="preserve">
+    <value>F10 - Ressourcen neu laden (Sprites/Paletten)</value>
+  </data>
+  <data name="ViewTab" xml:space="preserve">
+    <value>Ansicht</value>
   </data>
 </root>

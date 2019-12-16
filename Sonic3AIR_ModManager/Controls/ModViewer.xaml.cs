@@ -203,7 +203,7 @@ namespace Sonic3AIR_ModManager
             {
                 string newDirectoryPath = System.IO.Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName);
                 Directory.CreateDirectory(newDirectoryPath);
-                MainDataModel.ModManagement.UpdateModsList(true);
+                ModManagement.UpdateModsList(true);
             }
         }
     }
@@ -236,8 +236,6 @@ namespace Sonic3AIR_ModManager
 
         public bool IsInRootFolder { get; set; } = true;
 
-        public ModManagement ParentManager { get; set; }
-
         public string Name { get => Source.Name; set => Source.Name = value; }
         public string Description { get => Source.Description; set => Source.Description = value; }
         public string Author { get => Source.Author; set => Source.Author = value; }
@@ -254,7 +252,7 @@ namespace Sonic3AIR_ModManager
 
         private bool GetEnabledState()
         {
-            if (!ParentManager.S3AIRActiveMods.UseLegacyLoading)
+            if (!ModManagement.S3AIRActiveMods.UseLegacyLoading)
             {
                 return Source.IsEnabled;
             }
@@ -311,7 +309,7 @@ namespace Sonic3AIR_ModManager
 
         private void SetEnabledState(bool value)
         {
-            if (!ParentManager.S3AIRActiveMods.UseLegacyLoading)
+            if (!ModManagement.S3AIRActiveMods.UseLegacyLoading)
             {
                 Source.IsEnabled = value;
                 ModViewer.ItemCheck?.Invoke();
@@ -321,9 +319,8 @@ namespace Sonic3AIR_ModManager
 
         public AIR_API.Mod Source { get; set; }
 
-        public ModViewerItem(ModManagement parent, AIR_API.Mod _source, bool root = true)
+        public ModViewerItem(AIR_API.Mod _source, bool root = true)
         {
-            ParentManager = parent;
             Source = _source;
             IsInRootFolder = root;
         }

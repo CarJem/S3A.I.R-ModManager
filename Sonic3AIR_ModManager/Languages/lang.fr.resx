@@ -214,19 +214,19 @@
     <value>Ouvrir</value>
   </data>
   <data name="OpenAppDataFolder" xml:space="preserve">
-    <value>Ouvrir le dossier AppData</value>
+    <value>Ouvrir le répertoire de données de A.I.R. </value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenConfigFile" xml:space="preserve">
-    <value>Ouvrir le fichier de configuration</value>
+    <value>Ouvrir le fichier de configuration de A.I.R.</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenDownloadsFolder" xml:space="preserve">
-    <value>Ouvrir le dossier de téléchargement</value>
+    <value>Ouvrir le répertoire de téléchargement de Mod Manager</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenEXEFolder" xml:space="preserve">
-    <value>Ouvrir le dossier du fichier EXE</value>
+    <value>Ouvrez le répertoire EXE de A.I.R.</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenLocationExpandable" xml:space="preserve">
@@ -239,32 +239,32 @@
     <value>Les instructions de Modding sur Sonic 3 A.I.R</value>
   </data>
   <data name="OpenModsFolder" xml:space="preserve">
-    <value>Ouvrir le dossier des Mods</value>
+    <value>Ouvrir le répertoire Mods de A.I.R.</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenModTemplatesFolder" xml:space="preserve">
-    <value>Ouvrir le dossier du modèle de modding</value>
+    <value>Ouvrir le répertoire des modèles (templates) à modding de A.I.R.</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenModURL" xml:space="preserve">
     <value>Ouvrir l'URL du Mod</value>
   </data>
   <data name="OpenSampleModsFolder" xml:space="preserve">
-    <value>Ouvrir l'exemple du dossier Mods</value>
+    <value>Ouvrir l'exemple dans le répertoire Mods de A.I.R.</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenSettingsFile" xml:space="preserve">
-    <value>Ouvrir le fichier de configuration</value>
+    <value>Ouvrir le fichier de configuration de A.I.R.</value>
     <comment>Update Required</comment>
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
     <value>Options du système...</value>
   </data>
   <data name="OpenUserManual" xml:space="preserve">
-    <value>Le manuel d'utilisation de Sonic 3 A.I.R</value>
+    <value>Le manuel d'utilisation de Sonic 3 A.I.R.</value>
   </data>
   <data name="OpenVersionsFolder" xml:space="preserve">
-    <value>Ouvrir le dossier des versions</value>
+    <value>Ouvrir le répertoire des versions de Mod Manager</value>
     <comment>Update Required</comment>
   </data>
   <data name="RecordingsTab" xml:space="preserve">
@@ -377,15 +377,15 @@
   </data>
   <data name="InputMappingError1" xml:space="preserve">
     <value>Erreur lors du chargement du fichier de configuration des inputs !
- Assurez-vous que votre jeu est à jour et que le chemin du jeu A.I.R est défini dans Options.</value>
+ Assurez-vous que votre jeu est à jour et que le chemin du jeu A.I.R. est défini dans Options.</value>
   </data>
   <data name="InputMappingError2" xml:space="preserve">
     <value>Une erreur s'est produite lors de la lecture du fichier de configuration dans le dossier de cette version !
- Assurez-vous que le fichier de configuration n'est pas endommagé ou effectuez une réinstallationde cette version de A.I.R</value>
+ Assurez-vous que le fichier de configuration n'est pas endommagé ou effectuez une réinstallationde cette version de A.I.R.</value>
   </data>
   <data name="InputMappingError3" xml:space="preserve">
     <value>Le fichier de configuration n'existe pas dans le dossier A.I.R du fichier EXE.
- Assurez-vous que le fichier existe ou réinstaller cette version de A.I.R</value>
+ Assurez-vous que le fichier existe ou réinstaller cette version de A.I.R.</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound1" xml:space="preserve">
     <value>Les fichiers suivants sont introuvables :</value>
@@ -646,7 +646,7 @@
     <value>Exporter...</value>
   </data>
   <data name="ShowLogFileButton" xml:space="preserve">
-    <value>Ouvrir le fichier logfile.txt</value>
+    <value>Ouvrir le fichier Log </value>
     <comment>Update Required</comment>
   </data>
   <data name="PathColumnHeader" xml:space="preserve">
@@ -1034,10 +1034,94 @@ Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défin
     <value>Alt + B - Changer le flou d'arrière-plan</value>
   </data>
   <data name="UsefulShortKeysFilter" xml:space="preserve">
-    <value>Alt + F - Changer le filtre</value>
+    <value>Alt + F / Alt + G - Changer le filtre</value>
     <comment>Update Required</comment>
   </data>
   <data name="UsefulShortKeysPerformanceDisplay" xml:space="preserve">
     <value>Alt + P - Afficher les performances</value>
+  </data>
+  <data name="AddAIRVersion" xml:space="preserve">
+    <value>Ajouter une construction de A.I.R. ...</value>
+  </data>
+  <data name="ChangeAIRVersion" xml:space="preserve">
+    <value>Changer de construction de A.I.R. ...</value>
+  </data>
+  <data name="ContextMenuCloseHeader" xml:space="preserve">
+    <value>Fermer le menu contextuel</value>
+  </data>
+  <data name="FullDebugOutputOption" xml:space="preserve">
+    <value>Loguer toutes les sorties de débogage</value>
+  </data>
+  <data name="LegacyLoadingText_Line1" xml:space="preserve">
+    <value>Utiliser l'ancien système/ Chargement "non stacké" (Non empilé)</value>
+  </data>
+  <data name="LegacyLoadingText_Line2" xml:space="preserve">
+    <value>(Support limité à la version Pré-19.09.19.0)</value>
+  </data>
+  <data name="ManageAIRVersions" xml:space="preserve">
+    <value>Gérer les constructions A.I.R.</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Delete" xml:space="preserve">
+    <value>Supprimer la collection de mods</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_DeleteAll" xml:space="preserve">
+    <value>Supprimer toutes les collections de mods</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Rename" xml:space="preserve">
+    <value>Renommer la collection de mods</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Replace" xml:space="preserve">
+    <value>Remplacer la collection de mod existante</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Save" xml:space="preserve">
+    <value>Enregistrer la nouvelle collection de mods</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Delete" xml:space="preserve">
+    <value>Voulez-vous vraiment accéder à la collection de mods "{0}"? (Ça ne peut pas être annulé)</value>
+  </data>
+  <data name="ModCollectionDialog_Message_DeleteAll" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer toutes vos collections de mods enregistrées? (Ça ne peut pas être annulé)</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Rename" xml:space="preserve">
+    <value>Entrez le nouveau nom de cette collection de mods:</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Replace" xml:space="preserve">
+    <value>Voulez-vous vraiment remplacer la collection de mod existante? (Ça ne peut pas être annulé)</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Save" xml:space="preserve">
+    <value>Entrez le nom de cette nouvelle collection de mods:</value>
+  </data>
+  <data name="ModCollectionDialog_Name_Save" xml:space="preserve">
+    <value>Nouvelle collection de mods</value>
+  </data>
+  <data name="OpenAIRGamerecordingsFolder" xml:space="preserve">
+    <value>Ouvrir le répertoire d'enregistrement (capture) de A.I.R.</value>
+  </data>
+  <data name="OpenAIRGlobalSettingsFile" xml:space="preserve">
+    <value>Ouvrir le fichier de paramètres globaux de A.I.R.</value>
+  </data>
+  <data name="OpenAIRInputSettingsFile" xml:space="preserve">
+    <value>Ouvrir le fichier de paramètres Input de A.I.R.</value>
+  </data>
+  <data name="OpenModManagerLogFolder" xml:space="preserve">
+    <value>Ouvrir le répertoire des journaux(Log) de Mod Manager</value>
+  </data>
+  <data name="OpenModManagerSettingsFile" xml:space="preserve">
+    <value>Ouvrir le fichier de paramètres de Mod Manager</value>
+  </data>
+  <data name="SetAIRPathFromPreviousData" xml:space="preserve">
+    <value>Définir l'emplacement de A.I.R. à partir des données précédentes ...</value>
+  </data>
+  <data name="SetAIRPathManually" xml:space="preserve">
+    <value>Définir l'emplacement de A.I.R manuellement ...</value>
+  </data>
+  <data name="UsefulShortKeysDevHeader" xml:space="preserve">
+    <value>Raccourcis du mode de développement/Touches :</value>
+  </data>
+  <data name="UsefulShortKeysPaletteDebug" xml:space="preserve">
+    <value>Alt + M - Basculer la sortie de débogage de la palette</value>
+  </data>
+  <data name="UsefulShortKeysRefreshAssets" xml:space="preserve">
+    <value>F10 - Recharger les ressources (Sprites/Palettes)</value>
   </data>
 </root>

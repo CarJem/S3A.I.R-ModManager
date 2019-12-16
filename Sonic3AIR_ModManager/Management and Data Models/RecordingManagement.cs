@@ -6,12 +6,77 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.IO.Compression;
+using System.Net.Http;
+using System.Net;
+using System.Security.Permissions;
+using Microsoft.VisualBasic;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using SharpCompress.Readers;
+using SharpCompress.Writers;
+using SharpCompress.Archives;
+using SharpCompress.Common;
+using SharpCompress.Compressors;
+using SharpCompress.IO;
+using SharpCompress.Archives.Rar;
+using SharpCompress.Archives.SevenZip;
+using SharpCompress.Archives.Zip;
+using System.Dynamic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Reflection;
+using System.Threading;
+using System.Resources;
+using MessageBox = System.Windows.Forms.MessageBox;
+using DialogResult = System.Windows.Forms.DialogResult;
+using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
+using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
 
 namespace Sonic3AIR_ModManager
 {
     public static class RecordingManagement
     {
+        public static bool HasPlaybackWarningBeenPresented = false;
+
         #region Game Recording Management
+        public static void UpdateGameRecordingManagerButtons(ref ModManager Instance)
+        {
+            if (Instance.GameRecordingList.SelectedItem != null)
+            {
+                Instance.openRecordingButton.IsEnabled = true;
+                Instance.copyRecordingFilePath.IsEnabled = true;
+                Instance.uploadButton.IsEnabled = true;
+                Instance.deleteRecordingButton.IsEnabled = true;
+                Instance.playbackRecordingButton.IsEnabled = !ProcessLauncher.isGameRunning;
+
+                Instance.openRecordingMenuItem.IsEnabled = true;
+                Instance.copyRecordingFilePathMenuItem.IsEnabled = true;
+                Instance.recordingUploadMenuItem.IsEnabled = true;
+                Instance.deleteRecordingMenuItem.IsEnabled = true;
+                Instance.playbackRecordingMenuItem.IsEnabled = !ProcessLauncher.isGameRunning && RecordingManagement.HasPlaybackWarningBeenPresented;
+            }
+            else
+            {
+                Instance.openRecordingButton.IsEnabled = false;
+                Instance.copyRecordingFilePath.IsEnabled = false;
+                Instance.uploadButton.IsEnabled = false;
+                Instance.deleteRecordingButton.IsEnabled = false;
+                Instance.playbackRecordingButton.IsEnabled = false;
+
+                Instance.openRecordingMenuItem.IsEnabled = false;
+                Instance.copyRecordingFilePathMenuItem.IsEnabled = false;
+                Instance.recordingUploadMenuItem.IsEnabled = false;
+                Instance.deleteRecordingMenuItem.IsEnabled = false;
+                Instance.playbackRecordingMenuItem.IsEnabled = false;
+            }
+        }
 
         public static void CollectGameRecordings(ref ModManager Instance)
         {
@@ -124,9 +189,21 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        public static void UpdatePlayerWarning(ref ModManager Instance)
+        {
+            if (!HasPlaybackWarningBeenPresented)
+            {
+                Instance.recordingsPlaybackWarning.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Instance.recordingsPlaybackWarning.Visibility = Visibility.Collapsed;
+            }
+        }
+
         public static void UpdateAIRVersionsForPlaybackToolstrips(ref ModManager Instance)
         {
-            MainDataModel.UpdateGameRecordingManagerButtons(ref Instance);
+            RecordingManagement.UpdateGameRecordingManagerButtons(ref Instance);
             CleanUpInstalledVersionsForPlaybackToolStrip(ref Instance);
             Instance.PlayUsingOtherVersionMenuItem.IsEnabled = false;
             Instance.PlayUsingOtherVersionHoverMenuItem.IsEnabled = false;
@@ -238,5 +315,78 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         #endregion
+
+        public static async void UploadRecordingToFileDotIO(AIR_API.Recording recording)
+        {
+            string expires = "/?expires=1w";
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://file.io" + expires))
+                {
+                    var multipartContent = new MultipartFormDataContent();
+                    multipartContent.Add(new ByteArrayContent(File.ReadAllBytes(recording.FilePath)), "file", Path.GetFileName(recording.FilePath));
+                    request.Content = multipartContent;
+
+                    var response = await httpClient.SendAsync(request);
+                    string result = await response.Content.ReadAsStringAsync();
+                    dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
+                    string url = jsonObj.link;
+
+                    string message = UserLanguage.RecordingUploaded(url);
+                    Clipboard.SetText(url);
+                    MessageBox.Show(message);
+
+                }
+            }
+        }
+
+        public static bool DeleteRecording(AIR_API.Recording recording)
+        {
+            if (MessageBox.Show(UserLanguage.DeleteItem(recording.Name), "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
+            {
+                try
+                {
+                    File.Delete(recording.FilePath);
+                    return true;
+                }
+                catch
+                {
+                    MessageBox.Show(Program.LanguageResource.GetString("UnableToDeleteFile"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+                }
+            }
+            else return false;
+        }
+
+        public static void CopyRecordingLocationToClipboard(AIR_API.Recording item)
+        {
+            Clipboard.SetText(item.FilePath);
+            MessageBox.Show(Program.LanguageResource.GetString("RecordingPathCopiedToClipboard"));
+        }
+
+        public static void CopyRecordingToDestination(string file, string exe_directory)
+        {
+            try
+            {
+                File.Copy(file, Path.Combine(exe_directory, "gamerecording.bin"), true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public static void DeletePlaybackRecording(string exe_directory)
+        {
+            try
+            {
+                File.Delete(Path.Combine(exe_directory, "gamerecording.bin"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

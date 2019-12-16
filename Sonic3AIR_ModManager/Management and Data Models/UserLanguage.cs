@@ -316,6 +316,7 @@ namespace Sonic3AIR_ModManager
             form.exitButton.Content = Program.LanguageResource.GetString("Exit");
             form.saveAndLoadButton.Content = Program.LanguageResource.GetString("Save&Load");
             form.saveButton.Content = Program.LanguageResource.GetString("Save");
+            form.ForceQuitGame.Content = Program.LanguageResource.GetString("ForceQuitGame");
             #endregion
 
             #region Main Tab Control
@@ -515,6 +516,7 @@ namespace Sonic3AIR_ModManager
             form.label5.Text = GenerateUsefulShortKeysString();
             #endregion
 
+            form.ForceCloseMenuButton.Header = Program.LanguageResource.GetString("ForceQuitGame");
             form.CloseContextMenuButton.Header = GetOutputString("ContextMenuCloseHeader");
         }
 

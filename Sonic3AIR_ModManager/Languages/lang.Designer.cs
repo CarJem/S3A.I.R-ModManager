@@ -1060,6 +1060,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Force Quit.
+        /// </summary>
+        internal static string ForceQuitGame {
+            get {
+                return ResourceManager.GetString("ForceQuitGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Force Start.
         /// </summary>
         internal static string ForceStart {
@@ -1596,7 +1605,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to the &quot;{0}&quot; mod collection? (This can not be undone).
+        ///   Looks up a localized string similar to Are you sure you want to delete the &quot;{0}&quot; mod collection? (This can not be undone).
         /// </summary>
         internal static string ModCollectionDialog_Message_Delete {
             get {
@@ -2947,7 +2956,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A Version with that name already exists, or the name contains invalid characters for a folder, please specify a diffrent one:.
+        ///   Looks up a localized string similar to A Version with that name already exists, or the name contains invalid characters for a folder, please specify a different one:.
         /// </summary>
         internal static string VersionSelectCaption2 {
             get {

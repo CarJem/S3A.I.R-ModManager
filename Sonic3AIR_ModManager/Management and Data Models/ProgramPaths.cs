@@ -292,11 +292,9 @@ namespace Sonic3AIR_ModManager
         {
             if (MainDataModel.S3AIRSettings != null && MainDataModel.S3AIRSettings.Version != null)
             {
-                //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
                 if (MainDataModel.S3AIRSettings.Version >= new Version("19.12.7.0"))
                 {
-                    //return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "recordings"));
-                    return Directory.Exists(Sonic3AIRAppDataFolder);
+                    return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "gamerecordings"));
                 }
                 else
                 {
@@ -315,11 +313,9 @@ namespace Sonic3AIR_ModManager
         {
             if (MainDataModel.S3AIRSettings != null && MainDataModel.S3AIRSettings.Version != null)
             {
-                //TODO - Implement this When the Version that adds the Game Recordings Folder Comes Out
                 if (MainDataModel.S3AIRSettings.Version >= new Version("19.12.7.0"))
                 {
-                    //return Path.Combine(Sonic3AIRAppDataFolder, "recordings");
-                    return Sonic3AIRAppDataFolder;
+                    return Path.Combine(Sonic3AIRAppDataFolder, "gamerecordings");
                 }
                 else
                 {

@@ -208,6 +208,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>lang.null.resx</DependentUpon>
     </Compile>
+    <Compile Include="Management and Data Models\MMSettingsManagement.cs" />
     <Compile Include="Management and Data Models\ModManagement.cs" />
     <Compile Include="Controls\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -232,7 +233,8 @@
     </Compile>
     <Compile Include="Management and Data Models\MainDataModel.cs" />
     <Compile Include="Management and Data Models\RecordingManagement.cs" />
-    <Compile Include="RightClickAssistTool.cs" />
+    <Compile Include="Management and Data Models\VersionManagement.cs" />
+    <Compile Include="Management and Data Models\GameContextMenuHandler.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Controls\AutoBootDialog.xaml.cs">
       <DependentUpon>AutoBootDialog.xaml</DependentUpon>
