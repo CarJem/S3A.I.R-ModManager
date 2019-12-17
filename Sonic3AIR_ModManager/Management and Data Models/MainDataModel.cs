@@ -104,67 +104,19 @@ namespace Sonic3AIR_ModManager
 
             ModManagement.UpdateModsList(true);
 
-            if (File.Exists(ProgramPaths.Sonic3AIRPath))
-            {
-                if (ValidateSelectedVersion(ref Instance) == false) NullSituation(ref Instance);
-            }
-            else NullSituation(ref Instance);
+            ValidateSelectedVersionLabels(ref Instance);
             Properties.Settings.Default.Save();
-
-            void NullSituation(ref ModManager SubInstance)
-            {
-                if (SubInstance.airVersionLabel != null)
-                {
-                    SubInstance.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: NULL";
-                    if (MainDataModel.S3AIRSettings.Version != null)
-                    {
-                        SubInstance.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {MainDataModel.S3AIRSettings.Version.ToString()}";
-                    }
-                    else SubInstance.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: NULL";
-                }
-            }
 
         }
 
-        private static bool ValidateSelectedVersion(ref ModManager Instance)
+        private static void ValidateSelectedVersionLabels(ref ModManager Instance)
         {
-            string metaDataFile = Directory.GetFiles(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-            if (metaDataFile != null)
+            VersionManagement.VersionReader.AIRVersionData fileData = VersionManagement.VersionReader.GetVersionData(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), false);
+            string settingData = (MainDataModel.S3AIRSettings.Version != null ? MainDataModel.S3AIRSettings.Version.ToString() : "NULL");
+            if (Instance.airVersionLabel != null)
             {
-                try
-                {
-                    MainDataModel.CurrentAIRVersion = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
-                    Instance.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {MainDataModel.CurrentAIRVersion.VersionString}";
-                    Instance.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {MainDataModel.S3AIRSettings.Version.ToString()}";
-                    return true;
-                }
-                catch
-                {
-                    return PhaseTwo(ref Instance);
-                }
-
-            }
-            else
-            {
-                return PhaseTwo(ref Instance);
-            }
-
-
-            bool PhaseTwo(ref ModManager Parent)
-            {
-                var versInfo = FileVersionInfo.GetVersionInfo(ProgramPaths.Sonic3AIRPath);
-                string fileVersionFull2 = $"{versInfo.FileMajorPart.ToString().PadLeft(2, '0')}.{versInfo.FileMinorPart.ToString().PadLeft(2, '0')}.{versInfo.FileBuildPart.ToString().PadLeft(2, '0')}.{versInfo.FilePrivatePart.ToString()}";
-                if (Version.TryParse(fileVersionFull2, out Version result))
-                {
-                    MainDataModel.CurrentAIRVersion = new AIR_API.VersionMetadata(result, fileVersionFull2);
-                    Parent.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {MainDataModel.CurrentAIRVersion.VersionString}";
-                    Parent.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {MainDataModel.S3AIRSettings.Version.ToString()}";
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                Instance.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {fileData.ToString()}";
+                Instance.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {settingData}";
             }
         }
 
@@ -250,7 +202,7 @@ namespace Sonic3AIR_ModManager
 
         public static void UpdateInGameButtons(ref ModManager Instance)
         {
-            bool enabled = !ProcessLauncher.isGameRunning;
+            bool enabled = !GameHandler.isGameRunning;
             Instance.ModManagerButtons.Visibility = (enabled ? Visibility.Visible : Visibility.Hidden);
             Instance.InGameButtons.Visibility = (enabled ? Visibility.Hidden : Visibility.Visible);
             Instance.saveAndLoadButton.IsEnabled = enabled;
@@ -272,8 +224,6 @@ namespace Sonic3AIR_ModManager
             Instance.playbackRecordingMenuItem.IsEnabled = enabled;
         }
 
-
-
         public static void UpdateSettingsStates(ref ModManager Instance)
         {
             UpdateAIRSettings(ref Instance);
@@ -283,21 +233,43 @@ namespace Sonic3AIR_ModManager
 
         public static void ChangeS3RomPath(ref ModManager Instance)
         {
-            string inital_folder = "";
-            if (File.Exists(MainDataModel.Global_Settings.RomPath)) inital_folder = Path.GetDirectoryName(MainDataModel.Global_Settings.RomPath);
+            string title = Program.LanguageResource.GetString("ChangeS3KROMPathDialog_Title");
+            string text = Program.LanguageResource.GetString("ChangeS3KROMPathDialog_Part1") + nL +
+                $"   - {Program.LanguageResource.GetString("ChangeS3KROMPathDialog_Part2")}" + nL +
+                $"   - {Program.LanguageResource.GetString("ChangeS3KROMPathDialog_Part3")}" + nL +
+                $"   - {Program.LanguageResource.GetString("ChangeS3KROMPathDialog_Part4")}";
 
-            OpenFileDialog fileDialog = new OpenFileDialog()
+            DialogResult result = MessageBox.Show(text, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
             {
-                Filter = $"{Program.LanguageResource.GetString("Sonic3KRomFile")} (*.bin)|*.bin",
-                InitialDirectory = inital_folder,
-                Title = Program.LanguageResource.GetString("SelectSonic3KRomFile")
+                // File Select
+                string inital_folder = "";
+                if (File.Exists(MainDataModel.Global_Settings.RomPath)) inital_folder = Path.GetDirectoryName(MainDataModel.Global_Settings.RomPath);
 
-            };
-            if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                MainDataModel.Global_Settings.RomPath = fileDialog.FileName;
-                MainDataModel.Global_Settings.Save();
+                OpenFileDialog fileDialog = new OpenFileDialog()
+                {
+                    Filter = $"{Program.LanguageResource.GetString("Sonic3KRomFile")} (*.bin)|*.bin",
+                    InitialDirectory = inital_folder,
+                    Title = Program.LanguageResource.GetString("SelectSonic3KRomFile")
+
+                };
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    MainDataModel.Global_Settings.RomPath = fileDialog.FileName;
+                    MainDataModel.Global_Settings.Save();
+                }
             }
+            else if (result == DialogResult.Yes)
+            {
+                // Auto Find ROM Path
+                string rom_path = AIR_API.SteamROMHandler.TryGetSteamRomPath();
+                if (rom_path != "")
+                {
+                    MainDataModel.Global_Settings.RomPath = rom_path;
+                    MainDataModel.Global_Settings.Save();
+                }
+            }
+
             UpdateAIRSettings(ref Instance);
         }
 

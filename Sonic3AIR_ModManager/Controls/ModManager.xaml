@@ -238,21 +238,21 @@
                                     <Grid Name="recordingsPlaybackWarningMessage" Visibility="Visible" TextBlock.TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2">
                                         <StackPanel>
                                             <TextBlock VerticalAlignment="Center">
-                                                <Run Text="WARNING" Foreground="Red" FontWeight="Bold" FontSize="20"></Run>
+                                                <Run Name="GameRecordingPlaybackWarning_Part1" Text="WARNING" Foreground="Red" FontWeight="Bold" FontSize="20"></Run>
                                                 <LineBreak></LineBreak>
                                                 <TextBlock.Effect>
                                                     <DropShadowEffect ShadowDepth="1" Direction="330" Color="Black" Opacity="1" BlurRadius="1"/>
                                                 </TextBlock.Effect>
                                             </TextBlock>
                                             <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" FontSize="12">
-                                                <Run Text="Recording Playback is a very dangerous feature that can (and will normally)" Foreground="{DynamicResource NormalText}"></Run>
+                                                <Run Name="GameRecordingPlaybackWarning_Part2" Text="Recording Playback is a very dangerous feature that can (and will normally)" Foreground="{DynamicResource NormalText}"></Run>
                                                 <LineBreak></LineBreak>
-                                                <Run Text="MODIFY SETTINGS AND EVEN WIPE YOUR SAVE DATA REGARDLESS OF HOW CAREFUL YOU ARE!" FontWeight="DemiBold" Foreground="Red"></Run>
+                                                <Run Name="GameRecordingPlaybackWarning_Part3" Text="MODIFY SETTINGS AND EVEN WIPE YOUR SAVE DATA REGARDLESS OF HOW CAREFUL YOU ARE!" FontWeight="DemiBold" Foreground="Red"></Run>
                                                 <LineBreak></LineBreak>
                                                 <LineBreak></LineBreak> 
-                                                <Run Text="It is highly recomended that you manually make a backup of A.I.R.'s save data before you use this tool if you worry about losing your data." Foreground="{DynamicResource NormalText}"></Run>
+                                                <Run Name="GameRecordingPlaybackWarning_Part4" Text="It is highly recomended that you manually make a backup of A.I.R.'s save data before you use this tool if you worry about losing your data." Foreground="{DynamicResource NormalText}"></Run>
                                                 <LineBreak></LineBreak>
-                                                <Run Foreground="Red" Text="I AM NOT RESPONSIBLE FOR ANY LOST DATA BY THE USE OF THIS TOOL!" FontWeight="DemiBold"></Run>
+                                                <Run Name="GameRecordingPlaybackWarning_Part5" Foreground="Red" Text="I AM NOT RESPONSIBLE FOR ANY LOST DATA BY THE USE OF THIS TOOL!" FontWeight="DemiBold"></Run>
                                                 <LineBreak></LineBreak>
 
                                                 <TextBlock.Effect>
@@ -341,6 +341,10 @@
                                         </Grid>
                                         <Separator Visibility="Hidden"></Separator>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="FullDebugOutputCheckBox" Content="Log Full Debug Output" Margin="0,2" IsChecked="{Binding ShowFullDebugOutput, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}" Click="FullDebugOutputCheckBox_Click"></CheckBox>
+                                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                                            <CheckBox x:Name="DisableInGameEnhancementsCheckbox" Style="{DynamicResource CheckBoxStyle1}" VerticalAlignment="Center" IsChecked="{Binding DisableInGameEnhancements, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}" Click="DisableInGameEnhancementsCheckbox_Click"></CheckBox>
+                                            <TextBlock x:Name="DisableInGameEnhancementsText" Text="Disable In-Game Enhancements&#10;(Enable only if you have issues running A.I.R.)" Margin="5,0,0,0"></TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
                                 </GroupBox>
                             </Grid>
@@ -368,7 +372,7 @@
                                         </Grid>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="fixGlitchesCheckbox" Content="Fix Glitches" Margin="0,2" Click="FixGlitchesCheckbox_Click"></CheckBox>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="failSafeModeCheckbox" Content="Fail Safe Mode" Margin="0,2" Click="FailSafeModeCheckbox_Click"></CheckBox>
-                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Enable Dev Mode (Not Debug Mode)" Margin="0,2" Name="devModeCheckbox" Click="devModeCheckbox_Click"></CheckBox>
+                                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Enable Dev Mode" Margin="0,2" Name="devModeCheckbox" Click="devModeCheckbox_Click"></CheckBox>
                                         <TextBlock x:Name="StartingWindowLabel" Text="Startup Window:" Margin="0,2"></TextBlock>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -605,6 +609,7 @@
                                 <StackPanel Height="25" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1">
                                     <Button x:Name="removeVersionButton" Width="75" Margin="4,0" Content="Remove" Click="RemoveVersionButton_Click"></Button>
                                     <Button x:Name="openVersionLocationButton" Width="125" Margin="4,0" Content="Open Location..." Click="OpenVersionLocationButton_Click"></Button>
+                                    <Button x:Name="refreshVersionsButton" Padding="20,0" Margin="4,0" Content="Refresh" Click="refreshVersionsButton_Click"></Button>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>

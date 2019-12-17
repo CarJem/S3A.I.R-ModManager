@@ -529,6 +529,51 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Would you like to set the path to the location of the Steam Sonic 3&amp;K ROM?.
+        /// </summary>
+        internal static string ChangeS3KROMPathDialog_Part1 {
+            get {
+                return ResourceManager.GetString("ChangeS3KROMPathDialog_Part1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click YES to set the Path Automatically based on the Steam S3&amp;K ROM.
+        /// </summary>
+        internal static string ChangeS3KROMPathDialog_Part2 {
+            get {
+                return ResourceManager.GetString("ChangeS3KROMPathDialog_Part2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click NO to set the Path Manually.
+        /// </summary>
+        internal static string ChangeS3KROMPathDialog_Part3 {
+            get {
+                return ResourceManager.GetString("ChangeS3KROMPathDialog_Part3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click CANCEL to leave the path unchanged and return to settings.
+        /// </summary>
+        internal static string ChangeS3KROMPathDialog_Part4 {
+            get {
+                return ResourceManager.GetString("ChangeS3KROMPathDialog_Part4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Sonic 3&amp;K ROM Path.
+        /// </summary>
+        internal static string ChangeS3KROMPathDialog_Title {
+            get {
+                return ResourceManager.GetString("ChangeS3KROMPathDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for A.I.R. Updates on Startup.
         /// </summary>
         internal static string CheckforAIRUpdatesOnStart {
@@ -844,6 +889,24 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable In-Game Enhancements.
+        /// </summary>
+        internal static string DisableInGameEnhacements_Part1 {
+            get {
+                return ResourceManager.GetString("DisableInGameEnhacements_Part1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Enable only if you have issues running A.I.R.).
+        /// </summary>
+        internal static string DisableInGameEnhacements_Part2 {
+            get {
+                return ResourceManager.GetString("DisableInGameEnhacements_Part2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to does not exist!.
         /// </summary>
         internal static string DoesNotExist {
@@ -1069,6 +1132,24 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to force quit Sonic 3 A.I.R? (All unsaved progress will be lost).
+        /// </summary>
+        internal static string ForceQuitGameDialog_Text {
+            get {
+                return ResourceManager.GetString("ForceQuitGameDialog_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force Quit Game.
+        /// </summary>
+        internal static string ForceQuitGameDialog_Title {
+            get {
+                return ResourceManager.GetString("ForceQuitGameDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Force Start.
         /// </summary>
         internal static string ForceStart {
@@ -1128,6 +1209,51 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string GameInstalledAt {
             get {
                 return ResourceManager.GetString("GameInstalledAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WARNING.
+        /// </summary>
+        internal static string GameRecordingPlaybackWarning_Part1 {
+            get {
+                return ResourceManager.GetString("GameRecordingPlaybackWarning_Part1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recording Playback is a very dangerous feature that can (and will normally).
+        /// </summary>
+        internal static string GameRecordingPlaybackWarning_Part2 {
+            get {
+                return ResourceManager.GetString("GameRecordingPlaybackWarning_Part2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MODIFY SETTINGS AND EVEN WIPE YOUR SAVE DATA REGARDLESS OF HOW CAREFUL YOU ARE!.
+        /// </summary>
+        internal static string GameRecordingPlaybackWarning_Part3 {
+            get {
+                return ResourceManager.GetString("GameRecordingPlaybackWarning_Part3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is highly recomended that you manually make a backup of A.I.R.&apos;s save data before you use this tool if you worry about losing your data..
+        /// </summary>
+        internal static string GameRecordingPlaybackWarning_Part4 {
+            get {
+                return ResourceManager.GetString("GameRecordingPlaybackWarning_Part4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I AM NOT RESPONSIBLE FOR ANY LOST DATA BY THE USE OF THIS TOOL!.
+        /// </summary>
+        internal static string GameRecordingPlaybackWarning_Part5 {
+            get {
+                return ResourceManager.GetString("GameRecordingPlaybackWarning_Part5", resourceCulture);
             }
         }
         
@@ -2655,6 +2781,33 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string TimestampColumnHeader {
             get {
                 return ResourceManager.GetString("TimestampColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We can&apos;t determine the version last used with Sonic 3 A.I.R.! This can be ethier a false alarm if this is a new install, or bad news if your heading to a older version of A.I.R! Using an older version can lead to undesired results like LOSING YOUR SETTINGS or LOSING YOUR SAVE DATA. Are you sure you want to continue?.
+        /// </summary>
+        internal static string TimeTravelSafetyNet_NullVersion {
+            get {
+                return ResourceManager.GetString("TimeTravelSafetyNet_NullVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It appears you are about to launch an older version of Sonic 3 A.I.R! This can lead to undesired results like LOSING YOUR SETTINGS or LOSING YOUR SAVE DATA. Are you sure you want to continue?.
+        /// </summary>
+        internal static string TimeTravelSafetyNet_OlderVersion {
+            get {
+                return ResourceManager.GetString("TimeTravelSafetyNet_OlderVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potential Time Travel Warning.
+        /// </summary>
+        internal static string TimeTravelSafetyNet_Title {
+            get {
+                return ResourceManager.GetString("TimeTravelSafetyNet_Title", resourceCulture);
             }
         }
         

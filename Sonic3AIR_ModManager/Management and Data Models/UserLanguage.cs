@@ -361,6 +361,14 @@ namespace Sonic3AIR_ModManager
 
             form.RecordingsViewer.TimestampColumn.Header = Program.LanguageResource.GetString("TimestampColumnHeader");
             form.RecordingsViewer.RecVersionColumn.Header = Program.LanguageResource.GetString("AIRVersionColumnHeader");
+
+            form.GameRecordingPlaybackWarning_Part1.Text = Program.LanguageResource.GetString("GameRecordingPlaybackWarning_Part1");
+            form.GameRecordingPlaybackWarning_Part2.Text = Program.LanguageResource.GetString("GameRecordingPlaybackWarning_Part2");
+            form.GameRecordingPlaybackWarning_Part3.Text = Program.LanguageResource.GetString("GameRecordingPlaybackWarning_Part3");
+            form.GameRecordingPlaybackWarning_Part4.Text = Program.LanguageResource.GetString("GameRecordingPlaybackWarning_Part4");
+            form.GameRecordingPlaybackWarning_Part5.Text = Program.LanguageResource.GetString("GameRecordingPlaybackWarning_Part5");
+            form.RecordingsPlaybackWarningUnderstoodButton.Content = Program.LanguageResource.GetString("UnderstoodButton");
+
             #endregion
 
             #endregion
@@ -383,6 +391,10 @@ namespace Sonic3AIR_ModManager
             form.checkBox1.Content = Program.LanguageResource.GetString("CheckforAIRUpdatesOnStart");
             form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
             form.FullDebugOutputCheckBox.Content = Program.LanguageResource.GetString("FullDebugOutputOption");
+
+            form.DisableInGameEnhancementsText.Text = Program.LanguageResource.GetString("DisableInGameEnhacements_Part1");
+            form.DisableInGameEnhancementsText.Text += Environment.NewLine + Program.LanguageResource.GetString("DisableInGameEnhacements_Part2");
+
 
             #region AIR Path Context Menu Strip
             form.SetAIRpathManuallyMenuItem.Header = GetOutputString("SetAIRPathManually");
@@ -466,6 +478,7 @@ namespace Sonic3AIR_ModManager
 
             form.removeVersionButton.Content = Program.LanguageResource.GetString("Remove");
             form.openVersionLocationButton.Content = Program.LanguageResource.GetString("OpenLocationExpandable");
+            form.refreshVersionsButton.Content = Program.LanguageResource.GetString("Refresh"); 
 
             form.VersionsViewer.VersionColumn.Header = Program.LanguageResource.GetString("VersionColumnHeader");
             form.VersionsViewer.PathColumn.Header = Program.LanguageResource.GetString("PathColumnHeader");

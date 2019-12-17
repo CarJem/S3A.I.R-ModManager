@@ -54,13 +54,13 @@ namespace Sonic3AIR_ModManager
                 Instance.copyRecordingFilePath.IsEnabled = true;
                 Instance.uploadButton.IsEnabled = true;
                 Instance.deleteRecordingButton.IsEnabled = true;
-                Instance.playbackRecordingButton.IsEnabled = !ProcessLauncher.isGameRunning;
+                Instance.playbackRecordingButton.IsEnabled = !GameHandler.isGameRunning;
 
                 Instance.openRecordingMenuItem.IsEnabled = true;
                 Instance.copyRecordingFilePathMenuItem.IsEnabled = true;
                 Instance.recordingUploadMenuItem.IsEnabled = true;
                 Instance.deleteRecordingMenuItem.IsEnabled = true;
-                Instance.playbackRecordingMenuItem.IsEnabled = !ProcessLauncher.isGameRunning && RecordingManagement.HasPlaybackWarningBeenPresented;
+                Instance.playbackRecordingMenuItem.IsEnabled = !GameHandler.isGameRunning && RecordingManagement.HasPlaybackWarningBeenPresented;
             }
             else
             {
@@ -184,7 +184,7 @@ namespace Sonic3AIR_ModManager
             if (Instance.GameRecordingList.SelectedItem != null && Instance.GameRecordingList.SelectedItem is AIR_API.Recording)
             {
                 var recordingFile = Instance.GameRecordingList.SelectedItem as AIR_API.Recording;
-                ProcessLauncher.LaunchGameRecording(recordingFile.FilePath, ProgramPaths.Sonic3AIRPath);
+                GameHandler.LaunchGameRecording(recordingFile.FilePath, ProgramPaths.Sonic3AIRPath);
                 MainDataModel.UpdateInGameButtons(ref Instance);
             }
         }
@@ -284,7 +284,7 @@ namespace Sonic3AIR_ModManager
                     if (tag.Instance.GameRecordingList.SelectedItem != null && tag.Instance.GameRecordingList.SelectedItem is AIR_API.Recording)
                     {
                         var recordingFile = tag.FilePath;
-                        ProcessLauncher.LaunchGameRecording(recordingFile, tag.FilePath);
+                        GameHandler.LaunchGameRecording(recordingFile, tag.FilePath);
                         MainDataModel.UpdateInGameButtons(ref tag.Instance);
                     }
                 }
@@ -302,7 +302,7 @@ namespace Sonic3AIR_ModManager
                 if (RecordingVersions.Keys.ToList().Contains(recordingFile.AIRVersion))
                 {
                     var exe_path = RecordingVersions.Where(x => x.Key == recordingFile.AIRVersion).FirstOrDefault().Value;
-                    ProcessLauncher.LaunchGameRecording(recordingFile.FilePath, exe_path);
+                    GameHandler.LaunchGameRecording(recordingFile.FilePath, exe_path);
                     MainDataModel.UpdateInGameButtons(ref Instance);
                 }
 

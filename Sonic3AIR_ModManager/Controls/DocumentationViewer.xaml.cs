@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MoonPdfLib.MuPdf;
 using System.IO;
+using PdfiumViewer;
+using System.Windows.Forms;
 
 namespace Sonic3AIR_ModManager
 {
@@ -23,11 +24,22 @@ namespace Sonic3AIR_ModManager
     public partial class DocumentationViewer : Window
     {
         private string FileName;
-        public DocumentationViewer()
+        private bool UsePDFViewer { get; set; } = false;
+
+        private PDFViewer AltViewer { get; set; }
+
+        public DocumentationViewer(bool useWebRendering = true)
         {
             InitializeComponent();
             var Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
+            SetupAltViewer();
+        }
+
+        public void SetupAltViewer()
+        {
+            AltViewer = new PDFViewer();
+            FormsViewer.Child = AltViewer;
         }
 
         public void ShowDialog(string _fileName)
@@ -39,32 +51,60 @@ namespace Sonic3AIR_ModManager
 
         private void LoadFile(string filename)
         {
-            try
+            LoadUsingWebViewer(filename);
+        }
+
+        public void UpdateColorControls(System.Windows.Forms.Control myControl)
+        {
+            if (myControl is System.Windows.Forms.TreeView)
             {
-                pdfViewer.OpenFile(filename);
+                myControl.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
+                myControl.ForeColor = System.Drawing.Color.White;
+                (myControl as System.Windows.Forms.TreeView).LineColor = System.Drawing.Color.White;
+                (myControl as System.Windows.Forms.TreeView).ShowPlusMinus = true;
             }
-            catch (Exception ex)
+            if (myControl is System.Windows.Forms.TreeNode)
             {
-                MessageBox.Show(ex.Message, "");
+                myControl.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
+                myControl.ForeColor = System.Drawing.Color.White;
+            }
+
+
+            // Any other non-standard controls should be implemented here aswell...
+
+            foreach (System.Windows.Forms.Control subC in myControl.Controls)
+            {
+                UpdateColorControls(subC);
             }
         }
 
-        bool PDFisLoaded = false;
-
-        private void pdfViewer_PdfLoaded(object sender, EventArgs e)
+        private void MyControl_Paint(object sender, PaintEventArgs e)
         {
-            //TODO: Gut Unused Method
-            PDFisLoaded = true;
+            if (sender is VScrollBar || sender is HScrollBar || sender is ScrollBar)
+            {
+                WinformsTheming.InvertGraphicsArea(e.Graphics, e.ClipRectangle);
+            }
+        }
+
+        private void LoadUsingWebViewer(string filename)
+        {
+            try
+            {
+                AltViewer.View.Document = PdfDocument.Load(filename);
+                AltViewer.View.ShowToolbar = false;
+                AltViewer.View.ZoomMode = PdfViewerZoomMode.FitWidth;
+                UpdateColorControls(AltViewer.View);
+
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message, "");
+            }
         }
 
         private void ExternalOpenButton_Click(object sender, RoutedEventArgs e)
         {
             if (File.Exists(FileName)) System.Diagnostics.Process.Start(FileName);
-        }
-
-        private void pdfViewer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            LoadFile(FileName);
         }
     }
 }

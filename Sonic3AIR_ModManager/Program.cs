@@ -103,7 +103,7 @@ namespace Sonic3AIR_ModManager
         static void RealMain(string[] args)
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
-            GameContextMenuHandler.Subscribe();
+            GameHandler.InGameContextMenu.Subscribe();
             try
             {
                 ProgramPaths.CreateMissingModManagerFolders();
@@ -123,7 +123,7 @@ namespace Sonic3AIR_ModManager
             {
                //TODO : Add Proper Catch Statement
             }
-            GameContextMenuHandler.Unsubscribe();
+            GameHandler.InGameContextMenu.Unsubscribe();
             Log.InfoFormat("Shuting Down!");
         }
         #endregion
@@ -263,13 +263,13 @@ namespace Sonic3AIR_ModManager
         {
             //ConsoleManager.Show();
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) => {
-                if (e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
+                if (e.Exception.TargetSite != null && e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
                 else if (Properties.Settings.Default.ShowFullDebugOutput)
                 {
-                    Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                    Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
                 }
             };
 
@@ -277,9 +277,16 @@ namespace Sonic3AIR_ModManager
 
         }
 
+        static string RemoveNewLineChars(Exception exception_to_search, string replacement_string = " ")
+        {
+            if (exception_to_search.Message != null) return System.Text.RegularExpressions.Regex.Replace(exception_to_search.Message, @"\t|\n|\r", replacement_string);
+            return exception_to_search.ToString();
+        }
+
         static string RemoveNewLineChars(string string_to_search, string replacement_string = " ")
         {
-            return System.Text.RegularExpressions.Regex.Replace(string_to_search, @"\t|\n|\r", replacement_string);
+            if (string_to_search != null) return System.Text.RegularExpressions.Regex.Replace(string_to_search, @"\t|\n|\r", replacement_string);
+            return "";
         }
 
         static void CleanUpLogsFolder()

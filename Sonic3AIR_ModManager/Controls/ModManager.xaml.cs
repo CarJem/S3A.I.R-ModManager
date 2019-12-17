@@ -55,8 +55,6 @@ namespace Sonic3AIR_ModManager
     /// 
 
 
-    // TODO: Implement Version Checking to Prevent More Stupid Bug Reports
-    // TODO: Fix Unable to Install Version After Download is Complete
     // TODO: Backup/Restore A.I.R. Save Data Functionality
 
 
@@ -126,6 +124,7 @@ namespace Sonic3AIR_ModManager
                 Instance = this;
                 ModManagement.UpdateInstance(ref Instance);
                 ProcessLauncher.UpdateInstance(ref Instance);
+                GameHandler.UpdateInstance(ref Instance);
                 InputDeviceManager.UpdateInstance(ref Instance);
                 MainDataModel.Global_Settings = new AIR_API.Settings_Global(new FileInfo(ProgramPaths.Sonic3AIRGlobalSettingsFile));
                 MainDataModel.Input_Settings = new AIR_API.Settings_Input(new FileInfo(ProgramPaths.Sonic3AIRGlobalInputFile));
@@ -140,7 +139,7 @@ namespace Sonic3AIR_ModManager
                 FileManagement.GBAPIWatcher.EnableRaisingEvents = true;
                 FileManagement.GBAPIWatcher.Changed += FileManagement.GBAPIWatcher_Changed;
                 UserLanguage.ApplyLanguage(ref Instance);
-                if (autoBoot) ProcessLauncher.LaunchSonic3AIR();
+                if (autoBoot) GameHandler.LaunchSonic3AIR();
                 if (gamebanana_api != "") FileManagement.GamebananaAPI_Install(gamebanana_api);
                 HasInitilizationCompleted = true;
             }
@@ -256,7 +255,7 @@ namespace Sonic3AIR_ModManager
 
         private void ForceQuitGame_Click(object sender, RoutedEventArgs e)
         {
-            ProcessLauncher.ForceQuitSonic3AIR();
+            GameHandler.ForceQuitSonic3AIR();
         }
 
         private void apiInstallChecker_Tick(object sender, EventArgs e)
@@ -444,7 +443,7 @@ namespace Sonic3AIR_ModManager
 
         private void ModManager_WindowClosing(object sender, CancelEventArgs e)
         {
-            if (ProcessLauncher.isGameRunning)
+            if (GameHandler.isGameRunning)
             {
                 e.Cancel = true;
             }
@@ -632,7 +631,7 @@ namespace Sonic3AIR_ModManager
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
             ModManagement.Save();
-            ProcessLauncher.LaunchSonic3AIR();
+            GameHandler.LaunchSonic3AIR();
             MainDataModel.UpdateInGameButtons(ref Instance);
         }
 
@@ -707,6 +706,11 @@ namespace Sonic3AIR_ModManager
             Properties.Settings.Default.Save();
         }
 
+        private void DisableInGameEnhancementsCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
+
         private void RecordingsSelectedLocationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (HasInitilizationCompleted) RecordingManagement.UpdateSelectedFolderPath(ref Instance);
@@ -765,7 +769,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (GameRecordingList.SelectedItem != null && GameRecordingList.SelectedItem is AIR_API.Recording && GameRecordingList.IsMouseOver)
                 {
-                    recordingsPanel.ContextMenu.IsOpen = !ProcessLauncher.isGameRunning;
+                    recordingsPanel.ContextMenu.IsOpen = !GameHandler.isGameRunning;
                 }
             }
 
@@ -898,6 +902,11 @@ namespace Sonic3AIR_ModManager
             RecordingManagement.UpdatePlayerWarning(ref Instance);
         }
 
+        private void refreshVersionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            VersionManagement.RefreshVersionsList(ref Instance, true);
+        }
+
         #endregion
 
         #region Error Linking to Settings
@@ -916,6 +925,7 @@ namespace Sonic3AIR_ModManager
             if (sender.Equals(LaunchOptionsGroup) && LaunchOptionsFailureMessageBackground.Visibility == Visibility.Visible) HyperlinkToGeneralTabAIRPath();
             else if (!sender.Equals(LaunchOptionsGroup)) HyperlinkToGeneralTabAIRPath();
         }
+
 
 
 

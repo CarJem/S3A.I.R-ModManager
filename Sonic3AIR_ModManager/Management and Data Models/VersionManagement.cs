@@ -38,26 +38,6 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        public class AIRVersionListItem
-        {
-            public string Name { get { return _name; } }
-            private string _name;
-
-            public string FilePath { get { return _filePath; } }
-            private string _filePath;
-
-            public override string ToString()
-            {
-                return $"{Program.LanguageResource.GetString("Version")} {Name}";
-            }
-
-            public AIRVersionListItem(string name, string filePath)
-            {
-                _name = name;
-                _filePath = filePath;
-            }
-        }
-
         public static void OpenVersionFolder(ref ModManager Instance)
         {
             if (Instance.VersionsListView.SelectedItem != null && Instance.VersionsListView.SelectedItem is AIRVersionListItem)
@@ -81,16 +61,8 @@ namespace Sonic3AIR_ModManager
                         string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
                         if (File.Exists(filePath))
                         {
-                            var versInfo = FileVersionInfo.GetVersionInfo(filePath);
-                            string fileVersionFull2 = $"{versInfo.FileMajorPart.ToString().PadLeft(2, '0')}.{versInfo.FileMinorPart.ToString().PadLeft(2, '0')}.{versInfo.FileBuildPart.ToString().PadLeft(2, '0')}.{versInfo.FilePrivatePart}";
-                            if (Version.TryParse(fileVersionFull2, out Version result))
-                            {
-                                Instance.VersionsListView.Items.Add(new AIRVersionListItem(fileVersionFull2, folder.FullName));
-                            }
-                            else
-                            {
-                                Instance.VersionsListView.Items.Add(new AIRVersionListItem(folder.Name, folder.FullName));
-                            }
+                            VersionReader.AIRVersionData data = VersionReader.GetVersionData(Path.GetDirectoryName(filePath), false);
+                            Instance.VersionsListView.Items.Add(new AIRVersionListItem(data.ToString(), folder.FullName));
                         }
 
 
@@ -125,8 +97,8 @@ namespace Sonic3AIR_ModManager
                         string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
                         if (File.Exists(filePath))
                         {
-                            Instance.ChangeAIRVersionMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath, ref Instance));
-                            Instance.ChangeAIRVersionFileMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder.Name, filePath, ref Instance));
+                            Instance.ChangeAIRVersionMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder, filePath, ref Instance));
+                            Instance.ChangeAIRVersionFileMenuItem.Items.Add(GenerateInstalledVersionsToolstripItem(folder, filePath, ref Instance));
                         }
 
 
@@ -151,22 +123,10 @@ namespace Sonic3AIR_ModManager
             Instance.ChangeAIRVersionFileMenuItem.Items.Clear();
         }
 
-        public class VersionTag
-        {
-            public string Path { get; set; }
-            public ModManager Instance;
-
-            public VersionTag(ModManager _instance, string _path)
-            {
-                Instance = _instance;
-                Path = _path;
-            }
-        }
-
-        public static MenuItem GenerateInstalledVersionsToolstripItem(string name, string filepath, ref ModManager Instance)
+        public static MenuItem GenerateInstalledVersionsToolstripItem(DirectoryInfo folder, string filepath, ref ModManager Instance)
         {
             MenuItem item = new MenuItem();
-            item.Header = name;
+            item.Header = $"{folder.Name} ({VersionReader.GetVersionData(folder.FullName).ToString()})";
             item.Tag = new VersionTag(Instance, filepath);
             item.Click += ChangeAIRPathByInstalls;
             item.IsCheckable = false;
@@ -203,9 +163,6 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-
-        #region A.I.R. Version Installation 
-
         public static void InstallVersionFromZIP()
         {
             OpenFileDialog ofd = new OpenFileDialog()
@@ -232,108 +189,217 @@ namespace Sonic3AIR_ModManager
                         }
                     }
 
-
-                    string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
-                    AIR_API.VersionMetadata ver;
-                    string output2 = "";
-                    string baseFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\";
-
-                    try
+                    string exe = Directory.GetFiles(destination, "Sonic3AIR.exe", SearchOption.AllDirectories).FirstOrDefault();
+                    if (exe != null && exe != "")
                     {
-                        ver = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
-                        output2 = $"{baseFolder}{ver.VersionString}";
-                        if (Directory.Exists(output2)) throw new Exception();
-                        try
-                        {
-                            AddVersion(destination, output2);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                        VersionReader.AIRVersionData version_data = VersionReader.GetVersionData(output, true);
+                        string folder_path = $"{ProgramPaths.Sonic3AIR_MM_VersionsFolder}{version_data.ToString()}";
+                        MoveVersionToFinalLocation(destination, folder_path);
                     }
-                    catch
+                    else
                     {
-                        try
-                        {
-                            string exe = Directory.GetFiles(destination, "Sonic3AIR.exe", SearchOption.AllDirectories).FirstOrDefault();
-                            var versInfo = FileVersionInfo.GetVersionInfo(exe);
-                            string fileVersionFull2 = $"{versInfo.FileMajorPart.ToString().PadLeft(2, '0')}.{versInfo.FileMinorPart.ToString().PadLeft(2, '0')}.{versInfo.FileBuildPart.ToString().PadLeft(2, '0')}.{versInfo.FilePrivatePart.ToString()}";
-                            if (Version.TryParse(fileVersionFull2, out Version result))
-                            {
-                                output2 = $"{baseFolder}{fileVersionFull2}";
-                                AddVersion(destination, output2);
-                            }
-                            else
-                            {
-                                output2 = $"{baseFolder}{fileVersionFull2}";
-                                AddVersion(destination, output2);
-                            }
-
-                        }
-                        catch
-                        {
-                            VersionException(baseFolder, output2, destination);
-                        }
+                        //TODO : Proper Message Implemented
+                        string message = "";
+                        MessageBox.Show(message);
+                        CleanUpDownloadsFolder();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    CleanUpDownloadsFolder();
                 }
 
             }
 
-            void AddVersion(string destination, string output2)
-            {
-                Directory.Move(destination, output2);
 
-                Directory.CreateDirectory(destination);
-
-                MessageBox.Show(UserLanguage.VersionInstalled(output2));
-            }
 
         }
 
-        private static void VersionException(string baseFolder, string output2, string destination)
+        private static void CleanUpDownloadsFolder()
         {
-            string exceptionVersion = "";
-            DialogResult result;
-            result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption1"));
-            while (Directory.Exists($"{baseFolder}{exceptionVersion}") && !Uri.IsWellFormedUriString($"{baseFolder}{exceptionVersion}", UriKind.Absolute) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+            string destination = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM\\downloads";
+            FileManagement.WipeFolderContents(destination);
+        }
+
+        private static void MoveVersionToFinalLocation(string destination, string output2)
+        {
+            Directory.Move(destination, output2);
+            Directory.CreateDirectory(destination);
+            MessageBox.Show(UserLanguage.VersionInstalled(output2));
+            CleanUpDownloadsFolder();
+        }
+
+        public class AIRVersionListItem
+        {
+            public string Name { get { return _name; } }
+            private string _name;
+
+            public string FilePath { get { return _filePath; } }
+            private string _filePath;
+
+            public override string ToString()
             {
-                result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption2"));
+                return $"{Program.LanguageResource.GetString("Version")} {Name}";
             }
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            public AIRVersionListItem(string name, string filePath)
             {
-                output2 = exceptionVersion;
-                AddVersion();
-            }
-            else
-            {
-                System.IO.DirectoryInfo di = new DirectoryInfo(destination);
-
-                foreach (FileInfo file in di.GetFiles())
-                {
-                    file.Delete();
-                }
-                foreach (DirectoryInfo dir in di.GetDirectories())
-                {
-                    dir.Delete(true);
-                }
-            }
-
-            void AddVersion()
-            {
-                Directory.Move(destination, output2);
-
-                Directory.CreateDirectory(destination);
-
-                MessageBox.Show(UserLanguage.VersionInstalled(output2));
+                _name = name;
+                _filePath = filePath;
             }
         }
 
-        #endregion
+        public class VersionTag
+        {
+            public string Path { get; set; }
+            public ModManager Instance;
+
+            public VersionTag(ModManager _instance, string _path)
+            {
+                Instance = _instance;
+                Path = _path;
+            }
+        }
+
+        public static class VersionReader
+        {
+            public static Dictionary<string, AIRVersionData> DataRefrence { get; set; } = new Dictionary<string, AIRVersionData>();
+
+            public class AIRVersionData
+            {
+                public string VersionString { get; set; } = "NULL";
+                public Version Version { get; set; }
+                public FileVersionInfo FileInfo { get; set; }
+                public AIR_API.VersionMetadata Metadata { get; set; }
+
+                public override string ToString()
+                {
+                    if (FileInfo != null)
+                    {
+                        return $"{FileInfo.FileMajorPart.ToString().PadLeft(2, '0')}.{FileInfo.FileMinorPart.ToString().PadLeft(2, '0')}.{FileInfo.FileBuildPart.ToString().PadLeft(2, '0')}.{FileInfo.FilePrivatePart.ToString()}";
+                    }
+                    else if (Version != null)
+                    {
+                        return $"{Version.Major.ToString().PadLeft(2, '0')}.{Version.Minor.ToString().PadLeft(2, '0')}.{Version.Build.ToString().PadLeft(2, '0')}.{Version.Revision.ToString()}";
+                    }
+                    else
+                    {
+                        return VersionString;
+                    }
+                }
+
+
+                public AIRVersionData(Version _ver, string _ver_string, AIR_API.VersionMetadata _meta)
+                {
+                    Version = _ver;
+                    VersionString = _ver_string;
+                    Metadata = _meta;
+                }
+
+                public static AIRVersionData NullableDefault()
+                {
+                    return new AIRVersionData(null, "NULL", null);
+                }
+            }
+
+            public static AIRVersionData GetVersionData(string destination, bool isAdding = false)
+            {
+                if (DataRefrence.ContainsKey(destination)) return DataRefrence[destination];
+                else
+                {
+                    AIR_API.VersionMetadata VersionData = CheckforMetadataFile(destination);
+                    if (VersionData == null) return GetDataFromEXE(destination, isAdding);
+                    else return ReturnUsingMetadata(destination, VersionData);
+                }
+
+            }
+
+            private static AIRVersionData ReturnUsingMetadata(string destination, AIR_API.VersionMetadata meta)
+            {
+                var data = new AIRVersionData(meta.Version, meta.VersionString, meta);
+                DataRefrence.Add(destination, data);
+                return data;
+            }
+
+            private static AIR_API.VersionMetadata CheckforMetadataFile(string destination)
+            {
+                string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
+                if (metaDataFile != null && metaDataFile != "")
+                {
+                    try
+                    {
+                        AIR_API.VersionMetadata ver = new AIR_API.VersionMetadata(new FileInfo(metaDataFile));
+                        return ver;
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+
+            private static AIRVersionData GetDataFromEXE(string destination, bool isAdding)
+            {
+                AIRVersionData data;
+                string exe = Directory.GetFiles(destination, "Sonic3AIR.exe", SearchOption.AllDirectories).FirstOrDefault();
+                if (exe != null && exe != "")
+                {
+                    var versInfo = FileVersionInfo.GetVersionInfo(exe);
+                    string fileVersionFull2 = $"{versInfo.FileMajorPart.ToString().PadLeft(2, '0')}.{versInfo.FileMinorPart.ToString().PadLeft(2, '0')}.{versInfo.FileBuildPart.ToString().PadLeft(2, '0')}.{versInfo.FilePrivatePart.ToString()}";
+                    if (Version.TryParse(fileVersionFull2, out Version result))
+                    {
+                        data = new AIRVersionData(result, fileVersionFull2, new AIR_API.VersionMetadata(result, fileVersionFull2));
+                    }
+                    else
+                    {
+                        data = new AIRVersionData(null, fileVersionFull2, new AIR_API.VersionMetadata(null, fileVersionFull2));
+                    }
+                    DataRefrence.Add(destination, data);
+                    return data;
+                }
+                else
+                {
+                    return LastResortVersionMethod(destination, isAdding);
+                }
+
+            }
+
+            private static AIRVersionData LastResortVersionMethod(string destination, bool isAdding)
+            {
+                if (isAdding)
+                {
+                    string exceptionVersion = "";
+                    DialogResult result;
+                    result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption1"));
+                    while (Directory.Exists($"{exceptionVersion}") && !Uri.IsWellFormedUriString($"{exceptionVersion}", UriKind.Absolute) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+                    {
+                        result = ExtraDialog.ShowInputDialog(ref exceptionVersion, "", UserLanguage.GetOutputString("VersionSelectCaption2"));
+                    }
+
+                    AIRVersionData data;
+                    data = new AIRVersionData(null, exceptionVersion, null);
+                    DataRefrence.Add(destination, data);
+                    return data;
+                }
+                else
+                {
+                    var data = AIRVersionData.NullableDefault();
+                    DataRefrence.Add(destination, data);
+                    return data;
+                }
+
+
+
+
+            }
+        }
+
+
     }
 }

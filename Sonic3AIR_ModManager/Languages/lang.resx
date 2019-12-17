@@ -1433,4 +1433,55 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
   <data name="ForceQuitGame" xml:space="preserve">
     <value>Force Quit</value>
   </data>
+  <data name="GameRecordingPlaybackWarning_Part1" xml:space="preserve">
+    <value>WARNING</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part2" xml:space="preserve">
+    <value>Recording Playback is a very dangerous feature that can (and will normally)</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part3" xml:space="preserve">
+    <value>MODIFY SETTINGS AND EVEN WIPE YOUR SAVE DATA REGARDLESS OF HOW CAREFUL YOU ARE!</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part4" xml:space="preserve">
+    <value>It is highly recomended that you manually make a backup of A.I.R.'s save data before you use this tool if you worry about losing your data.</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part5" xml:space="preserve">
+    <value>I AM NOT RESPONSIBLE FOR ANY LOST DATA BY THE USE OF THIS TOOL!</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part1" xml:space="preserve">
+    <value>Disable In-Game Enhancements</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part2" xml:space="preserve">
+    <value>(Enable only if you have issues running A.I.R.)</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part1" xml:space="preserve">
+    <value>Would you like to set the path to the location of the Steam Sonic 3&amp;K ROM?</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part2" xml:space="preserve">
+    <value>Click YES to set the Path Automatically based on the Steam S3&amp;K ROM</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part3" xml:space="preserve">
+    <value>Click NO to set the Path Manually</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part4" xml:space="preserve">
+    <value>Click CANCEL to leave the path unchanged and return to settings</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Title" xml:space="preserve">
+    <value>Change Sonic 3&amp;K ROM Path</value>
+  </data>
+  <data name="TimeTravelSafetyNet_Title" xml:space="preserve">
+    <value>Potential Time Travel Warning</value>
+  </data>
+  <data name="TimeTravelSafetyNet_OlderVersion" xml:space="preserve">
+    <value>It appears you are about to launch an older version of Sonic 3 A.I.R! This can lead to undesired results like LOSING YOUR SETTINGS or LOSING YOUR SAVE DATA. Are you sure you want to continue?</value>
+  </data>
+  <data name="TimeTravelSafetyNet_NullVersion" xml:space="preserve">
+    <value>We can't determine the version last used with Sonic 3 A.I.R.! This can be ethier a false alarm if this is a new install, or bad news if your heading to a older version of A.I.R! Using an older version can lead to undesired results like LOSING YOUR SETTINGS or LOSING YOUR SAVE DATA. Are you sure you want to continue?</value>
+  </data>
+  <data name="ForceQuitGameDialog_Title" xml:space="preserve">
+    <value>Force Quit Game</value>
+  </data>
+  <data name="ForceQuitGameDialog_Text" xml:space="preserve">
+    <value>Are you sure you want to force quit Sonic 3 A.I.R? (All unsaved progress will be lost)</value>
+  </data>
 </root>

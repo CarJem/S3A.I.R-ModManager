@@ -127,7 +127,7 @@ namespace Sonic3AIR_ModManager.Controls
 
         private void ForceCloseMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            ProcessLauncher.ForceQuitSonic3AIR();
+            GameHandler.ForceQuitSonic3AIR();
         }
     }
 }
