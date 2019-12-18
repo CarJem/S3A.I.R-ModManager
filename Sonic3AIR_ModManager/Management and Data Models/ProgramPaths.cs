@@ -25,6 +25,7 @@ namespace Sonic3AIR_ModManager
         public static string Sonic3AIRLogFile { get => Sonic3AIRAppDataFolder + "\\logfile.txt"; }
         public static string Sonic3AIRGlobalSettingsFile { get => Sonic3AIRAppDataFolder + "\\settings_global.json"; }
         public static string Sonic3AIRGlobalInputFile { get => Sonic3AIRAppDataFolder + "\\settings_input.json"; }
+        public static string Sonic3AIR_BaseFolder { get => GetSonic3AIRBaseFolderPath(); }
 
         public static string Sonic3AIR_MM_BaseFolder { get => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM"; }
         public static string Sonic3AIR_MM_GBRequestsFolder { get => Sonic3AIR_MM_BaseFolder + "\\gb_api_urls"; }
@@ -37,10 +38,19 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         #region Sonic 3 A.I.R. Path
-    public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
+        public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
         public static string GetSonic3AIRPath()
         {
             return Properties.Settings.Default.Sonic3AIRPath;
+
+        }
+        public static string GetSonic3AIRBaseFolderPath()
+        {
+            if (File.Exists(Properties.Settings.Default.Sonic3AIRPath))
+            {
+                return Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
+            }
+            else return "";
 
         }
         public static void SetSonic3AIRPath(string value)

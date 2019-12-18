@@ -19,6 +19,8 @@ namespace Sonic3AIR_ModManager
 
         public static bool isDebug;
 
+        public static bool allowDebugOutput { get; set; } = true;
+
         public static bool isDeveloper { get; set; } = false;
 
         [ConditionalAttribute("DEBUG")]
@@ -39,7 +41,7 @@ namespace Sonic3AIR_ModManager
             {
                 System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                return fvi.FileVersion;               
+                return fvi.FileVersion;
             }
         }
 
@@ -51,7 +53,7 @@ namespace Sonic3AIR_ModManager
         }
 
         public static Version InternalVersion { get; } = new Version(VersionString);
-       
+
         #endregion
 
         #region Update Variables
@@ -103,7 +105,8 @@ namespace Sonic3AIR_ModManager
         static void RealMain(string[] args)
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
-            GameHandler.InGameContextMenu.Subscribe();
+            DiscordRP.InitDiscord();
+            DiscordRP.UpdateDiscord();
             try
             {
                 ProgramPaths.CreateMissingModManagerFolders();
@@ -121,9 +124,9 @@ namespace Sonic3AIR_ModManager
             }
             catch
             {
-               //TODO : Add Proper Catch Statement
+                //TODO : Add Proper Catch Statement
             }
-            GameHandler.InGameContextMenu.Unsubscribe();
+            DiscordRP.DisposeDiscord();
             Log.InfoFormat("Shuting Down!");
         }
         #endregion
@@ -179,7 +182,7 @@ namespace Sonic3AIR_ModManager
         static void StartApplication(string[] args)
         {
             System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false); 
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
             FileManagement.CleanUpAPIRequests();
 
@@ -194,7 +197,7 @@ namespace Sonic3AIR_ModManager
                 else StockStartup();
 
             }
-            
+
         }
 
         static void ForcedAutoBootStartup()
@@ -262,12 +265,13 @@ namespace Sonic3AIR_ModManager
         static void StartLogging()
         {
             //ConsoleManager.Show();
-            AppDomain.CurrentDomain.FirstChanceException += (sender, e) => {
-                if (e.Exception.TargetSite != null && e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
+            AppDomain.CurrentDomain.FirstChanceException += (sender, e) =>
+            {
+                if (e.Exception.TargetSite != null && e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly() && (!isDebug && !allowDebugOutput))
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
-                else if (Properties.Settings.Default.ShowFullDebugOutput)
+                else if (Properties.Settings.Default.ShowFullDebugOutput && (!isDebug && !allowDebugOutput))
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
                 }
@@ -319,8 +323,6 @@ namespace Sonic3AIR_ModManager
         }
 
         #endregion
-
-
 
 
     }

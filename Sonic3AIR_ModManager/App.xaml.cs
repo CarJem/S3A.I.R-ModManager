@@ -5,6 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Runtime.CompilerServices;
+using System.Reflection;
+using System.IO;
 
 namespace Sonic3AIR_ModManager
 {
@@ -28,14 +31,14 @@ namespace Sonic3AIR_ModManager
             if (Sonic3AIR_ModManager.Properties.Settings.Default.UseDarkTheme == true) ChangeSkin(Skin.Dark);
             else ChangeSkin(Skin.Light);
 
-            #if DEBUG
-            System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
-            #endif
+            DebugDisable();
 
             Instance = this;
             this.InitializeComponent();
+
         }
 
+        #region Launch
         public void RunAutoBoot(bool isForced = false)
         {
             if (isForced) Program.Log.InfoFormat("Starting in forced auto-boot mode...");
@@ -46,7 +49,7 @@ namespace Sonic3AIR_ModManager
 
                 if (Program.AutoBootCanceled == false)
                 {
-                   this.Run(new ModManager(true));
+                    this.Run(new ModManager(true));
                 }
                 else if (!isForced) this.Run(new ModManager(false));
             }
@@ -59,13 +62,21 @@ namespace Sonic3AIR_ModManager
             this.Run(new ModManager(Arguments));
         }
 
-
         public void DefaultStart()
         {
             Program.Log.InfoFormat("Starting Mod Manager...");
             this.Run(new ModManager());
         }
+        #endregion
 
+        #region Misc
+
+        private void DebugDisable()
+        {
+#if DEBUG
+            System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+#endif
+        }
 
         public static void ChangeSkin(Skin newSkin)
         {
@@ -80,5 +91,7 @@ namespace Sonic3AIR_ModManager
                     dict.Source = dict.Source;
             }
         }
+
+        #endregion
     }
 }

@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.IO;
 using PdfiumViewer;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Sonic3AIR_ModManager
 {
@@ -24,29 +26,28 @@ namespace Sonic3AIR_ModManager
     public partial class DocumentationViewer : Window
     {
         private string FileName;
-        private bool UsePDFViewer { get; set; } = false;
-
-        private PDFViewer AltViewer { get; set; }
+        private PdfViewer View { get; set; }
+        private PdfDocument Doc { get; set; }
 
         public DocumentationViewer(bool useWebRendering = true)
         {
             InitializeComponent();
             var Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
-            SetupAltViewer();
+            SetupViewer();
         }
 
-        public void SetupAltViewer()
+        public void SetupViewer()
         {
-            AltViewer = new PDFViewer();
-            FormsViewer.Child = AltViewer;
+            View = new PdfViewer();
+            FormsViewer.Child = View;
         }
 
         public void ShowDialog(string _fileName)
         {
-            this.Show();
             FileName = _fileName;
             LoadFile(FileName);
+            base.ShowDialog();
         }
 
         private void LoadFile(string filename)
@@ -54,23 +55,14 @@ namespace Sonic3AIR_ModManager
             LoadUsingWebViewer(filename);
         }
 
-        public void UpdateColorControls(System.Windows.Forms.Control myControl)
-        {
+         public void UpdateColorControls(System.Windows.Forms.Control myControl)
+         {
             if (myControl is System.Windows.Forms.TreeView)
             {
                 myControl.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
                 myControl.ForeColor = System.Drawing.Color.White;
-                (myControl as System.Windows.Forms.TreeView).LineColor = System.Drawing.Color.White;
                 (myControl as System.Windows.Forms.TreeView).ShowPlusMinus = true;
             }
-            if (myControl is System.Windows.Forms.TreeNode)
-            {
-                myControl.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
-                myControl.ForeColor = System.Drawing.Color.White;
-            }
-
-
-            // Any other non-standard controls should be implemented here aswell...
 
             foreach (System.Windows.Forms.Control subC in myControl.Controls)
             {
@@ -90,10 +82,12 @@ namespace Sonic3AIR_ModManager
         {
             try
             {
-                AltViewer.View.Document = PdfDocument.Load(filename);
-                AltViewer.View.ShowToolbar = false;
-                AltViewer.View.ZoomMode = PdfViewerZoomMode.FitWidth;
-                UpdateColorControls(AltViewer.View);
+                Doc = PdfDocument.Load(filename);;
+                View.Document = Doc;
+                View.ShowToolbar = false;
+                View.ZoomMode = PdfViewerZoomMode.FitWidth;
+                View.MouseMove += AltViewer_MouseMove;
+                UpdateColorControls(View);
 
             }
             catch (Exception ex)
@@ -102,9 +96,30 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        private void AltViewer_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            View.Update();
+            View.Invalidate();
+        }
+
         private void ExternalOpenButton_Click(object sender, RoutedEventArgs e)
         {
             if (File.Exists(FileName)) System.Diagnostics.Process.Start(FileName);
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Closing -= Window_Closing;
+            Doc.Dispose();
+            Doc = null;
+            View.MouseMove -= AltViewer_MouseMove;
+            View.Dispose();
+            View = null;
+            FormsViewer.Child = null;
+            FormsViewer.Dispose();
+            FormsViewer = null;
+
         }
     }
 }

@@ -59,6 +59,9 @@ namespace Sonic3AIR_ModManager
         public static string nL = Environment.NewLine;
         public static AIR_API.Settings S3AIRSettings;
 
+        public static string LastAIRSettingsVersion { get; set; } = "NULL";
+        public static string LastAIREXEVersion { get; set; } = "NULL";
+
         public static AIR_API.Settings_Global Global_Settings { get; set; }
         public static AIR_API.Settings_Input Input_Settings { get; set; }
         public static AIR_API.GameConfig GameConfig { get; set; }
@@ -111,10 +114,13 @@ namespace Sonic3AIR_ModManager
 
         private static void ValidateSelectedVersionLabels(ref ModManager Instance)
         {
-            VersionManagement.VersionReader.AIRVersionData fileData = VersionManagement.VersionReader.GetVersionData(Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath), false);
+            VersionManagement.VersionReader.AIRVersionData fileData = VersionManagement.VersionReader.GetVersionData(ProgramPaths.Sonic3AIR_BaseFolder, false);
             string settingData = (MainDataModel.S3AIRSettings.Version != null ? MainDataModel.S3AIRSettings.Version.ToString() : "NULL");
             if (Instance.airVersionLabel != null)
             {
+                LastAIRSettingsVersion = settingData;
+                LastAIREXEVersion = fileData.ToString();
+
                 Instance.airVersionLabel.Text = $"{Program.LanguageResource.GetString("AIRVersion")}: {fileData.ToString()}";
                 Instance.airVersionLabel.Text += Environment.NewLine + $"{Program.LanguageResource.GetString("SettingsVersionLabel")}: {settingData}";
             }
@@ -222,6 +228,16 @@ namespace Sonic3AIR_ModManager
             Instance.OptionsTabControl.IsEnabled = enabled;
             Instance.playbackRecordingButton.IsEnabled = enabled;
             Instance.playbackRecordingMenuItem.IsEnabled = enabled;
+
+            Instance.DisableInGameEnhancementsCheckbox.IsEnabled = enabled;
+            Instance.DisableInGameEnhancementsText.IsEnabled = enabled;
+
+            if (Properties.Settings.Default.DisableInGameEnhancements == false)
+            {
+                if (GameHandler.isGameRunning) GameHandler.InGameContextMenu.Subscribe();
+                else GameHandler.InGameContextMenu.Unsubscribe();
+            }
+
         }
 
         public static void UpdateSettingsStates(ref ModManager Instance)

@@ -347,12 +347,18 @@ namespace Sonic3AIR_ModManager
 
             public static IKeyboardMouseEvents m_GlobalHook;
 
+            private static bool CurrentlySubscribed = false;
+
             public static void Subscribe()
             {
-                // Note: for the application hook, use the Hook.AppEvents() instead
-                m_GlobalHook = Hook.GlobalEvents();
+                if (CurrentlySubscribed == false)
+                {
+                    // Note: for the application hook, use the Hook.AppEvents() instead
+                    m_GlobalHook = Hook.GlobalEvents();
+                    m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
+                    CurrentlySubscribed = true;
+                }
 
-                m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
             }
 
             private static Controls.InGameContextMenu cm { get; set; }
@@ -507,11 +513,13 @@ namespace Sonic3AIR_ModManager
 
             public static void Unsubscribe()
             {
-                m_GlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
-                //m_GlobalHook.KeyPress -= GlobalHookKeyPress;
+                if (CurrentlySubscribed == true)
+                {
+                    m_GlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
+                    m_GlobalHook.Dispose();
+                    CurrentlySubscribed = false;
+                }
 
-                //It is recommened to dispose it
-                m_GlobalHook.Dispose();
             }
         }
     }

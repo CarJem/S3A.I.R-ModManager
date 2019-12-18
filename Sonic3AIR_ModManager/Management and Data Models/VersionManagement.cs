@@ -324,6 +324,7 @@ namespace Sonic3AIR_ModManager
 
             private static AIR_API.VersionMetadata CheckforMetadataFile(string destination)
             {
+                if (destination == null || destination == "" || !Directory.Exists(destination)) return null;
                 string metaDataFile = Directory.GetFiles(destination, "metadata.json", SearchOption.AllDirectories).FirstOrDefault();
                 if (metaDataFile != null && metaDataFile != "")
                 {
@@ -347,6 +348,7 @@ namespace Sonic3AIR_ModManager
             private static AIRVersionData GetDataFromEXE(string destination, bool isAdding)
             {
                 AIRVersionData data;
+                if (destination == null || destination == "" || !Directory.Exists(destination)) return LastResortVersionMethod(destination, isAdding);
                 string exe = Directory.GetFiles(destination, "Sonic3AIR.exe", SearchOption.AllDirectories).FirstOrDefault();
                 if (exe != null && exe != "")
                 {
@@ -389,8 +391,9 @@ namespace Sonic3AIR_ModManager
                 }
                 else
                 {
+                    if (destination == null || destination == "" || !Directory.Exists(destination)) destination = "NULL";
                     var data = AIRVersionData.NullableDefault();
-                    DataRefrence.Add(destination, data);
+                    if (!DataRefrence.ContainsKey(destination)) DataRefrence.Add(destination, data);
                     return data;
                 }
 

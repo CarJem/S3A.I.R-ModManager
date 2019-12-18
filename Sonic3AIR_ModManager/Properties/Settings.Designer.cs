@@ -178,5 +178,17 @@ namespace Sonic3AIR_ModManager.Properties {
                 this["DisableInGameEnhancements"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowDiscordRPC {
+            get {
+                return ((bool)(this["ShowDiscordRPC"]));
+            }
+            set {
+                this["ShowDiscordRPC"] = value;
+            }
+        }
     }
 }

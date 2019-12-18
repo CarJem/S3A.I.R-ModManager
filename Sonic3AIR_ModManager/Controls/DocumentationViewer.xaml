@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             Height="768" Width="640" UseLayoutRounding="True" MinHeight="350" MinWidth="450" WindowStartupLocation="CenterScreen"  Foreground="{DynamicResource NormalText}" Background="{DynamicResource NormalBackground}">
+             Height="768" Width="640" UseLayoutRounding="True" MinHeight="350" MinWidth="450" Closing="Window_Closing" WindowStartupLocation="CenterScreen"  Foreground="{DynamicResource NormalText}" Background="{DynamicResource NormalBackground}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
