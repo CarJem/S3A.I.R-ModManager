@@ -28,7 +28,7 @@ namespace Sonic3AIR_ModManager
 
         public App()
         {
-            if (Sonic3AIR_ModManager.Properties.Settings.Default.UseDarkTheme == true) ChangeSkin(Skin.Dark);
+            if (Sonic3AIR_ModManager.MainDataModel.Settings.UseDarkTheme == true) ChangeSkin(Skin.Dark);
             else ChangeSkin(Skin.Light);
 
             DebugDisable();
@@ -41,9 +41,16 @@ namespace Sonic3AIR_ModManager
         #region Launch
         public void RunAutoBoot(bool isForced = false)
         {
-            if (isForced) Program.Log.InfoFormat("Starting in forced auto-boot mode...");
+            int? value = null;
+            if (isForced)
+            {
+                Program.Log.InfoFormat("Starting in forced auto-boot mode...");
+                value = 7;
+            }
             else Program.Log.InfoFormat("Starting Auto-Boot Mode...");
-            var auto = new AutoBootDialog();
+
+
+            var auto = new AutoBootDialog(value);
             if (auto.ShowDialog() == true)
             {
 

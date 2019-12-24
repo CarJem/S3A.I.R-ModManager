@@ -75,7 +75,7 @@ namespace Sonic3AIR_ModManager
         #region Initialize Methods
         public ModManager(bool autoBoot = false)
         {
-            if (Properties.Settings.Default.AutoUpdates)
+            if (MainDataModel.Settings.AutoUpdates)
             {
                 if (autoBoot == false && Program.AIRUpdaterState == Program.UpdateState.NeverStarted && Program.MMUpdaterState == Program.UpdateState.NeverStarted)
                 {
@@ -119,20 +119,17 @@ namespace Sonic3AIR_ModManager
             AllowUpdate = true;
 
 
-            if (ProgramPaths.ValidateInstall(ref ModManagement.S3AIRActiveMods, ref MainDataModel.S3AIRSettings) == true)
+            if (ProgramPaths.ValidateInstall(ref ModManagement.S3AIRActiveMods, ref MainDataModel.S3AIRSettings, ref MainDataModel.Global_Settings, ref MainDataModel.Input_Settings) == true)
             {
                 Instance = this;
                 ModManagement.UpdateInstance(ref Instance);
                 ProcessLauncher.UpdateInstance(ref Instance);
                 GameHandler.UpdateInstance(ref Instance);
                 InputDeviceManager.UpdateInstance(ref Instance);
-                MainDataModel.Global_Settings = new AIR_API.Settings_Global(new FileInfo(ProgramPaths.Sonic3AIRGlobalSettingsFile));
-                MainDataModel.Input_Settings = new AIR_API.Settings_Input(new FileInfo(ProgramPaths.Sonic3AIRGlobalInputFile));
                 MainDataModel.SetTooltips(ref Instance);
                 ModManagement.UpdateModsList(true);
                 MainDataModel.UpdateSettingsStates(ref Instance);
                 MainDataModel.SetInitialWindowSize(ref Instance);
-                MainDataModel.Settings = new Settings.ModManagerSettings(ProgramPaths.Sonic3AIR_MM_SettingsFile);
                 MainDataModel.ApiInstallChecker.Enabled = true;
                 MainDataModel.ApiInstallChecker.Start();
                 FileManagement.GBAPIWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
@@ -154,6 +151,12 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         #region Events
+
+        private void useDiscordRPCCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            MainDataModel.Settings.Save();
+            DiscordRP.UpdateDiscord();
+        }
 
         private void openMMlogsFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -449,8 +452,8 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                Properties.Settings.Default.WindowSize = new System.Drawing.Size((int)this.Width, (int)this.Height);
-                Properties.Settings.Default.Save();
+                MainDataModel.Settings.WindowSize = new System.Drawing.Size((int)this.Width, (int)this.Height);
+                MainDataModel.Settings.Save();
             }
         }
 
@@ -677,7 +680,7 @@ namespace Sonic3AIR_ModManager
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Save();
+            MainDataModel.Settings.Save();
             App.Instance.Shutdown();
         }
 
@@ -703,12 +706,12 @@ namespace Sonic3AIR_ModManager
 
         private void FullDebugOutputCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            MainDataModel.Settings.Save();
         }
 
         private void DisableInGameEnhancementsCheckbox_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            MainDataModel.Settings.Save();
         }
 
         private void RecordingsSelectedLocationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -905,6 +908,11 @@ namespace Sonic3AIR_ModManager
         private void refreshVersionsButton_Click(object sender, RoutedEventArgs e)
         {
             VersionManagement.RefreshVersionsList(ref Instance, true);
+        }
+
+        private void HasDeviceNamesCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            InputDeviceManager.ChangeHasDeviceNamesState(HasDeviceNamesCheckbox.IsChecked.Value);
         }
 
         #endregion

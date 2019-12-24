@@ -139,7 +139,7 @@ namespace Sonic3AIR_ModManager
             MenuItem item = sender as MenuItem;
             VersionTag tag = (item.Tag as VersionTag);
             ProgramPaths.Sonic3AIRPath = tag.Path;
-            Properties.Settings.Default.Save();
+            MainDataModel.Settings.Save();
             MainDataModel.UpdateAIRSettings(ref tag.Instance);
         }
 
@@ -152,7 +152,7 @@ namespace Sonic3AIR_ModManager
                     if (File.Exists(MainDataModel.S3AIRSettings.AIREXEPath))
                     {
                         ProgramPaths.Sonic3AIRPath = MainDataModel.S3AIRSettings.AIREXEPath;
-                        Properties.Settings.Default.Save();
+                        MainDataModel.Settings.Save();
                         MainDataModel.UpdateAIRSettings(ref Instance);
                     }
                     else
@@ -193,7 +193,7 @@ namespace Sonic3AIR_ModManager
                     if (exe != null && exe != "")
                     {
                         VersionReader.AIRVersionData version_data = VersionReader.GetVersionData(output, true);
-                        string folder_path = $"{ProgramPaths.Sonic3AIR_MM_VersionsFolder}{version_data.ToString()}";
+                        string folder_path = $"{ProgramPaths.Sonic3AIR_MM_VersionsFolder}\\{version_data.ToString()}";
                         MoveVersionToFinalLocation(destination, folder_path);
                     }
                     else

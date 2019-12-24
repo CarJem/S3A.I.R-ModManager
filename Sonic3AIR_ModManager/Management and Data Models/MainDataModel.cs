@@ -62,8 +62,8 @@ namespace Sonic3AIR_ModManager
         public static string LastAIRSettingsVersion { get; set; } = "NULL";
         public static string LastAIREXEVersion { get; set; } = "NULL";
 
-        public static AIR_API.Settings_Global Global_Settings { get; set; }
-        public static AIR_API.Settings_Input Input_Settings { get; set; }
+        public static AIR_API.Settings_Global Global_Settings;
+        public static AIR_API.Settings_Input Input_Settings;
         public static AIR_API.GameConfig GameConfig { get; set; }
         public static AIR_API.VersionMetadata CurrentAIRVersion;
 
@@ -108,7 +108,7 @@ namespace Sonic3AIR_ModManager
             ModManagement.UpdateModsList(true);
 
             ValidateSelectedVersionLabels(ref Instance);
-            Properties.Settings.Default.Save();
+            MainDataModel.Settings.Save();
 
         }
 
@@ -180,10 +180,10 @@ namespace Sonic3AIR_ModManager
 
         public static void SetInitialWindowSize(ref ModManager Instance)
         {
-            if (Properties.Settings.Default.WindowSize != null)
+            if (MainDataModel.Settings.WindowSize != null)
             {
-                Instance.Width = Properties.Settings.Default.WindowSize.Width;
-                Instance.Height = Properties.Settings.Default.WindowSize.Height;
+                Instance.Width = MainDataModel.Settings.WindowSize.Width;
+                Instance.Height = MainDataModel.Settings.WindowSize.Height;
             }
         }
 
@@ -232,7 +232,7 @@ namespace Sonic3AIR_ModManager
             Instance.DisableInGameEnhancementsCheckbox.IsEnabled = enabled;
             Instance.DisableInGameEnhancementsText.IsEnabled = enabled;
 
-            if (Properties.Settings.Default.DisableInGameEnhancements == false)
+            if (MainDataModel.Settings.DisableInGameEnhancements == false)
             {
                 if (GameHandler.isGameRunning) GameHandler.InGameContextMenu.Subscribe();
                 else GameHandler.InGameContextMenu.Unsubscribe();
@@ -243,8 +243,8 @@ namespace Sonic3AIR_ModManager
         public static void UpdateSettingsStates(ref ModManager Instance)
         {
             UpdateAIRSettings(ref Instance);
-            Instance.autoLaunchDelayLabel.IsEnabled = Properties.Settings.Default.AutoLaunch;
-            Instance.AutoLaunchNUD.IsEnabled = Properties.Settings.Default.AutoLaunch;
+            Instance.autoLaunchDelayLabel.IsEnabled = MainDataModel.Settings.AutoLaunch;
+            Instance.AutoLaunchNUD.IsEnabled = MainDataModel.Settings.AutoLaunch;
         }
 
         public static void ChangeS3RomPath(ref ModManager Instance)
@@ -587,7 +587,7 @@ namespace Sonic3AIR_ModManager
 
         public static void RefreshTheme(ref ModManager Instance)
         {
-            if (Properties.Settings.Default.UseDarkTheme)
+            if (Instance.useDarkModeCheckBox.IsChecked.Value)
             {
                 App.ChangeSkin(Skin.Dark);
             }

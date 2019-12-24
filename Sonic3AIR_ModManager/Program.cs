@@ -105,6 +105,7 @@ namespace Sonic3AIR_ModManager
         static void RealMain(string[] args)
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
+            MMSettingsManagement.LoadModManagerSettings();
             DiscordRP.InitDiscord();
             DiscordRP.UpdateDiscord();
             try
@@ -202,35 +203,20 @@ namespace Sonic3AIR_ModManager
 
         static void ForcedAutoBootStartup()
         {
-
             // Save Original Values
-            var autoLaunchOld = Properties.Settings.Default.AutoLaunch;
-            var preStartOld = Properties.Settings.Default.KeepOpenOnLaunch;
-            var postCloseOld = Properties.Settings.Default.KeepOpenOnQuit;
-            var autoLaunchDelayOld = Properties.Settings.Default.AutoLaunchDelay;
-
-            // Set Values Specific to Forced Auto Boot Startup
-            Properties.Settings.Default.AutoLaunch = true;
-            Properties.Settings.Default.KeepOpenOnLaunch = true;
-            Properties.Settings.Default.KeepOpenOnQuit = false;
-            Properties.Settings.Default.AutoLaunchDelay = 7;
-            Properties.Settings.Default.Save();
+            var autoLaunchOld = MainDataModel.Settings.AutoLaunch;
+            var preStartOld = MainDataModel.Settings.KeepOpenOnLaunch;
+            var postCloseOld = MainDataModel.Settings.KeepOpenOnQuit;
+            var autoLaunchDelayOld = MainDataModel.Settings.AutoLaunchDelay;
 
             // Start Auto-Boot
             AutoBootLoader(true);
-
-            // Revert Options to their Original Values
-            Properties.Settings.Default.AutoLaunch = autoLaunchOld;
-            Properties.Settings.Default.KeepOpenOnLaunch = preStartOld;
-            Properties.Settings.Default.KeepOpenOnQuit = postCloseOld;
-            Properties.Settings.Default.AutoLaunchDelay = autoLaunchDelayOld;
-            Properties.Settings.Default.Save();
 
         }
 
         static void StockStartup()
         {
-            if (Properties.Settings.Default.AutoLaunch) AutoBootLoader();
+            if (MainDataModel.Settings.AutoLaunch) AutoBootLoader();
             else
             {
                 var app = new App();
@@ -271,7 +257,7 @@ namespace Sonic3AIR_ModManager
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                 }
-                else if (Properties.Settings.Default.ShowFullDebugOutput && (!isDebug && !allowDebugOutput))
+                else if (MainDataModel.Settings.ShowFullDebugOutput && (!isDebug && !allowDebugOutput))
                 {
                     Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
                 }

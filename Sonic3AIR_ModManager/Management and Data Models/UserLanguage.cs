@@ -50,7 +50,7 @@ namespace Sonic3AIR_ModManager
 
         private static Language GetCurrentLanguage()
         {
-            string currentLang = Properties.Settings.Default.UserLanguage;
+            string currentLang = MainDataModel.Settings.UserLanguage;
             return GetLangVar(currentLang);
         }
 
@@ -76,8 +76,8 @@ namespace Sonic3AIR_ModManager
 
         private static void SetCurrentLanguage(Language value)
         {
-            Properties.Settings.Default.UserLanguage = GetLangString(value);
-            Properties.Settings.Default.Save();
+            MainDataModel.Settings.UserLanguage = GetLangString(value);
+            MainDataModel.Settings.Save();
             ApplyLanguageResourcePath(value);
         }
 
@@ -391,6 +391,7 @@ namespace Sonic3AIR_ModManager
             form.checkBox1.Content = Program.LanguageResource.GetString("CheckforAIRUpdatesOnStart");
             form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
             form.FullDebugOutputCheckBox.Content = Program.LanguageResource.GetString("FullDebugOutputOption");
+            form.useDiscordRPCCheckBox.Content = Program.LanguageResource.GetString("EnableDiscordRPCOption");
 
             form.DisableInGameEnhancementsText.Text = Program.LanguageResource.GetString("DisableInGameEnhacements_Part1");
             form.DisableInGameEnhancementsText.Text += Environment.NewLine + Program.LanguageResource.GetString("DisableInGameEnhacements_Part2");
@@ -453,6 +454,8 @@ namespace Sonic3AIR_ModManager
             form.groupBox4.Header = Program.LanguageResource.GetString("ButtonMappings");
             form.groupBox7.Header = Program.LanguageResource.GetString("DeviceIdentifierNames");
             form.openGamepadSettingsButton.Content = Program.LanguageResource.GetString("OpenSystemSettingsExpandable");
+            form.HasDeviceNamesCheckbox.Content = Program.LanguageResource.GetString("HasDeviceNamesCheckbox");
+            form.reloadInputsButton.Content = Program.LanguageResource.GetString("Reload");
 
             form.buttonALabel.Content = Program.LanguageResource.GetString("Buttons_A");
             form.buttonBLabel.Content = Program.LanguageResource.GetString("Buttons_B");

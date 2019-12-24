@@ -41,12 +41,12 @@ namespace Sonic3AIR_ModManager
         public static string Sonic3AIRPath { get => GetSonic3AIRPath(); set => SetSonic3AIRPath(value); }
         public static string GetSonic3AIRPath()
         {
-            return Properties.Settings.Default.Sonic3AIRPath;
+            return MainDataModel.Settings.Sonic3AIRPath;
 
         }
         public static string GetSonic3AIRBaseFolderPath()
         {
-            if (File.Exists(Properties.Settings.Default.Sonic3AIRPath))
+            if (File.Exists(MainDataModel.Settings.Sonic3AIRPath))
             {
                 return Path.GetDirectoryName(ProgramPaths.Sonic3AIRPath);
             }
@@ -55,8 +55,8 @@ namespace Sonic3AIR_ModManager
         }
         public static void SetSonic3AIRPath(string value)
         {
-            Properties.Settings.Default.Sonic3AIRPath = value;
-            Properties.Settings.Default.Save();
+            MainDataModel.Settings.Sonic3AIRPath = value;
+            MainDataModel.Settings.Save();
         }
 
         #endregion
@@ -342,7 +342,7 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        public static bool ValidateInstall(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings)
+        public static bool ValidateInstall(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, ref AIR_API.Settings_Global Global_Settings, ref AIR_API.Settings_Input Input_Settings)
         {
             CreateMissingModManagerFolders();
 
@@ -350,10 +350,12 @@ namespace Sonic3AIR_ModManager
             if (!Directory.Exists(Sonic3AIRAppDataFolder)) Directory.CreateDirectory(Sonic3AIRAppDataFolder);
             if (!File.Exists(Sonic3AIRActiveModsList)) File.Create(Sonic3AIRActiveModsList);
             if (!File.Exists(Sonic3AIRSettingsFile)) File.Create(Sonic3AIRSettingsFile);
+            if (!File.Exists(Sonic3AIRGlobalInputFile)) File.Create(Sonic3AIRGlobalInputFile);
+            if (!File.Exists(Sonic3AIRGlobalSettingsFile)) File.Create(Sonic3AIRGlobalSettingsFile);
 
 
 
-            return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, false);
+            return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, ref Global_Settings, ref Input_Settings, false);
         }
 
         public static void CreateMissingModManagerFolders()
@@ -372,6 +374,16 @@ namespace Sonic3AIR_ModManager
 
             }
 
+        }
+
+        public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, ref AIR_API.Settings_Global Global_Settings, ref AIR_API.Settings_Input Input_Settings, bool throwVersionMismatchError = false)
+        {
+            ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, false);
+            Global_Settings = new AIR_API.Settings_Global(new FileInfo(Sonic3AIRGlobalSettingsFile));
+            Input_Settings = new AIR_API.Settings_Input(new FileInfo(Sonic3AIRGlobalInputFile));
+            Global_Settings.Save();
+            Input_Settings.Save();
+            return true;
         }
 
         public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, bool throwVersionMismatchError = false)

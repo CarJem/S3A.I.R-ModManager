@@ -303,18 +303,19 @@ namespace Sonic3AIR_ModManager
                     Directory.Delete(output2, true);
                 }
 
-
                 Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
 
                 MessageBox.Show($"{Program.LanguageResource.GetString("GameInstalledAt")} \"{output2}\"");
 
                 Program.AIRUpdaterState = Program.UpdateState.Finished;
+                try { WipeFolderContents(ProgramPaths.Sonic3AIR_MM_DownloadsFolder); }
+                catch (Exception ex) { }
                 Close();
 
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show(Program.LanguageResource.GetString("UpdateFailedError"));
+                MessageBox.Show(Program.LanguageResource.GetString("UpdateFailedError") + Environment.NewLine, ex.Message);
 
                 Program.AIRUpdaterState = Program.UpdateState.Finished;
                 Close();
@@ -388,11 +389,20 @@ namespace Sonic3AIR_ModManager
             string filename = "temp.zip";
             if (remote_filename != "") filename = remote_filename;
 
-            DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{destination}\\{filename}");
-            downloadWindow.DownloadCompleted = finishAction;
-            if (backgroundDownload) downloadWindow.StartBackground();
-            else downloadWindow.Start();
+            if (File.Exists(Path.Combine(destination, filename)))
+            {
+                UpdateFileName = filename;
+                finishAction?.Invoke();
+            }
+            else
+            {
+                DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{destination}\\{filename}");
+                downloadWindow.DownloadCompleted = finishAction;
+                if (backgroundDownload) downloadWindow.StartBackground();
+                else downloadWindow.Start();
+            }
             return filename;
+
         }
 
         #endregion

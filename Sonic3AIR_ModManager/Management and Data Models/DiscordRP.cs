@@ -15,6 +15,7 @@ namespace Sonic3AIR_ModManager
 		public static string APP_ID = "434894884391092234";
 		public static System.Timers.Timer timer;
 		private static bool DisableLogging = true;
+		private static bool isInitilized = false;
 		private static TimeSpan UpdateInterval { get; set; } = new TimeSpan();
 		public static DateTime StartTime { get; set; } = new DateTime();
 
@@ -39,6 +40,16 @@ namespace Sonic3AIR_ModManager
 			NOTE: 	If you are using Unity3D, you must use the full constructor and define
 					 the pipe connection.
 			*/
+
+			if (client != null)
+			{
+				//Unsubscribe to events
+				client.OnReady -= Client_OnReady;
+				client.OnPresenceUpdate -= Client_OnPresenceUpdate;
+				client.OnError -= Client_OnError;
+			}
+
+
 			client = new DiscordRpcClient(APP_ID);
 			UpdateInterval = TimeSpan.FromSeconds(5);
 
@@ -48,9 +59,9 @@ namespace Sonic3AIR_ModManager
 			client.OnError += Client_OnError;
 
 			//Connect to the RPC
-			bool status = client.Initialize();
+			isInitilized = client.Initialize();
 			client.SetPresence(Presence.GetRichPresence());
-			StartTimer();
+			if (timer == null) StartTimer();
 		}
 
 		private static void Client_OnReady(object sender, DiscordRPC.Message.ReadyMessage args)
@@ -124,6 +135,11 @@ namespace Sonic3AIR_ModManager
 				return richPresence;
 			}
 
+			public static void GetImageTextDetails(ref RichPresence richPresence)
+			{
+				//richPresence.Assets.LargeImageText
+			}
+
 			public static void GetLoop1Details(ref RichPresence richPresence)
 			{
 				richPresence.Details = string.Format("[1/4] | A.I.R. Version:");
@@ -168,6 +184,8 @@ namespace Sonic3AIR_ModManager
 				if (GameHandler.isGameRunning) richPresence.Assets.SmallImageKey = "ingame";
 				else richPresence.Assets.SmallImageKey = "offline";
 
+				GetImageTextDetails(ref richPresence);
+
 				//richPresence.Assets.LargeImageText = "";
 				//richPresence.Assets.SmallImageKey = "";
 				//richPresence.Assets.SmallImageText = "";
@@ -201,9 +219,26 @@ namespace Sonic3AIR_ModManager
 
         public static void UpdateDiscord()
 		{
-			//Invoke all the events, such as OnPresenceUpdate
-			client.SetPresence(Presence.GetRichPresence());
-			client.Invoke();
+			if (MainDataModel.Settings.ShowDiscordRPC)
+			{
+				if (!isInitilized) InitDiscord();
+				else
+				{
+					client.SetPresence(Presence.GetRichPresence());
+					client.Invoke();
+				}
+			}
+			else if (!MainDataModel.Settings.ShowDiscordRPC && isInitilized)
+			{
+				HideDiscord();
+			}
+		}
+
+		public static void HideDiscord()
+		{
+			client.Dispose();
+			isInitilized = false;
+
 		}
 
 		public static void DisposeDiscord()

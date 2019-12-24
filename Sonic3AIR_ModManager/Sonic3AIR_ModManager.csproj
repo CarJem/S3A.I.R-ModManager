@@ -85,6 +85,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Publish|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -173,6 +175,7 @@
     <Compile Include="Management and Data Models\MainDataModel.cs" />
     <Compile Include="Management and Data Models\RecordingManagement.cs" />
     <Compile Include="Management and Data Models\VersionManagement.cs" />
+    <Compile Include="Personal Settings Classes\SettingsBinding.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Controls\AutoBootDialog.xaml.cs">
       <DependentUpon>AutoBootDialog.xaml</DependentUpon>
@@ -419,6 +422,10 @@
     <ProjectReference Include="..\AIR-API\AIR-API\AIR-API.csproj">
       <Project>{4311f3b1-e4a1-401c-bc13-e5e80254242e}</Project>
       <Name>AIR-API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AIR_Protocol_Handler\Sonic3AIR_MM_GBAPIInstaller.csproj">
+      <Project>{11a257a9-07ac-43c5-8705-808b7afd644b}</Project>
+      <Name>Sonic3AIR_MM_GBAPIInstaller</Name>
     </ProjectReference>
     <ProjectReference Include="..\GenerationsLib\GenerationsLib.Core\GenerationsLib.Core.csproj">
       <Project>{51ca42a9-58f0-4f3d-a250-bc22d8a8540e}</Project>

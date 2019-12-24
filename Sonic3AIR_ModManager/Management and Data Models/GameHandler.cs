@@ -100,7 +100,7 @@ namespace Sonic3AIR_ModManager
         public static void GameStartHandler()
         {
             isGameRunning = true;
-            if (!Properties.Settings.Default.KeepOpenOnLaunch)
+            if (!MainDataModel.Settings.KeepOpenOnLaunch)
             {
                 Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
@@ -121,8 +121,8 @@ namespace Sonic3AIR_ModManager
         public static void GameEndHandler()
         {
             isGameRunning = false;
-            if (!Properties.Settings.Default.KeepOpenOnQuit) Environment.Exit(0);
-            else if (!Properties.Settings.Default.KeepOpenOnLaunch)
+            if (!MainDataModel.Settings.KeepOpenOnQuit) Environment.Exit(0);
+            else if (!MainDataModel.Settings.KeepOpenOnLaunch)
             {
                 Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {

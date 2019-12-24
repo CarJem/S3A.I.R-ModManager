@@ -952,6 +952,15 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Discord RPC Support.
+        /// </summary>
+        internal static string EnableDiscordRPCOption {
+            get {
+                return ResourceManager.GetString("EnableDiscordRPCOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable Mod Stacking.
         /// </summary>
         internal static string EnableModStacking {
@@ -1240,7 +1249,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is highly recomended that you manually make a backup of A.I.R.&apos;s save data before you use this tool if you worry about losing your data..
+        ///   Looks up a localized string similar to It is highly recommended that you manually make a backup of A.I.R.&apos;s save data before you use this tool if you worry about losing your data..
         /// </summary>
         internal static string GameRecordingPlaybackWarning_Part4 {
             get {
@@ -1290,6 +1299,15 @@ namespace Sonic3AIR_ModManager.Languages {
         internal static string GuidesTab {
             get {
                 return ResourceManager.GetString("GuidesTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uses Device Names (Disable for Keyboards).
+        /// </summary>
+        internal static string HasDeviceNamesCheckbox {
+            get {
+                return ResourceManager.GetString("HasDeviceNamesCheckbox", resourceCulture);
             }
         }
         
@@ -2785,7 +2803,7 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We can&apos;t determine the version last used with Sonic 3 A.I.R.! This can be ethier a false alarm if this is a new install, or bad news if your heading to a older version of A.I.R! Using an older version can lead to undesired results like LOSING YOUR SETTINGS or LOSING YOUR SAVE DATA. Are you sure you want to continue?.
+        ///   Looks up a localized string similar to We can&apos;t determine the version last used with Sonic 3 A.I.R.! This can be either a false alarm if this is a new install, or bad news if your heading to a older version of A.I.R.! Using an older version can lead to undesired results like LOSING YOUR SETTINGS or LOSING YOUR SAVE DATA. Are you sure you want to continue?.
         /// </summary>
         internal static string TimeTravelSafetyNet_NullVersion {
             get {

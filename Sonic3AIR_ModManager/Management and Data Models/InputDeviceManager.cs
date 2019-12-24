@@ -24,6 +24,7 @@ namespace Sonic3AIR_ModManager
         {
             MainDataModel.Input_Settings.InputDevices = InputDevices;
             MainDataModel.Input_Settings.Save();
+            UpdateInputMappings();
         }
         public static void UpdateInputDeviceButtons()
         {
@@ -81,7 +82,11 @@ namespace Sonic3AIR_ModManager
                         if (Instance.startInputButton.Content == null) Instance.startInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
                         if (Instance.backInputButton.Content == null) Instance.backInputButton.Content = Program.LanguageResource.GetString("Input_NONE");
 
+                        Instance.HasDeviceNamesCheckbox.IsEnabled = true;
+                        Instance.HasDeviceNamesCheckbox.IsChecked = device.HasDeviceNames;
+
                         UpdateInputDeviceNamesList(true);
+
 
 
 
@@ -130,6 +135,7 @@ namespace Sonic3AIR_ModManager
             Instance.rightInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
             Instance.startInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
             Instance.backInputButton.Content = (Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL"));
+            Instance.HasDeviceNamesCheckbox.IsEnabled = false;
             Instance.inputDeviceNamesList.Items.Add((Program.LanguageResource.GetString("Input_NULL") == null ? "" : Program.LanguageResource.GetString("Input_NULL")));
         }
 
@@ -443,8 +449,23 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        public static void ChangeHasDeviceNamesState(bool value)
+        {
+            // TODO: Where I left off
+            if (Instance.inputMethodsList.SelectedItem != null && Instance.inputMethodsList.SelectedItem is AIR_API.InputMappings.Device)
+            {
+                var deviceToModify = Instance.inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
+                deviceToModify.HasDeviceNames = value;
+                UpdateInputDeviceNamesList(true);
+            }
+        }
+
         public static void UpdateInputDeviceNamesList(bool refreshItems = false)
         {
+            if (refreshItems)
+            {
+                Instance.inputDeviceNamesList.Items.Clear();
+            }
             if (MainDataModel.Input_Settings != null)
             {
                 if (Instance.inputMethodsList.SelectedItem != null)
@@ -454,6 +475,7 @@ namespace Sonic3AIR_ModManager
                         AIR_API.InputMappings.Device device = Instance.inputMethodsList.SelectedItem as AIR_API.InputMappings.Device;
                         if (device.HasDeviceNames)
                         {
+                            if (device.DeviceNames == null) device.DeviceNames = new List<string>();
                             if (refreshItems)
                             {
                                 foreach (var name in device.DeviceNames)

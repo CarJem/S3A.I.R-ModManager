@@ -43,7 +43,7 @@ namespace Sonic3AIR_ModManager
         public static List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> CollectModCollectionsMenuItems()
         {
             List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> collections = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
-            foreach (var collection in MainDataModel.Settings.Options.ModCollections)
+            foreach (var collection in MainDataModel.Settings.ModCollections)
             {
                 collections.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem(collection.Name, collection));
             }
@@ -72,7 +72,7 @@ namespace Sonic3AIR_ModManager
         public static List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> CollectLaunchPresetsMenuItems()
         {
             List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem> collections = new List<GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem>();
-            foreach (var collection in MainDataModel.Settings.Options.LaunchPresets)
+            foreach (var collection in MainDataModel.Settings.LaunchPresets)
             {
                 collections.Add(new GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem(collection.Name, collection));
             }
@@ -126,8 +126,8 @@ namespace Sonic3AIR_ModManager
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 ModManagement.Save();
-                int collectionsIndex = MainDataModel.Settings.Options.ModCollections.IndexOf(collection);
-                MainDataModel.Settings.Options.ModCollections[collectionsIndex].Name = name;
+                int collectionsIndex = MainDataModel.Settings.ModCollections.IndexOf(collection);
+                MainDataModel.Settings.ModCollections[collectionsIndex].Name = name;
                 SaveModManagerSettings();
             }
         }
@@ -139,7 +139,7 @@ namespace Sonic3AIR_ModManager
             string message = string.Format(UserLanguage.GetOutputString("ModCollectionDialog_Message_Delete"), collection.Name);
             if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
             {
-                MainDataModel.Settings.Options.ModCollections.Remove(collection);
+                MainDataModel.Settings.ModCollections.Remove(collection);
                 SaveModManagerSettings();
             }
         }
@@ -152,8 +152,8 @@ namespace Sonic3AIR_ModManager
             {
                 ModManagement.Save();
                 var collection = e.Content as Settings.ModCollection;
-                int collectionsIndex = MainDataModel.Settings.Options.ModCollections.IndexOf(collection);
-                MainDataModel.Settings.Options.ModCollections[collectionsIndex] = new Sonic3AIR_ModManager.Settings.ModCollection(ModManagement.S3AIRActiveMods.ActiveClass, collection.Name);
+                int collectionsIndex = MainDataModel.Settings.ModCollections.IndexOf(collection);
+                MainDataModel.Settings.ModCollections[collectionsIndex] = new Sonic3AIR_ModManager.Settings.ModCollection(ModManagement.S3AIRActiveMods.ActiveClass, collection.Name);
                 SaveModManagerSettings();
             }
         }
@@ -164,7 +164,7 @@ namespace Sonic3AIR_ModManager
             string message = UserLanguage.GetOutputString("ModCollectionDialog_Message_DeleteAll");
             if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
             {
-                MainDataModel.Settings.Options.ModCollections.Clear();
+                MainDataModel.Settings.ModCollections.Clear();
                 SaveModManagerSettings();
             }
         }
@@ -178,7 +178,7 @@ namespace Sonic3AIR_ModManager
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 ModManagement.Save();
-                MainDataModel.Settings.Options.ModCollections.Add(new Sonic3AIR_ModManager.Settings.ModCollection(ModManagement.S3AIRActiveMods.ActiveClass, name));
+                MainDataModel.Settings.ModCollections.Add(new Sonic3AIR_ModManager.Settings.ModCollection(ModManagement.S3AIRActiveMods.ActiveClass, name));
                 SaveModManagerSettings();
             }
 

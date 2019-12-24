@@ -1124,4 +1124,58 @@ Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zu
   <data name="ViewTab" xml:space="preserve">
     <value>Ansicht</value>
   </data>
+  <data name="ForceQuitGame" xml:space="preserve">
+    <value>Beenden erzwingen</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part1" xml:space="preserve">
+    <value>WARNUNG</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part2" xml:space="preserve">
+    <value>Das Abspielen von Game Recordings ist ein sehr gefährliches Feature, das üblicherweise</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part3" xml:space="preserve">
+    <value>DEINE EINSTELLUNGEN VERÄNDERT UND SOGAR DEINE SPIELSTÄNDE LÖSCHEN KANN, AUCH WENN DU VORSICHTIG DAMIT BIST!</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part4" xml:space="preserve">
+    <value>Es wird dringend empfohlen, per Hand eine Sicherung von A.I.R.'s gespeicherten Daten zu machen, bevor du dieses Werkzeug benutzt, um den Verlust von Spielständen zu verhindern.</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part5" xml:space="preserve">
+    <value>ICH BIN NICHT VERANTWORTLICH FÜR VERLORENE SPIELDATEN DURCH VERWENDUNG DIESES WERKZEUGS!</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part1" xml:space="preserve">
+    <value>Verbesserungen im Spiel abschalten</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part2" xml:space="preserve">
+    <value>(Mache hier nur Änderungen, wenn A.I.R. nicht richtig funktioniert)</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part1" xml:space="preserve">
+    <value>Willst du den Pfad auf das Steam-ROM von Sonic 3&amp;K setzen?</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part2" xml:space="preserve">
+    <value>Klicke JA, um den Pfad automatisch auf das Steam-ROM von Sonic 3&amp;K zu setzen</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part3" xml:space="preserve">
+    <value>Klicke NEIN, um den Pfad manuell zu setzen</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part4" xml:space="preserve">
+    <value>Klicke ABBRECHEN, um die Pfad unverändert zu lassen und zu den Einstellungen zurückzukehren</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Title" xml:space="preserve">
+    <value>Sonic 3&amp;K ROM Pfad verändern</value>
+  </data>
+  <data name="TimeTravelSafetyNet_Title" xml:space="preserve">
+    <value>Warnung vor möglicher Zeitreise</value>
+  </data>
+  <data name="TimeTravelSafetyNet_OlderVersion" xml:space="preserve">
+    <value>Es scheint, als ob du eine ältere Version von Sonic 3 A.I.R. starten willst! Das kann zu unerwünschten Ergebnissen wie dem VERLUST VON EINSTELLUNGEN oder sogar SPIELSTÄNDEN führen. Willst du wirklich fortfahren?</value>
+  </data>
+  <data name="TimeTravelSafetyNet_NullVersion" xml:space="preserve">
+    <value>Es kann nicht festgestellt werden, was deine zuletzt genutzte Version von Sonic 3 A.I.R. war! Dies ist entweder ein falscher Alarm, falls dies eine neuere Installation ist - oder schlechte Nachrichten, falls du eine äleter Version von A.I.R. nutzen willst! Eine ältere Version zu starten kann zu unerwünschten Ergebnissen wie dem VERLUST VON EINSTELLUNGEN oder sogar SPIELSTÄNDEN führen. Willst du wirklich fortfahren?</value>
+  </data>
+  <data name="ForceQuitGameDialog_Title" xml:space="preserve">
+    <value>Beenden des Spiels erzwingen</value>
+  </data>
+  <data name="ForceQuitGameDialog_Text" xml:space="preserve">
+    <value>Willst du wirklich ein Beenden von Sonic 3 A.I.R. erzwingen? (Ungesicherter Fortschritt geht dabei verloren)</value>
+  </data>
 </root>

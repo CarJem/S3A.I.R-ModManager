@@ -24,7 +24,7 @@ namespace Sonic3AIR_ModManager
     {
         private System.Windows.Forms.Timer CountDown = new System.Windows.Forms.Timer();
         private System.Windows.Forms.Timer AnimationLoop = new System.Windows.Forms.Timer();
-        private int TimeLeft = (int)(Properties.Settings.Default.AutoLaunchDelay - 1);
+        private int TimeLeft;
 
 
         private static Color TransparentSpecial = Color.FromArgb(Colors.Transparent.A, Colors.White.R, Colors.White.G, Colors.White.B);
@@ -40,9 +40,12 @@ namespace Sonic3AIR_ModManager
         private LinearGradientBrush BrushTest = new LinearGradientBrush();
         private LinearGradientBrush BrushTest2 = new LinearGradientBrush();
 
-        public AutoBootDialog()
+        public AutoBootDialog(int? forcedTimeLeft = null)
         {
             InitializeComponent();
+
+            if (forcedTimeLeft != null) TimeLeft = forcedTimeLeft.Value;
+            else TimeLeft = (int)(MainDataModel.Settings.AutoLaunchDelay - 1);
 
             AutoBootDialog Instance = this;
             UserLanguage.ApplyLanguage(ref Instance);
@@ -74,7 +77,7 @@ namespace Sonic3AIR_ModManager
 
         private void AnimationLoop_Tick(object sender, EventArgs e)
         {   
-            bool allowedToTick = (Properties.Settings.Default.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.AIRUpdaterState == Program.UpdateState.Finished && Program.MMUpdaterState == Program.UpdateState.Finished : true);
+            bool allowedToTick = (MainDataModel.Settings.AutoUpdates ? Program.CheckedForUpdateOnStartup && Program.AIRUpdaterState == Program.UpdateState.Finished && Program.MMUpdaterState == Program.UpdateState.Finished : true);
             if (allowedToTick)
             {
 
@@ -221,7 +224,7 @@ namespace Sonic3AIR_ModManager
 
         private void CountDown_Tick(object sender, EventArgs evt)
         {
-            bool allowedToProcced = (Properties.Settings.Default.AutoUpdates ? HasUpdatesFinalized() : true);
+            bool allowedToProcced = (MainDataModel.Settings.AutoUpdates ? HasUpdatesFinalized() : true);
             if (allowedToProcced)
             {
                 if (!CancelButton.IsEnabled) CancelButton.IsEnabled = true;
