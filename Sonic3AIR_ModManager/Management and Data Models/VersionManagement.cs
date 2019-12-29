@@ -47,10 +47,34 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        public static List<VersionReader.AIRVersionData> InstalledVersions { get; set; } = new List<VersionReader.AIRVersionData>();
+
+        public static void RefreshVersionsList()
+        {
+            InstalledVersions.Clear();
+            DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
+            var folders = directoryInfo.GetDirectories().ToList();
+            if (folders.Count != 0)
+            {
+                foreach (var folder in folders.VersionSort().Reverse())
+                {
+                    string filePath = Path.Combine(folder.FullName, "sonic3air_game", "Sonic3AIR.exe");
+                    if (File.Exists(filePath))
+                    {
+                        VersionReader.AIRVersionData data = VersionReader.GetVersionData(Path.GetDirectoryName(filePath), false);
+                        InstalledVersions.Add(data);
+                    }
+
+
+                }
+            }
+        }
+
         public static void RefreshVersionsList(ref ModManager Instance, bool fullRefresh = false)
         {
             if (fullRefresh)
             {
+                InstalledVersions.Clear();
                 Instance.VersionsListView.Items.Clear();
                 DirectoryInfo directoryInfo = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_VersionsFolder);
                 var folders = directoryInfo.GetDirectories().ToList();
@@ -63,6 +87,7 @@ namespace Sonic3AIR_ModManager
                         {
                             VersionReader.AIRVersionData data = VersionReader.GetVersionData(Path.GetDirectoryName(filePath), false);
                             Instance.VersionsListView.Items.Add(new AIRVersionListItem(data.ToString(), folder.FullName));
+                            InstalledVersions.Add(data);
                         }
 
 

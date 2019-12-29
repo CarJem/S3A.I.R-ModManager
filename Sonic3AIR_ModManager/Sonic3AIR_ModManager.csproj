@@ -488,6 +488,6 @@
     <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "$(ConfigurationName)" "$(SolutionDir)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "$(ConfigurationName)" "$(SolutionDir)Sonic3AIR_ModManager\" "false" "true"</PreBuildEvent>
+    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "$(ConfigurationName)" "$(SolutionDir)Sonic3AIR_ModManager\" "false" "false"</PreBuildEvent>
   </PropertyGroup>
 </Project>

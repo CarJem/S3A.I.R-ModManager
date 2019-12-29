@@ -60,6 +60,7 @@ namespace Sonic3AIR_ModManager
 
         public static void LaunchSonic3AIR()
         {
+            Program.Log.InfoFormat("Starting Sonic 3 A.I.R. via Mod Manager...");
             bool IsGamePathSet = true;
             if (ProgramPaths.Sonic3AIRPath == null || ProgramPaths.Sonic3AIRPath == "")
             {
@@ -120,6 +121,7 @@ namespace Sonic3AIR_ModManager
 
         public static void GameEndHandler()
         {
+            Program.Log.InfoFormat("Killing Sonic 3 A.I.R. via Mod Manager...");
             isGameRunning = false;
             if (!MainDataModel.Settings.KeepOpenOnQuit) Environment.Exit(0);
             else if (!MainDataModel.Settings.KeepOpenOnLaunch)
@@ -150,6 +152,7 @@ namespace Sonic3AIR_ModManager
 
         public static void LaunchGameRecording(string file, string viewer_exe)
         {
+            Program.Log.InfoFormat("Starting Sonic 3 A.I.R. Recording via Mod Manager...");
             try
             {
                 System.Threading.Thread thread = new System.Threading.Thread(() => GameHandler.RunGameRecordingViewer(file, viewer_exe));
@@ -193,6 +196,7 @@ namespace Sonic3AIR_ModManager
 
         public static void RecordingEndHandler(string viewer_exe)
         {
+            Program.Log.InfoFormat("Killing Sonic 3 A.I.R. Recording via Mod Manager...");
             RestoreSettings(viewer_exe);
             Instance.Dispatcher.BeginInvoke((Action)(() =>
             {
@@ -261,6 +265,7 @@ namespace Sonic3AIR_ModManager
 
         public static void ForceQuitSonic3AIR()
         {
+            Program.Log.InfoFormat("Attempting to Force Quit Sonic 3 A.I.R. via Mod Manager...");
             if (CurrentGameProcess != null && !CurrentGameProcess.HasExited)
             {
                 string title = Program.LanguageResource.GetString("ForceQuitGameDialog_Title");

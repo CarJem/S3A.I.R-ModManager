@@ -10,101 +10,244 @@ namespace Sonic3AIR_ModManager
 
 	public static class DiscordRP
 	{
+		#region Variables
+
 		//Used For Discord Rich Presence
 
 		public static string APP_ID = "434894884391092234";
 		public static System.Timers.Timer timer;
-		private static bool DisableLogging = true;
-		private static bool isInitilized = false;
-		private static TimeSpan UpdateInterval { get; set; } = new TimeSpan();
-		public static DateTime StartTime { get; set; } = new DateTime();
+		public static DateTime StartTime { get; set; }
 
 		public static DiscordRpcClient client;
 
-		private static void StartTimer()
-		{
-			timer = new System.Timers.Timer(UpdateInterval.TotalMilliseconds);
-			timer.Elapsed += Timer_Elapsed;
-			timer.Start();
-		}
+        #endregion
+
+        #region Timer
 
 		private static void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			UpdateDiscord();
 		}
+        #endregion
 
-		public static void InitDiscord()
-		{
-			/*
-			Create a discord client
-			NOTE: 	If you are using Unity3D, you must use the full constructor and define
-					 the pipe connection.
-			*/
+        #region Event Messages
 
-			if (client != null)
-			{
-				//Unsubscribe to events
-				client.OnReady -= Client_OnReady;
-				client.OnPresenceUpdate -= Client_OnPresenceUpdate;
-				client.OnError -= Client_OnError;
-			}
-
-
-			client = new DiscordRpcClient(APP_ID);
-			UpdateInterval = TimeSpan.FromSeconds(5);
-
-			//Subscribe to events
-			client.OnReady += Client_OnReady;
-			client.OnPresenceUpdate += Client_OnPresenceUpdate;
-			client.OnError += Client_OnError;
-
-			//Connect to the RPC
-			isInitilized = client.Initialize();
-			client.SetPresence(Presence.GetRichPresence());
-			if (timer == null) StartTimer();
-		}
-
-		private static void Client_OnReady(object sender, DiscordRPC.Message.ReadyMessage args)
+        private static void Client_OnReady(object sender, DiscordRPC.Message.ReadyMessage args)
 		{
 			string output = string.Format("[Discord RPC] Received Ready from user {0}", args.User.Username);
-			Program.Log.InfoFormat(output);
+			Program.PrintOutput(output);
+		}
+
+		private static void Client_OnClose(object sender, DiscordRPC.Message.CloseMessage args)
+		{
+			string output = string.Format("[Discord RPC] Connection to Client Lost [Reason: {0}]", args.Reason);
+			Program.PrintOutput(output, 1);
 		}
 
 		private static void Client_OnPresenceUpdate(object sender, DiscordRPC.Message.PresenceMessage args)
 		{
-			if (!DisableLogging)
-			{
-				string output = string.Format("[Discord RPC] Received Update! {0}", args.Presence);
-				System.Diagnostics.Debug.Print(output);
-				Console.WriteLine(output);
-				Program.Log.InfoFormat(output);
-			}
+			string output = string.Format("[Discord RPC] Received Update! {0}", args.Presence);
+			Program.PrintOutput(output);
 		}
 
 		private static void Client_OnError(object sender, DiscordRPC.Message.ErrorMessage args)
 		{
-			if (!DisableLogging)
+			string output = string.Format("[Discord RPC] Failed Update! {0}", args.Message);
+			Program.PrintOutput(output, 1);
+		}
+
+		private static void Client_OnConnectionEstablished(object sender, DiscordRPC.Message.ConnectionEstablishedMessage args)
+		{
+			string output = string.Format("[Discord RPC] Connection Established [Pipe: {0}, Message: {1}]", args.ConnectedPipe, args.Type);
+			Program.PrintOutput(output);
+		}
+
+		private static void Client_OnConnectionFailed(object sender, DiscordRPC.Message.ConnectionFailedMessage args)
+		{
+			string output = string.Format("[Discord RPC] Failed to Connect [Pipe: {0}, Message: {1}]", args.FailedPipe, args.Type);
+			Program.PrintOutput(output, 1);
+		}
+		#endregion
+
+		#region Discord Methods
+
+		#region Status Reports
+		private enum InitilizationType : int
+		{
+			AddEventHandlers = 0,
+			RemoveEventHandlers = 1,
+			SetupTimer = 2,
+			AttemptInitilization = 3,
+			AttemptDisposal = 4
+		}
+
+		private static bool IsClientExistant
+		{
+			get
 			{
-				string output = string.Format("[Discord RPC] Failed Update! {0}", args.Message);
-				System.Diagnostics.Debug.Print(output);
-				Console.WriteLine(output);
-				Program.Log.InfoFormat(output);
+				if (client != null) return true;
+				else return false;
+			}
+		}
+		private static bool IsInitilized
+		{
+			get
+			{
+				if (client != null) return client.IsInitialized;
+				else return false;
+			}
+		}
+		private static bool HasAttemptedInitilization { get; set; } = false;
+		private static bool AreEventsInitilized { get; set; } = false;
+		private static bool HasTimerStarted { get; set; } = false;
+        #endregion
+
+        public static void InitDiscord()
+		{
+			InitializeComponents(InitilizationType.SetupTimer);
+			InitializeComponents(InitilizationType.AttemptInitilization);
+			InitializeComponents(InitilizationType.AddEventHandlers);
+		}
+		public static void UpdateDiscord()
+		{
+			if (MainDataModel.Settings.ShowDiscordRPC)
+			{
+				InitDiscord();
+				SetDiscordRP();
+			}
+			else
+			{
+				if (IsClientExistant)
+				{
+					Program.PrintOutput("[Discord RPC] Turning Discord RPC OFF...");
+					DisposeDiscord();
+				}
+			}
+
+		}
+		public static void DisposeDiscord()
+		{
+			InitializeComponents(InitilizationType.RemoveEventHandlers);
+			InitializeComponents(InitilizationType.AttemptDisposal);
+		}
+		public static void SetDiscordRP()
+		{
+			if (IsInitilized)
+			{
+				Program.PrintOutput("[Discord RPC] Updating Discord RPC...");
+				client.SetPresence(Presence.GetRichPresence());
+				client.Invoke();
+			}
+		}
+		private static void InitializeComponents(InitilizationType type)
+		{
+			switch (type)
+			{
+				case InitilizationType.AddEventHandlers:
+					AddEventHandlers();
+					break;
+				case InitilizationType.RemoveEventHandlers:
+					RemoveEventHandlers();
+					break;
+				case InitilizationType.SetupTimer:
+					SetupTimer();
+					break;
+				case InitilizationType.AttemptInitilization:
+					AttemptInitilization();
+					break;
+				case InitilizationType.AttemptDisposal:
+					AttemptDisposal();
+					break;
+			}
+
+			void AddEventHandlers()
+			{
+				if (!AreEventsInitilized && IsClientExistant)
+				{
+					Program.PrintOutput("[Discord RPC] Initializing Discord RPC Event Handlers...");
+					client.OnReady += Client_OnReady;
+					client.OnPresenceUpdate += Client_OnPresenceUpdate;
+					client.OnError += Client_OnError;
+					client.OnConnectionFailed += Client_OnConnectionFailed;
+					client.OnConnectionEstablished += Client_OnConnectionEstablished;
+					client.OnClose += Client_OnClose;
+					AreEventsInitilized = true;
+				}
+			}
+			void RemoveEventHandlers()
+			{
+				if (AreEventsInitilized && IsClientExistant)
+				{
+					Program.PrintOutput("[Discord RPC] Disposing Discord RPC Event Handlers...");
+					client.OnReady -= Client_OnReady;
+					client.OnPresenceUpdate -= Client_OnPresenceUpdate;
+					client.OnError -= Client_OnError;
+					client.OnConnectionFailed -= Client_OnConnectionFailed;
+					client.OnConnectionEstablished -= Client_OnConnectionEstablished;
+					client.OnClose -= Client_OnClose;
+					AreEventsInitilized = false;
+				}
+			}
+			void SetupTimer()
+			{
+				if (!HasTimerStarted)
+				{
+					timer = new System.Timers.Timer();
+					timer.Interval = TimeSpan.FromSeconds(5).TotalMilliseconds;
+					timer.Elapsed += new System.Timers.ElapsedEventHandler(Timer_Elapsed);
+					timer.Start();
+					HasTimerStarted = true;
+				}
+			}
+			void AttemptInitilization()
+			{
+				var processes = System.Diagnostics.Process.GetProcessesByName("Discord");
+				if (processes == null || processes.Count() <= 0)
+				{
+					if (IsClientExistant) AttemptDisposal();
+					return;
+				}
+
+				if (!IsInitilized)
+				{
+					bool wasSuccessful = false;
+					if (!HasAttemptedInitilization || !IsClientExistant)
+					{
+						Program.PrintOutput("[Discord RPC] Starting Discord RPC");
+						client = new DiscordRpcClient(APP_ID);
+						//client.Logger = new DiscordRPC.Logging.ConsoleLogger { Level = DiscordRPC.Logging.LogLevel.Warning };
+						wasSuccessful = client.Initialize();
+						HasAttemptedInitilization = true;
+					}
+					else
+					{
+						Program.PrintOutput("[Discord RPC] Re-attempting to Start Discord RPC");
+						wasSuccessful = client.Initialize();
+
+					}
+
+					if (wasSuccessful) Program.PrintOutput("[Discord RPC] Successfully Started Discord RPC");
+					else Program.PrintOutput("[Discord RPC] Failed to Start Discord RPC");
+				}
+
+
+			}
+			void AttemptDisposal()
+			{
+				if (IsClientExistant)
+				{
+					Program.PrintOutput("[Discord RPC] Closing Discord RPC Support...");
+					client.Dispose();
+					client = null;
+					HasAttemptedInitilization = false;
+				}
+
 			}
 		}
 
+		#region Rich Presence
 		public static class Presence
 		{
-			/*public static RichPresence GetRichPresence()
-			{
-
-				RichPresence richPresence = new RichPresence();
-				richPresence.Details = GetDetails();
-				richPresence.State = GetState();
-				richPresence.Timestamps = GetTimestamps();
-				richPresence.Assets = GetAssets();
-				return richPresence;
-			}*/
-
 			public static int LoopPoint = 0;
 			public static int LoopEnd = 4;
 
@@ -191,11 +334,11 @@ namespace Sonic3AIR_ModManager
 				//richPresence.Assets.SmallImageText = "";
 			}
 
-            #endregion
+			#endregion
 
 
-            #region Timestamps
-            static bool timeStampSet = false;
+			#region Timestamps
+			static bool timeStampSet = false;
 			public static void GetTimestamps(ref RichPresence richPresence)
 			{
 				if (!timeStampSet)
@@ -214,37 +357,12 @@ namespace Sonic3AIR_ModManager
 				}
 
 			}
-            #endregion
-        }
-
-        public static void UpdateDiscord()
-		{
-			if (MainDataModel.Settings.ShowDiscordRPC)
-			{
-				if (!isInitilized) InitDiscord();
-				else
-				{
-					client.SetPresence(Presence.GetRichPresence());
-					client.Invoke();
-				}
-			}
-			else if (!MainDataModel.Settings.ShowDiscordRPC && isInitilized)
-			{
-				HideDiscord();
-			}
+			#endregion
 		}
 
-		public static void HideDiscord()
-		{
-			client.Dispose();
-			isInitilized = false;
+		#endregion
 
-		}
-
-		public static void DisposeDiscord()
-		{
-			client.Dispose();
-		}
+		#endregion
 
 	}
 }

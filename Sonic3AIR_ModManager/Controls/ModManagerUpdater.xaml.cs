@@ -66,6 +66,7 @@ namespace Sonic3AIR_ModManager
 
         public ModManagerUpdater(bool _manuallyTriggered = false)
         {
+            Program.Log.InfoFormat("Checking for Mod Manager Updates...");
             InitializeComponent();
             try { this.Owner = System.Windows.Application.Current.MainWindow; }
             catch { }

@@ -32,7 +32,6 @@ namespace Sonic3AIR_ModManager
 
 
         private AIR_API.VersionCheck VersionCheckInfo;
-        private AIR_API.Settings SettingsFile;
 
         private string VersionCheckFileName = "";
         private string UpdateFileName = "";
@@ -41,10 +40,11 @@ namespace Sonic3AIR_ModManager
 
         private bool DisableUpdater = false;
         private Updater Instance;
-        public bool isOffline = false;
+        public bool isOnline = false;
 
         public Updater(bool _manuallyTriggered = false)
         {
+            Program.Log.InfoFormat("Checking for A.I.R. Updates...");
             InitializeComponent();
             try { this.Owner = System.Windows.Application.Current.MainWindow; }
             catch { }
@@ -78,9 +78,9 @@ namespace Sonic3AIR_ModManager
             try
             {
                 bool isDeveloper = false;
-                isOffline = IsNetworkAvailable();
+                isOnline = IsNetworkAvailable();
 
-                if (isOffline)
+                if (isOnline)
                 {
                     string url = "";
                     if (isDeveloper) url = @"http://sonic3air.org/sonic3air_updateinfo_dev.json";
@@ -113,6 +113,15 @@ namespace Sonic3AIR_ModManager
             return System.IO.Path.GetFileName(uri.LocalPath);
         }
 
+        private Version GetLatestVersion(FileInfo settingsFile)
+        {
+            var SettingsFile = new AIR_API.Settings(settingsFile);
+            VersionManagement.RefreshVersionsList();
+            var LatestVersionStored = VersionManagement.InstalledVersions.Select(s => s.Version).Max();
+            if (LatestVersionStored != null && LatestVersionStored.CompareTo(SettingsFile.Version) > 0) return LatestVersionStored;
+            else return SettingsFile.Version;
+        }
+
         private void DownloadCheckComplete()
         {
             string destination = ProgramPaths.Sonic3AIR_MM_BaseFolder;
@@ -131,10 +140,10 @@ namespace Sonic3AIR_ModManager
 
             if (File.Exists(settingsPath))
             {
-                SettingsFile = new AIR_API.Settings(settingsFile);
-                if (SettingsFile.Version != null)
+                Version LatestVersion = GetLatestVersion(settingsFile);
+                if (LatestVersion != null)
                 {
-                    var result = SettingsFile.Version.CompareTo(VersionCheckInfo.Version);
+                    var result = LatestVersion.CompareTo(VersionCheckInfo.Version);
                     var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
                     if (result < 0)
                     {
@@ -293,7 +302,7 @@ namespace Sonic3AIR_ModManager
                 }
 
 
-
+                //TODO : Add Proper Download Cache for Failed Install of Downloads
 
                 string output2 = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Sonic3AIR_MM\\air_versions\\{version}\\sonic3air_game";
 
@@ -302,6 +311,8 @@ namespace Sonic3AIR_ModManager
                     // TODO : Add Collision Handling
                     Directory.Delete(output2, true);
                 }
+                
+                //TODO : Fix Issues with this Automated Downloading and Installing System
 
                 Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
 
@@ -363,9 +374,7 @@ namespace Sonic3AIR_ModManager
 
         private void DownloadUpdate()
         {
-            string AIR_Path = SettingsFile.AIREXEPath;
             string DownloadURL = VersionCheckInfo.DownloadURL;
-            string CurrentVersion = SettingsFile.Version.ToString();
             string LatestVersion = VersionCheckInfo.Version.ToString();
 
             string BaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR_MM";

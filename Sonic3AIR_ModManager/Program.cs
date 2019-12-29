@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Threading;
 
 namespace Sonic3AIR_ModManager
 {
@@ -106,8 +107,7 @@ namespace Sonic3AIR_ModManager
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
             MMSettingsManagement.LoadModManagerSettings();
-            DiscordRP.InitDiscord();
-            DiscordRP.UpdateDiscord();
+            StartDiscord();
             try
             {
                 ProgramPaths.CreateMissingModManagerFolders();
@@ -127,9 +127,27 @@ namespace Sonic3AIR_ModManager
             {
                 //TODO : Add Proper Catch Statement
             }
-            DiscordRP.DisposeDiscord();
+            EndDiscord();
             Log.InfoFormat("Shuting Down!");
         }
+        #endregion
+
+        #region Discord Threads
+
+        static void StartDiscord()
+        {
+            Thread thread = new Thread(() => DiscordRP.InitDiscord());
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
+        static void EndDiscord()
+        {
+            Thread thread = new Thread(() => DiscordRP.DisposeDiscord());
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
         #endregion
 
         #region Startup Region
@@ -248,23 +266,62 @@ namespace Sonic3AIR_ModManager
 
         #region Logging
 
+        public static void PrintOutput(string output, int type = 0)
+        {
+            switch (type)
+            {
+                case 0:
+                    Log.InfoFormat(output);
+                    break;
+                case 1:
+                    Log.ErrorFormat(output);
+                    break;
+                case 2:
+                    Log.WarnFormat(output);
+                    break;
+                case 3:
+                    Log.DebugFormat(output);
+                    break;
+            }
+        }
+
         static void StartLogging()
         {
             //ConsoleManager.Show();
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) =>
             {
-                if (e.Exception.TargetSite != null && e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly() && (!isDebug && !allowDebugOutput))
+                if ((!isDebug && !allowDebugOutput))
                 {
-                    Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                    if (e.Exception.TargetSite != null && e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
+                    {
+                        Log.ErrorFormat("[Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                    }
+                    else if (MainDataModel.Settings.ShowFullDebugOutput)
+                    {
+                        Log.ErrorFormat("[FULL] [Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
+                    }
                 }
-                else if (MainDataModel.Settings.ShowFullDebugOutput && (!isDebug && !allowDebugOutput))
-                {
-                    Log.ErrorFormat("Exception Thrown: {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
-                }
+
             };
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                if ((!isDebug && !allowDebugOutput))
+                {
+                    if (e.ExceptionObject != null && e.ExceptionObject is Exception)
+                    {
+                        Exception ex = e.ExceptionObject as Exception;
+                        if (ex.TargetSite != null && ex.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
+                        {
+                            Log.ErrorFormat("[Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex.Message), RemoveNewLineChars(ex.StackTrace));
+                        }
+                        else if (MainDataModel.Settings.ShowFullDebugOutput)
+                        {
+                            Log.ErrorFormat("[FULL] [Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex), RemoveNewLineChars(ex.StackTrace));
+                        }
+                    }
+                }
 
-
-
+            };
         }
 
         static string RemoveNewLineChars(Exception exception_to_search, string replacement_string = " ")

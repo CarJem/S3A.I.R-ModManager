@@ -344,6 +344,7 @@ namespace Sonic3AIR_ModManager
 
         public static bool ValidateInstall(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, ref AIR_API.Settings_Global Global_Settings, ref AIR_API.Settings_Input Input_Settings)
         {
+            Program.Log.InfoFormat("Validating Install...");
             CreateMissingModManagerFolders();
 
             if (!Directory.Exists(Sonic3AIRModsFolder)) Directory.CreateDirectory(Sonic3AIRModsFolder);
