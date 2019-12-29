@@ -342,68 +342,141 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        public static bool ValidateInstall(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, ref AIR_API.Settings_Global Global_Settings, ref AIR_API.Settings_Input Input_Settings)
+        #region Universal File/Folder Path Validators
+
+        public static bool FileOrDirectoryValid(string path, bool isFile = false)
         {
-            Program.Log.InfoFormat("Validating Install...");
-            CreateMissingModManagerFolders();
+            bool exists = (isFile ? File.Exists(path) : Directory.Exists(path));
+            try
+            {
+                if (!exists)
+                {
+                    try
+                    {
+                        if (isFile) File.Create(path);
+                        else Directory.CreateDirectory(path);
 
-            if (!Directory.Exists(Sonic3AIRModsFolder)) Directory.CreateDirectory(Sonic3AIRModsFolder);
-            if (!Directory.Exists(Sonic3AIRAppDataFolder)) Directory.CreateDirectory(Sonic3AIRAppDataFolder);
-            if (!File.Exists(Sonic3AIRActiveModsList)) File.Create(Sonic3AIRActiveModsList);
-            if (!File.Exists(Sonic3AIRSettingsFile)) File.Create(Sonic3AIRSettingsFile);
-            if (!File.Exists(Sonic3AIRGlobalInputFile)) File.Create(Sonic3AIRGlobalInputFile);
-            if (!File.Exists(Sonic3AIRGlobalSettingsFile)) File.Create(Sonic3AIRGlobalSettingsFile);
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Program.Log.InfoFormat("[ProgramPaths] Can't Create the Item Required to be Valid [Message: {0}]", ex.Message);
+                        return false;
+                    }
+                }
+                else return true;
+            }
+            catch (Exception ex)
+            {
+                Program.Log.InfoFormat("[ProgramPaths] Path to Item is unabled to be Validated [Message: {0}]", ex.Message);
+                return false;
+            }
 
-
-
-            return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, ref Global_Settings, ref Input_Settings, false);
         }
 
-        public static void CreateMissingModManagerFolders()
+        #endregion
+
+        public static bool ValidateInstall(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, ref AIR_API.Settings_Global Global_Settings, ref AIR_API.Settings_Input Input_Settings)
+        {
+            Program.Log.InfoFormat("[ProgramPaths] Validating Install...");
+
+            bool CanProceed = CreateMissingModManagerFolders();
+
+            try
+            {
+                Program.Log.InfoFormat("[ProgramPaths] Making Folders Required to Run the Mod Manager...");
+                CanProceed = (CanProceed ? FileOrDirectoryValid(Sonic3AIRModsFolder) : CanProceed);
+                CanProceed = (CanProceed ? FileOrDirectoryValid(Sonic3AIRAppDataFolder) : CanProceed);
+                CanProceed = (CanProceed ? FileOrDirectoryValid(Sonic3AIRActiveModsList, true) : CanProceed);
+                CanProceed = (CanProceed ? FileOrDirectoryValid(Sonic3AIRSettingsFile, true) : CanProceed);
+                CanProceed = (CanProceed ? FileOrDirectoryValid(Sonic3AIRGlobalInputFile, true) : CanProceed);
+                CanProceed = (CanProceed ? FileOrDirectoryValid(Sonic3AIRGlobalSettingsFile, true) : CanProceed);
+            }
+            catch (Exception ex)
+            {
+                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Making all the folders required to Run the Mod Manager [Message: {0}]", ex.Message);
+                if (CanProceed) CanProceed = false;
+            }
+
+            if (CanProceed)
+            {
+                return ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, ref Global_Settings, ref Input_Settings, false);
+            }
+            else
+            {
+                Program.Log.ErrorFormat("[ProgramPaths] Unable to run the Mod Manager due to being Unable to Validate Install");
+                return false;
+            }
+        }
+
+        public static bool CreateMissingModManagerFolders()
         {
             try
             {
-                if (!Directory.Exists(Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_TempModsFolder);
-                if (!Directory.Exists(Sonic3AIR_MM_BaseFolder)) Directory.CreateDirectory(Sonic3AIR_MM_BaseFolder);
-                if (!Directory.Exists(Sonic3AIR_MM_DownloadsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_DownloadsFolder);
-                if (!Directory.Exists(Sonic3AIR_MM_VersionsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_VersionsFolder);
-                if (!Directory.Exists(Sonic3AIR_MM_GBRequestsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_GBRequestsFolder);
-                if (!Directory.Exists(Sonic3AIR_MM_LogsFolder)) Directory.CreateDirectory(Sonic3AIR_MM_LogsFolder);
+                Program.Log.InfoFormat("[ProgramPaths] Creating Missing Mod Manager Folders...");
+                bool isValid = true;
+                isValid = (isValid ? FileOrDirectoryValid(Sonic3AIR_MM_TempModsFolder) : isValid);
+                isValid = (isValid ? FileOrDirectoryValid(Sonic3AIR_MM_BaseFolder) : isValid);
+                isValid = (isValid ? FileOrDirectoryValid(Sonic3AIR_MM_DownloadsFolder) : isValid);
+                isValid = (isValid ? FileOrDirectoryValid(Sonic3AIR_MM_VersionsFolder) : isValid);
+                isValid = (isValid ? FileOrDirectoryValid(Sonic3AIR_MM_GBRequestsFolder) : isValid);
+                isValid = (isValid ? FileOrDirectoryValid(Sonic3AIR_MM_LogsFolder) : isValid);
+                return isValid;
             }
-            catch
+            catch (Exception ex)
             {
-
+                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Creating the Missing Mod Manager Folders [Message: {0}]", ex.Message);
+                return false;
             }
 
         }
 
         public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, ref AIR_API.Settings_Global Global_Settings, ref AIR_API.Settings_Input Input_Settings, bool throwVersionMismatchError = false)
         {
-            ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, false);
-            Global_Settings = new AIR_API.Settings_Global(new FileInfo(Sonic3AIRGlobalSettingsFile));
-            Input_Settings = new AIR_API.Settings_Input(new FileInfo(Sonic3AIRGlobalInputFile));
-            Global_Settings.Save();
-            Input_Settings.Save();
-            return true;
+            try
+            {
+                Program.Log.InfoFormat("[ProgramPaths] Validating Settings and Active Mods Files...");
+                ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, false);
+                Global_Settings = new AIR_API.Settings_Global(new FileInfo(Sonic3AIRGlobalSettingsFile));
+                Input_Settings = new AIR_API.Settings_Input(new FileInfo(Sonic3AIRGlobalInputFile));
+                Global_Settings.Save();
+                Input_Settings.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Validating the Mod Manager's Global Settings and Input Files [Message: {0}]", ex.Message);
+                return false;
+            }
+
         }
 
         public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, bool throwVersionMismatchError = false)
         {
-            if (!File.Exists(Sonic3AIRActiveModsList))
+            try
             {
-                S3AIRActiveMods = new AIR_API.ActiveModsList(Sonic3AIRActiveModsList);
+                if (!File.Exists(Sonic3AIRActiveModsList))
+                {
+                    S3AIRActiveMods = new AIR_API.ActiveModsList(Sonic3AIRActiveModsList);
+                }
+                else
+                {
+                    FileInfo list = new FileInfo(Sonic3AIRActiveModsList);
+                    S3AIRActiveMods = new AIR_API.ActiveModsList(list);
+                }
+
+
+
+                FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
+                S3AIRSettings = new AIR_API.Settings(file);
+                return true;
             }
-            else
+            catch (Exception ex)
             {
-                FileInfo list = new FileInfo(Sonic3AIRActiveModsList);
-                S3AIRActiveMods = new AIR_API.ActiveModsList(list);
+                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Validating the A.I.R. Settings and Active Mod Files [Message: {0}]", ex.Message);
+                return false;
             }
 
-
-
-            FileInfo file = new FileInfo(Sonic3AIRSettingsFile);
-            S3AIRSettings = new AIR_API.Settings(file);
-            return true;
         }
     }
 }

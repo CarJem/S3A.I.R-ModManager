@@ -266,25 +266,6 @@ namespace Sonic3AIR_ModManager
 
         #region Logging
 
-        public static void PrintOutput(string output, int type = 0)
-        {
-            switch (type)
-            {
-                case 0:
-                    Log.InfoFormat(output);
-                    break;
-                case 1:
-                    Log.ErrorFormat(output);
-                    break;
-                case 2:
-                    Log.WarnFormat(output);
-                    break;
-                case 3:
-                    Log.DebugFormat(output);
-                    break;
-            }
-        }
-
         static void StartLogging()
         {
             //ConsoleManager.Show();

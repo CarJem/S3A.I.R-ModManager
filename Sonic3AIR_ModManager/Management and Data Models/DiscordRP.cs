@@ -35,37 +35,37 @@ namespace Sonic3AIR_ModManager
         private static void Client_OnReady(object sender, DiscordRPC.Message.ReadyMessage args)
 		{
 			string output = string.Format("[Discord RPC] Received Ready from user {0}", args.User.Username);
-			Program.PrintOutput(output);
+			Program.Log.InfoFormat(output);
 		}
 
 		private static void Client_OnClose(object sender, DiscordRPC.Message.CloseMessage args)
 		{
 			string output = string.Format("[Discord RPC] Connection to Client Lost [Reason: {0}]", args.Reason);
-			Program.PrintOutput(output, 1);
+			Program.Log.InfoFormat(output, 1);
 		}
 
 		private static void Client_OnPresenceUpdate(object sender, DiscordRPC.Message.PresenceMessage args)
 		{
-			string output = string.Format("[Discord RPC] Received Update! {0}", args.Presence);
-			Program.PrintOutput(output);
+			//string output = string.Format("[Discord RPC] Updated Discord RPC!");
+			//Program.Log.InfoFormat(output);
 		}
 
 		private static void Client_OnError(object sender, DiscordRPC.Message.ErrorMessage args)
 		{
-			string output = string.Format("[Discord RPC] Failed Update! {0}", args.Message);
-			Program.PrintOutput(output, 1);
+			string output = string.Format("[Discord RPC] Failed to Update RP! [Message: {0}]", args.Message);
+			Program.Log.InfoFormat(output, 1);
 		}
 
 		private static void Client_OnConnectionEstablished(object sender, DiscordRPC.Message.ConnectionEstablishedMessage args)
 		{
 			string output = string.Format("[Discord RPC] Connection Established [Pipe: {0}, Message: {1}]", args.ConnectedPipe, args.Type);
-			Program.PrintOutput(output);
+			Program.Log.InfoFormat(output);
 		}
 
 		private static void Client_OnConnectionFailed(object sender, DiscordRPC.Message.ConnectionFailedMessage args)
 		{
 			string output = string.Format("[Discord RPC] Failed to Connect [Pipe: {0}, Message: {1}]", args.FailedPipe, args.Type);
-			Program.PrintOutput(output, 1);
+			Program.Log.InfoFormat(output, 1);
 		}
 		#endregion
 
@@ -119,7 +119,7 @@ namespace Sonic3AIR_ModManager
 			{
 				if (IsClientExistant)
 				{
-					Program.PrintOutput("[Discord RPC] Turning Discord RPC OFF...");
+					Program.Log.InfoFormat("[Discord RPC] Turning Discord RPC OFF...");
 					DisposeDiscord();
 				}
 			}
@@ -134,7 +134,6 @@ namespace Sonic3AIR_ModManager
 		{
 			if (IsInitilized)
 			{
-				Program.PrintOutput("[Discord RPC] Updating Discord RPC...");
 				client.SetPresence(Presence.GetRichPresence());
 				client.Invoke();
 			}
@@ -164,7 +163,7 @@ namespace Sonic3AIR_ModManager
 			{
 				if (!AreEventsInitilized && IsClientExistant)
 				{
-					Program.PrintOutput("[Discord RPC] Initializing Discord RPC Event Handlers...");
+					Program.Log.InfoFormat("[Discord RPC] Initializing Discord RPC Event Handlers...");
 					client.OnReady += Client_OnReady;
 					client.OnPresenceUpdate += Client_OnPresenceUpdate;
 					client.OnError += Client_OnError;
@@ -178,7 +177,7 @@ namespace Sonic3AIR_ModManager
 			{
 				if (AreEventsInitilized && IsClientExistant)
 				{
-					Program.PrintOutput("[Discord RPC] Disposing Discord RPC Event Handlers...");
+					Program.Log.InfoFormat("[Discord RPC] Disposing Discord RPC Event Handlers...");
 					client.OnReady -= Client_OnReady;
 					client.OnPresenceUpdate -= Client_OnPresenceUpdate;
 					client.OnError -= Client_OnError;
@@ -213,7 +212,7 @@ namespace Sonic3AIR_ModManager
 					bool wasSuccessful = false;
 					if (!HasAttemptedInitilization || !IsClientExistant)
 					{
-						Program.PrintOutput("[Discord RPC] Starting Discord RPC");
+						Program.Log.InfoFormat("[Discord RPC] Starting Discord RPC");
 						client = new DiscordRpcClient(APP_ID);
 						//client.Logger = new DiscordRPC.Logging.ConsoleLogger { Level = DiscordRPC.Logging.LogLevel.Warning };
 						wasSuccessful = client.Initialize();
@@ -221,13 +220,13 @@ namespace Sonic3AIR_ModManager
 					}
 					else
 					{
-						Program.PrintOutput("[Discord RPC] Re-attempting to Start Discord RPC");
+						Program.Log.InfoFormat("[Discord RPC] Re-attempting to Start Discord RPC");
 						wasSuccessful = client.Initialize();
 
 					}
 
-					if (wasSuccessful) Program.PrintOutput("[Discord RPC] Successfully Started Discord RPC");
-					else Program.PrintOutput("[Discord RPC] Failed to Start Discord RPC");
+					if (wasSuccessful) Program.Log.InfoFormat("[Discord RPC] Successfully Started Discord RPC");
+					else Program.Log.InfoFormat("[Discord RPC] Failed to Start Discord RPC");
 				}
 
 
@@ -236,7 +235,7 @@ namespace Sonic3AIR_ModManager
 			{
 				if (IsClientExistant)
 				{
-					Program.PrintOutput("[Discord RPC] Closing Discord RPC Support...");
+					Program.Log.InfoFormat("[Discord RPC] Closing Discord RPC Support...");
 					client.Dispose();
 					client = null;
 					HasAttemptedInitilization = false;
