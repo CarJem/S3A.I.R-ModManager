@@ -192,8 +192,18 @@ namespace Sonic3AIR_ModManager
 
         public static void LoadModManagerSettings()
         {
-            MainDataModel.Settings = null;
-            MainDataModel.Settings = new Settings.ModManagerSettings(ProgramPaths.Sonic3AIR_MM_SettingsFile);
+            try
+            {
+                Program.Log.InfoFormat("Loading Personal Settings...");
+                if (!System.IO.File.Exists(ProgramPaths.Sonic3AIR_MM_SettingsFile)) System.IO.File.Create(ProgramPaths.Sonic3AIR_MM_SettingsFile).Close();
+                MainDataModel.Settings = null;
+                MainDataModel.Settings = new Settings.ModManagerSettings(ProgramPaths.Sonic3AIR_MM_SettingsFile);
+            }
+            catch (Exception ex)
+            {
+                Program.Log.ErrorFormat("[Fatal Error] {0}", ex.Message);
+            }
+
         }
 
 

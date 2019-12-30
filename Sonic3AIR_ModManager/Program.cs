@@ -106,12 +106,13 @@ namespace Sonic3AIR_ModManager
         static void RealMain(string[] args)
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
-            MMSettingsManagement.LoadModManagerSettings();
-            StartDiscord();
             try
             {
                 ProgramPaths.CreateMissingModManagerFolders();
+                MMSettingsManagement.LoadModManagerSettings();
+                StartDiscord();
                 isDebugging();
+                Program.Log.InfoFormat("Prasing Launch Arguments...");
                 Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => { Arguments = o; });
                 isDeveloper = Arguments.dev_mode;
                 var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
@@ -120,14 +121,13 @@ namespace Sonic3AIR_ModManager
                     Log.InfoFormat("Application Already Open! Adding Potential URL to Gamebanana 1-Click Install Handler...");
                     GamebannaAPIHandler(args);
                 }
-                else StartApplication(args);
-
+                else StartApplication();
+                EndDiscord();
             }
-            catch
+            catch (Exception ex)
             {
-                //TODO : Add Proper Catch Statement
+                Log.ErrorFormat("[Fatal Error] {0}", ex.Message);
             }
-            EndDiscord();
             Log.InfoFormat("Shuting Down!");
         }
         #endregion
@@ -198,7 +198,7 @@ namespace Sonic3AIR_ModManager
             app.GBAPI(Arguments.gamebanana_api);
         }
 
-        static void StartApplication(string[] args)
+        static void StartApplication()
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
