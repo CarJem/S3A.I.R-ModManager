@@ -56,7 +56,7 @@ namespace Sonic3AIR_ModManager
 
 
     // TODO: Backup/Restore A.I.R. Save Data Functionality
-
+    // TODO: Fix URL Handler Not Working While Mod Manager is Open
 
     public partial class ModManager : Window
     {

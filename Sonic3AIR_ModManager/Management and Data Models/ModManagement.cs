@@ -112,33 +112,48 @@ namespace Sonic3AIR_ModManager
             string CurrentFolderPath = ProgramPaths.Sonic3AIRModsFolder;
             if (Instance.ModViewer.FolderView.SelectedItem != null) CurrentFolderPath = (Instance.ModViewer.FolderView.SelectedItem as SubDirectoryItem).FilePath;
 
-            foreach (var item in Instance.ModViewer.View.Items)
+            if (Instance.ModViewer.FolderView.SelectedIndex == 1) UpdateViewerModsShowAll();
+            else UpdateViewerMods();
+
+            Instance.ModViewer.Refresh();
+
+            void UpdateViewerModsShowAll()
             {
-                ModViewerItem mod = (ModViewerItem)item;
-                if (CurrentFolderPath != null && (Instance.ModViewer.FolderView.SelectedIndex == 0 || Instance.ModViewer.FolderView.SelectedIndex == -1) && mod.IsInRootFolder)
+                foreach (var item in Instance.ModViewer.View.Items)
                 {
+                    ModViewerItem mod = (ModViewerItem)item;
                     mod.Visibility = Visibility.Visible;
                 }
-                else if (!(Instance.ModViewer.FolderView.SelectedIndex == 0 || Instance.ModViewer.FolderView.SelectedIndex == -1))
+            }
+
+            void UpdateViewerMods()
+            {
+                foreach (var item in Instance.ModViewer.View.Items)
                 {
-                    if (CurrentFolderPath != null && mod.Source.FileLocation.Contains(CurrentFolderPath))
+                    ModViewerItem mod = (ModViewerItem)item;
+                    if (CurrentFolderPath != null && (Instance.ModViewer.FolderView.SelectedIndex == 0 || Instance.ModViewer.FolderView.SelectedIndex == -1) && mod.IsInRootFolder)
                     {
                         mod.Visibility = Visibility.Visible;
+                    }
+                    else if (!(Instance.ModViewer.FolderView.SelectedIndex == 0 || Instance.ModViewer.FolderView.SelectedIndex == -1))
+                    {
+                        if (CurrentFolderPath != null && mod.Source.FileLocation.Contains(CurrentFolderPath))
+                        {
+                            mod.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            mod.Visibility = Visibility.Collapsed;
+                        }
                     }
                     else
                     {
                         mod.Visibility = Visibility.Collapsed;
                     }
-                }
-                else
-                {
-                    mod.Visibility = Visibility.Collapsed;
-                }
 
 
+                }
             }
-
-            Instance.ModViewer.Refresh();
 
         }
 
@@ -182,6 +197,7 @@ namespace Sonic3AIR_ModManager
             DirectoryInfo d = new DirectoryInfo(ProgramPaths.Sonic3AIRModsFolder);
             DirectoryInfo[] folders = d.GetDirectories();
             itemsCurrent.Add(new SubDirectoryItem(UserLanguage.BaseModFolderString(), ProgramPaths.Sonic3AIRModsFolder));
+            itemsCurrent.Add(new SubDirectoryItem("All - Show All Mods (including Subdirectories)","")); //TODO : Add User Translation
             foreach (DirectoryInfo folder in folders)
             {
                 var files = folder.GetFiles();
