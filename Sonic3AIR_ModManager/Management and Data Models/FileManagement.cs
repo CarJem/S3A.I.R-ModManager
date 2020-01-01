@@ -532,6 +532,7 @@ namespace Sonic3AIR_ModManager
             else if (File.Exists(file7Z)) AddMod(file7Z);
             else
             {
+                // Add User Translation
                 MessageBox.Show("Something went Wrong!");
                 CleanUpTempModsFolder();
             }

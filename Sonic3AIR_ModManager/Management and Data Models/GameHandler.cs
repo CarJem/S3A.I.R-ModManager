@@ -57,8 +57,35 @@ namespace Sonic3AIR_ModManager
                 else return false;
             }
         }
+        #region Forced Auto Boot Mode
+        private static int FAB_Fullscreen_Preserved { get; set; }
 
-        public static void LaunchSonic3AIR()
+        private static void ForcedAutoBoot_SetSettings(bool isEnabled, bool preserveSettings = false)
+        {
+            if (isEnabled)
+            {
+                // Save Original Values
+                FAB_Fullscreen_Preserved = MainDataModel.Global_Settings.Fullscreen;
+
+                // Set Specific Values
+                MainDataModel.Global_Settings.Fullscreen = 2;
+                MainDataModel.Global_Settings.Save();
+            }
+            else
+            {
+                // Reset to Original Values
+                MainDataModel.Global_Settings.Fullscreen = FAB_Fullscreen_Preserved;
+                MainDataModel.Global_Settings.Save();
+            }
+
+            Instance.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                MainDataModel.UpdateAIRSettings(ref Instance);
+            }));
+        }
+        #endregion
+
+        public static void LaunchSonic3AIR(bool isForcedAutoBoot = false)
         {
             Program.Log.InfoFormat("Starting Sonic 3 A.I.R. via Mod Manager...");
             bool IsGamePathSet = true;
@@ -70,7 +97,7 @@ namespace Sonic3AIR_ModManager
             {
                 if (TimeTravelSafetyNet() == true)
                 {
-                    System.Threading.Thread thread = new System.Threading.Thread(GameHandler.RunSonic3AIR);
+                    System.Threading.Thread thread = new System.Threading.Thread(t => GameHandler.RunSonic3AIR(isForcedAutoBoot));
                     thread.Start();
                 }
             }
@@ -80,16 +107,16 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        public static void RunSonic3AIR()
+        public static void RunSonic3AIR(bool isForcedAutoBoot)
         {
             try
             {
-                GameStartHandler();
+                GameStartHandler(isForcedAutoBoot);
                 string filename = ProgramPaths.Sonic3AIRPath;
                 var start = new ProcessStartInfo() { FileName = filename, WorkingDirectory = Path.GetDirectoryName(filename) };
                 CurrentGameProcess = Process.Start(start);
                 CurrentGameProcess.WaitForExit();
-                GameEndHandler();
+                GameEndHandler(isForcedAutoBoot);
             }
             catch (Exception ex)
             {
@@ -98,10 +125,14 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        public static void GameStartHandler()
+        public static void GameStartHandler(bool isForcedAutoBoot)
         {
+            bool KeepOpenOnQuit = (!isForcedAutoBoot ? MainDataModel.Settings.KeepOpenOnQuit : false);
+            bool KeepOpenOnLaunch = (!isForcedAutoBoot ? MainDataModel.Settings.KeepOpenOnLaunch : false);
+
             isGameRunning = true;
-            if (!MainDataModel.Settings.KeepOpenOnLaunch)
+            ForcedAutoBoot_SetSettings(true);
+            if (!KeepOpenOnLaunch)
             {
                 Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {
@@ -119,12 +150,16 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        public static void GameEndHandler()
+        public static void GameEndHandler(bool isForcedAutoBoot)
         {
+            bool KeepOpenOnQuit = (!isForcedAutoBoot ? MainDataModel.Settings.KeepOpenOnQuit : false);
+            bool KeepOpenOnLaunch = (!isForcedAutoBoot ? MainDataModel.Settings.KeepOpenOnLaunch : false);
+
             Program.Log.InfoFormat("Killing Sonic 3 A.I.R. via Mod Manager...");
             isGameRunning = false;
-            if (!MainDataModel.Settings.KeepOpenOnQuit) Environment.Exit(0);
-            else if (!MainDataModel.Settings.KeepOpenOnLaunch)
+            ForcedAutoBoot_SetSettings(false);
+            if (!KeepOpenOnQuit) Environment.Exit(0);
+            else if (!KeepOpenOnLaunch)
             {
                 Instance.Dispatcher.BeginInvoke((Action)(() =>
                 {

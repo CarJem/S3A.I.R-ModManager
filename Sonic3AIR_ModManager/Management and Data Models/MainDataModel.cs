@@ -58,7 +58,7 @@ namespace Sonic3AIR_ModManager
 
         public static string nL = Environment.NewLine;
         public static AIR_API.Settings S3AIRSettings;
-
+        public static bool isDownloading { get; set; } = false;
         public static string LastAIRSettingsVersion { get; set; } = "NULL";
         public static string LastAIREXEVersion { get; set; } = "NULL";
 
@@ -67,7 +67,8 @@ namespace Sonic3AIR_ModManager
         public static AIR_API.GameConfig GameConfig { get; set; }
         public static AIR_API.VersionMetadata CurrentAIRVersion;
 
-        public static System.Windows.Forms.Timer ApiInstallChecker;
+        public static System.Windows.Forms.Timer TimedEvents;
+        public static System.Windows.Forms.Timer TimedUpdaterEvents;
 
         public static System.Windows.Controls.ToolTip AddModTooltip = new System.Windows.Controls.ToolTip();
         public static System.Windows.Controls.ToolTip RemoveSelectedModTooltip = new System.Windows.Controls.ToolTip();
@@ -204,6 +205,16 @@ namespace Sonic3AIR_ModManager
             Instance.moveToBottomButton.ToolTip = MainDataModel.MoveModToBottomTooltip;
 
             Instance.Title = string.Format("{0} {1}", Program.LanguageResource.GetString("ApplicationTitle"), Program.Version);
+        }
+
+        public static void UpdateInUpdateButtons(ref ModManager Instance)
+        {
+            bool isAIRUpdaterActive = Program.AIRUpdaterState == Program.UpdateState.Checking || Program.AIRUpdaterState == Program.UpdateState.Running;
+            bool isMMUpdaterActive = Program.MMUpdaterState == Program.UpdateState.Checking || Program.MMUpdaterState == Program.UpdateState.Running;
+
+
+            bool enabled = !isMMUpdaterActive && !isAIRUpdaterActive;
+            Instance.IsEnabled = enabled;
         }
 
         public static void UpdateInGameButtons(ref ModManager Instance)

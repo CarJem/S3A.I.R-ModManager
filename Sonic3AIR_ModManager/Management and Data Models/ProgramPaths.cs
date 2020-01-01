@@ -260,6 +260,18 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        private static string GetSonic3AIR_EXE_Directory()
+        {
+            if (File.Exists(Sonic3AIRPath))
+            {
+                return Path.GetDirectoryName(Sonic3AIRPath);
+            }
+            else
+            {
+                return "AIR_EXE_FOLDER_NOT_FOUND";
+            }
+        }
+
         public static bool DoesSonic3AIRGameRecordingsFolderPathExist()
         {
             switch (GameRecordingsFolderDesiredPath)
@@ -269,7 +281,7 @@ namespace Sonic3AIR_ModManager
                 case GameRecordingSearchLocation.S3AIR_AppData:
                     return Directory.Exists(Sonic3AIRAppDataFolder);
                 case GameRecordingSearchLocation.S3AIR_EXE_Folder:
-                    return Directory.Exists(Path.GetDirectoryName(Sonic3AIRPath));
+                    return Directory.Exists(GetSonic3AIR_EXE_Directory());
                 case GameRecordingSearchLocation.S3AIR_RecordingsFolder:
                     return Directory.Exists(Path.Combine(Sonic3AIRAppDataFolder, "gamerecordings"));
                 case GameRecordingSearchLocation.S3AIR_Custom:
@@ -288,7 +300,7 @@ namespace Sonic3AIR_ModManager
                 case GameRecordingSearchLocation.S3AIR_AppData:
                     return Sonic3AIRAppDataFolder;
                 case GameRecordingSearchLocation.S3AIR_EXE_Folder:
-                    return Path.GetDirectoryName(Sonic3AIRPath);
+                    return GetSonic3AIR_EXE_Directory();
                 case GameRecordingSearchLocation.S3AIR_RecordingsFolder:
                     return Path.Combine(Sonic3AIRAppDataFolder, "gamerecordings");
                 case GameRecordingSearchLocation.S3AIR_Custom:
@@ -335,7 +347,7 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                return Path.GetDirectoryName(Sonic3AIRPath);
+                return GetSonic3AIR_EXE_Directory();
             }
         }
 
@@ -353,7 +365,7 @@ namespace Sonic3AIR_ModManager
                 {
                     try
                     {
-                        if (isFile) File.Create(path);
+                        if (isFile) File.Create(path).Close();
                         else Directory.CreateDirectory(path);
 
                         return true;
@@ -430,22 +442,52 @@ namespace Sonic3AIR_ModManager
             }
 
         }
+        public static bool ValidateGlobalSettings(ref AIR_API.Settings_Global Global_Settings)
+        {
+            try
+            {
+                Program.Log.InfoFormat("[ProgramPaths] Validating Mod Manager's Global Settings...");
+                Global_Settings = new AIR_API.Settings_Global(new FileInfo(Sonic3AIRGlobalSettingsFile));
+                Global_Settings.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Validating the Mod Manager's Global Settings [Message: {0}]", ex.Message);
+                return false;
+            }
+        }
+
+        public static bool ValidateGlobalInputSettings(ref AIR_API.Settings_Input Input_Settings)
+        {
+            try
+            {
+                Program.Log.InfoFormat("[ProgramPaths] Validating Mod Manager's Input Files...");
+                Input_Settings = new AIR_API.Settings_Input(new FileInfo(Sonic3AIRGlobalInputFile));
+                Input_Settings.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Validating the Mod Manager's Input Files [Message: {0}]", ex.Message);
+                return false;
+            }
+        }
 
         public static bool ValidateSettingsAndActiveMods(ref AIR_API.ActiveModsList S3AIRActiveMods, ref AIR_API.Settings S3AIRSettings, ref AIR_API.Settings_Global Global_Settings, ref AIR_API.Settings_Input Input_Settings, bool throwVersionMismatchError = false)
         {
             try
             {
                 Program.Log.InfoFormat("[ProgramPaths] Validating Settings and Active Mods Files...");
-                ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, false);
-                Global_Settings = new AIR_API.Settings_Global(new FileInfo(Sonic3AIRGlobalSettingsFile));
-                Input_Settings = new AIR_API.Settings_Input(new FileInfo(Sonic3AIRGlobalInputFile));
-                Global_Settings.Save();
-                Input_Settings.Save();
-                return true;
+                bool isValid = true;
+                isValid = ValidateSettingsAndActiveMods(ref S3AIRActiveMods, ref S3AIRSettings, false);
+                isValid = ValidateGlobalInputSettings(ref Input_Settings);
+                isValid = ValidateGlobalSettings(ref Global_Settings);
+                return isValid;
             }
             catch (Exception ex)
             {
-                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Validating the Mod Manager's Global Settings and Input Files [Message: {0}]", ex.Message);
+                Program.Log.ErrorFormat("[ProgramPaths] Some issue with Validating the Mod Manager's Global Settings, Active Mods, A.I.R. Specific Settings and/or Input Files [Message: {0}]", ex.Message);
                 return false;
             }
 

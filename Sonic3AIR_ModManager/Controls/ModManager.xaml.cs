@@ -73,8 +73,9 @@ namespace Sonic3AIR_ModManager
         #endregion
 
         #region Initialize Methods
-        public ModManager(bool autoBoot = false)
+        public ModManager(bool autoBoot = false, bool isForcedAutoBoot = false)
         {
+            InitializeUpdaterEventsTimer();
             if (MainDataModel.Settings.AutoUpdates)
             {
                 if (autoBoot == false && Program.AIRUpdaterState == Program.UpdateState.NeverStarted && Program.MMUpdaterState == Program.UpdateState.NeverStarted)
@@ -85,7 +86,7 @@ namespace Sonic3AIR_ModManager
             }
 
 
-            StartModloader(autoBoot);
+            StartModloader(autoBoot, "", isForcedAutoBoot);
 
         }
 
@@ -106,11 +107,19 @@ namespace Sonic3AIR_ModManager
             ModViewer.SelectionChanged += View_SelectionChanged;
             ModViewer.FolderView.SelectionChanged += FolderView_SelectionChanged;
 
-            MainDataModel.ApiInstallChecker = new System.Windows.Forms.Timer();
-            MainDataModel.ApiInstallChecker.Tick += apiInstallChecker_Tick;
+            MainDataModel.TimedEvents = new System.Windows.Forms.Timer();
+            MainDataModel.TimedEvents.Tick += TimedEvents_Tick;
         }
 
-        private void StartModloader(bool autoBoot = false, string gamebanana_api = "")
+        private void InitializeUpdaterEventsTimer()
+        {
+            MainDataModel.TimedUpdaterEvents = new System.Windows.Forms.Timer();
+            MainDataModel.TimedUpdaterEvents.Tick += TimedUpdaterEvents_Tick;
+            MainDataModel.TimedUpdaterEvents.Enabled = true;
+            MainDataModel.TimedUpdaterEvents.Start();
+        }
+
+        private void StartModloader(bool autoBoot = false, string gamebanana_api = "", bool isForcedAutoBoot = false)
         {
             AllowUpdate = false;
             InitializeComponent();
@@ -130,13 +139,13 @@ namespace Sonic3AIR_ModManager
                 ModManagement.UpdateModsList(true);
                 MainDataModel.UpdateSettingsStates(ref Instance);
                 MainDataModel.SetInitialWindowSize(ref Instance);
-                MainDataModel.ApiInstallChecker.Enabled = true;
-                MainDataModel.ApiInstallChecker.Start();
+                MainDataModel.TimedEvents.Enabled = true;
+                MainDataModel.TimedEvents.Start();
                 FileManagement.GBAPIWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName;
                 FileManagement.GBAPIWatcher.EnableRaisingEvents = true;
                 FileManagement.GBAPIWatcher.Changed += FileManagement.GBAPIWatcher_Changed;
                 UserLanguage.ApplyLanguage(ref Instance);
-                if (autoBoot) GameHandler.LaunchSonic3AIR();
+                if (autoBoot) GameHandler.LaunchSonic3AIR(isForcedAutoBoot);
                 if (gamebanana_api != "") FileManagement.GamebananaAPI_Install(gamebanana_api);
                 HasInitilizationCompleted = true;
             }
@@ -261,7 +270,12 @@ namespace Sonic3AIR_ModManager
             GameHandler.ForceQuitSonic3AIR();
         }
 
-        private void apiInstallChecker_Tick(object sender, EventArgs e)
+        private void TimedUpdaterEvents_Tick(object sender, EventArgs e)
+        {
+            MainDataModel.UpdateInUpdateButtons(ref Instance);
+        }
+
+        private void TimedEvents_Tick(object sender, EventArgs e)
         {
             FileManagement.GBAPIInstallTrigger();
         }

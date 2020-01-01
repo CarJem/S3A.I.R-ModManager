@@ -76,10 +76,11 @@ namespace Sonic3AIR_ModManager
         {
             Running,
             Finished,
+            Checking,
             NeverStarted,
         }
 
-        public static UpdateState AIRUpdaterState { get; set; } = UpdateState.NeverStarted;
+        public static UpdateState AIRUpdaterState { get ; set; } = UpdateState.NeverStarted;
         public static UpdateState MMUpdaterState { get; set; } = UpdateState.NeverStarted;
 
         public static UpdateResult AIRUpdateResults { get; set; } = UpdateResult.Null;
@@ -212,7 +213,8 @@ namespace Sonic3AIR_ModManager
             }
             else
             {
-                if (Arguments?.auto_boot == true) ForcedAutoBootStartup();
+                bool forcedAutoBoot = (Arguments?.auto_boot ?? false);
+                if (forcedAutoBoot == true) ForcedAutoBootStartup();
                 else StockStartup();
 
             }
@@ -221,12 +223,6 @@ namespace Sonic3AIR_ModManager
 
         static void ForcedAutoBootStartup()
         {
-            // Save Original Values
-            var autoLaunchOld = MainDataModel.Settings.AutoLaunch;
-            var preStartOld = MainDataModel.Settings.KeepOpenOnLaunch;
-            var postCloseOld = MainDataModel.Settings.KeepOpenOnQuit;
-            var autoLaunchDelayOld = MainDataModel.Settings.AutoLaunchDelay;
-
             // Start Auto-Boot
             AutoBootLoader(true);
 

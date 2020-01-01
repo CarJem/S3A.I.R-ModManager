@@ -13,7 +13,7 @@ using System.Security.Permissions;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("19.12.27.0")]
-[assembly: AssemblyFileVersion("19.12.27.0")]
+[assembly: AssemblyVersion("20.01.01.1")]
+[assembly: AssemblyFileVersion("20.01.01.1")]
 [assembly: Guid("74887941-ce31-48e7-a4ef-75c52ec6415e")]
 

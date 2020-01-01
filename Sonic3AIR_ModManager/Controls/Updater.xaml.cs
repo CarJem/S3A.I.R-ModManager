@@ -44,6 +44,7 @@ namespace Sonic3AIR_ModManager
 
         public Updater(bool _manuallyTriggered = false)
         {
+            Program.AIRUpdaterState = Program.UpdateState.Checking;
             Program.Log.InfoFormat("Checking for A.I.R. Updates...");
             InitializeComponent();
             try { this.Owner = System.Windows.Application.Current.MainWindow; }
@@ -124,65 +125,87 @@ namespace Sonic3AIR_ModManager
 
         private void DownloadCheckComplete()
         {
-            string destination = ProgramPaths.Sonic3AIR_MM_BaseFolder;
-            string path = $"{destination}//{VersionCheckFileName}";
-            FileInfo file = new FileInfo(path);
-            VersionCheckInfo = new AIR_API.VersionCheck(file);
-
-            var block = new Paragraph(new Run(VersionCheckInfo.Details));
-            richTextBox1.Document.Blocks.Add(block);
-
-            string settingsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR" + "\\settings.json";
-            FileInfo settingsFile = new FileInfo(settingsPath);
-
-
-            file.Delete();
-
-            if (File.Exists(settingsPath))
+            try
             {
-                Version LatestVersion = GetLatestVersion(settingsFile);
-                if (LatestVersion != null)
+                string destination = ProgramPaths.Sonic3AIR_MM_BaseFolder;
+                string path = $"{destination}//{VersionCheckFileName}";
+                FileInfo file = new FileInfo(path);
+                VersionCheckInfo = new AIR_API.VersionCheck(file);
+
+                var block = new Paragraph(new Run(VersionCheckInfo.Details));
+                richTextBox1.Document.Blocks.Add(block);
+
+                string settingsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Sonic3AIR" + "\\settings.json";
+                FileInfo settingsFile = new FileInfo(settingsPath);
+
+
+                file.Delete();
+
+                if (File.Exists(settingsPath))
                 {
-                    var result = LatestVersion.CompareTo(VersionCheckInfo.Version);
-                    var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
-                    if (result < 0)
+                    Version LatestVersion = GetLatestVersion(settingsFile);
+                    if (LatestVersion != null)
                     {
-                        if (result2 < 0)
+                        var result = LatestVersion.CompareTo(VersionCheckInfo.Version);
+                        var result2 = CheckFromSelectedVersion(VersionCheckInfo.Version);
+                        if (result < 0)
                         {
-                            Program.AIRUpdateResults = Program.UpdateResult.OutOfDate;
-                            Program.CheckedForUpdateOnStartup = true;
+                            if (result2 < 0)
+                            {
+                                Program.AIRUpdateResults = Program.UpdateResult.OutOfDate;
+                                Program.CheckedForUpdateOnStartup = true;
+                            }
+                            else
+                            {
+                                Program.AIRUpdateResults = Program.UpdateResult.UpToDate;
+                                Program.CheckedForUpdateOnStartup = true;
+                            }
+
                         }
                         else
                         {
                             Program.AIRUpdateResults = Program.UpdateResult.UpToDate;
                             Program.CheckedForUpdateOnStartup = true;
                         }
-
                     }
                     else
                     {
-                        Program.AIRUpdateResults = Program.UpdateResult.UpToDate;
+                        Program.AIRUpdateResults = Program.UpdateResult.ValueNull;
                         Program.CheckedForUpdateOnStartup = true;
                     }
-                } 
+                }
                 else
                 {
-                    Program.AIRUpdateResults = Program.UpdateResult.ValueNull;
+                    Program.AIRUpdateResults = Program.UpdateResult.FileNotFound;
                     Program.CheckedForUpdateOnStartup = true;
                 }
-            }
-            else
-            {
-                Program.AIRUpdateResults = Program.UpdateResult.FileNotFound;
-                Program.CheckedForUpdateOnStartup = true;
-            }
 
-            if (Program.AIRUpdateResults == Program.UpdateResult.OutOfDate)
-            {
-                updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
-                if (ShowDialog() == true)
+                if (Program.AIRUpdateResults == Program.UpdateResult.OutOfDate || Program.AIRUpdateResults == Program.UpdateResult.ValueNull)
                 {
-                    DownloadUpdate();
+                    updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_Avaliable");
+                    if (ShowDialog() == true)
+                    {
+                        DownloadUpdate();
+                    }
+                    else
+                    {
+                        Program.AIRUpdaterState = Program.UpdateState.Finished;
+                        Close();
+                    }
+                }
+                else if (ManuallyTriggered && (Program.AIRUpdateResults == Program.UpdateResult.UpToDate || Program.AIRUpdateResults == Program.UpdateResult.ValueNull))
+                {
+                    ManuallyTriggered = false;
+                    updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_UpToDate");
+                    if (ShowDialog() == true)
+                    {
+                        DownloadUpdate();
+                    }
+                    else
+                    {
+                        Program.AIRUpdaterState = Program.UpdateState.Finished;
+                        Close();
+                    }
                 }
                 else
                 {
@@ -190,25 +213,11 @@ namespace Sonic3AIR_ModManager
                     Close();
                 }
             }
-            else if (ManuallyTriggered && Program.AIRUpdateResults == Program.UpdateResult.UpToDate)
+            catch (Exception ex)
             {
-                ManuallyTriggered = false;
-                updateMessageLabel.Text = Program.LanguageResource.GetString("Updater_UpToDate");
-                if (ShowDialog() == true)
-                {
-                    DownloadUpdate();
-                }
-                else
-                {
-                    Program.AIRUpdaterState = Program.UpdateState.Finished;
-                    Close();
-                }
+                throw ex;
             }
-            else
-            {
-                Program.AIRUpdaterState = Program.UpdateState.Finished;
-                Close();
-            }
+            
 
 
 
@@ -311,10 +320,8 @@ namespace Sonic3AIR_ModManager
                     // TODO : Add Collision Handling
                     Directory.Delete(output2, true);
                 }
-                
-                //TODO : Fix Issues with this Automated Downloading and Installing System
-
-                Directory.Move(Path.Combine(destination, "sonic3air_game"), output2);
+                string download_source = Path.Combine(destination, "sonic3air_game");
+                Microsoft.VisualBasic.FileIO.FileSystem.MoveDirectory(download_source, output2, true);
 
                 MessageBox.Show($"{Program.LanguageResource.GetString("GameInstalledAt")} \"{output2}\"");
 
@@ -327,7 +334,6 @@ namespace Sonic3AIR_ModManager
             catch (Exception ex)
             {
                 MessageBox.Show(Program.LanguageResource.GetString("UpdateFailedError") + Environment.NewLine, ex.Message);
-
                 Program.AIRUpdaterState = Program.UpdateState.Finished;
                 Close();
             }
@@ -398,18 +404,10 @@ namespace Sonic3AIR_ModManager
             string filename = "temp.zip";
             if (remote_filename != "") filename = remote_filename;
 
-            if (File.Exists(Path.Combine(destination, filename)))
-            {
-                UpdateFileName = filename;
-                finishAction?.Invoke();
-            }
-            else
-            {
-                DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{destination}\\{filename}");
-                downloadWindow.DownloadCompleted = finishAction;
-                if (backgroundDownload) downloadWindow.StartBackground();
-                else downloadWindow.Start();
-            }
+            DownloadWindow downloadWindow = new DownloadWindow($"{Program.LanguageResource.GetString("Downloading")} \"{filename}\"", url, $"{destination}\\{filename}");
+            downloadWindow.DownloadCompleted = finishAction;
+            if (backgroundDownload) downloadWindow.StartBackground();
+            else downloadWindow.Start();
             return filename;
 
         }

@@ -56,7 +56,7 @@ namespace Sonic3AIR_ModManager
 
                 if (Program.AutoBootCanceled == false)
                 {
-                    this.Run(new ModManager(true));
+                    this.Run(new ModManager(true, isForced));
                 }
                 else if (!isForced) this.Run(new ModManager(false));
             }
