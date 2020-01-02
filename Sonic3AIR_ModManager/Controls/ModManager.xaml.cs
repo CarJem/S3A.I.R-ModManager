@@ -130,6 +130,7 @@ namespace Sonic3AIR_ModManager
 
             if (ProgramPaths.ValidateInstall(ref ModManagement.S3AIRActiveMods, ref MainDataModel.S3AIRSettings, ref MainDataModel.Global_Settings, ref MainDataModel.Input_Settings) == true)
             {
+                Program.Log.InfoFormat("[ModManager] Installation Validated Succesfully...");
                 Instance = this;
                 ModManagement.UpdateInstance(ref Instance);
                 ProcessLauncher.UpdateInstance(ref Instance);
@@ -148,6 +149,7 @@ namespace Sonic3AIR_ModManager
                 if (autoBoot) GameHandler.LaunchSonic3AIR(isForcedAutoBoot);
                 if (gamebanana_api != "") FileManagement.GamebananaAPI_Install(gamebanana_api);
                 HasInitilizationCompleted = true;
+                Program.Log.InfoFormat("[ModManager] Initilization Completed Succesfully...");
             }
             else
             {

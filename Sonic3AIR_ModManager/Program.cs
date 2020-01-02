@@ -12,7 +12,7 @@ namespace Sonic3AIR_ModManager
     static class Program
     {
         #region Variables
-        public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public static log4net.ILog Log;
 
         public static bool AutoBootCanceled = false;
 
@@ -264,6 +264,10 @@ namespace Sonic3AIR_ModManager
 
         static void StartLogging()
         {
+            log4net.GlobalContext.Properties["MMVersion"] = Version;
+            log4net.Config.XmlConfigurator.Configure();
+            Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
             //ConsoleManager.Show();
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) =>
             {
@@ -271,11 +275,11 @@ namespace Sonic3AIR_ModManager
                 {
                     if (e.Exception.TargetSite != null && e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
                     {
-                        Log.ErrorFormat("[Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
+                        if (Log != null) Log.ErrorFormat("[Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                     }
                     else if (MainDataModel.Settings.ShowFullDebugOutput)
                     {
-                        Log.ErrorFormat("[FULL] [Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
+                        if (Log != null) Log.ErrorFormat("[FULL] [Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
                     }
                 }
 
@@ -289,11 +293,11 @@ namespace Sonic3AIR_ModManager
                         Exception ex = e.ExceptionObject as Exception;
                         if (ex.TargetSite != null && ex.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
                         {
-                            Log.ErrorFormat("[Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex.Message), RemoveNewLineChars(ex.StackTrace));
+                            if (Log != null) Log.ErrorFormat("[Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex.Message), RemoveNewLineChars(ex.StackTrace));
                         }
                         else if (MainDataModel.Settings.ShowFullDebugOutput)
                         {
-                            Log.ErrorFormat("[FULL] [Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex), RemoveNewLineChars(ex.StackTrace));
+                            if (Log != null) Log.ErrorFormat("[FULL] [Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex), RemoveNewLineChars(ex.StackTrace));
                         }
                     }
                 }
@@ -317,12 +321,6 @@ namespace Sonic3AIR_ModManager
         {
             if (Directory.Exists(ProgramPaths.Sonic3AIR_MM_LogsFolder))
             {
-                string app_log_filepath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "app.log");
-
-                string log_filename = string.Format("S3AIR_MM_{0}_{1}.log", string.Format("[{0}]", GetVersionString()), DateTime.Now.ToString("[M-dd-yyyy]_[hh-mm-ss]"));
-                string log_filepath = Path.Combine(ProgramPaths.Sonic3AIR_MM_LogsFolder, log_filename);
-
-                if (File.Exists(app_log_filepath)) File.Copy(app_log_filepath, log_filepath);
                 DirectoryInfo logsFolder = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_LogsFolder);
                 var fileList = logsFolder.GetFiles("*.log", SearchOption.AllDirectories).ToList();
                 if (fileList.Count > 10)
