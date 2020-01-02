@@ -1,2 +1,2 @@
 # Sonic 3 A.I.R. Mod Manager
-TO-DO: Make a Description
+The ONE and ONLY Mod Loader, and Utility Tool for the Fan Game "Sonic 3 A.I.R. - Angel Island Revisited"
