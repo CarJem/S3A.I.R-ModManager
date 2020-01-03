@@ -131,7 +131,7 @@ namespace Sonic3AIR_ModManager
             bool KeepOpenOnLaunch = (!isForcedAutoBoot ? MainDataModel.Settings.KeepOpenOnLaunch : false);
 
             isGameRunning = true;
-            ForcedAutoBoot_SetSettings(true);
+            if (isForcedAutoBoot) ForcedAutoBoot_SetSettings(true);
             if (!KeepOpenOnLaunch)
             {
                 Instance.Dispatcher.BeginInvoke((Action)(() =>
@@ -157,7 +157,7 @@ namespace Sonic3AIR_ModManager
 
             Program.Log.InfoFormat("Killing Sonic 3 A.I.R. via Mod Manager...");
             isGameRunning = false;
-            ForcedAutoBoot_SetSettings(false);
+            if (isForcedAutoBoot) ForcedAutoBoot_SetSettings(false);
             if (!KeepOpenOnQuit) Environment.Exit(0);
             else if (!KeepOpenOnLaunch)
             {

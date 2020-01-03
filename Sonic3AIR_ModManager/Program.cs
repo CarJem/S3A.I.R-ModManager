@@ -91,7 +91,6 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-
         #region Main Region
         /// <summary>
         /// The main entry point for the application.
@@ -107,29 +106,37 @@ namespace Sonic3AIR_ModManager
         static void RealMain(string[] args)
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
-            try
+            ProgramPaths.CreateMissingModManagerFolders();
+            MMSettingsManagement.LoadModManagerSettings();
+            StartDiscord();
+            isDebugging();
+            PraseArguments(args);
+            isDeveloper = Arguments.dev_mode;
+            var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
+            if (exists)
             {
-                ProgramPaths.CreateMissingModManagerFolders();
-                MMSettingsManagement.LoadModManagerSettings();
-                StartDiscord();
-                isDebugging();
-                Program.Log.InfoFormat("Prasing Launch Arguments...");
-                Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o => { Arguments = o; });
-                isDeveloper = Arguments.dev_mode;
-                var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
-                if (exists)
-                {
-                    Log.InfoFormat("Application Already Open! Adding Potential URL to Gamebanana 1-Click Install Handler...");
-                    GamebannaAPIHandler(args);
-                }
-                else StartApplication();
-                EndDiscord();
+                Log.InfoFormat("Application Already Open! Adding Potential URL to Gamebanana 1-Click Install Handler...");
+                GamebannaAPIHandler(args);
             }
-            catch (Exception ex)
-            {
-                Log.ErrorFormat("[Fatal Error] {0}", ex.Message);
-            }
+            else StartApplication();
+            EndDiscord();
             Log.InfoFormat("Shuting Down!");
+        }
+
+
+        static void PraseArguments(string[] args)
+        {
+            Program.Log.InfoFormat("Prasing Launch Arguments...");
+            if (args != null && args.Length > 0)
+            {
+                var prasedArgs = Parser.Default.ParseArguments<Options>(args);
+                if (prasedArgs != null)
+                {
+                    prasedArgs.WithParsed<Options>(o => { Arguments = o; });
+                }
+                else Arguments = new Options();
+            }
+            else Arguments = new Options();
         }
         #endregion
 
