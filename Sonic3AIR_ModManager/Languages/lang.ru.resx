@@ -1,0 +1,1493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutTab" xml:space="preserve">
+    <value>О программе</value>
+    
+  </data>
+  <data name="AIRInternalSettings" xml:space="preserve">
+    <value>Внутренние настройки A.I.R.</value>
+    
+  </data>
+  <data name="AIRMedia" xml:space="preserve">
+    <value>Соцсети A.I.R....</value>
+    
+  </data>
+  <data name="AIRMMPlaces" xml:space="preserve">
+    <value>Места менеджера модов A.I.R.</value>
+    
+  </data>
+  <data name="AIRPlaces" xml:space="preserve">
+    <value>Места A.I.R.</value>
+    
+  </data>
+  <data name="AutoBootDelay" xml:space="preserve">
+    <value>Задержка (в секундах):</value>
+    
+  </data>
+  <data name="ButtonMappings" xml:space="preserve">
+    <value>Настройка управления</value>
+    
+  </data>
+  <data name="CarJemTwitter" xml:space="preserve">
+    <value>CarJem @ Твиттер</value>
+    
+  </data>
+  <data name="CheckforAIRUpdatesOnStart" xml:space="preserve">
+    <value>Проверять обновления A.I.R. при запуске программы.</value>
+    
+  </data>
+  <data name="CheckForGameUpdatesExpandable" xml:space="preserve">
+    <value>Проверить обновления игры...</value>
+    
+  </data>
+  <data name="CopyFilePath" xml:space="preserve">
+    <value>Скопировать путь к файлу</value>
+    
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+    
+  </data>
+  <data name="DeviceIdentifierNames" xml:space="preserve">
+    <value>Имена устройств</value>
+    
+  </data>
+  <data name="EnableAutoBootMode" xml:space="preserve">
+    <value>Включить режим авто-запуска</value>
+    
+  </data>
+  <data name="EnableModStacking" xml:space="preserve">
+    <value>Включить укладку модов</value>
+    
+  </data>
+  <data name="EnableModStacking_Note1" xml:space="preserve">
+    <value>ВАЖНО: Только для версий A.I.R.</value>
+    
+  </data>
+  <data name="EnableModStacking_Note2" xml:space="preserve">
+    <value>v19.09.19.0 и выше</value>
+    
+  </data>
+  <data name="Eukaryot3KTwitter" xml:space="preserve">
+    <value>Eukaryot3K @ Твиттер</value>
+    
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выйти</value>
+    
+  </data>
+  <data name="FailSafeMode" xml:space="preserve">
+    <value>Безопасный запуск</value>
+    
+  </data>
+  <data name="FixGlitches" xml:space="preserve">
+    <value>Исправить баги</value>
+    
+  </data>
+  <data name="GameBannaURLHandler" xml:space="preserve">
+    <value>Настроить Gamebanana URL Handler...</value>
+    
+  </data>
+  <data name="GeneralTab" xml:space="preserve">
+    <value>Общие</value>
+    
+  </data>
+  <data name="GuidesTab" xml:space="preserve">
+    <value>Гайды/Шорткаты</value>
+    
+  </data>
+  <data name="InputTab" xml:space="preserve">
+    <value>Управление</value>
+    
+  </data>
+  <data name="InstalledVersions" xml:space="preserve">
+    <value>Установленные версии</value>
+    
+  </data>
+  <data name="ModManagerOptions" xml:space="preserve">
+    <value>Настройки Менеджера модов</value>
+    
+  </data>
+  <data name="ModsTab" xml:space="preserve">
+    <value>Моды</value>
+    
+  </data>
+  <data name="ModsTab_ModProperties" xml:space="preserve">
+    <value>Свойства мода</value>
+    
+  </data>
+  <data name="MoreExpandable" xml:space="preserve">
+    <value>Более...</value>
+    
+  </data>
+  <data name="NoInstalledVersions" xml:space="preserve">
+    <value>Нет Установленных Версий</value>
+    
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Открыть</value>
+    
+  </data>
+  <data name="OpenAppDataFolder" xml:space="preserve">
+    <value>Открыть директорию данных A.I.R.</value>
+    
+  </data>
+  <data name="OpenConfigFile" xml:space="preserve">
+    <value>Открыть директорию настроек A.I.R.</value>
+    
+  </data>
+  <data name="OpenDownloadsFolder" xml:space="preserve">
+    <value>Открыть директорию загрузок Менеджера Модов</value>
+    
+  </data>
+  <data name="OpenEXEFolder" xml:space="preserve">
+    <value>Открыть директорию A.I.R.</value>
+    
+  </data>
+  <data name="OpenLocationExpandable" xml:space="preserve">
+    <value>Открыть директорию...</value>
+    
+  </data>
+  <data name="OpenModFolder" xml:space="preserve">
+    <value>Открыть Папку с Модами</value>
+    
+  </data>
+  <data name="OpenModInstructions" xml:space="preserve">
+    <value>Инструкции моддинга Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="OpenModsFolder" xml:space="preserve">
+    <value>Открыть директорию модов A.I.R.</value>
+    
+  </data>
+  <data name="OpenModTemplatesFolder" xml:space="preserve">
+    <value>Открыть директорию шаблонов модов A.I.R.</value>
+    
+  </data>
+  <data name="OpenModURL" xml:space="preserve">
+    <value>Открыть URL мода</value>
+    
+  </data>
+  <data name="OpenSampleModsFolder" xml:space="preserve">
+    <value>Открыть директорию образцов модов A.I.R.</value>
+    
+  </data>
+  <data name="OpenSettingsFile" xml:space="preserve">
+    <value>Открыть файл настроек A.I.R.</value>
+    
+  </data>
+  <data name="OpenSystemSettingsExpandable" xml:space="preserve">
+    <value>Открыть настройки системы...</value>
+    
+  </data>
+  <data name="OpenUserManual" xml:space="preserve">
+    <value>Мануал Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="OpenVersionsFolder" xml:space="preserve">
+    <value>Открыть директорию версий Менеджера Модов</value>
+    
+  </data>
+  <data name="RecordingsTab" xml:space="preserve">
+    <value>Записи Игр</value>
+    
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Обновить</value>
+    
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Перезагрузить</value>
+    
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Удалить</value>
+    
+  </data>
+  <data name="RemoveMod" xml:space="preserve">
+    <value>Удалить мод</value>
+    
+  </data>
+  <data name="S3AIRGB" xml:space="preserve">
+    <value>S3AIR @ Gamebanana</value>
+    
+  </data>
+  <data name="S3AIRHomepage" xml:space="preserve">
+    <value>Домашняя страница Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="S3KROMPathLabel" xml:space="preserve">
+    <value>Путь к РОМу Sonic 3K:</value>
+    
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+    
+  </data>
+  <data name="Save&amp;Load" xml:space="preserve">
+    <value>Save &amp; Load</value>
+    
+  </data>
+  <data name="SettingsTab" xml:space="preserve">
+    <value>Настройки</value>
+    
+  </data>
+  <data name="Sonic3AIRPathLabel" xml:space="preserve">
+    <value>Путь 3 A.I.R.:</value>
+    
+  </data>
+  <data name="StayOpenOnExit" xml:space="preserve">
+    <value>Оставаться открытым при выходе из игры</value>
+    
+  </data>
+  <data name="StayOpenOnLoad" xml:space="preserve">
+    <value>Оставаться открытым при запуске игры</value>
+    
+  </data>
+  <data name="ToolsTab" xml:space="preserve">
+    <value>Инструменты</value>
+    
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Загрузить</value>
+    
+  </data>
+  <data name="VersionsTab" xml:space="preserve">
+    <value>Версии</value>
+    
+  </data>
+  <data name="AIRVersion" xml:space="preserve">
+    <value>Версия A.I.R.</value>
+    
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Версия</value>
+    
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>Автор</value>
+    
+  </data>
+  <data name="ModManagerVersion" xml:space="preserve">
+    <value>Версия Менеджера Модов</value>
+    
+  </data>
+  <data name="Sonic3KRomFile" xml:space="preserve">
+    <value>РОМ Sonic 3K</value>
+    
+  </data>
+  <data name="SelectSonic3KRomFile" xml:space="preserve">
+    <value>Выбрать РОМ Sonic 3K...</value>
+    
+  </data>
+  <data name="SonicAIRVersionZIP" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Version ZIP</value>
+    
+  </data>
+  <data name="SelectSonicAIRVersionZIP" xml:space="preserve">
+    <value>Выбрать ZIP версии Sonic 3 A.I.RЫ...</value>
+    
+  </data>
+  <data name="AddAMod" xml:space="preserve">
+    <value>Добавить мод...</value>
+    
+  </data>
+  <data name="RemoveSelectedMod" xml:space="preserve">
+    <value>Удалить выбранный мод...</value>
+    
+  </data>
+  <data name="IncreaseModPriority" xml:space="preserve">
+    <value>Увеличить приоритет выбранного мода...</value>
+    
+  </data>
+  <data name="IncreaseModPriorityToMax" xml:space="preserve">
+    <value>Увеличить приоритет выбранного мода до максимума...</value>
+    
+  </data>
+  <data name="DecreaseModPriority" xml:space="preserve">
+    <value>Уменьшить приоритет выбранного мода...</value>
+    
+  </data>
+  <data name="DecreaseModPriorityToMin" xml:space="preserve">
+    <value>Уменьшить приоритет выбранного мода до минимума...</value>
+    
+  </data>
+  <data name="RecordingPathCopiedToClipboard" xml:space="preserve">
+    <value>Путь к файлу записи скопирован в буфер обмена!</value>
+    
+  </data>
+  <data name="AddNewDeviceTitle" xml:space="preserve">
+    <value>Добавить новое устройство...</value>
+    
+  </data>
+  <data name="AddNewDeviceDescription" xml:space="preserve">
+    <value>Введите имя устройства как в настройках системы или введите * чтобы выбрать все устройства.</value>
+    
+  </data>
+  <data name="DeleteDeviceTitle" xml:space="preserve">
+    <value>Удалить устройство</value>
+    
+  </data>
+  <data name="EnterModURL" xml:space="preserve">
+    <value>Ввести URL мода...</value>
+    
+  </data>
+  <data name="InputMappingError1" xml:space="preserve">
+    <value>Ошибка загрузки файла настройки управления!
+ Убедитесь, что ваша игра последней версии и что путь к игре поставлен правильно в Настройках.</value>
+    
+  </data>
+  <data name="InputMappingError2" xml:space="preserve">
+    <value>Произошла ошибка при чтении файла настроек в папке этой версии!
+ Убедитесь, что с ним всё в порядке или переустановите игру</value>
+    
+  </data>
+  <data name="InputMappingError3" xml:space="preserve">
+    <value>Файл настроек не существует в папке игры
+ Убедитесь, что файл существует или переустановите игру</value>
+    
+  </data>
+  <data name="CollectionFilesCouldNotBeFound1" xml:space="preserve">
+    <value>Следующие файлы не были найдены:</value>
+    
+  </data>
+  <data name="CollectionFilesCouldNotBeFound2" xml:space="preserve">
+    <value>Если вы ещё не запускали Sonic 3 A.I.R. yet, запустите её хотя бы один раз перед тем как запускать Менеджер Модов!</value>
+    
+  </data>
+  <data name="CollectionFilesCouldNotBeFound3" xml:space="preserve">
+    <value>Если запускали, то убедитесь что это директории существуют. Менеджер Модов не может работать без них</value>
+    
+  </data>
+  <data name="AIRChangePathNoLongerExists" xml:space="preserve">
+    <value>Файл с настройками больше не существует. Запустите A.I.R. снова за пределами Менеджера Модов и попробуйте снова</value>
+    
+  </data>
+  <data name="UnableToRemoveVersion" xml:space="preserve">
+    <value>Не получилось удалить версию!</value>
+    
+  </data>
+  <data name="UnableToDeleteFile" xml:space="preserve">
+    <value>Не получилось удалить файл!</value>
+    
+  </data>
+  <data name="PleaseRefreshTheModList" xml:space="preserve">
+    <value>Обновите список модов!</value>
+    
+  </data>
+  <data name="LogFileNotFound" xml:space="preserve">
+    <value>Файл с логом не найден</value>
+    
+  </data>
+  <data name="InvalidURL" xml:space="preserve">
+    <value>Неправильный URL</value>
+    
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Загрузка</value>
+    
+  </data>
+  <data name="Input_MULTI" xml:space="preserve">
+    <value>[MULTI]</value>
+    
+  </data>
+  <data name="Input_NULL" xml:space="preserve">
+    <value>[NULL]</value>
+    
+  </data>
+  <data name="Input_NONE" xml:space="preserve">
+    <value>[NONE]</value>
+    
+  </data>
+  <data name="Input_INPUT" xml:space="preserve">
+    <value>[INPUT]</value>
+    
+  </data>
+  <data name="Input_UNSUPPORTED" xml:space="preserve">
+    <value>[UNSUPPORTED]</value>
+    
+  </data>
+  <data name="Ok_Button" xml:space="preserve">
+    <value>OK</value>
+    
+  </data>
+  <data name="Cancel_Button" xml:space="preserve">
+    <value>Отмена</value>
+    
+  </data>
+  <data name="AutoBoot_Initalizing" xml:space="preserve">
+    <value>Инициализация...</value>
+    
+  </data>
+  <data name="AutoBoot_CheckingForUpdates" xml:space="preserve">
+    <value>Проверка обновлений...</value>
+    
+  </data>
+  <data name="AutoBoot_LaunchingIn" xml:space="preserve">
+    <value>Запуск через</value>
+    
+  </data>
+  <data name="Buttons_A" xml:space="preserve">
+    <value>A</value>
+    
+  </data>
+  <data name="Buttons_B" xml:space="preserve">
+    <value>B</value>
+    
+  </data>
+  <data name="Buttons_Back" xml:space="preserve">
+    <value>Back</value>
+    
+  </data>
+  <data name="Buttons_Down" xml:space="preserve">
+    <value>Вниз</value>
+    
+  </data>
+  <data name="Buttons_Left" xml:space="preserve">
+    <value>Влево</value>
+    
+  </data>
+  <data name="Buttons_Right" xml:space="preserve">
+    <value>Вправо</value>
+    
+  </data>
+  <data name="Buttons_Start" xml:space="preserve">
+    <value>Старт</value>
+    
+  </data>
+  <data name="Buttons_Up" xml:space="preserve">
+    <value>Вверх</value>
+    
+  </data>
+  <data name="Buttons_X" xml:space="preserve">
+    <value>X</value>
+    
+  </data>
+  <data name="Buttons_Y" xml:space="preserve">
+    <value>Y</value>
+    
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+    
+  </data>
+  <data name="ForceStart" xml:space="preserve">
+    <value>Форсированный запуск</value>
+    
+  </data>
+  <data name="DeleteItemConfirmation" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить</value>
+    
+  </data>
+  <data name="ErrorWithLoading" xml:space="preserve">
+    <value>Ошибка при загрузке</value>
+    
+  </data>
+  <data name="GameInstalledAt" xml:space="preserve">
+    <value>Игра была установлена в</value>
+    
+  </data>
+  <data name="JSONErrorPossible" xml:space="preserve">
+    <value>(Вероятно, ошибка JSON; Убедитесь, что файл mod.json написан правильно!)</value>
+    
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Причина</value>
+    
+  </data>
+  <data name="RecordingUploaded1" xml:space="preserve">
+    <value>Файл загружен в File.io, срок его действия истекает через 1 неделю и используется один раз:</value>
+    
+  </data>
+  <data name="RecordingUploaded2" xml:space="preserve">
+    <value>(URL скопирован в буфер обмена):</value>
+    
+  </data>
+  <data name="RemoveInputDeviceConfirmation1" xml:space="preserve">
+    <value>Подтверждение: вы хотите удалить</value>
+    
+  </data>
+  <data name="RemoveInputDeviceConfirmation2" xml:space="preserve">
+    <value>из списка приемлемых устройств управления?</value>
+    
+  </data>
+  <data name="RemoveVersionConfirmation" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить версию</value>
+    
+  </data>
+  <data name="S3AIRPathNotSet" xml:space="preserve">
+    <value>Путь к Sonic 3 A.I.R. не установлен!</value>
+    
+  </data>
+  <data name="SpecifiedFileDirNotExist" xml:space="preserve">
+    <value>Указанный файл или каталог не существует!</value>
+    
+  </data>
+  <data name="UnableToValididatePath" xml:space="preserve">
+    <value>Невозможно проверить путь</value>
+    
+  </data>
+  <data name="AIRCanNotStartNoPath" xml:space="preserve">
+    <value>Путь не указан. Не удается запустить Sonic 3 A.I.R!</value>
+    
+  </data>
+  <data name="EXEFileDialogFilter" xml:space="preserve">
+    <value>Запускаемый файл</value>
+    
+  </data>
+  <data name="EXEFileDialogTitle" xml:space="preserve">
+    <value>Выбрать .exe Sonic 3 A.I.R....</value>
+    
+  </data>
+  <data name="LanguageLabel" xml:space="preserve">
+    <value>Язык:</value>
+    
+  </data>
+  <data name="MissingAIRSetNowAlert" xml:space="preserve">
+    <value>Путь к файлу Sonic 3 A.I.R. не задан, установить его сейчас?</value>
+    
+  </data>
+  <data name="ModFileDialogFilter" xml:space="preserve">
+    <value>Мод Sonic 3 AIR</value>
+    
+  </data>
+  <data name="ModFileDialogTitle" xml:space="preserve">
+    <value>Выбрать файл сжатого мода...</value>
+    
+  </data>
+  <data name="NoModDescript" xml:space="preserve">
+    <value>Описание не предоставлено.</value>
+    
+  </data>
+  <data name="KeybindingsLabel" xml:space="preserve">
+    <value>Сочетания клавиш:</value>
+    
+  </data>
+  <data name="EditExpandable" xml:space="preserve">
+    <value>Редактировать...</value>
+    
+  </data>
+  <data name="KeyboardRadioButton" xml:space="preserve">
+    <value>Клавиатура</value>
+    
+  </data>
+  <data name="KeyLabel" xml:space="preserve">
+    <value>Клавиша:</value>
+    
+  </data>
+  <data name="ControllerRadioButton" xml:space="preserve">
+    <value>Контроллер</value>
+    
+  </data>
+  <data name="ButtonLabel" xml:space="preserve">
+    <value>Кнопка:</value>
+    
+  </data>
+  <data name="AxisPOVLabel" xml:space="preserve">
+    <value>Ось/Крестовина:</value>
+    
+  </data>
+  <data name="IDLabel" xml:space="preserve">
+    <value>ID:</value>
+    
+  </data>
+  <data name="DirectionGB" xml:space="preserve">
+    <value>Направление</value>
+    
+  </data>
+  <data name="TypeGB" xml:space="preserve">
+    <value>Тип</value>
+    
+  </data>
+  <data name="AxisRadioButton" xml:space="preserve">
+    <value>Ось</value>
+    
+  </data>
+  <data name="POVRadioButton" xml:space="preserve">
+    <value>Крестовина</value>
+    
+  </data>
+  <data name="CustomStringLabel" xml:space="preserve">
+    <value>Пользовательская строка:</value>
+    
+  </data>
+  <data name="ThumbstickRadioButton" xml:space="preserve">
+    <value>Стик</value>
+    
+  </data>
+  <data name="CustomAdvancedLabel" xml:space="preserve">
+    <value>Пользовательский/Расширенный:</value>
+    
+  </data>
+  <data name="ResultLabel" xml:space="preserve">
+    <value>Результат:</value>
+    
+  </data>
+  <data name="SelectInputTitleExpandable" xml:space="preserve">
+    <value>Выбрать управление...</value>
+    
+  </data>
+  <data name="EditKeybindingsTitleExpandable" xml:space="preserve">
+    <value>Изменить сочетания клавиш...</value>
+    
+  </data>
+  <data name="UpdateAvaliable" xml:space="preserve">
+    <value>Доступно обновление! Хотите обновиться сейчас??</value>
+    
+  </data>
+  <data name="UpdaterTitle" xml:space="preserve">
+    <value>Программа обновлений</value>
+    
+  </data>
+  <data name="Yes_Button" xml:space="preserve">
+    <value>Да</value>
+    
+  </data>
+  <data name="No_Button" xml:space="preserve">
+    <value>Нет</value>
+    
+  </data>
+  <data name="StartupFailureError" xml:space="preserve">
+    <value>Sonic 3 A.I.R устарел, используйте версию 19.08.17.0 или выше! (и запустите его хотя бы один раз)</value>
+    
+  </data>
+  <data name="DeleteKeybindTitle" xml:space="preserve">
+    <value>Удалить сочетание клавиш</value>
+    
+  </data>
+  <data name="DeleteKeybindVerification1" xml:space="preserve">
+    <value>Подтверждение: хотите удалить</value>
+    
+  </data>
+  <data name="DeleteKeybindVerification2" xml:space="preserve">
+    <value>сочетание клавиш?</value>
+    
+  </data>
+  <data name="KeybindingsExistingNote" xml:space="preserve">
+    <value>(Существующий)</value>
+    
+  </data>
+  <data name="Updater_Avaliable" xml:space="preserve">
+    <value>Доступно обновление! Хотите обновить сейчас??</value>
+    
+  </data>
+  <data name="Updater_UpToDate" xml:space="preserve">
+    <value>У вас последняя версия. Вы хотите загрузить её снова?</value>
+    
+  </data>
+  <data name="SettingsVersionLabel" xml:space="preserve">
+    <value>Версия настроек A.I.R.</value>
+    
+  </data>
+  <data name="AIRDevMode" xml:space="preserve">
+    <value>Включить режим разработчика</value>
+    
+  </data>
+  <data name="ImportExpandable" xml:space="preserve">
+    <value>Импортировать...</value>
+    
+  </data>
+  <data name="ExportExpanable" xml:space="preserve">
+    <value>Экспортировать...</value>
+    
+  </data>
+  <data name="ShowLogFileButton" xml:space="preserve">
+    <value>Показать лог A.I.R.</value>
+    
+  </data>
+  <data name="PathColumnHeader" xml:space="preserve">
+    <value>Путь</value>
+    
+  </data>
+  <data name="AIRVersionColumnHeader" xml:space="preserve">
+    <value>Версия A.I.R.</value>
+    
+  </data>
+  <data name="TimestampColumnHeader" xml:space="preserve">
+    <value>Предмет</value>
+    
+  </data>
+  <data name="VersionColumnHeader" xml:space="preserve">
+    <value>Версия</value>
+    
+  </data>
+  <data name="SaveInputMappingsButton" xml:space="preserve">
+    <value>Сохранить настройки управления</value>
+    
+  </data>
+  <data name="ResetMappingsToDefaultButton" xml:space="preserve">
+    <value>Сбросить до значений по умолчанию</value>
+    
+  </data>
+  <data name="ResetInputMappingsDefaultFormTitle" xml:space="preserve">
+    <value>Сбросить настройки управления до начальных</value>
+    
+  </data>
+  <data name="ResetInputMappingsDefaultFormMessage" xml:space="preserve">
+    <value>Вы уверены? Ваши текущие изменения будут потеряны!</value>
+    
+  </data>
+  <data name="DetectControllerExpandable" xml:space="preserve">
+    <value>Обнаружить контроллер...</value>
+    
+  </data>
+  <data name="DetectGamepadInputExpandable" xml:space="preserve">
+    <value>Обнаружить ввод контроллера...</value>
+    
+  </data>
+  <data name="JoystickInputSelectorFormTitle" xml:space="preserve">
+    <value>Выбрать контроллер...</value>
+    
+  </data>
+  <data name="NoControllerFound" xml:space="preserve">
+    <value>Контроллеры не найдены!</value>
+    
+  </data>
+  <data name="Select_Button" xml:space="preserve">
+    <value>Выбрать</value>
+    
+  </data>
+  <data name="WaitingForInputDialogLabel" xml:space="preserve">
+    <value>Ожидание ввода...</value>
+    
+  </data>
+  <data name="Reselect_Input_Button" xml:space="preserve">
+    <value>Выбрать другое управление</value>
+    
+  </data>
+  <data name="WaitingForInputDialogLabelTag" xml:space="preserve">
+    <value>Выбранное управление:</value>
+    
+  </data>
+  <data name="CheckForModManagerUpdatesButton" xml:space="preserve">
+    <value>Проверить наличие обновлений Менеджера Модов...</value>
+    
+  </data>
+  <data name="NewStrings" xml:space="preserve">
+    <value>=========================</value>
+    
+  </data>
+  <data name="AIROptionsTab" xml:space="preserve">
+    <value>Натройки A.I.R.</value>
+    
+    
+    
+  </data>
+  <data name="UseDarkTheme" xml:space="preserve">
+    <value>Использовать тёмную тему</value>
+    
+    
+  </data>
+  <data name="StartupWindowLabel" xml:space="preserve">
+    <value>Вид игры при запуске:</value>
+    
+    
+  </data>
+  <data name="FullscreenOption1" xml:space="preserve">
+    <value>В окне</value>
+    
+    
+  </data>
+  <data name="FullscreenOption2" xml:space="preserve">
+    <value>Полный экран</value>
+    
+    
+  </data>
+  <data name="FullscreenOption3" xml:space="preserve">
+    <value>Эксклюзивный полноэкранный режим</value>
+    
+    
+  </data>
+  <data name="UnderstoodButton" xml:space="preserve">
+    <value>Понятно</value>
+    
+    
+  </data>
+  <data name="AIRLaunchOptionsGroupHeader" xml:space="preserve">
+    <value>Опции запуска A.I.R.</value>
+    
+    
+  </data>
+  <data name="DefaultLaunchOptionItemText" xml:space="preserve">
+    <value>По умолчанию (НЕТ)</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsWarning1" xml:space="preserve">
+    <value>Игнорируется, если для Стартового уровня установлено значение "НЕТ"</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsWarning2" xml:space="preserve">
+    <value>Игнорируется, если в качестве Стартового уровня выбрано всё КРОМЕ "НЕТ"</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsPlayerS" xml:space="preserve">
+    <value>Ёж Соник</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsPlayerST" xml:space="preserve">
+    <value>Ёж Соник и Майлз "Тейлз" Прауэр</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsPlayerK" xml:space="preserve">
+    <value>Ехидна Наклз</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsPlayerKT" xml:space="preserve">
+    <value>Ехидна Наклз и Майлз "Тейлз" Прауэр (If Unlocked)</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsPlayerT" xml:space="preserve">
+    <value>Майлз "Тейлз" Прауэр</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsStartingPlayerLabel" xml:space="preserve">
+    <value>Персонаж при запуске</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsStartingSceneLabel" xml:space="preserve">
+    <value>Стартовый уровень</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsStartingPhaseLabel" xml:space="preserve">
+    <value>Стартовая фаза</value>
+    
+    
+  </data>
+  <data name="LaunchOptionsForewarning" xml:space="preserve">
+    <value>NOTE: Это параметры только для отладки!
+ Предназначен для разработчиков модов и целей отладки. Может нарушить такие функции, как достижения.
+ Будьте осторожны!</value>
+    
+    
+  </data>
+  <data name="NewControllerEntryName" xml:space="preserve">
+    <value>Новый Контроллер</value>
+    
+  </data>
+  <data name="AddInputDeviceDialogTitle" xml:space="preserve">
+    <value>Добавить новое устройство управления…</value>
+    
+  </data>
+  <data name="AddInputDeviceDialogCaption" xml:space="preserve">
+    <value>Введите имя устройства:</value>
+    
+  </data>
+  <data name="AddInputDeviceError1" xml:space="preserve">
+    <value>уже существует в каталоге, выберите другое имя!</value>
+    
+  </data>
+  <data name="AddInputDeviceError2" xml:space="preserve">
+    <value>используются недопустимые символы, пожалуйста, попробуйте использовать только нижнее подчеркивание и цифры/алфавит.</value>
+    
+  </data>
+  <data name="NewSubFolderEntryName" xml:space="preserve">
+    <value>new_sub_folder</value>
+    
+  </data>
+  <data name="CreateSubFolderDialogTitle" xml:space="preserve">
+    <value>Создать новую подпапку</value>
+    
+  </data>
+  <data name="CreateSubFolderDialogCaption1" xml:space="preserve">
+    <value>Введите имя подпапки, которую вы хотите создать.</value>
+    
+  </data>
+  <data name="CreateSubFolderDialogCaption2" xml:space="preserve">
+    <value>Это имя папки уже существует!</value>
+    
+  </data>
+  <data name="NewDeviceEntryName" xml:space="preserve">
+    <value>Новое Устройство</value>
+    
+  </data>
+  <data name="AuthorSection" xml:space="preserve">
+    <value>Автор:</value>
+    
+  </data>
+  <data name="NameSection" xml:space="preserve">
+    <value>Название:</value>
+    
+  </data>
+  <data name="ModVersionSection" xml:space="preserve">
+    <value>Версия мода:</value>
+    
+  </data>
+  <data name="GameVersionSection" xml:space="preserve">
+    <value>Версия игры:</value>
+    
+  </data>
+  <data name="ExistingModSection" xml:space="preserve">
+    <value>Существующий мод:</value>
+    
+  </data>
+  <data name="ConflictingModSection" xml:space="preserve">
+    <value>Конфликтующий мод:</value>
+    
+  </data>
+  <data name="ConflictDialogCaption" xml:space="preserve">
+    <value>Как бы вы хотели разрешить этот конфликт?</value>
+    
+  </data>
+  <data name="MakeCopyButton" xml:space="preserve">
+    <value>Сделать копию</value>
+    
+  </data>
+  <data name="OverwriteButton" xml:space="preserve">
+    <value>Перезаписать</value>
+    
+  </data>
+  <data name="AddNewSubFolderButton" xml:space="preserve">
+    <value>Добавить новую подпапку…</value>
+    
+  </data>
+  <data name="RemoveCurrentFolderButton" xml:space="preserve">
+    <value>Удалить текущую папку</value>
+    
+  </data>
+  <data name="CurrentFolderLabel" xml:space="preserve">
+    <value>Текущая папка:</value>
+    
+  </data>
+  <data name="Viewer_ActiveModsTab" xml:space="preserve">
+    <value>Активные Моды</value>
+    
+  </data>
+  <data name="Viewer_ModsTab" xml:space="preserve">
+    <value>Моды</value>
+    
+  </data>
+  <data name="OpenExternally" xml:space="preserve">
+    <value>Открыто Внешне…</value>
+    
+  </data>
+  <data name="Viewer_SubFolderItemFormatString" xml:space="preserve">
+    <value>Подпапка - ({0})</value>
+    
+  </data>
+  <data name="Viewer_BaseFolderItemFormatString" xml:space="preserve">
+    <value>Корневая - (Директория модов)</value>
+    
+  </data>
+  <data name="UpdateFailedError" xml:space="preserve">
+    <value>Обновление не удалось!</value>
+    
+  </data>
+  <data name="RemoveSubFolderWarning" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить {0}? Это не может быть отменено, и любые моды внутри этой папки будут потеряны!</value>
+    
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Mod Manager</value>
+    
+  </data>
+  <data name="ErrorHyperlinkClickMessage" xml:space="preserve">
+    <value>(Нажмите здесь, чтобы перейти туда!)</value>
+    
+  </data>
+  <data name="ModsLoadingError" xml:space="preserve">
+    <value>Ошибка загрузки модов!
+Убедитесь, что ваша игра обновлена, и в Настройках указан путь к A.I.R.</value>
+    
+  </data>
+  <data name="RecordingsLoadingError" xml:space="preserve">
+    <value>Ошибка при загрузке записей!</value>
+    
+  </data>
+  <data name="AIRTips" xml:space="preserve">
+    <value>Подсказки A.I.R...</value>
+    
+  </data>
+  <data name="AIRGuides" xml:space="preserve">
+    <value>Гайды A.I.R...</value>
+    
+  </data>
+  <data name="DoesNotExist" xml:space="preserve">
+    <value>не существует!</value>
+    
+  </data>
+  <data name="FileString" xml:space="preserve">
+    <value>Файл</value>
+    
+  </data>
+  <data name="FolderString" xml:space="preserve">
+    <value>Папка</value>
+    
+  </data>
+  <data name="CustomWordString" xml:space="preserve">
+    <value>Пользовательский (ая)</value>
+    
+  </data>
+  <data name="AboutString" xml:space="preserve">
+    <value>О программе</value>
+    
+  </data>
+  <data name="BuildDateString" xml:space="preserve">
+    <value>Дата выпуска</value>
+    
+  </data>
+  <data name="ArchitectureString" xml:space="preserve">
+    <value>Архитектура</value>
+    
+  </data>
+  <data name="UnsetFolderPathString" xml:space="preserve">
+    <value>UNSET_FOLDER_PATH</value>
+    
+  </data>
+  <data name="SetCustomGameRecordingFolderTitle" xml:space="preserve">
+    <value>Выберите свою папку с записями игр...</value>
+    
+  </data>
+  <data name="FileIsBusyTitle" xml:space="preserve">
+    <value>Файл занят</value>
+    
+  </data>
+  <data name="FileIsBusyCaption" xml:space="preserve">
+    <value>Файл: {0} в настоящее время используется другим процессом, вы все равно хотите продолжить? (Если щелкнуть «Нет» или закрыть это диалоговое окно, проверка будет выполнена только в случае потери файла; если вы застряли здесь, пожалуйста, принудительно закройте приложение).)</value>
+    
+  </data>
+  <data name="UnableToStartS3AIR" xml:space="preserve">
+    <value>Не получилось запустить Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="UnableToStartS3AIRRecordingViewer" xml:space="preserve">
+    <value>Неполучилось запустить плеер для записей Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="VersionSelectCaption1" xml:space="preserve">
+    <value>Не могу определить название версии, укажите свою:</value>
+    
+  </data>
+  <data name="VersionSelectCaption2" xml:space="preserve">
+    <value>Версия с таким именем уже существует, или имя содержит недопустимые символы для папки, укажите другое:</value>
+    
+  </data>
+  <data name="BackupFailed" xml:space="preserve">
+    <value>Ошибка резервного копирования</value>
+    
+  </data>
+  <data name="RestoreFailed" xml:space="preserve">
+    <value>Восстановление не удалось</value>
+    
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Попробовать снова?</value>
+    
+  </data>
+  <data name="RecordingsLocationDefault" xml:space="preserve">
+    <value>Папка по умолчанию</value>
+    
+  </data>
+  <data name="RecordingsLocationAppData" xml:space="preserve">
+    <value>Папка AppData Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="RecordingsLocationRecordingsFolder" xml:space="preserve">
+    <value>Папка с записями Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="RecordingsLocationEXEFolder" xml:space="preserve">
+    <value>Папка установки Sonic 3 A.I.R.</value>
+    
+  </data>
+  <data name="RecordingsLocationBrowse" xml:space="preserve">
+    <value>Указать...</value>
+    
+  </data>
+  <data name="RecordingsLocationLabel" xml:space="preserve">
+    <value>Выбранное место:</value>
+    
+  </data>
+  <data name="GameRecordingsPlayButton" xml:space="preserve">
+    <value>Играть...</value>
+    
+  </data>
+  <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
+    <value>Играть выбранную версию</value>
+    
+  </data>
+  <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
+    <value>Играть используя версию при записи</value>
+    
+  </data>
+  <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
+    <value>Играть используя...</value>
+    
+  </data>
+  <data name="FileTab" xml:space="preserve">
+    <value>Файл</value>
+    
+  </data>
+  <data name="ViewTab" xml:space="preserve">
+    <value>Вид</value>
+    
+  </data>
+  <data name="HelpTab" xml:space="preserve">
+    <value>Помощь</value>
+    
+  </data>
+  <data name="OtherTab" xml:space="preserve">
+    <value>Другое</value>
+    
+  </data>
+  <data name="LaunchPresetsMenuItem" xml:space="preserve">
+    <value>Пресеты запуска...</value>
+    
+  </data>
+  <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Загрузить пресет запуска...</value>
+    
+  </data>
+  <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Переименовать пресет запуска...</value>
+    
+  </data>
+  <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Удалить пресет запуска...</value>
+    
+  </data>
+  <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
+    <value>Заменить существующие текущие настройки...</value>
+    
+  </data>
+  <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Удалить все пресеты запуска</value>
+    
+  </data>
+  <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
+    <value>Сохранить текущие настройки как пресет запуска</value>
+    
+  </data>
+  <data name="ModCollectionsMenuItem" xml:space="preserve">
+    <value>Модпаки...</value>
+    
+  </data>
+  <data name="LoadModCollectionMenuItem" xml:space="preserve">
+    <value>Загрузить модпак...</value>
+    
+  </data>
+  <data name="RenameModCollectionMenuItem" xml:space="preserve">
+    <value>Переименовать модпак...</value>
+    
+  </data>
+  <data name="DeleteModCollectionMenuItem" xml:space="preserve">
+    <value>Удалить модпак...</value>
+    
+  </data>
+  <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
+    <value>Заменить существующий модпак...</value>
+    
+  </data>
+  <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
+    <value>Удалить все модпаки</value>
+    
+  </data>
+  <data name="SaveModCollectonMenuItem" xml:space="preserve">
+    <value>Сохранить активные моды как модпак</value>
+    
+  </data>
+  <data name="SetAIRPathManually" xml:space="preserve">
+    <value>Указать путь к A.I.R. самостоятельно...</value>
+    
+  </data>
+  <data name="SetAIRPathFromPreviousData" xml:space="preserve">
+    <value>Указать путь к A.I.R. из предыдущих данных...</value>
+    
+  </data>
+  <data name="AddAIRVersion" xml:space="preserve">
+    <value>Добавить билд A.I.R...</value>
+    
+  </data>
+  <data name="ChangeAIRVersion" xml:space="preserve">
+    <value>Изменить билд A.I.R...</value>
+    
+  </data>
+  <data name="ManageAIRVersions" xml:space="preserve">
+    <value>Управлять билдами A.I.R.</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Rename" xml:space="preserve">
+    <value>Переименовать модпак</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Rename" xml:space="preserve">
+    <value>Введите новое название для этого модпака:</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Delete" xml:space="preserve">
+    <value>Удалить модпак</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Delete" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить модпак "{0}"? (Это не может быть отменено)</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Replace" xml:space="preserve">
+    <value>Заменить существующий модпак</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Replace" xml:space="preserve">
+    <value>Вы уверены, что хотите заменить существующий модпак? (Это не может быть отменено)</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_DeleteAll" xml:space="preserve">
+    <value>Удалить все модпаки</value>
+  </data>
+  <data name="ModCollectionDialog_Message_DeleteAll" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить все ваши сохранённые модпаки? (Это не может быть отменено)</value>
+  </data>
+  <data name="ModCollectionDialog_Name_Save" xml:space="preserve">
+    <value>Новый модпак</value>
+  </data>
+  <data name="ModCollectionDialog_Caption_Save" xml:space="preserve">
+    <value>Сохранить новый модпак</value>
+  </data>
+  <data name="ModCollectionDialog_Message_Save" xml:space="preserve">
+    <value>Введите название этого нового модпака:</value>
+  </data>
+  <data name="LegacyLoadingText_Line1" xml:space="preserve">
+    <value>Использовать загрузку старого типа</value>
+  </data>
+  <data name="LegacyLoadingText_Line2" xml:space="preserve">
+    <value>(До 19.09.19.0; ограниченная поддержка)</value>
+  </data>
+  <data name="FullDebugOutputOption" xml:space="preserve">
+    <value>Log Full Debug Output</value>
+  </data>
+  <data name="UsefulShortKeysHeader" xml:space="preserve">
+    <value>Полезные сочетания клавиш в игре:</value>
+  </data>
+  <data name="UsefulShortKeysFullscreen" xml:space="preserve">
+    <value>Alt + Enter - Включить полноэкранный режим</value>
+  </data>
+  <data name="UsefulShortKeysGameRecordingCapture" xml:space="preserve">
+    <value>F2 - Сделать запись игры</value>
+  </data>
+  <data name="UsefulShortKeysContextMenu" xml:space="preserve">
+    <value>Right Click - Открыть контекстное меню A.I.R.</value>
+  </data>
+  <data name="UsefulShortKeysRescanInputs" xml:space="preserve">
+    <value>F3 - Найти новые контроллеры</value>
+  </data>
+  <data name="UsefulShortKeysSwapInput" xml:space="preserve">
+    <value>F4 - Меняет местами контроллеры первого и второго игрока</value>
+  </data>
+  <data name="UsefulShortKeysAudioAdjust" xml:space="preserve">
+    <value>Нумпад + или - - Регулировка громкости звука</value>
+  </data>
+  <data name="UsefulShortKeysBackgroundBlur" xml:space="preserve">
+    <value>Alt + B - Изменить размытие фона</value>
+  </data>
+  <data name="UsefulShortKeysFilter" xml:space="preserve">
+    <value>Alt + F / Alt + G - Переключаться между фильтрами экрана</value>
+  </data>
+  <data name="UsefulShortKeysDevHeader" xml:space="preserve">
+    <value>Сочетания клавиш в режиме разработчика:</value>
+  </data>
+  <data name="UsefulShortKeysPerformanceDisplay" xml:space="preserve">
+    <value>Alt + P - Показать производительность</value>
+  </data>
+  <data name="UsefulShortKeysPaletteDebug" xml:space="preserve">
+    <value>Alt + M - Переключить отладочный вывод палитры</value>
+  </data>
+  <data name="UsefulShortKeysRefreshAssets" xml:space="preserve">
+    <value>F10 - Перезагрузить ресурсы (спрайты / палитры)</value>
+  </data>
+  <data name="ContextMenuCloseHeader" xml:space="preserve">
+    <value>Закрыть контекстное меню</value>
+  </data>
+  <data name="OpenModManagerSettingsFile" xml:space="preserve">
+    <value>Открыть файл настроек Менеджера Модов</value>
+  </data>
+  <data name="OpenAIRGlobalSettingsFile" xml:space="preserve">
+    <value>Открыть файл глобальных настроек A.I.R.</value>
+  </data>
+  <data name="OpenAIRInputSettingsFile" xml:space="preserve">
+    <value>Открыть файл настроек управления A.I.R.</value>
+  </data>
+  <data name="OpenModManagerLogFolder" xml:space="preserve">
+    <value>Открыть директорию лога Менеджера Модов</value>
+  </data>
+  <data name="OpenAIRGamerecordingsFolder" xml:space="preserve">
+    <value>Открыть директорию записей A.I.R.</value>
+  </data>
+  <data name="ForceQuitGame" xml:space="preserve">
+    <value>Принудительный выход</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part1" xml:space="preserve">
+    <value>ВНИМАНИЕ</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part2" xml:space="preserve">
+    <value>Воспроизведение записи - очень опасная функция, которая может (и скорее всего точно)</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part3" xml:space="preserve">
+    <value>ИЗМЕНИТЬ ПАРАМЕТРЫ И ДАЖЕ СТЕРЕТЬ СОХРАНИТЬ ДАННЫЕ НЕЗАВИСИМО ОТ ВАШЕЙ ОСТОРОЖНОСТИ!</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part4" xml:space="preserve">
+    <value>Настоятельно рекомендуется сделать резервную копию сохранений A.I.R. перед использованием этой функции, если вы беспокоитесь о потере данных.</value>
+  </data>
+  <data name="GameRecordingPlaybackWarning_Part5" xml:space="preserve">
+    <value>РАЗРАБОТЧИКИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ЗА ЛЮБЫЕ УТЕРЯННЫЕ ДАННЫЕ!</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part1" xml:space="preserve">
+    <value>Отключить улучшения в игре</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part2" xml:space="preserve">
+    <value>(Включить, только если у вас есть проблемы с запуском A.I.R.)</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part1" xml:space="preserve">
+    <value>Хотели бы вы указать путь к локации Steam'овского РОМа Sonic 3&amp;K?</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part2" xml:space="preserve">
+    <value>Нажмите ДА, чтобы автоматически установить путь</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part3" xml:space="preserve">
+    <value>Нажмите НЕТ, чтобы установить путь вручную</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part4" xml:space="preserve">
+    <value>Нажмите ОТМЕНА, чтобы оставить путь без изменений и вернуться к настройкам</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Title" xml:space="preserve">
+    <value>Изменить путь к РОМу Sonic 3&amp;K</value>
+  </data>
+  <data name="TimeTravelSafetyNet_Title" xml:space="preserve">
+    <value>Потенциальное предупреждение о "путешествии во времени"</value>
+  </data>
+  <data name="TimeTravelSafetyNet_OlderVersion" xml:space="preserve">
+    <value>Похоже, вы собираетесь запустить более старую версию Sonic 3 A.I.R! Это может привести к нежелательным результатам, таким как потеря настроек или потеря сохраненных данных. Вы уверены что хотите продолжить?</value>
+  </data>
+  <data name="TimeTravelSafetyNet_NullVersion" xml:space="preserve">
+    <value>Мы не можем определить версию, использованную в последний раз с Sonic 3 A.I.R.! Это может быть либо ложная тревога, если это новая установка, либо плохая новость, если вы переходите на более старую версию A.I.R.! Использование более старой версии может привести к нежелательным результатам, таким как потеря настроек или потеря сохраненных данных. Вы уверены что хотите продолжить?</value>
+  </data>
+  <data name="ForceQuitGameDialog_Title" xml:space="preserve">
+    <value>Принудительный выход из игры</value>
+  </data>
+  <data name="ForceQuitGameDialog_Text" xml:space="preserve">
+    <value>Вы уверены, что хотите принудлительно выйти из Sonic 3 A.I.R? (Весь несохраненный прогресс будет потерян)</value>
+  </data>
+  <data name="EnableDiscordRPCOption" xml:space="preserve">
+    <value>Включить поддержку Discord Rich Presence</value>
+  </data>
+  <data name="HasDeviceNamesCheckbox" xml:space="preserve">
+    <value>Использует имена устройств (Отключите для клавиатуры)</value>
+  </data>
+</root>
