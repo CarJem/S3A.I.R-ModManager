@@ -101,6 +101,8 @@ namespace Sonic3AIR_ModManager
                 Instance.failSafeModeCheckbox.IsChecked = MainDataModel.Global_Settings.FailSafeMode;
                 Instance.FullscreenTypeComboBox.SelectedIndex = MainDataModel.Global_Settings.Fullscreen;
                 Instance.devModeCheckbox.IsChecked = MainDataModel.Global_Settings.DevMode;
+                Instance.SoftwareRenderingRadioButton.IsChecked = MainDataModel.Global_Settings.UseSoftwareRenderer;
+                Instance.HardwareRenderingRadioButton.IsChecked = !MainDataModel.Global_Settings.UseSoftwareRenderer;
             }
 
             GetLanguageSelection(ref Instance);
@@ -304,7 +306,8 @@ namespace Sonic3AIR_ModManager
         {
             FailSafeMode = 0,
             FixGlitches = 1,
-            EnableDevMode = 2
+            EnableDevMode = 2,
+            UseSoftwareRenderer = 3
         }
 
         public static void UpdateBoolSettings(S3AIRSetting setting, bool isChecked)
@@ -316,6 +319,10 @@ namespace Sonic3AIR_ModManager
             else if (setting == S3AIRSetting.FixGlitches)
             {
                 MainDataModel.Global_Settings.FixGlitches = isChecked;
+            }
+            else if (setting == S3AIRSetting.UseSoftwareRenderer)
+            {
+                MainDataModel.Global_Settings.UseSoftwareRenderer = isChecked;
             }
             else
             {

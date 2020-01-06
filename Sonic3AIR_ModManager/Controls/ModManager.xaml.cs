@@ -956,5 +956,10 @@ namespace Sonic3AIR_ModManager
 
 
         #endregion
+
+        private void RenderingRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainDataModel.UpdateBoolSettings(MainDataModel.S3AIRSetting.UseSoftwareRenderer, SoftwareRenderingRadioButton.IsChecked.Value);
+        }
     }
 }
