@@ -154,6 +154,11 @@ namespace Sonic3AIR_ModManager
                     Tag = "FR",
                     Content = "Français"
                 };
+                ComboBoxItem RU = new ComboBoxItem()
+                {
+                    Tag = "RU",
+                    Content = "Русский"
+                };
                 ComboBoxItem NULL = new ComboBoxItem()
                 {
                     Tag = "NULL",
@@ -163,16 +168,19 @@ namespace Sonic3AIR_ModManager
                 EN_US.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 GR.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 FR.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
+                RU.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 NULL.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
 
                 Instance.languageComboBox.Items.Add(EN_US);
                 Instance.languageComboBox.Items.Add(GR);
                 Instance.languageComboBox.Items.Add(FR);
+                Instance.languageComboBox.Items.Add(RU);
                 if (Program.isDebug) Instance.languageComboBox.Items.Add(NULL);
 
                 if (UserLanguage.CurrentLanguage == UserLanguage.Language.EN_US) Instance.languageComboBox.SelectedItem = EN_US;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.GR) Instance.languageComboBox.SelectedItem = GR;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.FR) Instance.languageComboBox.SelectedItem = FR;
+                else if (UserLanguage.CurrentLanguage == UserLanguage.Language.RU) Instance.languageComboBox.SelectedItem = RU;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.NULL) Instance.languageComboBox.SelectedItem = NULL;
                 else Instance.languageComboBox.SelectedItem = NULL;
 
@@ -345,6 +353,9 @@ namespace Sonic3AIR_ModManager
                         break;
                     case "FR":
                         UserLanguage.CurrentLanguage = UserLanguage.Language.FR;
+                        break;
+                    case "RU":
+                        UserLanguage.CurrentLanguage = UserLanguage.Language.RU;
                         break;
                     case "NULL":
                         UserLanguage.CurrentLanguage = UserLanguage.Language.NULL;

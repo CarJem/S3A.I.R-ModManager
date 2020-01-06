@@ -2470,6 +2470,33 @@ namespace Sonic3AIR_ModManager.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rendering Type.
+        /// </summary>
+        internal static string RenderingType_GroupBox_Header {
+            get {
+                return ResourceManager.GetString("RenderingType_GroupBox_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hardware.
+        /// </summary>
+        internal static string RenderingType_RadioButton_Hardware {
+            get {
+                return ResourceManager.GetString("RenderingType_RadioButton_Hardware", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software.
+        /// </summary>
+        internal static string RenderingType_RadioButton_Software {
+            get {
+                return ResourceManager.GetString("RenderingType_RadioButton_Software", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reselect Input.
         /// </summary>
         internal static string Reselect_Input_Button {

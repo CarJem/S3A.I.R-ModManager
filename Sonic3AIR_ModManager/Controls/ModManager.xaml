@@ -374,7 +374,7 @@
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="fixGlitchesCheckbox" Content="Fix Glitches" Margin="0,2" Click="FixGlitchesCheckbox_Click"></CheckBox>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" x:Name="failSafeModeCheckbox" Content="Fail Safe Mode" Margin="0,2" Click="FailSafeModeCheckbox_Click"></CheckBox>
                                         <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Enable Dev Mode" Margin="0,2" Name="devModeCheckbox" Click="devModeCheckbox_Click"></CheckBox>
-                                        <GroupBox Header="Rendering Type">
+                                        <GroupBox Header="Rendering Type" Name="RenderingTypeGroupBox">
                                             <StackPanel>
                                                 <RadioButton IsChecked="True" Margin="0,2,0,0" x:Name="SoftwareRenderingRadioButton" GroupName="DisplayRendering" Content="Software" Foreground="{DynamicResource NormalText}" Click="RenderingRadioButton_Click"></RadioButton>
                                                 <RadioButton Margin="0,2,0,0" x:Name="HardwareRenderingRadioButton" GroupName="DisplayRendering" Content="Hardware" Foreground="{DynamicResource NormalText}" Click="RenderingRadioButton_Click"></RadioButton>

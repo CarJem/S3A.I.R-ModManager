@@ -342,7 +342,7 @@
     
   </data>
   <data name="Save&amp;Load" xml:space="preserve">
-    <value>Save &amp; Load</value>
+    <value>Сохранить и запустить</value>
     
   </data>
   <data name="SettingsTab" xml:space="preserve">
@@ -350,7 +350,7 @@
     
   </data>
   <data name="Sonic3AIRPathLabel" xml:space="preserve">
-    <value>Путь 3 A.I.R.:</value>
+    <value>Путь к Sonic 3 A.I.R.:</value>
     
   </data>
   <data name="StayOpenOnExit" xml:space="preserve">
@@ -451,17 +451,17 @@
   </data>
   <data name="InputMappingError1" xml:space="preserve">
     <value>Ошибка загрузки файла настройки управления!
- Убедитесь, что ваша игра последней версии и что путь к игре поставлен правильно в Настройках.</value>
+  Убедитесь, что ваша игра последней версии и что путь к игре поставлен правильно в Настройках.</value>
     
   </data>
   <data name="InputMappingError2" xml:space="preserve">
     <value>Произошла ошибка при чтении файла настроек в папке этой версии!
- Убедитесь, что с ним всё в порядке или переустановите игру</value>
+  Убедитесь, что с ним всё в порядке или переустановите игру</value>
     
   </data>
   <data name="InputMappingError3" xml:space="preserve">
     <value>Файл настроек не существует в папке игры
- Убедитесь, что файл существует или переустановите игру</value>
+  Убедитесь, что файл существует или переустановите игру</value>
     
   </data>
   <data name="CollectionFilesCouldNotBeFound1" xml:space="preserve">
@@ -880,10 +880,6 @@
     <value>Проверить наличие обновлений Менеджера Модов...</value>
     
   </data>
-  <data name="NewStrings" xml:space="preserve">
-    <value>=========================</value>
-    
-  </data>
   <data name="AIROptionsTab" xml:space="preserve">
     <value>Натройки A.I.R.</value>
     
@@ -982,8 +978,8 @@
   </data>
   <data name="LaunchOptionsForewarning" xml:space="preserve">
     <value>NOTE: Это параметры только для отладки!
- Предназначен для разработчиков модов и целей отладки. Может нарушить такие функции, как достижения.
- Будьте осторожны!</value>
+  Предназначен для разработчиков модов и целей отладки. Может нарушить такие функции, как достижения.
+  Будьте осторожны!</value>
     
     
   </data>
@@ -1113,7 +1109,7 @@
   </data>
   <data name="ModsLoadingError" xml:space="preserve">
     <value>Ошибка загрузки модов!
-Убедитесь, что ваша игра обновлена, и в Настройках указан путь к A.I.R.</value>
+ Убедитесь, что ваша игра обновлена, и в Настройках указан путь к A.I.R.</value>
     
   </data>
   <data name="RecordingsLoadingError" xml:space="preserve">
@@ -1371,7 +1367,7 @@
     <value>(До 19.09.19.0; ограниченная поддержка)</value>
   </data>
   <data name="FullDebugOutputOption" xml:space="preserve">
-    <value>Log Full Debug Output</value>
+    <value>Сохранять весь отладочный вывод</value>
   </data>
   <data name="UsefulShortKeysHeader" xml:space="preserve">
     <value>Полезные сочетания клавиш в игре:</value>
@@ -1489,5 +1485,17 @@
   </data>
   <data name="HasDeviceNamesCheckbox" xml:space="preserve">
     <value>Использует имена устройств (Отключите для клавиатуры)</value>
+  </data>
+  <data name="NewStrings" xml:space="preserve">
+    <value>=========================</value>
+  </data>
+  <data name="RenderingType_GroupBox_Header" xml:space="preserve">
+    <value>Тип рендеринга</value>
+  </data>
+  <data name="RenderingType_RadioButton_Hardware" xml:space="preserve">
+    <value>Аппаратный</value>
+  </data>
+  <data name="RenderingType_RadioButton_Software" xml:space="preserve">
+    <value>Програмный</value>
   </data>
 </root>

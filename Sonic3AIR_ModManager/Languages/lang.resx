@@ -1490,4 +1490,13 @@ Make sure your game is up to date and you have A.I.R.'s Game Path set in Options
   <data name="HasDeviceNamesCheckbox" xml:space="preserve">
     <value>Uses Device Names (Disable for Keyboards)</value>
   </data>
+  <data name="RenderingType_GroupBox_Header" xml:space="preserve">
+    <value>Rendering Type</value>
+  </data>
+  <data name="RenderingType_RadioButton_Hardware" xml:space="preserve">
+    <value>Hardware</value>
+  </data>
+  <data name="RenderingType_RadioButton_Software" xml:space="preserve">
+    <value>Software</value>
+  </data>
 </root>

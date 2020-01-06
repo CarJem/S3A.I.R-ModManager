@@ -25,7 +25,8 @@ namespace Sonic3AIR_ModManager
             NULL = 0,
             EN_US = 1,
             GR = 2,
-            FR = 3
+            FR = 3,
+            RU = 4
         }
 
         private static Language GetLangVar(string value)
@@ -34,6 +35,7 @@ namespace Sonic3AIR_ModManager
             else if (value.Equals("EN_US")) return Language.EN_US;
             else if (value.Equals("GR")) return Language.GR;
             else if (value.Equals("FR")) return Language.FR;
+            else if (value.Equals("RU")) return Language.RU;
             else return Language.EN_US;
         }
 
@@ -43,6 +45,7 @@ namespace Sonic3AIR_ModManager
             else if (value.Equals(Language.EN_US)) return "EN_US";
             else if (value.Equals(Language.GR)) return "GR";
             else if (value.Equals(Language.FR)) return "FR";
+            else if (value.Equals(Language.RU)) return "RU";
             else return "EN_US";
         }
 
@@ -69,6 +72,7 @@ namespace Sonic3AIR_ModManager
                 if (value.Equals(Language.EN_US)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
                 else if (value.Equals(Language.GR)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
                 else if (value.Equals(Language.FR)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr");
+                else if (value.Equals(Language.RU)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru");
                 else System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
             }
 
@@ -392,6 +396,7 @@ namespace Sonic3AIR_ModManager
             form.languageLabel.Text = Program.LanguageResource.GetString("LanguageLabel");
             form.FullDebugOutputCheckBox.Content = Program.LanguageResource.GetString("FullDebugOutputOption");
             form.useDiscordRPCCheckBox.Content = Program.LanguageResource.GetString("EnableDiscordRPCOption");
+            form.useDarkModeCheckBox.Content = Program.LanguageResource.GetString("UseDarkTheme");
 
             form.DisableInGameEnhancementsText.Text = Program.LanguageResource.GetString("DisableInGameEnhacements_Part1");
             form.DisableInGameEnhancementsText.Text += Environment.NewLine + Program.LanguageResource.GetString("DisableInGameEnhacements_Part2");
@@ -416,9 +421,9 @@ namespace Sonic3AIR_ModManager
             form.failSafeModeCheckbox.Content = Program.LanguageResource.GetString("FailSafeMode");
             form.devModeCheckbox.Content = Program.LanguageResource.GetString("AIRDevMode");
 
-
-
-            form.useDarkModeCheckBox.Content = Program.LanguageResource.GetString("UseDarkTheme");
+            form.RenderingTypeGroupBox.Header = Program.LanguageResource.GetString("RenderingType_GroupBox_Header");
+            form.HardwareRenderingRadioButton.Content = Program.LanguageResource.GetString("RenderingType_RadioButton_Hardware");
+            form.SoftwareRenderingRadioButton.Content = Program.LanguageResource.GetString("RenderingType_RadioButton_Software");
 
             form.StartingWindowLabel.Text = Program.LanguageResource.GetString("StartupWindowLabel");
             form.FullscreenOption1.Content = Program.LanguageResource.GetString("FullscreenOption1");

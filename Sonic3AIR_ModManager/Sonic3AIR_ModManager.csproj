@@ -161,6 +161,11 @@
     <Compile Include="Controls\InGameContextMenu.xaml.cs">
       <DependentUpon>InGameContextMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Languages\lang.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lang.ru.resx</DependentUpon>
+    </Compile>
     <Compile Include="Management and Data Models\DiscordRP.cs" />
     <Compile Include="Management and Data Models\GameHandler.cs" />
     <Compile Include="Management and Data Models\InputDeviceManager.cs" />
@@ -278,6 +283,10 @@
     <EmbeddedResource Include="Languages\lang.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\lang.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>lang.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

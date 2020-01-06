@@ -1178,4 +1178,10 @@ Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zu
   <data name="ForceQuitGameDialog_Text" xml:space="preserve">
     <value>Willst du wirklich ein Beenden von Sonic 3 A.I.R. erzwingen? (Ungesicherter Fortschritt geht dabei verloren)</value>
   </data>
+  <data name="EnableDiscordRPCOption" xml:space="preserve">
+    <value>Discord RPC Unterstützung aktivieren</value>
+  </data>
+  <data name="HasDeviceNamesCheckbox" xml:space="preserve">
+    <value>Benutzt Gerätenamen (für Tastatur ausschalten)</value>
+  </data>
 </root>
