@@ -1,9 +1,9 @@
 {
   "BuiltAssemblies": [
     {
-      "LastBuilt": "2020-01-01T00:00:00-05:00",
+      "LastBuilt": "2020-01-05T00:00:00-05:00",
       "Identifier": "Sonic3AIR_ModManager",
-      "BuildNumber": 3
+      "BuildNumber": 0
     }
   ]
 }
