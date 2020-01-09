@@ -9,10 +9,12 @@
 !define LAUNCH_GAME_SHORTCUT "Sonic 3 A.I.R. Auto Boot"
 !define COMP_NAME "CarJem Generations"
 !define WEB_SITE "https://twitter.com/carter5467_99"
-!define VERSION "0.1.4.1"
+
+####!define VERSION "${_VERSION}"#### Obsolete ####
+
 !define COPYRIGHT "CarJem Generations © 2019"
 !define DESCRIPTION "Mod Manager for Sonic 3 A.I.R. - Angel Island Revisited"
-!define INSTALLER_NAME "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\Output\Setup.exe"
+!define INSTALLER_NAME "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\Output\Setup_${VERSION}.exe"
 !define INSTALLER_DIR "D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\"
 !define MAIN_APP_EXE "Sonic 3 A.I.R Mod Manager.exe"
 !define INSTALL_TYPE "SetShellVarContext current"
@@ -24,7 +26,7 @@
 # Product Details
 ############################################################################################
 
-VIProductVersion  "${VERSION}"
+VIProductVersion "${VERSION}"
 VIAddVersionKey "ProductName"  "${APP_NAME}"
 VIAddVersionKey "CompanyName"  "${COMP_NAME}"
 VIAddVersionKey "LegalCopyright"  "${COPYRIGHT}"

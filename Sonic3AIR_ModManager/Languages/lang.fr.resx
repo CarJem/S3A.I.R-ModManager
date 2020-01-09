@@ -1181,4 +1181,16 @@ Assurez-vous que votre jeu est à jour et que l'emplacement de A.I.R. est défin
   <data name="EnableDiscordRPCOption" xml:space="preserve">
     <value>Activer le support Discord RPC</value>
   </data>
+  <data name="HasDeviceNamesCheckbox" xml:space="preserve">
+    <value>Utiliser les noms de périphérique (désactiver pour les claviers)</value>
+  </data>
+  <data name="RenderingType_GroupBox_Header" xml:space="preserve">
+    <value>Type de rendu</value>
+  </data>
+  <data name="RenderingType_RadioButton_Hardware" xml:space="preserve">
+    <value>Matériel (Hardware)</value>
+  </data>
+  <data name="RenderingType_RadioButton_Software" xml:space="preserve">
+    <value>Logiciel</value>
+  </data>
 </root>

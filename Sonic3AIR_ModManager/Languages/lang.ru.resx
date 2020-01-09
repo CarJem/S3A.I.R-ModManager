@@ -130,7 +130,7 @@
     
   </data>
   <data name="AIRMMPlaces" xml:space="preserve">
-    <value>Места менеджера модов A.I.R.</value>
+    <value>Места Менеджера Модов A.I.R.</value>
     
   </data>
   <data name="AIRPlaces" xml:space="preserve">
@@ -158,7 +158,7 @@
     
   </data>
   <data name="CopyFilePath" xml:space="preserve">
-    <value>Скопировать путь к файлу</value>
+    <value>Скопир. путь файла</value>
     
   </data>
   <data name="Delete" xml:space="preserve">
@@ -222,7 +222,7 @@
     
   </data>
   <data name="ModManagerOptions" xml:space="preserve">
-    <value>Настройки Менеджера модов</value>
+    <value>Настройки Менеджера Модов</value>
     
   </data>
   <data name="ModsTab" xml:space="preserve">
@@ -294,7 +294,7 @@
     
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
-    <value>Открыть настройки системы...</value>
+    <value>Системн. настройки...</value>
     
   </data>
   <data name="OpenUserManual" xml:space="preserve">
@@ -314,7 +314,7 @@
     
   </data>
   <data name="Reload" xml:space="preserve">
-    <value>Перезагрузить</value>
+    <value>Перезагр.</value>
     
   </data>
   <data name="Remove" xml:space="preserve">
@@ -801,11 +801,11 @@
     
   </data>
   <data name="ImportExpandable" xml:space="preserve">
-    <value>Импортировать...</value>
+    <value>Импорт...</value>
     
   </data>
   <data name="ExportExpanable" xml:space="preserve">
-    <value>Экспортировать...</value>
+    <value>Экспорт...</value>
     
   </data>
   <data name="ShowLogFileButton" xml:space="preserve">
@@ -829,15 +829,15 @@
     
   </data>
   <data name="SaveInputMappingsButton" xml:space="preserve">
-    <value>Сохранить настройки управления</value>
+    <value>Сохр. настройки</value>
     
   </data>
   <data name="ResetMappingsToDefaultButton" xml:space="preserve">
-    <value>Сбросить до значений по умолчанию</value>
+    <value>Сбросить</value>
     
   </data>
   <data name="ResetInputMappingsDefaultFormTitle" xml:space="preserve">
-    <value>Сбросить настройки управления до начальных</value>
+    <value>Сбросить управление</value>
     
   </data>
   <data name="ResetInputMappingsDefaultFormMessage" xml:space="preserve">
@@ -922,17 +922,17 @@
     
   </data>
   <data name="DefaultLaunchOptionItemText" xml:space="preserve">
-    <value>По умолчанию (НЕТ)</value>
+    <value>По умолчанию (Нет)</value>
     
     
   </data>
   <data name="LaunchOptionsWarning1" xml:space="preserve">
-    <value>Игнорируется, если для Стартового уровня установлено значение "НЕТ"</value>
+    <value>Игнорируется, если для Стартового уровня установлено значение "Нет"</value>
     
     
   </data>
   <data name="LaunchOptionsWarning2" xml:space="preserve">
-    <value>Игнорируется, если в качестве Стартового уровня выбрано всё КРОМЕ "НЕТ"</value>
+    <value>Игнорируется, если в качестве Стартового уровня выбрано всё КРОМЕ "Нет"</value>
     
     
   </data>
@@ -952,7 +952,7 @@
     
   </data>
   <data name="LaunchOptionsPlayerKT" xml:space="preserve">
-    <value>Ехидна Наклз и Майлз "Тейлз" Прауэр (If Unlocked)</value>
+    <value>Ехидна Наклз и Майлз "Тейлз" Прауэр (если разблокировано)</value>
     
     
   </data>
@@ -1004,7 +1004,7 @@
     
   </data>
   <data name="NewSubFolderEntryName" xml:space="preserve">
-    <value>new_sub_folder</value>
+    <value>новая_подпапка</value>
     
   </data>
   <data name="CreateSubFolderDialogTitle" xml:space="preserve">
@@ -1153,7 +1153,7 @@
     
   </data>
   <data name="UnsetFolderPathString" xml:space="preserve">
-    <value>UNSET_FOLDER_PATH</value>
+    <value>НЕ_ВЫБРАН_ПУТЬ</value>
     
   </data>
   <data name="SetCustomGameRecordingFolderTitle" xml:space="preserve">
@@ -1358,7 +1358,7 @@
     <value>Сохранить новый модпак</value>
   </data>
   <data name="ModCollectionDialog_Message_Save" xml:space="preserve">
-    <value>Введите название этого нового модпака:</value>
+    <value>Настройки Менеджера Модов</value>
   </data>
   <data name="LegacyLoadingText_Line1" xml:space="preserve">
     <value>Использовать загрузку старого типа</value>
@@ -1496,6 +1496,6 @@
     <value>Аппаратный</value>
   </data>
   <data name="RenderingType_RadioButton_Software" xml:space="preserve">
-    <value>Програмный</value>
+    <value>Программный</value>
   </data>
 </root>

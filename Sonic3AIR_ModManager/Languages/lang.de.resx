@@ -1184,4 +1184,13 @@ Stelle sicher, dass das Spiel auf dem neuesten Stand ist und dass du den Pfad zu
   <data name="HasDeviceNamesCheckbox" xml:space="preserve">
     <value>Benutzt Gerätenamen (für Tastatur ausschalten)</value>
   </data>
+  <data name="RenderingType_GroupBox_Header" xml:space="preserve">
+    <value>Renderer</value>
+  </data>
+  <data name="RenderingType_RadioButton_Hardware" xml:space="preserve">
+    <value>Hardware</value>
+  </data>
+  <data name="RenderingType_RadioButton_Software" xml:space="preserve">
+    <value>Software</value>
+  </data>
 </root>

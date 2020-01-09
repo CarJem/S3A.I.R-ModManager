@@ -1,7 +1,12 @@
-﻿echo off
-set ConfigurationName=%1
-set SolutionDir=%~2
+﻿ECHO off
+SET ConfigurationName=%1
+SET SolutionDir=%~2
+SET TargetPath=%3
 
-if %ConfigurationName% == "Publish" (
-call "%SolutionDir%Installer\MakeInstaller.bat"
+
+("%SolutionDir%Installer\GenerationsLib.VersionExtracter.exe" %TargetPath%) > temp.txt
+SET /p FileVersion=<temp.txt
+
+IF %ConfigurationName% == "Publish" (
+CALL "%SolutionDir%Installer\MakeInstaller.bat" "%FileVersion%"
 )

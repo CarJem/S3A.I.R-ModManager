@@ -517,9 +517,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "$(ConfigurationName)" "$(SolutionDir)"</PostBuildEvent>
+    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "$(ConfigurationName)" "$(SolutionDir)Sonic3AIR_ModManager\" "false" "false"</PreBuildEvent>
+    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "$(ConfigurationName)" "$(SolutionDir)Sonic3AIR_ModManager\"</PreBuildEvent>
   </PropertyGroup>
 </Project>
