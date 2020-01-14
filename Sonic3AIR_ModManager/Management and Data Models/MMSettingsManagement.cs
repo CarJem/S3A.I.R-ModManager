@@ -20,14 +20,16 @@ namespace Sonic3AIR_ModManager
             Instance.RenameModCollectionMenuItem.RecentItemsSource = null;
             Instance.DeleteModCollectionMenuItem.RecentItemsSource = null;
             Instance.SaveModCollectonAsMenuItem.RecentItemsSource = null;
+            Instance.AddFromExistingModCollectionMenuItem.RecentItemsSource = null;
 
             if (MainDataModel.ModCollectionMenuItems.ContainsKey(0)) MainDataModel.ModCollectionMenuItems[0].Clear();
             if (MainDataModel.ModCollectionMenuItems.ContainsKey(1)) MainDataModel.ModCollectionMenuItems[1].Clear();
             if (MainDataModel.ModCollectionMenuItems.ContainsKey(2)) MainDataModel.ModCollectionMenuItems[2].Clear();
             if (MainDataModel.ModCollectionMenuItems.ContainsKey(3)) MainDataModel.ModCollectionMenuItems[3].Clear();
+            if (MainDataModel.ModCollectionMenuItems.ContainsKey(4)) MainDataModel.ModCollectionMenuItems[4].Clear();
 
             MainDataModel.ModCollectionMenuItems.Clear();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 MainDataModel.ModCollectionMenuItems.Add(i, CollectModCollectionsMenuItems());
             }
@@ -36,6 +38,7 @@ namespace Sonic3AIR_ModManager
             Instance.RenameModCollectionMenuItem.RecentItemsSource = MainDataModel.ModCollectionMenuItems[1];
             Instance.DeleteModCollectionMenuItem.RecentItemsSource = MainDataModel.ModCollectionMenuItems[2];
             Instance.SaveModCollectonAsMenuItem.RecentItemsSource = MainDataModel.ModCollectionMenuItems[3];
+            Instance.AddFromExistingModCollectionMenuItem.RecentItemsSource = MainDataModel.ModCollectionMenuItems[4];
 
 
         }
@@ -107,6 +110,16 @@ namespace Sonic3AIR_ModManager
         public static void SaveLaunchPreset()
         {
 
+        }
+
+        public static void AppendFromExistingModCollection(GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            ModManagement.Save();
+            var collectionToAppend = (e.Content as Settings.ModCollection).Mods;
+            var currentCollection = ModManagement.S3AIRActiveMods;
+            currentCollection.ActiveMods.InsertRange(0, collectionToAppend.ActiveMods);
+            ModManagement.S3AIRActiveMods.Save(currentCollection.ActiveMods);
+            ModManagement.UpdateModsList(true);
         }
 
         public static void LoadModCollection(GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)

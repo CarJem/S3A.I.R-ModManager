@@ -150,6 +150,7 @@
     <Reference Include="System.Windows.Forms">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
@@ -160,6 +161,15 @@
     <Compile Include="ConsoleManager.cs" />
     <Compile Include="Controls\InGameContextMenu.xaml.cs">
       <DependentUpon>InGameContextMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModViewer\ActiveMods.xaml.cs">
+      <DependentUpon>ActiveMods.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModViewer\ModProperties.xaml.cs">
+      <DependentUpon>ModProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModViewer\OtherMods.xaml.cs">
+      <DependentUpon>OtherMods.xaml</DependentUpon>
     </Compile>
     <Compile Include="Languages\lang.ru.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -244,7 +254,7 @@
       <DependentUpon>ModManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Management and Data Models\FileManagement.cs" />
-    <Compile Include="Controls\ModViewer.xaml.cs">
+    <Compile Include="Controls\ModViewer\ModViewer.xaml.cs">
       <DependentUpon>ModViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModWrapPanel.cs" />
@@ -268,6 +278,7 @@
     <Compile Include="Management and Data Models\UserLanguage.cs" />
     <Compile Include="Management and Data Models\ProgramPaths.cs" />
     <Compile Include="WinformsTheming.cs" />
+    <EmbeddedResource Include="Languages\lang.es.resx" />
     <EmbeddedResource Include="Languages\lang.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>lang.fr.Designer.cs</LastGenOutput>
@@ -409,6 +420,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ModViewer\ActiveMods.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ModViewer\ModProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ModViewer\OtherMods.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Updater.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -429,7 +452,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ModViewer.xaml">
+    <Page Include="Controls\ModViewer\ModViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

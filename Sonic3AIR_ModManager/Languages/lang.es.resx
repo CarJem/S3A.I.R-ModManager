@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutString" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="AboutTab" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="AddAIRVersion" xml:space="preserve">
+    <value>Agrega una versión de A.I.R...</value>
+  </data>
+  <data name="AddAMod" xml:space="preserve">
+    <value>Agrega un mod...</value>
+  </data>
+  <data name="AddInputDeviceDialogCaption" xml:space="preserve">
+    <value>Nombre del dispositivo de entrada:</value>
+  </data>
+  <data name="AddInputDeviceDialogTitle" xml:space="preserve">
+    <value>Agregar un dispositivo de entrada ...</value>
+  </data>
+  <data name="AddInputDeviceError1" xml:space="preserve">
+    <value>ya existe en el directorio, ¡elija otro nombre!</value>
+  </data>
+  <data name="AddInputDeviceError2" xml:space="preserve">
+    <value>utiliza caracteres inaceptables, intenta utilizar solo guiones bajos y caracteres numéricos/alfabéticos.</value>
+  </data>
+  <data name="AddNewDeviceDescription" xml:space="preserve">
+    <value>Ingresa el nombre del controlador tal como aparece en la configuración del sistema o escribe * para apuntar a todos los dispositivos.</value>
+  </data>
+  <data name="AddNewDeviceTitle" xml:space="preserve">
+    <value>Agrega un nuevo dispositivo...</value>
+  </data>
+  <data name="AddNewSubFolderButton" xml:space="preserve">
+    <value>Agregar una nueva subcarpeta...</value>
+  </data>
+  <data name="AIRCanNotStartNoPath" xml:space="preserve">
+    <value>Ruta no establecida. ¡No se puede iniciar Sonic 3 A.I.R!</value>
+  </data>
+  <data name="AIRChangePathNoLongerExists" xml:space="preserve">
+    <value>La configuración definida por el archivo ya no existe. Inicia A.I.R. nuevamente fuera del mod loader e intenta nuevamente</value>
+  </data>
+  <data name="AIRDevMode" xml:space="preserve">
+    <value>Habilitar el modo de desarrollador</value>
+  </data>
+  <data name="AIRGuides" xml:space="preserve">
+    <value>Guías de A.I.R...</value>
+  </data>
+  <data name="AIRInternalSettings" xml:space="preserve">
+    <value>Ajustes internos de A.I.R...</value>
+  </data>
+  <data name="AIRLaunchOptionsGroupHeader" xml:space="preserve">
+    <value>Opciones de inicio de A.I.R...</value>
+  </data>
+  <data name="AIRMedia" xml:space="preserve">
+    <value>Media de A.I.R...</value>
+  </data>
+  <data name="AIRMMPlaces" xml:space="preserve">
+    <value>Lugares del A.I.R. Mod Manager...</value>
+  </data>
+  <data name="AIROptionsTab" xml:space="preserve">
+    <value>Opciones de A.I.R...</value>
+  </data>
+  <data name="AIRPlaces" xml:space="preserve">
+    <value>Lugares de A.I.R...</value>
+  </data>
+  <data name="AIRTips" xml:space="preserve">
+    <value>Consejos de A.I.R...</value>
+  </data>
+  <data name="AIRVersion" xml:space="preserve">
+    <value>Versión de A.I.R.</value>
+  </data>
+  <data name="AIRVersionColumnHeader" xml:space="preserve">
+    <value>Versión de A.I.R.</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Sonic 3 A.I.R. Mod Manager</value>
+  </data>
+  <data name="ArchitectureString" xml:space="preserve">
+    <value>Arquitectura</value>
+  </data>
+  <data name="AuthorSection" xml:space="preserve">
+    <value>Autor:</value>
+  </data>
+  <data name="AutoBoot_CheckingForUpdates" xml:space="preserve">
+    <value>Comprobando actualizaciones...</value>
+  </data>
+  <data name="AutoBoot_Initalizing" xml:space="preserve">
+    <value>Inicializando...</value>
+  </data>
+  <data name="AutoBoot_LaunchingIn" xml:space="preserve">
+    <value>iniciando en</value>
+  </data>
+  <data name="AutoBootDelay" xml:space="preserve">
+    <value>Retraso (segundos):</value>
+  </data>
+  <data name="AxisPOVLabel" xml:space="preserve">
+    <value>Eje/POV:</value>
+  </data>
+  <data name="AxisRadioButton" xml:space="preserve">
+    <value>Eje</value>
+  </data>
+  <data name="BackupFailed" xml:space="preserve">
+    <value>Copia de seguridad fallida</value>
+  </data>
+  <data name="BuildDateString" xml:space="preserve">
+    <value>Fecha de versión</value>
+  </data>
+  <data name="ButtonLabel" xml:space="preserve">
+    <value>Botón:</value>
+  </data>
+  <data name="ButtonMappings" xml:space="preserve">
+    <value>Asignaciones de botones</value>
+  </data>
+  <data name="Buttons_A" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="Buttons_B" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="Buttons_Back" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="Buttons_Down" xml:space="preserve">
+    <value>Abajo</value>
+  </data>
+  <data name="Buttons_Left" xml:space="preserve">
+    <value>Izquierda</value>
+  </data>
+  <data name="Buttons_Right" xml:space="preserve">
+    <value>Derecha</value>
+  </data>
+  <data name="Buttons_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Buttons_Up" xml:space="preserve">
+    <value>Arriba</value>
+  </data>
+  <data name="Buttons_X" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="Buttons_Y" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>Por</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Cancel_Button" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="CarJemTwitter" xml:space="preserve">
+    <value>CarJem @ Twitter</value>
+  </data>
+  <data name="ChangeAIRVersion" xml:space="preserve">
+    <value>Cambiar de versión de A.I.R.</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part1" xml:space="preserve">
+    <value>¿Deseas establecer la ruta a la ubicación de la ROM de Steam de S3&amp;K?</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part2" xml:space="preserve">
+    <value>Haz clic en SÍ para configurar la ruta automáticamente en función de la ROM de Steam de S3&amp;K</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part3" xml:space="preserve">
+    <value>Haz clic en NO para establecer la ruta manualmente</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Part4" xml:space="preserve">
+    <value>Haz clic en CANCELAR para dejar la ruta sin cambios y volver a la configuración</value>
+  </data>
+  <data name="ChangeS3KROMPathDialog_Title" xml:space="preserve">
+    <value>Cambiar la ruta de la ROM de Sonic 3&amp;K</value>
+  </data>
+  <data name="CheckforAIRUpdatesOnStart" xml:space="preserve">
+    <value>Buscar actualizaciones de A.I.R. al inicio...</value>
+  </data>
+  <data name="CheckForGameUpdatesExpandable" xml:space="preserve">
+    <value>Buscar actualizaciones del juego...</value>
+  </data>
+  <data name="CheckForModManagerUpdatesButton" xml:space="preserve">
+    <value>Buscar actualizaciones del Mod Manager...</value>
+  </data>
+  <data name="CollectionFilesCouldNotBeFound1" xml:space="preserve">
+    <value>No se encontraron los siguientes archivos:</value>
+  </data>
+  <data name="CollectionFilesCouldNotBeFound2" xml:space="preserve">
+    <value>Si no has iniciado Sonic 3 A.I.R. todavia, ¡por favor inicia Sonic 3 A.I.R. una vez antes de iniciar el mod loader!</value>
+  </data>
+  <data name="CollectionFilesCouldNotBeFound3" xml:space="preserve">
+    <value>Si lo has iniciado, asegurate de que existan estas ubicaciones. El mod loader no puede ejecutarse sin ellas</value>
+  </data>
+  <data name="ConflictDialogCaption" xml:space="preserve">
+    <value>¿Cómo te gustaría resolver este conflicto?</value>
+  </data>
+  <data name="ConflictingModSection" xml:space="preserve">
+    <value>Mod conflictivo:</value>
+  </data>
+  <data name="ContextMenuCloseHeader" xml:space="preserve">
+    <value>Cerrar menú contextual</value>
+  </data>
+  <data name="ControllerRadioButton" xml:space="preserve">
+    <value>Controlador</value>
+  </data>
+  <data name="CopyFilePath" xml:space="preserve">
+    <value>Copiar ruta de archivo</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption1" xml:space="preserve">
+    <value>Escribe el nombre de la subcarpeta que deseas crear.</value>
+  </data>
+  <data name="CreateSubFolderDialogCaption2" xml:space="preserve">
+    <value>¡Ese nombre de carpeta ya existe!</value>
+  </data>
+  <data name="CreateSubFolderDialogTitle" xml:space="preserve">
+    <value>Crear una nueva subcarpeta</value>
+  </data>
+  <data name="CurrentFolderLabel" xml:space="preserve">
+    <value>Carpeta actual:</value>
+  </data>
+  <data name="CustomAdvancedLabel" xml:space="preserve">
+    <value>Personalizado/Avanzado:</value>
+  </data>
+  <data name="CustomStringLabel" xml:space="preserve">
+    <value>Cadena personalizada:</value>
+  </data>
+  <data name="CustomWordString" xml:space="preserve">
+    <value>Personalizado</value>
+  </data>
+  <data name="DecreaseModPriority" xml:space="preserve">
+    <value>Disminuir prioridad del mod seleccionado...</value>
+  </data>
+  <data name="DecreaseModPriorityToMin" xml:space="preserve">
+    <value>Disminuir prioridad del mod seleccionado a minutos...</value>
+  </data>
+  <data name="DefaultLaunchOptionItemText" xml:space="preserve">
+    <value>Predeterminado (NINGUNO)</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Eliminar todos los preajustes de inicio</value>
+  </data>
+  <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
+    <value>Eliminar todas las colecciones de mods</value>
+  </data>
+  <data name="DeleteDeviceTitle" xml:space="preserve">
+    <value>Eliminar dispositivo</value>
+  </data>
+  <data name="DeleteItemConfirmation" xml:space="preserve">
+    <value>Estás seguro que quieres borrar</value>
+  </data>
+  <data name="DeleteKeybindTitle" xml:space="preserve">
+    <value>Eliminar combinación de teclas</value>
+  </data>
+  <data name="DeleteKeybindVerification1" xml:space="preserve">
+    <value>Verificación: ¿Deseas eliminar la</value>
+  </data>
+  <data name="DeleteKeybindVerification2" xml:space="preserve">
+    <value>combinación de teclas?</value>
+  </data>
+  <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
+    <value>Eliminar inicio preajustado...</value>
+  </data>
+  <data name="DeleteModCollectionMenuItem" xml:space="preserve">
+    <value>Eliminar colección de mods...</value>
+  </data>
+  <data name="DetectControllerExpandable" xml:space="preserve">
+    <value>Detectar controlador...</value>
+  </data>
+  <data name="DetectGamepadInputExpandable" xml:space="preserve">
+    <value>Detectar entrada de gamepad...</value>
+  </data>
+  <data name="DeviceIdentifierNames" xml:space="preserve">
+    <value>Nombres de identificador de dispositivo</value>
+  </data>
+  <data name="DirectionGB" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part1" xml:space="preserve">
+    <value>Desactivar mejoras en el juego</value>
+  </data>
+  <data name="DisableInGameEnhacements_Part2" xml:space="preserve">
+    <value>(Habilita solo si tienes problemas para ejecutar A.I.R.)</value>
+  </data>
+  <data name="DoesNotExist" xml:space="preserve">
+    <value>¡no existe!</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Descargando</value>
+  </data>
+  <data name="EditExpandable" xml:space="preserve">
+    <value>Editar...</value>
+  </data>
+  <data name="EditKeybindingsTitleExpandable" xml:space="preserve">
+    <value>Editar combinación de teclas...</value>
+  </data>
+  <data name="EnableAutoBootMode" xml:space="preserve">
+    <value>Habilitar el modo de arranque automático</value>
+  </data>
+  <data name="EnableDiscordRPCOption" xml:space="preserve">
+    <value>Habilitar soporte RPC de Discord</value>
+  </data>
+  <data name="EnableModStacking" xml:space="preserve">
+    <value>Habilitar apilamiento de mods</value>
+  </data>
+  <data name="EnableModStacking_Note1" xml:space="preserve">
+    <value>NOTA: Para versiones de A.I.R.</value>
+  </data>
+  <data name="EnableModStacking_Note2" xml:space="preserve">
+    <value>v19.09.19.0 y superior solamente</value>
+  </data>
+  <data name="EnterModURL" xml:space="preserve">
+    <value>Ingresar URL de mod...</value>
+  </data>
+</root>

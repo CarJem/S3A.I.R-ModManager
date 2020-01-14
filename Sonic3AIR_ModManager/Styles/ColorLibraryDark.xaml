@@ -153,7 +153,7 @@
     <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="{Binding Color, Source={StaticResource RSDK_RadioButton_Static_Glyph}}"/>
     
 
-    <SolidColorBrush x:Key="ListItemHoverFill" Color="{Binding Color, Source={StaticResource RSDK_ButtonPressed_Background}}"/>
+    <SolidColorBrush x:Key="ListItemHoverFill" Color="{Binding Color, Source={StaticResource RSDK_ButtonMouseOver_Background}}"/>
     <SolidColorBrush x:Key="ListItemSelectedFill" Color="{Binding Color, Source={StaticResource RSDK_ButtonPressed_Background}}"/>
     <SolidColorBrush x:Key="ListItemSelectedInactiveFill" Color="{Binding Color, Source={StaticResource RSDK_ButtonMouseOver_Background}}"/>
     <SolidColorBrush x:Key="ListItemSelectedHoverFill" Color="{Binding Color, Source={StaticResource RSDK_ButtonPressed_Background}}"/>

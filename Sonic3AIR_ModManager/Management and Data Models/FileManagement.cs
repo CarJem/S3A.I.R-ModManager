@@ -49,22 +49,27 @@ namespace Sonic3AIR_ModManager
 
         #region Mod File Management
 
-        public static void AddMod()
+        public static void AddMods()
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
                 Filter = $"{Program.LanguageResource.GetString("ModFileDialogFilter")} (*.zip;*.7z;*.rar)|*.zip;*.7z;*.rar",
-                Title = Program.LanguageResource.GetString("ModFileDialogTitle")
+                Title = Program.LanguageResource.GetString("ModFileDialogTitle"),
+                Multiselect = true
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                AddMod(ofd.FileName);
+                foreach (string filename in ofd.FileNames)
+                {
+                    AddMod(filename);
+                }
+                new Action(ModManager.UpdateUIFromInvoke).Invoke();
             }
         }
 
-        public static void AddMod(string file)
+        public static void AddMod(string file, bool updateUI = true)
         {
-            PrepMod(file);
+            PrepMod(file, updateUI);
         }
 
         public static void ExtractRar(string file)
@@ -112,20 +117,33 @@ namespace Sonic3AIR_ModManager
             }
         }
 
+        public static void RemoveMods(List<AIR_API.Mod> modsToRemove)
+        {
+            //TODO : Language Translations
+            if (MessageBox.Show($"Are you sure you want to delete {modsToRemove.Count} Mod(s)? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                foreach (var modToRemove in modsToRemove)
+                {
+                    WipeFolderContents(modToRemove.FolderPath);
+                    Directory.Delete(modToRemove.FolderPath);
+                }
+                new Action(ModManager.UpdateUIFromInvoke).Invoke();
+            }
+        }
+
         public static void RemoveMod(AIR_API.Mod modToRemove)
         {
+            //TODO : Language Translations
             if (MessageBox.Show($"Are you sure you want to delete {modToRemove.Name}? This cannot be undone!", "Sonic 3 AIR Mod Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 WipeFolderContents(modToRemove.FolderPath);
                 Directory.Delete(modToRemove.FolderPath);
                 new Action(ModManager.UpdateUIFromInvoke).Invoke();
             }
-
-
         }
 
         #region Move Mod
-        public static void MoveMod(AIR_API.Mod modToMove, string path)
+        public static void MoveMod(AIR_API.Mod modToMove, string path, bool updateUI = true)
         {
             string newPath = Path.Combine(path, modToMove.FolderName);
             if (!Directory.Exists(newPath))
@@ -143,7 +161,7 @@ namespace Sonic3AIR_ModManager
 
             }
 
-            new Action(ModManager.UpdateUIFromInvoke).Invoke();
+            if (updateUI) new Action(ModManager.UpdateUIFromInvoke).Invoke();
         }
 
         private static void ModMoveConflictResolve(AIR_API.Mod ExistingMod, AIR_API.Mod NewMod, string newPath)
@@ -169,18 +187,27 @@ namespace Sonic3AIR_ModManager
 
             void MakeModCopy()
             {
-                string ModPath = newPath;
+                string OriginalFolderName = ExistingMod.FolderName;
+                string NewFolderName = ExistingMod.FolderName;
+                string PathLocation = Directory.GetParent(newPath).FullName;
                 int index = 1;
-                string OriginalPath = ExistingMod.FolderName;
-                while (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath))
+                while (Directory.Exists(PathLocation + "\\" + NewFolderName))
                 {
-                    ModPath = $"{ModPath}({index})";
+                    NewFolderName = $"{OriginalFolderName}({index})";
                 }
+                string ModPath = PathLocation + "\\" + NewFolderName;
                 Directory.Move(ExistingMod.FolderPath, ModPath);
             }
 
-            void MoveMod() { Directory.Move(ExistingMod.FolderPath, newPath); }
-            void DeleteOldMod() { Directory.Delete(newPath); }
+            void MoveMod() 
+            { 
+                Directory.Move(ExistingMod.FolderPath, newPath); 
+            }
+            void DeleteOldMod() 
+            {
+                WipeFolderContents(newPath);
+                Directory.Delete(newPath); 
+            }
 
             #endregion
         }
@@ -244,7 +271,7 @@ namespace Sonic3AIR_ModManager
 
         #region Mod Import Validation Chain
 
-        public static void PrepMod(string file)
+        public static void PrepMod(string file, bool updateUI = true)
         {
             try
             {
@@ -263,7 +290,7 @@ namespace Sonic3AIR_ModManager
                 ModSearchLoop();
             }
             CleanUpTempModsFolder();
-            new Action(ModManager.UpdateUIFromInvoke).Invoke();
+            if (updateUI) new Action(ModManager.UpdateUIFromInvoke).Invoke();
 
             void ModSearchLoop()
             {
@@ -299,6 +326,8 @@ namespace Sonic3AIR_ModManager
 
             if (Directory.Exists(ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath)) ModImportConflictResolve(meta, file);
             else MoveMod();
+
+            if (!Directory.Exists(ProgramPaths.Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(ProgramPaths.Sonic3AIR_MM_TempModsFolder);
 
 
             void MoveMod() { Directory.Move(System.IO.Path.GetDirectoryName(meta), ProgramPaths.Sonic3AIRModsFolder + "\\" + ModPath); }

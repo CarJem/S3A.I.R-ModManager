@@ -26,7 +26,8 @@ namespace Sonic3AIR_ModManager
             EN_US = 1,
             GR = 2,
             FR = 3,
-            RU = 4
+            RU = 4,
+            ES = 5
         }
 
         private static Language GetLangVar(string value)
@@ -36,6 +37,7 @@ namespace Sonic3AIR_ModManager
             else if (value.Equals("GR")) return Language.GR;
             else if (value.Equals("FR")) return Language.FR;
             else if (value.Equals("RU")) return Language.RU;
+            else if (value.Equals("ES")) return Language.ES;
             else return Language.EN_US;
         }
 
@@ -46,6 +48,7 @@ namespace Sonic3AIR_ModManager
             else if (value.Equals(Language.GR)) return "GR";
             else if (value.Equals(Language.FR)) return "FR";
             else if (value.Equals(Language.RU)) return "RU";
+            else if (value.Equals(Language.ES)) return "ES";
             else return "EN_US";
         }
 
@@ -73,6 +76,7 @@ namespace Sonic3AIR_ModManager
                 else if (value.Equals(Language.GR)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
                 else if (value.Equals(Language.FR)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr");
                 else if (value.Equals(Language.RU)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru");
+                else if (value.Equals(Language.ES)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
                 else System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
             }
 
@@ -229,6 +233,7 @@ namespace Sonic3AIR_ModManager
             form.exitMenuItem.Header = Program.LanguageResource.GetString("Exit");
 
             #region Mod Collections Section
+            form.AddFromExistingModCollectionMenuItem.Header = "Append Existing Mod Collection..."; //TODO : Language Translation
             form.ModCollectionsMenuItem.Header = Program.LanguageResource.GetString("ModCollectionsMenuItem");
             form.LoadModCollectionMenuItem.Header = Program.LanguageResource.GetString("LoadModCollectionMenuItem");
             form.RenameModCollectionMenuItem.Header = Program.LanguageResource.GetString("RenameModCollectionMenuItem");
@@ -330,12 +335,11 @@ namespace Sonic3AIR_ModManager
             form.settingsPage.Header = Program.LanguageResource.GetString("SettingsTab");
 
             #region Mod Page
-            form.groupBox3.Header = Program.LanguageResource.GetString("ModsTab_ModProperties");
+            form.ModViewer.PHost.groupBox3.Header = Program.LanguageResource.GetString("ModsTab_ModProperties");
             form.refreshButton.Content = Program.LanguageResource.GetString("Reload");
             form.moreModOptionsButton.Content = Program.LanguageResource.GetString("MoreExpandable");
 
             form.gamebannaURLHandlerOptionsToolStripMenuItem.Content = Program.LanguageResource.GetString("GameBannaURLHandler");
-            form.LegacyLoadingText.Text = Program.LanguageResource.GetString("LegacyLoadingText_Line1") + Environment.NewLine + Program.LanguageResource.GetString("LegacyLoadingText_Line2");
             //form.enableModStackingToolStripMenuItem.Content = Program.LanguageResource.GetString("EnableModStacking");
             //form.onForAIRVersionUnreleasedToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note1");
             //form.v1909190AndAboveOnlyToolStripMenuItem.Text = Program.LanguageResource.GetString("EnableModStacking_Note2");
@@ -544,11 +548,12 @@ namespace Sonic3AIR_ModManager
         public static void ApplyLanguage(ref ModViewer form)
         {
 
-            form.AddNewSubFolderMenuItem.Header = Program.LanguageResource.GetString("AddNewSubFolderButton");
+            form.MHost.AddNewSubFolderMenuItem.Header = Program.LanguageResource.GetString("AddNewSubFolderButton");
             form.RemoveCurrentFolderMenuItem.Header = Program.LanguageResource.GetString("RemoveCurrentFolderButton");           
-            form.CurrentFolderLabel.Content = Program.LanguageResource.GetString("CurrentFolderLabel");            
+            form.MHost.CurrentFolderLabel.Content = Program.LanguageResource.GetString("CurrentFolderLabel");            
             form.ActiveModsTab.Header = Program.LanguageResource.GetString("Viewer_ActiveModsTab");            
             form.ModsTab.Header = Program.LanguageResource.GetString("Viewer_ModsTab");           
+            form.LegacyLoadingText.Text = Program.LanguageResource.GetString("LegacyLoadingText_Line1") + Environment.NewLine + Program.LanguageResource.GetString("LegacyLoadingText_Line2");
         }
 
         public static void ApplyLanguage(ref ItemConflictDialog form)

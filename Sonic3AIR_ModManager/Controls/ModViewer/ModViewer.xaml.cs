@@ -26,8 +26,43 @@ namespace Sonic3AIR_ModManager
         public static Action ItemCheck;
         public SelectionChangedEventHandler SelectionChanged;
 
+        #region View States
+        public ViewSetting CurrentView { get; set; } = ViewSetting.Panel;
+
+        public GridLength SpliterALocationStorage { get; set; } = new GridLength(0.5, GridUnitType.Star);
+        public GridLength SpliterBLocationStorage { get; set; } = new GridLength(0.5, GridUnitType.Star);
+
+        #endregion
+
+        #region Mod View Hosts
+
+        public ActiveMods AHost;
+        public OtherMods MHost;
+        public ModProperties PHost;
+        
+
+        public ListView View { get => MHost.View; set => MHost.View = value; }
+        public ListView ActiveView { get => AHost.ActiveView; set => AHost.ActiveView = value; }
+        public ComboBox FolderView { get => MHost.FolderView; set => MHost.FolderView = value; }
+        public MenuItem RemoveCurrentFolderMenuItem { get => MHost.RemoveCurrentFolderMenuItem; set => MHost.RemoveCurrentFolderMenuItem = value; }
+        public Button ChangeFolderButton { get => MHost.ChangeFolderButton; set => MHost.ChangeFolderButton = value; }
+
+        private void InitializeHostedComponents()
+        {
+            AHost = new ActiveMods(this);
+            MHost = new OtherMods(this);
+            PHost = new ModProperties();
+        }
+
+        #endregion
+
         #region List Access Variables
+
+
+
         public object SelectedItem { get => GetSelectedItem(); set => SetSelectedItem(value); }
+
+        public System.Collections.IList SelectedItems { get => GetSelectedItems(); }
         public object SelectedFolderItem { get => GetSelectedFolderItem(); set => SetSelectedFolderItem(value); }
         public int ActiveSelectedIndex { get => GetSelectedIndex(); set => SetSelectedIndex(value); }
 
@@ -62,6 +97,12 @@ namespace Sonic3AIR_ModManager
             FolderView.SelectedItem = value;
         }
 
+        private System.Collections.IList GetSelectedItems()
+        {
+            if (ActiveView.SelectedItems != null && ActiveView.SelectedItems.Count != 0) return ActiveView.SelectedItems;
+            else return View.SelectedItems;
+        }
+
         private object GetSelectedItem()
         {
             if (ActiveView.SelectedItem != null) return ActiveView.SelectedItem;
@@ -78,7 +119,9 @@ namespace Sonic3AIR_ModManager
 
         public ModViewer()
         {
+            InitializeHostedComponents();
             InitializeComponent();
+            ChangeView(CurrentView);
             if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
                 // Do runtime stuff
@@ -89,6 +132,80 @@ namespace Sonic3AIR_ModManager
 
 
 
+        }
+
+        public enum ViewSetting : int
+        {
+            Tabbed = 0,
+            Panel = 1,
+            NoChange = 2
+        }
+
+        public void ChangeView(ViewSetting view, bool UpdateProperties = true)
+        {
+            CurrentView = view;
+            ActiveModsTab.Content = null;
+            ModsTab.Content = null;
+
+            TabView.Visibility = Visibility.Collapsed;
+            PanelView.Visibility = Visibility.Collapsed;
+
+            PanelA.Children.Clear();
+            PanelB.Children.Clear();
+
+            PropertiesPanelA.Children.Clear();
+            PropertiesPanelB.Children.Clear();
+
+
+            if (view == ViewSetting.Panel)
+            {
+                PanelA.Children.Add(AHost);
+                PanelB.Children.Add(MHost);
+
+                PropertiesPanelB.Children.Add(PHost);
+
+                if (UpdateProperties)
+                {
+                    if (!ModPropertiesVisibilitySwitch.IsChecked.Value)
+                    {
+                        SpliterBLocationStorage = PanelView.RowDefinitions[2].Height;
+                        PanelView.RowDefinitions[2].Height = new GridLength(0);
+                        Splitter2.IsEnabled = false;
+                    }
+                    else
+                    {
+                        PanelView.RowDefinitions[2].Height = SpliterBLocationStorage;
+                        Splitter2.IsEnabled = true;
+                    }
+                }
+
+
+                PanelView.Visibility = Visibility.Visible;
+            }
+            else if (view == ViewSetting.Tabbed)
+            {
+                ActiveModsTab.Content = AHost;
+                ModsTab.Content = MHost;
+
+                PropertiesPanelA.Children.Add(PHost);
+
+                if (UpdateProperties)
+                {
+                    if (!ModPropertiesVisibilitySwitch.IsChecked.Value)
+                    {
+                        SpliterALocationStorage = TabView.RowDefinitions[2].Height;
+                        TabView.RowDefinitions[2].Height = new GridLength(0);
+                        Splitter1.IsEnabled = false;
+                    }
+                    else
+                    {
+                        TabView.RowDefinitions[2].Height = SpliterALocationStorage;
+                        Splitter1.IsEnabled = true;
+                    }
+                }
+
+                TabView.Visibility = Visibility.Visible;
+            }
         }
 
         #region List Access Methods
@@ -118,7 +235,7 @@ namespace Sonic3AIR_ModManager
             ActiveView.Items.Clear();
         }
 
-        private void View_KeyDown(object sender, KeyEventArgs e)
+        public void View_KeyDown(object sender, KeyEventArgs e)
         {
 
             if (View.SelectedItem != null && View.SelectedItem is ModViewerItem)
@@ -132,19 +249,24 @@ namespace Sonic3AIR_ModManager
 
         }
 
-        private void View_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LegacyLoadingCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+            ModManagement.ToggleLegacyModManagement(LegacyLoadingCheckbox.IsChecked.Value);
+        }
+
+        public void View_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ActiveView.SelectedItem != null && View.SelectedItem != null) ActiveView.SelectedItem = null;
             SelectionChanged?.Invoke(sender, e);
         }
 
-        private void ActiveView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void ActiveView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ActiveView.SelectedItem != null && View.SelectedItem != null) View.SelectedItem = null;
             SelectionChanged?.Invoke(sender, e);
         }
 
-        private void FolderView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void FolderView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectionChanged?.Invoke(sender, e);
             UpdateSelectedFolderLabel();
@@ -164,7 +286,7 @@ namespace Sonic3AIR_ModManager
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             ChangeFolderButton.ContextMenu.IsOpen = true;
             UpdateSelectedFolderLabel();
@@ -178,17 +300,17 @@ namespace Sonic3AIR_ModManager
             }
         }
 
-        private void RemoveCurrentFolderMenuItem_Click(object sender, RoutedEventArgs e)
+        public void RemoveCurrentFolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
             FileManagement.RemoveSubFolder((FolderView.SelectedValue as SubDirectoryItem).FilePath);
         }
 
-        private void FolderListHost_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        public void FolderListHost_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
 
         }
 
-        private void AddNewSubFolderMenuItem_Click(object sender, RoutedEventArgs e)
+        public void AddNewSubFolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
 
             string newFolderName = Program.LanguageResource.GetString("NewSubFolderEntryName");
@@ -205,6 +327,21 @@ namespace Sonic3AIR_ModManager
                 Directory.CreateDirectory(newDirectoryPath);
                 ModManagement.UpdateModsList(true);
             }
+        }
+
+        private void PanelViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeView(ViewSetting.Panel);
+        }
+
+        private void TabViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeView(ViewSetting.Tabbed);
+        }
+
+        private void ModPropertiesVisibilitySwitch_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeView(CurrentView);
         }
     }
 

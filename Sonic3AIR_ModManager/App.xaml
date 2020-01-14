@@ -25,6 +25,7 @@
                 <ResourceDictionary Source="Styles/AppSpecificStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/MenuItemContextStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/GroupBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/IconLibrary.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

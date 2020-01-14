@@ -179,7 +179,7 @@ namespace Sonic3AIR_ModManager
             PraseMods();
             UpdateNewModsListItems();
 
-            Instance.LegacyLoadingCheckbox.IsChecked = S3AIRActiveMods.UseLegacyLoading;
+            Instance.ModViewer.LegacyLoadingCheckbox.IsChecked = S3AIRActiveMods.UseLegacyLoading;
         }
 
         public static void GetAllModContainingSubFolders()
@@ -383,20 +383,41 @@ namespace Sonic3AIR_ModManager
 
         public static void SubDirectoryMove_Click(object sender, RoutedEventArgs e)
         {
-            if (Instance.ModViewer.View.SelectedItem != null && Instance.ModViewer.View.SelectedItem is ModViewerItem)
+            if (ModManagement.S3AIRActiveMods.UseLegacyLoading) LegacyLoading();
+            else NormalLoading();
+
+            new Action(ModManager.UpdateUIFromInvoke).Invoke();
+
+            void NormalLoading()
             {
-                FileManagement.MoveMod((Instance.ModViewer.View.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
-            }
-            else if (ModManagement.S3AIRActiveMods.UseLegacyLoading)
-            {
-                if (Instance.ModViewer.ActiveView.SelectedItem != null && Instance.ModViewer.ActiveView.SelectedItem is ModViewerItem)
+                if (Instance.ModViewer.View.SelectedItem != null)
                 {
-                    FileManagement.MoveMod((Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem).Source, (sender as MenuItem).Tag.ToString());
+                    var collection = Instance.ModViewer.View.SelectedItems;
+                    for (int i = 0; i < collection.Count; i++)
+                    {
+                        object item = collection[i];
+                        if (item is ModViewerItem)
+                        {
+                            FileManagement.MoveMod((item as ModViewerItem).Source, (sender as MenuItem).Tag.ToString(), false);
+                        }
+                    }
                 }
             }
-
-
-
+            void LegacyLoading()
+            {
+                if (Instance.ModViewer.ActiveView.SelectedItem != null)
+                {
+                    var collection = Instance.ModViewer.View.SelectedItems;
+                    for (int i = 0; i < collection.Count; i++)
+                    {
+                        object item = collection[i];
+                        if (item is ModViewerItem)
+                        {
+                            FileManagement.MoveMod((item as ModViewerItem).Source, (sender as MenuItem).Tag.ToString(), false);
+                        }
+                    }
+                }
+            }
         }
 
         public static void Save()

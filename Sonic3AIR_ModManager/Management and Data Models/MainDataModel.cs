@@ -142,45 +142,53 @@ namespace Sonic3AIR_ModManager
                 ComboBoxItem EN_US = new ComboBoxItem()
                 {
                     Tag = "EN_US",
-                    Content = "English (US)",
+                    Content = "English (EN_US)",
                 };
                 ComboBoxItem GR = new ComboBoxItem()
                 {
                     Tag = "GR",
-                    Content = "Deutsch"
+                    Content = "Deutsch (GR)"
                 };
                 ComboBoxItem FR = new ComboBoxItem()
                 {
                     Tag = "FR",
-                    Content = "Français"
+                    Content = "Français (FR)"
                 };
                 ComboBoxItem RU = new ComboBoxItem()
                 {
                     Tag = "RU",
-                    Content = "Русский"
+                    Content = "Русский (RU)"
+                };
+                ComboBoxItem ES = new ComboBoxItem()
+                {
+                    Tag = "ES",
+                    Content = "Español (ES)"
                 };
                 ComboBoxItem NULL = new ComboBoxItem()
                 {
                     Tag = "NULL",
-                    Content = "NULL"
+                    Content = "NULL (404)"
                 };
 
                 EN_US.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 GR.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 FR.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 RU.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
+                ES.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 NULL.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
 
                 Instance.languageComboBox.Items.Add(EN_US);
                 Instance.languageComboBox.Items.Add(GR);
                 Instance.languageComboBox.Items.Add(FR);
                 Instance.languageComboBox.Items.Add(RU);
+                Instance.languageComboBox.Items.Add(ES);
                 if (Program.isDebug) Instance.languageComboBox.Items.Add(NULL);
 
                 if (UserLanguage.CurrentLanguage == UserLanguage.Language.EN_US) Instance.languageComboBox.SelectedItem = EN_US;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.GR) Instance.languageComboBox.SelectedItem = GR;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.FR) Instance.languageComboBox.SelectedItem = FR;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.RU) Instance.languageComboBox.SelectedItem = RU;
+                else if (UserLanguage.CurrentLanguage == UserLanguage.Language.ES) Instance.languageComboBox.SelectedItem = ES;
                 else if (UserLanguage.CurrentLanguage == UserLanguage.Language.NULL) Instance.languageComboBox.SelectedItem = NULL;
                 else Instance.languageComboBox.SelectedItem = NULL;
 
@@ -356,6 +364,9 @@ namespace Sonic3AIR_ModManager
                         break;
                     case "RU":
                         UserLanguage.CurrentLanguage = UserLanguage.Language.RU;
+                        break;
+                    case "ES":
+                        UserLanguage.CurrentLanguage = UserLanguage.Language.ES;
                         break;
                     case "NULL":
                         UserLanguage.CurrentLanguage = UserLanguage.Language.NULL;
@@ -599,16 +610,16 @@ namespace Sonic3AIR_ModManager
                     tech_name_p.Margin = no_margin;
                     description_p.Margin = no_margin;
 
-                    Instance.modInfoTextBox.Document.Blocks.Clear();
-                    Instance.modInfoTextBox.Document.Blocks.Add(author_p);
-                    Instance.modInfoTextBox.Document.Blocks.Add(version_p);
-                    Instance.modInfoTextBox.Document.Blocks.Add(air_version_p);
-                    Instance.modInfoTextBox.Document.Blocks.Add(tech_name_p);
-                    Instance.modInfoTextBox.Document.Blocks.Add(description_p);
+                    Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Clear();
+                    Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Add(author_p);
+                    Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Add(version_p);
+                    Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Add(air_version_p);
+                    Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Add(tech_name_p);
+                    Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Add(description_p);
                 }
-                else Instance.modInfoTextBox.Document.Blocks.Clear();
+                else Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Clear();
             }
-            else Instance.modInfoTextBox.Document.Blocks.Clear();
+            else Instance.ModViewer.PHost.modInfoTextBox.Document.Blocks.Clear();
 
 
 

@@ -199,11 +199,6 @@ namespace Sonic3AIR_ModManager
             ProcessLauncher.Open1ClickInstaller();
         }
 
-        private void LegacyLoadingCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-            ModManagement.ToggleLegacyModManagement(LegacyLoadingCheckbox.IsChecked.Value);
-        }
-
         private void addInputMethodButton_Click(object sender, RoutedEventArgs e)
         {
             InputDeviceManager.AddInputDevice();
@@ -497,10 +492,7 @@ namespace Sonic3AIR_ModManager
 
         private void RemoveModToolStripMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (ModViewer.SelectedItem != null)
-            {
-                FileManagement.RemoveMod((ModViewer.SelectedItem as ModViewerItem).Source);
-            }
+            RemoveButton_Click(sender, e);
         }
 
         private void OpenModFolderToolStripMenuItem_Click(object sender, RoutedEventArgs e)
@@ -528,14 +520,26 @@ namespace Sonic3AIR_ModManager
 
         private void AddMods_Click(object sender, RoutedEventArgs e)
         {
-            FileManagement.AddMod();
+            FileManagement.AddMods();
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             if (ModViewer.SelectedItem != null)
             {
-                FileManagement.RemoveMod((ModViewer.SelectedItem as ModViewerItem).Source);
+                if (ModViewer.SelectedItems.Count > 1)
+                {
+                    List<AIR_API.Mod> ModsToRemove = new List<AIR_API.Mod>();
+                    foreach (var items in ModViewer.SelectedItems)
+                    {
+                        ModsToRemove.Add((items as ModViewerItem).Source);
+                    }
+                    FileManagement.RemoveMods(ModsToRemove);
+                }
+                else
+                {
+                    FileManagement.RemoveMod((ModViewer.SelectedItem as ModViewerItem).Source);
+                }
             }
         }
 
@@ -888,6 +892,11 @@ namespace Sonic3AIR_ModManager
         private void LoadModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
         {
             MMSettingsManagement.LoadModCollection(e);
+        }
+
+        private void AddFromExistingModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
+        {
+            MMSettingsManagement.AppendFromExistingModCollection(e);
         }
 
         private void RenameModCollectionMenuItem_RecentItemSelected(object sender, GenerationsLib.WPF.Controls.RecentsListMenuItem.RecentItem e)
