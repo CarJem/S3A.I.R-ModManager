@@ -121,13 +121,13 @@ namespace Sonic3AIR_ModManager
         {
             InitializeHostedComponents();
             InitializeComponent();
-            ChangeView(CurrentView);
+            ChangeView(CurrentView, true);
             if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
                 // Do runtime stuff
                 UpdateSelectedFolderLabel();
                 var Instance = this;
-                UserLanguage.ApplyLanguage(ref Instance);
+                Management.UserLanguage.ApplyLanguage(ref Instance);
             }
 
 
@@ -138,10 +138,10 @@ namespace Sonic3AIR_ModManager
         {
             Tabbed = 0,
             Panel = 1,
-            NoChange = 2
+            NoChange = 3
         }
 
-        public void ChangeView(ViewSetting view, bool UpdateProperties = true)
+        public void ChangeView(ViewSetting view, bool UpdateProperties = false)
         {
             CurrentView = view;
             ActiveModsTab.Content = null;
@@ -149,6 +149,9 @@ namespace Sonic3AIR_ModManager
 
             TabView.Visibility = Visibility.Collapsed;
             PanelView.Visibility = Visibility.Collapsed;
+
+            PanelViewButton.IsChecked = false;
+            TabViewButton.IsChecked = false;
 
             PanelA.Children.Clear();
             PanelB.Children.Clear();
@@ -164,23 +167,9 @@ namespace Sonic3AIR_ModManager
 
                 PropertiesPanelB.Children.Add(PHost);
 
-                if (UpdateProperties)
-                {
-                    if (!ModPropertiesVisibilitySwitch.IsChecked.Value)
-                    {
-                        SpliterBLocationStorage = PanelView.RowDefinitions[2].Height;
-                        PanelView.RowDefinitions[2].Height = new GridLength(0);
-                        Splitter2.IsEnabled = false;
-                    }
-                    else
-                    {
-                        PanelView.RowDefinitions[2].Height = SpliterBLocationStorage;
-                        Splitter2.IsEnabled = true;
-                    }
-                }
-
-
                 PanelView.Visibility = Visibility.Visible;
+
+                PanelViewButton.IsChecked = true;
             }
             else if (view == ViewSetting.Tabbed)
             {
@@ -189,23 +178,33 @@ namespace Sonic3AIR_ModManager
 
                 PropertiesPanelA.Children.Add(PHost);
 
-                if (UpdateProperties)
-                {
-                    if (!ModPropertiesVisibilitySwitch.IsChecked.Value)
-                    {
-                        SpliterALocationStorage = TabView.RowDefinitions[2].Height;
-                        TabView.RowDefinitions[2].Height = new GridLength(0);
-                        Splitter1.IsEnabled = false;
-                    }
-                    else
-                    {
-                        TabView.RowDefinitions[2].Height = SpliterALocationStorage;
-                        Splitter1.IsEnabled = true;
-                    }
-                }
-
                 TabView.Visibility = Visibility.Visible;
+
+                TabViewButton.IsChecked = true;
             }
+
+            if (UpdateProperties)
+            {
+                if (!ModPropertiesVisibilitySwitch.IsChecked.Value)
+                {
+                    SpliterALocationStorage = TabView.RowDefinitions[2].Height;
+                    TabView.RowDefinitions[2].Height = new GridLength(0);
+                    Splitter1.IsEnabled = false;
+
+                    SpliterBLocationStorage = PanelView.RowDefinitions[2].Height;
+                    PanelView.RowDefinitions[2].Height = new GridLength(0);
+                    Splitter2.IsEnabled = false;
+                }
+                else
+                {
+                    TabView.RowDefinitions[2].Height = SpliterALocationStorage;
+                    Splitter1.IsEnabled = true;
+                    PanelView.RowDefinitions[2].Height = SpliterBLocationStorage;
+                    Splitter2.IsEnabled = true;
+                }
+            }
+
+
         }
 
         #region List Access Methods
@@ -237,7 +236,6 @@ namespace Sonic3AIR_ModManager
 
         public void View_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (View.SelectedItem != null && View.SelectedItem is ModViewerItem)
             {
                 var item = View.SelectedItem as ModViewerItem;
@@ -247,11 +245,6 @@ namespace Sonic3AIR_ModManager
                 }
             }
 
-        }
-
-        private void LegacyLoadingCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-            ModManagement.ToggleLegacyModManagement(LegacyLoadingCheckbox.IsChecked.Value);
         }
 
         public void View_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -273,7 +266,7 @@ namespace Sonic3AIR_ModManager
 
             if (FolderView.SelectedItem != null)
             {
-                if ((FolderView.SelectedItem as SubDirectoryItem).FilePath != ProgramPaths.Sonic3AIRModsFolder)
+                if ((FolderView.SelectedItem as SubDirectoryItem).FilePath != Management.ProgramPaths.Sonic3AIRModsFolder)
                 {
                     RemoveCurrentFolderMenuItem.IsEnabled = true;
                 }
@@ -302,7 +295,7 @@ namespace Sonic3AIR_ModManager
 
         public void RemoveCurrentFolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            FileManagement.RemoveSubFolder((FolderView.SelectedValue as SubDirectoryItem).FilePath);
+            Management.ModManagement.RemoveSubFolder((FolderView.SelectedValue as SubDirectoryItem).FilePath);
         }
 
         public void FolderListHost_ContextMenuOpening(object sender, ContextMenuEventArgs e)
@@ -316,32 +309,32 @@ namespace Sonic3AIR_ModManager
             string newFolderName = Program.LanguageResource.GetString("NewSubFolderEntryName");
             System.Windows.Forms.DialogResult result;
             result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption1"));
-            while (Directory.Exists(System.IO.Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName)) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
+            while (Directory.Exists(System.IO.Path.Combine(Management.ProgramPaths.Sonic3AIRModsFolder, newFolderName)) && (result != System.Windows.Forms.DialogResult.Cancel || result != System.Windows.Forms.DialogResult.Abort))
             {
                 result = ExtraDialog.ShowInputDialog(ref newFolderName, Program.LanguageResource.GetString("CreateSubFolderDialogTitle"), Program.LanguageResource.GetString("CreateSubFolderDialogCaption2"));
             }
 
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                string newDirectoryPath = System.IO.Path.Combine(ProgramPaths.Sonic3AIRModsFolder, newFolderName);
+                string newDirectoryPath = System.IO.Path.Combine(Management.ProgramPaths.Sonic3AIRModsFolder, newFolderName);
                 Directory.CreateDirectory(newDirectoryPath);
-                ModManagement.UpdateModsList(true);
+                Management.ModManagement.UpdateModsList(true);
             }
         }
 
         private void PanelViewButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangeView(ViewSetting.Panel);
+            ChangeView(ViewSetting.Panel, false);
         }
 
         private void TabViewButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangeView(ViewSetting.Tabbed);
+            ChangeView(ViewSetting.Tabbed, false);
         }
 
         private void ModPropertiesVisibilitySwitch_Click(object sender, RoutedEventArgs e)
         {
-            ChangeView(CurrentView);
+            ChangeView(CurrentView, true);
         }
     }
 
@@ -389,7 +382,7 @@ namespace Sonic3AIR_ModManager
 
         private bool GetEnabledState()
         {
-            if (!ModManagement.S3AIRActiveMods.UseLegacyLoading)
+            if (!Management.ModManagement.S3AIRActiveMods.UseLegacyLoading)
             {
                 return Source.IsEnabled;
             }
@@ -446,7 +439,7 @@ namespace Sonic3AIR_ModManager
 
         private void SetEnabledState(bool value)
         {
-            if (!ModManagement.S3AIRActiveMods.UseLegacyLoading)
+            if (!Management.ModManagement.S3AIRActiveMods.UseLegacyLoading)
             {
                 Source.IsEnabled = value;
                 ModViewer.ItemCheck?.Invoke();

@@ -158,8 +158,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConsoleManager.cs" />
-    <Compile Include="Controls\InGameContextMenu.xaml.cs">
+    <Compile Include="Classes\VersionCheck.cs" />
+    <Compile Include="Management\External\DownloaderAPI.cs" />
+    <Compile Include="Management\External\GamebananaAPI.cs" />
+    <Compile Include="Methods\ConsoleManager.cs" />
+    <Compile Include="Controls\Game\InGameContextMenu.xaml.cs">
       <DependentUpon>InGameContextMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModViewer\ActiveMods.xaml.cs">
@@ -176,10 +179,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>lang.ru.resx</DependentUpon>
     </Compile>
-    <Compile Include="Management and Data Models\DiscordRP.cs" />
-    <Compile Include="Management and Data Models\GameHandler.cs" />
-    <Compile Include="Management and Data Models\InputDeviceManager.cs" />
-    <Compile Include="Controls\ConfigEditorDialog.xaml.cs">
+    <Compile Include="Management\External\GameHandler.cs" />
+    <Compile Include="Management\Collections\InputDeviceManager.cs" />
+    <Compile Include="Controls\ModViewer\ConfigEditorDialog.xaml.cs">
       <DependentUpon>ConfigEditorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Languages\lang.null.Designer.cs">
@@ -187,41 +189,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>lang.null.resx</DependentUpon>
     </Compile>
-    <Compile Include="Management and Data Models\MMSettingsManagement.cs" />
-    <Compile Include="Management and Data Models\ModManagement.cs" />
-    <Compile Include="Controls\AboutWindow.xaml.cs">
+    <Compile Include="Management\Internal\MMSettingsManagement.cs" />
+    <Compile Include="Management\Collections\ModManagement.cs" />
+    <Compile Include="Controls\Options\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DocumentationViewer.xaml.cs">
+    <Compile Include="Controls\Documenation\DocumentationViewer.xaml.cs">
       <DependentUpon>DocumentationViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\JoystickReaderDialog.xaml.cs">
+    <Compile Include="Controls\InputMapping\JoystickReaderDialog.xaml.cs">
       <DependentUpon>JoystickReaderDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\KeybindingsListDialog.xaml.cs">
+    <Compile Include="Controls\InputMapping\KeybindingsListDialog.xaml.cs">
       <DependentUpon>KeybindingsListDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\KeyBindingDialog.xaml.cs">
+    <Compile Include="Controls\InputMapping\KeyBindingDialog.xaml.cs">
       <DependentUpon>KeyBindingDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DeviceNameDialog.xaml.cs">
+    <Compile Include="Controls\InputMapping\DeviceNameDialog.xaml.cs">
       <DependentUpon>DeviceNameDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\JoystickInputSelectorDialog.xaml.cs">
+    <Compile Include="Controls\InputMapping\JoystickInputSelectorDialog.xaml.cs">
       <DependentUpon>JoystickInputSelectorDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Management and Data Models\MainDataModel.cs" />
-    <Compile Include="Management and Data Models\RecordingManagement.cs" />
-    <Compile Include="Management and Data Models\VersionManagement.cs" />
-    <Compile Include="Personal Settings Classes\SettingsBinding.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Controls\AutoBootDialog.xaml.cs">
+    <Compile Include="Management\Internal\MainDataModel.cs" />
+    <Compile Include="Management\Collections\RecordingManagement.cs" />
+    <Compile Include="Management\Collections\VersionManagement.cs" />
+    <Compile Include="Settings\SettingsBinding.cs" />
+    <Compile Include="Methods\Settings.cs" />
+    <Compile Include="Controls\Game\AutoBootDialog.xaml.cs">
       <DependentUpon>AutoBootDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DownloadWindow.xaml.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="ExtraDialog.cs" />
-    <Compile Include="JoystickReader.cs" />
+    <Compile Include="Controls\Updater\DownloadWindow.xaml.cs" />
+    <Compile Include="Methods\Extensions.cs" />
+    <Compile Include="Methods\ExtraDialog.cs" />
+    <Compile Include="Methods\JoystickReader.cs" />
     <Compile Include="Languages\lang.fr.Designer.cs">
       <DependentUpon>lang.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -232,35 +234,35 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Controls\ItemConflictDialog.xaml.cs">
+    <Compile Include="Controls\ModViewer\ItemConflictDialog.xaml.cs">
       <DependentUpon>ItemConflictDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ModManagerUpdater.xaml.cs">
+    <Compile Include="Controls\Updater\ModManagerUpdater.xaml.cs">
       <DependentUpon>ModManagerUpdater.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Updater.xaml.cs">
+    <Compile Include="Controls\Updater\Updater.xaml.cs">
       <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\VersionsListView.xaml.cs">
+    <Compile Include="Controls\ListViews\VersionsListView.xaml.cs">
       <DependentUpon>VersionsListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RecordingsListView.xaml.cs">
+    <Compile Include="Controls\ListViews\RecordingsListView.xaml.cs">
       <DependentUpon>RecordingsListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ListViewControl.xaml.cs">
+    <Compile Include="Controls\ListViews\ListViewControl.xaml.cs">
       <DependentUpon>ListViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModManager.xaml.cs">
       <DependentUpon>ModManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Management and Data Models\FileManagement.cs" />
+    <Compile Include="Management\External\FileManagement.cs" />
     <Compile Include="Controls\ModViewer\ModViewer.xaml.cs">
       <DependentUpon>ModViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ModWrapPanel.cs" />
+    <Compile Include="Controls\ModViewer\ModWrapPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Management and Data Models\ProcessLauncher.cs" />
+    <Compile Include="Management\External\ProcessLauncher.cs" />
     <Compile Include="Languages\lang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -271,13 +273,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Personal Settings Classes\LaunchPreset.cs" />
-    <Compile Include="Personal Settings Classes\ModCollection.cs" />
-    <Compile Include="Personal Settings Classes\ModManagerSettings.cs" />
-    <Compile Include="Styles\SkinResourceDictonary.cs" />
-    <Compile Include="Management and Data Models\UserLanguage.cs" />
-    <Compile Include="Management and Data Models\ProgramPaths.cs" />
-    <Compile Include="WinformsTheming.cs" />
+    <Compile Include="Settings\LaunchPreset.cs" />
+    <Compile Include="Settings\ModCollection.cs" />
+    <Compile Include="Settings\ModManagerSettings.cs" />
+    <Compile Include="Management\Internal\UserLanguage.cs" />
+    <Compile Include="Management\Internal\ProgramPaths.cs" />
+    <Compile Include="Methods\WinformsTheming.cs" />
     <EmbeddedResource Include="Languages\lang.es.resx" />
     <EmbeddedResource Include="Languages\lang.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -310,25 +311,16 @@
     <None Include="Properties\app.manifest" />
     <None Include="Properties\PostBuild.bat" />
     <None Include="Properties\PreBuild.bat" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <None Include="Properties\Versioning\build_list.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="discord-rpc.dll">
+    <Content Include="Lib\discord-rpc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="pdfium.dll">
+    <Content Include="Lib\pdfium.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AIR_Original_Icon_HD.ico" />
@@ -336,23 +328,23 @@
     <Content Include="Resources\Icon_Newish_v2.ico" />
     <Content Include="Resources\Icon_Newish_v3.1.ico" />
     <Content Include="Resources\Icon_Newish_v3.ico" />
-    <Content Include="libmupdf.dll">
+    <Content Include="Lib\libmupdf.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ModManager.ico" />
     <Content Include="Resources\ModManagerIconTest2.ico" />
     <Resource Include="Resources\EntrySFX.wav" />
     <Resource Include="Resources\win.bmp" />
-    <Content Include="Steam Banners\banner_and_knuckles.png">
+    <Content Include="Steam_Banners\banner_and_knuckles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Steam Banners\banner.png">
+    <Content Include="Steam_Banners\banner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SDL2.dll">
+    <Content Include="Lib\SDL2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Steam Banners\new_banner.png">
+    <Content Include="Steam_Banners\new_banner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\ModIconDefault.png" />
@@ -368,55 +360,87 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AboutWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DocumentationViewer.xaml">
+    <Page Include="Controls\Assets\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\InGameContextMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\JoystickReaderDialog.xaml">
+    <Page Include="Controls\Assets\Themes\BetaTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ConfigEditorDialog.xaml">
+    <Page Include="Controls\Assets\Themes\CarJemTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\KeybindingsListDialog.xaml">
+    <Page Include="Controls\Assets\Themes\DarkTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\KeyBindingDialog.xaml">
+    <Page Include="Controls\Assets\Themes\GammaTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\DeviceNameDialog.xaml">
+    <Page Include="Controls\Assets\Themes\LightTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\JoystickInputSelectorDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\AutoBootDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DownloadWindow.xaml">
+    <Page Include="Controls\Assets\Themes\ShardTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ItemConflictDialog.xaml">
+    <Page Include="Controls\Assets\Themes\SparksTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Options\AboutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Documenation\DocumentationViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ModManagerUpdater.xaml">
+    <Page Include="Controls\Game\InGameContextMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InputMapping\JoystickReaderDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ModViewer\ConfigEditorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InputMapping\KeybindingsListDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InputMapping\KeyBindingDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InputMapping\DeviceNameDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InputMapping\JoystickInputSelectorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Game\AutoBootDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Updater\DownloadWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ModViewer\ItemConflictDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Updater\ModManagerUpdater.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -432,19 +456,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Updater.xaml">
+    <Page Include="Controls\Updater\Updater.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\VersionsListView.xaml">
+    <Page Include="Controls\ListViews\VersionsListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RecordingsListView.xaml">
+    <Page Include="Controls\ListViews\RecordingsListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ListViewControl.xaml">
+    <Page Include="Controls\ListViews\ListViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -455,22 +479,6 @@
     <Page Include="Controls\ModViewer\ModViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\ColorLibraryCodenameGamma.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\ColorLibraryLight.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\ColorLibraryDark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\AppSpecificStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -514,7 +522,7 @@
       <Version>1.0.121</Version>
     </PackageReference>
     <PackageReference Include="Extended.Wpf.Toolkit">
-      <Version>3.6.0</Version>
+      <Version>3.8.1</Version>
     </PackageReference>
     <PackageReference Include="log4net">
       <Version>2.0.8</Version>
@@ -538,9 +546,10 @@
       <Version>0.24.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(TargetPath)" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "$(ConfigurationName)" "$(SolutionDir)Sonic3AIR_ModManager\"</PreBuildEvent>

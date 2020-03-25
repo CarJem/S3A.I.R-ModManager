@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Sonic3AIR_ModManager"
              xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
-             xmlns:genLib="clr-namespace:GenerationsLib.WPF.Styles;assembly=GenerationsLib.WPF"
+             xmlns:genLib="clr-namespace:GenerationsLib.WPF.Themes;assembly=GenerationsLib.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -24,111 +24,22 @@
                             <Canvas.Resources/>
                             <!--Unknown tag: metadata-->
                             <!--Unknown tag: sodipodi:namedview-->
-                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4522" Fill="{StaticResource NormalText}" Data="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"/>
+                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4522" Fill="{DynamicResource NormalText}" Data="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"/>
                         </Canvas>
                     </DockPanel>
                 </ToggleButton.Content>
-                <ToggleButton.Style>
-                    <Style TargetType="{x:Type ToggleButton}">
-                        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-                        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-                        <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
-                        <Setter Property="BorderThickness" Value="1"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Padding" Value="1"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsChecked" Value="true">
-                                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsPressed" Value="true">
-                                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="false">
-                                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ToggleButton.Style>
             </ToggleButton>
             <Separator></Separator>
-            <Button Width="30" Height="30" Name="PanelViewButton" Click="PanelViewButton_Click">
-                <Button.Content>
-                    <Canvas Width="16" Height="16">
-                        <Canvas.RenderTransform>
-                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX="9" CenterY="9"></ScaleTransform>
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources/>
-                        <!--Unknown tag: sodipodi:namedview-->
-                        <!--Unknown tag: metadata-->
-                        <Canvas>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="2" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="4" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="6" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="8" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="10" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="12" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="14" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="10" Canvas.Top="2" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="10" Canvas.Top="4" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="10" Canvas.Top="6" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="10" Canvas.Top="8" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="10" Canvas.Top="10" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="10" Canvas.Top="12" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="10" Canvas.Top="14" Width="6" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="8" Canvas.Top="1" Width="1" Height="14" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                        </Canvas>
-                    </Canvas>
-                </Button.Content>
-            </Button>
-            <Button Width="30" Height="30" Name="TabViewButton" Click="TabViewButton_Click">
-                <Button.Content>
-                    <Canvas Width="16" Height="16">
-                        <Canvas.RenderTransform>
-                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX="9" CenterY="9"></ScaleTransform>
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources/>
-                        <Canvas>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="2" Width="15" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="4" Width="15" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="6" Width="15" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="8" Width="15" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="10" Width="15" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="12" Width="15" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                            <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="14" Width="15" Height="1" Fill="{DynamicResource NormalText}" StrokeThickness="0" Stroke="{DynamicResource NormalText}" StrokeMiterLimit="4"/>
-                        </Canvas>
-                    </Canvas>
-                </Button.Content>
-            </Button>
-            <StatusBarItem HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal">
-                    <CheckBox x:Name="LegacyLoadingCheckbox" Style="{DynamicResource CheckBoxStyle1}" VerticalAlignment="Center" IsChecked="False" Click="LegacyLoadingCheckbox_Click" ></CheckBox>
-                    <TextBlock HorizontalAlignment="Right" x:Name="LegacyLoadingText" Foreground="{DynamicResource NormalText}" Text="Use Legacy / Stackless Loading&#10;(Pre-19.09.19.0; Limited Support)" Margin="5,0,0,0"></TextBlock>
-                </StackPanel>
-            </StatusBarItem>
+            <ToggleButton Width="30" Height="30" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Name="PanelViewButton" Click="PanelViewButton_Click" Content="{DynamicResource PanelView}">
+            </ToggleButton>
+            <ToggleButton Width="30" Height="30" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Name="TabViewButton" Click="TabViewButton_Click" Content="{DynamicResource TabView}">
+            </ToggleButton>
         </StatusBar>
         <Grid Name="TabView" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="2"></RowDefinition>
-                <RowDefinition MinHeight="100"></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TabControl x:Name="TabView_Control">
                 <TabItem Header="Active Mods" Name="ActiveModsTab"></TabItem>
@@ -145,7 +56,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="2"></RowDefinition>
-                <RowDefinition MinHeight="100"></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid x:Name="PanelA" Grid.Column="0"></Grid>
             <Grid x:Name="PanelB" Grid.Column="1"></Grid>
@@ -157,119 +68,124 @@
 
 
     <UserControl.Resources>
-        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
-            <Setter Property="SelectionBrush" Value="Transparent"></Setter>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Grid x:Name="background">
-                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                        <Condition Property="IsSelectionActive" Value="false"/>
-                    </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                </MultiTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="{x:Type ListView}">
-            <Setter Property="Background" Value="{DynamicResource ListBox.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ListBox.Static.Border}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListView}">
-                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
-                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
-                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </ScrollViewer>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource ListBox.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource ListBox.Disabled.Border}"/>
-                            </Trigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsGrouping" Value="true"/>
-                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                            </MultiTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <DataTemplate x:Key="ModViewTemplate">
-            <Border BorderThickness="1" BorderBrush="{DynamicResource ButtonBorder}" Visibility="{Binding Visibility}">
-                <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="52"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.Style>
-                        <Style TargetType="{x:Type Grid}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                                    <Setter Property="Background" Value="#7F26FF04" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                                    <Setter Property="Background" Value="#7FFF0000" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Grid.Style>
-                    <StackPanel Width="Auto" Height="Auto">
-                        <DockPanel>
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                    <Grid Width="50" Height="50">
-                                        <Image RenderOptions.BitmapScalingMode="HighQuality" Width="50" Height="50" Source="{Binding Image}"></Image>
-                                    </Grid>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Sonic 3 A.I.R Mod Manager;component/Controls/Assets/Icons.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{DynamicResource NormalText}"/>
+                <Setter Property="SelectionBrush" Value="Transparent"></Setter>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="AllowDrop" Value="true"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Grid x:Name="background">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                                 </Border>
                             </Grid>
-                            <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="1" Height="Auto">
-                                <TextBox Cursor="Arrow" Style="{StaticResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2" FontWeight="Bold">
-                                </TextBox>
-                                <TextBox Cursor="Arrow" Style="{StaticResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
-                            </StackPanel>
-                            <CheckBox Visibility="{Binding CheckBoxVisibility}" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
-                        </DockPanel>
-                    </StackPanel>
-                    <TextBlock Cursor="Arrow" Padding="0,0,2,0" Grid.Row="1" Text="{Binding Version}" TextAlignment="Right" Foreground="Yellow" Background="#7E000000" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap" FontWeight="DemiBold" />
-                </Grid>
-            </Border>
-        </DataTemplate>
-        <ItemsPanelTemplate x:Key="ModViewPanelTemplate">
-            <local:ModWrapPanel2 HorizontalAlignment="Center">
-            </local:ModWrapPanel2>
-        </ItemsPanelTemplate>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                            <Condition Property="IsSelectionActive" Value="false"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                    </MultiTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type ListView}">
+                <Setter Property="Background" Value="{DynamicResource ListBox.Static.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource ListBox.Static.Border}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListView}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                                <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource ListBox.Disabled.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource ListBox.Disabled.Border}"/>
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsGrouping" Value="true"/>
+                                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <DataTemplate x:Key="ModViewTemplate">
+                <Border BorderThickness="1" BorderBrush="{DynamicResource ButtonBorder}" Visibility="{Binding Visibility}">
+                    <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="52"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                        <Setter Property="Background" Value="#7F26FF04" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                        <Setter Property="Background" Value="#7FFF0000" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <StackPanel Width="Auto" Height="Auto">
+                            <DockPanel>
+                                <Grid>
+                                    <Border BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                        <Grid Width="50" Height="50">
+                                            <Image RenderOptions.BitmapScalingMode="HighQuality" Width="50" Height="50" Source="{Binding Image}"></Image>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                                <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="1" Height="Auto">
+                                    <TextBox Cursor="Arrow" Style="{StaticResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2" FontWeight="Bold">
+                                    </TextBox>
+                                    <TextBox Cursor="Arrow" Style="{StaticResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
+                                </StackPanel>
+                                <CheckBox Visibility="{Binding CheckBoxVisibility}" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
+                            </DockPanel>
+                        </StackPanel>
+                        <TextBlock Cursor="Arrow" Padding="0,0,2,0" Grid.Row="1" Text="{Binding Version}" TextAlignment="Right" Foreground="Yellow" Background="#7E000000" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap" FontWeight="DemiBold" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
+            <ItemsPanelTemplate x:Key="ModViewPanelTemplate">
+                <local:ModWrapPanel2 HorizontalAlignment="Center">
+                </local:ModWrapPanel2>
+            </ItemsPanelTemplate>
+        </ResourceDictionary>
     </UserControl.Resources>
 
 </UserControl>

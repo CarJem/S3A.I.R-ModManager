@@ -1,14 +1,28 @@
 ﻿<Application x:Class="Sonic3AIR_ModManager.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:gen="clr-namespace:GenerationsLib.WPF.Styles;assembly=GenerationsLib.WPF"
+             xmlns:skin="clr-namespace:GenerationsLib.WPF.Themes;assembly=GenerationsLib.WPF"
              xmlns:local="clr-namespace:Sonic3AIR_ModManager" ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <local:SkinResourceDictionary DarkSource="Styles/ColorLibraryDark.xaml" LightSource="Styles/ColorLibraryLight.xaml" />
+                <skin:SkinResourceDictionary
+                    CarJemSource="/GenerationsLib.WPF;Component/Themes/CarJemTheme.xaml" 
+                    BetaSource="/GenerationsLib.WPF;Component/Themes/BetaTheme.xaml" 
+                    ShardSource="/GenerationsLib.WPF;Component/Themes/ShardTheme.xaml" 
+                    DarkSource="/GenerationsLib.WPF;Component/Themes/DarkTheme.xaml" 
+                    LightSource="/GenerationsLib.WPF;Component/Themes/LightTheme.xaml"
+                    GammaSource="/GenerationsLib.WPF;Component/Themes/GammaTheme.xaml"
+                    SparksSource="/GenerationsLib.WPF;Component/Themes/SparksTheme.xaml"/>
+                <skin:SkinResourceDictionary
+                    CarJemSource="Controls/Assets/Themes/CarJemTheme.xaml" 
+                    BetaSource="Controls/Assets/Themes/BetaTheme.xaml" 
+                    ShardSource="Controls/Assets/Themes/ShardTheme.xaml" 
+                    DarkSource="Controls/Assets/Themes/DarkTheme.xaml" 
+                    LightSource="Controls/Assets/Themes/LightTheme.xaml"
+                    GammaSource="Controls/Assets/Themes/GammaTheme.xaml"
+                    SparksSource="Controls/Assets/Themes/SparksTheme.xaml"/>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/IconLibrary.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/CheckboxStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ButtonStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ItemContainerStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/FlatButtonStyle.xaml"></ResourceDictionary>
@@ -22,10 +36,13 @@
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/RepeatButtonStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/ToolbarStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/SliderStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Styles/AppSpecificStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/MenuItemContextStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/GroupBoxStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/IconLibrary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/SliderStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/XceedStyles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/LabelStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/CheckboxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/GenerationsLib.WPF;Component/Styles/HyperlinkStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

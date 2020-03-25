@@ -15,21 +15,33 @@ namespace Sonic3AIR_ModManager
     /// Interaction logic for App.xaml
     /// </summary>
     /// 
-
-    public enum Skin { Dark, Light }
     public partial class App : Application
     {
         public static App Instance;
 
-        public static Skin Skin { get; set; } = Skin.Dark;
+        public static GenerationsLib.WPF.Themes.Skin Skin
+        {
+            get
+            {
+                if (Sonic3AIR_ModManager.Management.MainDataModel.Settings.CurrentTheme != GenerationsLib.WPF.Themes.SkinResourceDictionary.CurrentTheme)
+                {
+                    GenerationsLib.WPF.Themes.SkinResourceDictionary.CurrentTheme = Sonic3AIR_ModManager.Management.MainDataModel.Settings.CurrentTheme;
+                }
+                return Sonic3AIR_ModManager.Management.MainDataModel.Settings.CurrentTheme;
+            }
+            set
+            {
+                GenerationsLib.WPF.Themes.SkinResourceDictionary.CurrentTheme = value;
+                Sonic3AIR_ModManager.Management.MainDataModel.Settings.CurrentTheme = value;
+            }
+        }
 
         public static bool SkinChanged { get; set; } = false;
 
 
         public App()
         {
-            if (Sonic3AIR_ModManager.MainDataModel.Settings.UseDarkTheme == true) ChangeSkin(Skin.Dark);
-            else ChangeSkin(Skin.Light);
+            GenerationsLib.WPF.Themes.SkinResourceDictionary.ChangeSkin(Sonic3AIR_ModManager.Management.MainDataModel.Settings.CurrentTheme, Sonic3AIR_ModManager.App.Current.Resources.MergedDictionaries);
 
             DebugDisable();
 
@@ -83,20 +95,6 @@ namespace Sonic3AIR_ModManager
 #if DEBUG
             System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
 #endif
-        }
-
-        public static void ChangeSkin(Skin newSkin)
-        {
-            Skin = newSkin;
-
-            foreach (ResourceDictionary dict in Sonic3AIR_ModManager.App.Current.Resources.MergedDictionaries)
-            {
-
-                if (dict is SkinResourceDictionary skinDict)
-                    skinDict.UpdateSource();
-                else
-                    dict.Source = dict.Source;
-            }
         }
 
         #endregion

@@ -1,0 +1,68 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid x:Key="PanelView" Width="24" Height="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Rectangle VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Column="1" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+    </Grid>
+    <Grid x:Key="TabView" Width="24" Height="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="1" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+    </Grid>
+    <StackPanel x:Key="ListView" Width="24" Height="24">
+        <Rectangle Fill="{DynamicResource NormalText}" Height="2" Margin="0,1,0,2" Width="Auto" HorizontalAlignment="Stretch"></Rectangle>
+        <Rectangle Fill="{DynamicResource NormalText}" Height="2" Margin="0,0,0,2" Width="Auto" HorizontalAlignment="Stretch"></Rectangle>
+        <Rectangle Fill="{DynamicResource NormalText}" Height="2" Margin="0,0,0,2" Width="Auto" HorizontalAlignment="Stretch"></Rectangle>
+        <Rectangle Fill="{DynamicResource NormalText}" Height="2" Margin="0,0,0,2" Width="10" HorizontalAlignment="Left"></Rectangle>
+        <Rectangle Fill="{DynamicResource NormalText}" Height="2" Margin="0,0,0,2" Width="Auto" HorizontalAlignment="Stretch"></Rectangle>
+        <Rectangle Fill="{DynamicResource NormalText}" Height="2" Margin="0,0,0,2" Width="Auto" HorizontalAlignment="Stretch"></Rectangle>
+    </StackPanel>
+    <Grid x:Key="GridView" Width="24" Height="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
+            <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
+            <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
+            <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition SharedSizeGroup="B"></RowDefinition>
+            <RowDefinition SharedSizeGroup="B"></RowDefinition>
+            <RowDefinition SharedSizeGroup="B"></RowDefinition>
+            <RowDefinition SharedSizeGroup="B"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+
+        <Rectangle Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="1" Grid.Column="3" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+
+        <Rectangle Grid.Row="2" Grid.Column="2" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="3" Grid.Column="3" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+
+        <Rectangle Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+        <Rectangle Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" Margin="1" HorizontalAlignment="Stretch" Fill="{DynamicResource NormalText}"></Rectangle>
+    </Grid>
+</ResourceDictionary>

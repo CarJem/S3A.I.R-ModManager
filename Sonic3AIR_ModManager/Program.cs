@@ -30,7 +30,7 @@ namespace Sonic3AIR_ModManager
             isDebug = true;
         }
 
-        public static ResourceManager LanguageResource { get { return UserLanguage.CurrentResource; } set { UserLanguage.CurrentResource = value; } }
+        public static ResourceManager LanguageResource { get { return Management.UserLanguage.CurrentResource; } set { Management.UserLanguage.CurrentResource = value; } }
 
         #endregion
 
@@ -106,9 +106,8 @@ namespace Sonic3AIR_ModManager
         static void RealMain(string[] args)
         {
             Log.InfoFormat("Starting Sonic 3 A.I.R. Mod Manager...");
-            ProgramPaths.CreateMissingModManagerFolders();
-            MMSettingsManagement.LoadModManagerSettings();
-            StartDiscord();
+            Management.ProgramPaths.CreateMissingModManagerFolders();
+            Management.MMSettingsManagement.LoadModManagerSettings();
             isDebugging();
             PraseArguments(args);
             isDeveloper = Arguments.dev_mode;
@@ -119,7 +118,6 @@ namespace Sonic3AIR_ModManager
                 GamebannaAPIHandler(args);
             }
             else StartApplication();
-            EndDiscord();
             Log.InfoFormat("Shuting Down!");
         }
 
@@ -140,24 +138,6 @@ namespace Sonic3AIR_ModManager
         }
         #endregion
 
-        #region Discord Threads
-
-        static void StartDiscord()
-        {
-            Thread thread = new Thread(() => DiscordRP.InitDiscord());
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-        }
-
-        static void EndDiscord()
-        {
-            Thread thread = new Thread(() => DiscordRP.DisposeDiscord());
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-        }
-
-        #endregion
-
         #region Startup Region
 
         static void GamebannaAPIHandler(string[] args)
@@ -169,7 +149,7 @@ namespace Sonic3AIR_ModManager
                 bool fileCreated = false;
                 while (!fileCreated)
                 {
-                    string path = Path.Combine(ProgramPaths.Sonic3AIR_MM_GBRequestsFolder, $"gb_api{currentFileIndex}.txt");
+                    string path = Path.Combine(Management.ProgramPaths.Sonic3AIR_MM_GBRequestsFolder, $"gb_api{currentFileIndex}.txt");
                     Log.InfoFormat("Attempting to creating file at \"{0}\"...", path);
                     if (!File.Exists(path))
                     {
@@ -210,8 +190,8 @@ namespace Sonic3AIR_ModManager
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            UserLanguage.ApplyLanguageResourcePath(UserLanguage.CurrentLanguage);
-            FileManagement.CleanUpAPIRequests();
+            Management.UserLanguage.ApplyLanguageResourcePath(Management.UserLanguage.CurrentLanguage);
+            Management.ModManagement.CleanUpAPIRequests();
 
             if (Arguments?.gamebanana_api != null)
             {
@@ -237,7 +217,7 @@ namespace Sonic3AIR_ModManager
 
         static void StockStartup()
         {
-            if (MainDataModel.Settings.AutoLaunch) AutoBootLoader();
+            if (Management.MainDataModel.Settings.AutoLaunch) AutoBootLoader();
             else
             {
                 var app = new App();
@@ -284,7 +264,7 @@ namespace Sonic3AIR_ModManager
                     {
                         if (Log != null) Log.ErrorFormat("[Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception.Message), RemoveNewLineChars(e.Exception.StackTrace));
                     }
-                    else if (MainDataModel.Settings.ShowFullDebugOutput)
+                    else if (Management.MainDataModel.Settings.ShowFullDebugOutput)
                     {
                         if (Log != null) Log.ErrorFormat("[FULL] [Exception Thrown] {0} {1}", RemoveNewLineChars(e.Exception), RemoveNewLineChars(e.Exception.StackTrace));
                     }
@@ -302,7 +282,7 @@ namespace Sonic3AIR_ModManager
                         {
                             if (Log != null) Log.ErrorFormat("[Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex.Message), RemoveNewLineChars(ex.StackTrace));
                         }
-                        else if (MainDataModel.Settings.ShowFullDebugOutput)
+                        else if (Management.MainDataModel.Settings.ShowFullDebugOutput)
                         {
                             if (Log != null) Log.ErrorFormat("[FULL] [Unhandled Exception Thrown] {0} {1}", RemoveNewLineChars(ex), RemoveNewLineChars(ex.StackTrace));
                         }
@@ -326,9 +306,9 @@ namespace Sonic3AIR_ModManager
 
         static void CleanUpLogsFolder()
         {
-            if (Directory.Exists(ProgramPaths.Sonic3AIR_MM_LogsFolder))
+            if (Directory.Exists(Management.ProgramPaths.Sonic3AIR_MM_LogsFolder))
             {
-                DirectoryInfo logsFolder = new DirectoryInfo(ProgramPaths.Sonic3AIR_MM_LogsFolder);
+                DirectoryInfo logsFolder = new DirectoryInfo(Management.ProgramPaths.Sonic3AIR_MM_LogsFolder);
                 var fileList = logsFolder.GetFiles("*.log", SearchOption.AllDirectories).ToList();
                 if (fileList.Count > 10)
                 {
