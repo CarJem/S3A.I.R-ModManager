@@ -536,10 +536,6 @@ namespace Sonic3AIR_ModManager
                 {
                     Management.RecordingManagement.CollectGameRecordings(ref Instance);
                 }
-                else if (PrimaryTabControl.SelectedItem == optionsPage)
-                {
-                    Management.InputDeviceManager.RefreshInputMappings();
-                }
             }
         }
 
@@ -551,6 +547,10 @@ namespace Sonic3AIR_ModManager
                 {
                     Management.RecordingManagement.CollectGameRecordings(ref Instance);
                     Management.RecordingManagement.UpdateGameRecordingManagerButtons(ref Instance);
+                }
+                else if (tabControl3.SelectedItem == inputPage)
+                {
+                    Management.InputDeviceManager.RefreshInputMappings();
                 }
             }
         }

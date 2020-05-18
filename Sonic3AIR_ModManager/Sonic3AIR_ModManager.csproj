@@ -140,6 +140,10 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework.Luna" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />

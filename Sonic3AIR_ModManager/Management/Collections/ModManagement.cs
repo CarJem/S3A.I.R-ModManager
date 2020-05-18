@@ -483,7 +483,7 @@ namespace Sonic3AIR_ModManager.Management
             DirectoryInfo d = new DirectoryInfo(Management.ProgramPaths.Sonic3AIRModsFolder);
             DirectoryInfo[] folders = d.GetDirectories();
             itemsCurrent.Add(new SubDirectoryItem(Management.UserLanguage.BaseModFolderString(), Management.ProgramPaths.Sonic3AIRModsFolder));
-            itemsCurrent.Add(new SubDirectoryItem("All - Show All Mods (including Subdirectories)","")); //TODO : Add User Translation
+            itemsCurrent.Add(new SubDirectoryItem("All Disabled Mods","")); //TODO : Add User Translation
             foreach (DirectoryInfo folder in folders)
             {
                 var files = folder.GetFiles();

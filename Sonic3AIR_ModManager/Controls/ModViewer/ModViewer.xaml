@@ -46,7 +46,7 @@
                 <TabItem Header="Mods" Name="ModsTab"></TabItem>
             </TabControl>
             <GridSplitter x:Name="Splitter1"  Background="DarkGray" ResizeDirection="Rows" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext" />
-            <Grid x:Name="PropertiesPanelA" Grid.Row="2"></Grid>
+            <Grid x:Name="PropertiesPanelA" Grid.Row="2" Background="Transparent"></Grid>
         </Grid>
         <Grid Name="PanelView" Visibility="Collapsed" Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -61,7 +61,7 @@
             <Grid x:Name="PanelA" Grid.Column="0"></Grid>
             <Grid x:Name="PanelB" Grid.Column="1"></Grid>
             <GridSplitter x:Name="Splitter2" Grid.ColumnSpan="2" Background="DarkGray" ResizeDirection="Rows" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext" />
-            <Grid x:Name="PropertiesPanelB" Grid.Row="2" Grid.ColumnSpan="2"></Grid>
+            <Grid x:Name="PropertiesPanelB" Grid.Row="2" Grid.ColumnSpan="2" Background="Transparent"></Grid>
         </Grid>
     </Grid>
 
@@ -80,7 +80,6 @@
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 <Setter Property="AllowDrop" Value="true"/>
                 <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
                 <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>

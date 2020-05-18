@@ -281,6 +281,9 @@ namespace Sonic3AIR_ModManager
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (FolderView.SelectedIndex == 0 || FolderView.SelectedIndex == 1) RemoveCurrentFolderMenuItem.IsEnabled = false;
+            else RemoveCurrentFolderMenuItem.IsEnabled = true;
+
             ChangeFolderButton.ContextMenu.IsOpen = true;
             UpdateSelectedFolderLabel();
         }
