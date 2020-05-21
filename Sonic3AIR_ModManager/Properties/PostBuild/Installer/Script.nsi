@@ -14,7 +14,7 @@
 
 !define COPYRIGHT "CarJem Generations © 2019"
 !define DESCRIPTION "Mod Manager for Sonic 3 A.I.R. - Angel Island Revisited"
-!define INSTALLER_NAME "Setup_${VERSION}.exe"
+!define INSTALLER_NAME "Setup.exe"
 !define INSTALLER_DIR "."
 !define MAIN_APP_EXE "Sonic 3 A.I.R Mod Manager.exe"
 !define INSTALL_TYPE "SetShellVarContext current"
