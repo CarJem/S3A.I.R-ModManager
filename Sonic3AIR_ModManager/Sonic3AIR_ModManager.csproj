@@ -314,7 +314,18 @@
     </None>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\PostBuild.bat" />
+    <None Include="Properties\PostBuild\Installer\InstallOptionsEx.nsi" />
+    <None Include="Properties\PostBuild\Installer\Script.nsi" />
+    <None Include="Properties\PostBuild\Installer\UninstallOptions.ini" />
+    <None Include="Properties\PostBuild\MainScript.bat" />
+    <None Include="Properties\PostBuild\MakeInstaller.bat" />
+    <None Include="Properties\PostBuild\MakeZIP.bat" />
+    <None Include="Properties\PostBuild\MoveBinaries.bat" />
+    <None Include="Properties\PostBuild\PublishStep.bat" />
     <None Include="Properties\PreBuild.bat" />
+    <None Include="Properties\PreBuild\AlwaysClean.bat" />
+    <None Include="Properties\PreBuild\MainScript.bat" />
+    <None Include="Properties\PreBuild\UpdateVersion.bat" />
     <None Include="Properties\Versioning\build_list.json" />
   </ItemGroup>
   <ItemGroup>
@@ -327,6 +338,8 @@
     <Content Include="Lib\pdfium.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Properties\PostBuild\Installer\AIR_Original_Icon_HD.ico" />
+    <Content Include="Properties\PostBuild\Installer\win.bmp" />
     <Content Include="Resources\AIR_Original_Icon_HD.ico" />
     <Content Include="Resources\Icon_Newish.ico" />
     <Content Include="Resources\Icon_Newish_v2.ico" />
@@ -553,9 +566,9 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call "$(SolutionDir)\Sonic3AIR_ModManager\Properties\PostBuild.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(TargetPath)" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>start /min cmd.exe /c "call "$(ProjectDir)Properties\PostBuild\MainScript.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(TargetDir)" "$(ProjectDir)" "$(TargetPath)""</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>call "$(SolutionDir)Sonic3AIR_ModManager\Properties\PreBuild.bat" "$(ConfigurationName)" "$(SolutionDir)Sonic3AIR_ModManager\"</PreBuildEvent>
+    <PreBuildEvent>start /min cmd.exe /c "call "$(ProjectDir)Properties\PreBuild\MainScript.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(TargetDir)" "$(ProjectDir)""</PreBuildEvent>
   </PropertyGroup>
 </Project>

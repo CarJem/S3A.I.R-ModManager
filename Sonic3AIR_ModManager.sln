@@ -15,13 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerationsLib.Core", "Gene
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{203AFC06-5F04-4E0C-860B-F2E1AD347508}"
 	ProjectSection(SolutionItems) = preProject
-		Installer\AIR_Original_Icon_HD.ico = Installer\AIR_Original_Icon_HD.ico
 		Installer\GenerationsLib.VersionExtracter.exe = Installer\GenerationsLib.VersionExtracter.exe
-		Installer\InstallOptionsEx.nsi = Installer\InstallOptionsEx.nsi
-		Installer\MakeInstaller.bat = Installer\MakeInstaller.bat
-		Installer\Sonic 3 A.I.R. Mod Manager.nsi = Installer\Sonic 3 A.I.R. Mod Manager.nsi
-		Installer\UninstallOptions.ini = Installer\UninstallOptions.ini
-		Installer\win.bmp = Installer\win.bmp
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{12A9B877-4A3F-4F5D-9965-6BD0E9C0320C}"

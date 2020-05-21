@@ -12,7 +12,7 @@ if %errorlevel% leq 4 exit 0 else exit %errorlevel%
 
 :: Set Installer Version
 ("%SolutionDir%Installer\GenerationsLib.VersionExtracter.exe" %TargetPath%) > temp.txt
-	set /p FileVersion=<temp.txt
+SET /p FileVersion=<temp.txt
 
 :: Generate Installer
 IF %ConfigurationName% == "Publish" (
