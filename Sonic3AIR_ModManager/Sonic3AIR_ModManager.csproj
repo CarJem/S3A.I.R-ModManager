@@ -308,6 +308,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>lang.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Languages\lang.nl.resx" />
     <EmbeddedResource Include="Languages\lang.null.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>lang.null.Designer.cs</LastGenOutput>

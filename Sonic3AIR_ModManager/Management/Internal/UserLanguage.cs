@@ -27,7 +27,8 @@ namespace Sonic3AIR_ModManager.Management
             GR = 2,
             FR = 3,
             RU = 4,
-            ES = 5
+            ES = 5,
+            NL = 6
         }
 
         private static Language GetLangVar(string value)
@@ -38,6 +39,7 @@ namespace Sonic3AIR_ModManager.Management
             else if (value.Equals("FR")) return Language.FR;
             else if (value.Equals("RU")) return Language.RU;
             else if (value.Equals("ES")) return Language.ES;
+            else if (value.Equals("NL")) return Language.NL;
             else return Language.EN_US;
         }
 
@@ -49,6 +51,7 @@ namespace Sonic3AIR_ModManager.Management
             else if (value.Equals(Language.FR)) return "FR";
             else if (value.Equals(Language.RU)) return "RU";
             else if (value.Equals(Language.ES)) return "ES";
+            else if (value.Equals(Language.NL)) return "NL";
             else return "EN_US";
         }
 
@@ -77,6 +80,7 @@ namespace Sonic3AIR_ModManager.Management
                 else if (value.Equals(Language.FR)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr");
                 else if (value.Equals(Language.RU)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru");
                 else if (value.Equals(Language.ES)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
+                else if (value.Equals(Language.NL)) System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("nl");
                 else System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
             }
 

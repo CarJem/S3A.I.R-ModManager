@@ -166,6 +166,11 @@ namespace Sonic3AIR_ModManager.Management
                     Tag = "ES",
                     Content = "Español (ES)"
                 };
+                ComboBoxItem NL = new ComboBoxItem()
+                {
+                    Tag = "NL",
+                    Content = "Nederlands (NL)"
+                };
                 ComboBoxItem NULL = new ComboBoxItem()
                 {
                     Tag = "NULL",
@@ -177,6 +182,7 @@ namespace Sonic3AIR_ModManager.Management
                 FR.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 RU.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 ES.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
+                NL.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
                 NULL.SetBinding(FrameworkElement.WidthProperty, LangItemsWidth);
 
                 Instance.languageComboBox.Items.Add(EN_US);
@@ -184,6 +190,7 @@ namespace Sonic3AIR_ModManager.Management
                 Instance.languageComboBox.Items.Add(FR);
                 Instance.languageComboBox.Items.Add(RU);
                 Instance.languageComboBox.Items.Add(ES);
+                Instance.languageComboBox.Items.Add(NL);
                 if (Program.isDebug) Instance.languageComboBox.Items.Add(NULL);
 
                 if (Management.UserLanguage.CurrentLanguage == Management.UserLanguage.Language.EN_US) Instance.languageComboBox.SelectedItem = EN_US;
@@ -191,6 +198,7 @@ namespace Sonic3AIR_ModManager.Management
                 else if (Management.UserLanguage.CurrentLanguage == Management.UserLanguage.Language.FR) Instance.languageComboBox.SelectedItem = FR;
                 else if (Management.UserLanguage.CurrentLanguage == Management.UserLanguage.Language.RU) Instance.languageComboBox.SelectedItem = RU;
                 else if (Management.UserLanguage.CurrentLanguage == Management.UserLanguage.Language.ES) Instance.languageComboBox.SelectedItem = ES;
+                else if (Management.UserLanguage.CurrentLanguage == Management.UserLanguage.Language.NL) Instance.languageComboBox.SelectedItem = NL;
                 else if (Management.UserLanguage.CurrentLanguage == Management.UserLanguage.Language.NULL) Instance.languageComboBox.SelectedItem = NULL;
                 else Instance.languageComboBox.SelectedItem = NULL;
 
@@ -366,6 +374,9 @@ namespace Sonic3AIR_ModManager.Management
                         break;
                     case "ES":
                         Management.UserLanguage.CurrentLanguage = Management.UserLanguage.Language.ES;
+                        break;
+                    case "NL":
+                        Management.UserLanguage.CurrentLanguage = Management.UserLanguage.Language.NL;
                         break;
                     case "NULL":
                         Management.UserLanguage.CurrentLanguage = Management.UserLanguage.Language.NULL;

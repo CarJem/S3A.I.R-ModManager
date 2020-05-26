@@ -117,113 +117,116 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutString" xml:space="preserve">
+    <value>Over</value>
+  </data>
   <data name="AboutTab" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>Over</value>
   </data>
   <data name="AddAIRVersion" xml:space="preserve">
-    <value>Agrega una versión de A.I.R...</value>
+    <value>Voeg een A.I.R. versie toe</value>
   </data>
   <data name="AddAMod" xml:space="preserve">
-    <value>Agrega un mod...</value>
+    <value>Voeg een mod toe</value>
   </data>
   <data name="AddInputDeviceDialogCaption" xml:space="preserve">
-    <value>Nombre del dispositivo de entrada:</value>
+    <value>Invoerapparaatnaam</value>
   </data>
   <data name="AddInputDeviceDialogTitle" xml:space="preserve">
-    <value>Agregar un dispositivo de entrada ...</value>
+    <value>Voeg een invoerapparaat toe</value>
   </data>
   <data name="AddInputDeviceError1" xml:space="preserve">
-    <value>ya existe en el directorio, ¡elige otro nombre!</value>
+    <value>bestaaat al, kies een andere naam!</value>
   </data>
   <data name="AddInputDeviceError2" xml:space="preserve">
-    <value>utiliza caracteres inaceptables, intenta utilizar solo guiones bajos y caracteres numéricos/alfabéticos.</value>
+    <value>gebruikt onbruikbare tekens, gebruik alleen nummers, letters en lage streepjes</value>
   </data>
   <data name="AddNewDeviceDescription" xml:space="preserve">
-    <value>Ingresa el nombre del controlador tal como aparece en la configuración del sistema o escribe * para apuntar a todos los dispositivos.</value>
+    <value>Voer de naam van de controller in zoals deze is aangegeven in de systeeminstellingen of typ * om alle apparaten te targeten </value>
   </data>
   <data name="AddNewDeviceTitle" xml:space="preserve">
-    <value>Agrega un nuevo dispositivo...</value>
+    <value>Voeg apparaat toe...</value>
   </data>
   <data name="AddNewSubFolderButton" xml:space="preserve">
-    <value>Agregar una nueva subcarpeta...</value>
+    <value>Voeg submap toe...</value>
   </data>
   <data name="AIRCanNotStartNoPath" xml:space="preserve">
-    <value>Ruta no establecida. ¡No se puede iniciar Sonic 3 A.I.R!</value>
+    <value>Pad is niet ingesteld. Kan Sonic 3 A.I.R. niet starten!</value>
   </data>
   <data name="AIRChangePathNoLongerExists" xml:space="preserve">
-    <value>La configuración definida por el archivo ya no existe. Inicia A.I.R. nuevamente fuera del mod loader e intenta nuevamente</value>
+    <value>De instellingen die door het bestand zijn gedefinieerd, bestaan niet meer. Start A.I.R. buiten de mod lader en probeer het opnieuw</value>
   </data>
   <data name="AIRDevMode" xml:space="preserve">
-    <value>Habilitar el modo de desarrollador</value>
+    <value>Activeer Dev modus</value>
   </data>
   <data name="AIRGuides" xml:space="preserve">
-    <value>Guías de A.I.R...</value>
+    <value>A.I.R. gidsen</value>
   </data>
   <data name="AIRInternalSettings" xml:space="preserve">
-    <value>Ajustes internos de A.I.R...</value>
+    <value>A.I.R. interne instellingen</value>
   </data>
   <data name="AIRLaunchOptionsGroupHeader" xml:space="preserve">
-    <value>Opciones de inicio de A.I.R...</value>
+    <value>A.I.R. opstart opties</value>
   </data>
   <data name="AIRMedia" xml:space="preserve">
-    <value>Media de A.I.R...</value>
+    <value>A.I.R. Media</value>
   </data>
   <data name="AIRMMPlaces" xml:space="preserve">
-    <value>Lugares del A.I.R. Mod Manager...</value>
+    <value>A.I.R. Mod Manager plekken</value>
   </data>
   <data name="AIROptionsTab" xml:space="preserve">
-    <value>Opciones de A.I.R...</value>
+    <value>A.I.R. opties</value>
   </data>
   <data name="AIRPlaces" xml:space="preserve">
-    <value>Lugares de A.I.R...</value>
+    <value>A.I.R. Plekken</value>
   </data>
   <data name="AIRTips" xml:space="preserve">
-    <value>Consejos de A.I.R...</value>
+    <value>A.I.R. Tips</value>
   </data>
   <data name="AIRVersion" xml:space="preserve">
-    <value>Versión de A.I.R.</value>
+    <value>A.I.R. Versie</value>
   </data>
   <data name="AIRVersionColumnHeader" xml:space="preserve">
-    <value>Versión de A.I.R.</value>
+    <value>A.I.R. Versie</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Sonic 3 A.I.R. Mod Manager</value>
+    <value>Sonic 3 A.I.R. Mod manager</value>
   </data>
   <data name="ArchitectureString" xml:space="preserve">
-    <value>Arquitectura</value>
+    <value>Architectuur</value>
   </data>
   <data name="AuthorSection" xml:space="preserve">
-    <value>Autor:</value>
+    <value>Auteur:</value>
   </data>
   <data name="AutoBoot_CheckingForUpdates" xml:space="preserve">
-    <value>Comprobando actualizaciones...</value>
+    <value>Zoeken naar updates...</value>
   </data>
   <data name="AutoBoot_Initalizing" xml:space="preserve">
-    <value>Inicializando...</value>
+    <value>Bezig met initialiseren...</value>
   </data>
   <data name="AutoBoot_LaunchingIn" xml:space="preserve">
-    <value>iniciando en</value>
+    <value>Opstarten in</value>
   </data>
   <data name="AutoBootDelay" xml:space="preserve">
-    <value>Retraso (segundos):</value>
+    <value>Vertraging (seconden):</value>
   </data>
   <data name="AxisPOVLabel" xml:space="preserve">
-    <value>Eje/POV:</value>
+    <value>As / POV:</value>
   </data>
   <data name="AxisRadioButton" xml:space="preserve">
-    <value>Eje</value>
+    <value>As</value>
   </data>
   <data name="BackupFailed" xml:space="preserve">
-    <value>Copia de seguridad fallida</value>
+    <value>Backup gefaald</value>
   </data>
   <data name="BuildDateString" xml:space="preserve">
-    <value>Fecha de versión</value>
+    <value>Versiedatum</value>
   </data>
   <data name="ButtonLabel" xml:space="preserve">
-    <value>Botón:</value>
+    <value>Knop:</value>
   </data>
   <data name="ButtonMappings" xml:space="preserve">
-    <value>Asignaciones de botones</value>
+    <value>Knop instellingen</value>
   </data>
   <data name="Buttons_A" xml:space="preserve">
     <value>A</value>
@@ -232,22 +235,22 @@
     <value>B</value>
   </data>
   <data name="Buttons_Back" xml:space="preserve">
-    <value>Atrás</value>
+    <value>Turug</value>
   </data>
   <data name="Buttons_Down" xml:space="preserve">
-    <value>Abajo</value>
+    <value>Omlaag</value>
   </data>
   <data name="Buttons_Left" xml:space="preserve">
-    <value>Izquierda</value>
+    <value>Links</value>
   </data>
   <data name="Buttons_Right" xml:space="preserve">
-    <value>Derecha</value>
+    <value>Rechts</value>
   </data>
   <data name="Buttons_Start" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="Buttons_Up" xml:space="preserve">
-    <value>Arriba</value>
+    <value>Omhoog</value>
   </data>
   <data name="Buttons_X" xml:space="preserve">
     <value>X</value>
@@ -256,366 +259,363 @@
     <value>Y</value>
   </data>
   <data name="By" xml:space="preserve">
-    <value>Por</value>
+    <value>Door</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancelar</value>
+    <value>Annuleer</value>
   </data>
   <data name="Cancel_Button" xml:space="preserve">
-    <value>Cancelar</value>
+    <value>Annuleer</value>
   </data>
   <data name="CarJemTwitter" xml:space="preserve">
     <value>CarJem @ Twitter</value>
   </data>
   <data name="ChangeAIRVersion" xml:space="preserve">
-    <value>Cambiar de versión de A.I.R.</value>
+    <value>Verander A.I.R. versie</value>
   </data>
   <data name="ChangeS3KROMPathDialog_Part1" xml:space="preserve">
-    <value>¿Deseas establecer la ruta a la ubicación de la ROM de Steam de S3&amp;K?</value>
+    <value>Wil je het pad instellen naar de Sonic 3 &amp; knuckles Steam ROM</value>
   </data>
   <data name="ChangeS3KROMPathDialog_Part2" xml:space="preserve">
-    <value>Haz clic en SÍ para configurar la ruta automáticamente en función de la ROM de Steam de S3&amp;K</value>
+    <value>Klik op JA om het pad naar de Sonic 3 &amp; knuckles Steam ROM automatisch in te stellen</value>
   </data>
   <data name="ChangeS3KROMPathDialog_Part3" xml:space="preserve">
-    <value>Haz clic en NO para establecer la ruta manualmente</value>
+    <value>Kik op NEE om het pad handmatig in te stellen</value>
   </data>
   <data name="ChangeS3KROMPathDialog_Part4" xml:space="preserve">
-    <value>Haz clic en CANCELAR para dejar la ruta sin cambios y volver a la configuración</value>
+    <value>Klik op annuleren om het pad te laten zoals het is en terug te gaan naar instellingen</value>
   </data>
   <data name="ChangeS3KROMPathDialog_Title" xml:space="preserve">
-    <value>Cambiar la ruta de la ROM de Sonic 3&amp;K</value>
+    <value>Verander Sonic 3 &amp; knuckles ROM</value>
   </data>
   <data name="CheckforAIRUpdatesOnStart" xml:space="preserve">
-    <value>Buscar actualizaciones de A.I.R. al inicio...</value>
+    <value>Controleer voor A.I.R. updates bij opstarten</value>
   </data>
   <data name="CheckForGameUpdatesExpandable" xml:space="preserve">
-    <value>Buscar actualizaciones del juego...</value>
+    <value>Controleer voor game updates</value>
   </data>
   <data name="CheckForModManagerUpdatesButton" xml:space="preserve">
-    <value>Buscar actualizaciones del Mod Manager...</value>
+    <value>Controleer op mod manager updates</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound1" xml:space="preserve">
-    <value>No se encontraron los siguientes archivos:</value>
+    <value>De volgende bestanden konden niet worden gevonden:</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound2" xml:space="preserve">
-    <value>Si no has iniciado Sonic 3 A.I.R. todavia, ¡por favor inicia Sonic 3 A.I.R. una vez antes de iniciar el mod loader!</value>
+    <value>Als je Sonic 3 A.I.R. nog niet hebt uitgevoerd, doe dit voordat je de mod lader start!</value>
   </data>
   <data name="CollectionFilesCouldNotBeFound3" xml:space="preserve">
-    <value>Si lo has iniciado, asegurate de que existan estas ubicaciones. El mod loader no puede ejecutarse sin ellas</value>
+    <value>Zorg ervoor dat deze locaties bestaan, de mod lader werkt niet zonder deze locaties</value>
   </data>
   <data name="ConflictDialogCaption" xml:space="preserve">
-    <value>¿Cómo te gustaría resolver este conflicto?</value>
+    <value>Hoe wil je dit probleem oplossen?</value>
   </data>
   <data name="ConflictingModSection" xml:space="preserve">
-    <value>Mod conflictivo:</value>
+    <value>Probleem Mod:</value>
   </data>
   <data name="ContextMenuCloseHeader" xml:space="preserve">
-    <value>Cerrar menú contextual</value>
+    <value>Sluit context menu</value>
   </data>
   <data name="ControllerRadioButton" xml:space="preserve">
-    <value>Controlador</value>
+    <value>Controller</value>
   </data>
   <data name="CopyFilePath" xml:space="preserve">
-    <value>Copiar ruta de archivo</value>
+    <value>Kopieer bestandspad</value>
   </data>
   <data name="CreateSubFolderDialogCaption1" xml:space="preserve">
-    <value>Escribe el nombre de la subcarpeta que deseas crear.</value>
+    <value>Typ de naam van de submap in die je wilt toevoegen.</value>
   </data>
   <data name="CreateSubFolderDialogCaption2" xml:space="preserve">
-    <value>¡Ese nombre de carpeta ya existe!</value>
+    <value>Die mapnaam bestaat al!</value>
   </data>
   <data name="CreateSubFolderDialogTitle" xml:space="preserve">
-    <value>Crear una nueva subcarpeta</value>
+    <value>Maak een nieuwe submap</value>
   </data>
   <data name="CurrentFolderLabel" xml:space="preserve">
-    <value>Carpeta actual:</value>
+    <value>Huidige map:</value>
   </data>
   <data name="CustomAdvancedLabel" xml:space="preserve">
-    <value>Personalizado/Avanzado:</value>
+    <value>Aangepast/Geavanceerd:</value>
   </data>
   <data name="CustomStringLabel" xml:space="preserve">
-    <value>Cadena personalizada:</value>
+    <value>Aangepaste tekst </value>
   </data>
   <data name="CustomWordString" xml:space="preserve">
-    <value>Personalizado</value>
+    <value>Aangepast</value>
   </data>
   <data name="DecreaseModPriority" xml:space="preserve">
-    <value>Disminuir prioridad del mod seleccionado...</value>
+    <value>Verlaag mod prioriteit</value>
   </data>
   <data name="DecreaseModPriorityToMin" xml:space="preserve">
-    <value>Disminuir prioridad del mod seleccionado a minutos...</value>
+    <value>Verlaag mod prioriteit naar het minimale</value>
   </data>
   <data name="DefaultLaunchOptionItemText" xml:space="preserve">
-    <value>Predeterminado (NINGUNO)</value>
+    <value>Standaard (GEEN)</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Eliminar</value>
+    <value>Verwijder</value>
   </data>
   <data name="DeleteAllLaunchPresetsMenuItem" xml:space="preserve">
-    <value>Eliminar todos los preajustes de inicio</value>
+    <value>Verwijder alle opstart presets</value>
   </data>
   <data name="DeleteAllModCollectionsMenuItem" xml:space="preserve">
-    <value>Eliminar todas las colecciones de mods</value>
+    <value>Verwijder alle mod collecties</value>
   </data>
   <data name="DeleteDeviceTitle" xml:space="preserve">
-    <value>Eliminar dispositivo</value>
+    <value>Verwijder apparaat</value>
   </data>
   <data name="DeleteItemConfirmation" xml:space="preserve">
-    <value>Estás seguro que quieres borrar</value>
+    <value>Weet je zeker dat je dit wilt verwijderen:</value>
   </data>
   <data name="DeleteKeybindTitle" xml:space="preserve">
-    <value>Eliminar combinación de teclas</value>
+    <value>Verwijder keybind</value>
   </data>
   <data name="DeleteKeybindVerification1" xml:space="preserve">
-    <value>Verificación: ¿Deseas eliminar la</value>
+    <value>Verificatie: weet je zeker dat je de keybind</value>
   </data>
   <data name="DeleteKeybindVerification2" xml:space="preserve">
-    <value>combinación de teclas?</value>
+    <value>wilt verwijderen?</value>
   </data>
   <data name="DeleteLaunchPresetsMenuItem" xml:space="preserve">
-    <value>Eliminar inicio preajustado...</value>
+    <value>Verwijder opstart preset</value>
   </data>
   <data name="DeleteModCollectionMenuItem" xml:space="preserve">
-    <value>Eliminar colección de mods...</value>
+    <value>Verwijder mod collectie</value>
   </data>
   <data name="DetectControllerExpandable" xml:space="preserve">
-    <value>Detectar controlador...</value>
+    <value>Detecteer controller...</value>
   </data>
   <data name="DetectGamepadInputExpandable" xml:space="preserve">
-    <value>Detectar entrada de gamepad...</value>
+    <value>Detecteer gamepad invoer...</value>
   </data>
   <data name="DeviceIdentifierNames" xml:space="preserve">
-    <value>Nombres de identificador de dispositivo</value>
+    <value>Namen van apparaat-ID's</value>
   </data>
   <data name="DirectionGB" xml:space="preserve">
-    <value>Dirección</value>
+    <value>Richting</value>
   </data>
   <data name="DisableInGameEnhacements_Part1" xml:space="preserve">
-    <value>Desactivar mejoras en el juego</value>
+    <value>Schakel ingame verbeteringen uit</value>
   </data>
   <data name="DisableInGameEnhacements_Part2" xml:space="preserve">
-    <value>(Habilita solo si tienes problemas para ejecutar A.I.R.)</value>
+    <value>(alleen activeren als je problemen hebt met A.I.R.)</value>
   </data>
   <data name="DoesNotExist" xml:space="preserve">
-    <value>¡no existe!</value>
+    <value>bestaat niet!</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Descargando</value>
+    <value>Downloaden</value>
   </data>
   <data name="EditExpandable" xml:space="preserve">
-    <value>Editar...</value>
+    <value>Aanpassen...</value>
   </data>
   <data name="EditKeybindingsTitleExpandable" xml:space="preserve">
-    <value>Editar combinación de teclas...</value>
+    <value>Pas keybinds aan</value>
   </data>
   <data name="EnableAutoBootMode" xml:space="preserve">
-    <value>Habilitar el modo de arranque automático</value>
+    <value>Activeer auto boot modus</value>
   </data>
   <data name="EnableDiscordRPCOption" xml:space="preserve">
-    <value>Habilitar soporte RPC de Discord</value>
+    <value>Schakel Discord RPC-ondersteuning in</value>
   </data>
   <data name="EnableModStacking" xml:space="preserve">
-    <value>Habilitar apilamiento de mods</value>
+    <value>Activeer mod stapelen</value>
   </data>
   <data name="EnableModStacking_Note1" xml:space="preserve">
-    <value>NOTA: Para versiones de A.I.R.</value>
+    <value>let op: Alleen voor A.I.R. versies </value>
   </data>
   <data name="EnableModStacking_Note2" xml:space="preserve">
-    <value>v19.09.19.0 y superior solamente</value>
+    <value>vanaf v19.09.19.0</value>
   </data>
   <data name="EnterModURL" xml:space="preserve">
-    <value>Ingresar URL de mod...</value>
-  </data>
-  <data name="AboutString" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>Voer mod URL in...</value>
   </data>
   <data name="ErrorHyperlinkClickMessage" xml:space="preserve">
-    <value>(¡Haz clic aquí para ir allí!)</value>
+    <value>(Klik hier om daar naartoe te gaan)</value>
   </data>
   <data name="ErrorWithLoading" xml:space="preserve">
-    <value>Error al cargar</value>
+    <value>Error met laden</value>
   </data>
   <data name="Eukaryot3KTwitter" xml:space="preserve">
     <value>Eukaryot3K @ Twitter</value>
   </data>
   <data name="EXEFileDialogFilter" xml:space="preserve">
-    <value>Archivo ejecutable</value>
+    <value>Uitvoerbaar bestand</value>
   </data>
   <data name="EXEFileDialogTitle" xml:space="preserve">
-    <value>Selecciona ejecutable de Sonic 3 A.I.R.</value>
+    <value>Selecteer Sonic 3 A.I.R.</value>
   </data>
   <data name="ExistingModSection" xml:space="preserve">
-    <value>Mod existente:</value>
+    <value>Bestaande mod:</value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Salir</value>
+    <value>Verlaten</value>
   </data>
   <data name="ExportExpanable" xml:space="preserve">
-    <value>Exportar...</value>
+    <value>Exporteer...</value>
   </data>
   <data name="FailSafeMode" xml:space="preserve">
-    <value>Modo a prueba de fallos</value>
+    <value>Fail safe modus</value>
   </data>
   <data name="FileIsBusyCaption" xml:space="preserve">
-    <value>El archivo: {0} está siendo utilizado por otro proceso, ¿te gustaría continuar de todos modos? (Al hacer clic en No o al cerrar este cuadro de diálogo solo se volverá a verificar si se pierde el archivo; si te quedas atascado aquí, forza el cierre de la aplicación)</value>
+    <value>Het bestand: {0} wordt momenteel gebruikt door een ander proces. Wil je toch doorgaan? (Als je op Nee klikt of dit dialoogvenster sluit, wordt alleen opnieuw gecontroleerd als het bestand verloren is gegaan; als je hier vastloopt, sluit je de toepassing alsjeblieft)</value>
   </data>
   <data name="FileIsBusyTitle" xml:space="preserve">
-    <value>El archivo está ocupado</value>
+    <value>Bestand is druk bezig</value>
   </data>
   <data name="FileString" xml:space="preserve">
-    <value>Archivo</value>
+    <value>Bestand</value>
   </data>
   <data name="FileTab" xml:space="preserve">
-    <value>Archivo</value>
+    <value>Bestand</value>
   </data>
   <data name="FixGlitches" xml:space="preserve">
-    <value>Arreglar errores</value>
+    <value>Repareer glitches</value>
   </data>
   <data name="FolderString" xml:space="preserve">
-    <value>Carpeta</value>
+    <value>Map</value>
   </data>
   <data name="ForceQuitGame" xml:space="preserve">
-    <value>Forzar la salida</value>
+    <value>Gedwongen stoppen</value>
   </data>
   <data name="ForceQuitGameDialog_Text" xml:space="preserve">
-    <value>¿Estás seguro de que quieres forzar el cierre de Sonic 3 A.I.R? (Todo el progreso no guardado se perderá)</value>
+    <value>Weet je zeker dat je Sonic 3 A.I.R wilt stoppen? (Alle niet-opgeslagen voortgang gaat verloren)</value>
   </data>
   <data name="ForceQuitGameDialog_Title" xml:space="preserve">
-    <value>Forzar la salida del juego</value>
+    <value>Gedwongen stoppen</value>
   </data>
   <data name="ForceStart" xml:space="preserve">
-    <value>Forzar inicio</value>
+    <value>Gedwongen starten</value>
   </data>
   <data name="FullDebugOutputOption" xml:space="preserve">
-    <value>Registrar la salida de depuración completa</value>
+    <value>Houd volledige debug output bij</value>
   </data>
   <data name="FullscreenOption1" xml:space="preserve">
-    <value>Ventana</value>
+    <value>onvolledig scherm</value>
   </data>
   <data name="FullscreenOption2" xml:space="preserve">
-    <value>Pantalla completa</value>
+    <value>Volledig scherm</value>
   </data>
   <data name="FullscreenOption3" xml:space="preserve">
-    <value>Pantalla completa exclusiva</value>
+    <value>alleen volledig scherm</value>
   </data>
   <data name="GameBannaURLHandler" xml:space="preserve">
-    <value>Opciones del Gamebanana URL Handler...</value>
+    <value>Gamebanana URL Handler opties ...</value>
   </data>
   <data name="GameInstalledAt" xml:space="preserve">
-    <value>El juego ha sido instalado en</value>
+    <value>De game is geïnstalleerd in</value>
   </data>
   <data name="GameRecordingPlaybackWarning_Part1" xml:space="preserve">
-    <value>ADVERTENCIA</value>
+    <value>WAARSCHUWING</value>
   </data>
   <data name="GameRecordingPlaybackWarning_Part2" xml:space="preserve">
-    <value>La reproducción de grabación es una característica muy peligrosa que puede (y normalmente lo hará)</value>
+    <value>opnames terugkijken is een gevaarlijke functie (en zal meestal)</value>
   </data>
   <data name="GameRecordingPlaybackWarning_Part3" xml:space="preserve">
-    <value>¡MODIFICAR AJUSTES E INCLUSIVE BORRAR TUS DATOS GUARDADOS NO IMPORTA QUE TAN CUIDADOSO SEAS!</value>
+    <value>INSTELLINGEN WIJZIGEN EN OPSLAGGEGEVENS WISSEN, HOE VOORZICHTIG JE OOK BENT</value>
   </data>
   <data name="GameRecordingPlaybackWarning_Part4" xml:space="preserve">
-    <value>Se recomienda encarecidamente que realices una copia de seguridad manual de los datos guardados de A.I.R. antes de usar esta herramienta si te preocupa perder sus datos.</value>
+    <value>Het wordt ten zeerste aanbevolen om handmatig een back-up te maken van de opslaggegevens van A.I.R. voordat je deze tool gebruikt als je je zorgen maakt over het verliezen van je gegevens.</value>
   </data>
   <data name="GameRecordingPlaybackWarning_Part5" xml:space="preserve">
-    <value>¡NO SOY RESPONSABLE DE NINGÚN DATO PERDIDO POR EL USO DE ESTA HERRAMIENTA!</value>
+    <value>IK BEN NIET VERANTWOORDELIJK VOOR VERLOREN GEGEVENS DOOR HET GEBRUIK VAN DEZE TOOL!</value>
   </data>
   <data name="GameRecordingsPlayButton" xml:space="preserve">
-    <value>Jugar...</value>
+    <value>Speel...</value>
   </data>
   <data name="GameVersionSection" xml:space="preserve">
-    <value>Versión del juego:</value>
+    <value>Game versie:</value>
   </data>
   <data name="GeneralTab" xml:space="preserve">
-    <value>General</value>
+    <value>Algemeen</value>
   </data>
   <data name="GuidesTab" xml:space="preserve">
-    <value>Guías/Atajos</value>
+    <value>Gidsen / snelkoppelingen</value>
   </data>
   <data name="HasDeviceNamesCheckbox" xml:space="preserve">
-    <value>Utiliza nombres de dispositivo (deshabilitar para teclados)</value>
+    <value>Gebruikt apparaatnamen (uitschakelen voor toetsenborden)</value>
   </data>
   <data name="HelpTab" xml:space="preserve">
-    <value>Ayuda</value>
+    <value>Help</value>
   </data>
   <data name="IDLabel" xml:space="preserve">
     <value>ID:</value>
   </data>
   <data name="ImportExpandable" xml:space="preserve">
-    <value>Importar...</value>
+    <value>Importeer...</value>
   </data>
   <data name="IncreaseModPriority" xml:space="preserve">
-    <value>Aumentar prioridad del mod seleccionado...</value>
+    <value>Verhoog geselecteerde mod prioriteit ...</value>
   </data>
   <data name="IncreaseModPriorityToMax" xml:space="preserve">
-    <value>Aumentar prioridad del mod seleccionado al máximo...</value>
+    <value>Verhoog geselecteerde mod prioriteit naar het maximum...</value>
   </data>
   <data name="Input_INPUT" xml:space="preserve">
-    <value>[INPUT]</value>
+    <value>[INVOER]</value>
   </data>
   <data name="Input_MULTI" xml:space="preserve">
     <value>[MULTI]</value>
   </data>
   <data name="Input_NONE" xml:space="preserve">
-    <value>[NINGUNO]</value>
+    <value>[GEEN]</value>
   </data>
   <data name="Input_NULL" xml:space="preserve">
     <value>[NULL]</value>
   </data>
   <data name="Input_UNSUPPORTED" xml:space="preserve">
-    <value>[SIN SOPORTE]</value>
+    <value>[GEEN SUPPORT]</value>
   </data>
   <data name="InputMappingError1" xml:space="preserve">
-    <value>¡Error al cargar el archivo de configuración de entrada!
- Asegúrate de que tu juego esté actualizado y que tengas la ruta del juego de A.I.R. configurada en Opciones.</value>
+    <value>Fout bij laden van invoerconfiguratiebestand!
+Zorg ervoor dat je game up-to-date is en dat je je A.I.R. Game Pad hebt ingesteld in Opties. </value>
   </data>
   <data name="InputMappingError2" xml:space="preserve">
-    <value>¡Se produjo un error al leer el archivo de configuración en la carpeta de esta versión!
-  Asegúrate de que no haya nada malo o realiza una instalación limpia de esta versión de A.I.R.</value>
+    <value>Er is een fout opgetreden bij het lezen van het configuratiebestand in de map van deze versie!
+  Zorg ervoor dat er niets mis mee is of maak een schone installatie van deze versie van A.I.R. </value>
   </data>
   <data name="InputMappingError3" xml:space="preserve">
-    <value>El archivo de configuración no existe en la carpeta del EXE de A.I.R.
- Asegúrate de que no haya nada malo o realiza una instalación limpia de esta versión de A.I.R.</value>
+    <value>Het configuratiebestand bestaat niet in de A.I.R. EXE-map.
+Zorg ervoor dat het bestand bestaat of maak een schone installatie van deze versie van A.I.R.</value>
   </data>
   <data name="InputTab" xml:space="preserve">
-    <value>Input</value>
+    <value>Invoer</value>
   </data>
   <data name="InstalledVersions" xml:space="preserve">
-    <value>Versiones instaladas</value>
+    <value>Geïnstalleerde versies</value>
   </data>
   <data name="InvalidURL" xml:space="preserve">
-    <value>URL invalida</value>
+    <value>Foute URL</value>
   </data>
   <data name="JoystickInputSelectorFormTitle" xml:space="preserve">
-    <value>Selecciona un controlador...</value>
+    <value>Selecteer een controller ...</value>
   </data>
   <data name="JSONErrorPossible" xml:space="preserve">
-    <value>(Probablemente sea un error del JSON; ¡asegúrate de que el archivo mod.json esté formateado correctamente!)</value>
+    <value>(Waarschijnlijk een JSON-fout; zorg ervoor dat het bestand mod.json correct is opgemaakt!)</value>
   </data>
   <data name="KeybindingsExistingNote" xml:space="preserve">
-    <value>(Existente)</value>
+    <value>(Bestaand)</value>
   </data>
   <data name="KeybindingsLabel" xml:space="preserve">
-    <value>Atajos de teclado:</value>
+    <value>Sneltoetsen:</value>
   </data>
   <data name="KeyboardRadioButton" xml:space="preserve">
-    <value>Teclado</value>
+    <value>Toetsenbord</value>
   </data>
   <data name="KeyLabel" xml:space="preserve">
-    <value>Tecla:</value>
+    <value>Toets:</value>
   </data>
   <data name="LanguageLabel" xml:space="preserve">
-    <value>Idioma:</value>
+    <value>Taal:</value>
   </data>
   <data name="LaunchOptionsForewarning" xml:space="preserve">
-    <value>NOTA: ¡Estas son solo opciones de depuración!
- Destinado a desarrolladores de mods y propósitos de depuración. Esto puede romper los gustos de características como Achivements.
- ¡Por favor ten cuidado!</value>
+    <value>OPMERKING: dit zijn alleen foutopsporingsopties!
+Bedoeld voor mod-ontwikkelaars en debug-doeleinden. Dit kan functies zoals functies, zoals prestaties, verbreken.
+Wees alsjeblieft voorzichtig!</value>
   </data>
   <data name="LaunchOptionsPlayerK" xml:space="preserve">
     <value>Knuckles the Echidna</value>
   </data>
   <data name="LaunchOptionsPlayerKT" xml:space="preserve">
-    <value>Knuckles the Echidna &amp; Miles "Tails" Prower (Si está desbloqueado)</value>
+    <value>Knuckles the Echidna &amp; Miles "Tails" Prower (als deze is ontgrendeld)</value>
   </data>
   <data name="LaunchOptionsPlayerS" xml:space="preserve">
     <value>Sonic the Hedgehog</value>
@@ -627,552 +627,551 @@
     <value>Miles "Tails" Prower</value>
   </data>
   <data name="LaunchOptionsStartingPhaseLabel" xml:space="preserve">
-    <value>Fase inicial</value>
+    <value>Startfase</value>
   </data>
   <data name="LaunchOptionsStartingPlayerLabel" xml:space="preserve">
-    <value>Jugador inicial</value>
+    <value>Startspeler</value>
   </data>
   <data name="LaunchOptionsStartingSceneLabel" xml:space="preserve">
-    <value>Escena inicial</value>
+    <value>Startscene</value>
   </data>
   <data name="LaunchOptionsWarning1" xml:space="preserve">
-    <value>
-Ignorado si la escena inicial está establecida en NINGUNA</value>
+    <value>Genegeerd als de startscene is ingesteld op GEEN</value>
   </data>
   <data name="LaunchOptionsWarning2" xml:space="preserve">
-    <value>Ignorado si la escena inicial está configurada en algo diferente a NINGUNA</value>
+    <value>Wordt genegeerd als de startscene is ingesteld op iets anders dan GEEN</value>
   </data>
   <data name="LaunchPresetsMenuItem" xml:space="preserve">
-    <value>Iniciar preajustes...</value>
+    <value>presets starten...</value>
   </data>
   <data name="LegacyLoadingText_Line1" xml:space="preserve">
-    <value>Usar carga heredada/sin apilamiento</value>
+    <value>Gebruik stapelloos laden</value>
   </data>
   <data name="LegacyLoadingText_Line2" xml:space="preserve">
-    <value>(Pre-19.09.19.0; Soporte limitado)</value>
+    <value>(pre-19.09.19.0; beperkte ondersteuning</value>
   </data>
   <data name="LoadLaunchPresetsMenuItem" xml:space="preserve">
-    <value>Cargar preajuste de lanzamiento...</value>
+    <value>Startvoorinstelling laden...</value>
   </data>
   <data name="LoadModCollectionMenuItem" xml:space="preserve">
-    <value>Cargar colección de mods...</value>
+    <value>Laad mod collectie...</value>
   </data>
   <data name="LogFileNotFound" xml:space="preserve">
-    <value>Archivo de registro no encontrado</value>
+    <value>Log bestand niet gevonden</value>
   </data>
   <data name="MakeCopyButton" xml:space="preserve">
-    <value>Hacer copia</value>
+    <value>Maak kopie</value>
   </data>
   <data name="ManageAIRVersions" xml:space="preserve">
-    <value>Administrar versiones de A.I.R.</value>
+    <value>Beheer A.I.R. versies</value>
   </data>
   <data name="MissingAIRSetNowAlert" xml:space="preserve">
-    <value>La ruta del archivo de Sonic 3 A.I.R. no está configurada, ¿te gustaría configurarla ahora?</value>
+    <value>Het bestandspad van Sonic 3 A.I.R. is niet ingesteld. Wil je het nu instellen?</value>
   </data>
   <data name="ModCollectionDialog_Caption_Delete" xml:space="preserve">
-    <value>Eliminar la colección de mods</value>
+    <value>Verwijder mod collectie</value>
   </data>
   <data name="ModCollectionDialog_Caption_DeleteAll" xml:space="preserve">
-    <value>Eliminar todas las colecciones de mods</value>
+    <value>Verwijder alle mod collecties</value>
   </data>
   <data name="ModCollectionDialog_Caption_Rename" xml:space="preserve">
-    <value>Renombrar la colección de mods</value>
+    <value>Hernoem een modcollectie</value>
   </data>
   <data name="ModCollectionDialog_Caption_Replace" xml:space="preserve">
-    <value>Reemplazar la colección de mods existente</value>
+    <value>Vervang bestaande mod collectie</value>
   </data>
   <data name="ModCollectionDialog_Caption_Save" xml:space="preserve">
-    <value>Guardar la nueva colección de mods</value>
+    <value>Sla een mod collectie op</value>
   </data>
   <data name="ModCollectionDialog_Message_Delete" xml:space="preserve">
-    <value>¿Estás seguro de que deseas eliminar la colección de mods "{0}"? (Esto no se puede deshacer)</value>
+    <value>Weet je zeker dat u de mod-verzameling '{0}' wilt verwijderen? (Dit kan niet ongedaan gemaakt worden)</value>
   </data>
   <data name="ModCollectionDialog_Message_DeleteAll" xml:space="preserve">
-    <value>¿Estás seguro de que deseas eliminar todas tus colecciones de mods guardadas? (Esto no se puede deshacer)</value>
+    <value>Weet je zeker dat je al je opgeslagen mod-collecties wilt verwijderen? (Dit kan niet ongedaan gemaakt worden)</value>
   </data>
   <data name="ModCollectionDialog_Message_Rename" xml:space="preserve">
-    <value>Ingresa el nuevo nombre de esta colección de mods:</value>
+    <value>Voer de nieuwe naam van deze mod-collectie in:</value>
   </data>
   <data name="ModCollectionDialog_Message_Replace" xml:space="preserve">
-    <value>¿Estás seguro de que deseas reemplazar la colección de mod existente? (Esto no se puede deshacer)</value>
+    <value>Weet je zeker dat je de bestaande mod-collectie wilt vervangen? (Dit kan niet ongedaan gemaakt worden)</value>
   </data>
   <data name="ModCollectionDialog_Message_Save" xml:space="preserve">
-    <value>Ingresa el nombre de esta nueva colección de mods:</value>
+    <value>Voer de naam in van deze nieuwe mod-collectie:</value>
   </data>
   <data name="ModCollectionDialog_Name_Save" xml:space="preserve">
-    <value>Nueva colección de mods:</value>
+    <value>Nieuwe mod-collectie</value>
   </data>
   <data name="ModCollectionsMenuItem" xml:space="preserve">
-    <value>Colecciones de mods...</value>
+    <value>Mod collecties...</value>
   </data>
   <data name="ModFileDialogFilter" xml:space="preserve">
-    <value>Mod de Sonic 3 A.I.R.</value>
+    <value>Sonic 3 AIR Mod</value>
   </data>
   <data name="ModFileDialogTitle" xml:space="preserve">
-    <value>Seleccionar archivo de mod comprimido...</value>
+    <value>Selecteer gecomprimeerd mod-bestand ...</value>
   </data>
   <data name="ModManagerOptions" xml:space="preserve">
-    <value>Opciones del Mod Manager</value>
+    <value>Mod Manager Opties</value>
   </data>
   <data name="ModManagerVersion" xml:space="preserve">
-    <value>Versión del Mod Manager</value>
+    <value>Mod Manager Versie</value>
   </data>
   <data name="ModsLoadingError" xml:space="preserve">
-    <value>¡Error al cargar mods!
-Asegúrate de que tu juego esté actualizado y que tengas la Ruta del juego de A.I.R. configurada en Opciones.</value>
+    <value>Fout bij het laden van mods!
+Zorg ervoor dat je game up-to-date is en dat je A.I.R.'s Game Path hebt ingesteld in Opties.</value>
   </data>
   <data name="ModsTab" xml:space="preserve">
     <value>Mods</value>
   </data>
   <data name="ModsTab_ModProperties" xml:space="preserve">
-    <value>Propiedades del mod</value>
+    <value>Mod eigenschappen</value>
   </data>
   <data name="ModVersionSection" xml:space="preserve">
-    <value>Versión del mod:</value>
+    <value>Mod versie:</value>
   </data>
   <data name="MoreExpandable" xml:space="preserve">
-    <value>Más...</value>
+    <value>Meer...</value>
   </data>
   <data name="NameSection" xml:space="preserve">
-    <value>Nombre:</value>
+    <value>Naam:</value>
   </data>
   <data name="NewControllerEntryName" xml:space="preserve">
-    <value>Nuevo Controlador</value>
+    <value>Nieuwecontroller</value>
   </data>
   <data name="NewDeviceEntryName" xml:space="preserve">
-    <value>Nuevo Dispositivo</value>
+    <value>Nieuwapparaat</value>
   </data>
   <data name="NewSubFolderEntryName" xml:space="preserve">
-    <value>nueva_sub_carpeta</value>
+    <value>nieuwe_submap</value>
   </data>
   <data name="No_Button" xml:space="preserve">
-    <value>No</value>
+    <value>Nee</value>
   </data>
   <data name="NoControllerFound" xml:space="preserve">
-    <value>No se encontraron controladores!</value>
+    <value>Geen controllers gevonden!</value>
   </data>
   <data name="NoInstalledVersions" xml:space="preserve">
-    <value>No hay versiones instaladas</value>
+    <value>Geen geïnstalleerde versies</value>
   </data>
   <data name="NoModDescript" xml:space="preserve">
-    <value>Sin descripción proporcionada.</value>
+    <value>Geen beschrijving toegevoegd.</value>
   </data>
   <data name="Ok_Button" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Abrir</value>
+    <value>Open</value>
   </data>
   <data name="OpenAIRGamerecordingsFolder" xml:space="preserve">
-    <value>Abrir directorio de grabación de juego de A.I.R.</value>
+    <value>Open A.I.R. opname map</value>
   </data>
   <data name="OpenAIRGlobalSettingsFile" xml:space="preserve">
-    <value>Abrir archivo de ajustes globales de A.I.R.</value>
+    <value>Open A.I.R. instellingen</value>
   </data>
   <data name="OpenAIRInputSettingsFile" xml:space="preserve">
-    <value>Abrir archivo de ajustes de entrada de A.I.R.</value>
+    <value>Open A.I.R. besturingsinstellingen</value>
   </data>
   <data name="OpenAppDataFolder" xml:space="preserve">
-    <value>Abrir directorio de datos de A.I.R.</value>
+    <value>Open A.I.R. Data map</value>
   </data>
   <data name="OpenConfigFile" xml:space="preserve">
-    <value>Abrir archivo de configuración de A.I.R.</value>
+    <value>Open A.I.R. configuratiebestand</value>
   </data>
   <data name="OpenDownloadsFolder" xml:space="preserve">
-    <value>Abrir directorio de descargas del Mod Manager</value>
+    <value>Open Mod Manager Downloads map</value>
   </data>
   <data name="OpenEXEFolder" xml:space="preserve">
-    <value>Abrir directorio del EXE de A.I.R.</value>
+    <value>Open A.I.R. EXE map</value>
   </data>
   <data name="OpenExternally" xml:space="preserve">
-    <value>Abrir externamente...</value>
+    <value>Extern openen...</value>
   </data>
   <data name="OpenLocationExpandable" xml:space="preserve">
-    <value>Abrir ubicación...</value>
+    <value>Locatie openen...</value>
   </data>
   <data name="OpenModFolder" xml:space="preserve">
-    <value>Abrir carpeta de mod</value>
+    <value>Open Mod map</value>
   </data>
   <data name="OpenModInstructions" xml:space="preserve">
-    <value>Instrucciones de Modding de Sonic 3 A.I.R.</value>
+    <value>Sonic 3 A.I.R. Modding Instructies</value>
   </data>
   <data name="OpenModManagerLogFolder" xml:space="preserve">
-    <value>Abrir directorio de registro del Mod Manager</value>
+    <value>Open Mod Manager Log map</value>
   </data>
   <data name="OpenModManagerSettingsFile" xml:space="preserve">
-    <value>Abrir archivo de configuración del Mod Manager</value>
+    <value>Open Mod Manager instellingsbestand</value>
   </data>
   <data name="OpenModsFolder" xml:space="preserve">
-    <value>Abrir directorio de mods de A.I.R.</value>
+    <value>Open A.I.R. Mods map</value>
   </data>
   <data name="OpenModTemplatesFolder" xml:space="preserve">
-    <value>Abrir plantillas de Modding de A.I.R.</value>
+    <value>Open A.I.R. Mod voorbeelden</value>
   </data>
   <data name="OpenModURL" xml:space="preserve">
-    <value>Abrir URL de mod</value>
+    <value>Open Mod URL</value>
   </data>
   <data name="OpenSampleModsFolder" xml:space="preserve">
-    <value>Abrir directorio de mods de muestra de A.I.R.</value>
+    <value>Open A.I.R. voorbeeld Mods map</value>
   </data>
   <data name="OpenSettingsFile" xml:space="preserve">
-    <value>Abrir archivo de ajustes de A.I.R.</value>
+    <value>Open A.I.R. instellingsbestand</value>
   </data>
   <data name="OpenSystemSettingsExpandable" xml:space="preserve">
-    <value>Abrir ajustes de sistema...</value>
+    <value>Open systeeminstellingen...</value>
   </data>
   <data name="OpenUserManual" xml:space="preserve">
-    <value>Manual del usuario de Sonic 3 A.I.R.</value>
+    <value>Sonic 3 A.I.R. Handleiding</value>
   </data>
   <data name="OpenVersionsFolder" xml:space="preserve">
-    <value>Abrir directorio de versiones del Mod Manager</value>
+    <value>Open Mod Manager Versies map</value>
   </data>
   <data name="OtherTab" xml:space="preserve">
-    <value>Otros</value>
+    <value>Anders</value>
   </data>
   <data name="OverwriteButton" xml:space="preserve">
-    <value>Sobrescribir</value>
+    <value>Vervangen</value>
   </data>
   <data name="PathColumnHeader" xml:space="preserve">
-    <value>Ruta</value>
+    <value>Pad</value>
   </data>
   <data name="PlayUsingCurrentVersionMenuItem" xml:space="preserve">
-    <value>Jugar usando la versión actual</value>
+    <value>Speel met de huidige versie</value>
   </data>
   <data name="PlayUsingMatchingVersionMenuItem" xml:space="preserve">
-    <value>Jugar usando la versión de grabación</value>
+    <value>Speel met opnameversie</value>
   </data>
   <data name="PlayUsingOtherVersionMenuItem" xml:space="preserve">
-    <value>Jugar usando...</value>
+    <value>Spelen met...</value>
   </data>
   <data name="PleaseRefreshTheModList" xml:space="preserve">
-    <value>¡Por favor actualiza la lista de mods!</value>
+    <value>Vernieuw de Mod-lijst!</value>
   </data>
   <data name="POVRadioButton" xml:space="preserve">
     <value>POV</value>
   </data>
   <data name="Reason" xml:space="preserve">
-    <value>Razón</value>
+    <value>Reden</value>
   </data>
   <data name="RecordingPathCopiedToClipboard" xml:space="preserve">
-    <value>¡Ruta de archivo de grabación copiada al portapapeles!</value>
+    <value>Bestandspad opname gekopieerd naar klembord!</value>
   </data>
   <data name="RecordingsLoadingError" xml:space="preserve">
-    <value>¡Error al cargar grabaciones!</value>
+    <value>Fout bij het laden van opnamen!</value>
   </data>
   <data name="RecordingsLocationAppData" xml:space="preserve">
-    <value>Carpeta AppData de Sonic 3 A.I.R.</value>
+    <value>Sonic 3 A.I.R. AppData-map</value>
   </data>
   <data name="RecordingsLocationBrowse" xml:space="preserve">
-    <value>Explorar...</value>
+    <value>Bladeren...</value>
   </data>
   <data name="RecordingsLocationDefault" xml:space="preserve">
-    <value>Carpeta por defecto</value>
+    <value>Standaard map</value>
   </data>
   <data name="RecordingsLocationEXEFolder" xml:space="preserve">
-    <value>Carpeta del EXE de Sonic 3 A.I.R.</value>
+    <value>Sonic 3 A.I.R. EXE-map</value>
   </data>
   <data name="RecordingsLocationLabel" xml:space="preserve">
-    <value>Lugar Seleccionado:</value>
+    <value>Geselecteerde locatie:</value>
   </data>
   <data name="RecordingsLocationRecordingsFolder" xml:space="preserve">
-    <value>Carpeta de grabaciones de Sonic 3 A.I.R.</value>
+    <value>Sonic 3 A.I.R. Opnamemap</value>
   </data>
   <data name="RecordingsTab" xml:space="preserve">
-    <value>Grabaciones de juego</value>
+    <value>Game opnames</value>
   </data>
   <data name="RecordingUploaded1" xml:space="preserve">
-    <value>Archivo subido a File.io, caducará en 1 semana y tiene un solo uso:</value>
+    <value>Bestand geüpload naar File.io, het verloopt over 1 week en heeft een eenmalig gebruik:</value>
   </data>
   <data name="RecordingUploaded2" xml:space="preserve">
-    <value>(La URL se ha copiado al portapapeles)</value>
+    <value>(URL is gekopieerd naar klembord):</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Actualizar</value>
+    <value>Vernieuwen</value>
   </data>
   <data name="Reload" xml:space="preserve">
-    <value>Recargar</value>
+    <value>Herladen</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Remover</value>
+    <value>Verwijderen</value>
   </data>
   <data name="RemoveCurrentFolderButton" xml:space="preserve">
-    <value>Eliminar carpeta actual</value>
+    <value>Huidige map verwijderen</value>
   </data>
   <data name="RemoveInputDeviceConfirmation1" xml:space="preserve">
-    <value>Verificación: ¿Quieres eliminar</value>
+    <value>Verificatie: wilt u dit verwijderen:</value>
   </data>
   <data name="RemoveInputDeviceConfirmation2" xml:space="preserve">
-    <value>de la lista de dispositivos aceptables para esta entrada?</value>
+    <value>uit de lijst met acceptabele apparaten voor deze invoer?</value>
   </data>
   <data name="RemoveMod" xml:space="preserve">
-    <value>Eliminar mod</value>
+    <value>Mod verwijderen</value>
   </data>
   <data name="RemoveSelectedMod" xml:space="preserve">
-    <value>Eliminar mod seleccionado...</value>
+    <value>Geselecteerde mod verwijderen...</value>
   </data>
   <data name="RemoveSubFolderWarning" xml:space="preserve">
-    <value>¿Estás seguro de que deseas eliminar {0}? Esto no se puede deshacer y se perderán todas los mods dentro de esta carpeta</value>
+    <value>Weet je zeker dat je {0} wilt verwijderen? Dit kan niet ongedaan worden gemaakt en alle mods in deze map gaan verloren!</value>
   </data>
   <data name="RemoveVersionConfirmation" xml:space="preserve">
-    <value>¿Estás seguro de que quieres eliminar la versión</value>
+    <value>Weet je zeker dat je deze versie wil verwijderen:</value>
   </data>
   <data name="RenameLaunchPresetsMenuItem" xml:space="preserve">
-    <value>Cambiar nombre de preajuste de lanzamiento...</value>
+    <value>hernoem opstart preset</value>
   </data>
   <data name="RenameModCollectionMenuItem" xml:space="preserve">
-    <value>Renombrar la colección de mods...</value>
+    <value>Hernoem Mod Collectie...</value>
   </data>
   <data name="Reselect_Input_Button" xml:space="preserve">
-    <value>Reselccionar entrada</value>
+    <value>Herselecteer Input</value>
   </data>
   <data name="ResetInputMappingsDefaultFormMessage" xml:space="preserve">
-    <value>¿Estás seguro, tus modificaciones actuales se perderán!</value>
+    <value>Weet je het zeker, je huidige bewerkingen zullen verloren gaan!</value>
   </data>
   <data name="ResetInputMappingsDefaultFormTitle" xml:space="preserve">
-    <value>Restablecer asignaciones de entrada a las predeterminadas</value>
+    <value>zet invoer mappings terug naar standaard</value>
   </data>
   <data name="ResetMappingsToDefaultButton" xml:space="preserve">
-    <value>Restablecer a los valores predeterminados</value>
+    <value>Reset naar standaardwaarden</value>
   </data>
   <data name="RestoreFailed" xml:space="preserve">
-    <value>Restauración fallida</value>
+    <value>Herstellen mislukt</value>
   </data>
   <data name="ResultLabel" xml:space="preserve">
-    <value>Resultado:</value>
+    <value>Resultaat:</value>
   </data>
   <data name="S3AIRGB" xml:space="preserve">
     <value>S3AIR @ Gamebanana</value>
   </data>
   <data name="S3AIRHomepage" xml:space="preserve">
-    <value>Página principal de Sonic 3 A.I.R.</value>
+    <value>Sonic 3 A.I.R. hoofdpagina</value>
   </data>
   <data name="S3AIRPathNotSet" xml:space="preserve">
-    <value>¡La ruta de Sonic 3 A.I.R. no está definida!</value>
+    <value>Het pad van Sonic 3 A.I.R. is niet ingesteld!</value>
   </data>
   <data name="S3KROMPathLabel" xml:space="preserve">
-    <value>Ruta de ROM de Sonic 3K:</value>
+    <value>Sonic 3K ROM-pad:</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Guardar</value>
+    <value>Opslaan</value>
   </data>
   <data name="Save&amp;Load" xml:space="preserve">
-    <value>Guardar y Cargar</value>
+    <value>Opslaan en laden</value>
   </data>
   <data name="SaveInputMappingsButton" xml:space="preserve">
-    <value>Guardar asignaciones de entrada</value>
+    <value>Sla invoer mappings op</value>
   </data>
   <data name="SaveLaunchPresetAsMenuItem" xml:space="preserve">
-    <value>Reemplazar la configuración actual existente...</value>
+    <value>huidige instellingen vervangen...</value>
   </data>
   <data name="SaveLaunchPresetMenuItem" xml:space="preserve">
-    <value>Guardar la configuración actual como inicio preestablecido</value>
+    <value>Sla huidige instellingen op als start preset</value>
   </data>
   <data name="SaveModCollectonAsMenuItem" xml:space="preserve">
-    <value>Reemplazar la colección de mods existente...</value>
+    <value>Bestaande mod-collectie vervangen...</value>
   </data>
   <data name="SaveModCollectonMenuItem" xml:space="preserve">
-    <value>Guardar mods activos como una colección de mods</value>
+    <value>Sla actieve mods op als mod-verzameling</value>
   </data>
   <data name="Select_Button" xml:space="preserve">
-    <value>Seleccionar</value>
+    <value>Selecteer</value>
   </data>
   <data name="SelectInputTitleExpandable" xml:space="preserve">
-    <value>Seleccionar entrada...</value>
+    <value>Invoer selecteren...</value>
   </data>
   <data name="SelectSonic3KRomFile" xml:space="preserve">
-    <value>Seleccionar archivo de ROM de Sonic 3K...</value>
+    <value>Selecteer Sonic 3K ROM...</value>
   </data>
   <data name="SelectSonicAIRVersionZIP" xml:space="preserve">
-    <value>Seleccionar ZIP de una versión de Sonic 3 A.I.R...</value>
+    <value>Selecteer Sonic 3 A.I.R. Versie ZIP...</value>
   </data>
   <data name="SetAIRPathFromPreviousData" xml:space="preserve">
-    <value>Establecer ruta de A.I.R. de datos anteriores...</value>
+    <value>Stel A.I.R. Pad in door middel vanvan eerdere gegevens...</value>
   </data>
   <data name="SetAIRPathManually" xml:space="preserve">
-    <value>Establecer ruta de A.I.R. manualmente...</value>
+    <value>Stel A.I.R. Pad handmatig in...</value>
   </data>
   <data name="SetCustomGameRecordingFolderTitle" xml:space="preserve">
-    <value>Seleccione una carpeta de grabaciones de juegos personalizada...</value>
+    <value>Selecteer een Custom Game opname map...</value>
   </data>
   <data name="SettingsTab" xml:space="preserve">
-    <value>Ajustes</value>
+    <value>Instellingen</value>
   </data>
   <data name="SettingsVersionLabel" xml:space="preserve">
-    <value>Versión de ajustes de A.I.R:</value>
+    <value>Instellingen A.I.R. versie</value>
   </data>
   <data name="ShowLogFileButton" xml:space="preserve">
-    <value>Mostrar el archivo de registro de A.I.R.</value>
+    <value>Toon A.I.R. Logbestand</value>
   </data>
   <data name="Sonic3AIRPathLabel" xml:space="preserve">
-    <value>Ruta de Sonic 3 A.I.R:</value>
+    <value>Sonic 3 A.I.R. Pad:</value>
   </data>
   <data name="Sonic3KRomFile" xml:space="preserve">
-    <value>Ruta de ROM de Sonic 3K:</value>
+    <value>Sonic 3K ROM</value>
   </data>
   <data name="SonicAIRVersionZIP" xml:space="preserve">
-    <value>Versión de ZIP de A.I.R:</value>
+    <value>Sonic 3 A.I.R. Versie ZIP</value>
   </data>
   <data name="SpecifiedFileDirNotExist" xml:space="preserve">
-    <value>¡El archivo o directorio especificado no existe!</value>
+    <value>Opgegeven bestand of map bestaat niet!</value>
   </data>
   <data name="StartupFailureError" xml:space="preserve">
-    <value>Sonic 3 A.I.R. está desactualizado, ¡por favor usa la versión 19.08.17.0 o superior! (e inicialo al menos cuando esté completo)</value>
+    <value>Sonic 3 A.I.R is verouderd, gebruik versie 19.08.17.0 of hoger! (en start het minstens één keer volledig op)</value>
   </data>
   <data name="StartupWindowLabel" xml:space="preserve">
-    <value>Ventana de inicio:</value>
+    <value>Opstartvenster:</value>
   </data>
   <data name="StayOpenOnExit" xml:space="preserve">
-    <value>Mantenerse abierto al salir del juego</value>
+    <value>Blijf open na Game verlaten</value>
   </data>
   <data name="StayOpenOnLoad" xml:space="preserve">
-    <value>Mantenerse abierto al abrir el juego</value>
+    <value>Blijf open bij Game laden</value>
   </data>
   <data name="ThumbstickRadioButton" xml:space="preserve">
-    <value>Pulgar</value>
+    <value>Duim</value>
   </data>
   <data name="TimestampColumnHeader" xml:space="preserve">
-    <value>Articulo</value>
+    <value>Item</value>
   </data>
   <data name="TimeTravelSafetyNet_NullVersion" xml:space="preserve">
-    <value>¡No podemos determinar la última versión utilizada con Sonic 3 A.I.R.! ¡Esto puede ser una falsa alarma si se trata de una instalación nueva o una mala noticia si te diriges a una versión anterior de A.I.R.! El uso de una versión anterior puede conducir a resultados no deseados, como PÉRDIDA DE TU CONFIGURACIÓN o PÉRDIDA DE TUS DATOS GUARDADOS. Estás seguro de que quieres continuar?</value>
+    <value>We kunnen niet bepalen welke versie het laatst is gebruikt met Sonic 3 A.I.R.! Dit kan een vals alarm zijn als dit een nieuwe installatie is, of slecht nieuws als je op weg bent naar een oudere versie van A.I.R.! Het gebruik van een oudere versie kan leiden tot ongewenste resultaten zoals VERLIES VAN JE INSTELLINGEN of VERLIES VAN JE OPSLAGGEGEVENS. Weet je zeker dat je door wilt gaan?</value>
   </data>
   <data name="TimeTravelSafetyNet_OlderVersion" xml:space="preserve">
-    <value>¡Parece que estás a punto de iniciar una versión anterior de Sonic 3 A.I.R! Esto puede conducir a resultados no deseados, como PÉRDIDA DE TU CONFIGURACIÓN o PÉRDIDA DE TUS DATOS GUARDADOS. Estás seguro de que quieres continuar?</value>
+    <value>Het lijkt erop dat je op het punt staat een oudere versie van Sonic 3 A.I.R! Dit kan leiden tot ongewenste resultaten zoals VERLIES VAN JE INSTELLINGEN of VERLIES VAN JE OPSLAGGEGEVENS. Weet je zeker dat je door wilt gaan?</value>
   </data>
   <data name="TimeTravelSafetyNet_Title" xml:space="preserve">
-    <value>Advertencia potencial de viaje en el tiempo</value>
+    <value>Potentiële waarschuwing voor tijdreizen</value>
   </data>
   <data name="ToolsTab" xml:space="preserve">
-    <value>Herramientas</value>
+    <value>Gereedschap</value>
   </data>
   <data name="TryAgain" xml:space="preserve">
-    <value>¿Inténtalo de nuevo?</value>
+    <value>Opnieuw proberen?</value>
   </data>
   <data name="TypeGB" xml:space="preserve">
-    <value>Tipo</value>
+    <value>Type</value>
   </data>
   <data name="UnableToDeleteFile" xml:space="preserve">
-    <value>¡No se puede eliminar el archivo!</value>
+    <value>Kan bestand niet verwijderen!</value>
   </data>
   <data name="UnableToRemoveVersion" xml:space="preserve">
-    <value>¡No se puede eliminar la versión!</value>
+    <value>Kan versie niet verwijderen!</value>
   </data>
   <data name="UnableToStartS3AIR" xml:space="preserve">
-    <value>No se puede iniciar Sonic 3 A.I.R.</value>
+    <value>Kan Sonic 3 A.I.R. niet starten</value>
   </data>
   <data name="UnableToStartS3AIRRecordingViewer" xml:space="preserve">
-    <value>No se puede iniciar el visor de grabación de Sonic 3 A.I.R.</value>
+    <value>Kan Sonic 3 A.I.R. Opnameviewer niet starten</value>
   </data>
   <data name="UnableToValididatePath" xml:space="preserve">
-    <value>No se puede validar la ruta</value>
+    <value>Kan pad niet valideren</value>
   </data>
   <data name="UnderstoodButton" xml:space="preserve">
-    <value>Entendido</value>
+    <value>Begrepen</value>
   </data>
   <data name="UnsetFolderPathString" xml:space="preserve">
-    <value>UBICACIÓN_DE_ARCHIVO_NO_AJUSTADA</value>
+    <value>UNSET_FOLDER_PATH</value>
   </data>
   <data name="UpdateAvaliable" xml:space="preserve">
-    <value>¡Hay una actualización disponible! ¿Te gustaría actualizar ahora?</value>
+    <value>Een update is beschikbaar! Wil je nu updaten?</value>
   </data>
   <data name="UpdateFailedError" xml:space="preserve">
-    <value>¡Actualización fallida!</value>
+    <value>Update mislukt!</value>
   </data>
   <data name="Updater_Avaliable" xml:space="preserve">
-    <value>¡Hay una actualización disponible! ¿Te gustaría actualizar ahora?</value>
+    <value>Een update is beschikbaar! Wil je nu updaten?</value>
   </data>
   <data name="Updater_UpToDate" xml:space="preserve">
-    <value>Tienes la última versión. ¿Te gustaría volver a descargarla?</value>
+    <value>Je hebt de nieuwste versie. Wil je het opnieuw downloaden?</value>
   </data>
   <data name="UpdaterTitle" xml:space="preserve">
-    <value>Actualizador</value>
+    <value>Updater</value>
   </data>
   <data name="Upload" xml:space="preserve">
-    <value>Subir</value>
+    <value>Uploaden</value>
   </data>
   <data name="UseDarkTheme" xml:space="preserve">
-    <value>Usar tema oscuro</value>
+    <value>Gebruik donker thema</value>
   </data>
   <data name="UsefulShortKeysAudioAdjust" xml:space="preserve">
-    <value>Numpad Plus/Minus - Ajusta el volumen de audio global</value>
+    <value>Numpad Plus / Minus - Pas het audiovolume aan</value>
   </data>
   <data name="UsefulShortKeysBackgroundBlur" xml:space="preserve">
-    <value>Alt + B - Cambiar desenfoque de fondo</value>
+    <value>Alt + B - Achtergrondvervaging wijzigen</value>
   </data>
   <data name="UsefulShortKeysContextMenu" xml:space="preserve">
-    <value>Clic derecho - Abrir el menú contextual de A.I.R.</value>
+    <value>rechtermuisknopklik - Open A.I.R Context Menu</value>
   </data>
   <data name="UsefulShortKeysDevHeader" xml:space="preserve">
-    <value>Atajos/teclas del modo de desarrollador:</value>
+    <value>Sneltoetsen / toetsen voor Dev-modus:</value>
   </data>
   <data name="UsefulShortKeysFilter" xml:space="preserve">
-    <value>Alt + F / Alt + G - Cambiar filtro de pantalla</value>
+    <value>Alt + F / Alt + G - kies schermfilter</value>
   </data>
   <data name="UsefulShortKeysFullscreen" xml:space="preserve">
-    <value>Alt + Intro - Cambiar a pantalla completa</value>
+    <value>Alt + Enter - Volledig scherm wisselen</value>
   </data>
   <data name="UsefulShortKeysGameRecordingCapture" xml:space="preserve">
-    <value>F2 - Toma una captura de grabación del juego</value>
+    <value>F2 - Maak een Game opname Capture</value>
   </data>
   <data name="UsefulShortKeysHeader" xml:space="preserve">
-    <value>Atajos/teclas útiles en el juego:</value>
+    <value>Handige in-game snelkoppelingen / toetsen:</value>
   </data>
   <data name="UsefulShortKeysPaletteDebug" xml:space="preserve">
-    <value>Alt + M - Alternar la salida de depuración de la paleta</value>
+    <value>Alt + M - activeer Palette Debug uitvoer</value>
   </data>
   <data name="UsefulShortKeysPerformanceDisplay" xml:space="preserve">
-    <value>Alt + P - Mostrar pantalla de rendimiento</value>
+    <value>Alt + P - laat preformance display zien</value>
   </data>
   <data name="UsefulShortKeysRefreshAssets" xml:space="preserve">
-    <value>F10 - Recargar los recursos (Sprites/Paletas)</value>
+    <value>F10 - Bronnen opnieuw laden (Sprites / Palettes)</value>
   </data>
   <data name="UsefulShortKeysRescanInputs" xml:space="preserve">
-    <value>F3 - Volver a buscar controladores</value>
+    <value>F3 - Opnieuw scannen naar gamecontrollers</value>
   </data>
   <data name="UsefulShortKeysSwapInput" xml:space="preserve">
-    <value>F4 - Cambia los controladores de juego para el J1 y J2</value>
+    <value>F4 - Schakelt gamecontrollers voor P1 en P2</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Versión</value>
+    <value>Versie</value>
   </data>
   <data name="VersionColumnHeader" xml:space="preserve">
-    <value>Versión</value>
+    <value>Versie</value>
   </data>
   <data name="VersionSelectCaption1" xml:space="preserve">
-    <value>No se puede determinar el nombre de la versión, especifica el tuyo:</value>
+    <value>Kan de versienaam niet bepalen, geef uw eigen naam op:</value>
   </data>
   <data name="VersionSelectCaption2" xml:space="preserve">
-    <value>Ya existe una versión con ese nombre, o el nombre contiene caracteres no válidos para una carpeta, especifica uno diferente:</value>
+    <value>Er bestaat al een versie met die naam of de naam bevat ongeldige tekens voor een map, geef een andere naam op:</value>
   </data>
   <data name="VersionsTab" xml:space="preserve">
-    <value>Versiones</value>
+    <value>Versies</value>
   </data>
   <data name="Viewer_ActiveModsTab" xml:space="preserve">
-    <value>Mods Activos</value>
+    <value>Actieve mods</value>
   </data>
   <data name="Viewer_BaseFolderItemFormatString" xml:space="preserve">
-    <value>Raíz - (Directorio de Mods)</value>
+    <value>Root - (Mods map)</value>
   </data>
   <data name="Viewer_ModsTab" xml:space="preserve">
-    <value>Mods </value>
+    <value>Mods</value>
   </data>
   <data name="Viewer_SubFolderItemFormatString" xml:space="preserve">
-    <value>Subcarpeta - ({0})</value>
+    <value>Submap - ({0})</value>
   </data>
   <data name="ViewTab" xml:space="preserve">
-    <value>Ver</value>
+    <value>Bekijk</value>
   </data>
   <data name="WaitingForInputDialogLabel" xml:space="preserve">
-    <value>Esperando entrada...</value>
+    <value>Wachten op invoer...</value>
   </data>
   <data name="WaitingForInputDialogLabelTag" xml:space="preserve">
-    <value>Entrada seleccionada:</value>
+    <value>Geselecteerde invoer:</value>
   </data>
   <data name="Yes_Button" xml:space="preserve">
-    <value>Si</value>
+    <value>Ja</value>
   </data>
   <data name="RenderingType_GroupBox_Header" xml:space="preserve">
-    <value>Tipo de renderizado</value>
+    <value>Weergavetype</value>
   </data>
   <data name="RenderingType_RadioButton_Hardware" xml:space="preserve">
     <value>Hardware</value>
