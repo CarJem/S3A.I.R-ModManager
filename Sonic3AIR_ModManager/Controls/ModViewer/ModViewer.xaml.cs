@@ -385,14 +385,7 @@ namespace Sonic3AIR_ModManager
 
         private bool GetEnabledState()
         {
-            if (!Management.ModManagement.S3AIRActiveMods.UseLegacyLoading)
-            {
-                return Source.IsEnabled;
-            }
-            else
-            {
-                return IsInRootFolder;
-            }
+            return Source.IsEnabled;
         }
 
         public void DisposeImage()
@@ -442,12 +435,8 @@ namespace Sonic3AIR_ModManager
 
         private void SetEnabledState(bool value)
         {
-            if (!Management.ModManagement.S3AIRActiveMods.UseLegacyLoading)
-            {
-                Source.IsEnabled = value;
-                ModViewer.ItemCheck?.Invoke();
-            }
-
+            Source.IsEnabled = value;
+            ModViewer.ItemCheck?.Invoke();
         }
 
         public AIR_API.Mod Source { get; set; }

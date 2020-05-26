@@ -480,6 +480,7 @@ namespace Sonic3AIR_ModManager.Management
                 {
                     FileInfo list = new FileInfo(Sonic3AIRActiveModsList);
                     S3AIRActiveMods = new AIR_API.ActiveModsList(list);
+                    if (S3AIRActiveMods.UseLegacyLoading == true) S3AIRActiveMods.UseLegacyLoading = false; //For older users who still have this bool set to true.
                 }
 
 

@@ -249,33 +249,16 @@ namespace Sonic3AIR_ModManager.Management
             IList<ModViewerItem> JustDisabledItems = new List<ModViewerItem>();
             IList<ModViewerItem> JustEnabledItems = new List<ModViewerItem>();
 
-            if (!S3AIRActiveMods.UseLegacyLoading)
+            foreach (ModViewerItem mod in ModsList)
             {
-                foreach (ModViewerItem mod in ModsList)
-                {
-                    mod.CheckBoxVisibility = Visibility.Visible;
-                    if (mod.IsEnabled) JustEnabledItems.Add(mod);
-                }
-
-                foreach (ModViewerItem mod in ActiveModsList)
-                {
-                    mod.CheckBoxVisibility = Visibility.Visible;
-                    if (!mod.IsEnabled) JustDisabledItems.Add(mod);
-                }
+                mod.CheckBoxVisibility = Visibility.Visible;
+                if (mod.IsEnabled) JustEnabledItems.Add(mod);
             }
-            else
-            {
-                foreach (ModViewerItem mod in ModsList)
-                {
-                    mod.CheckBoxVisibility = Visibility.Collapsed;
-                    if (mod.IsInRootFolder) JustEnabledItems.Add(mod);
-                }
 
-                foreach (ModViewerItem mod in ActiveModsList)
-                {
-                    mod.CheckBoxVisibility = Visibility.Collapsed;
-                    if (!mod.IsInRootFolder) JustDisabledItems.Add(mod);
-                }
+            foreach (ModViewerItem mod in ActiveModsList)
+            {
+                mod.CheckBoxVisibility = Visibility.Visible;
+                if (!mod.IsEnabled) JustDisabledItems.Add(mod);
             }
 
 
@@ -405,8 +388,8 @@ namespace Sonic3AIR_ModManager.Management
         }
         public static void ToggleLegacyModManagement(bool value)
         {
-            Management.ModManagement.S3AIRActiveMods.UseLegacyLoading = value;
-            Management.ModManagement.Save();
+            //Management.ModManagement.S3AIRActiveMods.UseLegacyLoading = value;
+            //Management.ModManagement.Save();
         }
         public static void Save()
         {

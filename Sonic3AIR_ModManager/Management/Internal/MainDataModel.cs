@@ -498,7 +498,7 @@ namespace Sonic3AIR_ModManager.Management
         {
             if (Instance.ModViewer.SelectedItem != null)
             {
-                if (Instance.ModViewer.ActiveView.SelectedItem != null && (Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem).IsEnabled && !Management.ModManagement.S3AIRActiveMods.UseLegacyLoading)
+                if (Instance.ModViewer.ActiveView.SelectedItem != null && (Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem).IsEnabled)
                 {
                     Instance.moveUpButton.IsEnabled = (Instance.ModViewer.ActiveView.Items.IndexOf((Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem)) > 0);
                     Instance.moveDownButton.IsEnabled = (Instance.ModViewer.ActiveView.Items.IndexOf((Instance.ModViewer.ActiveView.SelectedItem as ModViewerItem)) < Instance.ModViewer.ActiveView.Items.Count - 1);
@@ -517,7 +517,7 @@ namespace Sonic3AIR_ModManager.Management
                 Instance.editModFolderToolStripMenuItem.IsEnabled = true;
                 Instance.openModFolderToolStripMenuItem.IsEnabled = true;
                 Instance.openModURLToolStripMenuItem.IsEnabled = (ValidateURL((Instance.ModViewer.SelectedItem as ModViewerItem).Source.URL));
-                if (Instance.ModViewer.ActiveView.Items.Contains(Instance.ModViewer.SelectedItem) && !Management.ModManagement.S3AIRActiveMods.UseLegacyLoading) Instance.moveModToSubFolderMenuItem.IsEnabled = false;
+                if (Instance.ModViewer.ActiveView.Items.Contains(Instance.ModViewer.SelectedItem)) Instance.moveModToSubFolderMenuItem.IsEnabled = false;
                 else Instance.moveModToSubFolderMenuItem.IsEnabled = true;
             }
             else
@@ -534,20 +534,10 @@ namespace Sonic3AIR_ModManager.Management
                 Instance.openModURLToolStripMenuItem.IsEnabled = false;
             }
 
-            if (Management.ModManagement.S3AIRActiveMods.UseLegacyLoading)
-            {
-                Instance.moveUpButton.Visibility = Visibility.Collapsed;
-                Instance.moveDownButton.Visibility = Visibility.Collapsed;
-                Instance.moveToTopButton.Visibility = Visibility.Collapsed;
-                Instance.moveToBottomButton.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                Instance.moveUpButton.Visibility = Visibility.Visible;
-                Instance.moveDownButton.Visibility = Visibility.Visible;
-                Instance.moveToTopButton.Visibility = Visibility.Visible;
-                Instance.moveToBottomButton.Visibility = Visibility.Visible;
-            }
+            Instance.moveUpButton.Visibility = Visibility.Visible;
+            Instance.moveDownButton.Visibility = Visibility.Visible;
+            Instance.moveToTopButton.Visibility = Visibility.Visible;
+            Instance.moveToBottomButton.Visibility = Visibility.Visible;
 
             bool ValidateURL(string value)
             {

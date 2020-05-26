@@ -98,9 +98,23 @@ namespace Sonic3AIR_ModManager
         [STAThread]
         static void Main(string[] args)
         {
-            StartLogging();
-            RealMain(args);
-            EndLogging();
+            try
+            {
+                StartLogging();
+                RealMain(args);
+                EndLogging();
+            }
+            catch (Exception ex)
+            {
+                //TODO: Add Language Translations
+                string button_abort = "OK - Open Logs Folder & Close Application";
+                string button_ignore = "Cancel - Close Application";
+                string note = string.Format("{1}{0}{2}", Environment.NewLine, button_abort, button_ignore);
+                var result = System.Windows.Forms.MessageBox.Show(string.Format("{0}{1}{2}{1}{3}", ex.Message, Environment.NewLine + "|" + Environment.NewLine, ex.StackTrace, note), "ERROR", System.Windows.Forms.MessageBoxButtons.OKCancel);
+                if (result == System.Windows.Forms.DialogResult.OK) Process.Start(Sonic3AIR_ModManager.Management.ProgramPaths.Sonic3AIR_MM_LogsFolder);
+                throw ex;
+            }
+
         }
 
         static void RealMain(string[] args)
