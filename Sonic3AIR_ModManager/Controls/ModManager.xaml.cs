@@ -684,6 +684,7 @@ namespace Sonic3AIR_ModManager
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            Program.Log.InfoFormat("[ModManager] Closing Mod Manager Window...");
             Management.MainDataModel.Settings.Save();
             App.Instance.Shutdown();
         }

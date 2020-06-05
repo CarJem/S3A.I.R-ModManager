@@ -284,7 +284,11 @@ namespace Sonic3AIR_ModManager
                     }
                     else
                     {
-                        throw new Exception();
+                        //TODO: Improve Exception Handling
+                        var exception = new Exception("Unable to Prase Version");
+                        MessageBox.Show(Program.LanguageResource.GetString("UpdateFailedError") + Environment.NewLine, exception.Message);
+                        Program.AIRUpdaterState = Program.UpdateState.Finished;
+                        Close();
                     }
                 }
 

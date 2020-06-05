@@ -118,10 +118,11 @@ UninstPage instfiles
 Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
+RmDir /r "$INSTDIR"
 SetOutPath "$INSTDIR"
 File /r D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Sonic3AIR_ModManager\bin\Release\*.*
-File D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\UninstallOptions.ini
-File D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\AIR_Original_Icon_HD.ico
+#File D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\UninstallOptions.ini
+#File D:\Users\CarJem\source\sonic3air_repos\Sonic3AIR_ModManager\Installer\AIR_Original_Icon_HD.ico
 SectionEnd
 
 ######################################################################

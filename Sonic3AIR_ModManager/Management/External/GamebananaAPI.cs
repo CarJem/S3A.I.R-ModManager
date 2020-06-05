@@ -50,6 +50,7 @@ namespace Sonic3AIR_ModManager.Management
         }
         public static void GamebananaAPI_Install(string data)
         {
+            Program.Log.InfoFormat("[GBPAPI] Attempting to Download Mod...");
             if (!Directory.Exists(Management.ProgramPaths.Sonic3AIR_MM_TempModsFolder)) Directory.CreateDirectory(Management.ProgramPaths.Sonic3AIR_MM_TempModsFolder);
             string url = data.Replace("s3airmm://", "");
             if (url == "") MessageBox.Show("Invalid URL", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
