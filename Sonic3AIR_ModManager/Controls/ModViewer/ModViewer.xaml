@@ -102,9 +102,9 @@
                                     </Border>
                                 </Grid>
                                 <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Width="185" Margin="1" Height="Auto">
-                                    <TextBox Cursor="Arrow" Style="{StaticResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2" FontWeight="Bold">
+                                    <TextBox Cursor="Arrow" IsReadOnly="True" Focusable="False" Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2" FontWeight="Bold">
                                     </TextBox>
-                                    <TextBox Cursor="Arrow" Style="{StaticResource TextBoxStyle1}" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
+                                    <TextBox Cursor="Arrow" IsReadOnly="True" Focusable="False" Text="{Binding Author}" TextWrapping="NoWrap" MaxLines="1" FontWeight="Medium" />
                                 </StackPanel>
                                 <CheckBox Visibility="{Binding CheckBoxVisibility}" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"></CheckBox>
                             </DockPanel>

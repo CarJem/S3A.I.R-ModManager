@@ -20,7 +20,7 @@
             <RowDefinition Height="85"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Foreground="{DynamicResource NormalText}">
-            <MenuItem Name="FileMenuItem" Header="File" SubmenuOpened="FileMenuItem_SubmenuOpened">
+            <MenuItem Name="FileMenuItem" Header="File" SubmenuOpened="FileMenuItem_SubmenuOpened" Click="FileMenuItem_Click">
                 <MenuItem x:Name="saveMenuItem" Header="Save" Click="SaveButton_Click"></MenuItem>
                 <MenuItem x:Name="LoadMenuItem" Header="Save &amp; Load" Click="RunButton_Click"></MenuItem>
                 <Separator></Separator>

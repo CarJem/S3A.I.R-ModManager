@@ -100,6 +100,7 @@ namespace Sonic3AIR_ModManager
                 Close();
                 DownloadCompleted?.Invoke();
             });
+
         }
     }
 }

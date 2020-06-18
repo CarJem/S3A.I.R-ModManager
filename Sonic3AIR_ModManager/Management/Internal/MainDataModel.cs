@@ -621,6 +621,7 @@ namespace Sonic3AIR_ModManager.Management
         }
         public static void RefreshTheme(ref ModManager Instance, GenerationsLib.WPF.Themes.Skin newSkin)
         {
+            Program.Log.InfoFormat("[MainDataModel] Refreshing Current Theme...");
             App.Skin = newSkin;
             GenerationsLib.WPF.Themes.SkinResourceDictionary.ChangeSkin(App.Skin, Sonic3AIR_ModManager.App.Current.Resources.MergedDictionaries);
 

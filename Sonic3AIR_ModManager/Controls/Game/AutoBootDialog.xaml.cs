@@ -178,7 +178,11 @@ namespace Sonic3AIR_ModManager
 
         private string GetAIRVersion()
         {
-            return Management.VersionManagement.VersionReader.GetVersionData(Path.GetDirectoryName(Management.ProgramPaths.Sonic3AIRPath)).ToString();
+            if (Directory.Exists(Management.ProgramPaths.Sonic3AIRPath))
+            {
+                return Management.VersionManagement.VersionReader.GetVersionData(Path.GetDirectoryName(Management.ProgramPaths.Sonic3AIRPath)).ToString();
+            }
+            else return "N/A";
         }
 
 

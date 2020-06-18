@@ -20,7 +20,8 @@ CALL "%CurrentDir%\MoveBinaries.bat" %ConfigurationName% %SolutionDir% %TargetDi
 if %ConfigurationName% == "Publish" (
    call "%CurrentDir%\MakeInstaller.bat" "%ProjectDir%" "%FileVersion%"
    call "%CurrentDir%\MakeZIP.bat" "%TargetDir%" "%CurrentDir%Build_%FileVersion%.zip"
-   call "%AssistantPath%" "Sonic3AIRModManager"
+   :: call "%AssistantPath%" "Sonic3AIR_ModManager"
+   call "%AssistantPath%"
 )
 
 :: Generate a ZIP for a Experimental Testing Build

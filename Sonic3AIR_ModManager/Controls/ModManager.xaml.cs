@@ -969,6 +969,9 @@ namespace Sonic3AIR_ModManager
             Management.MainDataModel.RefreshTheme(ref Instance, e);
         }
 
-
+        private void FileMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            PrimaryTabControl.Focus();
+        }
     }
 }

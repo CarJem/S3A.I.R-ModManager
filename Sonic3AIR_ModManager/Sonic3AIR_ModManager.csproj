@@ -159,7 +159,6 @@
     <Reference Include="PresentationFramework.Aero">
       <Private>True</Private>
     </Reference>
-    <Reference Include="PresentationFramework.Luna" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -343,7 +342,6 @@
     <None Include="Properties\PreBuild\AlwaysClean.bat" />
     <None Include="Properties\PreBuild\MainScript.bat" />
     <None Include="Properties\PreBuild\UpdateVersion.bat" />
-    <None Include="Properties\Versioning\build_list.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -580,7 +578,9 @@
       <Version>0.24.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\Versioning\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>start /min cmd.exe /c "call "$(ProjectDir)Properties\PostBuild\MainScript.bat" "$(ConfigurationName)" "$(SolutionDir)" "$(TargetDir)" "$(ProjectDir)" "$(TargetPath)""</PostBuildEvent>

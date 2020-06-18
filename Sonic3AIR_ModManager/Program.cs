@@ -107,12 +107,25 @@ namespace Sonic3AIR_ModManager
             catch (Exception ex)
             {
                 //TODO: Add Language Translations
-                string button_abort = "OK - Open Logs Folder & Close Application";
-                string button_ignore = "Cancel - Close Application";
-                string note = string.Format("{1}{0}{2}", Environment.NewLine, button_abort, button_ignore);
-                var result = System.Windows.Forms.MessageBox.Show(string.Format("{0}{1}{2}{1}{3}", ex.Message, Environment.NewLine + "|" + Environment.NewLine, ex.StackTrace, note), "ERROR", System.Windows.Forms.MessageBoxButtons.OKCancel);
-                if (result == System.Windows.Forms.DialogResult.OK) Process.Start(Sonic3AIR_ModManager.Management.ProgramPaths.Sonic3AIR_MM_LogsFolder);
-                throw ex;
+                string button_abort = "Yes - Open Logs Folder & Close Application";
+                string button_ignore = "No - Close Application";
+                string button_retry = "Cancel - Try to Ignore Error";
+                string note = string.Format("{1}{0}{2}{0}{3}", Environment.NewLine, button_abort, button_ignore, button_retry);
+                var result = System.Windows.Forms.MessageBox.Show(string.Format("{0}{1}{2}{1}{3}", ex.Message, Environment.NewLine + "|" + Environment.NewLine, ex.StackTrace, note), "ERROR", System.Windows.Forms.MessageBoxButtons.YesNoCancel);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    Process.Start(Sonic3AIR_ModManager.Management.ProgramPaths.Sonic3AIR_MM_LogsFolder);
+                    throw ex;
+                }
+                else if (result == System.Windows.Forms.DialogResult.Cancel)
+                {
+
+                }
+                else
+                {
+                    throw ex;
+                }
+
             }
 
         }
@@ -134,7 +147,6 @@ namespace Sonic3AIR_ModManager
             else StartApplication();
             Log.InfoFormat("Shuting Down!");
         }
-
 
         static void PraseArguments(string[] args)
         {
